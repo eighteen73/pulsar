@@ -1,0 +1,33 @@
+{
+  "name": "new-theme",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "TAILWIND_MODE=build mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production",
+    "lint": "npm run lint:css && npm run lint:js && npm run lint:php",
+    "lint:css": "stylelint './assets/css/**/*.css'",
+    "lint:js": "eslint './assets/js/**/*.js'",
+    "lint:php": "./vendor/bin/phpcs .",
+    "i18n": "npm run i18n:textdomain && npm run i18n:pot",
+    "i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
+    "i18n:pot": "npx node-wp-i18n makepot"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@roots/bud": "latest",
+    "@roots/bud-postcss": "^5.7.7",
+    "@roots/bud-preset-wordpress": "latest",
+    "@roots/bud-tailwindcss": "^5.7.7"
+  },
+  "dependencies": {
+    "alpinejs": "^3.9.5",
+    "tailwindcss": "^3.0.23"
+  }
+}
