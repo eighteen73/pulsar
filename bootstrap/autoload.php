@@ -1,0 +1,23 @@
+<?php
+/**
+ * Autoload bootstrap file.
+ *
+ * This file is used to autoload classes and functions necessary for the theme
+ * to run. Classes utilize the PSR-4 autoloader in Composer and is defined in
+ * `composer.json`.
+ *
+ * @package NewTheme
+ */
+
+namespace NewTheme;
+
+/**
+ * Run the Composer autoloader.
+ *
+ * Auto-load any projects via the Composer autoloader. Be sure to check if the
+ * file exists in case someone's using Composer to load their dependencies in
+ * a different directory. This also autoloads our theme's classes.
+ */
+if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
+	require_once get_parent_theme_file_path( 'vendor/autoload.php' );
+}
