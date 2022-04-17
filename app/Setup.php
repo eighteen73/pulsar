@@ -104,7 +104,7 @@ class Setup implements Bootable {
 	 * @return void
 	 */
 	public function imageSizes() {
-		add_image_size( 'td-60', 60, 60, true );
+		add_image_size( '4x3', 640, 480, true );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Setup implements Bootable {
 		register_sidebar(
 			[
 				'id'   => 'primary',
-				'name' => esc_html_x( 'Primary', 'sidebar', 'posh-sheds' ),
+				'name' => esc_html_x( 'Primary', 'sidebar', 'new-theme' ),
 			] + $args
 		);
 	}

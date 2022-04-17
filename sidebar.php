@@ -2,14 +2,14 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @package orphansTheme
+ * @package NewTheme
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+if ( ! is_active_sidebar( 'primary' ) ) {
 	return;
 }
 ?>
 
 <aside class="sidebar">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	<?php dynamic_sidebar( 'primary' ); ?>
 </aside>
