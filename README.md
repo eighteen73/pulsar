@@ -1,4 +1,6 @@
-<p align="center">
+# New Theme
+
+<p>
   <strong>WordPress starter theme with Tailwind CSS, Alpine JS and a modern development workflow</strong>
 </p>
 
