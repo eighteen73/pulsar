@@ -5,12 +5,12 @@
  * @package NewTheme
  */
 
-namespace NewTheme;
+namespace NewTheme\Editor;
 
 use NewTheme\Contracts\Bootable;
 use NewTheme\Tools\Config;
 
-class BlockPatterns implements Bootable {
+class Patterns implements Bootable {
 
     /**
 	 * Bootstraps the class' actions/filters.

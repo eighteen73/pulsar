@@ -5,12 +5,12 @@
  * @package NewTheme
  */
 
-namespace NewTheme;
+namespace NewTheme\Editor;
 
 use NewTheme\Contracts\Bootable;
 use NewTheme\Tools\Config;
 
-class BlockStyles implements Bootable {
+class Styles implements Bootable {
 
     /**
 	 * Bootstraps the class' actions/filters.
@@ -19,7 +19,7 @@ class BlockStyles implements Bootable {
 	 * @return void
 	 */
 	public function boot() {
-		add_action( 'init', [ $this, 'register'] );
+		add_action( 'init', [ $this, 'register' ] );
 	}
 
 	/**

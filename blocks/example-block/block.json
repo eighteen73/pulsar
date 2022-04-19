@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+	"title": "Example Block",
+	"description": "An Example Block",
+	"textdomain": "new-theme",
+	"name": "new-theme/example",
+  "icon": "feedback",
+  "category": "new-theme-blocks",
+	"attributes":{
+		"title": {
+			"type" : "string"
+		}
+  },
+  "example": {
+    "attributes":{
+      "title": "Example Block"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:../../public/blocks/example-block/editor.js",
+  "editorStyle": "file:../../public/blocks/example-block/editor.css"
+}

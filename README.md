@@ -19,9 +19,13 @@ Make sure all dependencies have been installed before moving on:
 themes/your-theme-name/    # → Root of your theme
 ├── app/                   # → Theme PHP
 │   ├── Contracts/         # → Interfaces and Traits
+│   ├── Editor/            # → Editor specific classes
+│       ├── Blocks.php     # → Registration of custom blocks
+│       ├── Patterns.php   # → Block pattern management
+│       ├── Styles.php     # → Block styles management
 │   ├── Tools/             # → Various tools used throughout the theme
-│   ├── BlockPatterns.php  # → Block pattern management
-│   ├── BlockStyles.php    # → Block styles management
+│       ├── Mix.php        # → Handles asset management with Laravel Mix
+│       ├── Svg.php        # → Allows manipulating SVGs and inlining them
 │   ├── Enqueue.php        # → Theme assets
 │   └── Setup.php          # → Theme setup
 ├── bootstrap/             # → Theme bootstrap and compatibility
