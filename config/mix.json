@@ -1,0 +1,24 @@
+{
+  "entries": {
+    "css": [
+      "resources/css/app.css",
+      "resources/css/editor.css"
+    ],
+    "js": [
+      "resources/js/app.js",
+      "resources/js/editor.js"
+    ]
+  },
+  "browserSync": {
+    "settings": {
+      "host": "localhost",
+      "port": 3000,
+      "proxy": "http://themedev.test",
+      "open": false
+    },
+    "options": {
+      "injectCss": true,
+      "reload": false
+    }
+  }
+}

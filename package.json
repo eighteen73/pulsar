@@ -10,8 +10,8 @@
     "prod": "npm run production",
     "production": "mix --production",
     "lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-    "lint:css": "stylelint './assets/css/**/*.css'",
-    "lint:js": "eslint './assets/js/**/*.js'",
+    "lint:css": "stylelint './resources/css/**/*.css'",
+    "lint:js": "eslint './resources/js/**/*.js'",
     "lint:php": "./vendor/bin/phpcs .",
     "i18n": "npm run i18n:textdomain && npm run i18n:pot",
     "i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
@@ -21,10 +21,13 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "@roots/bud": "latest",
-    "@roots/bud-postcss": "^5.7.7",
-    "@roots/bud-preset-wordpress": "latest",
-    "@roots/bud-tailwindcss": "^5.7.7"
+    "browser-sync": "^2.27.9",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "laravel-mix": "^6.0.43",
+    "laravel-mix-clean": "^0.1.0",
+    "laravel-mix-copy-watched": "^2.3.1",
+    "postcss-import": "^14.1.0"
   },
   "dependencies": {
     "alpinejs": "^3.9.5",
