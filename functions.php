@@ -27,4 +27,3 @@ if ( version_compare( $GLOBALS['wp_version'], '5.8', '<' ) || version_compare( P
  */
 require_once get_parent_theme_file_path( 'bootstrap/autoload.php' );
 require_once get_parent_theme_file_path( 'bootstrap/theme.php' );
-

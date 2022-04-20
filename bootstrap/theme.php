@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bootstrap all of the theme classes.
+ *
+ * @package NewTheme
+ */
 
 namespace NewTheme;
 
@@ -16,18 +21,19 @@ use NewTheme\Tools\Config;
  * @return mixed
  */
 function theme( string $abstract = '' ) {
-	static $bindings = null;
+	static $classes = null;
 
 	// On first run, create new components and boot them.
-	if ( is_null( $bindings ) ) {
+	if ( is_null( $classes ) ) {
 		$bindings = Config::get( 'bindings' );
 
 		foreach ( $bindings as $binding ) {
-			$binding->boot();
+			$classes[ $binding ] = new $binding();
+			$classes[ $binding ]->boot();
 		}
 	}
 
-	return $abstract ? $bindings[ $abstract ] : $bindings;
+	return $abstract ? $classes[ $abstract ] : $classes;
 }
 
 /**
