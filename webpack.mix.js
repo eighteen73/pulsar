@@ -20,7 +20,7 @@ mix
   .setPublicPath('./public')
   .browserSync(
     config.browserSync.settings,
-	config.browserSync.options
+		config.browserSync.options
   );
 
 config.entries.css.forEach(entry => {

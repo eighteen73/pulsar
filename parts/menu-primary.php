@@ -18,6 +18,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 			'item_spacing'   => 'discard',
 			'menu_id'        => 'menu-primary-items',
 			'menu_class'     => 'menu-items',
+			'walker'         => new \NewTheme\Menu\AlpineJSWalker(),
 		]
 	);
 	?>

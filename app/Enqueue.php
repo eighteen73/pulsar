@@ -34,8 +34,8 @@ class Enqueue implements Bootable {
 	public function styles() {
 
 		wp_enqueue_style(
-			'new-theme-screen',
-			Mix::asset( 'css/screen.css' ),
+			'new-theme-app',
+			Mix::asset( 'css/app.css' ),
 			false,
 			null
 		);

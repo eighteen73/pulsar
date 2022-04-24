@@ -10,6 +10,9 @@ namespace NewTheme\Editor;
 use NewTheme\Contracts\Bootable;
 use NewTheme\Tools\Config;
 
+/**
+ * Block patterns handling.
+ */
 class Patterns implements Bootable {
 
 	/**

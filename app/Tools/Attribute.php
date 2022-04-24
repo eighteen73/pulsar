@@ -62,9 +62,9 @@ class Attribute {
 	 * Outputs an HTML element's attributes.
 	 *
 	 * @access public
-	 * @param  string $slug
-	 * @param  string $context
-	 * @param  array  $attr
+	 * @param  string $name The name/ID of the element (e.g., `sidebar`).
+	 * @param  string $context A specific context for the element (e.g., `primary`).
+	 * @param  array  $attr An array of attributes to pass in.
 	 * @return void
 	 */
 	public function __construct( $name, $context = '', array $attr = [] ) {
@@ -92,7 +92,7 @@ class Attribute {
 	 * @return void
 	 */
 	public function display() {
-		echo $this->render();
+		echo $this->render(); // WPCS: XSS ok.
 	}
 
 	/**
@@ -127,8 +127,8 @@ class Attribute {
 	 * Adds custom data to the attribute object.
 	 *
 	 * @access public
-	 * @param  string|array $name
-	 * @param  mixed        $value
+	 * @param  string|array $name The name(s) of the attribute(s).
+	 * @param  mixed        $value The value of the attribute.
 	 * @return $this
 	 */
 	public function with( $name, $value = null ) {
@@ -145,9 +145,8 @@ class Attribute {
 	/**
 	 * Returns a single, unescaped attribute's value.
 	 *
-	 * @since  1.0.0
 	 * @access public
-	 * @param  string $name
+	 * @param  string $name The name of the attribute.
 	 * @return string
 	 */
 	public function get( $name ) {
@@ -161,7 +160,7 @@ class Attribute {
 	 * Filters and returns the array of attributes.
 	 *
 	 * @access protected
-	 * @return void
+	 * @return array
 	 */
 	public function all() {
 
@@ -197,13 +196,6 @@ class Attribute {
 		// Merge the attributes with the defaults.
 		$this->attr = wp_parse_args( $this->input, $defaults );
 
-		// Provide a filter hook for the class attribute directly. The
-		// classes are split up into an array for easier filtering. Note
-		// that theme authors should still utilize the core WP body,
-		// post, and comment class filter hooks. This should only be
-		// used for custom attributes.
-		$hook = "hybrid/attr/{$this->name}/class";
-
 		if ( isset( $this->attr['class'] ) ) {
 
 			$classes = explode( ' ', $this->attr['class'] );
@@ -218,7 +210,7 @@ class Attribute {
 	 * `<html>` element attributes.
 	 *
 	 * @access protected
-	 * @param  array $attr
+	 * @param  array $attr Array of attributes.
 	 * @return array
 	 */
 	protected function html( $attr ) {

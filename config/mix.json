@@ -6,7 +6,8 @@
     ],
     "js": [
       "resources/js/app.js",
-      "resources/js/editor.js"
+      "resources/js/editor.js",
+      "blocks/index.js"
     ]
   },
   "browserSync": {
