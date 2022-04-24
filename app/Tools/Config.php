@@ -18,7 +18,7 @@ class Config {
 	 * Includes and returns a given PHP config file. The file must return
 	 * an array.
 	 *
-	 * @param  string  $name
+	 * @param  string $name
 	 * @return array
 	 */
 	public static function get( $name ) {
@@ -34,7 +34,7 @@ class Config {
 	/**
 	 * Returns the config path or file path if set.
 	 *
-	 * @param  string  $file
+	 * @param  string $file
 	 * @return string
 	 */
 	public static function path( $file = '' ) {

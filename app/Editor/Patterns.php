@@ -12,7 +12,7 @@ use NewTheme\Tools\Config;
 
 class Patterns implements Bootable {
 
-    /**
+	/**
 	 * Bootstraps the class' actions/filters.
 	 *
 	 * @access public
@@ -25,6 +25,7 @@ class Patterns implements Bootable {
 
 	/**
 	 * Retrieve the config for this class.
+	 *
 	 * @return array
 	 */
 	public function config() {
@@ -32,11 +33,11 @@ class Patterns implements Bootable {
 	}
 
 	 /**
-	 * Registers custom block patterns and categories.
-	 *
-	 * @access public
-	 * @return void
-	 */
+	  * Registers custom block patterns and categories.
+	  *
+	  * @access public
+	  * @return void
+	  */
 	public function registerCategories() {
 
 		$categories = $this->config()['categories'] ?: [];
@@ -44,7 +45,7 @@ class Patterns implements Bootable {
 		foreach ( $categories as $category_slug => $category ) {
 			$this->addCategory( $category_slug, $category );
 		}
-    }
+	}
 
 	/**
 	 * Registers custom block patterns and categories.
@@ -59,30 +60,33 @@ class Patterns implements Bootable {
 		foreach ( $block_patterns as $pattern_slug => $pattern ) {
 			$this->addPattern( $pattern_slug, $pattern );
 		}
-    }
+	}
 
 	/**
 	 * Adds a block pattern category.
 	 *
 	 * @access protected
-	 * @param  string  $slug
-	 * @param  string  $label
+	 * @param  string $slug
+	 * @param  string $label
 	 * @return void
 	 */
 	protected function addCategory( string $slug, string $label ) {
 
 		// Register block pattern categories.
-		register_block_pattern_category( $slug, [
-			'label' => $label,
-		] );
+		register_block_pattern_category(
+			$slug,
+			[
+				'label' => $label,
+			]
+		);
 	}
 
 	/**
 	 * Adds a block pattern.
 	 *
 	 * @access protected
-	 * @param  string  $slug
-	 * @param  array   $args
+	 * @param  string $slug
+	 * @param  array  $args
 	 * @return void
 	 */
 	protected function addPattern( string $slug, array $args = [] ) {
@@ -100,21 +104,24 @@ class Patterns implements Bootable {
 
 		register_block_pattern(
 			"new-theme/{$slug}",
-			wp_parse_args( $args, [
-				'categories'    => [ 'new-theme' ],
-				'content'       => $content,
-				'viewportWidth' => 1024,
-			] )
+			wp_parse_args(
+				$args,
+				[
+					'categories'    => [ 'new-theme' ],
+					'content'       => $content,
+					'viewportWidth' => 1024,
+				]
+			)
 		);
 	}
 
 	/**
-	* Returns a pattern file's content.
-	*
-	* @access protected
-	* @param  string  $slug
-	* @return string
-	*/
+	 * Returns a pattern file's content.
+	 *
+	 * @access protected
+	 * @param  string $slug
+	 * @return string
+	 */
 	protected function patternContent( string $slug ) {
 		ob_start();
 		include get_theme_file_path( "patterns/{$slug}.php" );

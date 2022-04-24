@@ -12,7 +12,7 @@ use NewTheme\Tools\Config;
 
 class Styles implements Bootable {
 
-    /**
+	/**
 	 * Bootstraps the class' actions/filters.
 	 *
 	 * @access public
@@ -24,19 +24,20 @@ class Styles implements Bootable {
 
 	/**
 	 * Retrieve the config for this class.
+	 *
 	 * @return array
 	 */
 	public function config() {
 		return Config::get( 'block-styles' );
 	}
 
-    /**
+	/**
 	 * Registers custom block styles.
 	 *
 	 * @access public
 	 * @return void
 	 */
-    public function register() {
+	public function register() {
 
 		$block_styles = $this->config() ?: [];
 
@@ -45,14 +46,14 @@ class Styles implements Bootable {
 				$this->add( $style_slug, $style );
 			}
 		}
-    }
+	}
 
 	/**
 	 * Registers a block style.
 	 *
 	 * @access protected
-	 * @param  string  $slug
-	 * @param  array   $args
+	 * @param  string $slug
+	 * @param  array  $args
 	 * @return void
 	 */
 	protected function add( string $slug, array $args = [] ) {

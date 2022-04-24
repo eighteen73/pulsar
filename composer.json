@@ -7,12 +7,20 @@
       "email": "brettsmason@gmail.com"
     }
   ],
-  "require": {
-    "php": ">=7.4"
+  "require-dev": {
+    "php": ">=7.4",
+    "wp-coding-standards/wpcs": "*",
+    "dealerdirect/phpcodesniffer-composer-installer": "*",
+    "phpcompatibility/php-compatibility": "*"
   },
   "autoload": {
     "psr-4": {
       "NewTheme\\": "app/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

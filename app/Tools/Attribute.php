@@ -62,9 +62,9 @@ class Attribute {
 	 * Outputs an HTML element's attributes.
 	 *
 	 * @access public
-	 * @param  string  $slug
-	 * @param  string  $context
-	 * @param  array   $attr
+	 * @param  string $slug
+	 * @param  string $context
+	 * @param  array  $attr
 	 * @return void
 	 */
 	public function __construct( $name, $context = '', array $attr = [] ) {
@@ -127,8 +127,8 @@ class Attribute {
 	 * Adds custom data to the attribute object.
 	 *
 	 * @access public
-	 * @param  string|array  $name
-	 * @param  mixed         $value
+	 * @param  string|array $name
+	 * @param  mixed        $value
 	 * @return $this
 	 */
 	public function with( $name, $value = null ) {
@@ -147,7 +147,7 @@ class Attribute {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  string  $name
+	 * @param  string $name
 	 * @return string
 	 */
 	public function get( $name ) {
@@ -183,7 +183,7 @@ class Attribute {
 			// from overwriting everything later.
 			unset( $this->input['class'] );
 
-		// If no class was input, let's build a custom default.
+			// If no class was input, let's build a custom default.
 		} else {
 			$defaults['class'] = $this->context ? "{$this->name} {$this->name}--{$this->context}" : $this->name;
 		}
@@ -218,7 +218,7 @@ class Attribute {
 	 * `<html>` element attributes.
 	 *
 	 * @access protected
-	 * @param  array   $attr
+	 * @param  array $attr
 	 * @return array
 	 */
 	protected function html( $attr ) {

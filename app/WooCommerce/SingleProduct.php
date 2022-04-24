@@ -1,6 +1,7 @@
 <?php
 
 namespace NewTheme\WooCommerce;
+
 use NewTheme\Contracts\Bootable;
 
 class SingleProduct implements Bootable {

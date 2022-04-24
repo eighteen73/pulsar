@@ -66,8 +66,8 @@ if ( post_password_required() ) {
 			<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
 				<h2 class="sr-only"><?php esc_html_e( 'Comment navigation', 'new-theme' ); ?></h2>
 				<div class="nav-links">
-					<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', '_s' ) ); ?></div>
-					<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', '_s' ) ); ?></div>
+					<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'new-theme' ) ); ?></div>
+					<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'new-theme' ) ); ?></div>
 				</div>
 			</nav>
 		<?php endif; ?>

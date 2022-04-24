@@ -11,7 +11,7 @@ use NewTheme\Contracts\Bootable;
 
 class Blocks implements Bootable {
 
-    /**
+	/**
 	 * Bootstraps the class' actions/filters.
 	 *
 	 * @access public
@@ -21,13 +21,13 @@ class Blocks implements Bootable {
 		add_action( 'init', [ $this, 'register' ] );
 	}
 
-    /**
+	/**
 	 * Registers custom blocks.
 	 *
 	 * @access public
 	 * @return void
 	 */
-    public function register() {
+	public function register() {
 		global $wp_version;
 
 		$is_pre_wp_6 = version_compare( $wp_version, '6.0', '<' );
@@ -74,7 +74,7 @@ class Blocks implements Bootable {
 			// Remove the filter after we register the blocks
 			remove_filter( 'plugins_url', [ $this, 'filterPluginsUrl' ], 10, 2 );
 		}
-    }
+	}
 
 	/**
 	 * Filter the plugins_url to allow us to use assets from theme.
