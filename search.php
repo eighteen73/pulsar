@@ -29,7 +29,7 @@ get_header(); ?>
 			<?php endwhile; ?>
 			</ul>
 
-			<?php the_posts_navigation(); ?>
+			<?php the_posts_pagination(); ?>
 		<?php endif; ?>
 	</section>
 

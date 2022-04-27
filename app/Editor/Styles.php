@@ -10,6 +10,9 @@ namespace Pulsar\Editor;
 use Pulsar\Contracts\Bootable;
 use Pulsar\Tools\Config;
 
+/**
+ * Block styles handling.
+ */
 class Styles implements Bootable {
 
 	/**

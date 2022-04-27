@@ -9,6 +9,9 @@ namespace Pulsar\Editor;
 
 use Pulsar\Contracts\Bootable;
 
+/**
+ * Block handling.
+ */
 class Blocks implements Bootable {
 
 	/**
@@ -34,7 +37,7 @@ class Blocks implements Bootable {
 
 		if ( $is_pre_wp_6 ) {
 			// Filter the plugins URL to allow us to have blocks in themes with linked assets. i.e editorScripts
-			add_filter( 'plugins_url', [ $this, 'filterPluginsUrl' ], 10, 2 );
+			add_filter( 'plugins_url', [ $this, 'filter_plugins_url' ], 10, 2 );
 		}
 
 		$blocks_directory = get_theme_file_path( '/blocks/' );
@@ -72,7 +75,7 @@ class Blocks implements Bootable {
 
 		if ( $is_pre_wp_6 ) {
 			// Remove the filter after we register the blocks
-			remove_filter( 'plugins_url', [ $this, 'filterPluginsUrl' ], 10, 2 );
+			remove_filter( 'plugins_url', [ $this, 'filter_plugins_url' ], 10, 2 );
 		}
 	}
 
@@ -84,7 +87,7 @@ class Blocks implements Bootable {
 	 *
 	 * @return string The overridden url to the block asset.
 	 */
-	function filterPluginsUrl( $url, $path ) {
+	public function filter_plugins_url( $url, $path ) {
 		$file = preg_replace( '/\.\.\//', '', $path );
 		return trailingslashit( get_stylesheet_directory_uri() ) . $file;
 	}

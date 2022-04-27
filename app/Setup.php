@@ -22,8 +22,8 @@ class Setup implements Bootable {
 	public function boot() {
 		add_action( 'after_setup_theme', [ $this, 'supports' ], 5 );
 		add_action( 'init', [ $this, 'menus' ] );
-		add_action( 'init', [ $this, 'imageSizes' ] );
-		add_action( 'widgets_init', [ $this, 'widgetAreas' ] );
+		add_action( 'init', [ $this, 'image_sizes' ] );
+		add_action( 'widgets_init', [ $this, 'widget_areas' ] );
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function imageSizes() {
+	public function image_sizes() {
 		add_image_size( '4x3', 640, 480, true );
 	}
 
@@ -112,7 +112,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function widgetAreas() {
+	public function widget_areas() {
 		$args = [
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',

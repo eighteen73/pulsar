@@ -22,8 +22,8 @@ class Patterns implements Bootable {
 	 * @return void
 	 */
 	public function boot() {
-		add_action( 'init', [ $this, 'registerCategories' ] );
-		add_action( 'init', [ $this, 'registerPatterns' ] );
+		add_action( 'init', [ $this, 'register_categories' ] );
+		add_action( 'init', [ $this, 'register_patterns' ] );
 	}
 
 	/**
@@ -41,12 +41,12 @@ class Patterns implements Bootable {
 	  * @access public
 	  * @return void
 	  */
-	public function registerCategories() {
+	public function register_categories() {
 
 		$categories = $this->config()['categories'] ?: [];
 
 		foreach ( $categories as $category_slug => $category ) {
-			$this->addCategory( $category_slug, $category );
+			$this->add_category( $category_slug, $category );
 		}
 	}
 
@@ -56,12 +56,12 @@ class Patterns implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function registerPatterns() {
+	public function register_patterns() {
 
 		$block_patterns = $this->config()['patterns'] ?: [];
 
 		foreach ( $block_patterns as $pattern_slug => $pattern ) {
-			$this->addPattern( $pattern_slug, $pattern );
+			$this->add_pattern( $pattern_slug, $pattern );
 		}
 	}
 
@@ -73,7 +73,7 @@ class Patterns implements Bootable {
 	 * @param  string $label
 	 * @return void
 	 */
-	protected function addCategory( string $slug, string $label ) {
+	protected function add_category( string $slug, string $label ) {
 
 		// Register block pattern categories.
 		register_block_pattern_category(
@@ -92,13 +92,13 @@ class Patterns implements Bootable {
 	 * @param  array  $args
 	 * @return void
 	 */
-	protected function addPattern( string $slug, array $args = [] ) {
+	protected function add_pattern( string $slug, array $args = [] ) {
 
 		/**
 		 * If no content is passed in, assume there is a corresponding
 		 * `/patterns/{$slug}.php` file and pull the content from there.
 		 */
-		$content = $args['content'] ?? $this->patternContent( $slug );
+		$content = $args['content'] ?? $this->pattern_content( $slug );
 
 		// A pattern must have content.
 		if ( ! $content ) {
@@ -125,7 +125,7 @@ class Patterns implements Bootable {
 	 * @param  string $slug
 	 * @return string
 	 */
-	protected function patternContent( string $slug ) {
+	protected function pattern_content( string $slug ) {
 		ob_start();
 		include get_theme_file_path( "patterns/{$slug}.php" );
 		return ob_get_clean();

@@ -6,5 +6,4 @@ return [
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Editor\Styles::class,
 	Pulsar\WooCommerce\Setup::class,
-	Pulsar\WooCommerce\SingleProduct::class,
 ];

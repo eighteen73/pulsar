@@ -28,7 +28,7 @@ class Setup implements Bootable {
 		add_action( 'after_setup_theme', [ $this, 'supports' ] );
 
 		// Disable WooCommerce core styles.
-		add_filter( 'woocommerce_enqueue_styles', [ $this, 'disableCoreStyles' ] );
+		add_filter( 'woocommerce_enqueue_styles', [ $this, 'disable_core_styles' ] );
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Setup implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function disableCoreStyles() {
+	public function disable_core_styles() {
 		return [];
 	}
 }

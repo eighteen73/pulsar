@@ -1,7 +1,15 @@
 <?php
+/**
+ * AlpineJS walker class.
+ *
+ * @package Pulsar
+ */
 
 namespace Pulsar\Menu;
 
+/**
+ * AlpineJS walker class.
+ */
 class AlpineJSWalker extends \Walker_Nav_Menu {
 	/**
 	 * Starts the list before the elements are added.
