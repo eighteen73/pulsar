@@ -20,4 +20,30 @@ namespace Pulsar;
  */
 if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
 	require_once get_parent_theme_file_path( 'vendor/autoload.php' );
+} else {
+	spl_autoload_register(
+		function( $class_name ) {
+			$namespace = 'Pulsar';
+
+			if ( strpos( $class_name, $namespace . '\\' ) !== 0 ) {
+				return false;
+			}
+
+			$parts = explode( '\\', substr( $class_name, strlen( $namespace . '\\' ) ) );
+
+			$path = get_template_directory() . '/app';
+			foreach ( $parts as $part ) {
+				$path .= '/' . $part;
+			}
+			$path .= '.php';
+
+			if ( ! file_exists( $path ) ) {
+				return false;
+			}
+
+			require_once $path;
+
+			return true;
+		}
+	);
 }
