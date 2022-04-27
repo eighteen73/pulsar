@@ -18,5 +18,9 @@
 	<!-- Show sniff codes in all reports -->
 	<arg value="ns"/>
 
+	<rule ref="Squiz.PHP.EmbeddedPhp">
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+	</rule>
+
 	<rule ref="Eighteen73-WordPress-Default" />
 </ruleset>

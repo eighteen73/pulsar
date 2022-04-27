@@ -1,6 +1,7 @@
 {
   "name": "eighteen73/pulsar",
   "type": "wordpress-theme",
+  "license": "MIT",
   "authors": [
     {
       "name": "Brett Mason",
@@ -24,5 +25,14 @@
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  },
+  "scripts": {
+    "config-cs": [
+      "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+      "\"vendor/bin/phpcs\" --config-set default_standard Eighteen73-WordPress-Default"
+    ],
+    "post-install-cmd": "@config-cs",
+    "post-update-cmd": "@config-cs",
+    "lint": "\"vendor/bin/phpcs\" . "
   }
 }
