@@ -2,7 +2,7 @@
 /**
  * The archive template file
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 get_header(); ?>

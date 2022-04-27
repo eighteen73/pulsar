@@ -2,7 +2,7 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 if ( ! is_active_sidebar( 'primary' ) ) {

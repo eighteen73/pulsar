@@ -2,13 +2,13 @@
 /**
  * Block patterns handling.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Editor;
+namespace Pulsar\Editor;
 
-use NewTheme\Contracts\Bootable;
-use NewTheme\Tools\Config;
+use Pulsar\Contracts\Bootable;
+use Pulsar\Tools\Config;
 
 /**
  * Block patterns handling.
@@ -106,11 +106,11 @@ class Patterns implements Bootable {
 		}
 
 		register_block_pattern(
-			"new-theme/{$slug}",
+			"pulsar/{$slug}",
 			wp_parse_args(
 				$args,
 				[
-					'categories'    => [ 'new-theme' ],
+					'categories'    => [ 'pulsar' ],
 					'content'       => $content,
 					'viewportWidth' => 1024,
 				]

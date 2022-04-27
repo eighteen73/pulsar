@@ -2,7 +2,7 @@
 /**
  * The template for displaying the header.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 ?>
@@ -20,7 +20,7 @@
 		<div id="page" class="site">
 			<header id="masthead" class="site-header"  x-data="menu()">
 				<div class="container">
-					<a class="sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'new-theme' ); ?></a>
+					<a class="sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
 					<h1><?php bloginfo( 'name' ); ?></h1>
 
 					<button
@@ -29,7 +29,7 @@
 						class="lg:hidden"
 						type="button"
 						aria-controls="menu-primary"
-						aria-label="<?php esc_html_e( 'Toggle Navigation', 'new-theme' ); ?>">
+						aria-label="<?php esc_html_e( 'Toggle Navigation', 'pulsar' ); ?>">
 						<span x-text="showMenu ? 'Close' : 'Open'"></span>
 					</button>
 

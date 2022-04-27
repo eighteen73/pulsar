@@ -2,10 +2,10 @@
 /**
  * Laravel Mix asset path management.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Tools;
+namespace Pulsar\Tools;
 
 /**
  * Mix class.

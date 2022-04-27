@@ -2,12 +2,12 @@
 /**
  * Bootstrap all of the theme classes.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme;
+namespace Pulsar;
 
-use NewTheme\Tools\Config;
+use Pulsar\Tools\Config;
 
 /**
  * Mini container.  This allows us to set up single instances of our objects
@@ -40,4 +40,4 @@ function theme( string $abstract = '' ) {
  * Bootstrap theme.
  * Run a small bootstrapping routine.
  */
-do_action( 'new_theme/booted', theme() );
+do_action( 'pulsar/booted', theme() );

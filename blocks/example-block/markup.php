@@ -2,7 +2,7 @@
 /**
  * Example block markup
  *
- * @package NewTheme\Blocks\Example
+ * @package Pulsar\Blocks\Example
  *
  * @var array    $attributes         Block attributes.
  * @var string   $content            Block content.

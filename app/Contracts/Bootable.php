@@ -8,10 +8,10 @@
  * the class constructor. Most bootable classes are meant to be single-instance
  * classes that get loaded once per page request.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Contracts;
+namespace Pulsar\Contracts;
 
 /**
  * Bootable interface.

@@ -1,5 +1,5 @@
 {
-  "name": "brettsmason/new-theme",
+  "name": "brettsmason/pulsar",
   "type": "wordpress-theme",
   "authors": [
     {
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "NewTheme\\": "app/"
+      "Pulsar\\": "app/"
     }
   },
   "config": {

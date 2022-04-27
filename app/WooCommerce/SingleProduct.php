@@ -1,8 +1,8 @@
 <?php
 
-namespace NewTheme\WooCommerce;
+namespace Pulsar\WooCommerce;
 
-use NewTheme\Contracts\Bootable;
+use Pulsar\Contracts\Bootable;
 
 class SingleProduct implements Bootable {
 

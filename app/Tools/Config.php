@@ -4,10 +4,10 @@
  *
  * A simple class for grabbing and returning a configuration file from `/config`.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Tools;
+namespace Pulsar\Tools;
 
 /**
  * Config class.
@@ -26,7 +26,7 @@ class Config {
 		$file = static::path( "{$name}.php" );
 
 		return (array) apply_filters(
-			"new_theme/config/{$name}/",
+			"pulsar/config/{$name}/",
 			file_exists( $file ) ? include( $file ) : []
 		);
 	}

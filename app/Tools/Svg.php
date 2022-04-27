@@ -4,12 +4,12 @@
  *
  * This is an SVG system for displaying SVGs in themes.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Tools;
+namespace Pulsar\Tools;
 
-use NewTheme\Tools\Attribute;
+use Pulsar\Tools\Attribute;
 
 /**
  * Create SVG markup from a .svg file.

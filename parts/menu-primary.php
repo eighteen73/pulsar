@@ -6,7 +6,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 
 <nav id="menu-primary" class="menu-primary">
 	<button id="menu-toggle" class="" aria-expanded="false" aria-controls="menu-primary-items">
-		<span class="sr-only"><?php esc_html_e( 'Menu', 'new-theme' ); ?></span>
+		<span class="sr-only"><?php esc_html_e( 'Menu', 'pulsar' ); ?></span>
 	</button>
 
 	<?php
@@ -18,7 +18,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 			'item_spacing'   => 'discard',
 			'menu_id'        => 'menu-primary-items',
 			'menu_class'     => 'menu-items',
-			'walker'         => new \NewTheme\Menu\AlpineJSWalker(),
+			'walker'         => new \Pulsar\Menu\AlpineJSWalker(),
 		]
 	);
 	?>

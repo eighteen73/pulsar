@@ -1,10 +1,10 @@
 <?php
 return [
-	NewTheme\Setup::class,
-	NewTheme\Enqueue::class,
-	NewTheme\Editor\Blocks::class,
-	NewTheme\Editor\Patterns::class,
-	NewTheme\Editor\Styles::class,
-	NewTheme\WooCommerce\Setup::class,
-	NewTheme\WooCommerce\SingleProduct::class,
+	Pulsar\Setup::class,
+	Pulsar\Enqueue::class,
+	Pulsar\Editor\Blocks::class,
+	Pulsar\Editor\Patterns::class,
+	Pulsar\Editor\Styles::class,
+	Pulsar\WooCommerce\Setup::class,
+	Pulsar\WooCommerce\SingleProduct::class,
 ];

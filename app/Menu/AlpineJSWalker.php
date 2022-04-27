@@ -1,6 +1,6 @@
 <?php
 
-namespace NewTheme\Menu;
+namespace Pulsar\Menu;
 
 class AlpineJSWalker extends \Walker_Nav_Menu {
 	/**

@@ -3,10 +3,10 @@
   "apiVersion": 2,
 	"title": "Example Block",
 	"description": "An Example Block",
-	"textdomain": "new-theme",
-	"name": "new-theme/example",
+	"textdomain": "pulsar",
+	"name": "pulsar/example",
   "icon": "feedback",
-  "category": "new-theme-blocks",
+  "category": "pulsar-blocks",
 	"attributes":{
 		"title": {
 			"type" : "string"

@@ -2,12 +2,12 @@
 /**
  * Block handling.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Editor;
+namespace Pulsar\Editor;
 
-use NewTheme\Contracts\Bootable;
+use Pulsar\Contracts\Bootable;
 
 class Blocks implements Bootable {
 

@@ -2,12 +2,12 @@
 /**
  * Theme setup.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme;
+namespace Pulsar;
 
-use NewTheme\Contracts\Bootable;
+use Pulsar\Contracts\Bootable;
 
 /**
  * Setup class.
@@ -34,7 +34,7 @@ class Setup implements Bootable {
 	public function supports() {
 
 		// Theme translations.
-		load_theme_textdomain( 'new-theme', get_parent_theme_file_path( 'resources/lang' ) );
+		load_theme_textdomain( 'pulsar', get_parent_theme_file_path( 'resources/lang' ) );
 
 		// Title tag support.
 		add_theme_support( 'title-tag' );
@@ -93,7 +93,7 @@ class Setup implements Bootable {
 
 		register_nav_menus(
 			[
-				'primary' => esc_html_x( 'Primary', 'nav menu location', 'new-theme' ),
+				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
 			]
 		);
 	}
@@ -123,7 +123,7 @@ class Setup implements Bootable {
 		register_sidebar(
 			[
 				'id'   => 'primary',
-				'name' => esc_html_x( 'Primary', 'sidebar', 'new-theme' ),
+				'name' => esc_html_x( 'Primary', 'sidebar', 'pulsar' ),
 			] + $args
 		);
 	}

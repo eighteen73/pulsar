@@ -2,12 +2,12 @@
 /**
  * WooCommerce class.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\WooCommerce;
+namespace Pulsar\WooCommerce;
 
-use NewTheme\Contracts\Bootable;
+use Pulsar\Contracts\Bootable;
 
 /**
  * Handles setting up everything we need for WooCommerce.

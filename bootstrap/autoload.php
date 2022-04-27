@@ -6,10 +6,10 @@
  * to run. Classes utilize the PSR-4 autoloader in Composer and is defined in
  * `composer.json`.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme;
+namespace Pulsar;
 
 /**
  * Run the Composer autoloader.

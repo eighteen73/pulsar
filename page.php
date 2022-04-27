@@ -4,7 +4,7 @@
  * Looks for a content/page-{page-slug}.php file,
  * otherwise uses content/page.php
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 get_header(); ?>

@@ -2,13 +2,13 @@
 /**
  * Theme assets enqueue.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme;
+namespace Pulsar;
 
-use NewTheme\Contracts\Bootable;
-use NewTheme\Tools\Mix;
+use Pulsar\Contracts\Bootable;
+use Pulsar\Tools\Mix;
 
 /**
  * Enqueue scripts, styles and fonts.
@@ -34,7 +34,7 @@ class Enqueue implements Bootable {
 	public function styles() {
 
 		wp_enqueue_style(
-			'new-theme-app',
+			'pulsar-app',
 			Mix::asset( 'css/app.css' ),
 			false,
 			null
@@ -49,7 +49,7 @@ class Enqueue implements Bootable {
 	public function scripts() {
 
 		wp_enqueue_script(
-			'new-theme-app',
+			'pulsar-app',
 			Mix::asset( 'js/app.js' ),
 			null,
 			null,

@@ -7,11 +7,11 @@
  * `post_class()`, and `comment_class()` on steroids. However, it can handle
  * attributes for any elements.
  *
- * @package NewTheme
+ * @package Pulsar
  * @link    https://themehybrid.com/hybrid-attr
  */
 
-namespace NewTheme\Tools;
+namespace Pulsar\Tools;
 
 /**
  * Attributes class.

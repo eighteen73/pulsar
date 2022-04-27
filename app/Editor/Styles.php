@@ -2,13 +2,13 @@
 /**
  * Block styles handling.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
-namespace NewTheme\Editor;
+namespace Pulsar\Editor;
 
-use NewTheme\Contracts\Bootable;
-use NewTheme\Tools\Config;
+use Pulsar\Contracts\Bootable;
+use Pulsar\Tools\Config;
 
 class Styles implements Bootable {
 

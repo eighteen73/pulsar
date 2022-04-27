@@ -138,7 +138,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
   \*****************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"title":"Example Block","description":"An Example Block","textdomain":"new-theme","name":"new-theme/example","icon":"feedback","category":"new-theme-blocks","attributes":{"title":{"type":"string"}},"example":{"attributes":{"title":"Example Block"}},"supports":{"html":false},"editorScript":"file:../../public/blocks/example-block/editor.js","editorStyle":"file:../../public/blocks/example-block/editor.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"title":"Example Block","description":"An Example Block","textdomain":"pulsar","name":"pulsar/example","icon":"feedback","category":"pulsar-blocks","attributes":{"title":{"type":"string"}},"example":{"attributes":{"title":"Example Block"}},"supports":{"html":false},"editorScript":"file:../../public/blocks/example-block/editor.js","editorStyle":"file:../../public/blocks/example-block/editor.css"}');
 
 /***/ })
 
@@ -146,7 +146,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -160,14 +160,14 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	!function() {
@@ -180,7 +180,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return getter;
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -192,12 +192,12 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			}
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
 /******/ 	}();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	!function() {
 /******/ 		// define __esModule on exports
@@ -208,13 +208,13 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	}();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./blocks/index.js");
-/******/ 	
+/******/
 /******/ })()
 ;

@@ -4,7 +4,7 @@
  *
  * This file is used to bootstrap the theme.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 /**

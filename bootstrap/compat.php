@@ -8,12 +8,12 @@
  * PHP requirement. Only call this file after initially checking that the site
  * doesn't meet either the WP or PHP requirement.
  *
- * @package NewTheme
+ * @package Pulsar
  */
 
 // Add actions to fail at certain points in the load process.
-add_action( 'after_switch_theme', 'new_theme_switch_theme' );
-add_action( 'template_redirect', 'new_theme_preview' );
+add_action( 'after_switch_theme', 'pulsar_switch_theme' );
+add_action( 'template_redirect', 'pulsar_preview' );
 
 /**
  * Returns the compatibility messaged based on whether the WP or PHP minimum
@@ -22,12 +22,12 @@ add_action( 'template_redirect', 'new_theme_preview' );
  * @access public
  * @return mixed
  */
-function new_theme_compat_message() {
+function pulsar_compat_message() {
 	if ( version_compare( $GLOBALS['wp_version'], '5.8', '<' ) ) {
 
 		return sprintf(
 			/* translators: %1$s is supported WordPress version, and %2$s is WordPress version used. */
-			esc_html__( 'Theme requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'new-theme' ),
+			esc_html__( 'Theme requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'pulsar' ),
 			'5.8',
 			$GLOBALS['wp_version']
 		);
@@ -36,7 +36,7 @@ function new_theme_compat_message() {
 
 		return sprintf(
 			/* translators: %1$s is supported PHP version, and %2$s is PHP version used. */
-			esc_html__( 'Theme requires at least PHP version %1$s. You are running version %2$s. Please upgrade and try again.', 'new-theme' ),
+			esc_html__( 'Theme requires at least PHP version %1$s. You are running version %2$s. Please upgrade and try again.', 'pulsar' ),
 			'7.4',
 			PHP_VERSION
 		);
@@ -52,13 +52,13 @@ function new_theme_compat_message() {
  * @param  string $old_name Old name of the theme.
  * @return void
  */
-function new_theme_switch_theme( $old_name ) {
+function pulsar_switch_theme( $old_name ) {
 
 	switch_theme( $old_name ? $old_name : WP_DEFAULT_THEME );
 
 	unset( $_GET['activated'] );
 
-	add_action( 'admin_notices', 'new_theme_upgrade_notice' );
+	add_action( 'admin_notices', 'pulsar_upgrade_notice' );
 }
 
 /**
@@ -67,8 +67,8 @@ function new_theme_switch_theme( $old_name ) {
  * @access public
  * @return void
  */
-function new_theme_upgrade_notice() {
-	printf( '<div class="error"><p>%s</p></div>', esc_html( new_theme_compat_message() ) );
+function pulsar_upgrade_notice() {
+	printf( '<div class="error"><p>%s</p></div>', esc_html( pulsar_compat_message() ) );
 }
 
 /**
@@ -77,8 +77,8 @@ function new_theme_upgrade_notice() {
  * @access public
  * @return void
  */
-function new_theme_preview() {
+function pulsar_preview() {
 	if ( isset( $_GET['preview'] ) ) { // WPCS: CSRF ok.
-		wp_die( esc_html( new_theme_compat_message() ) );
+		wp_die( esc_html( pulsar_compat_message() ) );
 	}
 }
