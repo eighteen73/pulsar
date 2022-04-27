@@ -1,5 +1,5 @@
 {
-  "name": "new-theme",
+  "name": "pulsar",
   "version": "1.0.0",
   "scripts": {
     "dev": "npm run development",
@@ -35,5 +35,25 @@
     "@wordpress/browserslist-config": "^4.1.2",
     "alpinejs": "^3.9.5",
     "tailwindcss": "^3.0.23"
+  },
+  "babel": {
+    "presets": [
+      "@wordpress/babel-preset-default"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-import": {},
+      "tailwindcss/nesting": {},
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ],
+  "prettier": "@wordpress/prettier-config",
+  "stylelint": {
+    "extends": "@wordpress/stylelint-config"
   }
 }
