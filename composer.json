@@ -1,17 +1,19 @@
 {
-  "name": "brettsmason/pulsar",
+  "name": "eighteen73/pulsar",
   "type": "wordpress-theme",
   "authors": [
     {
       "name": "Brett Mason",
-      "email": "brettsmason@gmail.com"
+      "email": "brett@orphans.co.uk"
     }
   ],
+  "minimum-stability": "dev",
   "require-dev": {
     "php": ">=7.4",
     "wp-coding-standards/wpcs": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "*",
-    "phpcompatibility/php-compatibility": "*"
+    "phpcompatibility/php-compatibility": "*",
+    "eighteen73/phpcs-composer": "dev-main"
   },
   "autoload": {
     "psr-4": {
