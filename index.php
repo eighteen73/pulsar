@@ -16,7 +16,7 @@ get_header(); ?>
 				<?php get_template_part( 'parts/content/archive', get_post_type() ); ?>
 			<?php endwhile; ?>
 
-			<?php the_posts_navigation(); ?>
+			<?php the_posts_pagination(); ?>
 		<?php endif; ?>
 	</main>
 
