@@ -1,4 +1,4 @@
-# New Theme
+# Pulsar
 
 <p>
   <strong>WordPress starter theme with Tailwind CSS, Alpine JS and a modern development workflow</strong>
@@ -62,7 +62,6 @@ Edit `app/Setup.php` to enable or disable theme features, setup navigation menus
 ## Theme development
 
 - Run `npm install` from the theme directory to install dependencies
-- Run `composer install` from the theme directory to create the Composer autoloader file
 
 ### Build commands
 
