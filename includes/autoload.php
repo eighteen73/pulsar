@@ -47,3 +47,12 @@ if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
 		}
 	);
 }
+
+/**
+ * Autoload template tag functions.
+ * These should be placed within the `includes/template-tags` directory.
+ * Ideally, group them by functionality.
+ */
+foreach ( glob( get_template_directory() . '/includes/template-tags/*.php' ) as $filename ) {
+    include_once $filename;
+}

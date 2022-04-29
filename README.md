@@ -37,6 +37,7 @@ themes/your-theme-name/      # → Root of your theme
 │           └── Svg.php     # → Allows manipulating SVGs and inlining them
 │       ├── Enqueue.php     # → Theme assets
 │       └── Setup.php       # → Theme setup
+│   └── template-tags/      # → Theme template tags
 ├── parts/                  # → Theme partial template files
 ├── patterns/               # → Theme block pattern template files
 ├── composer.json           # → Autoloading for `app/` classes
