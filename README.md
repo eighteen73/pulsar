@@ -16,7 +16,7 @@ Make sure all dependencies have been installed before moving on:
 ## Theme structure
 
 ```sh
-themes/your-theme-name/      # → Root of your theme
+themes/your-theme-name/     # → Root of your theme
 ├── blocks/                 # → Custom blocks
 ├── config/                 # → Theme configuration files
 │   ├── bindings.php        # → Theme container bindings
