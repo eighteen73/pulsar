@@ -16,43 +16,44 @@ Make sure all dependencies have been installed before moving on:
 ## Theme structure
 
 ```sh
-themes/your-theme-name/    # → Root of your theme
-├── app/                   # → Theme PHP
-│   ├── Contracts/         # → Interfaces and Traits
-│   ├── Editor/            # → Editor specific classes
-│       ├── Blocks.php     # → Registration of custom blocks
-│       ├── Patterns.php   # → Block pattern management
-│       ├── Styles.php     # → Block styles management
-│   ├── Tools/             # → Various tools used throughout the theme
-│       ├── Mix.php        # → Handles asset management with Laravel Mix
-│       ├── Svg.php        # → Allows manipulating SVGs and inlining them
-│   ├── Enqueue.php        # → Theme assets
-│   └── Setup.php          # → Theme setup
-├── bootstrap/             # → Theme bootstrap and compatibility
-│   ├── autoload.php       # → Theme autoloader
-│   ├── compat.php         # → Theme compatibility
-│   └── theme.php          # → Theme mini container
-├── config/                # → Theme configuration files
-│   ├── bindings.php       # → Theme container bindings
-│   ├── block-patterns.php # → Theme compatibility
-│   └── theme.php          # → Theme bootloader
-├── parts/                 # → Theme partial template files
-├── patterns/              # → Theme block pattern template files
-├── composer.json          # → Autoloading for `app/` classes
-├── public/                # → Built theme assets (never edit)
-├── functions.php          # → Theme bootloader
-├── node_modules/          # → Node.js packages (never edit)
-├── package.json           # → Node.js dependencies and scripts
-├── resources/             # → Theme assets and templates
-│   ├── css/               # → Theme stylesheets
-│   ├── fonts/             # → Theme fonts
-│   ├── img/               # → Theme images
-│   ├── js/                # → Theme javascript
-│   ├── svg/               # → Theme SVGs
-├── templates/             # → Theme custom template files
-├── screenshot.png         # → Theme screenshot for WP admin
-├── style.css              # → Theme meta information
-├── vendor/                # → Composer packages (never edit)
+themes/your-theme-name/      # → Root of your theme
+├── blocks/                 # → Custom blocks
+├── config/                 # → Theme configuration files
+│   ├── bindings.php        # → Theme container bindings
+│   ├── block-patterns.php  # → Theme compatibility
+│   └── theme.php           # → Theme bootloader
+├── includes/               # → Theme bootstrap and compatibility
+│   ├── autoload.php        # → Theme autoloader
+│   ├── compat.php          # → Theme compatibility
+│   └── theme.php           # → Theme mini container
+│   └── classes/            # → Theme classes (autoloaded)
+│       ├── Contracts/      # → Interfaces and Traits
+│       ├── Editor/         # → Editor specific classes
+│       ├── Blocks.php      # → Registration of custom blocks
+│       ├── Patterns.php    # → Block pattern management
+│       ├── Styles.php      # → Block styles management
+│       └── Tools/          # → Various tools used throughout the theme
+│           ├── Mix.php     # → Handles asset management with Laravel Mix
+│           └── Svg.php     # → Allows manipulating SVGs and inlining them
+│       ├── Enqueue.php     # → Theme assets
+│       └── Setup.php       # → Theme setup
+├── parts/                  # → Theme partial template files
+├── patterns/               # → Theme block pattern template files
+├── composer.json           # → Autoloading for `app/` classes
+├── dist/                   # → Built theme assets (never edit)
+├── functions.php           # → Theme bootloader
+├── node_modules/           # → Node.js packages (never edit)
+├── package.json            # → Node.js dependencies and scripts
+├── src/                    # → Theme assets and templates
+│   ├── css/                # → Theme stylesheets
+│   ├── fonts/              # → Theme fonts
+│   ├── img/                # → Theme images
+│   ├── js/                 # → Theme javascript
+│   ├── svg/                # → Theme SVGs
+├── templates/              # → Theme custom template files
+├── screenshot.png          # → Theme screenshot for WP admin
+├── style.css               # → Theme meta information
+├── vendor/                 # → Composer packages (never edit)
 ```
 
 ## Theme setup
