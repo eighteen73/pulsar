@@ -31,7 +31,7 @@ if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
 
 			$parts = explode( '\\', substr( $class_name, strlen( $namespace . '\\' ) ) );
 
-			$path = get_template_directory() . '/app';
+			$path = get_template_directory() . '/includes/classes';
 			foreach ( $parts as $part ) {
 				$path .= '/' . $part;
 			}

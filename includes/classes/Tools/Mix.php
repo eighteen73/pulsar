@@ -26,11 +26,11 @@ class Mix {
 			return self::$mix;
 		}
 
-		$file      = get_parent_theme_file_path( 'public/mix-manifest.json' );
+		$file      = get_parent_theme_file_path( 'dist/mix-manifest.json' );
 		self::$mix = (array) json_decode( file_get_contents( $file ), true );
 
 		if ( is_child_theme() ) {
-			$child = get_theme_file_path() . 'public/mix-manifest.json';
+			$child = get_theme_file_path() . 'dist/mix-manifest.json';
 
 			if ( file_exists( $child ) ) {
 				self::$mix = array_merge(
@@ -63,6 +63,6 @@ class Mix {
 			$path = $manifest[ $path ];
 		}
 
-		return get_theme_file_uri( 'public' . $path );
+		return get_theme_file_uri( 'dist' . $path );
 	}
 }

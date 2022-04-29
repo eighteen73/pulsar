@@ -17,7 +17,7 @@ require('laravel-mix-copy-watched');
  */
 
 mix
-  .setPublicPath('./public')
+  .setPublicPath('./dist')
   .browserSync(
     config.browserSync.settings,
 		config.browserSync.options
@@ -32,9 +32,9 @@ config.entries.js.forEach(entry => {
 });
 
 mix
-  .copyDirectoryWatched('resources/fonts', 'public/fonts')
-  .copyDirectoryWatched('resources/img', 'public/img')
-  .copyDirectoryWatched('resources/svg', 'public/svg');
+  .copyDirectoryWatched('src/fonts', 'dist/fonts')
+  .copyDirectoryWatched('src/img', 'dist/img')
+  .copyDirectoryWatched('src/svg', 'dist/svg');
 
 mix
   .autoload({

@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Pulsar\\": "app/"
+      "Pulsar\\": "includes/classes/"
     }
   },
   "config": {
