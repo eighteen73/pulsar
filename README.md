@@ -10,7 +10,6 @@ Make sure all dependencies have been installed before moving on:
 
 - [WordPress](https://wordpress.org/) >= 5.9
 - [PHP](https://secure.php.net/manual/en/install.php) >= 7.4.0
-- [Composer](https://getcomposer.org/download/)
 - [Node.js](http://nodejs.org/) >= 16
 
 ## Theme structure
@@ -20,12 +19,10 @@ themes/your-theme-name/     # → Root of your theme
 ├── blocks/                 # → Custom blocks
 ├── config/                 # → Theme configuration files
 │   ├── bindings.php        # → Theme container bindings
-│   ├── block-patterns.php  # → Theme compatibility
-│   └── theme.php           # → Theme bootloader
-├── includes/               # → Theme bootstrap and compatibility
-│   ├── autoload.php        # → Theme autoloader
-│   ├── compat.php          # → Theme compatibility
-│   └── theme.php           # → Theme mini container
+│   ├── block-patterns.php  # → Custom block patterns
+│   ├── block-styles.php    # → Custom block styles
+│   └── mix.json            # → Mix entries and other settings
+├── includes/               # → Theme functions and classes
 │   └── classes/            # → Theme classes (autoloaded)
 │       ├── Contracts/      # → Interfaces and Traits
 │       ├── Editor/         # → Editor specific classes
@@ -38,13 +35,13 @@ themes/your-theme-name/     # → Root of your theme
 │       ├── Enqueue.php     # → Theme assets
 │       └── Setup.php       # → Theme setup
 │   └── template-tags/      # → Theme template tags
+│   ├── autoload.php        # → Theme autoloader
+│   ├── compat.php          # → Theme compatibility
+│   └── theme.php           # → Theme mini container
+├── dist/                   # → Built theme assets (never edit)
 ├── parts/                  # → Theme partial template files
 ├── patterns/               # → Theme block pattern template files
-├── composer.json           # → Autoloading for `app/` classes
-├── dist/                   # → Built theme assets (never edit)
-├── functions.php           # → Theme bootloader
 ├── node_modules/           # → Node.js packages (never edit)
-├── package.json            # → Node.js dependencies and scripts
 ├── src/                    # → Theme assets and templates
 │   ├── css/                # → Theme stylesheets
 │   ├── fonts/              # → Theme fonts
@@ -52,9 +49,10 @@ themes/your-theme-name/     # → Root of your theme
 │   ├── js/                 # → Theme javascript
 │   ├── svg/                # → Theme SVGs
 ├── templates/              # → Theme custom template files
+├── functions.php           # → Theme bootloader
+├── package.json            # → Node.js dependencies and scripts
 ├── screenshot.png          # → Theme screenshot for WP admin
 ├── style.css               # → Theme meta information
-├── vendor/                 # → Composer packages (never edit)
 ```
 
 ## Theme setup
