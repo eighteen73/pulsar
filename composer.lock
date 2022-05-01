@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e0762fa939c20d83cf7b442acb1f9f6",
+    "content-hash": "792fd0a58fbf3da0d8026f913081468c",
     "packages": [],
     "packages-dev": [
         {
@@ -298,16 +298,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.6.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a"
+                "reference": "b314140057170a81075556a71764f2f302e3b8be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5e4e71592f69da17871dba6e80dd51bce74a351a",
-                "reference": "5e4e71592f69da17871dba6e80dd51bce74a351a",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b314140057170a81075556a71764f2f302e3b8be",
+                "reference": "b314140057170a81075556a71764f2f302e3b8be",
                 "shasum": ""
             },
             "require": {
@@ -319,6 +319,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/phpcs",
                 "bin/phpcbf"
@@ -350,7 +351,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2021-12-12T21:44:58+00:00"
+            "time": "2022-04-18T00:25:09+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -411,9 +412,9 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": {
+    "platform": {
         "php": ">=7.4"
     },
-    "plugin-api-version": "2.2.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
