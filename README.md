@@ -21,6 +21,8 @@ themes/your-theme-name/     # → Root of your theme
 │   ├── bindings.php        # → Theme container bindings
 │   ├── block-patterns.php  # → Custom block patterns
 │   ├── block-styles.php    # → Custom block styles
+│   ├── blocks.php          # → All enabled blocks
+│   └── browsersync.json    # → Developer-specific configuration for BrowserSync (if wanted)
 │   └── mix.json            # → Mix entries and other settings
 ├── includes/               # → Theme functions and classes
 │   └── classes/            # → Theme classes (autoloaded)

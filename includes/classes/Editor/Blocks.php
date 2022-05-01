@@ -8,11 +8,16 @@
 namespace Pulsar\Editor;
 
 use Pulsar\Contracts\Bootable;
+use Pulsar\Tools\Config;
 
 /**
  * Block handling.
  */
 class Blocks implements Bootable {
+
+
+	// Quick dev. toggle to re-enable all blocks while testing
+	const ENABLE_ALL_BLOCKS = false;
 
 	/**
 	 * Bootstraps the class' actions/filters.
@@ -22,6 +27,7 @@ class Blocks implements Bootable {
 	 */
 	public function boot() {
 		add_action( 'init', [ $this, 'register' ] );
+		add_filter( 'allowed_block_types_all', [ $this, 'restrict_blocks' ], 10, 2 );
 	}
 
 	/**
@@ -57,7 +63,7 @@ class Blocks implements Bootable {
 				if ( file_exists( $markup_file_path ) ) {
 
 					// only add the render callback if the block has a file called markup.php in it's directory
-					$block_options['render_callback'] = function( $attributes, $content, $block ) use ( $block_folder ) {
+					$block_options['render_callback'] = function ( $attributes, $content, $block ) use ( $block_folder ) {
 
 						// create helpful variables that will be accessible in markup.php file
 						$context = $block->context;
@@ -82,7 +88,7 @@ class Blocks implements Bootable {
 	/**
 	 * Filter the plugins_url to allow us to use assets from theme.
 	 *
-	 * @param string $url  The plugins url
+	 * @param string $url The plugins url
 	 * @param string $path The path to the asset.
 	 *
 	 * @return string The overridden url to the block asset.
@@ -90,5 +96,21 @@ class Blocks implements Bootable {
 	public function filter_plugins_url( $url, $path ) {
 		$file = preg_replace( '/\.\.\//', '', $path );
 		return trailingslashit( get_stylesheet_directory_uri() ) . $file;
+	}
+
+	/**
+	 * Limit the blocks that are made available to content editors
+	 */
+	public function restrict_blocks( $block_editor_context, $editor_context ) {
+		if ( self::ENABLE_ALL_BLOCKS || empty( $editor_context->post ) ) {
+			return $block_editor_context;
+		}
+
+		$blocks = Config::get( 'blocks' );
+		if ( ! $blocks ) {
+			return $block_editor_context;
+		}
+
+		return $blocks;
 	}
 }
