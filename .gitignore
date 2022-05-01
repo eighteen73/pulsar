@@ -1,5 +1,6 @@
+/.idea
 /node_modules
 /vendor
+/dist/mix/dev
 npm-debug.log
 yarn-error.log
-/.idea

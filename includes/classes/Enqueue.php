@@ -48,13 +48,29 @@ class Enqueue implements Bootable {
 	 */
 	public function scripts() {
 
-		wp_enqueue_script(
-			'pulsar-app',
-			Mix::asset( 'js/app.js' ),
-			null,
-			null,
-			true
-		);
+        wp_enqueue_script(
+            'pulsar-app-manifest',
+            Mix::asset( 'js/manifest.js' ),
+            null,
+            null,
+            true
+        );
+
+        wp_enqueue_script(
+            'pulsar-app-vendor',
+            Mix::asset( 'js/vendor.js' ),
+            [ 'pulsar-app-manifest' ],
+            null,
+            true
+        );
+
+        wp_enqueue_script(
+            'pulsar-app',
+            Mix::asset( 'js/app.js' ),
+            [ 'pulsar-app-vendor' ],
+            null,
+            true
+        );
 
 		// Load WordPress' comment-reply script where appropriate.
 		if ( is_singular() && get_option( 'thread_comments' ) && comments_open() ) {

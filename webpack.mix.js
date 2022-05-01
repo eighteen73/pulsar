@@ -1,54 +1,54 @@
-const mix = require('laravel-mix');
-const config = require('./config/mix.json');
+const config = require('./config/mix.json')
+const mix = require('laravel-mix')
 
-// Plugins.
-require('laravel-mix-clean');
-require('laravel-mix-copy-watched');
+require('laravel-mix-clean')
 
 /*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Sage application. By default, we are compiling the Sass file
- | for your application, as well as bundling up your JS files.
- |
+ * Separate dev/live destinations to prevent dev files from ever being uploaded, and
+ * to help reduce unnecessary code conflicts when working alongside other developers.
  */
 
-mix
-  .setPublicPath('./dist')
-  .browserSync(
-    config.browserSync.settings,
-		config.browserSync.options
-  );
+if (mix.inProduction()) {
+    mix.setPublicPath('dist/mix/live')
+    mix.version()
+} else {
+    mix.setPublicPath('dist/mix/dev')
+}
+
+/*
+ * Stylesheets
+ */
 
 config.entries.css.forEach(entry => {
-  mix.postCss(entry, 'css')
-});
+    mix.postCss(entry,'css')
+})
+
+mix.options({
+    processCssUrls: false,
+    postCss: [
+        require('autoprefixer'),
+        require('postcss-import'),
+        require('postcss-nested'),
+        require('tailwindcss')
+    ]
+})
+
+/*
+ * JavaScript
+ */
 
 config.entries.js.forEach(entry => {
-  mix.js(entry, 'js')
-});
+    mix.js(entry,'js')
+})
 
-mix
-  .copyDirectoryWatched('src/fonts', 'dist/fonts')
-  .copyDirectoryWatched('src/img', 'dist/img')
-  .copyDirectoryWatched('src/svg', 'dist/svg');
+mix.autoload({
+    jquery: ['$', 'window.jQuery']
+})
 
-mix
-  .autoload({
-	jquery: [
-	  '$',
-	  'window.jQuery'
-	]
-  })
-  .options({
-    processCssUrls: false,
-  })
-  .version()
-  .clean();
+mix.extract()
 
-if (!mix.inProduction()) {
-  mix.sourceMaps();
-}
+/*
+ * Housekeeping
+ */
+
+mix.clean()
