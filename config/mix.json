@@ -8,17 +8,5 @@
       "src/js/app.js",
       "src/js/editor.js"
     ]
-  },
-  "browserSync": {
-    "settings": {
-      "host": "localhost",
-      "port": 3000,
-      "proxy": "http://client-name.test",
-      "open": false
-    },
-    "options": {
-      "injectCss": true,
-      "reload": false
-    }
   }
 }
