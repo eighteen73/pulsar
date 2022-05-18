@@ -14,7 +14,7 @@
  * proceeding if this is a theme for public release. If building for a client
  * that meets these requirements, this code is unnecessary.
  */
-if ( version_compare( $GLOBALS['wp_version'], '5.8', '<' ) || version_compare( PHP_VERSION, '7.4', '<' ) ) {
+if ( version_compare( $GLOBALS['wp_version'], '6.0', '<' ) || version_compare( PHP_VERSION, '7.4', '<' ) ) {
 	require_once get_parent_theme_file_path( 'includes/compat.php' );
 	return;
 }

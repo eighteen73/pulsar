@@ -23,12 +23,12 @@ add_action( 'template_redirect', 'pulsar_preview' );
  * @return mixed
  */
 function pulsar_compat_message() {
-	if ( version_compare( $GLOBALS['wp_version'], '5.8', '<' ) ) {
+	if ( version_compare( $GLOBALS['wp_version'], '6.0', '<' ) ) {
 
 		return sprintf(
 			/* translators: %1$s is supported WordPress version, and %2$s is WordPress version used. */
 			esc_html__( 'Theme requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'pulsar' ),
-			'5.8',
+			'6.0',
 			$GLOBALS['wp_version']
 		);
 
