@@ -46,7 +46,7 @@ class Blocks implements Bootable {
 			add_filter( 'plugins_url', [ $this, 'filter_plugins_url' ], 10, 2 );
 		}
 
-		$blocks_directory = get_theme_file_path( '/blocks/' );
+		$blocks_directory = get_theme_file_path( '/dist/' );
 
 		// Register all the blocks in the theme
 		if ( file_exists( $blocks_directory ) ) {

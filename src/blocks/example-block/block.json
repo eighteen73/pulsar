@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "pulsar/example-block",
+	"version": "0.1.0",
+	"title": "Example Block",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example dynamic block.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "example-block",
+	"editorScript": "file:index.js",
+	"editorStyle": "file:editor.css",
+	"style": "file:style.css"
+}
