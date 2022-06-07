@@ -1,0 +1,19 @@
+{
+  "register": {
+    "core/image": {}
+  },
+  "unregister": {
+    "core/button": [
+      "fill",
+      "outline"
+    ],
+    "core/quote": [
+      "default",
+      "plain"
+    ],
+    "core/image": [
+      "default",
+      "rounded"
+    ]
+  }
+}
