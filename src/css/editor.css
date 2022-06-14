@@ -1,3 +1,30 @@
-.editor {
-	background-color: #f5f5f5;
-}
+/**
+ * Base Styles.
+ */
+@import "tailwindcss/base";
+
+/**
+ * Component Styles.
+ */
+@import "tailwindcss/components";
+
+/**
+ * Block Styles.
+ */
+/* @import "blocks/core/columns"; */
+
+/**
+ * Pattern Styles.
+ */
+/* @import "patterns/pattern-name"; */
+
+/**
+ * Utility Styles.
+ */
+@import "tailwindcss/utilities";
+@import "utilities/alpine";
+
+/**
+ * Page title.
+ */
+.editor-post-title__block .editor-post-title__input {}
