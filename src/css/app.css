@@ -1,3 +1,25 @@
+/**
+ * Base Styles.
+ */
 @import "tailwindcss/base";
+
+/**
+ * Component Styles.
+ */
 @import "tailwindcss/components";
+
+/**
+ * Block Styles.
+ */
+/* @import "blocks/core/columns"; */
+
+/**
+ * Pattern Styles.
+ */
+/* @import "patterns/pattern-name"; */
+
+/**
+ * Utility Styles.
+ */
 @import "tailwindcss/utilities";
+@import "utilities/alpine";
