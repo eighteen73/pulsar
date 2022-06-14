@@ -16,7 +16,7 @@ use Pulsar\Tools\Config;
 class Blocks implements Bootable {
 
 
-	// Quick dev. toggle to re-enable all blocks while testing
+	// Quick dev. toggle to re-enable all blocks while testing.
 	const ENABLE_ALL_BLOCKS = false;
 
 	/**
@@ -37,16 +37,8 @@ class Blocks implements Bootable {
 	 * @return void
 	 */
 	public function register() {
-		global $wp_version;
 
-		$is_pre_wp_6 = version_compare( $wp_version, '6.0', '<' );
-
-		if ( $is_pre_wp_6 ) {
-			// Filter the plugins URL to allow us to have blocks in themes with linked assets. i.e editorScripts
-			add_filter( 'plugins_url', [ $this, 'filter_plugins_url' ], 10, 2 );
-		}
-
-		$blocks_directory = get_theme_file_path( '/dist/' );
+		$blocks_directory = get_theme_file_path( '/dist/blocks/' );
 
 		// Register all the blocks in the theme
 		if ( file_exists( $blocks_directory ) ) {
@@ -59,18 +51,15 @@ class Blocks implements Bootable {
 
 				$block_options = [];
 
-				$markup_file_path = $block_folder . '/markup.php';
-				if ( file_exists( $markup_file_path ) ) {
+				$template_file_path = $block_folder . '/template.php';
+				if ( file_exists( $template_file_path ) ) {
 
-					// only add the render callback if the block has a file called markup.php in it's directory
+					// only add the render callback if the block has a file called template.php in it's directory
 					$block_options['render_callback'] = function ( $attributes, $content, $block ) use ( $block_folder ) {
 
-						// create helpful variables that will be accessible in markup.php file
-						$context = $block->context;
-
-						// get the actual markup from the markup.php file
+						// get the actual markup from the template.php file
 						ob_start();
-						include "{$block_folder}/markup.php";
+						include "{$block_folder}/template.php";
 						return ob_get_clean();
 					};
 				};
@@ -78,24 +67,6 @@ class Blocks implements Bootable {
 				register_block_type_from_metadata( $block_folder, $block_options );
 			};
 		};
-
-		if ( $is_pre_wp_6 ) {
-			// Remove the filter after we register the blocks
-			remove_filter( 'plugins_url', [ $this, 'filter_plugins_url' ], 10, 2 );
-		}
-	}
-
-	/**
-	 * Filter the plugins_url to allow us to use assets from theme.
-	 *
-	 * @param string $url The plugins url
-	 * @param string $path The path to the asset.
-	 *
-	 * @return string The overridden url to the block asset.
-	 */
-	public function filter_plugins_url( $url, $path ) {
-		$file = preg_replace( '/\.\.\//', '', $path );
-		return trailingslashit( get_stylesheet_directory_uri() ) . $file;
 	}
 
 	/**

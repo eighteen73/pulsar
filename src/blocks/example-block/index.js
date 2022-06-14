@@ -17,17 +17,15 @@
  /**
   * Internal dependencies
   */
- import json from './block.json';
- import Edit from './edit';
-
- const { name } = json;
+import metadata from './block.json';
+import Edit from './edit';
 
  /**
   * Every block starts by registering a new block type definition.
   *
   * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
   */
- registerBlockType( name, {
+ registerBlockType( metadata.name, {
 	 /**
 	  * @see ./edit.js
 	  */
