@@ -64,7 +64,7 @@ class Blocks implements Bootable {
 					};
 				};
 
-				register_block_type_from_metadata( $block_folder, $block_options );
+				register_block_type( $block_folder, $block_options );
 			};
 		};
 	}
