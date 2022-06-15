@@ -77,9 +77,6 @@ class Setup implements Bootable {
 		// Add support for editor styles.
 		add_theme_support( 'editor-styles' );
 
-		// Add support for align wide blocks.
-		add_theme_support( 'align-wide' );
-
 		// Let core handle responsive embed wrappers.
 		add_theme_support( 'responsive-embeds' );
 	}
@@ -104,7 +101,7 @@ class Setup implements Bootable {
 	 * @return void
 	 */
 	public function image_sizes() {
-		add_image_size( '4x3', 640, 480, true );
+		// add_image_size( '4x3', 640, 480, true );
 	}
 
 	/**
