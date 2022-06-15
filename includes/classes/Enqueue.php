@@ -24,6 +24,7 @@ class Enqueue implements Bootable {
 	public function boot() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ], 10 );
+		add_action( 'admin_init', [ $this, 'editor_styles' ] );
 	}
 
 	/**
@@ -76,5 +77,19 @@ class Enqueue implements Bootable {
 		if ( is_singular() && get_option( 'thread_comments' ) && comments_open() ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
+	}
+
+	/**
+	 * Editor stylesheets.
+	 *
+	 * @return void
+	 */
+	public function editor_styles() {
+
+		add_editor_style(
+			[
+				'dist/editor.css'
+			]
+		);
 	}
 }
