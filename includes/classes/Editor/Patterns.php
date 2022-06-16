@@ -23,7 +23,6 @@ class Patterns implements Bootable {
 	 */
 	public function boot() {
 		add_action( 'init', [ $this, 'register_categories' ] );
-		add_action( 'init', [ $this, 'register_patterns' ] );
 	}
 
 	/**
@@ -51,21 +50,6 @@ class Patterns implements Bootable {
 	}
 
 	/**
-	 * Registers custom block patterns and categories.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function register_patterns() {
-
-		$block_patterns = $this->config()['patterns'] ?: [];
-
-		foreach ( $block_patterns as $pattern_slug => $pattern ) {
-			$this->add_pattern( $pattern_slug, $pattern );
-		}
-	}
-
-	/**
 	 * Adds a block pattern category.
 	 *
 	 * @access protected
@@ -82,52 +66,5 @@ class Patterns implements Bootable {
 				'label' => $label,
 			]
 		);
-	}
-
-	/**
-	 * Adds a block pattern.
-	 *
-	 * @access protected
-	 * @param  string $slug
-	 * @param  array  $args
-	 * @return void
-	 */
-	protected function add_pattern( string $slug, array $args = [] ) {
-
-		/**
-		 * If no content is passed in, assume there is a corresponding
-		 * `/patterns/{$slug}.php` file and pull the content from there.
-		 */
-		$content = $args['content'] ?? $this->pattern_content( $slug );
-
-		// A pattern must have content.
-		if ( ! $content ) {
-			return;
-		}
-
-		register_block_pattern(
-			"pulsar/{$slug}",
-			wp_parse_args(
-				$args,
-				[
-					'categories'    => [ 'pulsar' ],
-					'content'       => $content,
-					'viewportWidth' => 1024,
-				]
-			)
-		);
-	}
-
-	/**
-	 * Returns a pattern file's content.
-	 *
-	 * @access protected
-	 * @param  string $slug
-	 * @return string
-	 */
-	protected function pattern_content( string $slug ) {
-		ob_start();
-		include get_theme_file_path( "patterns/{$slug}.php" );
-		return ob_get_clean();
 	}
 }
