@@ -3,8 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: require('fast-glob').sync([
 		'./**/*.php',
-		'./resources/css/**/*.css',
-		'./resources/js/*.js',
+		'./src/**/*.{css,js}',
 	]),
   theme: {
 		container: ({ theme }) => ({
