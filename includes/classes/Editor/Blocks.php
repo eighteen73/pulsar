@@ -44,6 +44,7 @@ class Blocks implements Bootable {
 		if ( file_exists( $blocks_directory ) ) {
 			$block_json_files = glob( $blocks_directory . '*/block.json' );
 
+
 			// auto register all blocks that were found.
 			foreach ( $block_json_files as $filename ) {
 
@@ -64,7 +65,7 @@ class Blocks implements Bootable {
 					};
 				};
 
-				register_block_type( $block_folder, $block_options );
+				register_block_type_from_metadata( $block_folder, $block_options );
 			};
 		};
 	}

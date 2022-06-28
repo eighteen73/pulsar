@@ -3,15 +3,25 @@
 	"apiVersion": 2,
 	"name": "pulsar/example-block",
 	"version": "0.1.0",
-	"title": "Example Block",
-	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example dynamic block.",
+	"title": "Example block",
+	"category": "text",
+	"icon": "universal-access-alt",
+	"attributes": {
+		"message": {
+			"type": "string",
+			"default": "Hello from a dynamic block!"
+		}
+	},
+	"example": {
+		"attributes": {
+			"message": "Example Dynamic Block"
+		}
+	},
 	"supports": {
 		"html": false
 	},
 	"textdomain": "example-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style.css"
+	"style": "file:./style-index.css"
 }
