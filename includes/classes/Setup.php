@@ -79,6 +79,14 @@ class Setup implements Bootable {
 
 		// Let core handle responsive embed wrappers.
 		add_theme_support( 'responsive-embeds' );
+
+		// Disable core block patterns.
+		remove_theme_support( 'core-block-patterns' );
+
+		// by adding the `theme.json` file block templates automatically get enabled.
+		// because the template editor will need additional QA and work to get right
+		// the default is to disable this feature.
+		remove_theme_support( 'block-templates' );
 	}
 
 	/**
