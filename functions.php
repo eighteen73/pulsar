@@ -3,6 +3,8 @@
  * Theme functions file.
  *
  * This file is used to bootstrap the theme.
+ * No other code should be placed here.
+ * Instead, it should be placed in the `/includes` folder in a relevant file.
  *
  * @package Pulsar
  */
