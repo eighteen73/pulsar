@@ -1,63 +1,116 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/theme.json",
-  "version": 2,
-  "settings": {
-    "color": {
-      "background": false,
-      "custom": false,
-      "customDuotone": false,
-      "customGradient": false,
-      "defaultDuotone": false,
-      "defaultGradients": false,
-      "defaultPalette": false,
-      "duotone": [],
-      "gradients": [],
-      "link": false,
-      "palette": [],
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"color": {
+			"background": true,
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"duotone": [],
+			"gradients": [],
+			"link": false,
+			"palette": [
+				{
+					"name": "Primary",
+					"slug": "primary",
+					"color": "#DD93B5"
+				},
+				{
+          "name": "Secondary",
+					"slug": "secondary",
+					"color": "#F47733"
+				},
+				{
+          "name": "Tertiary",
+					"slug": "tertiary",
+					"color": "#0F5B66"
+				}
+			],
       "text": false
-    },
-    "custom": {},
-    "layout": {
-      "contentSize": "1024px",
-      "wideSize": "1280px"
-    },
-    "spacing": {
-      "blockGap": false,
-      "margin": false,
-      "padding": false,
-      "units": []
-    },
-    "typography": {
-      "customFontSize": false,
-      "fontStyle": false,
-      "fontWeight": false,
-      "letterSpacing": false,
-      "lineHeight": false,
-      "textDecoration": false,
-      "textTransform": false,
-      "dropCap": false,
-      "fontSizes": [],
-      "fontFamilies": []
-    },
-    "blocks": {
-      "core/button": {
-        "color": {
-          "palette": []
-        }
-      }
-    }
-  },
-  "styles": {
-    "color": {},
-    "elements": {
-      "h1": {},
-      "h2": {},
-      "h3": {},
-      "h4": {},
-      "h5": {},
-      "h6": {},
-      "link": {}
-    },
-    "typography": {}
-  }
+		},
+		"custom": {},
+		"layout": {
+			"contentSize": "1024px",
+			"wideSize": "1280px"
+		},
+		"spacing": {
+			"blockGap": false,
+			"margin": false,
+			"padding": false,
+			"units": []
+		},
+		"typography": {
+			"customFontSize": false,
+			"fontStyle": false,
+			"fontWeight": false,
+			"letterSpacing": false,
+			"lineHeight": false,
+			"textDecoration": false,
+			"textTransform": false,
+			"dropCap": false,
+			"fontSizes": [
+				{
+					"slug": "xs",
+					"size": "0.75rem",
+					"name": "Extra Small"
+				},
+				{
+					"slug": "sm",
+					"size": "0.875rem",
+					"name": "Small"
+				},
+				{
+					"slug": "lg",
+					"size": "1.125rem",
+					"name": "Large"
+				},
+				{
+					"slug": "xl",
+					"size": "1.25rem",
+					"name": "XL"
+				},
+				{
+					"slug": "2xl",
+					"size": "1.25rem",
+					"name": "2XL"
+				}
+			],
+			"fontFamilies": [
+				{
+					"name": "Sans",
+					"slug": "sans",
+					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+				},
+				{
+					"name": "Serif",
+					"slug": "serif",
+					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+				}
+			]
+		},
+		"blocks": {
+			"core/button": {
+				"color": {
+					"palette": []
+				}
+			}
+		}
+	},
+	"styles": {
+		"color": {},
+		"elements": {
+			"h1": {},
+			"h2": {},
+			"h3": {},
+			"h4": {},
+			"h5": {},
+			"h6": {},
+			"link": {}
+		},
+		"typography": {}
+	}
 }
