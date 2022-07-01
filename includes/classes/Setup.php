@@ -77,9 +77,6 @@ class Setup implements Bootable {
 		// Add support for editor styles.
 		add_theme_support( 'editor-styles' );
 
-		// Add support for align wide blocks.
-		add_theme_support( 'align-wide' );
-
 		// Let core handle responsive embed wrappers.
 		add_theme_support( 'responsive-embeds' );
 	}
