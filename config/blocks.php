@@ -1,12 +1,11 @@
 <?php
-
 /**
- * Fill in all the blocks that you which to be made available to content editors.
+ * List all the blocks that you wish to be made available to content editors.
  *
- * Note: Custom blocks need to me added to this array
+ * Note: Custom blocks also need to be added to this array.
  *
- * A restrictive but useful default has been included. Return an empty array if
- * you wish to remove this restriction.
+ * A restrictive but useful default has been included.
+ * Return an empty array if you wish to remove this restriction.
  */
 return [
 	// Text
@@ -17,7 +16,6 @@ return [
 	'core/preformatted',
 	'core/pullquote',
 	'core/table',
-	'core/verse',
 
 	// Media
 	'core/image',
@@ -32,6 +30,7 @@ return [
 
 	// Design
 	'core/buttons',
+	'core/button',
 	'core/column',
 	'core/columns',
 	'core/group',
