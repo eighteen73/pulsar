@@ -2,25 +2,17 @@
   "name": "pulsar",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "npm run production",
-    "production": "mix --production",
-    "lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-    "lint:css": "stylelint './resources/css/**/*.css'",
-    "lint:js": "eslint './resources/js/**/*.js'",
-    "lint:php": "./vendor/bin/phpcs .",
-    "i18n": "npm run i18n:textdomain && npm run i18n:pot",
-    "i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
-    "i18n:pot": "npx node-wp-i18n makepot"
+    "dev": "npm run clean && bud dev",
+    "build": "npm run clean && bud build",
+    "clean": "bud clean"
   },
   "engines": {
     "node": ">=16.0.0"
   },
   "devDependencies": {
+    "@roots/bud": "^6.2.0",
+    "@roots/bud-preset-wordpress": "^6.2.0",
+    "@roots/bud-tailwindcss": "^6.2.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.2",
     "@wordpress/babel-preset-default": "^6.9.0",
@@ -29,16 +21,7 @@
     "@wordpress/prettier-config": "^1.2.0",
     "@wordpress/stylelint-config": "^20.0.2",
     "alpinejs": "^3.9.5",
-    "autoprefixer": "^10.4.4",
-    "browser-sync": "^2.27.9",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "clean-webpack-plugin": "^4.0.0",
-    "fast-glob": "^3.2.11",
-    "laravel-mix": "^6.0.43",
-    "laravel-mix-clean": "^0.1.0",
-    "postcss": "^8.4.12",
-    "postcss-import": "^14.1.0",
-    "postcss-nested": "^5.0.6",
+    "mini-css-extract-plugin": "^2.6.1",
     "tailwindcss": "^3.0.23"
   },
   "babel": {

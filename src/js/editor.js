@@ -1,9 +1,9 @@
 /**
  * Entry point for all core block overrides.
  */
+import { domReady } from '@wordpress/dom-ready';
 
-wp.domReady(() => {
+domReady(() => {
 	// import './block/filters';
-	// import './block/styles';
 	// import './block/variations';
 });
