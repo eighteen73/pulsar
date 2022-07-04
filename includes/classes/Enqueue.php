@@ -25,6 +25,8 @@ class Enqueue implements Bootable {
 		add_action( 'wp_enqueue_scripts', [ $this, 'styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ], 10 );
 		add_action( 'admin_init', [ $this, 'editor_styles' ] );
+
+		add_action( 'enqueue_block_editor_assets', [ $this, 'editor_scripts' ] );
 	}
 
 	/**
@@ -36,7 +38,7 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_style(
 			'pulsar-app',
-			Mix::asset( 'css/app.css' ),
+			Mix::asset( 'app.css' ),
 			false,
 			null
 		);
@@ -51,7 +53,7 @@ class Enqueue implements Bootable {
 
         wp_enqueue_script(
             'pulsar-app-manifest',
-            Mix::asset( 'js/manifest.js' ),
+            Mix::asset( 'manifest.js' ),
             null,
             null,
             true
@@ -59,7 +61,7 @@ class Enqueue implements Bootable {
 
         wp_enqueue_script(
             'pulsar-app-vendor',
-            Mix::asset( 'js/vendor.js' ),
+            Mix::asset( 'vendor.js' ),
             [ 'pulsar-app-manifest' ],
             null,
             true
@@ -67,7 +69,7 @@ class Enqueue implements Bootable {
 
         wp_enqueue_script(
             'pulsar-app',
-            Mix::asset( 'js/app.js' ),
+            Mix::asset( 'app.js' ),
             [ 'pulsar-app-vendor' ],
             null,
             true
@@ -90,6 +92,16 @@ class Enqueue implements Bootable {
 			[
 				'dist/editor.css'
 			]
+		);
+	}
+
+	public function editor_scripts() {
+
+		wp_enqueue_script(
+			'pulsar-editor',
+			Mix::asset( 'editor.js' ),
+			[ 'wp-blocks', 'wp-dom', 'wp-edit-post' ],
+			true,
 		);
 	}
 }

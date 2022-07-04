@@ -31,11 +31,11 @@ class Mix {
 		}
 
 		$build_mode = self::build_mode();
-		$file       = get_parent_theme_file_path( "dist/mix/{$build_mode}/mix-manifest.json" );
+		$file       = get_parent_theme_file_path( "dist/manifest.json" );
 		self::$mix  = (array) json_decode( file_get_contents( $file ), true );
 
 		if ( is_child_theme() ) {
-			$child = get_theme_file_path() . 'dist/mix-manifest.json';
+			$child = get_theme_file_path() . 'dist/manifest.json';
 
 			if ( file_exists( $child ) ) {
 				self::$mix = array_merge(
@@ -62,13 +62,13 @@ class Mix {
 		$manifest = self::mix();
 
 		// Make sure to trim any slashes from the front of the path.
-		$path = '/' . ltrim( $path, '/' );
+		$path = ltrim( $path, '/' );
 
 		if ( $manifest && isset( $manifest[ $path ] ) ) {
 
 			// Use the dev build in development environments
 			$build_mode = self::build_mode();
-			$base_uri   = get_theme_file_uri( "dist/mix/{$build_mode}" );
+			$base_uri   = get_theme_file_uri( "dist" );
 
 			return $base_uri . $manifest[ $path ];
 		}
