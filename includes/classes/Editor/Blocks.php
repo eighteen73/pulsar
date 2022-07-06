@@ -26,7 +26,6 @@ class Blocks implements Bootable {
 	 * @return void
 	 */
 	public function boot() {
-		add_action( 'init', [ $this, 'register' ] );
 		add_filter( 'allowed_block_types_all', [ $this, 'restrict_blocks' ], 10, 2 );
 	}
 
