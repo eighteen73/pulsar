@@ -4,8 +4,8 @@ module.exports = {
   content: require('fast-glob').sync([
 		'!./dist',
 		'./**/*.php',
-		'./resources/css/**/*.css',
-		'./resources/js/*.js',
+		'./src/css/**/*.css',
+		'./src/js/*.js',
 	]),
   theme: {
 		container: ({ theme }) => ({
