@@ -110,7 +110,7 @@ class Svg {
 	 */
 	public function render() {
 
-		$path = trim( 'dist/svg', '/' );
+		$path = trim( 'assets/svg', '/' );
 
 		$file = $path ? "{$path}/{$this->file}" : $this->file;
 
