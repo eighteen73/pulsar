@@ -1,50 +1,56 @@
-window.menu = function() {
-    return {
-        showMenu: false,
-        openMenus: [],
+import Alpine from 'alpinejs';
 
-        toggleMenu(menuItemID, parentID) {
-            if (!this.isMenuOpen(menuItemID)) {
-                if (parentID == 0) {
-                    this.closeAllMenus();
-                }
+document.addEventListener('alpine:init', () => {
+	Alpine.data('menu', () => ({
+		showMenu: false,
+		openMenus: [],
 
-                this.openMenus = this.openMenus.concat({
-                    id: menuItemID,
-                    parent: parentID,
-                });
+		toggleMenu(menuItemID, parentID) {
+			if (!this.isMenuOpen(menuItemID)) {
+				if (parentID === 0) {
+					this.closeAllMenus();
+				}
 
+				this.openMenus = this.openMenus.concat({
+					id: menuItemID,
+					parent: parentID,
+				});
 
-                return;
-            }
+				return;
+			}
 
-            // Close the current menu item and it's children
-            this.openMenus = this.openMenus.filter(openMenuItem => {
-                return (openMenuItem.parent != menuItemID) && (openMenuItem.id != menuItemID);
-            });
-        },
+			// Close the current menu item and it's children
+			this.openMenus = this.openMenus.filter((openMenuItem) => {
+				return (
+					openMenuItem.parent !== menuItemID &&
+					openMenuItem.id !== menuItemID
+				);
+			});
+		},
 
-        closeAllMenus() {
-            this.openMenus = [];
-        },
+		closeAllMenus() {
+			this.openMenus = [];
+		},
 
-        isMenuOpen(menuID) {
-            return this.openMenus.some(openMenuItem => openMenuItem.id === menuID);
-        },
+		isMenuOpen(menuID) {
+			return this.openMenus.some(
+				(openMenuItem) => openMenuItem.id === menuID
+			);
+		},
 
-        onEscape(e) {
-            this.closeAllMenus();
+		onEscape(e) {
+			this.closeAllMenus();
 
-            let topLevelButton = e.currentTarget.querySelector('button');
-            if(topLevelButton){
-                topLevelButton.focus();
-            }
-        },
+			const topLevelButton = e.currentTarget.querySelector('button');
+			if (topLevelButton) {
+				topLevelButton.focus();
+			}
+		},
 
-        onClickAway(e) {
-            if(!e.target.classList.contains('dropdown')) {
-                this.closeAllMenus();
-            }
-        },
-    }
-}
+		onClickAway(e) {
+			if (!e.target.classList.contains('dropdown')) {
+				this.closeAllMenus();
+			}
+		},
+	}));
+});
