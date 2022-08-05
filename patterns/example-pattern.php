@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Example pattern
+ * Title: Example Pattern
  * Slug: pulsar/example-pattern
  * Categories: pulsar
  *
@@ -8,5 +8,6 @@
  */
 
 ?>
-
-<!-- wp:paragraph --><p>A single paragraph block style</p><!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>Example Pattern</h2>
+<!-- /wp:heading -->

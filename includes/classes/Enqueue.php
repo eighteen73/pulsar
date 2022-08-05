@@ -8,7 +8,7 @@
 namespace Pulsar;
 
 use Pulsar\Contracts\Bootable;
-use Pulsar\Tools\Mix;
+use Pulsar\Tools\Asset;
 
 /**
  * Enqueue scripts, styles and fonts.
@@ -36,9 +36,9 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_style(
 			'pulsar-app',
-			Mix::asset( 'css/app.css' ),
-			false,
-			null
+			get_theme_file_uri( 'dist/app.css' ),
+			[],
+			Asset::attribute( 'app', 'version' ),
 		);
 	}
 
@@ -50,26 +50,10 @@ class Enqueue implements Bootable {
 	public function scripts() {
 
         wp_enqueue_script(
-            'pulsar-app-manifest',
-            Mix::asset( 'js/manifest.js' ),
-            null,
-            null,
-            true
-        );
-
-        wp_enqueue_script(
-            'pulsar-app-vendor',
-            Mix::asset( 'js/vendor.js' ),
-            [ 'pulsar-app-manifest' ],
-            null,
-            true
-        );
-
-        wp_enqueue_script(
             'pulsar-app',
-            Mix::asset( 'js/app.js' ),
-            [ 'pulsar-app-vendor' ],
-            null,
+			get_theme_file_uri( 'dist/app.js' ),
+			[ 'pulsar-app-vendor' ],
+			Asset::attribute( 'app', 'version' ),
             true
         );
 

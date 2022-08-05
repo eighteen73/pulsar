@@ -36,4 +36,7 @@ return [
 	'core/group',
 	'core/separator',
 	'core/spacer',
+
+	// Custom
+	'pulsar/example-block',
 ];
