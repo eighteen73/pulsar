@@ -18,7 +18,7 @@
 		<?php wp_body_open(); ?>
 
 		<div id="page" class="site">
-			<header id="masthead" class="site-header"  x-data="menu()">
+			<header id="masthead" class="site-header" x-data="menu()">
 				<div class="container">
 					<a class="sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
 					<h1><?php bloginfo( 'name' ); ?></h1>

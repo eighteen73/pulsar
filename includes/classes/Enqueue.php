@@ -25,6 +25,7 @@ class Enqueue implements Bootable {
 		add_action( 'wp_enqueue_scripts', [ $this, 'styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ], 10 );
 		add_action( 'admin_init', [ $this, 'editor_styles' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'editor_scripts' ] );
 	}
 
 	/**
@@ -35,10 +36,10 @@ class Enqueue implements Bootable {
 	public function styles() {
 
 		wp_enqueue_style(
-			'pulsar-app',
-			get_theme_file_uri( 'dist/app.css' ),
+			'pulsar-app-styles',
+			get_theme_file_uri( 'dist/app-styles.css' ),
 			[],
-			Asset::attribute( 'app', 'version' ),
+			Asset::attribute( 'app-styles', 'version' ),
 		);
 	}
 
@@ -50,10 +51,10 @@ class Enqueue implements Bootable {
 	public function scripts() {
 
         wp_enqueue_script(
-            'pulsar-app',
-			get_theme_file_uri( 'dist/app.js' ),
-			[ 'pulsar-app-vendor' ],
-			Asset::attribute( 'app', 'version' ),
+            'pulsar-app-scripts',
+			get_theme_file_uri( 'dist/app-scripts.js' ),
+			[],
+			Asset::attribute( 'app-scripts', 'version' ),
             true
         );
 
@@ -72,8 +73,19 @@ class Enqueue implements Bootable {
 
 		add_editor_style(
 			[
-				'dist/editor.css'
+				'dist/editor-styles.css'
 			]
+		);
+	}
+
+	public function editor_scripts() {
+
+		wp_enqueue_script(
+			'pulsar-editor-scripts',
+			get_theme_file_uri( 'dist/editor-scripts.js' ),
+			Asset::attribute( 'editor-scripts', 'dependencies' ),
+			Asset::attribute( 'editor-scripts', 'version' ),
+			true,
 		);
 	}
 }

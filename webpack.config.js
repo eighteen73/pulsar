@@ -42,10 +42,10 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		...getWebpackEntryPoints(),
-		'app-css': ['./src/css/app.css'],
-		'app-js': ['./src/js/app.js'],
-		'editor-css': ['./src/css/app.css'],
-		'editor-js': ['./src/js/editor.js'],
+		'app-styles': ['./src/css/app.css'],
+		'app-scripts': ['./src/js/app.js'],
+		'editor-styles': ['./src/css/app.css'],
+		'editor-scripts': ['./src/js/editor.js'],
 	},
 	plugins: [
 		...defaultConfig.plugins.filter(
