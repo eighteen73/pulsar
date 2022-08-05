@@ -4,6 +4,7 @@ const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extract
 
 /**
  * Map our custom packages.
+ * These should be available in Pulsar Toolkit as globally available packages.
  *
  * @param {string} request Requested module
  *
@@ -21,6 +22,7 @@ function requestToHandle(request) {
 
 /**
  * Externalize our custom packages.
+ * These should be available in Pulsar Toolkit as globally available packages.
  *
  * @param {string} request Requested module
  *
