@@ -24,6 +24,7 @@ class Setup implements Bootable {
 		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
 		add_action( 'widgets_init', [ $this, 'widget_areas' ] );
+		add_action( 'wp_head', [ $this, 'javascript_detected' ], 0 );
 	}
 
 	/**
@@ -131,5 +132,17 @@ class Setup implements Bootable {
 				'name' => esc_html_x( 'Primary', 'sidebar', 'pulsar' ),
 			] + $args
 		);
+	}
+
+	/**
+	 * Handles JavaScript detection.
+	 *
+	 * Replaces the `no-js` class with `js` on the root `<html>` element when JavaScript is detected.
+	 *
+	 * @return void
+	 */
+	public function javascript_detected() {
+
+		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
 }
