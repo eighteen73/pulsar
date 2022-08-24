@@ -35,7 +35,7 @@ class Setup implements Bootable {
 	public function supports() {
 
 		// Theme translations.
-		load_theme_textdomain( 'pulsar', get_parent_theme_file_path( 'resources/lang' ) );
+		load_theme_textdomain( 'pulsar', get_parent_theme_file_path( 'languages' ) );
 
 		// Title tag support.
 		add_theme_support( 'title-tag' );
