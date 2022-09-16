@@ -3,6 +3,7 @@ const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
 
 module.exports = {
 	...defaultConfig,
+	stats: 'minimal',
 	entry: {
 		...getWebpackEntryPoints(),
 		'app-styles': ['./src/css/app.css'],
