@@ -17,6 +17,7 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
+    "@eighteen73/tailwindcss-wordpress": "^1.1.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.2",
     "@wordpress/babel-preset-default": "^6.9.0",

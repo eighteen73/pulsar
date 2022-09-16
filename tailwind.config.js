@@ -1,4 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const { themeJson } = require('@eighteen73/tailwindcss-wordpress');
+const json = require('./theme.json');
 
 module.exports = {
 	content: require('fast-glob').sync([
@@ -16,6 +18,15 @@ module.exports = {
 			xs: '475px',
 			...defaultTheme.screens,
 		},
+		colors: {
+			...{
+				current: 'currentColor',
+				transparent: 'transparent',
+			},
+			...themeJson('settings.color.palette', json),
+		},
+		fontFamily: themeJson('settings.typography.fontFamilies', json),
+		fontSize: themeJson('settings.typography.fontSizes', json),
 		extend: {},
 	},
 	plugins: [
