@@ -6,7 +6,10 @@
  *
  * A restrictive but useful default has been included.
  * Return an empty array if you wish to remove this restriction.
+ *
+ * @package Pulsar
  */
+
 return [
 	// Text
 	'core/paragraph',

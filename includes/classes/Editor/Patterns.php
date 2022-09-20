@@ -31,7 +31,7 @@ class Patterns implements Bootable {
 	 * @return array
 	 */
 	public function config() {
-		return Config::get( 'block-patterns' );
+		return Config::get( 'block-pattern-categories' );
 	}
 
 	 /**
@@ -42,7 +42,7 @@ class Patterns implements Bootable {
 	  */
 	public function register_categories() {
 
-		$categories = $this->config()['categories'] ?: [];
+		$categories = $this->config() ?: [];
 
 		foreach ( $categories as $category_slug => $category ) {
 			$this->add_category( $category_slug, $category );
