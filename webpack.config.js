@@ -8,7 +8,7 @@ module.exports = {
 		...getWebpackEntryPoints(),
 		'app-styles': ['./src/css/app.css'],
 		'app-scripts': ['./src/js/app.js'],
-		'editor-styles': ['./src/css/app.css'],
+		'editor-styles': ['./src/css/editor.css'],
 		'editor-scripts': ['./src/js/editor.js'],
 	},
 	output: {
