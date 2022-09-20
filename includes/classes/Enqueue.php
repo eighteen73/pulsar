@@ -53,7 +53,7 @@ class Enqueue implements Bootable {
         wp_enqueue_script(
             'pulsar-app-scripts',
 			get_theme_file_uri( 'dist/app-scripts.js' ),
-			[],
+			Asset::attribute( 'app-scripts', 'dependencies' ),
 			Asset::attribute( 'app-scripts', 'version' ),
             true
         );

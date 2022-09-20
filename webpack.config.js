@@ -11,4 +11,23 @@ module.exports = {
 		'editor-styles': ['./src/css/app.css'],
 		'editor-scripts': ['./src/js/editor.js'],
 	},
+	output: {
+		path: __dirname + '/dist',
+		publicPath: '/dist',
+	},
+	devServer: {
+		...defaultConfig.devServer,
+		hot: true,
+		static: __dirname + '/dist/',
+		allowedHosts: 'all',
+		host: 'localhost',
+		port: 1873,
+		proxy: {
+			'/dist': {
+				pathRewrite: {
+					'^/dist': '',
+				},
+			},
+		},
+	},
 };
