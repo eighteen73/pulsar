@@ -1,7 +1,8 @@
-// import Alpine from 'alpinejs';
+import Alpine from 'alpinejs';
 
-// window.Alpine = Alpine;
+window.Alpine = Alpine;
 
-// Alpine.start();
+Alpine.start();
 
-// import './components/menu';
+// Any custom components or functionality should be in their own partial.
+import './components/menu';

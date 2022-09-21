@@ -25,6 +25,7 @@ class Setup implements Bootable {
 		add_action( 'init', [ $this, 'image_sizes' ] );
 		add_action( 'widgets_init', [ $this, 'widget_areas' ] );
 		add_action( 'wp_head', [ $this, 'javascript_detected' ], 0 );
+		add_action( 'init', [ $this, 'page_title_meta' ] );
 	}
 
 	/**
@@ -144,5 +145,25 @@ class Setup implements Bootable {
 	public function javascript_detected() {
 
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+	}
+
+	/**
+	 * Register post meta used in the theme for showing/hiding the page title.
+	 *
+	 * @return void
+	 */
+	public function page_title_meta() {
+
+		register_post_meta(
+			'',
+			'display_post_title',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'default'       => true,
+				'type'          => 'boolean',
+				'auth_callback' => '__return_true',
+			)
+		);
 	}
 }

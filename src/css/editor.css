@@ -1,30 +1,55 @@
 /**
  * Base Styles.
+ *
+ * Resets, normalization,fonts, etc. are best handled here.
+ * These are the base styles that other styles will build upon.
  */
 @import "tailwindcss/base";
+/* @import "base/example"; */
+
 
 /**
  * Component Styles.
+ *
+ * Components are things that can be broken up into individual pieces of code.
+ * A good example of this is a button.
  */
 @import "tailwindcss/components";
+/* @import "components/example"; */
+
 
 /**
  * Block Styles.
+ *
+ * Styles specifically for blocks. These would typically be overrrides for
+ * core blocks, but any other block styling can go here too.
  */
-/* @import "blocks/core/columns"; */
+
+/* @import "blocks/core/example"; */
+
 
 /**
- * Pattern Styles.
+ * Vendor Styles.
+ *
+ * Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
  */
-/* @import "patterns/pattern-name"; */
+/* @import "vendor/example"; */
+
 
 /**
  * Utility Styles.
+ *
+ * The bulk of Tailwind classes will go here. Any other custom utility
+ * classes should also go here. This should always be the last layer
+ * in this file, as utility classes should always trump other styles.
  */
 @import "tailwindcss/utilities";
 @import "utilities/alpine";
 
+
 /**
- * Page title.
+ * Editor Styles.
+ *
+ * Anything more specific to the editor should go here.
  */
-.editor-post-title__block .editor-post-title__input {}
+ @import "editor/title";
