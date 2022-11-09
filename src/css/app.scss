@@ -1,11 +1,21 @@
 /**
+ * Tools.
+ *
+ * These are our Sass functions and mixins.
+ * No css should be output in this layer.
+ */
+@use "tools/functions" as *;
+@use "tools/mixins" as *;
+
+
+/**
  * Base Styles.
  *
  * Resets, normalization,fonts, etc. are best handled here.
  * These are the base styles that other styles will build upon.
  */
-@import "base/reset";
-/* @import "base/example"; */
+@use "base/reset";
+// @use "base/example";
 
 
 /**
@@ -14,7 +24,7 @@
  * Components are things that can be broken up into individual pieces of code.
  * A good example of this is a button.
  */
-/* @import "components/example"; */
+// @use "components/example";
 
 
 /**
@@ -23,7 +33,7 @@
  * Styles specifically for blocks. These would typically be overrrides for
  * core blocks, but any other block styling can go here too.
  */
-/* @import "blocks/core/example"; */
+// @use "blocks/core/example";
 
 
 /**
@@ -31,13 +41,13 @@
  *
  * Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
  */
-/* @import "vendor/example"; */
+// @use "vendor/example";
 
 
 /**
  * Utility Styles.
  *
- * Custom utility classes should also go here. This should always be the last 
+ * Custom utility classes should also go here. This should always be the last
  * layer in this file, as utility classes should always trump other styles.
  */
-@import "utilities/alpine";
+@use "utilities/alpine";

@@ -2,6 +2,13 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"settings": {
+		"custom": {
+			"color": {
+				"primary": "#DD93B5",
+				"secondary": "#F47733",
+				"tertiary": "#0F5B66"
+			}
+		},
 		"color": {
 			"background": true,
 			"custom": false,
@@ -13,26 +20,9 @@
 			"duotone": [],
 			"gradients": [],
 			"link": false,
-			"palette": [
-				{
-					"name": "Primary",
-					"slug": "primary",
-					"color": "#DD93B5"
-				},
-				{
-          "name": "Secondary",
-					"slug": "secondary",
-					"color": "#F47733"
-				},
-				{
-          "name": "Tertiary",
-					"slug": "tertiary",
-					"color": "#0F5B66"
-				}
-			],
-      "text": false
+			"palette": [],
+			"text": false
 		},
-		"custom": {},
 		"layout": {
 			"contentSize": "1024px",
 			"wideSize": "1280px"
