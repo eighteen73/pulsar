@@ -23,7 +23,6 @@ themes/your-theme-name/     # → Root of your theme
 │   ├── block-styles.php    # → Custom block styles
 │   ├── blocks.php          # → All enabled blocks
 │   └── browsersync.json    # → Developer-specific configuration for BrowserSync (if wanted)
-│   └── mix.json            # → Mix entries and other settings
 ├── includes/               # → Theme functions and classes
 │   └── classes/            # → Theme classes (autoloaded)
 │       ├── Contracts/      # → Interfaces and Traits
@@ -32,7 +31,6 @@ themes/your-theme-name/     # → Root of your theme
 │       ├── Patterns.php    # → Block pattern management
 │       ├── Styles.php      # → Block styles management
 │       └── Tools/          # → Various tools used throughout the theme
-│           ├── Mix.php     # → Handles asset management with Laravel Mix
 │           └── Svg.php     # → Allows manipulating SVGs and inlining them
 │       ├── Enqueue.php     # → Theme assets
 │       └── Setup.php       # → Theme setup

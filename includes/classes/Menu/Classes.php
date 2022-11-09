@@ -30,10 +30,10 @@ class Classes implements Bootable {
 	/**
 	 * Adds option 'menu_item_class' to 'wp_nav_menu'.
 	 *
-	 * @param array $classes  Array of the CSS classes that are applied to the menu item's <li> element.
-	 * @param WP_Post $item   The current menu item
-	 * @param stdClass        An object of wp_nav_menu() arguments.
-	 * @param int             Depth of menu item.
+	 * @param array     $classes  Array of the CSS classes that are applied to the menu item's <li> element.
+	 * @param \WP_Post  $item   The current menu item
+	 * @param \stdClass $args     An object of wp_nav_menu() arguments.
+	 * @param int       $depth         Depth of menu item.
 	 *
 	 * @return array
 	 */
@@ -53,10 +53,10 @@ class Classes implements Bootable {
 	/**
 	 * Adds option 'menu_link_class' to 'wp_nav_menu'.
 	 *
-	 * @param array $atts     Menu attributes.
-	 * @param WP_Post $item   The current menu item.
-	 * @param stdClass $args  An object of wp_nav_menu() arguments.
-	 * @param int $depth      Depth of menu item.
+	 * @param array     $atts     Menu attributes.
+	 * @param \WP_Post  $item   The current menu item.
+	 * @param \stdClass $args  An object of wp_nav_menu() arguments.
+	 * @param int       $depth      Depth of menu item.
 	 *
 	 * @return array
 	 */
@@ -76,9 +76,9 @@ class Classes implements Bootable {
 	/**
 	 * Adds option 'menu_submenu_class' to 'wp_nav_menu'.
 	 *
-	 * @param array $classes  Array of the CSS classes that are applied to the menu <ul> element.
-	 * @param stdClass $args  An object of wp_nav_menu() arguments.
-	 * @param int $depth      Holds the nav menu arguments.
+	 * @param array     $classes  Array of the CSS classes that are applied to the menu <ul> element.
+	 * @param \stdClass $args  An object of wp_nav_menu() arguments.
+	 * @param int       $depth      Holds the nav menu arguments.
 	 *
 	 * @return array
 	 */

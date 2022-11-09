@@ -17,7 +17,7 @@ use Pulsar\Tools\Config;
  * Child theme authors can access the objects via `theme( $abstract )`.
  *
  * @access public
- * @param  string $abstract
+ * @param  string $abstract The class abstract
  * @return mixed
  */
 function theme( string $abstract = '' ) {

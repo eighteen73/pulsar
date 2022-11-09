@@ -50,13 +50,13 @@ class Enqueue implements Bootable {
 	 */
 	public function scripts() {
 
-        wp_enqueue_script(
-            'pulsar-app-scripts',
+		wp_enqueue_script(
+			'pulsar-app-scripts',
 			get_theme_file_uri( 'dist/app-scripts.js' ),
 			Asset::attribute( 'app-scripts', 'dependencies' ),
 			Asset::attribute( 'app-scripts', 'version' ),
-            true
-        );
+			true
+		);
 
 		// Load WordPress' comment-reply script where appropriate.
 		if ( is_singular() && get_option( 'thread_comments' ) && comments_open() ) {
@@ -73,11 +73,16 @@ class Enqueue implements Bootable {
 
 		add_editor_style(
 			[
-				'dist/editor-styles.css'
+				'dist/editor-styles.css',
 			]
 		);
 	}
 
+	/**
+	 * Editor scripts.
+	 *
+	 * @return void
+	 */
 	public function editor_scripts() {
 
 		wp_enqueue_script(

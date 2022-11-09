@@ -54,5 +54,5 @@ if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
  * Ideally, group them by functionality.
  */
 foreach ( glob( get_template_directory() . '/includes/template-tags/*.php' ) as $filename ) {
-    include_once $filename;
+	include_once $filename;
 }

@@ -50,6 +50,16 @@ class AlpineJSWalker extends \Walker_Nav_Menu {
 		$output .= "{$n}{$indent}<ul$class_names x-cloak>{$n}";
 	}
 
+	/**
+	 * Starts the list element.
+	 *
+	 * @param string   $output Used to append additional content (passed by reference).
+	 * @param mixed    $item The item
+	 * @param int      $depth Depth of menu item. Used for padding
+	 * @param stdClass $args An object of wp_nav_menu() arguments
+	 * @param int      $id The item ID
+	 * @return void
+	 */
 	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 			$t = '';

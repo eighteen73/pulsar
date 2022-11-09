@@ -157,13 +157,13 @@ class Setup implements Bootable {
 		register_post_meta(
 			'',
 			'display_post_title',
-			array(
+			[
 				'show_in_rest'  => true,
 				'single'        => true,
 				'default'       => true,
 				'type'          => 'boolean',
 				'auth_callback' => '__return_true',
-			)
+			]
 		);
 	}
 }
