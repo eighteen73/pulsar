@@ -17,10 +17,6 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "@eighteen73/tailwindcss-wordpress": "^1.1.0",
-    "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.2",
-    "@wordpress/babel-preset-default": "^6.9.0",
     "@wordpress/browserslist-config": "^4.1.2",
     "@wordpress/eslint-plugin": "^12.1.0",
     "@wordpress/prettier-config": "^1.2.0",
@@ -29,8 +25,7 @@
     "fast-glob": "^3.2.11",
     "postcss": "^8.4.12",
     "postcss-import": "^14.1.0",
-    "postcss-nested": "^5.0.6",
-    "tailwindcss": "^3.0.23"
+    "postcss-nested": "^5.0.6"
   },
   "babel": {
     "presets": [

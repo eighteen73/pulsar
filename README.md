@@ -1,7 +1,7 @@
 # Pulsar
 
 <p>
-  <strong>WordPress starter theme with Tailwind CSS, Alpine JS and a modern development workflow</strong>
+  <strong>WordPress starter theme for a modern development workflow</strong>
 </p>
 
 ## Requirements

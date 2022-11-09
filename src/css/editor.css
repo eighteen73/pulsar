@@ -4,8 +4,8 @@
  * Resets, normalization,fonts, etc. are best handled here.
  * These are the base styles that other styles will build upon.
  */
-@import "tailwindcss/base";
-/* @import "base/example"; */
+ @import "base/reset";
+ /* @import "base/example"; */
 
 
 /**
@@ -14,7 +14,6 @@
  * Components are things that can be broken up into individual pieces of code.
  * A good example of this is a button.
  */
-@import "tailwindcss/components";
 /* @import "components/example"; */
 
 
@@ -39,11 +38,9 @@
 /**
  * Utility Styles.
  *
- * The bulk of Tailwind classes will go here. Any other custom utility
- * classes should also go here. This should always be the last layer
- * in this file, as utility classes should always trump other styles.
+ * Custom utility classes should also go here. This should always be the last 
+ * layer in this file, as utility classes should always trump other styles.
  */
-@import "tailwindcss/utilities";
 @import "utilities/alpine";
 
 
