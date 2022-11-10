@@ -1,46 +1,60 @@
 {
-  "name": "pulsar",
-  "version": "1.0.0",
-  "scripts": {
-    "watch": "wp-scripts start --output-path=dist --webpack-copy-php",
-    "hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
-    "production": "wp-scripts build --output-path=dist --webpack-copy-php",
-    "lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-    "lint:css": "stylelint './src/css/**/*.css'",
-    "lint:js": "eslint './src/js/**/*.js'",
-    "lint:php": "./vendor/bin/phpcs .",
-    "i18n": "npm run i18n:textdomain && npm run i18n:pot",
-    "i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
-    "i18n:pot": "npx node-wp-i18n makepot"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "devDependencies": {
-    "@wordpress/browserslist-config": "^4.1.2",
-    "@wordpress/eslint-plugin": "^12.1.0",
-    "@wordpress/prettier-config": "^1.2.0",
-    "@wordpress/scripts": "^23.3.0",
-    "@wordpress/stylelint-config": "^20.0.2"
-  },
-  "babel": {
-    "presets": [
-      "@wordpress/babel-preset-default"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:@wordpress/eslint-plugin/recommended"
-    ]
-  },
-  "browserslist": [
-    "extends @wordpress/browserslist-config"
-  ],
-  "prettier": "@wordpress/prettier-config",
-  "stylelint": {
-    "extends": "@wordpress/stylelint-config"
-  },
+	"name": "pulsar",
+	"version": "1.0.0",
+	"scripts": {
+		"watch": "wp-scripts start --output-path=dist --webpack-copy-php",
+		"hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
+		"production": "wp-scripts build --output-path=dist --webpack-copy-php",
+		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
+		"lint:css": "stylelint './src/css/**/*.css'",
+		"lint:js": "eslint './src/js/**/*.js'",
+		"lint:php": "./vendor/bin/phpcs .",
+		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
+		"i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
+		"i18n:pot": "npx node-wp-i18n makepot"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"devDependencies": {
+		"@wordpress/browserslist-config": "^4.1.2",
+		"@wordpress/eslint-plugin": "^12.1.0",
+		"@wordpress/prettier-config": "^1.2.0",
+		"@wordpress/scripts": "^23.3.0",
+		"@wordpress/stylelint-config": "^20.0.2",
+		"stylelint-order": "^5.0.0"
+	},
   "dependencies": {
-    "alpinejs": "^3.10.3"
-  }
+		"alpinejs": "^3.10.3"
+	},
+	"babel": {
+		"presets": [
+			"@wordpress/babel-preset-default"
+		]
+	},
+  "browserslist": [
+		"extends @wordpress/browserslist-config"
+	],
+	"eslintConfig": {
+		"extends": [
+			"plugin:@wordpress/eslint-plugin/recommended"
+		]
+	},
+	"prettier": "@wordpress/prettier-config",
+  "stylelint": {
+		"extends": "@wordpress/stylelint-config/scss",
+		"plugins": [
+			"stylelint-order",
+			"stylelint-scss"
+		],
+		"rules": {
+			"max-nesting-depth": 3,
+			"declaration-no-important": true,
+			"order/order": [
+				"custom-properties",
+				"declarations"
+			],
+			"order/properties-alphabetical-order": true
+		}
+	}
 }
