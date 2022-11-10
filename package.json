@@ -24,7 +24,7 @@
 		"@wordpress/stylelint-config": "^20.0.2",
 		"stylelint-order": "^5.0.0"
 	},
-  "dependencies": {
+	"dependencies": {
 		"alpinejs": "^3.10.3"
 	},
 	"babel": {
@@ -32,7 +32,7 @@
 			"@wordpress/babel-preset-default"
 		]
 	},
-  "browserslist": [
+	"browserslist": [
 		"extends @wordpress/browserslist-config"
 	],
 	"eslintConfig": {
@@ -41,11 +41,10 @@
 		]
 	},
 	"prettier": "@wordpress/prettier-config",
-  "stylelint": {
+	"stylelint": {
 		"extends": "@wordpress/stylelint-config/scss",
 		"plugins": [
-			"stylelint-order",
-			"stylelint-scss"
+			"stylelint-order"
 		],
 		"rules": {
 			"max-nesting-depth": 3,
