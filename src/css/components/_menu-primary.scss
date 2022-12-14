@@ -1,0 +1,19 @@
+
+// The top level <nav>
+.menu-primary {
+
+	// Menu items list.
+	&__items {}
+
+	// The sub-menu.
+	&__sub-menu {}
+
+	// Individual items.
+	&__item {}
+
+	// Item link.
+	&__link {}
+
+	// The menu toggle button
+	&__toggle {}
+}

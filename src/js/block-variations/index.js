@@ -1,5 +1,6 @@
 /**
  * Entry point for block variations.
+ *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-variations/
  */
 

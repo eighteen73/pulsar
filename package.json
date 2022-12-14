@@ -49,6 +49,18 @@
 		"rules": {
 			"max-nesting-depth": 3,
 			"declaration-no-important": true,
+      "at-rule-empty-line-before": [
+				"always",
+				{
+					"ignoreAtRules": [
+						"apply",
+						"import",
+            "function",
+            "return",
+            "use"
+					]
+				}
+			],
 			"order/order": [
 				"custom-properties",
 				"declarations"

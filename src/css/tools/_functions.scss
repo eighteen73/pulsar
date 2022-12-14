@@ -4,6 +4,7 @@
 /// @example
 /// 	theme(color, primary)
 /// 	// var(--wp--custom--color--primary)
+///
 @function theme($key, $value) {
 	@return var(--wp--custom--#{$key}--#{$value});
 }

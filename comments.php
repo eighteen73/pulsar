@@ -19,7 +19,7 @@ if ( post_password_required() ) {
 ?>
 
 <div id="comments">
-	<h2 class="sr-only"><?php esc_html_e( 'Comment section', 'pulsar' ); ?></h2>
+	<h2 class="screen-reader-text"><?php esc_html_e( 'Comment section', 'pulsar' ); ?></h2>
 
 	<?php
 	// You can start editing here -- including this comment!
@@ -40,7 +40,7 @@ if ( post_password_required() ) {
 		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through?
 			?>
 			<nav id="comment-nav-above" role="navigation">
-				<h3 class="sr-only"><?php esc_html_e( 'Comment navigation', 'pulsar' ); ?></h3>
+				<h3 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'pulsar' ); ?></h3>
 				<div>
 					<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'pulsar' ) ); ?></div>
 					<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'pulsar' ) ); ?></div>
@@ -64,7 +64,7 @@ if ( post_password_required() ) {
 		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
 			?>
 			<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-				<h2 class="sr-only"><?php esc_html_e( 'Comment navigation', 'pulsar' ); ?></h2>
+				<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'pulsar' ); ?></h2>
 				<div class="nav-links">
 					<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'pulsar' ) ); ?></div>
 					<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'pulsar' ) ); ?></div>

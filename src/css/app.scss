@@ -4,6 +4,7 @@
  * These are our Sass functions and mixins.
  * No css should be output in this layer.
  */
+
 @use "tools/functions" as *;
 @use "tools/mixins" as *;
 
@@ -14,8 +15,9 @@
  * Resets, normalization,fonts, etc. are best handled here.
  * These are the base styles that other styles will build upon.
  */
+
 @use "base/reset";
-// @use "base/example";
+@use "base/typography";
 
 
 /**
@@ -24,7 +26,10 @@
  * Components are things that can be broken up into individual pieces of code.
  * A good example of this is a button.
  */
-// @use "components/example";
+
+@use "components/footer";
+@use "components/header";
+@use "utilities/container";
 
 
 /**
@@ -33,7 +38,21 @@
  * Styles specifically for blocks. These would typically be overrrides for
  * core blocks, but any other block styling can go here too.
  */
-// @use "blocks/core/example";
+
+@use "blocks/core-button";
+@use "blocks/core-buttons";
+@use "blocks/core-column";
+@use "blocks/core-columns";
+@use "blocks/core-embed";
+@use "blocks/core-gallery";
+@use "blocks/core-group";
+@use "blocks/core-heading";
+@use "blocks/core-image";
+@use "blocks/core-list";
+@use "blocks/core-media-text";
+@use "blocks/core-paragraph";
+@use "blocks/core-quote";
+@use "blocks/core-table";
 
 
 /**
@@ -41,6 +60,7 @@
  *
  * Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
  */
+
 // @use "vendor/example";
 
 
@@ -50,4 +70,6 @@
  * Custom utility classes should also go here. This should always be the last
  * layer in this file, as utility classes should always trump other styles.
  */
+
 @use "utilities/alpine";
+@use "utilities/wordpress";
