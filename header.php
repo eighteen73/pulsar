@@ -24,16 +24,6 @@
 
 					<h1 class="site-header__title"><?php bloginfo( 'name' ); ?></h1>
 
-					<button
-						@click.prevent="showMenu = !showMenu"
-						:aria-expanded="showMenu.toString()"
-						class="lg:hidden"
-						type="button"
-						aria-controls="menu-primary"
-						aria-label="<?php esc_html_e( 'Toggle Navigation', 'pulsar' ); ?>">
-						<span x-text="showMenu ? 'Close' : 'Open'"></span>
-					</button>
-
-					<?php get_template_part( 'parts/menu-primary' ); ?>
+					<?php get_template_part( 'parts/menus/primary' ); ?>
 				</div>
 			</header>
