@@ -1,6 +1,7 @@
 @use "../settings" as *;
 @use "sass:string";
 @use "sass:list";
+@use "sass:map";
 
 /// Used to output a theme.json equivalent css custom property.
 ///
@@ -73,4 +74,14 @@
 	}
 
 	@return $string;
+}
+
+/// Retrieve the size of a given breakpoint from the $breakpoints map.
+///
+/// @param {string} $size - The breakpoint size to retrieve.
+///
+/// @return {string} The breakpoint size.
+///
+@function breakpoint-size($size) {
+	@return map.get($breakpoints, $size);
 }

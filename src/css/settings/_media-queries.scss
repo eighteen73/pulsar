@@ -1,15 +1,15 @@
-/// Map of media queries.
-$media-queries: (
-	xs: 480,
-	sm: 640,
-	md: 768,
-	lg: 1024,
-	xl: 1280,
-	2xl: 1536,
+/// Map of breakpoints.
+$breakpoints: (
+	xs: 480px,
+	sm: 640px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1280px,
+	2xl: 1536px,
 );
 
 /// Generate a min-width and max-width query for each size.
-@each $name, $size in $media-queries {
-	@custom-media --#{$name} (min-width: #{$size}px);
-	@custom-media --#{$name}-down (max-width: #{$size - 1}px);
+@each $breakpoint-name, $breakpoint-size in $breakpoints {
+	@custom-media --#{$breakpoint-name} (min-width: #{$breakpoint-size});
+	@custom-media --#{$breakpoint-name}-down (max-width: #{$breakpoint-size - 1});
 }
