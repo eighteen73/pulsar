@@ -1,7 +1,10 @@
-/// Adds styling specific to dark mode.
-/// Takes in to account prefers-color-scheme,
-/// but also a data attribute for toggling if required.
-///
+@use "../settings" as *;
+@use "sass:map";
+@use "sass:list";
+
+/// Add styles for dark mode.
+/// Can target both prefers-color-scheme, and
+/// via a data attribute on the body.
 @mixin dark() {
 
 	@media (prefers-color-scheme: dark) {
@@ -10,5 +13,20 @@
 
 	[data-mode="dark"] & {
 		@content;
+	}
+}
+
+/// Adjusts the `--wp--custom--layout--content-size` css variable,
+/// which is used for the container per breakpoint.
+/// This lets the container behave like Tailwind, where it
+/// snaps to sizes at breakpoints.
+/// This should be used on the `<body>` tag.
+@mixin container-sizes ($sizes...) {
+	@each $size in $sizes {
+		$breakpoint: map.get($breakpoints, $size);
+
+		@media (--#{$size}) {
+			--wp--custom--layout--content-size: #{$breakpoint};
+		}
 	}
 }

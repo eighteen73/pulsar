@@ -18,11 +18,11 @@
 		<?php wp_body_open(); ?>
 
 		<div id="page" class="site">
-			<header id="masthead" class="site-header" x-data="menu()">
-				<div class="container">
+			<header id="masthead" class="site-header container" x-data="menu()">
+				<div class="site-header__inner">
 					<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
 
-					<h1 class="site-header__title"><?php bloginfo( 'name' ); ?></h1>
+					<?php Pulsar\site_logo(); ?>
 
 					<?php get_template_part( 'parts/menus/primary' ); ?>
 				</div>
