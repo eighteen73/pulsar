@@ -1,0 +1,8 @@
+@use "../tools" as *;
+
+a {
+
+	&:hover {}
+
+	&:focus-visible {}
+}

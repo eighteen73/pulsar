@@ -1,0 +1,3 @@
+@use "../tools" as *;
+
+:where(ul:not([class])) {}
