@@ -1,10 +1,76 @@
+@use "../settings" as *;
+@use "sass:string";
+@use "sass:list";
 
 /// Used to output a theme.json equivalent css custom property.
+///
+/// @param {string} $key - The theme.json key to retrieve.
+/// @param {string} $value - The theme.json value to retrieve from key.
 ///
 /// @example
 /// 	theme(color, primary)
 /// 	// var(--wp--custom--color--primary)
 ///
+/// @return {string} The css variable.
+///
 @function theme($key, $value) {
-	@return var(--wp--custom--#{$key}--#{$value});
+	@return var(--wp--custom--#{$key}--#{split-string($value, "-")});
+}
+
+/// Return a spacing value multiplied by the base spacing size.
+///
+/// @param {string} $multiplier - Multiply the $size by this value.
+/// @param {string} $key - The key for the theme.json spacing key.
+///
+/// @return {string} The spacing size.
+///
+@function space($multiplier, $key: "base") {
+	@return calc(var(--wp--custom--spacing--#{split-string($key, "-")}, 4px) * #{$multiplier});
+}
+
+/// Check if a string contains a number.
+///
+/// @param {string} $string - The string to check.
+///
+/// @return {boolean}
+///
+@function string-is-number($string) {
+
+	/// Strings that count as numbers.
+	$numbers: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+
+	/// Loop over the given string and check against $numbers.
+	@for $i from 1 through string.length($string) {
+		$character: string.slice($string, $i, $i);
+		$index: list.index($numbers, $character);
+
+		@if $index {
+			@return true;
+		}
+	}
+
+	@return false;
+}
+
+/// Checks a string for the presence of a number.
+/// If it contains a number, split by the separator.
+///
+/// @param {string} $string - The string to separate.
+/// @param {string} $separator - The separator to use to split the string.
+///
+/// @return {string} The separated string.
+///
+@function split-string($string, $separator) {
+
+	/// Loop over the string and check for a number.
+	@for $i from 1 through str-length($string) {
+		$character: string.slice($string, $i, $i);
+		$next-character: string.slice($string, $i + 1, $i + 1);
+
+		@if string-is-number($character) and not string-is-number($next-character) {
+			$string: string.insert($string, $separator, $i + 1);
+		}
+	}
+
+	@return $string;
 }
