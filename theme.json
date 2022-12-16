@@ -2,15 +2,49 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"settings": {
+    "useRootPaddingAwareAlignments": true,
 		"custom": {
 			"color": {
 				"primary": "#DD93B5",
 				"secondary": "#F47733",
-				"tertiary": "#0F5B66"
-			}
+				"tertiary": "#0F5B66",
+        "white": "#fff",
+        "black": "#000"
+			},
+      "layout": {
+        "contentSize": "1280px",
+        "wideSize": "1536px"
+      },
+      "fontSize": {
+        "sm": "clamp(14px, 2vw, 16px)",
+				"base": "clamp(16px, 2vw, 18px)",
+				"md": "clamp(18px, 2vw, 22px)",
+				"lg": "clamp(18px, 2vw, 24px)",
+				"xl": "clamp(20px, 2vw, 26px)",
+				"2xl": "clamp(22px, 2vw, 28px)",
+				"3xl": "clamp(28px, 3vw, 36px)",
+				"4xl": "clamp(30px, 3vw, 51px)"
+      },
+      "fontFamily": {
+        "sans": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "serif": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+      },
+      "lineHeight": {
+        "none": "1",
+        "tight": "1.25",
+        "snug": "1.375",
+        "normal": "1.5",
+        "relaxed": "1.625",
+        "loose": "2"
+      },
+      "spacing": {
+        "base": "4px",
+        "blockGap": "clamp(calc(var(--wp--custom--spacing--base) * 8), 3vw, calc(var(--wp--custom--spacing--base) * 16))",
+        "page": "calc(var(--wp--custom--spacing--base) * 6)"
+      }
 		},
 		"color": {
-			"background": true,
+			"background": false,
 			"custom": false,
 			"customDuotone": false,
 			"customGradient": false,
@@ -24,14 +58,13 @@
 			"text": false
 		},
 		"layout": {
-			"contentSize": "1024px",
-			"wideSize": "1280px"
+			"contentSize": "var(--wp--custom--layout--content-size)",
+			"wideSize": "var(--wp--custom--layout--wide-size)"
 		},
 		"spacing": {
 			"blockGap": false,
-			"margin": false,
-			"padding": false,
-			"units": []
+			"margin": true,
+			"padding": true
 		},
 		"typography": {
 			"customFontSize": false,
@@ -42,65 +75,17 @@
 			"textDecoration": false,
 			"textTransform": false,
 			"dropCap": false,
-			"fontSizes": [
-				{
-					"slug": "xs",
-					"size": "0.75rem",
-					"name": "Extra Small"
-				},
-				{
-					"slug": "sm",
-					"size": "0.875rem",
-					"name": "Small"
-				},
-				{
-					"slug": "lg",
-					"size": "1.125rem",
-					"name": "Large"
-				},
-				{
-					"slug": "xl",
-					"size": "1.25rem",
-					"name": "XL"
-				},
-				{
-					"slug": "2xl",
-					"size": "1.25rem",
-					"name": "2XL"
-				}
-			],
-			"fontFamilies": [
-				{
-					"name": "Sans",
-					"slug": "sans",
-					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
-				},
-				{
-					"name": "Serif",
-					"slug": "serif",
-					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
-				}
-			]
+			"fontSizes": [],
+			"fontFamilies": []
 		},
-		"blocks": {
-			"core/button": {
-				"color": {
-					"palette": []
-				}
-			}
-		}
+		"blocks": {}
 	},
-	"styles": {
-		"color": {},
-		"elements": {
-			"h1": {},
-			"h2": {},
-			"h3": {},
-			"h4": {},
-			"h5": {},
-			"h6": {},
-			"link": {}
-		},
-		"typography": {}
-	}
+  "styles": {
+    "spacing": {
+      "padding": {
+				"right": "var(--wp--custom--spacing--page)",
+				"left": "var(--wp--custom--spacing--page)"
+			}
+    }
+  }
 }
