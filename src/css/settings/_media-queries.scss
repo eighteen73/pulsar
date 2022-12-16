@@ -1,0 +1,15 @@
+/// Map of media queries.
+$media-queries: (
+	xs: 480,
+	sm: 640,
+	md: 768,
+	lg: 1024,
+	xl: 1280,
+	2xl: 1536,
+);
+
+/// Generate a min-width and max-width query for each size.
+@each $name, $size in $media-queries {
+	@custom-media --#{$name} (min-width: #{$size}px);
+	@custom-media --#{$name}-down (max-width: #{$size - 1}px);
+}

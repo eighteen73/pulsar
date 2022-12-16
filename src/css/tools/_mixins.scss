@@ -1,0 +1,14 @@
+/// Adds styling specific to dark mode.
+/// Takes in to account prefers-color-scheme,
+/// but also a data attribute for toggling if required.
+///
+@mixin dark() {
+
+	@media (prefers-color-scheme: dark) {
+		@content;
+	}
+
+	[data-mode="dark"] & {
+		@content;
+	}
+}

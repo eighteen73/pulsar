@@ -1,3 +1,4 @@
+@use "../tools" as *;
 
 // The top level <nav>
 .menu-primary {
@@ -12,8 +13,13 @@
 	&__item {}
 
 	// Item link.
-	&__link {}
+	&__link {
 
-	// The menu toggle button
+		&:hover {}
+
+		&:focus-visible {}
+	}
+
+	// The menu toggle button.
 	&__toggle {}
 }
