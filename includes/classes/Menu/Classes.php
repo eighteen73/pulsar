@@ -37,7 +37,7 @@ class Classes implements Bootable {
 	public function menu_classes( array $args ) {
 
 		// Use the theme location as a namespace.
-		$location = $args['theme_location'];
+		$location = $args['theme_location'] ? $args['theme_location'] : 'default';
 
 		// Add the base class.
 		$args['menu_class'] = "menu-{$location}__items";
