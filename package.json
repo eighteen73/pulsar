@@ -22,6 +22,7 @@
 		"@wordpress/prettier-config": "^1.2.0",
 		"@wordpress/scripts": "^23.3.0",
 		"@wordpress/stylelint-config": "^20.0.2",
+		"postcss-custom-media": "^9.0.1",
 		"stylelint-order": "^5.0.0"
 	},
 	"dependencies": {
@@ -49,15 +50,20 @@
 		"rules": {
 			"max-nesting-depth": 3,
 			"declaration-no-important": true,
-      "at-rule-empty-line-before": [
+			"at-rule-empty-line-before": [
 				"always",
 				{
 					"ignoreAtRules": [
 						"apply",
 						"import",
-            "function",
-            "return",
-            "use"
+						"function",
+						"return",
+						"use",
+						"forward",
+						"custom-media",
+            "each",
+            "mixin",
+            "for"
 					]
 				}
 			],
