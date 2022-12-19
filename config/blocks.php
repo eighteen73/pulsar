@@ -13,6 +13,7 @@
 return [
 	// Text
 	'core/heading',
+	'core/post-title',
 	'core/list',
 	'core/list-item',
 	'core/paragraph',
