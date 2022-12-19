@@ -6,9 +6,18 @@ if ( ! has_nav_menu( $location ) ) {
 }
 ?>
 
-<nav id="menu-<?php echo esc_attr( $location ); ?>" class="menu-<?php echo esc_attr( $location ); ?>">
-	<button id="menu-<?php echo esc_attr( $location ); ?>-toggle" class="menu-<?php echo esc_attr( $location ); ?>__toggle" aria-expanded="false" aria-controls="menu-<?php echo esc_attr( $location ); ?>-items">
-		<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'pulsar' ); ?></span>
+<nav
+	id="menu-<?php echo esc_attr( $location ); ?>"
+	class="menu-<?php echo esc_attr( $location ); ?>"
+	aria-label="<?php echo esc_attr( ucwords( $location ) ); ?> <?php esc_html_e( 'Menu', 'pulsar' ); ?>"
+>
+	<button
+		id="menu-<?php echo esc_attr( $location ); ?>-toggle"
+		class="menu-<?php echo esc_attr( $location ); ?>__toggle"
+		aria-controls="menu-<?php echo esc_attr( $location ); ?>-items"
+		aria-expanded="false"
+	>
+		<span class="screen-reader-text"><?php esc_html_e( 'Toggle Menu', 'pulsar' ); ?></span>
 	</button>
 
 	<?php
