@@ -62,6 +62,7 @@
 /// @return {string} The separated string.
 ///
 @function split-string($string, $separator) {
+	$string: #{$string};
 
 	/// Loop over the string and check for a number.
 	@for $i from 1 through str-length($string) {
