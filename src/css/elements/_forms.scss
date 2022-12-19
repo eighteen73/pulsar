@@ -17,8 +17,8 @@ textarea,
 select {
 	appearance: none;
 	background-color: theme(color, white);
-	border-color: theme(color, black);
-	border-width: 1px;
+	border: 2px solid theme(color, black);
+	box-shadow: none;
 	display: block;
 	font-size: theme(font-size, base);
 	line-height: theme(line-height, normal);
@@ -28,9 +28,8 @@ select {
 	padding-top: space(2);
 
 	&:focus {
-		border-color: theme(color, primary);
-		outline: 2px solid theme(color, primary);
-		outline-offset: -2px;
+		box-shadow: inset 0 0 0 2px;
+		outline: 3px solid theme(color, focus);
 	}
 }
 
@@ -44,30 +43,9 @@ textarea::placeholder {
 	opacity: 1;
 }
 
-::-webkit-datetime-edit-fields-wrapper {
-	padding: 0;
-}
-
-::-webkit-date-and-time-value {
-	min-height: 1.5em;
-}
-
-::-webkit-datetime-edit,
-::-webkit-datetime-edit-year-field,
-::-webkit-datetime-edit-month-field,
-::-webkit-datetime-edit-day-field,
-::-webkit-datetime-edit-hour-field,
-::-webkit-datetime-edit-minute-field,
-::-webkit-datetime-edit-second-field,
-::-webkit-datetime-edit-millisecond-field,
-::-webkit-datetime-edit-meridiem-field {
-	padding-bottom: 0;
-	padding-top: 0;
-}
-
 select {
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-	background-position: right space(2) center;
+	background-position: right space(1) center;
 	background-repeat: no-repeat;
 	background-size: 1.5em 1.5em;
 	padding-right: space(10);
@@ -88,9 +66,8 @@ select {
 	appearance: none;
 	background-color: theme(color, white);
 	background-origin: border-box;
-	border-color: theme(color, primary);
-	border-width: 1px;
-	color: theme(color, primary);
+	border: 1px solid theme(color, black);
+	color: theme(color, black);
 	display: inline-block;
 	flex-shrink: 0;
 	height: space(4);
@@ -101,8 +78,8 @@ select {
 	width: space(4);
 
 	&:focus {
-		outline: 2px solid transparent;
-		outline-offset: 2px;
+		box-shadow: inset 0 0 0 2px;
+		outline: 3px solid theme(color, focus);
 	}
 
 	&:checked {
@@ -121,6 +98,7 @@ select {
 }
 
 [type="checkbox"] {
+	border-radius: none;
 
 	&:checked {
 		background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
@@ -143,18 +121,11 @@ select {
 }
 
 [type="radio"] {
+	border-radius: 100%;
 
 	&:checked {
 		background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
 	}
-}
-
-[type="checkbox"] {
-	border-radius: none;
-}
-
-[type="radio"] {
-	border-radius: 100%;
 }
 
 [type="file"] {
@@ -164,14 +135,41 @@ select {
 	border-width: 0;
 	font-size: unset;
 	line-height: inherit;
-	padding: 0;
+	padding: 5px;
 
 	&:focus {
-		outline: 1px solid ButtonText;
-		outline: 1px auto -webkit-focus-ring-color;
+		box-shadow: inset 0 0 0 2px;
+		outline: 3px solid theme(color, focus);
 	}
 }
 
 label {
 	display: block;
+	margin-bottom: space(2);
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+	padding: 0;
+}
+
+// Unfortunate hack until https://bugs.webkit.org/show_bug.cgi?id=198959 is fixed.
+// This sucks because users can't change line-height with a utility on date inputs now.
+// Reference: https://github.com/twbs/bootstrap/pull/31993
+::-webkit-date-and-time-value {
+	min-height: 1.5em;
+}
+
+// In Safari on macOS date time inputs are 4px taller than normal inputs
+// This is because there is extra padding on the datetime-edit and datetime-edit-{part}-field pseudo elements
+::-webkit-datetime-edit,
+::-webkit-datetime-edit-year-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-minute-field,
+::-webkit-datetime-edit-second-field,
+::-webkit-datetime-edit-millisecond-field,
+::-webkit-datetime-edit-meridiem-field {
+	padding-bottom: 0;
+	padding-top: 0;
 }

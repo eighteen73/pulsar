@@ -8,6 +8,9 @@
 				"primary": "#DD93B5",
 				"secondary": "#F47733",
 				"tertiary": "#0F5B66",
+        "error": "#d4351c",
+        "success": "#00703c",
+        "focus": "#fd0",
         "white": "#fff",
         "black": "#000"
 			},
