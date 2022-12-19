@@ -25,6 +25,7 @@
 	@return var(--wp--custom--#{$key}#{split-string($selector, "-")});
 }
 
+
 /// Used to output a theme.json equivalent css custom property for a colour.
 ///
 /// @param {string|list} $value - theme.json value to retrieve from `color` key.
@@ -46,6 +47,7 @@
 	@return var(--wp--custom--color#{split-string($selector, "-")});
 }
 
+
 /// Return a spacing value multiplied by the base spacing size.
 ///
 /// @param {string} $multiplier - Multiply the $size by this value.
@@ -56,6 +58,7 @@
 @function space($multiplier, $key: "base") {
 	@return calc(var(--wp--custom--spacing--#{split-string($key, "-")}, 4px) * #{$multiplier});
 }
+
 
 /// Check if a string contains a number.
 ///
@@ -81,6 +84,7 @@
 	@return false;
 }
 
+
 /// Checks a string for the presence of a number.
 /// If it contains a number, split by the separator.
 ///
@@ -104,6 +108,7 @@
 
 	@return $string;
 }
+
 
 /// Retrieve the size of a given breakpoint from the $breakpoints map.
 ///
