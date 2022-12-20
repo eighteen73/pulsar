@@ -18,12 +18,12 @@
 		<?php wp_body_open(); ?>
 
 		<div id="page" class="site">
-			<header id="masthead" class="site-header container" x-data="menu()">
+			<header id="masthead" class="site-header container">
 				<div class="site-header__inner">
 					<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
 
 					<?php Pulsar\site_logo(); ?>
 
-					<?php get_template_part( 'parts/menus/primary' ); ?>
+					<?php get_template_part( 'parts/menu/primary' ); ?>
 				</div>
 			</header>

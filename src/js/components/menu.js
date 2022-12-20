@@ -5,7 +5,20 @@ document.addEventListener('alpine:init', () => {
 		showMenu: false,
 		openMenus: [],
 
-		toggleMenu(menuItemID, parentID) {
+		init() {
+			this.setShowMenu();
+		},
+
+		setShowMenu() {
+			this.showMenu = window.innerWidth > 1023;
+		},
+
+		toggleMenu() {
+			this.showMenu = !this.showMenu;
+			this.$dispatch('showmenu' + this.showMenu.toString());
+		},
+
+		toggleMenuList(menuItemID, parentID) {
 			if (!this.isMenuOpen(menuItemID)) {
 				if (parentID === 0) {
 					this.closeAllMenus();
@@ -48,7 +61,7 @@ document.addEventListener('alpine:init', () => {
 		},
 
 		onClickAway(e) {
-			if (!e.target.classList.contains('dropdown')) {
+			if (!e.target.hasAttribute('data-dropdown')) {
 				this.closeAllMenus();
 			}
 		},
