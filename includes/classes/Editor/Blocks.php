@@ -71,6 +71,10 @@ class Blocks implements Bootable {
 
 	/**
 	 * Limit the blocks that are made available to content editors
+	 *
+	 * @param bool|string[]           $block_editor_context Array of block type slugs, or boolean to enable/disable all
+	 * @param WP_Block_Editor_Context $editor_context The current block editor context
+	 * @return array
 	 */
 	public function restrict_blocks( $block_editor_context, $editor_context ) {
 		if ( self::ENABLE_ALL_BLOCKS || empty( $editor_context->post ) ) {

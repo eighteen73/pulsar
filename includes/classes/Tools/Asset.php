@@ -18,14 +18,14 @@ class Asset {
 	 * @param string $slug The slug of the asset file, eg `app-styles`.
 	 * @param string $attribute The attribute to get from the asset file. Typically `version` or `dependencies`.
 	 *
-	 * @return array
+	 * @return string|array
 	 */
 	public static function attribute( $slug, $attribute ) {
 		$asset      = self::get( $slug );
 		$attributes = [];
 
 		if ( ! empty( $attribute ) && isset( $asset[ $attribute ] ) ) {
-			return $attributes = $asset[ $attribute ];
+			return $asset[ $attribute ];
 		}
 
 		if ( $attribute === 'dependencies' && SCRIPT_DEBUG === true ) {

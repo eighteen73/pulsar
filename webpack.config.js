@@ -6,9 +6,9 @@ module.exports = {
 	stats: 'minimal',
 	entry: {
 		...getWebpackEntryPoints(),
-		'app-styles': ['./src/css/app.css'],
+		'app-styles': ['./src/css/app.scss'],
 		'app-scripts': ['./src/js/app.js'],
-		'editor-styles': ['./src/css/editor.css'],
+		'editor-styles': ['./src/css/editor.scss'],
 		'editor-scripts': ['./src/js/editor.js'],
 	},
 	output: {

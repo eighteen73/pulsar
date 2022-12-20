@@ -1,0 +1,19 @@
+@use "../tools" as *;
+@use "../settings" as *;
+
+html {
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	-webkit-tap-highlight-color: theme(color, primary);
+}
+
+body {
+	font-family: theme(font-family, sans);
+	font-size: theme(font-size, base);
+	line-height: theme(line-height, "normal");
+
+	/// Sets how max-width constrained elements work.
+	/// This causes it to snap like Tailwind.
+
+	@include container-sizes(sm, md, lg, xl);
+}

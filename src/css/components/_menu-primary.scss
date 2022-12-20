@@ -1,0 +1,93 @@
+@use "../tools" as *;
+
+/// Sets when the menu converts to desktop.
+$bp: --lg;
+
+// The top level <nav>
+.menu-primary {
+
+	// Menu items list.
+	&__items {
+		display: flex;
+		flex-direction: column;
+
+		@media ($bp) {
+			flex-direction: row;
+		}
+	}
+
+	// The sub-menu.
+	&__sub-menu {
+		display: none;
+
+		@media ($bp) {
+			left: 0;
+			position: absolute;
+			top: 100%;
+		}
+
+		/// Display the sub-menu when parent is open.
+		[aria-expanded="true"] + & {
+			display: flex;
+		}
+	}
+
+	// Individual items.
+	&__item {
+
+		&--has-children {
+			position: relative;
+		}
+
+		&--has-mega-menu {
+			position: static;
+		}
+	}
+
+	// Item link.
+	&__link {
+		background-color: transparent;
+		border: 0;
+		color: color(black);
+		cursor: pointer;
+		display: block;
+		font-size: inherit;
+		line-height: 1;
+		padding: space(2) space(4);
+		text-decoration: none;
+
+		&:hover {}
+
+		&:focus-visible {
+			background-color: color(focus);
+			outline: none;
+		}
+
+		&-icon {
+			height: 10px;
+			margin-left: space(2);
+			width: 10px;
+
+			[aria-expanded="true"] > & {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	// The menu toggle button.
+	&__toggle {
+		background-color: transparent;
+		border: 0;
+		cursor: pointer;
+		padding: 0;
+
+		@media ($bp) {
+			display: none;
+		}
+
+		&-icon {
+			width: 44px;
+		}
+
+	}
+}

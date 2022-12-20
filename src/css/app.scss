@@ -1,0 +1,75 @@
+/**
+ * This is the primary stylesheet. We don"t actually write any styles here.
+ * Instead, we import all of our styles from partials within the sub-folders.
+ * This file is set up based on the Inverted Triangle CSS (ITCSS) system,
+ * which gets more specific as we drill down each layer.  This keeps your
+ * style code lean and organized.
+ *
+ * The bulk of your code should be within the `/components` folder.  By
+ * default, we follow the Block-Element-Modifier (BEM) system in our HTML.
+ * Each "block" is a "component" in our CSS.
+ */
+
+/// Settings.
+///
+/// Settings handle the configuration and don"t output CSS. This is a good
+/// place to define things like variables.
+
+@use "settings";
+
+/// Tools.
+///
+/// These are used throughout the code but don"t output CSS on their own.
+/// Things like mixins and extensions go here.
+
+@use "tools";
+
+
+/// Generic.
+///
+/// This is the first point that real CSS is output. Resets, normalization,
+/// fonts, etc. are best handled here. These are the base styles that other
+/// styles will build upon.
+
+@use "generic";
+
+
+/// Elements.
+///
+/// Elements are (or should be) class-less designs for the base
+/// HTML elements.
+
+@use "elements";
+
+
+/// Components.
+///
+/// Components make up the bulk of the actual theme design.  Nearly
+/// every piece of the design is some type of component, whether it"s
+
+
+@use "components";
+
+
+/// Block Styles.
+///
+/// Styles specifically for blocks. These would typically be overrrides for
+/// core blocks, but any other block styling can go here too.
+
+@use "blocks";
+
+
+/// Vendor Styles.
+///
+/// Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
+
+// @use "vendor/example";
+
+
+/// Utilities.
+///
+/// Utilities are helper classes and overrides.  This gets loaded last.
+/// If necessary, this is the only place where `!important` rules should
+/// go, but only if necessary.
+
+@use "utilities";

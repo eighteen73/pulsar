@@ -12,34 +12,26 @@
 
 return [
 	// Text
-	'core/paragraph',
 	'core/heading',
+	'core/post-title',
 	'core/list',
+	'core/list-item',
+	'core/paragraph',
 	'core/quote',
-	'core/preformatted',
-	'core/pullquote',
 	'core/table',
 
 	// Media
-	'core/image',
-	'core/gallery',
 	'core/cover',
-	'core/file',
+	'core/embed',
+	'core/gallery',
+	'core/image',
 	'core/media-text',
 	'core/video',
 
-	// Widget
-	'core/html',
-
 	// Design
-	'core/buttons',
 	'core/button',
+	'core/buttons',
 	'core/column',
 	'core/columns',
 	'core/group',
-	'core/separator',
-	'core/spacer',
-
-	// Custom
-	'pulsar/example-block',
 ];

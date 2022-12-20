@@ -13,5 +13,6 @@ return [
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Menu\Classes::class,
+	Pulsar\Menu\MegaMenu::class,
 	Pulsar\WooCommerce\Setup::class,
 ];

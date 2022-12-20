@@ -53,8 +53,8 @@ class Patterns implements Bootable {
 	 * Adds a block pattern category.
 	 *
 	 * @access protected
-	 * @param  string $slug
-	 * @param  string $label
+	 * @param  string $slug  The slug
+	 * @param  string $label The label
 	 * @return void
 	 */
 	protected function add_category( string $slug, string $label ) {

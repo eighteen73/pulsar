@@ -4,6 +4,7 @@
 
 	<!-- Scan all files in directory -->
 	<file>.</file>
+	<exclude-pattern type="relative">dist/*</exclude-pattern>
 
 	<!-- Scan only PHP files -->
 	<arg name="extensions" value="php"/>

@@ -18,21 +18,12 @@
 		<?php wp_body_open(); ?>
 
 		<div id="page" class="site">
-			<header id="masthead" class="site-header" x-data="menu()">
-				<div class="container">
-					<a class="sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
-					<h1><?php bloginfo( 'name' ); ?></h1>
+			<header id="masthead" class="site-header container">
+				<div class="site-header__inner">
+					<a class="screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pulsar' ); ?></a>
 
-					<button
-						@click.prevent="showMenu = !showMenu"
-						:aria-expanded="showMenu.toString()"
-						class="lg:hidden"
-						type="button"
-						aria-controls="menu-primary"
-						aria-label="<?php esc_html_e( 'Toggle Navigation', 'pulsar' ); ?>">
-						<span x-text="showMenu ? 'Close' : 'Open'"></span>
-					</button>
+					<?php Pulsar\site_logo(); ?>
 
-					<?php get_template_part( 'parts/menu-primary' ); ?>
+					<?php get_template_part( 'parts/menu/primary' ); ?>
 				</div>
 			</header>

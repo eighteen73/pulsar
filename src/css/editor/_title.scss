@@ -2,12 +2,11 @@
  * Page title.
  * Also includes styling for the page title display toggle.
  */
-
- .edit-post-visual-editor__post-title-wrapper {
-	position: relative;
-	max-width: var(--pulsar-content-width);
+.edit-post-visual-editor__post-title-wrapper {
 	margin-left: auto;
 	margin-right: auto;
+	max-width: var(--pulsar-content-width);
+	position: relative;
 
 	&.invisible {
 		opacity: 0.5;
@@ -39,33 +38,33 @@
 			box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
 
 			.title-visibility {
-				opacity: 1;
 				color: var(--wp-admin-theme-color);
+				opacity: 1;
 			}
 		}
 	}
 
 	.title-visibility {
+		background-color: #fff;
+		bottom: 0;
+		box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+		color: var(--wp-admin-theme-color);
 		cursor: pointer;
 		font-size: 18px;
-		width: 36px;
 		height: 100%;
-		text-align: center;
-		color: var(--wp-admin-theme-color);
-		vertical-align: middle;
+		margin: 0 !important;
+		opacity: 0;
+		padding: 0 !important;
 		position: absolute;
 		right: 0;
-		bottom: 0;
-		opacity: 0;
-		margin: 0 !important;
-		padding: 0 !important;
-		box-shadow: 0 0 0 1px var(--wp-admin-theme-color);
+		text-align: center;
 		transition: all 0.2s;
-		background-color: #fff;
+		vertical-align: middle;
+		width: 36px;
 
 		&:hover {
-			opacity: 1;
 			color: var(--wp-admin-theme-color);
+			opacity: 1;
 
 			&::after {
 				opacity: 1;
@@ -74,31 +73,31 @@
 		}
 
 		&::before {
-			width: 100%;
-			height: 100%;
-			display: inline-flex;
 			align-items: center;
+			display: inline-flex;
+			height: 100%;
 			justify-content: center;
+			width: 100%;
 		}
 
 		&::after {
-			content: attr(data-tooltip);
-			white-space: nowrap;
-			border-radius: 2px;
-			pointer-events: none;
-			color: #fff;
+			align-items: flex-start;
 			background: #1e1e1e;
-			opacity: 0;
-			visibility: hidden;
-			width: max-content;
-			line-height: 26px;
-			margin-left: -1px;
+			border-radius: 2px;
+			color: #fff;
+			content: attr(data-tooltip);
 			display: flex;
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			align-items: flex-start;
-			padding: 0 6px;
 			font-size: 12px;
+			line-height: 26px;
+			margin-left: -1px;
+			opacity: 0;
+			padding: 0 6px;
+			pointer-events: none;
 			transition: all 0.2s;
+			visibility: hidden;
+			white-space: nowrap;
+			width: max-content;
 		}
 	}
 }

@@ -1,0 +1,5 @@
+@use "../tools" as *;
+
+[x-cloak] {
+	display: none !important; // stylelint-disable-line -- Should always be hidden.
+}

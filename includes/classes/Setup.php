@@ -101,6 +101,7 @@ class Setup implements Bootable {
 		register_nav_menus(
 			[
 				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
+				'footer' => esc_html_x( 'Footer', 'nav menu location', 'pulsar' ),
 			]
 		);
 	}
@@ -157,13 +158,13 @@ class Setup implements Bootable {
 		register_post_meta(
 			'',
 			'display_post_title',
-			array(
+			[
 				'show_in_rest'  => true,
 				'single'        => true,
 				'default'       => true,
 				'type'          => 'boolean',
 				'auth_callback' => '__return_true',
-			)
+			]
 		);
 	}
 }

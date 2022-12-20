@@ -1,6 +1,6 @@
 <?php
 /**
- * AlpineJS walker class.
+ * Primary walker class.
  *
  * @package Pulsar
  */
@@ -8,9 +8,9 @@
 namespace Pulsar\Menu;
 
 /**
- * AlpineJS walker class.
+ * Primary walker class.
  */
-class AlpineJSWalker extends \Walker_Nav_Menu {
+class PrimaryWalker extends \Walker_Nav_Menu {
 	/**
 	 * Starts the list before the elements are added.
 	 *
@@ -141,9 +141,15 @@ class AlpineJSWalker extends \Walker_Nav_Menu {
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
 		$attributes = '';
+
 		if ( $args->walker && $args->walker->has_children ) {
-			unset( $atts['href'] );
+			$atts['data-dropdown'] = true;
+
+			if ( $atts['href'] === '#' ) {
+				unset( $atts['href'] );
+			}
 		}
+
 		foreach ( $atts as $attr => $value ) {
 			if ( is_scalar( $value ) && '' !== $value && false !== $value ) {
 				$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
@@ -170,13 +176,19 @@ class AlpineJSWalker extends \Walker_Nav_Menu {
 
 		if ( $args->walker && $args->walker->has_children ) {
 			$item_output .= '<button' . $attributes;
-			$item_output .= " @click.prevent='toggleMenu(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
+			$item_output .= " @click.prevent='toggleMenuList(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
 			$item_output .= " @click.away='onClickAway'";
 			$item_output .= " :aria-expanded='(isMenuOpen(" . $item->ID . ")).toString()'";
-			$item_output .= " class='dropdown'";
 			$item_output .= " aria-haspopup='true'";
 			$item_output .= '>';
 			$item_output .= $args->link_before . $title . $args->link_after;
+
+			if ( $depth === 0 ) {
+				$item_output .= \Pulsar\render_svg( 'dropdown', [ 'class' => 'menu-primary__link-icon' ] );
+			} else {
+				$item_output .= \Pulsar\render_svg( 'dropdown', [ 'class' => 'menu-primary__link-icon' ] );
+			}
+
 			$item_output .= '</button>';
 		} else {
 			$item_output .= '<a' . $attributes . '>';
