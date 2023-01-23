@@ -1,8 +1,10 @@
 import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
+// Import any custom Alpine components.
+import menu from './components/menu';
 
+// Register any custom Alpine components.
+Alpine.data('menu', menu);
+
+// Boot Alpine.
 Alpine.start();
-
-// Any custom components or functionality should be in their own partial.
-import './components/menu';
