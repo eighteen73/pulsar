@@ -26,6 +26,8 @@ class Enqueue implements Bootable {
 		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ], 10 );
 		add_action( 'admin_init', [ $this, 'editor_styles' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'editor_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_styles' ], 10 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ], 10 );
 	}
 
 	/**
@@ -93,4 +95,18 @@ class Enqueue implements Bootable {
 			true,
 		);
 	}
+
+	/**
+	 * Admin CSS
+	 *
+	 * @return void
+	 */
+	public function admin_styles() {}
+
+	/**
+	 * Admin JavaScript
+	 *
+	 * @return void
+	 */
+	public function admin_scripts() {}
 }
