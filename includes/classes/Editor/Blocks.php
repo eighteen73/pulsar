@@ -28,6 +28,7 @@ class Blocks implements Bootable {
 	public function boot() {
 		add_action( 'init', [ $this, 'register' ] );
 		add_filter( 'allowed_block_types_all', [ $this, 'restrict_blocks' ], 10, 2 );
+		add_action( 'wp_default_styles', [ $this, 'remove_block_styles' ], 10 );
 	}
 
 	/**
@@ -87,5 +88,32 @@ class Blocks implements Bootable {
 		}
 
 		return $blocks;
+	}
+
+	/**
+	 * Remove block styles from the editor and the front end.
+	 *
+	 * @return void
+	 */
+	public function remove_block_styles( $styles ) {
+
+		/**
+		 * The stylesheets we want to remove.
+		 */
+		$handles = [ 'wp-block-library', 'wp-block-library-theme' ];
+
+		foreach ( $handles as $handle ) {
+
+			$style = $styles->query( $handle, 'registered' );
+			if ( ! $style ) {
+				continue;
+			}
+
+			// Remove the style
+			$styles->remove( $handle );
+
+			// Remove path and dependencies
+			$styles->add( $handle, false, [] );
+		}
 	}
 }
