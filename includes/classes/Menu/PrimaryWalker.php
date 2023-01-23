@@ -105,6 +105,8 @@ class PrimaryWalker extends \Walker_Nav_Menu {
 		$output .= $indent . '<li' . $id . $class_names;
 		if ( $depth === 0 ) {
 			$output .= ' @keydown.escape="onEscape($event)"';
+			$output .= " @pointerleave.debounce.50ms='onPointerLeave(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
+
 		}
 		$output .= '>';
 
@@ -176,9 +178,10 @@ class PrimaryWalker extends \Walker_Nav_Menu {
 
 		if ( $args->walker && $args->walker->has_children ) {
 			$item_output .= '<button' . $attributes;
-			$item_output .= " @click.prevent='toggleMenuList(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
+			$item_output .= " @click.prevent='toggleSubMenu(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
+			$item_output .= " @pointerenter.debounce.50ms='onPointerEnter(" . $item->ID . ', ' . $item->menu_item_parent . ")'";
 			$item_output .= " @click.away='onClickAway'";
-			$item_output .= " :aria-expanded='(isMenuOpen(" . $item->ID . ")).toString()'";
+			$item_output .= " :aria-expanded='(isSubMenuOpen(" . $item->ID . ")).toString()'";
 			$item_output .= " aria-haspopup='true'";
 			$item_output .= '>';
 			$item_output .= $args->link_before . $title . $args->link_after;

@@ -1,0 +1,36 @@
+@use "../tools" as *;
+
+.hamburger {
+
+	&__line {
+		transform-origin: center;
+		transition:
+			y theme(transition-duration, quick) ease-in theme(transition-duration, quick),
+			rotate theme(transition-duration, quick) ease-in,
+			opacity 50ms theme(transition-duration, quick);
+	}
+
+	[aria-expanded="true"] & {
+
+		&__line {
+			transition:
+				y theme(transition-duration, quick) ease-in,
+				rotate theme(transition-duration, quick) ease-in theme(transition-duration, quick),
+				opacity 50ms;
+		}
+
+		&__line--top {
+			rotate: 45deg;
+			y: 23px; // Half the SVG height minus half a line height.
+		}
+
+		&__line--middle {
+			opacity: 0;
+		}
+
+		&__line--bottom {
+			rotate: -45deg;
+			y: 23px; // Half the SVG height minus half a line height.
+		}
+	}
+}

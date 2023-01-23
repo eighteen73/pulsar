@@ -1,3 +1,11 @@
 @use "../tools" as *;
 
-.site-header {}
+.site-header {
+	position: relative;
+
+	&__inner {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+}

@@ -1,5 +1,5 @@
-<svg viewBox="0 0 100 100">
-	<rect width="80" height="10" x="10" y="25"></rect>
-	<rect width="80" height="10" x="10" y="45"></rect>
-	<rect width="80" height="10" x="10" y="65"></rect>
+<svg viewBox="0 0 60 50">
+	<rect class="hamburger__line hamburger__line--top" width="60" height="4" x="0" y="0" rx="2"></rect>
+	<rect class="hamburger__line hamburger__line--middle" width="60" height="4" x="0" y="22" rx="2"></rect>
+	<rect class="hamburger__line hamburger__line--bottom" width="60" height="4" x="0" y="44" rx="2"></rect>
 </svg>
