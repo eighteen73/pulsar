@@ -89,10 +89,6 @@
 
 	&__content {
 
-		> * + * {
-			margin-top: theme-preset(spacing, md);
-		}
-
 		.has-media-on-the-right & {
 			grid-column: 1;
 			grid-row: 1;
