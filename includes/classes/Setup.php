@@ -23,6 +23,7 @@ class Setup implements Bootable {
 		add_action( 'after_setup_theme', [ $this, 'supports' ], 5 );
 		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
+		add_filter( 'image_size_names_choose', [ $this, 'image_size_names' ] );
 		add_action( 'widgets_init', [ $this, 'widget_areas' ] );
 		add_action( 'wp_head', [ $this, 'javascript_detected' ], 0 );
 		add_action( 'init', [ $this, 'page_title_meta' ] );
@@ -46,21 +47,6 @@ class Setup implements Bootable {
 
 		// Selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		// Custom logo support.
-		add_theme_support(
-			'custom-logo',
-			[
-				'width'       => 300,
-				'height'      => 200,
-				'flex-height' => true,
-				'flex-width'  => true,
-				'header-text' => [
-					'app-header__title',
-					'app-header__description',
-				],
-			]
-		);
 
 		// Outputs HTML5 markup for core features.
 		add_theme_support(
@@ -101,7 +87,7 @@ class Setup implements Bootable {
 		register_nav_menus(
 			[
 				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
-				'footer' => esc_html_x( 'Footer', 'nav menu location', 'pulsar' ),
+				'footer'  => esc_html_x( 'Footer', 'nav menu location', 'pulsar' ),
 			]
 		);
 	}
@@ -116,6 +102,22 @@ class Setup implements Bootable {
 	}
 
 	/**
+	 * Register custom image size names.
+	 *
+	 * @param array $sizes Array of image size names.
+	 *
+	 * @return array
+	 */
+	public function image_size_names( $sizes ) {
+		return array_merge(
+			$sizes,
+			[
+				// 'example' => __( 'Example' ),
+			]
+		);
+	}
+
+	/**
 	 * Register widget areas.
 	 *
 	 * @return void
@@ -124,7 +126,7 @@ class Setup implements Bootable {
 		$args = [
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
+			'before_title'  => '<h2 class="widget__title">',
 			'after_title'   => '</h2>',
 		];
 
