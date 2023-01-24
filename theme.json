@@ -71,8 +71,8 @@
 		},
 		"spacing": {
 			"blockGap": false,
-			"margin": true,
-			"padding": true
+			"margin": false,
+			"padding": false
 		},
 		"typography": {
 			"customFontSize": false,
@@ -86,7 +86,55 @@
 			"fontSizes": [],
 			"fontFamilies": []
 		},
-		"blocks": {}
+		"blocks": {
+      "core/buttons": {
+        "spacing": {
+          "blockGap": true
+        }
+      },
+      "core/columns": {
+        "spacing": {
+          "blockGap": true,
+          "margin": true
+        }
+      },
+      "core/cover": {
+        "spacing": {
+          "margin": true
+        }
+      },
+      "core/gallery": {
+        "spacing": {
+          "blockGap": true,
+          "margin": true
+        }
+      },
+      "core/heading": {
+        "spacing": {
+          "margin": true
+        }
+      },
+      "core/image": {
+        "spacing": {
+          "margin": true
+        }
+      },
+      "core/list": {
+        "spacing": {
+          "margin": true
+        }
+      },
+      "core/media-text": {
+        "spacing": {
+          "margin": true
+        }
+      },
+      "core/paragraph": {
+        "spacing": {
+          "margin": true
+        }
+      }
+    }
 	},
   "styles": {
     "spacing": {
