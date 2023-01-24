@@ -1,6 +1,7 @@
 @use "../tools" as *;
 
-a {
+:where(a:not([class])) {
+	text-decoration: underline;
 
 	&:hover {}
 

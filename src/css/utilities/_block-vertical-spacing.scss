@@ -1,0 +1,14 @@
+@use "../tools" as *;
+
+// Used to set a sensible spacing between all top level blocks.
+.block-vertical-spacing {
+
+	> * + * {
+		margin-block-start: theme(spacing, blocks);
+	}
+
+	// We assume 2 blocks with a background colour should be sat together.
+	> :where(.has-background) + :where(.has-background) {
+		margin-block-start: 0;
+	}
+}

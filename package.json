@@ -61,9 +61,10 @@
 						"use",
 						"forward",
 						"custom-media",
-            "each",
-            "mixin",
-            "for"
+						"each",
+						"mixin",
+						"for",
+						"include"
 					]
 				}
 			],
