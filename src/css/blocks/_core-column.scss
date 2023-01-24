@@ -1,1 +1,41 @@
-.wp-block-column {}
+@use "../tools/functions" as *;
+
+.wp-block-column {
+	flex-basis: 0;
+	flex-grow: 1;
+
+	// Prevent the columns from growing wider than their distributed sizes.
+	min-width: 0;
+	overflow-wrap: break-word;
+
+	// Columns with an explicitly-assigned width should maintain their
+	// `flex-basis` width and not grow.
+	&[style*="flex-basis"] {
+		flex-grow: 0;
+	}
+
+	/**
+	* Individual Column Alignment
+	*/
+	&.is-vertically-aligned-top {
+		align-self: flex-start;
+	}
+
+	&.is-vertically-aligned-center {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-bottom {
+		align-self: flex-end;
+	}
+
+	&.is-vertically-aligned-top,
+	&.is-vertically-aligned-center,
+	&.is-vertically-aligned-bottom {
+		width: 100%;
+	}
+
+	// Custom block styles.
+	// Ideally they should target with low specificity, eg:
+	// &:where(.is-style-style-name) {}
+}
