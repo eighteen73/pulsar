@@ -1,1 +1,114 @@
-.wp-block-media-text {}
+@use "../tools" as *;
+
+.wp-block-media-text {
+	direction: ltr;
+	display: grid;
+	grid-template-columns: 50% 1fr;
+	grid-template-rows: auto;
+
+	&.has-media-on-the-right {
+		grid-template-columns: 1fr 50%;
+	}
+
+	&.is-vertically-aligned-top {
+
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: start;
+		}
+	}
+
+	&,
+	&.is-vertically-aligned-center {
+
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: center;
+		}
+	}
+
+	&.is-vertically-aligned-bottom {
+
+		.wp-block-media-text__content,
+		.wp-block-media-text__media {
+			align-self: end;
+		}
+	}
+
+	&.is-stacked-on-mobile {
+
+		@media (--md-down) {
+			grid-template-columns: 100% !important;
+		}
+	}
+
+	&__media {
+		grid-column: 1;
+		grid-row: 1;
+		margin: 0;
+
+		img,
+		video {
+			height: auto;
+			max-width: unset;
+			vertical-align: middle;
+			width: 100%;
+		}
+
+		.has-media-on-the-right & {
+			grid-column: 2;
+			grid-row: 1;
+		}
+
+		.is-image-fill & {
+			background-size: cover;
+			height: 100%;
+			min-height: 250px;
+
+			img {
+				border: 0;
+				clip: rect(0, 0, 0, 0);
+				height: 1px;
+				margin: -1px;
+				overflow: hidden;
+				padding: 0;
+				// The image is visually hidden but accessible to assistive technologies.
+				position: absolute;
+				width: 1px;
+			}
+		}
+
+		.is-stacked-on-mobile & {
+
+			@media (--md-down) {
+				grid-column: 1;
+				grid-row: 1;
+			}
+		}
+	}
+
+	&__content {
+
+		> * + * {
+			margin-top: theme-preset(spacing, md);
+		}
+
+		.has-media-on-the-right & {
+			grid-column: 1;
+			grid-row: 1;
+
+			> a {
+				display: block;
+				height: 100%;
+			}
+		}
+
+		.is-stacked-on-mobile & {
+
+			@media (--md-down) {
+				grid-column: 1;
+				grid-row: 2;
+			}
+		}
+	}
+}

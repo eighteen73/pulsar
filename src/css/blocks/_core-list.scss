@@ -1,1 +1,9 @@
-.wp-block-list {}
+@use "../tools" as *;
+
+.wp-block-list {
+	padding-left: space(2);
+
+	li {
+		padding-left: space(4);
+	}
+}

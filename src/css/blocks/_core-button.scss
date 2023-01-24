@@ -1,1 +1,32 @@
-.wp-block-button {}
+@use "../tools" as *;
+
+.wp-block-button {
+
+	// Prefer the link selector instead of the regular button classname
+	// to support the previous markup in addition to the new one.
+	&__link {
+
+		&.aligncenter {
+			text-align: center;
+		}
+
+		&.alignright {
+			text-align: right;
+		}
+	}
+
+	&.has-custom-width {
+		max-width: none;
+
+		.wp-block-button__link {
+			width: 100%;
+		}
+	}
+
+	&.has-custom-font-size {
+
+		.wp-block-button__link {
+			font-size: inherit;
+		}
+	}
+}
