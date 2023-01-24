@@ -1,9 +1,13 @@
 @use "../tools" as *;
 
 .wp-block-list {
-	padding-left: space(2);
+	padding-left: space(6);
 
 	li {
-		padding-left: space(4);
+		padding-left: space(1);
+
+		&::marker {
+			color: currentcolor;
+		}
 	}
 }
