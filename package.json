@@ -6,7 +6,7 @@
 		"hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
 		"production": "wp-scripts build --output-path=dist --webpack-copy-php",
 		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-		"lint:css": "stylelint './src/css/**/*.css'",
+		"lint:css": "stylelint './src/css/**/*.scss'",
 		"lint:js": "eslint './src/js/**/*.js'",
 		"lint:php": "./vendor/bin/phpcs .",
 		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
