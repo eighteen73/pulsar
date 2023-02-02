@@ -23,7 +23,8 @@
 		"@wordpress/scripts": "^23.3.0",
 		"@wordpress/stylelint-config": "^20.0.2",
 		"postcss-custom-media": "^9.0.1",
-		"stylelint-order": "^5.0.0"
+		"stylelint-order": "^5.0.0",
+		"webpack-remove-empty-scripts": "^1.0.1"
 	},
 	"dependencies": {
 		"alpinejs": "^3.10.3"

@@ -1,5 +1,6 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 function regexEqual(x, y) {
 	return (
@@ -59,4 +60,10 @@ module.exports = {
 			},
 		},
 	},
+	plugins: [
+		...defaultConfig.plugins,
+		new RemoveEmptyScriptsPlugin({
+			stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
+		}),
+	],
 };
