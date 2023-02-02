@@ -116,7 +116,7 @@ class Classes implements Bootable {
 		];
 
 		// Add current menu item modifier.
-		if ( in_array( "current-menu-item", $item->classes ) || in_array( "current_page_item", $item->classes ) ) {
+		if ( in_array( 'current-menu-item', $item->classes ) || in_array( 'current_page_item', $item->classes ) ) {
 			$_classes[] = "menu-{$location}__link--current";
 		}
 

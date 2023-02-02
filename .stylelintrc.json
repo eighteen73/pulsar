@@ -1,0 +1,28 @@
+{
+	"extends": "@wordpress/stylelint-config/scss",
+	"plugins": ["stylelint-order"],
+	"rules": {
+		"max-nesting-depth": 3,
+		"declaration-no-important": true,
+		"at-rule-empty-line-before": [
+			"always",
+			{
+				"ignoreAtRules": [
+					"apply",
+					"import",
+					"function",
+					"return",
+					"use",
+					"forward",
+					"custom-media",
+					"each",
+					"mixin",
+					"for",
+					"include"
+				]
+			}
+		],
+		"order/order": ["custom-properties", "declarations"],
+		"order/properties-alphabetical-order": true
+	}
+}
