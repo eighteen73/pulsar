@@ -11,4 +11,12 @@
  * @package Pulsar
  */
 
-return [];
+return [
+	'cards'          => 'Cards',
+	'call-to-action' => 'Call to Action',
+	'features'       => 'Features',
+	'hero'           => 'Hero',
+	'pages'          => 'Pages',
+	'posts'          => 'Posts',
+	'text'           => 'Text',
+];

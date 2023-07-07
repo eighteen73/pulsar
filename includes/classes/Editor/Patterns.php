@@ -31,7 +31,7 @@ class Patterns implements Bootable {
 	 * @return array
 	 */
 	public function config() {
-		return Config::get( 'block-pattern-categories' );
+		return Config::get( 'pattern-categories' );
 	}
 
 	 /**
