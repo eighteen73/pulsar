@@ -9,7 +9,7 @@
 		"lint:css": "stylelint './src/css/**/*.scss'",
 		"lint:js": "eslint './src/js/**/*.js'",
 		"lint:php": "./vendor/bin/phpcs .",
-    "format:css": "stylelint --fix './src/css/**/*.scss'",
+		"format:css": "stylelint --fix './src/css/**/*.scss'",
 		"format:js": "wp-scripts format",
 		"format:php": "./vendor/bin/phpcbf .",
 		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
@@ -17,7 +17,7 @@
 		"i18n:pot": "npx node-wp-i18n makepot"
 	},
 	"engines": {
-		"node": ">=16.0.0"
+		"node": ">=18.0.0"
 	},
 	"devDependencies": {
 		"@wordpress/browserslist-config": "^5.18",
@@ -26,7 +26,9 @@
 		"@wordpress/scripts": "^26.6",
 		"@wordpress/stylelint-config": "^21.18",
 		"alpinejs": "^3.12",
+		"fast-glob": "^3.3.0",
 		"postcss-custom-media": "^9.1",
+		"postcss-preset-env": "^9.0.0",
 		"stylelint-order": "^6.0",
 		"webpack-remove-empty-scripts": "^1.0"
 	},

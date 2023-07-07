@@ -17,6 +17,7 @@
 
 @use "settings";
 
+
 /// Tools.
 ///
 /// These are used throughout the code but don"t output CSS on their own.
@@ -47,16 +48,15 @@
 /// Components make up the bulk of the actual theme design.  Nearly
 /// every piece of the design is some type of component, whether it"s
 
-
 @use "components";
 
 
-/// Block Styles.
+/// Patterns.
 ///
-/// Styles specifically for blocks. These would typically be overrrides for
-/// core blocks, but any other block styling can go here too.
+/// Pattern styling should generally only be needed for responsive behaviour,
+/// or overrides.
 
-@use "blocks";
+@use "patterns";
 
 
 /// Vendor Styles.

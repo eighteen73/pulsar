@@ -1,6 +1,8 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+const { sync: glob } = require('fast-glob');
+const { basename } = require('path');
 
 function regexEqual(x, y) {
 	return (
@@ -31,15 +33,50 @@ defaultConfig.module.rules = defaultConfig.module.rules.map((item) => {
 	return item;
 });
 
+/**
+ * Converts a legacy path to the entry pair supported by webpack, e.g.:
+ * `./entry-one.js` -> `[ 'entry-one', './entry-one.js] ]`
+ * `entry-two.js` -> `[ 'entry-two', './entry-two.js' ]`
+ *
+ * @param {string} path The path provided.
+ *
+ * @return {string[]} The entry pair of its name and the file path.
+ */
+const stylesheetPathToEntry = (path) => {
+	const entryName = basename(path, '.scss');
+
+	if (!path.startsWith('./')) {
+		path = './' + path;
+	}
+
+	return [entryName, path];
+};
+
+function getBlockStylesEntryPoints() {
+	const styles = glob('./src/css/blocks/*.scss');
+
+	const entry = {};
+	styles.forEach((fileArg) => {
+		const [entryName, path] = fileArg.includes('=')
+			? fileArg.split('=')
+			: stylesheetPathToEntry(fileArg);
+		entry['css/blocks/' + entryName] = path;
+	});
+	process.env.WP_ENTRY = JSON.stringify(entry);
+
+	return entry;
+}
+
 module.exports = {
 	...defaultConfig,
 	stats: 'minimal',
 	entry: {
 		...getWebpackEntryPoints(),
-		'app-styles': ['./src/css/app.scss'],
-		'app-scripts': ['./src/js/app.js'],
-		'editor-styles': ['./src/css/editor.scss'],
-		'editor-scripts': ['./src/js/editor.js'],
+		...getBlockStylesEntryPoints(),
+		'css/app-styles': ['./src/css/app.scss'],
+		'css/editor-styles': ['./src/css/editor.scss'],
+		'js/app-scripts': ['./src/js/app.js'],
+		'js/editor-scripts': ['./src/js/editor.js'],
 	},
 	output: {
 		path: __dirname + '/dist',

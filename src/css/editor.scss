@@ -17,6 +17,7 @@
 
 @use "settings";
 
+
 /// Tools.
 ///
 /// These are used throughout the code but don"t output CSS on their own.
@@ -50,12 +51,12 @@
 @use "components";
 
 
-/// Block Styles.
+/// Patterns.
 ///
-/// Styles specifically for blocks. These would typically be overrrides for
-/// core blocks, but any other block styling can go here too.
+/// Pattern styling should generally only be needed for responsive behaviour,
+/// or overrides.
 
-@use "blocks";
+@use "patterns";
 
 
 /// Vendor Styles.
@@ -72,10 +73,3 @@
 /// go, but only if necessary.
 
 @use "utilities";
-
-
-/// Editor.
-///
-/// Anything more specific to the editor should go here.
-
-@use "editor/title" as *;

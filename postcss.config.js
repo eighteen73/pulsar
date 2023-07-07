@@ -1,6 +1,6 @@
 module.exports = {
 	plugins: {
-		autoprefixer: { grid: true },
+		'postcss-preset-env': {},
 		'postcss-custom-media': {},
 	},
 };
