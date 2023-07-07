@@ -24,9 +24,7 @@ class Setup implements Bootable {
 		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names' ] );
-		add_action( 'widgets_init', [ $this, 'widget_areas' ] );
 		add_action( 'wp_head', [ $this, 'javascript_detected' ], 0 );
-		add_action( 'init', [ $this, 'page_title_meta' ] );
 	}
 
 	/**
@@ -114,27 +112,6 @@ class Setup implements Bootable {
 			[
 				// 'example' => __( 'Example' ),
 			]
-		);
-	}
-
-	/**
-	 * Register widget areas.
-	 *
-	 * @return void
-	 */
-	public function widget_areas() {
-		$args = [
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget__title">',
-			'after_title'   => '</h2>',
-		];
-
-		register_sidebar(
-			[
-				'id'   => 'primary',
-				'name' => esc_html_x( 'Primary', 'sidebar', 'pulsar' ),
-			] + $args
 		);
 	}
 

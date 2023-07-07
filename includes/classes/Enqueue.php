@@ -53,7 +53,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function scripts() {
+	public function theme_scripts() {
 
 		wp_enqueue_script(
 			'pulsar-app-scripts',
