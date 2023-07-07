@@ -149,24 +149,4 @@ class Setup implements Bootable {
 
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
-
-	/**
-	 * Register post meta used in the theme for showing/hiding the page title.
-	 *
-	 * @return void
-	 */
-	public function page_title_meta() {
-
-		register_post_meta(
-			'',
-			'display_post_title',
-			[
-				'show_in_rest'  => true,
-				'single'        => true,
-				'default'       => true,
-				'type'          => 'boolean',
-				'auth_callback' => '__return_true',
-			]
-		);
-	}
 }
