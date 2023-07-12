@@ -20,16 +20,14 @@
 		"node": ">=18.0.0"
 	},
 	"devDependencies": {
+		"@eighteen73/eslint-config-wordpress": "^1.0.0",
+		"@eighteen73/stylelint-config-wordpress": "^1.0.0",
 		"@wordpress/browserslist-config": "^5.18",
-		"@wordpress/eslint-plugin": "^14.8",
-		"@wordpress/prettier-config": "^2.18",
+		"@wordpress/prettier-config": "^2.20.0",
 		"@wordpress/scripts": "^26.6",
-		"@wordpress/stylelint-config": "^21.18",
 		"alpinejs": "^3.12",
 		"fast-glob": "^3.3.0",
-		"postcss-custom-media": "^9.1",
 		"postcss-preset-env": "^9.0.0",
-		"stylelint-order": "^6.0",
 		"webpack-remove-empty-scripts": "^1.0"
 	},
 	"babel": {
