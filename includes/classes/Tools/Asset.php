@@ -16,12 +16,13 @@ class Asset {
 	 * Retrieve the attribute for a matching asset file.
 	 *
 	 * @param string $slug The slug of the asset file, eg `app-styles`.
+	 * @param string $path The path of the asset file, relative to the `dist` directory.
 	 * @param string $attribute The attribute to get from the asset file. Typically `version` or `dependencies`.
 	 *
 	 * @return string|array
 	 */
-	public static function attribute( $slug, $attribute ) {
-		$asset      = self::get( $slug );
+	public static function attribute( $slug, $path, $attribute ) {
+		$asset      = self::get( $slug, $path );
 		$attributes = [];
 
 		if ( ! empty( $attribute ) && isset( $asset[ $attribute ] ) ) {
@@ -39,14 +40,15 @@ class Asset {
 	 * Retrieve the a matching asset file.
 	 *
 	 * @param string $slug The slug of the asset file, eg `app-styles`.
+	 * @param string $path The path of the asset file, relative to the `dist` directory.
 	 *
 	 * @return array|null
 	 */
-	public static function get( $slug ) {
+	public static function get( $slug, $path ) {
 		$asset = null;
 
-		if ( file_exists( get_parent_theme_file_path( "dist/{$slug}.asset.php" ) ) ) {
-			$asset = require get_parent_theme_file_path( "dist/{$slug}.asset.php" );
+		if ( file_exists( get_parent_theme_file_path( "dist/${path}/{$slug}.asset.php" ) ) ) {
+			$asset = require get_parent_theme_file_path( "dist/{$path}/{$slug}.asset.php" );
 		}
 
 		return $asset;

@@ -42,9 +42,9 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_style(
 			'pulsar-app-styles',
-			get_theme_file_uri( 'dist/app-styles.css' ),
+			get_theme_file_uri( 'dist/css/app-styles.css' ),
 			[],
-			Asset::attribute( 'app-styles', 'version' ),
+			Asset::attribute( 'app-styles', 'css', 'version' ),
 		);
 	}
 
@@ -57,9 +57,9 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_script(
 			'pulsar-app-scripts',
-			get_theme_file_uri( 'dist/app-scripts.js' ),
-			Asset::attribute( 'app-scripts', 'dependencies' ),
-			Asset::attribute( 'app-scripts', 'version' ),
+			get_theme_file_uri( 'dist/css/app-scripts.js' ),
+			Asset::attribute( 'app-scripts', 'js', 'dependencies' ),
+			Asset::attribute( 'app-scripts', 'js', 'version' ),
 			true
 		);
 
@@ -168,8 +168,8 @@ class Enqueue implements Bootable {
 		wp_enqueue_script(
 			'pulsar-editor-scripts',
 			get_theme_file_uri( 'dist/editor-scripts.js' ),
-			Asset::attribute( 'editor-scripts', 'dependencies' ),
-			Asset::attribute( 'editor-scripts', 'version' ),
+			Asset::attribute( 'editor-scripts', 'js', 'dependencies' ),
+			Asset::attribute( 'editor-scripts', 'js', 'version' ),
 			true,
 		);
 	}
