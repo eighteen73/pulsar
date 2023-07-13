@@ -6,12 +6,12 @@
 /// classes and should be placed on the parent element rather than the element
 /// itself like you would with eg Tailwind.
 .container {
-	padding-left: var(--wp--style--root--padding-left);
-	padding-right: var(--wp--style--root--padding-right);
+	padding-left: var( --wp--style--root--padding-left );
+	padding-right: var( --wp--style--root--padding-right );
 
-	> * {
+	> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
 		margin-left: auto;
 		margin-right: auto;
-		max-width: theme(layout, content-size);
+		max-width: var( --wp--custom--layout--content );
 	}
 }

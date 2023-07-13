@@ -32,6 +32,10 @@
 
 // Use the page padding as a negative margin for alignfull.
 .alignfull {
-	margin-left: calc(theme(spacing, page) * -1);
-	margin-right: calc(theme(spacing, page) * -1);
+	margin-left: calc( var( --wp--custom--layout--padding ) * -1 );
+	margin-right: calc( var( --wp--custom--layout--padding ) * -1 );
+}
+
+:where(.has-background) + :where(.has-background) {
+	margin-block-start: 0;
 }
