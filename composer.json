@@ -10,10 +10,7 @@
 	],
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=7.4"
-	},
-	"require-dev": {
-		"eighteen73/phpcs-composer": "dev-main"
+		"php": ">=8.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -24,5 +21,8 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"require-dev": {
+		"eighteen73/wordpress-coding-standards": "dev-main"
 	}
 }

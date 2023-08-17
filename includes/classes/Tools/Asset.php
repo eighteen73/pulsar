@@ -21,7 +21,7 @@ class Asset {
 	 *
 	 * @return string|array
 	 */
-	public static function attribute( $slug, $path, $attribute ) {
+	public static function attribute( string $slug, string $path, string $attribute ) : string|array {
 		$asset      = self::get( $slug, $path );
 		$attributes = [];
 
@@ -37,14 +37,14 @@ class Asset {
 	}
 
 	/**
-	 * Retrieve the a matching asset file.
+	 * Retrieve the matching asset file.
 	 *
 	 * @param string $slug The slug of the asset file, eg `app-styles`.
 	 * @param string $path The path of the asset file, relative to the `dist` directory.
 	 *
 	 * @return array|null
 	 */
-	public static function get( $slug, $path ) {
+	public static function get( string $slug, string $path ) : array|null {
 		$asset = null;
 
 		if ( file_exists( get_parent_theme_file_path( "dist/${path}/{$slug}.asset.php" ) ) ) {

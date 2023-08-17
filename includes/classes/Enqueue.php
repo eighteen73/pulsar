@@ -22,7 +22,7 @@ class Enqueue implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() {
+	public function boot() : void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_scripts' ], 10 );
 		add_action( 'after_setup_theme', [ $this, 'block_styles' ] );
@@ -38,7 +38,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function theme_styles() {
+	public function theme_styles() : void {
 
 		wp_enqueue_style(
 			'pulsar-app-styles',
@@ -53,7 +53,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function theme_scripts() {
+	public function theme_scripts() : void {
 
 		wp_enqueue_script(
 			'pulsar-app-scripts',
@@ -79,7 +79,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function block_styles() {
+	public function block_styles() : void {
 
 		// Gets all the block stylesheets.
 		$files = glob( get_theme_file_path( 'dist/css/blocks/*.css' ) );
@@ -131,7 +131,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function disabled_block_styles() {
+	public function disabled_block_styles() : void {
 
 		$blocks = Config::get( 'disabled-block-styles' );
 
@@ -149,7 +149,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function editor_styles() {
+	public function editor_styles() : void {
 
 		add_editor_style(
 			[
@@ -163,7 +163,7 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function editor_scripts() {
+	public function editor_scripts() : void {
 
 		wp_enqueue_script(
 			'pulsar-editor-scripts',
@@ -179,12 +179,12 @@ class Enqueue implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function admin_styles() {}
+	public function admin_styles() : void {}
 
 	/**
 	 * Admin scripts.
 	 *
 	 * @return void
 	 */
-	public function admin_scripts() {}
+	public function admin_scripts() : void {}
 }

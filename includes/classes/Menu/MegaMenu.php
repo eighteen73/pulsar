@@ -20,20 +20,20 @@ class MegaMenu implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() {
+	public function boot() : void {
 		add_action( 'wp_nav_menu_item_custom_fields', [ $this, 'add_fields' ], 10, 2 );
-		add_action( 'wp_update_nav_menu_item', [ $this, 'save_fields' ], 10, 2 );
+		add_action( 'wp_update_nav_menu_item', [ $this, 'save_fields' ], 10, 3 );
 		add_filter( 'nav_menu_css_class', [ $this, 'add_class' ], 10, 4 );
 	}
 
 	/**
 	 * Add field to a menu item.
 	 *
-	 * @param int     $item_id
-	 * @param WP_Post $item
+	 * @param int      $item_id  Menu item ID as a numeric string.
+	 * @param \WP_Post $item     Menu item data object.
 	 * @return void
 	 */
-	public function add_fields( $item_id, $item ) {
+	public function add_fields( int $item_id, \WP_Post $item ) : void {
 
 		// Only allow mega menus for top level menu items.
 		if ( ! $item->menu_item_parent == 0 ) {
@@ -55,11 +55,12 @@ class MegaMenu implements Bootable {
 	/**
 	 * Save custom fields.
 	 *
-	 * @param int $menu_id
-	 * @param int $menu_item_db_id
+	 * @param int   $menu_id          ID of the updated menu.
+	 * @param int   $menu_item_db_id  ID of the updated menu item.
+	 * @param array $args             An array of arguments used to update a menu item.
 	 * @return void
 	 */
-	public function save_fields( $menu_id, $menu_item_db_id ) {
+	public function save_fields( int $menu_id, int $menu_item_db_id, array $args ) : void {
 		$mega_menu = isset( $_POST['menu-item-mega-menu'][ $menu_item_db_id ] ) ? 'yes' : 'no';
 
 		update_post_meta( $menu_item_db_id, '_menu_item_mega_menu', $mega_menu );
@@ -75,7 +76,7 @@ class MegaMenu implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function add_class( $classes, $item, $args, $depth ) {
+	public function add_class( array $classes, \WP_Post $item, \stdClass $args, int $depth ) : array {
 
 		// Use the theme location as a namespace.
 		$location = $args->theme_location ? $args->theme_location : 'default';

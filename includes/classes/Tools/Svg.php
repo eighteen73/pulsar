@@ -24,7 +24,7 @@ class Svg {
 	 *
 	 * @var string
 	 */
-	protected $name = '';
+	protected string $name = '';
 
 	/**
 	 * The SVG file that we're getting. Use a relative path to the theme
@@ -32,35 +32,35 @@ class Svg {
 	 *
 	 * @var string
 	 */
-	protected $file = '';
+	protected string $file = '';
 
 	/**
 	 * The class of the SVG object.
 	 *
 	 * @var string
 	 */
-	protected $class = '';
+	protected string $class = '';
 
 	/**
 	 * Used to add or replace an existing `<title>` element in the SVG.
 	 *
 	 * @var string
 	 */
-	protected $title = '';
+	protected string $title = '';
 
 	/**
 	 * Used to add or replace an existing `<desc>` element in the SVG.
 	 *
 	 * @var string
 	 */
-	protected $desc = '';
+	protected string $desc = '';
 
 	/**
 	 * Path info about the file.
 	 *
 	 * @var array
 	 */
-	protected $pathinfo = [];
+	protected array $pathinfo = [];
 
 	/**
 	 * Sets up the object properties.
@@ -69,7 +69,7 @@ class Svg {
 	 * @param  array  $args An array of arguements to apply to the SVG.
 	 * @return void
 	 */
-	public function __construct( $file, $args = [] ) {
+	public function __construct( string $file, array $args = [] ) {
 
 		// If any of the arguments match a class property, set that
 		// property to the argument value.
@@ -108,7 +108,7 @@ class Svg {
 	 *
 	 * @return string
 	 */
-	public function render() {
+	public function render() : string {
 
 		$path = trim( 'assets/svg', '/' );
 
@@ -190,8 +190,7 @@ class Svg {
 	 *
 	 * @return void
 	 */
-	public function display() {
-
+	public function display() : void {
 		echo $this->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

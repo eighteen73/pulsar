@@ -23,5 +23,5 @@ interface Bootable {
 	 *
 	 * @return void
 	 */
-	public function boot();
+	public function boot() : void;
 }

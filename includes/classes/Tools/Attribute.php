@@ -24,7 +24,7 @@ class Attribute {
 	 * @access protected
 	 * @var    string
 	 */
-	protected $name = '';
+	protected string $name = '';
 
 	/**
 	 * A specific context for the element (e.g., `primary`).
@@ -32,7 +32,7 @@ class Attribute {
 	 * @access public
 	 * @var    string
 	 */
-	protected $context = '';
+	protected string $context = '';
 
 	/**
 	 * The input attributes first passed in.
@@ -40,7 +40,7 @@ class Attribute {
 	 * @access protected
 	 * @var    array
 	 */
-	protected $input = [];
+	protected array $input = [];
 
 	/**
 	 * Stored array of attributes.
@@ -48,7 +48,7 @@ class Attribute {
 	 * @access protected
 	 * @var    array
 	 */
-	protected $attr = [];
+	protected array $attr = [];
 
 	/**
 	 * Stored array of data.
@@ -56,7 +56,7 @@ class Attribute {
 	 * @access protected
 	 * @var    array
 	 */
-	protected $data = [];
+	protected array $data = [];
 
 	/**
 	 * Outputs an HTML element's attributes.
@@ -65,9 +65,8 @@ class Attribute {
 	 * @param  string $name The name/ID of the element (e.g., `sidebar`).
 	 * @param  string $context A specific context for the element (e.g., `primary`).
 	 * @param  array  $attr An array of attributes to pass in.
-	 * @return void
 	 */
-	public function __construct( $name, $context = '', array $attr = [] ) {
+	public function __construct( string $name, string $context = '', array $attr = [] ) {
 
 		$this->name    = $name;
 		$this->context = $context;
@@ -81,7 +80,7 @@ class Attribute {
 	 * @access public
 	 * @return string
 	 */
-	public function __toString() {
+	public function __toString() : string {
 		return $this->render();
 	}
 
@@ -91,7 +90,7 @@ class Attribute {
 	 * @access public
 	 * @return void
 	 */
-	public function display() {
+	public function display() : void {
 		echo $this->render(); // WPCS: XSS ok.
 	}
 
@@ -101,7 +100,7 @@ class Attribute {
 	 * @access public
 	 * @return string
 	 */
-	public function render() {
+	public function render() : string {
 
 		$html = '';
 
@@ -131,7 +130,7 @@ class Attribute {
 	 * @param  mixed        $value The value of the attribute.
 	 * @return $this
 	 */
-	public function with( $name, $value = null ) {
+	public function with( string|array $name, mixed $value = null ) {
 
 		if ( is_array( $name ) ) {
 			$this->data = array_merge( $this->data, $name );
@@ -149,7 +148,7 @@ class Attribute {
 	 * @param  string $name The name of the attribute.
 	 * @return string
 	 */
-	public function get( $name ) {
+	public function get( string $name ) : string {
 
 		$attr = $this->all();
 
@@ -159,10 +158,10 @@ class Attribute {
 	/**
 	 * Filters and returns the array of attributes.
 	 *
-	 * @access protected
+	 * @access public
 	 * @return array
 	 */
-	public function all() {
+	public function all() : array {
 
 		// If we already have attributes, let's return them and bail.
 		if ( $this->attr ) {
@@ -213,7 +212,7 @@ class Attribute {
 	 * @param  array $attr Array of attributes.
 	 * @return array
 	 */
-	protected function html( $attr ) {
+	protected function html( array $attr ) : array {
 
 		$attr = [];
 

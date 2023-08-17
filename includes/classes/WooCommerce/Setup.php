@@ -22,7 +22,7 @@ class Setup implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() {
+	public function boot() : void {
 
 		// Register theme support for WooCommerce features.
 		add_action( 'after_setup_theme', [ $this, 'supports' ] );

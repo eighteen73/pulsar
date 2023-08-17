@@ -21,7 +21,7 @@ class Patterns implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() {
+	public function boot() : void {
 		add_action( 'init', [ $this, 'register_categories' ] );
 	}
 
@@ -30,7 +30,7 @@ class Patterns implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function config() {
+	public function config() : array {
 		return Config::get( 'pattern-categories' );
 	}
 
@@ -40,7 +40,7 @@ class Patterns implements Bootable {
 	  * @access public
 	  * @return void
 	  */
-	public function register_categories() {
+	public function register_categories() : void {
 
 		$categories = $this->config() ?: [];
 
@@ -57,7 +57,7 @@ class Patterns implements Bootable {
 	 * @param  string $label The label
 	 * @return void
 	 */
-	protected function add_category( string $slug, string $label ) {
+	protected function add_category( string $slug, string $label ) : void {
 
 		// Register block pattern categories.
 		register_block_pattern_category(

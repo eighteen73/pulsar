@@ -1,5 +1,7 @@
 <?php
 /**
+ * Functions that display or render the site logo.
+ *
  * @package Pulsar
  */
 
@@ -8,22 +10,20 @@ namespace Pulsar;
 /**
  * Displays the site logo.
  *
- * @access public
- * @param  array $args
+ * @param  array $args Arguments to pass to the final rendered logo.
  * @return void
  */
-function site_logo( array $args = [] ) {
-	echo get_site_logo( $args );
+function site_logo( array $args = [] ) : void {
+	echo get_site_logo( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
  * Returns the site logo HTML.
  *
- * @access public
- * @param  array $args
+ * @param  array $args Arguments to pass to the final rendered logo.
  * @return string
  */
-function get_site_logo( array $args = [] ) {
+function get_site_logo( array $args = [] ) : string {
 
 	$args = wp_parse_args(
 		$args,
@@ -43,7 +43,7 @@ function get_site_logo( array $args = [] ) {
 		[
 			'class' => 'site-header__icon',
 			'title' => $title,
-		]
+		],
 	);
 
 	if ( $title && $logo ) {
@@ -52,14 +52,14 @@ function get_site_logo( array $args = [] ) {
 			'<a class="%s" href="%s" rel="home">%s</a>',
 			esc_attr( $args['link_class'] ),
 			esc_url( home_url() ),
-			$logo
+			$logo,
 		);
 
 		$html = sprintf(
 			'<%1$s class="%2$s">%3$s</%1$s>',
 			tag_escape( $args['tag'] ),
 			"{$args['class']}",
-			$link
+			$link,
 		);
 	}
 

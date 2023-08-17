@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "792fd0a58fbf3da0d8026f913081468c",
+    "content-hash": "478dae8ad5b39c9f447dd3a8d86b9b35",
     "packages": [],
     "packages-dev": [
         {
@@ -83,17 +83,17 @@
             "time": "2022-02-04T12:51:07+00:00"
         },
         {
-            "name": "eighteen73/phpcs-composer",
+            "name": "eighteen73/wordpress-coding-standards",
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/eighteen73/phpcs-composer.git",
-                "reference": "73a763b6d0747b8f905a387ddce2ea491a5fef98"
+                "url": "https://github.com/eighteen73/wordpress-coding-standards.git",
+                "reference": "5c9af9d74d7801261792088140a4e33a2e195d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eighteen73/phpcs-composer/zipball/73a763b6d0747b8f905a387ddce2ea491a5fef98",
-                "reference": "73a763b6d0747b8f905a387ddce2ea491a5fef98",
+                "url": "https://api.github.com/repos/eighteen73/wordpress-coding-standards/zipball/5c9af9d74d7801261792088140a4e33a2e195d14",
+                "reference": "5c9af9d74d7801261792088140a4e33a2e195d14",
                 "shasum": ""
             },
             "require": {
@@ -118,11 +118,12 @@
                     "email": "brett@orphans.co.uk"
                 }
             ],
-            "description": "Modestly opinionated PHPCS configuration",
+            "description": "Modestly opinionated PHPCS configuration for WordPress.",
             "support": {
-                "source": "https://github.com/eighteen73/phpcs-composer/tree/v1.0.3"
+                "issues": "https://github.com/eighteen73/wordpress-coding-standards/issues",
+                "source": "https://github.com/eighteen73/wordpress-coding-standards/tree/main"
             },
-            "time": "2022-11-09T16:29:10+00:00"
+            "time": "2023-07-11T18:51:18+00:00"
         },
         {
             "name": "phpcompatibility/php-compatibility",
@@ -304,12 +305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf"
+                "reference": "a813c38729aef0034ff7b0f5f0ac54e94ea76804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
-                "reference": "add95a74551c3ba8fc99ef7651ad05f553b3fbbf",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/a813c38729aef0034ff7b0f5f0ac54e94ea76804",
+                "reference": "a813c38729aef0034ff7b0f5f0ac54e94ea76804",
                 "shasum": ""
             },
             "require": {
@@ -354,7 +355,7 @@
                 "source": "https://github.com/squizlabs/PHP_CodeSniffer",
                 "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
             },
-            "time": "2022-12-22T21:46:41+00:00"
+            "time": "2023-08-06T23:03:57+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -411,12 +412,12 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "eighteen73/phpcs-composer": 20
+        "eighteen73/wordpress-coding-standards": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4"
+        "php": ">=8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
