@@ -1,8 +1,9 @@
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
-const { basename } = require('path');
+const { basename, resolve } = require('path');
 
 function regexEqual(x, y) {
 	return (
@@ -101,6 +102,19 @@ module.exports = {
 		...defaultConfig.plugins,
 		new RemoveEmptyScriptsPlugin({
 			stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
+		}),
+		new MergeJsonWebpackPlugin({
+			space: '\t',
+			files: [
+				'./config/theme-json/base.json',
+				'./config/theme-json/settings.json',
+				'./config/theme-json/styles.json',
+				'./config/theme-json/customTemplates.json',
+				'./config/theme-json/templateParts.json',
+			],
+			output: {
+				fileName: '../theme.json',
+			},
 		}),
 	],
 };
