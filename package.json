@@ -23,6 +23,7 @@
 		"@eighteen73/eslint-config-wordpress": "^1.0.0",
 		"@eighteen73/stylelint-config-wordpress": "^1.0.0",
 		"@wordpress/browserslist-config": "^5.18",
+		"@wordpress/icons": "^9.31.0",
 		"@wordpress/prettier-config": "^2.20.0",
 		"@wordpress/scripts": "^26.6",
 		"alpinejs": "^3.12",

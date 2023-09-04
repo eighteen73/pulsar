@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"blocks": {
+			"core/button": {
+				"color": {
+					"background": true
+				}
+			},
+			"core/column": {
+				"spacing": {
+					"units": ["%"]
+				}
+			},
+			"core/group": {
+				"color": {
+					"background": true
+				}
+			},
+			"core/heading": {
+				"color": {
+					"text": true,
+					"palette": [
+						{
+							"name": "Primary",
+							"slug": "primary",
+							"color": "var(--wp--custom--color--primary)"
+						},
+						{
+							"name": "Secondary",
+							"slug": "secondary",
+							"color": "var(--wp--custom--color--secondary)"
+						},
+						{
+							"name": "Tertiary",
+							"slug": "tertiary",
+							"color": "var(--wp--custom--color--tertiary)"
+						}
+					]
+				}
+			}
+		}
+	}
+}

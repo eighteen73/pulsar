@@ -1,0 +1,95 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"typography": {
+			"customFontSize": false,
+			"dropCap": false,
+			"fluid": true,
+			"fontFamilies": [
+				{
+					"name": "Sans",
+					"slug": "sans",
+					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+				},
+				{
+					"name": "Serif",
+					"slug": "serif",
+					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Small",
+					"slug": "sm",
+					"size": "14px",
+					"fluid": {
+						"min": "12px",
+						"max": "14px"
+					}
+				},
+				{
+					"name": "Base",
+					"slug": "base",
+					"size": "18px",
+					"fluid": {
+						"min": "16px",
+						"max": "18px"
+					}
+				},
+				{
+					"name": "Medium",
+					"slug": "md",
+					"size": "22px",
+					"fluid": {
+						"min": "18px",
+						"max": "22px"
+					}
+				},
+				{
+					"name": "Large",
+					"slug": "lg",
+					"size": "28px",
+					"fluid": {
+						"min": "22px",
+						"max": "28px"
+					}
+				},
+				{
+					"name": "XL",
+					"slug": "xl",
+					"size": "35px",
+					"fluid": {
+						"min": "28px",
+						"max": "35px"
+					}
+				},
+				{
+					"name": "2XL",
+					"slug": "2-xl",
+					"size": "44px",
+					"fluid": {
+						"min": "35px",
+						"max": "44px"
+					}
+				},
+				{
+					"name": "3XL",
+					"slug": "3-xl",
+					"size": "55px",
+					"fluid": {
+						"min": "44px",
+						"max": "55px"
+					}
+				}
+			],
+			"fontStyle": false,
+			"fontWeight": false,
+			"letterSpacing": false,
+			"lineHeight": false,
+			"textColumns": true,
+			"textDecoration": false,
+			"textTransform": false
+		}
+	}
+}

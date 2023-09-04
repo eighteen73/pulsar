@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"color": {
+			"background": false,
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"duotone": [],
+			"gradients": [],
+			"link": false,
+			"palette": [
+				{
+					"name": "Primary",
+					"slug": "primary",
+					"color": "var(--wp--custom--color--primary)"
+				},
+				{
+					"name": "Secondary",
+					"slug": "secondary",
+					"color": "var(--wp--custom--color--secondary)"
+				},
+				{
+					"name": "Tertiary",
+					"slug": "tertiary",
+					"color": "var(--wp--custom--color--tertiary)"
+				}
+			],
+			"text": false
+		}
+	}
+}

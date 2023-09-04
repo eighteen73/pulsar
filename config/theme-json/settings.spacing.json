@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"spacing": {
+			"blockGap": true,
+			"margin": true,
+			"padding": true,
+			"spacingSizes": [
+				{
+					"name": "4px",
+					"size": "4px",
+					"slug": "xs"
+				},
+				{
+					"name": "8px",
+					"size": "8px",
+					"slug": "sm"
+				},
+				{
+					"name": "12px",
+					"size": "12px",
+					"slug": "md"
+				},
+				{
+					"name": "16px",
+					"size": "16px",
+					"slug": "lg"
+				},
+				{
+					"name": "24px",
+					"size": "clamp(18px, 2vw, 24px)",
+					"slug": "xl"
+				},
+				{
+					"name": "32px",
+					"size": "clamp(24px, 2vw, 32px)",
+					"slug": "2-xl"
+				},
+				{
+					"name": "48px",
+					"size": "clamp(32px, 2vw, 48px)",
+					"slug": "3-xl"
+				},
+				{
+					"name": "64px",
+					"size": "clamp(48px, 2vw, 64px)",
+					"slug": "4-xl"
+				},
+				{
+					"name": "96px",
+					"size": "clamp(64px, 2vw, 96px)",
+					"slug": "5-xl"
+				},
+				{
+					"name": "144px",
+					"size": "clamp(96px, 2vw, 144px)",
+					"slug": "6-xl"
+				}
+			],
+			"units": ["%", "px", "em", "rem", "vh", "vw"]
+		}
+	}
+}
