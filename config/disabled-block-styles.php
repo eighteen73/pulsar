@@ -14,5 +14,6 @@
  */
 
 return [
+	'button',
 	'columns',
 ];
