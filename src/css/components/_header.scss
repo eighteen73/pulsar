@@ -1,11 +1,23 @@
 @use "../tools" as *;
 
 .site-header {
+	margin: 0;
 	position: relative;
 
 	&__inner {
 		align-items: center;
 		display: flex;
 		justify-content: space-between;
+	}
+
+	&__logo {
+		font-family: unset;
+		font-size: unset;
+		line-height: 1;
+		margin: 0;
+	}
+
+	&__logo-link {
+		display: inline-block;
 	}
 }

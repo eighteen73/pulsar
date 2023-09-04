@@ -1,21 +1,19 @@
 @use "../tools" as *;
 
 .hamburger {
-
 	&__line {
 		transform-origin: center;
 		transition:
-			y theme(transition-duration, quick) ease-in theme(transition-duration, quick),
-			rotate theme(transition-duration, quick) ease-in,
-			opacity 50ms theme(transition-duration, quick);
+			y var(--wp--custom--transition-duration--quick) ease-in var(--wp--custom--transition-duration--quick),
+			rotate var(--wp--custom--transition-duration--quick) ease-in,
+			opacity 50ms var(--wp--custom--transition-duration--quick);
 	}
 
 	[aria-expanded="true"] & {
-
 		&__line {
 			transition:
-				y theme(transition-duration, quick) ease-in,
-				rotate theme(transition-duration, quick) ease-in theme(transition-duration, quick),
+				y var(--wp--custom--transition-duration--quick) ease-in,
+				rotate var(--wp--custom--transition-duration--quick) ease-in var(--wp--custom--transition-duration--quick),
 				opacity 50ms;
 		}
 

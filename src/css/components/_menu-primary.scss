@@ -1,6 +1,7 @@
 @use "../tools" as *;
 
 /// Sets when the menu converts to desktop.
+/// Used as a convenient way of updating a breakpoint in a single place.
 $bp: --lg;
 
 // Used for managing the overflow when a menu is open.
@@ -18,7 +19,7 @@ $bp: --lg;
 	// Menu items list.
 	// This is the elemment thats visibility should be toggled on small screens.
 	&__items {
-		background-color: color(white);
+		background-color: var(--wp--custom--color--base);
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
@@ -27,7 +28,7 @@ $bp: --lg;
 		position: absolute;
 		top: 100%;
 		transform: translateX(-100%);
-		transition: all 0.3s ease-in-out;
+		transition: all 300ms ease-in-out;
 		visibility: hidden;
 		width: 100%;
 
@@ -56,6 +57,7 @@ $bp: --lg;
 		flex-direction: column;
 
 		@media ($bp) {
+			background-color: var(--wp--custom--color--base);
 			display: flex;
 			left: 0;
 			opacity: 0;
@@ -74,14 +76,13 @@ $bp: --lg;
 
 	// Individual items.
 	&__item {
-
-		&--has-children {
+		&:where(.has-children) {
 			position: relative;
 		}
 
 		// Mega menus are usually positioned relative to the menu
 		// rather than the parent.
-		&--has-mega-menu {
+		&:where(.has-mega-menu) {
 			position: static;
 		}
 	}
@@ -90,25 +91,25 @@ $bp: --lg;
 	&__link {
 		background-color: transparent;
 		border: 0;
-		color: color(black);
+		color: var(--wp--custom--color--contrast);
 		cursor: pointer;
 		display: block;
 		font-size: inherit;
 		line-height: 1;
-		padding: space(2) space(4);
+		padding: var(--wp--preset--spacing--sm);
 		text-decoration: none;
 
 		&:hover {}
 
 		&:focus-visible {
-			background-color: color(focus);
+			background-color: var(--wp--custom--color--focus);
 			outline: none;
 		}
 
 		// An icon set for the item.
 		&-icon {
 			height: 10px;
-			margin-left: space(2);
+			margin-left: var(--wp--preset--spacing--sm);
 			width: 10px;
 
 			[aria-expanded="true"] > & {
@@ -129,7 +130,7 @@ $bp: --lg;
 		}
 
 		&-icon {
-			width: 44px;
+			width: 32px;
 		}
 	}
 }
