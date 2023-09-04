@@ -86,7 +86,7 @@ class MegaMenu implements Bootable {
 
 		// Set mega menu class if enabled.
 		if ( $mega_menu === 'yes' ) {
-			$classes[] = "menu-{$location}__item--mega-menu";
+			$classes[] = 'has-mega-menu';
 		}
 
 		return $classes;

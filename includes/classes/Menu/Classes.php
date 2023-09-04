@@ -63,25 +63,25 @@ class Classes implements Bootable {
 		// Base classes.
 		$_classes = [
 			"menu-{$location}__item",
-			"menu-{$location}__item--depth-{$depth}",
+			"is-depth-{$depth}",
 		];
 
 		// Add modifiers for current item/parent/ancestor.
 		foreach ( [ 'item', 'parent', 'ancestor' ] as $type ) {
 			if ( in_array( "current-menu-{$type}", $classes ) || in_array( "current_page_{$type}", $classes ) ) {
-				$_classes[] = 'item' === $type ? "menu-{$location}__item--current" : "menu-{$location}__item--{$type}";
+				$_classes[] = 'item' === $type ? 'is-current' : "is-{$type}";
 			}
 		}
 
 		// If the menu item is a post type archive and we're viewing a single
 		// post of that post type, the menu item should be an ancestor.
-		if ( 'post_type_archive' === $item->type && is_singular( $item->object ) && ! in_array( 'menu__item--ancestor', $_classes ) ) {
-			$_classes[] = "menu-{$location}__item--ancestor";
+		if ( 'post_type_archive' === $item->type && is_singular( $item->object ) && ! in_array( 'is-ancestor', $_classes ) ) {
+			$_classes[] = 'is-ancestor';
 		}
 
 		// Add a class if the menu item has children.
 		if ( in_array( 'menu-item-has-children', $classes ) ) {
-			$_classes[] = "menu-{$location}__item--has-children";
+			$_classes[] = 'has-children';
 		}
 
 		// Add custom user-added classes if we have any.
@@ -112,12 +112,12 @@ class Classes implements Bootable {
 		// Base classes.
 		$_classes = [
 			"menu-{$location}__link",
-			"menu-{$location}__link--depth-{$depth}",
+			"is-depth-{$depth}",
 		];
 
 		// Add current menu item modifier.
 		if ( in_array( 'current-menu-item', $item->classes ) || in_array( 'current_page_item', $item->classes ) ) {
-			$_classes[] = "menu-{$location}__link--current";
+			$_classes[] = 'is-current';
 		}
 
 		$atts['class'] = implode( ' ', $_classes );
@@ -142,7 +142,7 @@ class Classes implements Bootable {
 		// Base classes.
 		$_classes = [
 			"menu-{$location}__sub-menu",
-			"menu-{$location}__sub-menu--depth-{$depth}",
+			"is-depth-{$depth}",
 		];
 
 		return $_classes;
