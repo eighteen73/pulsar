@@ -13,4 +13,6 @@
  * @package Pulsar
  */
 
-return [];
+return [
+	'columns',
+];
