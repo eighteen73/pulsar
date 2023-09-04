@@ -20,7 +20,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.css';
+import './editor.scss';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -44,7 +44,7 @@ export default function Edit({ attributes: { message }, setAttributes }) {
 					setAttributes({ message: newMessage })
 				}
 			/>
-			<span> | {title ?? __('loading…', 'pulsar')}</span>
+			<span> | {title ?? __('loading…')}</span>
 		</p>
 	);
 }

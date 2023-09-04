@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "pulsar/example-block",
+	"name": "pulsar/example",
 	"version": "0.1.0",
-	"title": "Example block",
+	"title": "Example",
 	"category": "text",
 	"icon": "universal-access-alt",
 	"attributes": {
@@ -20,8 +20,9 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "example-block",
+	"textdomain": "pulsar",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
 }
