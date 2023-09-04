@@ -7,7 +7,9 @@ html {
 }
 
 body {
-	// font-family: theme( font-family, sans );
-	// font-size: theme( font-size, base );
-	// line-height: theme( line-height, "normal" );
+	font-family: var(--wp--preset--font-family--sans);
+	font-size: var(--wp--preset--font-size--base);
+	line-height: var(--wp--custom--line-height--relaxed);
+
+	@include container-sizes(sm, md, lg, xl);
 }

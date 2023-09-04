@@ -4,23 +4,24 @@ h1,
 h2,
 h3,
 h4 {
-	font-family: theme(font-family, serif);
+	font-family: var(--wp--preset--font-family--serif);
 	font-weight: 600;
-	line-height: theme(line-height, tight);
+	line-height: var(--wp--custom--line-height--tight);
+	margin-bottom: 0;
 }
 
 h1 {
-	font-size: theme(font-size, 4xl);
+	font-size: var(--wp--preset--font-size--3-xl);
 }
 
 h2 {
-	font-size: theme(font-size, 3xl);
+	font-size: var(--wp--preset--font-size--2-xl);
 }
 
 h3 {
-	font-size: theme(font-size, 2xl);
+	font-size: var(--wp--preset--font-size--xl);
 }
 
 h4 {
-	font-size: theme(font-size, xl);
+	font-size: var(--wp--preset--font-size--lg);
 }

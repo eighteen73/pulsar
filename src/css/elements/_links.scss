@@ -1,9 +1,12 @@
 @use "../tools" as *;
 
-:where(a:not([class])) {
+:where(a:not(.wp-element-button)) {
+	color: var(--wp--custom--color--contrast);
 	text-decoration: underline;
 
 	&:hover {}
 
-	&:focus-visible {}
+	&:focus-visible {
+		background-color: var(--wp--custom--color--focus);
+	}
 }
