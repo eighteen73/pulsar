@@ -4,6 +4,7 @@
 .wp-element-button,
 .wp-block-button .wp-block-button__link {
 	background-color: var(--wp--custom--color--primary);
+	border-radius: 0;
 	color: var(--wp--custom--color--contrast);
 	display: inline-flex;
 	padding: var(--wp--preset--spacing--lg);
