@@ -1,7 +1,10 @@
 @use "../tools" as *;
 
 .site-header {
+	@include container;
 	margin: 0;
+	padding-bottom: var(--wp--preset--spacing--lg);
+	padding-top: var(--wp--preset--spacing--lg);
 	position: relative;
 
 	&__inner {

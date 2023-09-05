@@ -1,5 +1,8 @@
 @use "../tools" as *;
 
 .site-footer {
+	@include container;
 	margin: 0;
+	padding-bottom: var(--wp--preset--spacing--lg);
+	padding-top: var(--wp--preset--spacing--lg);
 }
