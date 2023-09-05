@@ -14,3 +14,9 @@
  *
  * @package Pulsar
  */
+
+?>
+
+<!-- wp:group {"templateLock":"contentOnly","layout":{"type":"constrained"}} -->
+<div class="wp-block-group"></div>
+<!-- /wp:group -->
