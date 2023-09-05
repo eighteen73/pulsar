@@ -2,18 +2,33 @@
 @use "sass:map";
 @use "sass:list";
 
-/// Adjusts the `--wp--custom--layout--content-size` css variable,
+/// Adjusts the `--wp--custom--layout--content` css variable,
 /// which is used for the container per breakpoint.
 /// This lets the container behave like Tailwind, where it
 /// snaps to sizes at breakpoints.
 /// This should be used on the `<body>` tag.
-@mixin container-sizes ($sizes...) {
+@mixin container-sizes($sizes...) {
 	@each $size in $sizes {
 		$breakpoint: map.get($breakpoints, $size);
 
 		@media (--#{$size}) {
 			--wp--custom--layout--content: #{$breakpoint};
 		}
+	}
+}
+
+/// This recreates what WordPress adds to blocks
+/// when a block is layout constrained.
+/// This recreates the `has-global-padding` and `is-layout-constrained`
+/// classes and should be applied to the parent element.
+@mixin container() {
+	padding-left: var(--wp--style--root--padding-left);
+	padding-right: var(--wp--style--root--padding-right);
+
+	> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: var(--wp--style--global--content-size);
 	}
 }
 

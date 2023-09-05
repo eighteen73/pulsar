@@ -6,13 +6,13 @@ export default function Edit({ attributes }) {
 	const blockProps = useBlockProps();
 
 	return (
-		<Disabled>
-			<div {...blockProps}>
+		<div {...blockProps}>
+			<Disabled>
 				<ServerSideRender
 					block="pulsar/template-part"
 					attributes={attributes}
 				/>
-			</div>
-		</Disabled>
+			</Disabled>
+		</div>
 	);
 }

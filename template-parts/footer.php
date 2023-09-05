@@ -1,4 +1,4 @@
-<div class="site-footer__inner has-global-padding is-layout-constrained">
+<div class="site-footer__inner">
 	<?php
 	printf(
 		esc_html__( 'Copyright &#169; %1$s %2$s', 'pulsar' ),

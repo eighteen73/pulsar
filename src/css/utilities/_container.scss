@@ -1,0 +1,9 @@
+@use "../tools" as *;
+
+/// This class essentially recreates what WordPress adds to blocks
+/// when a block is layout constrained.
+/// This recreates the `has-global-padding` and `is-layout-constrained`
+/// classes and should be placed on the parent element.
+.container {
+	@include container;
+}
