@@ -7,13 +7,14 @@
  * A restrictive but useful default has been included.
  * Return an empty array if you wish to remove this restriction.
  *
+ * @see https://wordpress.org/documentation/article/blocks-list/
+ *
  * @package Pulsar
  */
 
 return [
 	// Text
 	'core/heading',
-	'core/post-title',
 	'core/list',
 	'core/list-item',
 	'core/paragraph',
@@ -34,4 +35,19 @@ return [
 	'core/column',
 	'core/columns',
 	'core/group',
+
+	// Theme
+	'core/archive-title',
+	'core/post-title',
+	'core/post-excerpt',
+	'core/post-featured-image',
+	'core/post-content',
+	'core/query-loop',
+	'core/search-results-title',
+	'core/template-part',
+
+	// WooCommerce
+
+	// Pulsar
+	'pulsar/template-part',
 ];

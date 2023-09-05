@@ -10,6 +10,7 @@ namespace Pulsar\Editor;
 use Pulsar\Contracts\Bootable;
 use Pulsar\Tools\Config;
 use \WP_Block_Editor_Context;
+use \WP_Block_Type_Registry;
 
 /**
  * Block handling.
@@ -19,6 +20,9 @@ class Blocks implements Bootable {
 
 	// Quick dev. toggle to re-enable all blocks while testing.
 	const ENABLE_ALL_BLOCKS = false;
+
+	// Should all Pulsar registered blocks be included without having to list them.
+	const ENABLE_ALL_PULSAR_BLOCKS = false;
 
 	/**
 	 * Bootstraps the class' actions/filters.
@@ -73,6 +77,20 @@ class Blocks implements Bootable {
 	public function allowed_blocks( array|bool $block_editor_context, \WP_Block_Editor_Context $editor_context ) : array|bool {
 		if ( self::ENABLE_ALL_BLOCKS || empty( $editor_context->post ) ) {
 			return $block_editor_context;
+		}
+
+		if ( self::ENABLE_ALL_PULSAR_BLOCKS ) {
+			$registry      = WP_Block_Type_Registry::get_instance();
+			$block_names   = array_keys( $registry->get_all_registered() );
+			$pulsar_blocks = array_filter(
+				$block_names,
+				function( $key ) {
+					return strpos( $key, 'pulsar/' ) !== false;
+				},
+			);
+
+			// Merge the pulsar_blocks array with the allowed-blocks array
+			return array_merge( Config::get( 'allowed-blocks' ) ?? [], $pulsar_blocks );
 		}
 
 		return Config::get( 'allowed-blocks' ) ?? $block_editor_context;
