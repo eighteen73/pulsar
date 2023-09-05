@@ -43,6 +43,8 @@ return [
 	'core/post-featured-image',
 	'core/post-content',
 	'core/query-loop',
+	'core/query-title',
+	'core/search',
 	'core/search-results-title',
 	'core/template-part',
 
