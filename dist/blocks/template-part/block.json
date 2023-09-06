@@ -29,7 +29,7 @@
       "type": "object",
       "default": {
         "move": true,
-        "remove": false
+        "remove": true
       }
     }
   },

@@ -1,13 +1,6 @@
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
-import {
-	PanelBody,
-	ToggleControl,
-	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
-	__experimentalToggleGroupControl as ToggleGroupControl,
-	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
-	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import { assign, merge } from 'lodash';
@@ -23,11 +16,9 @@ function modifyColumnsBlockSettings(settings, name) {
 		return settings;
 	}
 	return assign({}, settings, {
-		supports: merge(settings.supports, {
-			className: true,
-		}),
 		attributes: merge(settings.attributes, {
-			stackedBreakpoint: { type: 'string', default: 'md' },
+			isStackedOnTablet: { type: 'boolean', default: false },
+			isStackedOnDesktop: { type: 'boolean', default: false },
 			isReversedWhenStacked: { type: 'boolean', default: false },
 		}),
 	});
@@ -40,7 +31,12 @@ function modifyColumnsBlockSettings(settings, name) {
 const addInspectorControls = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
 		const {
-			attributes: { stackedBreakpoint, isReversedWhenStacked },
+			attributes: {
+				isStackedOnMobile,
+				isStackedOnTablet,
+				isStackedOnDesktop,
+				isReversedWhenStacked,
+			},
 			setAttributes,
 			name,
 		} = props;
@@ -54,48 +50,48 @@ const addInspectorControls = createHigherOrderComponent((BlockEdit) => {
 				<BlockEdit {...props} />
 				<InspectorControls>
 					<PanelBody>
-						<ToggleGroupControl
-							label={__('Stack on', 'pulsar')}
-							value={stackedBreakpoint}
-							onChange={(value) =>
-								setAttributes({
-									stackedBreakpoint: value,
-								})
-							}
-							isBlock
-							help={__(
-								'Set the breakpoint size where you wish to stack the columns.',
-								'pulsar'
-							)}
-						>
-							<ToggleGroupControlOption
-								value="sm"
-								label={__('Small', 'pulsar')}
-							/>
-							<ToggleGroupControlOption
-								value="md"
-								label={__('Medium', 'pulsar')}
-							/>
-							<ToggleGroupControlOption
-								value="lg"
-								label={__('Large', 'pulsar')}
-							/>
-						</ToggleGroupControl>
-
 						<ToggleControl
-							label={__('Reverse when stacked', 'pulsar')}
-							help={__(
-								'Allows column order to be reversed when stacked. Useful for example if you have an image in the right column, but want it to be on top when stacked.'
-							)}
-							checked={isReversedWhenStacked}
+							label={__('Stack on tablet')}
+							checked={isStackedOnTablet}
 							onChange={() =>
 								setAttributes({
-									isReversedWhenStacked:
-										!isReversedWhenStacked,
+									isStackedOnTablet: !isStackedOnTablet,
 								})
 							}
 						/>
 					</PanelBody>
+
+					<PanelBody>
+						<ToggleControl
+							label={__('Stack on desktop')}
+							checked={isStackedOnDesktop}
+							onChange={() =>
+								setAttributes({
+									isStackedOnDesktop: !isStackedOnDesktop,
+								})
+							}
+						/>
+					</PanelBody>
+
+					{(isStackedOnMobile ||
+						isStackedOnTablet ||
+						isStackedOnDesktop) && (
+						<PanelBody>
+							<ToggleControl
+								label={__('Reverse when stacked')}
+								help={__(
+									'Allows column order to be reversed when stacked. Useful for example if you have an image in the right column, but want it to be on top when stacked.'
+								)}
+								checked={isReversedWhenStacked}
+								onChange={() =>
+									setAttributes({
+										isReversedWhenStacked:
+											!isReversedWhenStacked,
+									})
+								}
+							/>
+						</PanelBody>
+					)}
 				</InspectorControls>
 			</Fragment>
 		);
@@ -108,7 +104,12 @@ const addInspectorControls = createHigherOrderComponent((BlockEdit) => {
 const addEditorClasses = createHigherOrderComponent((BlockListBlock) => {
 	return (props) => {
 		const {
-			attributes: { stackedBreakpoint, reverseOnStacked },
+			attributes: {
+				isStackedOnMobile,
+				isStackedOnTablet,
+				isStackedOnDesktop,
+				isReversedWhenStacked,
+			},
 			name,
 		} = props;
 
@@ -118,12 +119,20 @@ const addEditorClasses = createHigherOrderComponent((BlockListBlock) => {
 
 		const classes = [];
 
-		if (stackedBreakpoint) {
-			classes.push(`is-stacked-on-${stackedBreakpoint}`);
+		if (isStackedOnMobile) {
+			classes.push(`is-stacked-on-mobile`);
 		}
 
-		if (reverseOnStacked) {
-			classes.push('is-reversed-on-stacked');
+		if (isStackedOnTablet) {
+			classes.push(`is-stacked-on-tablet`);
+		}
+
+		if (isStackedOnDesktop) {
+			classes.push(`is-stacked-on-desktop`);
+		}
+
+		if (isReversedWhenStacked) {
+			classes.push('is-reversed-when-stacked');
 		}
 
 		return <BlockListBlock {...props} className={classes.join(' ')} />;
@@ -140,9 +149,24 @@ function addFrontendClasses(props, block, attributes) {
 
 	const classes = [props.className];
 
-	const { stackedBreakpoint, isReversedWhenStacked } = attributes;
+	const {
+		isStackedOnMobile,
+		isStackedOnTablet,
+		isStackedOnDesktop,
+		isReversedWhenStacked,
+	} = attributes;
 
-	classes.push(`is-stacked-on-${stackedBreakpoint}`);
+	if (isStackedOnMobile) {
+		classes.push(`is-stacked-on-mobile`);
+	}
+
+	if (isStackedOnTablet) {
+		classes.push('is-stacked-on-tablet');
+	}
+
+	if (isStackedOnDesktop) {
+		classes.push('is-stacked-on-desktop');
+	}
 
 	if (isReversedWhenStacked) {
 		classes.push('is-reversed-when-stacked');

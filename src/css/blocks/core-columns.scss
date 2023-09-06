@@ -6,10 +6,47 @@
 	// setting of `center`.
 	align-items: initial !important;
 	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap !important;
 
-	// Columns should always be rows unless set to stack.
-	&:where(:not([class^="is-stacked-on"])) {
-		flex-direction: column;
+	&:where(.is-reversed-when-stacked) {
+		flex-direction: column-reverse;
+	}
+
+	&:where(.is-not-stacked-on-mobile) {
+		flex-direction: row;
+	}
+
+	@media (--md) {
+		flex-direction: row;
+	}
+
+	&:where(.is-stacked-on-tablet) {
+		@media (--md) {
+			flex-direction: column;
+
+			&:where(.is-reversed-when-stacked) {
+				flex-direction: column-reverse;
+			}
+		}
+
+		@media (--lg) {
+			flex-direction: row;
+		}
+	}
+
+	&:where(.is-stacked-on-desktop) {
+		@media (--lg) {
+			flex-direction: column;
+
+			&:where(.is-reversed-when-stacked) {
+				flex-direction: column-reverse;
+			}
+		}
+
+		@media (--xl) {
+			flex-direction: row;
+		}
 	}
 
 	// All Columns Alignment
@@ -23,32 +60,5 @@
 
 	&.are-vertically-aligned-bottom {
 		align-items: flex-end;
-	}
-
-	&:where(.is-reversed-when-stacked) {
-		flex-direction: column-reverse;
-	}
-
-	&:where(.is-stacked-on-sm) {
-
-		@media (--sm) {
-			flex-direction: row;
-		}
-	}
-
-	/// The fallback stacking class.
-	&:where(.is-stacked-on-md),
-	&:where(:not([class*="is-stacked-on"])) {
-
-		@media (--md) {
-			flex-direction: row;
-		}
-	}
-
-	&:where(.is-stacked-on-lg) {
-
-		@media (--lg) {
-			flex-direction: row;
-		}
 	}
 }
