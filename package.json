@@ -30,6 +30,7 @@
 		"fast-glob": "^3.3.0",
 		"merge-jsons-webpack-plugin": "^2.0.1",
 		"postcss-preset-env": "^9.0.0",
+		"webpack-merge": "^5.9.0",
 		"webpack-remove-empty-scripts": "^1.0"
 	},
 	"babel": {

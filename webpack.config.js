@@ -1,38 +1,12 @@
-const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const wordpressConfig = require('@wordpress/scripts/config/webpack.config');
 const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
+const { getWordPressSrcDirectory } = require('@wordpress/scripts/utils');
+const { mergeWithRules } = require('webpack-merge');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
-const { basename, resolve } = require('path');
-
-function regexEqual(x, y) {
-	return (
-		x instanceof RegExp &&
-		y instanceof RegExp &&
-		x.source === y.source &&
-		x.global === y.global &&
-		x.ignoreCase === y.ignoreCase &&
-		x.multiline === y.multiline
-	);
-}
-
-// We need to disable css-loader URL tampering in the Gutenberg webpack config so we can write relative URLs.
-// @see https://github.com/WordPress/gutenberg/blob/ba01e5d7851d6211d020687b5ae927f47ea4683e/packages/scripts/config/webpack.config.js#L51
-defaultConfig.module.rules = defaultConfig.module.rules.map((item) => {
-	if (
-		regexEqual(item.test, /\.css$/) ||
-		regexEqual(item.test, /\.(sc|sa)ss$/)
-	) {
-		item.use = item.use.map((useRule) => {
-			if (useRule.loader.match(/\/css-loader\//)) {
-				useRule.options.url = false;
-			}
-			return useRule;
-		});
-	}
-
-	return item;
-});
+const { basename } = require('path');
 
 /**
  * Converts a legacy path to the entry pair supported by webpack, e.g.:
@@ -53,6 +27,11 @@ const stylesheetPathToEntry = (path) => {
 	return [entryName, path];
 };
 
+/**
+ * Get all of the block specific stylesheets to use for entry points.
+ *
+ * @returns {Object} An object of entry keys and values.
+ */
 function getBlockStylesEntryPoints() {
 	const styles = glob('./src/css/blocks/*.scss');
 
@@ -68,8 +47,36 @@ function getBlockStylesEntryPoints() {
 	return entry;
 }
 
-module.exports = {
-	...defaultConfig,
+/**
+ * Pulsars default config.
+ */
+const pulsarConfig = {
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: [
+					{
+						loader: require.resolve('css-loader'),
+						options: {
+							url: false,
+						},
+					},
+				],
+			},
+			{
+				test: /\.(sc|sa)ss$/,
+				use: [
+					{
+						loader: require.resolve('css-loader'),
+						options: {
+							url: false,
+						},
+					},
+				],
+			},
+		],
+	},
 	stats: 'minimal',
 	entry: {
 		...getWebpackEntryPoints(),
@@ -84,7 +91,6 @@ module.exports = {
 		publicPath: '/dist',
 	},
 	devServer: {
-		...defaultConfig.devServer,
 		hot: true,
 		static: __dirname + '/dist/',
 		allowedHosts: 'all',
@@ -99,7 +105,15 @@ module.exports = {
 		},
 	},
 	plugins: [
-		...defaultConfig.plugins,
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: '**/*.{svg,jpg,png}',
+					context: getWordPressSrcDirectory(),
+					noErrorOnMissing: true,
+				},
+			],
+		}),
 		new RemoveEmptyScriptsPlugin({
 			stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
 		}),
@@ -124,3 +138,15 @@ module.exports = {
 		}),
 	],
 };
+
+module.exports = mergeWithRules({
+	module: {
+		rules: {
+			test: 'match',
+			use: {
+				loader: 'match',
+				options: 'replace',
+			},
+		},
+	},
+})(wordpressConfig, pulsarConfig);
