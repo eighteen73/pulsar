@@ -12,10 +12,13 @@ import { addFilter } from '@wordpress/hooks';
 import TokenList from '@wordpress/token-list';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { assign, merge } from 'lodash';
 
 const withMultiBreakpoint = (BlockEdit) => (props) => {
+	if (props.name !== 'core/columns') return <BlockEdit {...props} />;
+
 	const { attributes, setAttributes } = props;
-	const { className } = attributes;
+	const { className, breakpoint } = attributes;
 
 	// Define our breakpoints.
 	const breakpoints = ['sm', 'md', 'lg', 'xl'];
@@ -30,7 +33,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 	};
 
 	// Set state for the active breakpoint.
-	const [activeBreakpoint, setActiveBreakpoint] = useState(false);
+	const [activeBreakpoint, setActiveBreakpoint] = useState(breakpoint);
 
 	// Define useful helper text for each breakpoint.
 	const helpText = {
@@ -59,6 +62,11 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 		}
 
 		setAttributes({ className: list.value });
+	};
+
+	const onChangeBreakpoint = (newBreakpoint) => {
+		setActiveBreakpoint(newBreakpoint);
+		setAttributes({ breakpoint: newBreakpoint });
 	};
 
 	// Toggle the reversed class independently.
@@ -93,23 +101,14 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 
 	// Set the initial columns state, along with clearing classes when stacking is disabled.
 	useEffect(() => {
-		if (attributes.isStackedOnMobile) {
-			breakpoints.forEach((breakpoint) => {
-				if (hasClass(classes[breakpoint])) {
-					setActiveBreakpoint(breakpoint);
-					return;
-				} else {
-					setActiveBreakpoint('sm');
-					toggleBreakpointClass(classes.sm, true);
-				}
-			});
-		} else {
+		if (!attributes.isStackedOnMobile) {
 			removeAllClasses();
 			setActiveBreakpoint(false);
+			setAttributes({ breakpoint: '' });
 		}
 	}, [attributes.isStackedOnMobile]);
 
-	return 'core/columns' === props.name ? (
+	return (
 		<>
 			<BlockEdit {...props} />
 			<InspectorControls>
@@ -118,7 +117,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 						<ToggleGroupControl
 							label={__('Screen sizes up to')}
 							onChange={(value) => {
-								setActiveBreakpoint(value);
+								onChangeBreakpoint(value);
 								toggleBreakpointClass(classes[value], value);
 							}}
 							value={activeBreakpoint}
@@ -146,8 +145,33 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 				)}
 			</InspectorControls>
 		</>
-	) : (
-		<BlockEdit {...props} />
 	);
 };
+
+/**
+ * Add Size attribute to Button block
+ *
+ * @param  {Object} settings Original block settings
+ * @param  {string} name     Block name
+ * @return {Object}          Filtered block settings
+ */
+function addAttributes(settings, name) {
+	if (name === 'core/columns') {
+		return assign({}, settings, {
+			attributes: merge(settings.attributes, {
+				breakpoint: {
+					type: 'string',
+					default: '',
+				},
+				className: {
+					type: 'string',
+					default: '',
+				},
+			}),
+		});
+	}
+	return settings;
+}
+
+addFilter('blocks.registerBlockType', 'pulsar/columns-block', addAttributes);
 addFilter('editor.BlockEdit', 'pulsar/columns-block', withMultiBreakpoint);
