@@ -23,7 +23,7 @@ export default (options = {}) => ({
 	},
 
 	// Closes a sub-menu.
-	closeSubMenu(menuItemID, parentID) {
+	closeSubMenu(menuItemID) {
 		if (!this.isSubMenuOpen(menuItemID)) {
 			return;
 		}

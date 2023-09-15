@@ -1,5 +1,5 @@
 import { addFilter } from '@wordpress/hooks';
-import { assign } from 'lodash';
+import { assign } from 'lodash'; // eslint-disable-line import/no-extraneous-dependencies
 
 /**
  * Adds a default class to the paragraph block.
