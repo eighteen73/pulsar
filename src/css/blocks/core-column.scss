@@ -1,0 +1,18 @@
+@use "../tools" as *;
+
+.wp-block-column {
+	flex-basis: 0;
+	flex-grow: 1;
+
+	&:where(.is-vertically-aligned-top) {
+		align-self: flex-start;
+	}
+
+	&:where(.is-vertically-aligned-center) {
+		align-self: center;
+	}
+
+	&:where(.is-vertically-aligned-bottom) {
+		align-self: flex-end;
+	}
+}
