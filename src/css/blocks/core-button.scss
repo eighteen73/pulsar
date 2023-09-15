@@ -9,8 +9,6 @@
 	display: inline-flex;
 	padding: var(--wp--preset--spacing--lg);
 
-	&:hover {}
-
 	&:focus-visible {
 		background-color: var(--wp--custom--color--focus);
 	}

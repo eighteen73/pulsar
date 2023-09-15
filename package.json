@@ -37,5 +37,8 @@
 		"presets": [
 			"@wordpress/babel-preset-default"
 		]
+	},
+	"dependencies": {
+		"modern-normalize": "^2.0.0"
 	}
 }

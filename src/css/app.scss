@@ -17,14 +17,12 @@
 
 @use "settings";
 
-
 /// Tools.
 ///
 /// These are used throughout the code but don"t output CSS on their own.
 /// Things like mixins and extensions go here.
 
 @use "tools";
-
 
 /// Generic.
 ///
@@ -34,14 +32,12 @@
 
 @use "generic";
 
-
 /// Elements.
 ///
 /// Elements are (or should be) class-less designs for the base
 /// HTML elements.
 
 @use "elements";
-
 
 /// Components.
 ///
@@ -50,7 +46,6 @@
 
 @use "components";
 
-
 /// Patterns.
 ///
 /// Pattern styling should generally only be needed for responsive behaviour,
@@ -58,13 +53,11 @@
 
 @use "patterns";
 
-
 /// Vendor Styles.
 ///
 /// Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
 
 // @use "vendor/example";
-
 
 /// Utilities.
 ///
