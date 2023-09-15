@@ -81,10 +81,10 @@ const pulsarConfig = {
 	entry: {
 		...getWebpackEntryPoints(),
 		...getBlockStylesEntryPoints(),
-		'css/app-styles': ['./src/css/app.scss'],
-		'css/editor-styles': ['./src/css/editor.scss'],
-		'js/app-scripts': ['./src/js/app.js'],
-		'js/editor-scripts': ['./src/js/editor.js'],
+		'css/app': ['./src/css/app.scss'],
+		'css/editor': ['./src/css/editor.scss'],
+		'js/app': ['./src/js/app.js'],
+		'js/editor': ['./src/js/editor.js'],
 	},
 	output: {
 		path: __dirname + '/dist',
