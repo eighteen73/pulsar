@@ -77,6 +77,7 @@ $bp: --lg;
 	// Individual items.
 	&__item {
 		&:where(.has-children) {
+			display: flex;
 			position: relative;
 		}
 
@@ -130,5 +131,13 @@ $bp: --lg;
 		&-icon {
 			width: 32px;
 		}
+	}
+
+	// The toggle for the sub-menu, if `parent_as_toggle` is false.
+	&__sub-menu-toggle {
+		background-color: transparent;
+		border: 0;
+		cursor: pointer;
+		padding: 0;
 	}
 }

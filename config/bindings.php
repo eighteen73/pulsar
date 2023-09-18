@@ -14,5 +14,6 @@ return [
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Menu\Classes::class,
 	Pulsar\Menu\MegaMenu::class,
+	Pulsar\Menu\Responsive::class,
 	Pulsar\WooCommerce\Setup::class,
 ];

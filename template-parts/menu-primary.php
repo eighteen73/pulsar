@@ -26,12 +26,15 @@ if ( ! has_nav_menu( $location ) ) {
 	<?php
 	wp_nav_menu(
 		[
-			'theme_location' => esc_attr( $location ),
-			'container'      => '',
-			'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
-			'item_spacing'   => 'discard',
-			'menu_id'        => 'menu-' . esc_attr( $location ) . '-items',
-			'walker'         => new \Pulsar\Menu\PrimaryWalker(),
+			'theme_location'   => esc_attr( $location ),
+			'container'        => '',
+			'items_wrap'       => '<ul class="%2$s">%3$s</ul>',
+			'item_spacing'     => 'discard',
+			'menu_id'          => 'menu-' . esc_attr( $location ) . '-items',
+			'responsive'       => [
+				'parent_as_toggle' => false,
+				'icon'             => Pulsar\render_svg( 'dropdown' ),
+			],
 		]
 	);
 	?>
