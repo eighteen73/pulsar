@@ -10,7 +10,7 @@
 		"lint:js": "eslint './src/js/**/*.js'",
 		"lint:php": "./vendor/bin/phpcs .",
 		"format:css": "stylelint --fix './src/css/**/*.scss'",
-		"format:js": "wp-scripts format",
+		"format:js": "eslint --fix './src/js/**/*.js'",
 		"format:php": "./vendor/bin/phpcbf .",
 		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
 		"i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
@@ -32,11 +32,6 @@
 		"postcss-preset-env": "^9.0.0",
 		"webpack-merge": "^5.9.0",
 		"webpack-remove-empty-scripts": "^1.0"
-	},
-	"babel": {
-		"presets": [
-			"@wordpress/babel-preset-default"
-		]
 	},
 	"dependencies": {
 		"modern-normalize": "^2.0.0"

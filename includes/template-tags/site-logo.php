@@ -13,7 +13,7 @@ namespace Pulsar;
  * @param  array $args Arguments to pass to the final rendered logo.
  * @return void
  */
-function site_logo( array $args = [] ) : void {
+function site_logo( array $args = [] ): void {
 	echo get_site_logo( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
@@ -23,7 +23,7 @@ function site_logo( array $args = [] ) : void {
  * @param  array $args Arguments to pass to the final rendered logo.
  * @return string
  */
-function get_site_logo( array $args = [] ) : string {
+function get_site_logo( array $args = [] ): string {
 
 	$args = wp_parse_args(
 		$args,

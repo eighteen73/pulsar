@@ -20,7 +20,7 @@ class Classes implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() : void {
+	public function boot(): void {
 		add_filter( 'wp_nav_menu_args', [ $this, 'menu_classes' ] );
 		add_filter( 'nav_menu_css_class', [ $this, 'item_classes' ], 10, 4 );
 		add_filter( 'nav_menu_link_attributes', [ $this, 'link_classes' ], 10, 4 );
@@ -55,7 +55,7 @@ class Classes implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function item_classes( array $classes, \WP_Post $item, \stdClass $args, int $depth ) : array {
+	public function item_classes( array $classes, \WP_Post $item, \stdClass $args, int $depth ): array {
 
 		// Use the theme location as a namespace.
 		$location = $args->theme_location ? $args->theme_location : 'default';
@@ -134,7 +134,7 @@ class Classes implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function submenu_classes( array $classes, \stdClass $args, int $depth ) : array {
+	public function submenu_classes( array $classes, \stdClass $args, int $depth ): array {
 
 		// Use the theme location as a namespace.
 		$location = $args->theme_location ? $args->theme_location : 'default';

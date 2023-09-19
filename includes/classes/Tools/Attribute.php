@@ -80,7 +80,7 @@ class Attribute {
 	 * @access public
 	 * @return string
 	 */
-	public function __toString() : string {
+	public function __toString(): string {
 		return $this->render();
 	}
 
@@ -90,8 +90,8 @@ class Attribute {
 	 * @access public
 	 * @return void
 	 */
-	public function display() : void {
-		echo $this->render(); // WPCS: XSS ok.
+	public function display(): void {
+		echo $this->render(); // PHPCS:ignore:WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -100,7 +100,7 @@ class Attribute {
 	 * @access public
 	 * @return string
 	 */
-	public function render() : string {
+	public function render(): string {
 
 		$html = '';
 
@@ -148,7 +148,7 @@ class Attribute {
 	 * @param  string $name The name of the attribute.
 	 * @return string
 	 */
-	public function get( string $name ) : string {
+	public function get( string $name ): string {
 
 		$attr = $this->all();
 
@@ -161,7 +161,7 @@ class Attribute {
 	 * @access public
 	 * @return array
 	 */
-	public function all() : array {
+	public function all(): array {
 
 		// If we already have attributes, let's return them and bail.
 		if ( $this->attr ) {
@@ -212,7 +212,7 @@ class Attribute {
 	 * @param  array $attr Array of attributes.
 	 * @return array
 	 */
-	protected function html( array $attr ) : array {
+	protected function html( array $attr ): array {
 
 		$attr = [];
 

@@ -108,7 +108,7 @@ class Svg {
 	 *
 	 * @return string
 	 */
-	public function render() : string {
+	public function render(): string {
 
 		$path = trim( 'assets/svg', '/' );
 
@@ -190,7 +190,7 @@ class Svg {
 	 *
 	 * @return void
 	 */
-	public function display() : void {
+	public function display(): void {
 		echo $this->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

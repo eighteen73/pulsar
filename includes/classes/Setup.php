@@ -19,7 +19,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function boot() : void {
+	public function boot(): void {
 		add_action( 'after_setup_theme', [ $this, 'supports' ], 5 );
 		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
@@ -32,7 +32,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function supports() : void {
+	public function supports(): void {
 
 		// Theme translations.
 		load_theme_textdomain( 'pulsar', get_parent_theme_file_path( 'languages' ) );
@@ -75,7 +75,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function menus() : void {
+	public function menus(): void {
 
 		register_nav_menus(
 			[
@@ -90,7 +90,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function image_sizes() : void {
+	public function image_sizes(): void {
 		// add_image_size( '4x3', 640, 480, true );
 	}
 
@@ -101,7 +101,7 @@ class Setup implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function image_size_names( array $sizes ) : array {
+	public function image_size_names( array $sizes ): array {
 		return array_merge(
 			$sizes,
 			[
@@ -117,7 +117,7 @@ class Setup implements Bootable {
 	 *
 	 * @return void
 	 */
-	public function javascript_detected() : void {
+	public function javascript_detected(): void {
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
 }

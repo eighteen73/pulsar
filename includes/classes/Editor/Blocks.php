@@ -9,8 +9,8 @@ namespace Pulsar\Editor;
 
 use Pulsar\Contracts\Bootable;
 use Pulsar\Tools\Config;
-use \WP_Block_Editor_Context;
-use \WP_Block_Type_Registry;
+use WP_Block_Editor_Context;
+use WP_Block_Type_Registry;
 
 /**
  * Block handling.
@@ -30,7 +30,7 @@ class Blocks implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() : void {
+	public function boot(): void {
 
 		// Load individual block CSS files on demand.
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
@@ -51,7 +51,7 @@ class Blocks implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function register_custom_blocks() : void {
+	public function register_custom_blocks(): void {
 
 		$blocks_directory = get_theme_file_path( '/dist/blocks/' );
 
@@ -74,7 +74,7 @@ class Blocks implements Bootable {
 	 * @param \WP_Block_Editor_Context $editor_context       The current block editor context
 	 * @return array|bool
 	 */
-	public function allowed_blocks( array|bool $block_editor_context, \WP_Block_Editor_Context $editor_context ) : array|bool {
+	public function allowed_blocks( array|bool $block_editor_context, \WP_Block_Editor_Context $editor_context ): array|bool {
 		if ( self::ENABLE_ALL_BLOCKS || empty( $editor_context->post ) ) {
 			return $block_editor_context;
 		}
@@ -84,7 +84,7 @@ class Blocks implements Bootable {
 			$block_names   = array_keys( $registry->get_all_registered() );
 			$pulsar_blocks = array_filter(
 				$block_names,
-				function( $key ) {
+				function ( $key ) {
 					return strpos( $key, 'pulsar/' ) !== false;
 				},
 			);

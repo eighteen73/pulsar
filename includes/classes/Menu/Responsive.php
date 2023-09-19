@@ -22,7 +22,7 @@ class Responsive implements Bootable {
 	 * @access public
 	 * @return void
 	 */
-	public function boot() : void {
+	public function boot(): void {
 		add_filter( 'nav_menu_submenu_attributes', [ $this, 'submenu_attributes' ], 10, 3 );
 		add_filter( 'nav_menu_item_attributes', [ $this, 'item_attributes' ], 10, 4 );
 		add_filter( 'nav_menu_link_attributes', [ $this, 'link_attributes' ], 10, 4 );
@@ -38,7 +38,7 @@ class Responsive implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function submenu_attributes( array $atts, \stdClass $args, int $depth ) : array {
+	public function submenu_attributes( array $atts, \stdClass $args, int $depth ): array {
 
 		if ( ! isset( $args->responsive ) ) {
 			return $atts;
@@ -59,7 +59,7 @@ class Responsive implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function item_attributes( array $atts, \WP_Post $menu_item, \stdClass $args, int $depth ) : array {
+	public function item_attributes( array $atts, \WP_Post $menu_item, \stdClass $args, int $depth ): array {
 
 		if ( ! isset( $args->responsive ) ) {
 			return $atts;
@@ -88,7 +88,7 @@ class Responsive implements Bootable {
 	 *
 	 * @return array
 	 */
-	public function link_attributes( array $atts, \WP_Post $menu_item, \stdClass $args, int $depth ) : array {
+	public function link_attributes( array $atts, \WP_Post $menu_item, \stdClass $args, int $depth ): array {
 
 		if ( ! isset( $args->responsive ) ) {
 			return $atts;
@@ -112,6 +112,16 @@ class Responsive implements Bootable {
 		return $atts;
 	}
 
+	/**
+	 * Adjust the markup of the parent item in a menu depending on options set.
+	 *
+	 * @param string   $item_output The menu item's starting HTML output.
+	 * @param WP_Post  $menu_item  Menu item data object.
+	 * @param int      $depth          Depth of menu item.
+	 * @param  stdClass $args  An object of wp_nav_menu() arguments.
+	 *
+	 * @return string The menu item's HTML output.
+	 */
 	public function parent_markup( $item_output, $menu_item, $depth, $args ) {
 
 		if ( ! isset( $args->responsive ) ) {

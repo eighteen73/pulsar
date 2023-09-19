@@ -27,7 +27,7 @@ class Config {
 
 		return (array) apply_filters(
 			"pulsar/config/{$name}/",
-			file_exists( $file ) ? include( $file ) : []
+			file_exists( $file ) ? include $file : []
 		);
 	}
 

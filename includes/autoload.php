@@ -22,7 +22,7 @@ if ( file_exists( get_parent_theme_file_path( 'vendor/autoload.php' ) ) ) {
 	require_once get_parent_theme_file_path( 'vendor/autoload.php' );
 } else {
 	spl_autoload_register(
-		function( $class_name ) {
+		function ( $class_name ) {
 			$namespace = 'Pulsar';
 
 			if ( strpos( $class_name, $namespace . '\\' ) !== 0 ) {

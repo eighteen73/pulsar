@@ -17,7 +17,7 @@ use Pulsar\Tools\Svg;
  * @param  array  $args An array or arguements to apply to the SVG.
  * @return void
  */
-function display_svg( string $file, array $args = [] ) : void {
+function display_svg( string $file, array $args = [] ): void {
 	$svg = new Svg( $file, $args );
 	$svg->display();
 }
@@ -30,7 +30,7 @@ function display_svg( string $file, array $args = [] ) : void {
  * @param  array  $args An array or arguements to apply to the SVG.
  * @return string
  */
-function render_svg( string $file, array $args = [] ) : string {
+function render_svg( string $file, array $args = [] ): string {
 	$svg = new Svg( $file, $args );
 	return $svg->render();
 }
