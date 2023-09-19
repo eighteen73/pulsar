@@ -45,6 +45,7 @@ class Enqueue implements Bootable {
 			get_theme_file_uri( 'dist/css/app.css' ),
 			[],
 			Asset::attribute( 'app', 'css', 'version' ),
+			'screen, print',
 		);
 	}
 
@@ -121,6 +122,7 @@ class Enqueue implements Bootable {
 					'src'     => get_theme_file_uri( "dist/css/blocks/{$name}.css" ),
 					'path'    => get_theme_file_path( "dist/css/blocks/{$name}.css" ),
 					'version' => Asset::attribute( $name, 'css/blocks', 'version' ),
+					'media'   => 'screen, print',
 				]
 			);
 		}
