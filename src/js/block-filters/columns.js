@@ -12,13 +12,10 @@ import { addFilter } from '@wordpress/hooks';
 import TokenList from '@wordpress/token-list';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { assign, merge } from 'lodash';
 
 const withMultiBreakpoint = (BlockEdit) => (props) => {
-	if (props.name !== 'core/columns') return <BlockEdit {...props} />;
-
 	const { attributes, setAttributes } = props;
-	const { className, breakpoint } = attributes;
+	const { className } = attributes;
 
 	// Define our breakpoints.
 	const breakpoints = ['sm', 'md', 'lg', 'xl'];
@@ -33,7 +30,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 	};
 
 	// Set state for the active breakpoint.
-	const [activeBreakpoint, setActiveBreakpoint] = useState(breakpoint);
+	const [activeBreakpoint, setActiveBreakpoint] = useState(false);
 
 	// Define useful helper text for each breakpoint.
 	const helpText = {
@@ -64,11 +61,6 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 		setAttributes({ className: list.value });
 	};
 
-	const onChangeBreakpoint = (newBreakpoint) => {
-		setActiveBreakpoint(newBreakpoint);
-		setAttributes({ breakpoint: newBreakpoint });
-	};
-
 	// Toggle the reversed class independently.
 	const toggleReversedClass = (enable) => {
 		const list = new TokenList(className);
@@ -95,20 +87,30 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 	};
 
 	// Check if the columns have a particular class.
-	const hasClass = (className) => {
-		return attributes.className?.includes(className);
+	const hasClass = (name) => {
+		return attributes.className?.includes(name);
 	};
 
 	// Set the initial columns state, along with clearing classes when stacking is disabled.
 	useEffect(() => {
-		if (!attributes.isStackedOnMobile) {
+		if (attributes.isStackedOnMobile) {
+			const activeClass = breakpoints.find((breakpoint) =>
+				hasClass(classes[breakpoint])
+			);
+
+			if (activeClass) {
+				setActiveBreakpoint(activeClass);
+			} else {
+				setActiveBreakpoint('sm');
+				toggleBreakpointClass(classes.sm, true);
+			}
+		} else {
 			removeAllClasses();
 			setActiveBreakpoint(false);
-			setAttributes({ breakpoint: '' });
 		}
 	}, [attributes.isStackedOnMobile]);
 
-	return (
+	return 'core/columns' === props.name ? (
 		<>
 			<BlockEdit {...props} />
 			<InspectorControls>
@@ -117,7 +119,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 						<ToggleGroupControl
 							label={__('Screen sizes up to')}
 							onChange={(value) => {
-								onChangeBreakpoint(value);
+								setActiveBreakpoint(value);
 								toggleBreakpointClass(classes[value], value);
 							}}
 							value={activeBreakpoint}
@@ -128,7 +130,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 								<ToggleGroupControlOption
 									key={breakpoint}
 									value={breakpoint}
-									label={__(breakpoint.toUpperCase())}
+									label={breakpoint.toUpperCase()}
 								/>
 							))}
 						</ToggleGroupControl>
@@ -145,33 +147,8 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 				)}
 			</InspectorControls>
 		</>
+	) : (
+		<BlockEdit {...props} />
 	);
 };
-
-/**
- * Add Size attribute to Button block
- *
- * @param  {Object} settings Original block settings
- * @param  {string} name     Block name
- * @return {Object}          Filtered block settings
- */
-function addAttributes(settings, name) {
-	if (name === 'core/columns') {
-		return assign({}, settings, {
-			attributes: merge(settings.attributes, {
-				breakpoint: {
-					type: 'string',
-					default: '',
-				},
-				className: {
-					type: 'string',
-					default: '',
-				},
-			}),
-		});
-	}
-	return settings;
-}
-
-addFilter('blocks.registerBlockType', 'pulsar/columns-block', addAttributes);
 addFilter('editor.BlockEdit', 'pulsar/columns-block', withMultiBreakpoint);
