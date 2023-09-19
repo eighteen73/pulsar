@@ -153,7 +153,7 @@ class Enqueue implements Bootable {
 
 		add_editor_style(
 			[
-				'dist/css/editor-styles.css',
+				'dist/css/editor.css',
 			]
 		);
 	}
@@ -167,7 +167,7 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_script(
 			'pulsar-editor-scripts',
-			get_theme_file_uri( 'dist/js/editor-scripts.js' ),
+			get_theme_file_uri( 'dist/js/editor.js' ),
 			Asset::attribute( 'editor-scripts', 'js', 'dependencies' ),
 			Asset::attribute( 'editor-scripts', 'js', 'version' ),
 			true,
