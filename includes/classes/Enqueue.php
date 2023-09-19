@@ -121,9 +121,10 @@ class Enqueue implements Bootable {
 					'handle'  => "pulsar-block-{$name}",
 					'src'     => get_theme_file_uri( "dist/css/blocks/{$name}.css" ),
 					'path'    => get_theme_file_path( "dist/css/blocks/{$name}.css" ),
-					'version' => Asset::attribute( $name, 'css/blocks', 'version' ),
+					'deps'    => Asset::attribute( $name, 'css/blocks', 'dependencies' ),
+					'ver'     => Asset::attribute( $name, 'css/blocks', 'version' ),
 					'media'   => 'screen, print',
-				]
+				],
 			);
 		}
 	}
