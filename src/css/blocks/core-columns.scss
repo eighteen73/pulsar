@@ -1,52 +1,16 @@
 @use "../tools" as *;
 
 .wp-block-columns {
-	// Ensure full vertical column stretch when alignment is not set.
-	// This overrides the Layout block support's default align-items
-	// setting of `center`.
-	align-items: initial !important;
 	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap !important;
 
-	&:where(.is-reversed-when-stacked) {
-		flex-direction: column-reverse;
+	// Trump cores `body .is-layout-flex` selector as it doesn't apply to columns.
+	&:not([class^="are-vertically-aligned"]) {
+		align-items: initial;
 	}
 
-	&:where(.is-not-stacked-on-mobile) {
-		flex-direction: row;
-	}
-
-	@media (--md) {
-		flex-direction: row;
-	}
-
-	&:where(.is-stacked-on-tablet) {
-		@media (--md) {
-			flex-direction: column;
-
-			&:where(.is-reversed-when-stacked) {
-				flex-direction: column-reverse;
-			}
-		}
-
-		@media (--lg) {
-			flex-direction: row;
-		}
-	}
-
-	&:where(.is-stacked-on-desktop) {
-		@media (--lg) {
-			flex-direction: column;
-
-			&:where(.is-reversed-when-stacked) {
-				flex-direction: column-reverse;
-			}
-		}
-
-		@media (--xl) {
-			flex-direction: row;
-		}
+	// Columns should always be rows unless set to stack.
+	&:where(:not([class^="is-stacked-on"])) {
+		flex-direction: column;
 	}
 
 	// All Columns Alignment
@@ -60,5 +24,35 @@
 
 	&.are-vertically-aligned-bottom {
 		align-items: flex-end;
+	}
+
+	&:where(.is-reversed-when-stacked) {
+		flex-direction: column-reverse;
+	}
+
+	/// The fallback stacking class.
+	&:where(.is-stacked-on-sm),
+	&:where(:not([class*="is-stacked-on"])) {
+		@media (--sm) {
+			flex-direction: row;
+		}
+	}
+
+	&:where(.is-stacked-on-md) {
+		@media (--md) {
+			flex-direction: row;
+		}
+	}
+
+	&:where(.is-stacked-on-lg) {
+		@media (--lg) {
+			flex-direction: row;
+		}
+	}
+
+	&:where(.is-stacked-on-xl) {
+		@media (--xl) {
+			flex-direction: row;
+		}
 	}
 }
