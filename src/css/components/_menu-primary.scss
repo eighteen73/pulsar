@@ -55,6 +55,7 @@ $bp: --lg;
 	&__sub-menu {
 		display: none;
 		flex-direction: column;
+		width: 100%;
 
 		@media ($bp) {
 			background-color: var(--wp--custom--color--base);
@@ -78,7 +79,12 @@ $bp: --lg;
 	&__item {
 		&:where(.has-children) {
 			display: flex;
+			flex-wrap: wrap;
 			position: relative;
+
+			@media ($bp) {
+				flex-wrap: nowrap;
+			}
 		}
 
 		// Mega menus are usually positioned relative to the menu
