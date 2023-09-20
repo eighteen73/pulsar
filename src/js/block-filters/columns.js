@@ -108,7 +108,7 @@ const withMultiBreakpoint = (BlockEdit) => (props) => {
 			removeAllClasses();
 			setActiveBreakpoint(false);
 		}
-	}, [attributes.isStackedOnMobile]);
+	}, [attributes.isStackedOnMobile]); //eslint-disable-line react-hooks/exhaustive-deps
 
 	return 'core/columns' === props.name ? (
 		<>
