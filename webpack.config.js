@@ -30,7 +30,7 @@ const stylesheetPathToEntry = (path) => {
 /**
  * Get all of the block specific stylesheets to use for entry points.
  *
- * @returns {Object} An object of entry keys and values.
+ * @return {Object} An object of entry keys and values.
  */
 function getBlockStylesEntryPoints() {
 	const styles = glob('./src/css/blocks/*.scss');
@@ -59,7 +59,7 @@ const pulsarConfig = {
 					{
 						loader: require.resolve('css-loader'),
 						options: {
-							url: false,
+							url: true,
 						},
 					},
 				],
@@ -70,10 +70,16 @@ const pulsarConfig = {
 					{
 						loader: require.resolve('css-loader'),
 						options: {
-							url: false,
+							url: true,
 						},
 					},
 				],
+			},
+			{
+				test: /\.svg$/,
+				issuer: /\.(j|t)sx?$/,
+				use: ['@svgr/webpack'],
+				type: 'javascript/auto',
 			},
 		],
 	},
@@ -88,7 +94,7 @@ const pulsarConfig = {
 	},
 	output: {
 		path: __dirname + '/dist',
-		publicPath: '/dist',
+		publicPath: './',
 	},
 	devServer: {
 		hot: true,
