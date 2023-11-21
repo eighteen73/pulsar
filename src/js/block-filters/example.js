@@ -1,5 +1,4 @@
 import { addFilter } from '@wordpress/hooks';
-import { assign } from 'lodash'; // eslint-disable-line import/no-extraneous-dependencies
 
 /**
  * Adds a default class to the paragraph block.
@@ -16,13 +15,15 @@ function groupSupports(settings, name) {
 		return settings;
 	}
 
-	return assign({}, settings, {
-		supports: assign({}, settings.supports, {
+	return {
+		...settings,
+		supports: {
+			...settings.supports,
 			spacing: {
 				padding: ['top', 'bottom'],
 			},
-		}),
-	});
+		},
+	};
 }
 
 addFilter(
