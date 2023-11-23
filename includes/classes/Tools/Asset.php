@@ -47,7 +47,7 @@ class Asset {
 	public static function get( string $slug, string $path ): array|null {
 		$asset = null;
 
-		if ( file_exists( get_parent_theme_file_path( "dist/${path}/{$slug}.asset.php" ) ) ) {
+		if ( file_exists( get_parent_theme_file_path( "dist/{$path}/{$slug}.asset.php" ) ) ) {
 			$asset = require get_parent_theme_file_path( "dist/{$path}/{$slug}.asset.php" );
 		}
 
