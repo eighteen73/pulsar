@@ -70,7 +70,7 @@ const pulsarConfig = {
 					{
 						loader: require.resolve('css-loader'),
 						options: {
-							url: true,
+							url: false,
 						},
 					},
 				],

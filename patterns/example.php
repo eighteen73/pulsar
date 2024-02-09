@@ -4,9 +4,9 @@
  * Description: A description of your pattern
  * Slug: pulsar/example
  * Categories: text
- * postTypes: page, post
- * blockTypes:
- * viewportWidth: 1280
+ * post Types: page, post
+ * block Types:
+ * viewport Width: 1280
  * Keywords: example
  * Inserter: true
  *
