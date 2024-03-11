@@ -1,3 +1,15 @@
+<?php
+/**
+ * The footer for our theme
+ *
+ * Title: Footer
+ * slug: footer
+ *
+ * @package Pulsar
+ */
+
+?>
+
 <div class="site-footer__inner">
 	<?php
 	printf(

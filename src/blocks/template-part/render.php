@@ -10,7 +10,6 @@
  */
 
 $slug = $attributes['slug'] ?? false;
-$name = $attributes['name'] ?? null;
 
 // We need a slug to be able to render the template.
 if ( ! $slug ) {
@@ -21,4 +20,4 @@ if ( ! $slug ) {
 $args = $block->context ? array_merge( $attributes, $block->context ) : $attributes;
 
 // Render the template.
-get_template_part( "template-parts/{$slug}", $name, $args );
+get_template_part( "template-parts/{$slug}", null, $args );

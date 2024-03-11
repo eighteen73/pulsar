@@ -1,4 +1,16 @@
 <?php
+/**
+ * The primary menu for our theme
+ *
+ * Title: Menu Primary
+ * slug: menu-primary
+ *
+ * @package Pulsar
+ */
+
+?>
+
+<?php
 $location = 'primary';
 
 if ( ! has_nav_menu( $location ) ) {
