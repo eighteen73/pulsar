@@ -1,17 +1,1 @@
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/css/blocks/core-button.scss ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-.wp-element-button,
-.wp-block-button .wp-block-button__link {
-  background-color: var(--wp--custom--color--primary);
-  border-radius: 0;
-  color: var(--wp--custom--color--contrast);
-  display: inline-flex;
-  padding: var(--wp--preset--spacing--lg);
-}
-.wp-element-button:focus-visible,
-.wp-block-button .wp-block-button__link:focus-visible {
-  background-color: var(--wp--custom--color--focus);
-}
-
-/*# sourceMappingURL=core-button.css.map*/
+.wp-element-button,.wp-block-button .wp-block-button__link{background-color:var(--wp--custom--color--primary);border-radius:0;color:var(--wp--custom--color--contrast);display:inline-flex;padding:var(--wp--preset--spacing--lg)}.wp-element-button:focus-visible,.wp-block-button .wp-block-button__link:focus-visible{background-color:var(--wp--custom--color--focus)}

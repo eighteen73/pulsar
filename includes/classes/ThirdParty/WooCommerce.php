@@ -5,7 +5,7 @@
  * @package Pulsar
  */
 
-namespace Pulsar\WooCommerce;
+namespace Pulsar\ThirdParty;
 
 use Pulsar\Contracts\Bootable;
 
@@ -14,7 +14,7 @@ use Pulsar\Contracts\Bootable;
  *
  * @access public
  */
-class Setup implements Bootable {
+class WooCommerce implements Bootable {
 
 	/**
 	 * Adds actions on the appropriate action hooks.

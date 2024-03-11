@@ -4,14 +4,17 @@
   "name": "pulsar/template-part",
   "description": "Allows using PHP templates for template parts.",
   "version": "0.1.0",
-  "title": "Template Part",
+  "title": "Theme Template Part",
   "category": "text",
   "supports": {
     "html": false,
     "reusable": false,
-    "inserter": false,
-    "lock": false,
-    "multiple": true
+    "inserter": true,
+    "lock": true,
+    "multiple": true,
+    "interactivity": {
+      "clientNavigation": true
+    }
   },
   "usesContext": [
     "postId",
@@ -20,9 +23,6 @@
   ],
   "attributes": {
     "slug": {
-      "type": "string"
-    },
-    "name": {
       "type": "string"
     },
     "lock": {

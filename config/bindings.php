@@ -12,8 +12,9 @@ return [
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Patterns::class,
+	Pulsar\Editor\TemplateParts::class,
 	Pulsar\Menu\Classes::class,
 	Pulsar\Menu\MegaMenu::class,
 	Pulsar\Menu\Responsive::class,
-	Pulsar\WooCommerce\Setup::class,
+	Pulsar\ThirdParty\WooCommerce::class,
 ];
