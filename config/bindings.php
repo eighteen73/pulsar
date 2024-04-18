@@ -16,5 +16,4 @@ return [
 	Pulsar\Menu\Classes::class,
 	Pulsar\Menu\MegaMenu::class,
 	Pulsar\Menu\Responsive::class,
-	Pulsar\ThirdParty\WooCommerce::class,
 ];
