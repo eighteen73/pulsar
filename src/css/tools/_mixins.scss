@@ -82,3 +82,29 @@
 	width: auto #{$important};
 	z-index: 0;
 }
+
+/// This mixin is used to apply the button styles to a button.
+/// It is used in the core button styles.
+/// It is also used in the WooCommerce Product block.
+@mixin button($color: var(--wp--custom--color--base), $background: var(--wp--custom--color--contrast)) {
+	align-items: center;
+	background-color: $background;
+	border: none;
+	border-radius: 0;
+	border-radius: 50px;
+	box-shadow: none;
+	color: $color;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: inherit;
+	justify-content: center;
+	line-height: inherit;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--xl);
+	position: relative;
+	text-align: center;
+	transition: all var(--wp--custom--transition-duration--quick);
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

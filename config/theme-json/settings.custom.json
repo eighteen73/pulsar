@@ -3,6 +3,9 @@
 	"version": 2,
 	"settings": {
 		"custom": {
+      "global":{
+
+      },
 			"color": {
 				"primary": "#DD93B5",
 				"secondary": "#F47733",

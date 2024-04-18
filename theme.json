@@ -76,6 +76,7 @@
 			"text": false
 		},
 		"custom": {
+			"global": {},
 			"color": {
 				"primary": "#DD93B5",
 				"secondary": "#F47733",
@@ -267,6 +268,37 @@
 		}
 	},
 	"styles": {
+		"elements": {
+			"link": {
+				"typography": {
+					"textDecoration": "none"
+				},
+				":hover": {
+					"typography": {
+						"textDecoration": "underline"
+					}
+				}
+			},
+			"button": {
+				"border": {
+					"color": "",
+					"radius": "",
+					"width": ""
+				},
+				"color": {
+					"background": "",
+					"text": ""
+				},
+				"spacing": {
+					"padding": {}
+				},
+				"typography": {
+					"lineHeight": "",
+					"fontSize": "",
+					"fontFamily": ""
+				}
+			}
+		},
 		"spacing": {
 			"blockGap": "var(--wp--custom--layout--block-gap)",
 			"padding": {

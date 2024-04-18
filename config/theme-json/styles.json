@@ -2,6 +2,37 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
 	"styles": {
+    "elements": {
+      "link": {
+        "typography": {
+          "textDecoration": "none"
+        },
+        ":hover": {
+          "typography": {
+            "textDecoration": "underline"
+          }
+        }
+      },
+      "button": {
+        "border": {
+          "color": "",
+          "radius": "",
+          "width": ""
+        },
+        "color": {
+          "background": "",
+          "text": ""
+        },
+        "spacing": {
+          "padding": {}
+        },
+        "typography": {
+          "lineHeight": "",
+          "fontSize": "",
+          "fontFamily": ""
+        }
+      }
+    },
 		"spacing": {
 			"blockGap": "var(--wp--custom--layout--block-gap)",
 			"padding": {

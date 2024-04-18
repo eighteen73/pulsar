@@ -1,0 +1,44 @@
+@use "../tools" as *;
+
+.woocommerce div.product .wc-block-add-to-cart-form form.cart {
+	table.variations {
+		tr {
+			th {
+				display: block;
+				line-height: inherit;
+				padding: 0;
+
+				label {
+					margin: 0;
+				}
+			}
+
+			td {
+				select {
+					font-size: inherit;
+					height: unset;
+					margin: 0;
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	button.single_add_to_cart_button {
+		margin-bottom: 0;
+	}
+
+	.input-text {
+		font-size: inherit;
+		padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--xl);
+	}
+
+	.quantity {
+		margin-bottom: 0;
+
+		.qty {
+			margin: 0;
+			width: 100px;
+		}
+	}
+}

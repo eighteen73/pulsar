@@ -2,7 +2,7 @@
 
 .wc-block-product-template {
 	--column-gap: var(--wp--custom--layout--block-gap);
-	--row-gap: var(--wp--custom--layout--block-gap);
+	--row-gap: calc(var(--column-gap) * 2);
 	--min-width: 200px;
 
 	gap: var(--row-gap) var(--column-gap);
