@@ -2,20 +2,23 @@
 
 <!-- wp:group {"tagName":"main","className":"site-main","layout":{"type":"constrained"}} -->
 <main class="wp-block-group site-main">
-	<!-- wp:woocommerce/cart -->
+	<!-- wp:woocommerce/cart {"align":"","className":""} -->
 	<div class="wp-block-woocommerce-cart is-loading">
-		<!-- wp:woocommerce/filled-cart-block -->
+		<!-- wp:woocommerce/filled-cart-block {"className":""} -->
 		<div class="wp-block-woocommerce-filled-cart-block">
-			<!-- wp:woocommerce/cart-items-block -->
+			<!-- wp:woocommerce/cart-items-block {"className":""} -->
 			<div class="wp-block-woocommerce-cart-items-block">
-				<!-- wp:woocommerce/cart-line-items-block -->
+				<!-- wp:woocommerce/cart-line-items-block {"className":""} -->
 				<div class="wp-block-woocommerce-cart-line-items-block"></div>
 				<!-- /wp:woocommerce/cart-line-items-block -->
 
-				<!-- wp:woocommerce/cart-cross-sells-block -->
+				<!-- wp:woocommerce/cart-cross-sells-block {"className":""} -->
 				<div class="wp-block-woocommerce-cart-cross-sells-block">
-					<!-- wp:pattern {"slug":"woocommerce/cart-cross-sells-message"} /-->
-					<!-- wp:woocommerce/cart-cross-sells-products-block -->
+					<!-- wp:heading {"className":""} -->
+					<h2 class="wp-block-heading">You may be interested in…</h2>
+					<!-- /wp:heading -->
+
+					<!-- wp:woocommerce/cart-cross-sells-products-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-cross-sells-products-block"
 					></div>
@@ -25,47 +28,47 @@
 			</div>
 			<!-- /wp:woocommerce/cart-items-block -->
 
-			<!-- wp:woocommerce/cart-totals-block -->
+			<!-- wp:woocommerce/cart-totals-block {"className":""} -->
 			<div class="wp-block-woocommerce-cart-totals-block">
-				<!-- wp:woocommerce/cart-order-summary-block -->
+				<!-- wp:woocommerce/cart-order-summary-block {"className":""} -->
 				<div class="wp-block-woocommerce-cart-order-summary-block">
-					<!-- wp:woocommerce/cart-order-summary-heading-block -->
+					<!-- wp:woocommerce/cart-order-summary-heading-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-heading-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-heading-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-coupon-form-block -->
+					<!-- wp:woocommerce/cart-order-summary-coupon-form-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-coupon-form-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-coupon-form-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-subtotal-block -->
+					<!-- wp:woocommerce/cart-order-summary-subtotal-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-subtotal-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-subtotal-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-fee-block -->
+					<!-- wp:woocommerce/cart-order-summary-fee-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-fee-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-fee-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-discount-block -->
+					<!-- wp:woocommerce/cart-order-summary-discount-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-discount-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-discount-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-shipping-block -->
+					<!-- wp:woocommerce/cart-order-summary-shipping-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-shipping-block"
 					></div>
 					<!-- /wp:woocommerce/cart-order-summary-shipping-block -->
 
-					<!-- wp:woocommerce/cart-order-summary-taxes-block -->
+					<!-- wp:woocommerce/cart-order-summary-taxes-block {"className":""} -->
 					<div
 						class="wp-block-woocommerce-cart-order-summary-taxes-block"
 					></div>
@@ -73,19 +76,19 @@
 				</div>
 				<!-- /wp:woocommerce/cart-order-summary-block -->
 
-				<!-- wp:woocommerce/cart-express-payment-block -->
+				<!-- wp:woocommerce/cart-express-payment-block {"className":""} -->
 				<div
 					class="wp-block-woocommerce-cart-express-payment-block"
 				></div>
 				<!-- /wp:woocommerce/cart-express-payment-block -->
 
-				<!-- wp:woocommerce/proceed-to-checkout-block -->
+				<!-- wp:woocommerce/proceed-to-checkout-block {"className":""} -->
 				<div
 					class="wp-block-woocommerce-proceed-to-checkout-block"
 				></div>
 				<!-- /wp:woocommerce/proceed-to-checkout-block -->
 
-				<!-- wp:woocommerce/cart-accepted-payment-methods-block -->
+				<!-- wp:woocommerce/cart-accepted-payment-methods-block {"className":""} -->
 				<div
 					class="wp-block-woocommerce-cart-accepted-payment-methods-block"
 				></div>
@@ -95,108 +98,27 @@
 		</div>
 		<!-- /wp:woocommerce/filled-cart-block -->
 
-		<!-- wp:woocommerce/empty-cart-block -->
+		<!-- wp:woocommerce/empty-cart-block {"className":""} -->
 		<div class="wp-block-woocommerce-empty-cart-block">
-			<!-- wp:woocommerce/filled-cart-block -->
-			<div class="wp-block-woocommerce-filled-cart-block">
-				<!-- wp:woocommerce/cart-items-block -->
-				<div class="wp-block-woocommerce-cart-items-block">
-					<!-- wp:woocommerce/cart-line-items-block -->
-					<div
-						class="wp-block-woocommerce-cart-line-items-block"
-					></div>
-					<!-- /wp:woocommerce/cart-line-items-block -->
+			<!-- wp:heading {"textAlign":"center","className":"with-empty-cart-icon wc-block-cart__empty-cart__title"} -->
+			<h2
+				class="wp-block-heading has-text-align-center with-empty-cart-icon wc-block-cart__empty-cart__title"
+			>
+				Your cart is currently empty!
+			</h2>
+			<!-- /wp:heading -->
 
-					<!-- wp:woocommerce/cart-cross-sells-block -->
-					<div class="wp-block-woocommerce-cart-cross-sells-block">
-						<!-- wp:pattern {"slug":"woocommerce/cart-cross-sells-message"} /-->
-						<!-- wp:woocommerce/cart-cross-sells-products-block -->
-						<div
-							class="wp-block-woocommerce-cart-cross-sells-products-block"
-						></div>
-						<!-- /wp:woocommerce/cart-cross-sells-products-block -->
-					</div>
-					<!-- /wp:woocommerce/cart-cross-sells-block -->
-				</div>
-				<!-- /wp:woocommerce/cart-items-block -->
+			<!-- wp:separator {"className":"is-style-dots"} -->
+			<hr
+				class="wp-block-separator has-alpha-channel-opacity is-style-dots"
+			/>
+			<!-- /wp:separator -->
 
-				<!-- wp:woocommerce/cart-totals-block -->
-				<div class="wp-block-woocommerce-cart-totals-block">
-					<!-- wp:woocommerce/cart-order-summary-block -->
-					<div class="wp-block-woocommerce-cart-order-summary-block">
-						<!-- wp:woocommerce/cart-order-summary-heading-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-heading-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-heading-block -->
+			<!-- wp:heading {"textAlign":"center","className":""} -->
+			<h2 class="wp-block-heading has-text-align-center">New in store</h2>
+			<!-- /wp:heading -->
 
-						<!-- wp:woocommerce/cart-order-summary-coupon-form-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-coupon-form-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-coupon-form-block -->
-
-						<!-- wp:woocommerce/cart-order-summary-subtotal-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-subtotal-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-subtotal-block -->
-
-						<!-- wp:woocommerce/cart-order-summary-fee-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-fee-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-fee-block -->
-
-						<!-- wp:woocommerce/cart-order-summary-discount-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-discount-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-discount-block -->
-
-						<!-- wp:woocommerce/cart-order-summary-shipping-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-shipping-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-shipping-block -->
-
-						<!-- wp:woocommerce/cart-order-summary-taxes-block -->
-						<div
-							class="wp-block-woocommerce-cart-order-summary-taxes-block"
-						></div>
-						<!-- /wp:woocommerce/cart-order-summary-taxes-block -->
-					</div>
-					<!-- /wp:woocommerce/cart-order-summary-block -->
-
-					<!-- wp:woocommerce/cart-express-payment-block -->
-					<div
-						class="wp-block-woocommerce-cart-express-payment-block"
-					></div>
-					<!-- /wp:woocommerce/cart-express-payment-block -->
-
-					<!-- wp:woocommerce/proceed-to-checkout-block -->
-					<div
-						class="wp-block-woocommerce-proceed-to-checkout-block"
-					></div>
-					<!-- /wp:woocommerce/proceed-to-checkout-block -->
-
-					<!-- wp:woocommerce/cart-accepted-payment-methods-block -->
-					<div
-						class="wp-block-woocommerce-cart-accepted-payment-methods-block"
-					></div>
-					<!-- /wp:woocommerce/cart-accepted-payment-methods-block -->
-				</div>
-				<!-- /wp:woocommerce/cart-totals-block -->
-			</div>
-			<!-- /wp:woocommerce/filled-cart-block -->
-
-			<!-- wp:woocommerce/empty-cart-block -->
-			<div class="wp-block-woocommerce-empty-cart-block">
-				<!-- wp:pattern {"slug":"woocommerce/cart-empty-message"} /-->>
-				<!-- wp:pattern {"slug":"woocommerce/cart-new-in-store-message"} /-->
-				<!-- wp:woocommerce/product-new {"rows":1} /-->
-			</div>
-			<!-- /wp:woocommerce/empty-cart-block -->
+			<!-- wp:woocommerce/product-new {"columns":4,"rows":1,"className":""} /-->
 		</div>
 		<!-- /wp:woocommerce/empty-cart-block -->
 	</div>
