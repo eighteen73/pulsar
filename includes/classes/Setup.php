@@ -21,10 +21,8 @@ class Setup implements Bootable {
 	 */
 	public function boot(): void {
 		add_action( 'after_setup_theme', [ $this, 'supports' ], 5 );
-		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names' ] );
-		add_action( 'wp_head', [ $this, 'javascript_detected' ], 0 );
 	}
 
 	/**
@@ -34,55 +32,8 @@ class Setup implements Bootable {
 	 */
 	public function supports(): void {
 
-		// Theme translations.
-		load_theme_textdomain( 'pulsar', get_parent_theme_file_path( 'languages' ) );
-
-		// Title tag support.
-		add_theme_support( 'title-tag' );
-
-		// Featured image support.
-		add_theme_support( 'post-thumbnails' );
-
-		// Selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		// Outputs HTML5 markup for core features.
-		add_theme_support(
-			'html5',
-			[
-				'script',
-				'style',
-				'comment-list',
-				'comment-form',
-				'search-form',
-				'gallery',
-				'caption',
-			]
-		);
-
-		// Add support for editor styles.
-		add_theme_support( 'editor-styles' );
-
-		// Let core handle responsive embed wrappers.
-		add_theme_support( 'responsive-embeds' );
-
 		// Disable core block patterns.
 		remove_theme_support( 'core-block-patterns' );
-	}
-
-	/**
-	 * Register menus.
-	 *
-	 * @return void
-	 */
-	public function menus(): void {
-
-		register_nav_menus(
-			[
-				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
-				'footer'  => esc_html_x( 'Footer', 'nav menu location', 'pulsar' ),
-			]
-		);
 	}
 
 	/**
@@ -108,16 +59,5 @@ class Setup implements Bootable {
 				// 'example' => __( 'Example' ),
 			]
 		);
-	}
-
-	/**
-	 * Handles JavaScript detection.
-	 *
-	 * Replaces the `no-js` class with `js` on the root `<html>` element when JavaScript is detected.
-	 *
-	 * @return void
-	 */
-	public function javascript_detected(): void {
-		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
 }
