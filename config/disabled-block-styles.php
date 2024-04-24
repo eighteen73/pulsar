@@ -16,4 +16,5 @@
 return [
 	'button',
 	'columns',
+	'navigation',
 ];
