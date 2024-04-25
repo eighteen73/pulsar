@@ -14,7 +14,4 @@ return [
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Editor\TemplateParts::class,
 	Pulsar\Editor\Render\Navigation::class,
-	Pulsar\Menu\Classes::class,
-	Pulsar\Menu\MegaMenu::class,
-	Pulsar\Menu\Responsive::class,
 ];

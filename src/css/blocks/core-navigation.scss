@@ -159,11 +159,17 @@
 				display: block;
 				height: auto;
 				opacity: 1;
-				position: relative;
+				position: static;
 				visibility: visible;
 				width: 100%;
 				z-index: auto;
 			}
+		}
+
+		// These are required due to the way colors are applied.
+		&:not(.is-menu-open.is-menu-open) {
+			background-color: inherit !important; // stylelint-disable-line declaration-no-important
+			color: inherit !important; // stylelint-disable-line declaration-no-important
 		}
 	}
 
@@ -269,7 +275,10 @@
 				opacity: 1;
 				overflow: visible;
 				visibility: visible;
-				width: auto;
+
+				&:where(:not(.wp-block-pulsar-navigation-megamenu__container)) {
+					width: auto;
+				}
 			}
 		}
 
@@ -282,6 +291,10 @@
 				left: 100%;
 				top: 0;
 			}
+		}
+
+		&.has-background {
+			padding: 0;
 		}
 	}
 

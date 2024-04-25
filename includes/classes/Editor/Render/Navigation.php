@@ -25,6 +25,7 @@ class Navigation implements Bootable {
 	public function boot(): void {
 		add_filter( 'render_block_core/navigation', [ $this, 'modify_icon' ], 10, 2 );
 		add_filter( 'render_block_core/navigation-submenu', [ $this, 'prepend_back_to_submenu' ], 10, 2 );
+		add_filter( 'render_block_pulsar/navigation-megamenu', [ $this, 'prepend_back_to_megamenu' ], 10, 2 );
 	}
 
 	/**
@@ -79,6 +80,36 @@ class Navigation implements Bootable {
 
 		// Find the opening UL tag and add the back button within it.
 		$block_content = preg_replace( '/<ul(.*?)>/', '$0' . $back_button, $block_content, 1 );
+
+		return $block_content;
+	}
+
+	/**
+	 * Prepend a back button to the megamenu.
+	 *
+	 * @param string $block_content The block content.
+	 * @param array  $block         The block.
+	 * @return string
+	 */
+	public function prepend_back_to_megamenu( string $block_content, array $block ): string {
+
+		$back_icon = render_svg( 'navigation-back' );
+
+		$back_button = sprintf(
+			'<div class="wp-block-navigation-item wp-block-navigation-link wp-block-navigation-back">
+				<button
+					class="wp-block-navigation-item__content wp-block-navigation-item__back"
+					data-wp-on--click="actions.toggleMenuOnClick"
+				>
+					%1$s %2$s
+				</button>
+			</div>',
+			$back_icon,
+			__( 'Back', 'pulsar' ),
+		);
+
+		// Find the opening DIV tag and add the back button within it.
+		$block_content = preg_replace( '/<div(.*?)>/', '$0' . $back_button, $block_content, 1 );
 
 		return $block_content;
 	}
