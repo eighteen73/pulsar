@@ -8,27 +8,17 @@
 	}
 
 	#{$block}__container {
-		background-color: var(--wp--custom--color--base);
+		background-color: inherit;
 		display: block;
 
 		@media (--lg) {
 			left: 50%;
-			// margin-top: calc(var(--megamenu-offset) * -1);
+			margin-top: calc(var(--megamenu-offset) * -1);
 			max-width: var(--wp--style--global--content-size);
 			position: absolute;
 			right: unset;
 			transform: translateX(-50%);
 			width: var(--wp--style--global--content-size);
-
-			&::before {
-				bottom: 100%;
-				content: "";
-				display: block;
-				height: var(--megamenu-offset);
-				left: 0;
-				position: absolute;
-				right: 0;
-			}
 		}
 	}
 }
