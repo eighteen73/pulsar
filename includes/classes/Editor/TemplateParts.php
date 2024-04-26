@@ -23,7 +23,27 @@ class TemplateParts implements Bootable {
 	 * @return void
 	 */
 	public function boot(): void {
+		add_filter( 'default_wp_template_part_areas', [ $this, 'template_part_areas' ] );
 		add_action( 'rest_api_init', [ $this, 'register_template_parts_route' ] );
+	}
+
+	/**
+	 * Add custom template part areas.
+	 *
+	 * @param array $areas The default areas.
+	 *
+	 * @return array
+	 */
+	public function template_part_areas( array $areas ): array {
+		$areas[] = array(
+			'area'        => 'megamenu',
+			'area_tag'    => 'div',
+			'description' => __( 'Megamenu templates are used to create sections of a megamenu.', 'pulsar' ),
+			'icon'        => 'layout',
+			'label'       => __( 'Megamenu', 'pulsar' ),
+		);
+
+		return $areas;
 	}
 
 	/**

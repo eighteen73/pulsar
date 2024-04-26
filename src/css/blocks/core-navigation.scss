@@ -1,0 +1,364 @@
+@use "../tools" as *;
+
+.has-modal-open {
+	overflow: hidden;
+}
+
+.wp-block-navigation {
+	$block: &;
+
+	// Custom properties for layout style cascade: default values.
+	--navigation-layout-justification-setting: flex-start;
+	--navigation-layout-direction: row;
+	--navigation-layout-wrap: wrap;
+	--navigation-layout-justify: flex-start;
+	--navigation-layout-align: center;
+
+	// Set the height of the mobile menu
+	--navigation-height: 100dvh;
+
+	// A default gap between menu items
+	--navigation-gap: var(--wp--preset--spacing--md);
+
+	gap: var(--navigation-gap);
+
+	&.is-vertical {
+		--navigation-layout-direction: column;
+		--navigation-layout-justify: initial;
+		--navigation-layout-align: flex-start;
+	}
+
+	&.no-wrap {
+		--navigation-layout-wrap: nowrap;
+	}
+
+	&.items-justified-center {
+		--navigation-layout-justification-setting: center;
+		--navigation-layout-justify: center;
+
+		&.is-vertical {
+			--navigation-layout-align: center;
+		}
+	}
+
+	&.items-justified-right {
+		--navigation-layout-justification-setting: flex-end;
+		--navigation-layout-justify: flex-end;
+
+		&.is-vertical {
+			--navigation-layout-align: flex-end;
+		}
+	}
+
+	&.items-justified-space-between {
+		--navigation-layout-justification-setting: space-between;
+		--navigation-layout-justify: space-between;
+	}
+
+	// The <ul> element
+	&__container {
+		align-items: var(--navigation-layout-align, initial);
+		display: flex;
+		flex-direction: var(--navigation-layout-direction, initial);
+		flex-wrap: var(--navigation-layout-wrap, wrap);
+		gap: inherit;
+		justify-content: var(--navigation-layout-justify, initial);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		&:where(.is-responsive) {
+			--navigation-layout-direction: column;
+			--navigation-layout-align: stretch;
+			--navigation-layout-wrap: nowrap;
+			gap: 0;
+			height: 100%;
+
+			@media (--lg) {
+				--navigation-layout-direction: row;
+				--navigation-layout-align: initial;
+				--navigation-layout-wrap: wrap;
+				gap: inherit;
+				height: auto;
+			}
+
+			:where(.hidden-by-default) & {
+				--navigation-layout-direction: column;
+				--navigation-layout-align: stretch;
+				--navigation-layout-wrap: nowrap;
+			}
+		}
+
+		&:only-child {
+			flex-grow: 1;
+		}
+	}
+
+	// The menu toggle button
+	&__responsive-container-open {
+		align-items: center;
+		background-color: transparent;
+		border: 0;
+		cursor: pointer;
+		display: flex;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		gap: inherit;
+		justify-content: center;
+		padding: 0;
+
+		&:where(:not(.always-shown)) {
+			@media (--lg) {
+				display: none;
+			}
+		}
+
+		svg {
+			&:first-child:where(:not(:only-child)) {
+				:where(.has-modal-open) & {
+					display: none;
+				}
+			}
+
+			&:last-child:where(:not(:only-child)) {
+				display: none;
+
+				:where(.has-modal-open) & {
+					display: block;
+				}
+			}
+		}
+	}
+
+	// The main container for the menu
+	&__responsive-container {
+		// background-color: inherit;
+		background-color: var(--wp--custom--color--base);
+		gap: inherit;
+		height: var(--navigation-height);
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		top: 100%;
+		transition: all var(--wp--custom--transition-duration--quick);
+		visibility: hidden;
+		width: 100%;
+		z-index: 1;
+
+		// Class added when menu is opened
+		&:where(.is-menu-open) {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		// When not hidden by default option, show the menu
+		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
+			@media (--lg) {
+				background-color: inherit;
+				display: block;
+				height: auto;
+				opacity: 1;
+				position: static;
+				visibility: visible;
+				width: 100%;
+				z-index: auto;
+			}
+		}
+
+		// These are required due to the way colors are applied.
+		&:not(.is-menu-open.is-menu-open) {
+			background-color: inherit !important; // stylelint-disable-line declaration-no-important
+			color: inherit !important; // stylelint-disable-line declaration-no-important
+		}
+	}
+
+	&__responsive-close {
+		gap: inherit;
+		height: 100%;
+		width: 100%;
+	}
+
+	// The default close button
+	&__responsive-container-close {
+		display: none;
+
+		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
+			@media (--lg) {
+				display: none;
+			}
+		}
+	}
+
+	&__responsive-dialog {
+		gap: inherit;
+		height: 100%;
+	}
+
+	&__responsive-container-content {
+		gap: inherit;
+		height: 100%;
+	}
+
+	// The menu <li> element
+	&-item {
+		align-items: center;
+		background-color: inherit;
+		display: flex;
+		justify-content: space-between;
+
+		&:where(.has-child) {
+			@media (--lg) {
+				position: relative;
+			}
+		}
+	}
+
+	// A single menu link/button
+	&-item__content {
+		background-color: transparent;
+		border: 0;
+		color: inherit;
+		cursor: pointer;
+		display: block;
+		flex: 1 1 0%;
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+		text-align: left;
+		text-decoration: none;
+
+		@media (--lg) {
+			padding: 0;
+		}
+	}
+
+	// Back button
+	&-item__back {
+		@media (--lg) {
+			display: none;
+		}
+	}
+
+	// A submenu container
+	&__submenu-container {
+		background-color: var(--wp--custom--color--base);
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform: translateX(-100%);
+		transition: all var(--wp--custom--transition-duration--quick);
+		visibility: hidden;
+
+		@media (--lg) {
+			align-items: normal;
+			background-color: inherit;
+			height: 0;
+			left: 0;
+			min-width: 250px;
+			opacity: 0;
+			top: 100%;
+			transform: none;
+			width: 0;
+			z-index: 2;
+		}
+
+		// Display a submenu when the parent is hovered
+		.has-child:where(:not(.open-on-click)):hover > & {
+			@media (--lg) {
+				height: auto;
+				min-width: 250px;
+				opacity: 1;
+				overflow: visible;
+				visibility: visible;
+
+				&:where(:not(.wp-block-pulsar-navigation-megamenu__container)) {
+					width: auto;
+				}
+			}
+		}
+
+		&:empty {
+			display: none;
+		}
+
+		& & {
+			@media (--lg) {
+				left: 100%;
+				top: 0;
+			}
+		}
+
+		&.has-background {
+			padding: 0;
+		}
+	}
+
+	// Display a submenu when the button is clicked
+	:where([aria-expanded="true"]) ~ &__submenu-container {
+		opacity: 1;
+		overflow: visible;
+		transform: translateX(0);
+		visibility: visible;
+
+		@media (--lg) {
+			height: auto;
+			width: auto;
+		}
+	}
+
+	// The submenu icon
+	&__submenu-icon {
+		align-items: center;
+		align-self: center;
+		background-color: inherit;
+		border: 0;
+		color: currentcolor;
+		display: flex;
+		font-size: inherit;
+		height: 10px;
+		justify-content: center;
+		margin-left: var(--wp--preset--spacing--xs);
+		padding: 0;
+		width: 10px;
+
+		svg {
+			stroke: currentcolor;
+			transform: rotate(-90deg);
+
+			@media (--lg) {
+				transform: rotate(0);
+			}
+		}
+
+		// Icon not on mobile when in a submenu should point right
+		.has-child #{$block}__submenu-container & svg {
+			@media (--lg) {
+				transform: rotate(-90deg);
+			}
+		}
+
+		// When the icon is also the toggle, make it more clickable
+		:where(.is-responsive) &:where(#{$block}-submenu__toggle) {
+			aspect-ratio: 1 / 1;
+			border: 1px solid;
+			cursor: pointer;
+			height: 100%;
+			margin: 0;
+			width: auto;
+
+			@media (--lg) {
+				aspect-ratio: unset;
+				border: unset;
+				cursor: unset;
+				height: auto;
+				margin-left: var(--wp--preset--spacing--xs);
+				width: auto;
+			}
+		}
+	}
+}
