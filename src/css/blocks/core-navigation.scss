@@ -253,6 +253,7 @@
 		transform: translateX(-100%);
 		transition: all var(--wp--custom--transition-duration--quick);
 		visibility: hidden;
+		z-index: 1;
 
 		@media (--lg) {
 			align-items: normal;
