@@ -62,6 +62,12 @@ const pulsarConfig = {
 							url: false,
 						},
 					},
+					{
+						loader: require.resolve('resolve-url-loader'),
+						options: {
+							root: __dirname,
+						},
+					},
 				],
 			},
 			{
@@ -71,6 +77,18 @@ const pulsarConfig = {
 						loader: require.resolve('css-loader'),
 						options: {
 							url: false,
+						},
+					},
+					{
+						loader: require.resolve('resolve-url-loader'),
+						options: {
+							root: __dirname,
+						},
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true, // Required for resolve-url-loader
 						},
 					},
 				],
