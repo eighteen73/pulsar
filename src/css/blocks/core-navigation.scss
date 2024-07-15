@@ -67,137 +67,9 @@
 		margin: 0;
 		padding: 0;
 
-		&:where(.is-responsive) {
-			--navigation-layout-direction: column;
-			--navigation-layout-align: stretch;
-			--navigation-layout-wrap: nowrap;
-			gap: 0;
-			height: 100%;
-
-			@media (--lg) {
-				--navigation-layout-direction: row;
-				--navigation-layout-align: initial;
-				--navigation-layout-wrap: wrap;
-				gap: inherit;
-				height: auto;
-			}
-
-			:where(.hidden-by-default) & {
-				--navigation-layout-direction: column;
-				--navigation-layout-align: stretch;
-				--navigation-layout-wrap: nowrap;
-			}
-		}
-
 		&:only-child {
 			flex-grow: 1;
 		}
-	}
-
-	// The menu toggle button
-	&__responsive-container-open {
-		align-items: center;
-		background-color: transparent;
-		border: 0;
-		cursor: pointer;
-		display: flex;
-		font-family: inherit;
-		font-size: inherit;
-		font-weight: inherit;
-		gap: inherit;
-		justify-content: center;
-		padding: 0;
-
-		&:where(:not(.always-shown)) {
-			@media (--lg) {
-				display: none;
-			}
-		}
-
-		svg {
-			&:first-child:where(:not(:only-child)) {
-				:where(.has-modal-open) & {
-					display: none;
-				}
-			}
-
-			&:last-child:where(:not(:only-child)) {
-				display: none;
-
-				:where(.has-modal-open) & {
-					display: block;
-				}
-			}
-		}
-	}
-
-	// The main container for the menu
-	&__responsive-container {
-		// background-color: inherit;
-		background-color: var(--wp--custom--color--base);
-		gap: inherit;
-		height: var(--navigation-height);
-		left: 0;
-		opacity: 0;
-		position: absolute;
-		top: 100%;
-		transition: all var(--wp--custom--transition-duration--quick);
-		visibility: hidden;
-		width: 100%;
-		z-index: 1;
-
-		// Class added when menu is opened
-		&:where(.is-menu-open) {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		// When not hidden by default option, show the menu
-		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
-			@media (--lg) {
-				background-color: inherit;
-				display: block;
-				height: auto;
-				opacity: 1;
-				position: static;
-				visibility: visible;
-				width: 100%;
-				z-index: auto;
-			}
-		}
-
-		// These are required due to the way colors are applied.
-		&:not(.is-menu-open.is-menu-open) {
-			background-color: inherit !important; // stylelint-disable-line declaration-no-important
-			color: inherit !important; // stylelint-disable-line declaration-no-important
-		}
-	}
-
-	&__responsive-close {
-		gap: inherit;
-		height: 100%;
-		width: 100%;
-	}
-
-	// The default close button
-	&__responsive-container-close {
-		display: none;
-
-		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
-			@media (--lg) {
-				display: none;
-			}
-		}
-	}
-
-	&__responsive-dialog {
-		gap: inherit;
-		height: 100%;
-	}
-
-	&__responsive-container-content {
-		gap: inherit;
-		height: 100%;
 	}
 
 	// The menu <li> element
@@ -205,6 +77,7 @@
 		align-items: center;
 		background-color: inherit;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 
 		&:where(.has-child) {
@@ -222,7 +95,6 @@
 		cursor: pointer;
 		display: block;
 		flex: 1 1 0%;
-		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
 		text-align: left;
 		text-decoration: none;
 
@@ -231,26 +103,12 @@
 		}
 	}
 
-	// Back button
-	&-item__back {
-		@media (--lg) {
-			display: none;
-		}
-	}
-
 	// A submenu container
 	&__submenu-container {
-		background-color: var(--wp--custom--color--base);
+		background-color: inherit;
 		color: inherit;
-		display: flex;
+		display: none;
 		flex-direction: column;
-		height: 100%;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transform: translateX(-100%);
 		transition: all var(--wp--custom--transition-duration--quick);
 		visibility: hidden;
 		z-index: 1;
@@ -258,6 +116,7 @@
 		@media (--lg) {
 			align-items: normal;
 			background-color: inherit;
+			display: flex;
 			height: 0;
 			left: 0;
 			min-width: 250px;
@@ -301,6 +160,7 @@
 
 	// Display a submenu when the button is clicked
 	:where([aria-expanded="true"]) ~ &__submenu-container {
+		display: flex;
 		opacity: 1;
 		overflow: visible;
 		transform: translateX(0);
@@ -360,6 +220,270 @@
 				margin-left: var(--wp--preset--spacing--xs);
 				width: auto;
 			}
+		}
+	}
+
+	/// Responsive navigation
+	/// Behaviour is controlled by the overlay menu option in the editor.
+	///
+	/// All styles for responsive behaviour should be within this block
+	/// Markup should be structured as follows:
+	///
+	/// <nav class="wp-block-navigation is-responsive">
+	/// 	<button class="wp-block-navigation__responsive-container-open">
+	/// 	<div class="wp-block-navigation__responsive-close">
+	/// 		<div class="wp-block-navigation__responsive-dialog">
+	/// 			<button class="wp-block-navigation__responsive-container-close">
+	/// 			<div class="wp-block-navigation__responsive-container-content">
+	/// 				<ul class="wp-block-navigation__container">
+	/// 					<li class="wp-block-navigation-item">
+	/// 						<a class="wp-block-navigation-item__content">
+	/// 							<span class="wp-block-navigation-item__label">
+	///						<li class="wp-block-navigation-item wp-block-navigation-submenu has-child">
+	///							<a class="wp-block-navigation-item__content">
+	/// 						<button class="wp-block-navigation-submenu__toggle">
+	/// 						<ul class="wp-block-navigation__submenu-container">
+	/// 							<li class="wp-block-navigation-submenu__header">
+	/// 								<button class="wp-block-navigation-submenu__back">
+	/// 								<span class="wp-block-navigation-submenu__label">
+	/// 								<a class="wp-block-navigation-submenu__all">
+	///
+	///
+	:where(.is-responsive) & {
+
+		// The navigation toggle button directly in the <nav> element
+		&__responsive-container-open {
+			align-items: center;
+			background-color: transparent;
+			border: 0;
+			cursor: pointer;
+			display: flex;
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			gap: inherit;
+			justify-content: center;
+			padding: 0;
+
+			// If overlay menu isn't  set to always, hide the button on desktop
+			&:where(:not(.always-shown)) {
+				@media (--lg) {
+					display: none;
+				}
+			}
+
+			svg {
+				&:first-child:where(:not(:only-child)) {
+					:where(.has-modal-open) & {
+						display: none;
+					}
+				}
+
+				&:last-child:where(:not(:only-child)) {
+					display: none;
+
+					:where(.has-modal-open) & {
+						display: block;
+					}
+				}
+			}
+		}
+
+		// The main container for the navigation
+		//  Directly  within the <nav> element
+		&__responsive-container {
+			background-color: inherit;
+			gap: inherit;
+			height: var(--navigation-height);
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 100%;
+			transition: all var(--wp--custom--transition-duration--quick);
+			visibility: hidden;
+			width: 100%;
+			z-index: 1;
+
+			// Class added when menu is opened
+			&:where(.is-menu-open) {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			// When not hidden by default option, show the navigation
+			&:where(:not(.hidden-by-default):not(.is-menu-open)) {
+				@media (--lg) {
+					background-color: inherit;
+					display: block;
+					height: auto;
+					opacity: 1;
+					position: static;
+					visibility: visible;
+					width: 100%;
+					z-index: auto;
+				}
+			}
+
+			// These are required due to the way colors are applied.
+			&:not(.is-menu-open.is-menu-open) {
+				background-color: inherit !important; // stylelint-disable-line declaration-no-important
+				color: inherit !important; // stylelint-disable-line declaration-no-important
+			}
+		}
+
+		// Another wrapper
+		&__responsive-close {
+			gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
+			height: 100%;
+			width: 100%;
+		}
+
+		// Another wrapper
+		&__responsive-dialog {
+			gap: inherit;
+			height: 100%;
+		}
+
+		// The main <ul> element
+		&__container {
+			--navigation-layout-direction: column;
+			--navigation-layout-align: stretch;
+			--navigation-layout-wrap: nowrap;
+			gap: 0;
+			height: 100%;
+
+			@media (--lg) {
+				--navigation-layout-direction: row;
+				--navigation-layout-align: initial;
+				--navigation-layout-wrap: wrap;
+				gap: inherit;
+				height: auto;
+			}
+
+			// When navigation is set to always be a toggle
+			:where(.hidden-by-default) & {
+				--navigation-layout-direction: column;
+				--navigation-layout-align: stretch;
+				--navigation-layout-wrap: nowrap;
+			}
+		}
+
+		// The default close button
+		// Style wise we tend to hide this and use the open button as a toggle instead.
+		&__responsive-container-close {
+			display: none;
+
+			:where(:not(.hidden-by-default):not(.is-menu-open)) & {
+				@media (--lg) {
+					display: none;
+				}
+			}
+		}
+
+		// The last wrapper before the <ul> element
+		&__responsive-container-content {
+			gap: inherit;
+			height: 100%;
+		}
+
+		/// Sliding state with back button
+		:where(.has-back-button) & {
+
+			// A submenu container
+			&__submenu-container {
+				background-color: inherit;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				left: 0;
+				overflow: hidden;
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translateX(-100%);
+				transition: all var(--wp--custom--transition-duration--quick);
+				visibility: hidden;
+				z-index: 1;
+
+				@media (--lg) {
+					align-items: normal;
+					background-color: inherit;
+					height: 0;
+					left: 0;
+					min-width: 250px;
+					opacity: 0;
+					top: 100%;
+					transform: none;
+					width: 0;
+					z-index: 2;
+				}
+
+				// Display a submenu when the parent is hovered
+				.has-child:where(:not(.open-on-click)):hover > & {
+					@media (--lg) {
+						height: auto;
+						min-width: 250px;
+						opacity: 1;
+						overflow: visible;
+						visibility: visible;
+
+						&:where(:not(.wp-block-pulsar-navigation-megamenu__container)) {
+							width: auto;
+						}
+					}
+				}
+
+				&:empty {
+					display: none;
+				}
+
+				& & {
+					@media (--lg) {
+						left: 100%;
+						top: 0;
+					}
+				}
+
+				&.has-background {
+					padding: 0;
+				}
+			}
+
+			// Display a submenu when the button is clicked
+			:where([aria-expanded="true"]) ~ &__submenu-container {
+				opacity: 1;
+				overflow: visible;
+				transform: translateX(0);
+				visibility: visible;
+
+				@media (--lg) {
+					height: auto;
+					width: auto;
+				}
+			}
+
+		}
+	}
+
+	///
+	/// Hide certain features if not enabled.
+	/// Ideally the markup shouldn't be rendered at all, but for now lets hide them.
+	///
+	&:where(:not(.has-submenu-back)) {
+		.wp-block-navigation-submenu__header {
+			display: none;
+		}
+	}
+
+	&:where(:not(.has-submenu-all)) {
+		.wp-block-navigation-submenu__all {
+			display: none;
+		}
+	}
+
+	&:where(:not(.has-submenu-label)) {
+		.wp-block-navigation-submenu__label {
+			display: none;
 		}
 	}
 }

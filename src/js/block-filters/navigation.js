@@ -13,9 +13,9 @@ const withAdditionalResponsiveControls = (BlockEdit) => (props) => {
 	const isResponsive = overlayMenu === 'mobile' || overlayMenu === 'always';
 
 	const classes = {
-		back: 'has-back-button',
-		all: 'has-view-all',
-		title: 'has-parent-title',
+		back: 'has-submenu-back',
+		label: 'has-submenu-label',
+		all: 'has-submenu-all',
 	};
 
 	const toggleClass = (enable, ClassToToggle) => {
@@ -68,7 +68,7 @@ const withAdditionalResponsiveControls = (BlockEdit) => (props) => {
 				{isResponsive && (
 					<PanelBody>
 						<ToggleControl
-							label={__('Show back button', 'pulsar')}
+							label={__('Show back navigation', 'pulsar')}
 							checked={hasClass(classes.back)}
 							onChange={(val) => {
 								toggleClass(val, classes.back);
@@ -77,20 +77,20 @@ const withAdditionalResponsiveControls = (BlockEdit) => (props) => {
 
 						{hasClass(classes.back) && (
 							<ToggleControl
-								label={__('Show view all', 'pulsar')}
-								checked={hasClass(classes.all)}
+								label={__('Show label', 'pulsar')}
+								checked={hasClass(classes.label)}
 								onChange={(val) => {
-									toggleClass(val, classes.all);
+									toggleClass(val, classes.label);
 								}}
 							/>
 						)}
 
 						{hasClass(classes.back) && (
 							<ToggleControl
-								label={__('Show parent title', 'pulsar')}
-								checked={hasClass(classes.title)}
+								label={__('Show view all', 'pulsar')}
+								checked={hasClass(classes.all)}
 								onChange={(val) => {
-									toggleClass(val, classes.title);
+									toggleClass(val, classes.all);
 								}}
 							/>
 						)}
