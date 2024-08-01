@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"shadow": {
+			"defaultPresets": false,
+			"presets": [
+				{
+					"name": "small",
+					"slug": "sm",
+					"shadow": "var:custom|box-shadow|sm"
+				}
+			]
+		}
+	}
+}
