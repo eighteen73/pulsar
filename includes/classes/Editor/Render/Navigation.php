@@ -53,6 +53,11 @@ class Navigation implements Bootable {
 
 		// Add submenu header
 		add_filter( 'render_block', [ $this, 'prepend_submenu_header' ], 10, 2 );
+
+		// Add classes to submenu items
+		// add_filter( 'render_block_core/navigation', [ $this, 'modify_children' ], 10, 2 );
+
+		add_filter( 'render_block_data', [ $this, 'modify_children' ], 10, 3 );
 	}
 
 	/**
@@ -166,5 +171,50 @@ class Navigation implements Bootable {
 			$all_url,
 			$all_text,
 		);
+	}
+
+	/**
+	 * Add classes to submenu items.
+	 *
+	 * @param string $block_content The block content.
+	 * @param array  $block         The block.
+	 * @return string
+	 */
+	public function modify_children( array $parsed_block, array $source_block, $parent_block ): array {
+
+		// $has_back  = str_contains( $block['attrs']['className'], 'has-submenu-back' );
+		// $has_label = str_contains( $block['attrs']['className'], 'has-submenu-label' );
+		// $has_all   = str_contains( $block['attrs']['className'], 'has-submenu-all' );
+
+		// $tags = new WP_HTML_Tag_Processor( $block_content );
+
+		// while ( $tags->next_tag( [ 'class_name' => 'has-child' ] ) ) {
+
+		// 	if ( $has_back ) {
+		// 		$tags->add_class( 'has-submenu-back' );
+		// 	}
+
+		// 	if ( $has_label ) {
+		// 		$tags->add_class( 'has-submenu-label' );
+		// 	}
+
+		// 	if ( $has_all ) {
+		// 		$tags->add_class( 'has-submenu-all' );
+		// 	}
+		// }
+
+		// $block_content = $tags->get_updated_html();
+
+		// return $block_content;
+
+		// ray($parsed_block['blockName']);
+
+		if ( ! in_array( $parsed_block['blockName'], [ 'core/navigation-link' ], true ) ) {
+			return $parsed_block;
+		}
+
+		ray($parsed_block);
+
+		return $parsed_block;
 	}
 }

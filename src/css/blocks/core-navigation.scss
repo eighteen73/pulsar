@@ -134,7 +134,7 @@
 	// The main container for the menu
 	&__responsive-container {
 		// background-color: inherit;
-		background-color: var(--wp--custom--color--base);
+		background-color: var(--wp--custom--color--neutral--0);
 		gap: inherit;
 		height: var(--navigation-height);
 		left: 0;
@@ -240,7 +240,7 @@
 
 	// A submenu container
 	&__submenu-container {
-		background-color: var(--wp--custom--color--base);
+		background-color: var(--wp--custom--color--neutral--0);
 		color: inherit;
 		display: flex;
 		flex-direction: column;

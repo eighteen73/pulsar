@@ -16,11 +16,11 @@
 textarea,
 select {
 	appearance: none;
-	background-color: var(--wp--custom--color--base);
-	border: 2px solid var(--wp--custom--color--contrast);
+	background-color: var(--wp--custom--color--neutral--0);
+	border: 1px solid var(--wp--custom--color--contrast);
 	box-shadow: none;
 	display: block;
-	font-size: var(--wp--preset--font-size--base);
+	font-size: var(--wp--preset--font-size--md);
 	line-height: var(--wp--custom--line-height--normal);
 	padding-bottom: var(--wp--preset--spacing--sm);
 	padding-left: var(--wp--preset--spacing--md);
@@ -63,7 +63,7 @@ select {
 [type="checkbox"],
 [type="radio"] {
 	appearance: none;
-	background-color: var(--wp--custom--color--base);
+	background-color: var(--wp--custom--color--neutral--0);
 	background-origin: border-box;
 	border: 1px solid var(--wp--custom--color--contrast);
 	color: var(--wp--custom--color--contrast);

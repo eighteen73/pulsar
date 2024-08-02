@@ -5,6 +5,6 @@
  */
 
 // Each block that needs filters to be applied, should have it's own file.
-import './alignment';
+import './align';
 import './columns';
 import './navigation';

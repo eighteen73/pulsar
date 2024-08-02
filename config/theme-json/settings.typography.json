@@ -9,14 +9,22 @@
 			"fluid": true,
 			"fontFamilies": [
 				{
-					"name": "Sans",
-					"slug": "sans",
-					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
-				},
-				{
-					"name": "Serif",
-					"slug": "serif",
-					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+					"name": "Inter",
+					"slug": "inter",
+					"fontFamily": "'Inter', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "auto",
+              "fontWeight": "100 900",
+              "fontDisplay": "swap",
+		          "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/inter/InterVariable-Italic.woff2",
+                "file:./assets/fonts/inter/InterVariable.woff2"
+              ]
+            }
+          ]
 				}
 			],
 			"fontSizes": [

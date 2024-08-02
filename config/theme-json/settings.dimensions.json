@@ -52,7 +52,7 @@
 				}
       ],
       "defaultAspectRatios": false,
-      "minHeight": true
+      "minHeight": false
     }
   }
 }
