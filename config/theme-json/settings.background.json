@@ -3,8 +3,8 @@
 	"version": 3,
   "settings": {
     "background": {
-      "backgroundImage": false,
-      "backgroundSize": false
+      "backgroundImage": true,
+      "backgroundSize": true
     }
   }
 }

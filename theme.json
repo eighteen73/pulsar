@@ -5,8 +5,8 @@
 		"appearanceTools": false,
 		"useRootPaddingAwareAlignments": true,
 		"background": {
-			"backgroundImage": false,
-			"backgroundSize": false
+			"backgroundImage": true,
+			"backgroundSize": true
 		},
 		"blocks": {
 			"core/button": {
@@ -17,7 +17,9 @@
 			"core/column": {
 				"spacing": {
 					"units": [
-						"%"
+						"%",
+						"px",
+						"vw"
 					]
 				}
 			},
@@ -28,24 +30,7 @@
 			},
 			"core/heading": {
 				"color": {
-					"text": true,
-					"palette": [
-						{
-							"name": "Primary",
-							"slug": "primary",
-							"color": "var(--wp--custom--color--primary)"
-						},
-						{
-							"name": "Secondary",
-							"slug": "secondary",
-							"color": "var(--wp--custom--color--secondary)"
-						},
-						{
-							"name": "Tertiary",
-							"slug": "tertiary",
-							"color": "var(--wp--custom--color--tertiary)"
-						}
-					]
+					"text": true
 				}
 			}
 		},
@@ -70,31 +55,117 @@
 				{
 					"name": "Primary",
 					"slug": "primary",
-					"color": "var(--wp--custom--color--primary)"
+					"color": "var:custom|color|primary|500"
 				},
 				{
 					"name": "Secondary",
 					"slug": "secondary",
-					"color": "var(--wp--custom--color--secondary)"
+					"color": "var:custom|color|secondary|500"
 				},
 				{
 					"name": "Tertiary",
 					"slug": "tertiary",
-					"color": "var(--wp--custom--color--tertiary)"
+					"color": "var:custom|color|tertiary|500"
 				}
 			],
 			"text": false
 		},
 		"custom": {
 			"color": {
-				"primary": "#DD93B5",
-				"secondary": "#F47733",
-				"tertiary": "#0F5B66",
-				"error": "#d4351c",
-				"success": "#00703c",
-				"focus": "#fd0",
-				"base": "#fff",
-				"contrast": "#000"
+				"neutral": {
+					"0": "#ffffff",
+					"50": "#F5F6F7",
+					"100": "#EDEFF1",
+					"200": "#D8DCDF",
+					"300": "#B5BEC4",
+					"400": "#8D9AA3",
+					"500": "#6F7E88",
+					"600": "#5A666F",
+					"700": "#49535B",
+					"800": "#3F474D",
+					"900": "#383D42",
+					"950": "#25282C",
+					"1000": "#00000"
+				},
+				"primary": {
+					"50": "#FEF2F3",
+					"100": "#FEE5E7",
+					"200": "#FCCFD5",
+					"300": "#F9A8B2",
+					"400": "#F4788A",
+					"500": "#E93756",
+					"600": "#D7274F",
+					"700": "#B51B40",
+					"800": "#98193C",
+					"900": "#821939",
+					"950": "#48091B"
+				},
+				"secondary": {
+					"50": "#EEF2FF",
+					"100": "#E0E7FF",
+					"200": "#C6D1FF",
+					"300": "#A4B2FD",
+					"400": "#8089F9",
+					"500": "#6162F3",
+					"600": "#4F44E7",
+					"700": "#4436CC",
+					"800": "#382FA4",
+					"900": "#312D82",
+					"950": "#201C50"
+				},
+				"tertiary": {
+					"50": "#F1F9FA",
+					"100": "#DBEDF2",
+					"200": "#BBDDE6",
+					"300": "#8CC4D4",
+					"400": "#56A2BA",
+					"500": "#3F91AD",
+					"600": "#336E87",
+					"700": "#2F5A6F",
+					"800": "#2D4C5D",
+					"900": "#2A414F",
+					"950": "#172935"
+				},
+				"error": {
+					"50": "#FEF2F2",
+					"100": "#FEE2E2",
+					"200": "#FECACA",
+					"300": "#FCA5A5",
+					"400": "#F87171",
+					"500": "#EF4444",
+					"600": "#DC2626",
+					"700": "#B91C1C",
+					"800": "#991B1B",
+					"900": "#7F1D1D",
+					"950": "#450A0A"
+				},
+				"warning": {
+					"50": "#FFFFEA",
+					"100": "#FFFBC5",
+					"200": "#FFF885",
+					"300": "#FFED46",
+					"400": "#FFDF1B",
+					"500": "#FFBF00",
+					"600": "#E29300",
+					"700": "#BB6802",
+					"800": "#985008",
+					"900": "#7C420B",
+					"950": "#482200"
+				},
+				"success": {
+					"50": "#EDFCF4",
+					"100": "#D3F8E3",
+					"200": "#AAF0CD",
+					"300": "#73E2B1",
+					"400": "#3BCC91",
+					"500": "#19BC7F",
+					"600": "#0C8F61",
+					"700": "#097350",
+					"800": "#0A5B41",
+					"900": "#094B36",
+					"950": "#042A1F"
+				},
+				"focus": "var|custom|color|primary|300"
 			},
 			"layout": {
 				"content": "768px",
@@ -118,29 +189,27 @@
 				"tight": "-0.025em",
 				"normal": "0em",
 				"wide": "0.025em",
-				"wider": "0.05em",
-				"widest": "0.1em"
+				"wider": "0.05em"
 			},
 			"borderRadius": {
-				"none": "0",
-				"sm": "0.125rem",
-				"md": "0.375rem",
-				"lg": "0.5rem",
-				"xl": "0.75rem",
-				"2-xl": "1rem",
-				"3-xl": "1.5rem",
+				"2-xs": "4px",
+				"xs": "8px",
+				"sm": "clamp(10px, 1.5vw, 16px)",
+				"md": "clamp(16px, 2.5vw, 24px)",
+				"lg": "clamp(24px, 3.5vw, 48px)",
+				"xl": "clamp(48px, 4.5vw, 96px)",
 				"full": "9999px"
 			},
 			"boxShadow": {
-				"sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-				"md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-				"lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-				"xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-				"2-xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+				"2-xs": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+				"xs": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+				"sm": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+				"md": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+				"lg": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
 			},
 			"transitionDuration": {
 				"quick": "100ms",
-				"base": "250ms",
+				"normal": "250ms",
 				"slow": "600ms"
 			}
 		},
@@ -194,7 +263,7 @@
 				}
 			],
 			"defaultAspectRatios": false,
-			"minHeight": true
+			"minHeight": false
 		},
 		"layout": {
 			"allowCustomContentAndWideSize": false,
@@ -313,14 +382,22 @@
 			"fluid": true,
 			"fontFamilies": [
 				{
-					"name": "Sans",
-					"slug": "sans",
-					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
-				},
-				{
-					"name": "Serif",
-					"slug": "serif",
-					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+					"name": "Inter",
+					"slug": "inter",
+					"fontFamily": "'Inter', sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontStyle": "auto",
+							"fontWeight": "100 900",
+							"fontDisplay": "swap",
+							"fontStretch": "normal",
+							"src": [
+								"file:./assets/fonts/inter/InterVariable-Italic.woff2",
+								"file:./assets/fonts/inter/InterVariable.woff2"
+							]
+						}
+					]
 				}
 			],
 			"fontSizes": [

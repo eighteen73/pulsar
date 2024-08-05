@@ -10,7 +10,7 @@
 			},
 			"core/column": {
 				"spacing": {
-					"units": ["%"]
+					"units": ["%", "px", "vw"]
 				}
 			},
 			"core/group": {
@@ -20,24 +20,7 @@
 			},
 			"core/heading": {
 				"color": {
-					"text": true,
-					"palette": [
-						{
-							"name": "Primary",
-							"slug": "primary",
-							"color": "var:custom|color|primary|500"
-						},
-						{
-							"name": "Secondary",
-							"slug": "secondary",
-							"color": "var:custom|color|secondary|500"
-						},
-						{
-							"name": "Tertiary",
-							"slug": "tertiary",
-							"color": "var:custom|color|tertiary|500"
-						}
-					]
+					"text": true
 				}
 			}
 		}
