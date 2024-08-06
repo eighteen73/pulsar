@@ -53,18 +53,20 @@ const updateVariationAlign = (settings, variationName, alignValue) => {
 const setDefaultBlockAlign = (settings, name) => {
 	switch (name) {
 		case 'core/columns':
-			settings = updateAlign(settings, 'wide');
+			return updateAlign(settings, 'wide');
 
 		case 'core/media-text':
-			settings = updateAlign(settings, 'wide');
+			return updateAlign(settings, 'wide');
 
 		case 'core/cover':
-			settings = updateAlign(settings, 'full');
+			return updateAlign(settings, 'full');
 
 		case 'core/group':
 			settings = updateVariationAlign(settings, 'group', 'full');
 			settings = updateVariationAlign(settings, 'group-row', 'wide');
 			settings = updateVariationAlign(settings, 'group-grid', 'wide');
+
+			return settings;
 	}
 
 	return settings;

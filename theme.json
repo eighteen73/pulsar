@@ -280,13 +280,7 @@
 		},
 		"shadow": {
 			"defaultPresets": false,
-			"presets": [
-				{
-					"name": "small",
-					"slug": "sm",
-					"shadow": "var:custom|box-shadow|sm"
-				}
-			]
+			"presets": []
 		},
 		"spacing": {
 			"blockGap": true,
