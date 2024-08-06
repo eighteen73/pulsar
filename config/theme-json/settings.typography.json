@@ -9,8 +9,8 @@
 			"fluid": true,
 			"fontFamilies": [
 				{
-					"name": "Inter",
-					"slug": "inter",
+					"name": "Primary",
+					"slug": "primary",
 					"fontFamily": "'Inter', sans-serif",
           "fontFace": [
             {
