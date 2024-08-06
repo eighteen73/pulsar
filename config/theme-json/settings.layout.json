@@ -6,7 +6,7 @@
       "allowCustomContentAndWideSize": false,
       "allowEditing": true,
 			"contentSize": "var:custom|layout|content",
-			"wideSize": "var(--wp--custom--layout--wide)"
+			"wideSize": "var:custom|layout|wide"
 		}
 	}
 }

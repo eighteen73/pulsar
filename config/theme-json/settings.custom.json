@@ -97,16 +97,16 @@
           "900": "#094B36",
           "950": "#042A1F"
         },
-        "focus": "var|custom|color|primary|300"
+        "focus": "var:custom|color|primary|300"
 			},
 			"layout": {
 				"content": "768px",
 				"wide": "1280px"
 			},
       "spacing": {
-				"blockGap": "var(--wp--preset--spacing--md)",
+				"blockGap": "var:preset|spacing|md",
         "edge": "clamp(var(--wp--preset--spacing--lg), 5.3333px + 5.8333vw, var(--wp--preset--spacing--3-xl))",
-				"group": "var(--wp--preset--spacing--4-xl)"
+				"group": "var:preset|spacing|4-xl"
       },
 			"lineHeight": {
 				"none": "1",
