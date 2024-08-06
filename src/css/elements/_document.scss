@@ -11,5 +11,5 @@ body {
 	font-size: var(--wp--preset--font-size--md);
 	line-height: var(--wp--custom--line-height--relaxed);
 
-	@include container-sizes(sm, md, lg, xl, 2-xl);
+	@include container-sizes(sm, md, lg, xl);
 }
