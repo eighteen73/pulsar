@@ -4,6 +4,12 @@
   <strong>WordPress starter theme for a modern development workflow</strong>
 </p>
 
+## Demo
+
+The theme demo is hosted on WordPress Playground, which is a system that runs WordPress directly in your browser. You can fully test the theme as if you were running it on your own site.
+
+[Playground Demo](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/eighteen73/pulsar/feature/wordpress-6.6/.playground/blueprint.json)
+
 ## Requirements
 
 Make sure all dependencies have been installed before moving on:
