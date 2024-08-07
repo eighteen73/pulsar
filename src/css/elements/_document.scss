@@ -7,9 +7,10 @@ html {
 }
 
 body {
-	font-family: var(--wp--preset--font-family--inter);
+	font-family: var(--wp--preset--font-family--primary);
 	font-size: var(--wp--preset--font-size--md);
+	-webkit-font-smoothing: antialiased;
 	line-height: var(--wp--custom--line-height--relaxed);
 
-	@include container-sizes(sm, md, lg, xl);
+	@include container-sizes(sm, md, lg, xl, 2-xl);
 }

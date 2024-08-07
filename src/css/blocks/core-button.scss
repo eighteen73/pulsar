@@ -3,11 +3,11 @@
 // Specificity of the core button styles are hard to override unfortunately.
 .wp-element-button,
 .wp-block-button .wp-block-button__link {
-	background-color: var(--wp--custom--color--primary);
+	background-color: var(--wp--custom--color--primary--500);
 	border-radius: 0;
-	color: var(--wp--custom--color--contrast);
+	color: var(--wp--custom--color--neutral--1000);
 	display: inline-flex;
-	padding: var(--wp--preset--spacing--lg);
+	padding: var(--wp--preset--spacing--sm);
 
 	&:focus-visible {
 		background-color: var(--wp--custom--color--focus);

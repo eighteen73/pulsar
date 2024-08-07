@@ -17,7 +17,7 @@ textarea,
 select {
 	appearance: none;
 	background-color: var(--wp--custom--color--neutral--0);
-	border: 1px solid var(--wp--custom--color--contrast);
+	border: 1px solid var(--wp--custom--color--neutral--1000);
 	box-shadow: none;
 	display: block;
 	font-size: var(--wp--preset--font-size--md);
@@ -39,7 +39,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-	color: var(--wp--custom--color--contrast);
+	color: var(--wp--custom--color--neutral--1000);
 	opacity: 1;
 }
 
@@ -65,8 +65,8 @@ select {
 	appearance: none;
 	background-color: var(--wp--custom--color--neutral--0);
 	background-origin: border-box;
-	border: 1px solid var(--wp--custom--color--contrast);
-	color: var(--wp--custom--color--contrast);
+	border: 1px solid var(--wp--custom--color--neutral--1000);
+	color: var(--wp--custom--color--neutral--1000);
 	display: inline-block;
 	flex-shrink: 0;
 	height: 16px;

@@ -26,29 +26,9 @@
 					"ratio": "16/9"
 				},
 				{
-					"name": "Extra Wide (Univisium) - 2:1",
-					"slug": "2-1",
-					"ratio": "2/1"
-				},
-				{
-					"name": "Cinema - 21:9",
-					"slug": "21-9",
-					"ratio": "21/9"
-				},
-				{
 					"name": "Portrait - 3:4",
 					"slug": "3-4",
 					"ratio": "3/4"
-				},
-				{
-					"name": "Classic Portrait - 2:3",
-					"slug": "2-3",
-					"ratio": "2/3"
-				},
-				{
-					"name": "Tall - 9:16",
-					"slug": "9-16",
-					"ratio": "9/16"
 				}
       ],
       "defaultAspectRatios": false,
