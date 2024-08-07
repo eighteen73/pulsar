@@ -22,7 +22,7 @@ class Navigation implements Bootable {
 	 *
 	 * @var array
 	 */
-	var $submenu_blocks = [
+	protected array $submenu_blocks = [
 		'core/navigation-submenu',
 		'pulsar/navigation-megamenu',
 	];
@@ -32,7 +32,7 @@ class Navigation implements Bootable {
 	 *
 	 * @var array
 	 */
-	var $icons = [
+	protected array $icons = [
 		'open'    => 'navigation-open',
 		'close'   => 'navigation-close',
 		'submenu' => 'navigation-submenu',
@@ -47,17 +47,38 @@ class Navigation implements Bootable {
 	 */
 	public function boot(): void {
 
+		// Add extension classes.
+		add_filter( 'render_block_core/navigation', [ $this, 'add_extension_classes' ], 10, 2 );
+
 		// Update icons
 		add_filter( 'render_block_core/navigation', [ $this, 'modify_open_icon' ], 10, 2 );
 		add_filter( 'render_block', [ $this, 'modify_submenu_icon' ], 10, 2 );
 
 		// Add submenu header
 		add_filter( 'render_block', [ $this, 'prepend_submenu_header' ], 10, 2 );
+	}
 
-		// Add classes to submenu items
-		// add_filter( 'render_block_core/navigation', [ $this, 'modify_children' ], 10, 2 );
+	/**
+	 * Add extension classes to the navigation block front end output.
+	 * Ass the navigation block is dynamic, the classes need adding here too.
+	 *
+	 * @param string $block_content The block content.
+	 * @param array  $block         The block.
+	 *
+	 * @return string
+	 */
+	public function add_extension_classes( string $block_content, array $block ): string {
 
-		add_filter( 'render_block_data', [ $this, 'modify_children' ], 10, 3 );
+		$tags = new WP_HTML_Tag_Processor( $block_content );
+
+		$tags->next_tag( [ 'class_name' => 'wp-block-navigation' ] );
+		$tags->add_class( 'has-submenu-back', $block['attrs']['hasSubmenuBack'] ?? false );
+		$tags->add_class( 'has-submenu-label', $block['attrs']['hasSubmenuLabel'] ?? false );
+		$tags->add_class( 'has-submenu-all', $block['attrs']['hasSubmenuAll'] ?? false );
+
+		$block_content = $tags->get_updated_html();
+
+		return $block_content;
 	}
 
 	/**
@@ -67,6 +88,7 @@ class Navigation implements Bootable {
 	 *
 	 * @param string $block_content The block content.
 	 * @param array  $block         The block.
+	 *
 	 * @return string
 	 */
 	public function modify_open_icon( string $block_content, array $block ): string {
@@ -74,7 +96,7 @@ class Navigation implements Bootable {
 		$tags = new WP_HTML_Tag_Processor( $block_content );
 
 		$tags->next_tag( [ 'class_name' => 'wp-block-navigation__responsive-container-open' ] );
-		$tags->set_attribute( 'data-wp-on--click', 'actions.toggleMenuOnClick' );
+		$tags->set_attribute( 'data-wp-on-async--click', 'actions.toggleMenuOnClick' );
 
 		$block_content = $tags->get_updated_html();
 		$open_icon     = render_svg( $this->icons['open'] );
@@ -93,6 +115,7 @@ class Navigation implements Bootable {
 	 *
 	 * @param string $block_content The block content.
 	 * @param array  $block         The block.
+	 *
 	 * @return string
 	 */
 	public function modify_submenu_icon( string $block_content, array $block ): string {
@@ -114,6 +137,7 @@ class Navigation implements Bootable {
 	 *
 	 * @param string $block_content The block content.
 	 * @param array  $block         The block.
+	 *
 	 * @return string
 	 */
 	public function prepend_submenu_header( string $block_content, array $block ): string {
@@ -125,7 +149,7 @@ class Navigation implements Bootable {
 		$back_button = $this->submenu_header_markup(
 			__( 'Back', 'pulsar' ),
 			$block['attrs']['label'],
-			$block['attrs']['url'],
+			$block['attrs']['url'] ?? '',
 			__( 'View all', 'pulsar' ) . '<span class="screen-reader-text"> ' . $block['attrs']['label'] . '</span>',
 		);
 
@@ -142,9 +166,10 @@ class Navigation implements Bootable {
 	 * @param string $label     The submenu title.
 	 * @param string $all_url   The view all URL.
 	 * @param string $all_text  The view all text.
+	 *
 	 * @return string
 	 */
-	public function submenu_header_markup( $back_text, $label, $all_url, $all_text ) {
+	public function submenu_header_markup( $back_text, $label, $all_url, $all_text ): string {
 
 		$back_icon = render_svg( $this->icons['back'] );
 
@@ -171,50 +196,5 @@ class Navigation implements Bootable {
 			$all_url,
 			$all_text,
 		);
-	}
-
-	/**
-	 * Add classes to submenu items.
-	 *
-	 * @param string $block_content The block content.
-	 * @param array  $block         The block.
-	 * @return string
-	 */
-	public function modify_children( array $parsed_block, array $source_block, $parent_block ): array {
-
-		// $has_back  = str_contains( $block['attrs']['className'], 'has-submenu-back' );
-		// $has_label = str_contains( $block['attrs']['className'], 'has-submenu-label' );
-		// $has_all   = str_contains( $block['attrs']['className'], 'has-submenu-all' );
-
-		// $tags = new WP_HTML_Tag_Processor( $block_content );
-
-		// while ( $tags->next_tag( [ 'class_name' => 'has-child' ] ) ) {
-
-		// 	if ( $has_back ) {
-		// 		$tags->add_class( 'has-submenu-back' );
-		// 	}
-
-		// 	if ( $has_label ) {
-		// 		$tags->add_class( 'has-submenu-label' );
-		// 	}
-
-		// 	if ( $has_all ) {
-		// 		$tags->add_class( 'has-submenu-all' );
-		// 	}
-		// }
-
-		// $block_content = $tags->get_updated_html();
-
-		// return $block_content;
-
-		// ray($parsed_block['blockName']);
-
-		if ( ! in_array( $parsed_block['blockName'], [ 'core/navigation-link' ], true ) ) {
-			return $parsed_block;
-		}
-
-		ray($parsed_block);
-
-		return $parsed_block;
 	}
 }

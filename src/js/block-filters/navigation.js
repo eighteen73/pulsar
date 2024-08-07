@@ -6,104 +6,131 @@ import TokenList from '@wordpress/token-list';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-const withAdditionalResponsiveControls = (BlockEdit) => (props) => {
+// Third party dependencies.
+import { registerBlockExtension } from '@10up/block-components';
+
+/**
+ * additionalAttributes object
+ * @type {object}
+ */
+const additionalAttributes = {
+	hasSubmenuBack: {
+		type: 'boolean',
+		default: false,
+	},
+	hasSubmenuLabel: {
+		type: 'boolean',
+		default: false,
+	},
+	hasSubmenuAll: {
+		type: 'boolean',
+		default: false,
+	},
+};
+
+/**
+ * classes object
+ * @type {object}
+ */
+const classes = {
+	back: 'has-submenu-back',
+	label: 'has-submenu-label',
+	all: 'has-submenu-all',
+};
+
+/**
+ * SubmenuOptionsEdit
+ * @param {object} props
+ * @returns {object} JSX
+ */
+const SubmenuOptionsEdit = (props) => {
 	const { attributes, setAttributes } = props;
-	const { className, overlayMenu } = attributes;
+	const { hasSubmenuBack, hasSubmenuLabel, hasSubmenuAll, overlayMenu } =
+		attributes;
 
 	const isResponsive = overlayMenu === 'mobile' || overlayMenu === 'always';
 
-	const classes = {
-		back: 'has-submenu-back',
-		label: 'has-submenu-label',
-		all: 'has-submenu-all',
-	};
-
-	const toggleClass = (enable, ClassToToggle) => {
-		const list = new TokenList(className);
-
-		if (enable) {
-			list.add(ClassToToggle);
-		} else {
-			list.remove(ClassToToggle);
-		}
-
-		setAttributes({ className: list.value });
-	};
-
-	const removeAllClasses = (classes) => {
-		const list = new TokenList(className);
-
-		for (const item in classes) {
-			list.remove(classes[item]);
-		}
-
-		setAttributes({ className: list.value });
-	};
-
-	const hasClass = (name) => {
-		return attributes.className?.includes(name);
-	};
-
-	// Set the initial classes.
+	// Set disable submenu options if menu isnt responsive.
 	useEffect(() => {
-		if (isResponsive) {
-			const activeClass = Object.keys(classes).find((item) =>
-				hasClass(classes[item])
-			);
-
-			if (activeClass) {
-				toggleClass(true, classes[activeClass]);
-			} else {
-				removeAllClasses();
-			}
-		} else {
-			removeAllClasses();
+		if (!isResponsive) {
+			setAttributes({
+				hasSubmenuBack: false,
+				hasSubmenuLabel: false,
+				hasSubmenuAll: false,
+			});
 		}
 	}, [overlayMenu]);
 
-	return 'core/navigation' === props.name ? (
-		<>
-			<BlockEdit {...props} />
-			<InspectorControls>
-				{isResponsive && (
-					<PanelBody>
+	return (
+		<InspectorControls>
+			{isResponsive && (
+				<PanelBody title="Submenu" initialOpen={true}>
+					<ToggleControl
+						label={__('Show back navigation', 'pulsar')}
+						checked={hasSubmenuBack}
+						onChange={(val) => {
+							setAttributes({ hasSubmenuBack: val });
+						}}
+					/>
+
+					{hasSubmenuBack && (
 						<ToggleControl
-							label={__('Show back navigation', 'pulsar')}
-							checked={hasClass(classes.back)}
+							label={__('Show label', 'pulsar')}
+							checked={hasSubmenuLabel}
 							onChange={(val) => {
-								toggleClass(val, classes.back);
+								setAttributes({ hasSubmenuLabel: val });
 							}}
 						/>
+					)}
 
-						{hasClass(classes.back) && (
-							<ToggleControl
-								label={__('Show label', 'pulsar')}
-								checked={hasClass(classes.label)}
-								onChange={(val) => {
-									toggleClass(val, classes.label);
-								}}
-							/>
-						)}
-
-						{hasClass(classes.back) && (
-							<ToggleControl
-								label={__('Show view all', 'pulsar')}
-								checked={hasClass(classes.all)}
-								onChange={(val) => {
-									toggleClass(val, classes.all);
-								}}
-							/>
-						)}
-					</PanelBody>
-				)}
-			</InspectorControls>
-		</>
-	) : (
-		<BlockEdit {...props} />
+					{hasSubmenuBack && (
+						<ToggleControl
+							label={__('Show view all', 'pulsar')}
+							checked={hasSubmenuAll}
+							onChange={(val) => {
+								setAttributes({ hasSubmenuAll: val });
+							}}
+						/>
+					)}
+				</PanelBody>
+			)}
+		</InspectorControls>
 	);
 };
-addFilter(
-	'editor.BlockEdit',
-	'pulsar/navigation-block',
-	withAdditionalResponsiveControls
-);
+
+/**
+ * generateClassNames
+ *
+ * a function to generate the new className string that should get added to
+ * the wrapping element of the block.
+ *
+ * @param {object} attributes block attributes
+ * @returns {string}
+ */
+function generateClassNames(attributes) {
+	const { hasSubmenuBack, hasSubmenuLabel, hasSubmenuAll } = attributes;
+
+	const classesList = new TokenList();
+	if (hasSubmenuBack) {
+		classesList.add(classes.back);
+	}
+	if (hasSubmenuLabel) {
+		classesList.add(classes.label);
+	}
+	if (hasSubmenuAll) {
+		classesList.add(classes.all);
+	}
+
+	return classesList.toString();
+}
+
+/**
+ * add the block extension
+ */
+registerBlockExtension('core/navigation', {
+	extensionName: 'pulsar/submenu-options',
+	attributes: additionalAttributes,
+	classNameGenerator: generateClassNames,
+	inlineStyleGenerator: () => null,
+	Edit: SubmenuOptionsEdit,
+});
