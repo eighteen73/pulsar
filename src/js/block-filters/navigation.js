@@ -33,6 +33,8 @@ const additionalAttributes = {
  * @type {object}
  */
 const classes = {
+	slide: 'is-style-slide',
+	accordion: 'is-style-accordion',
 	back: 'has-submenu-back',
 	label: 'has-submenu-label',
 	all: 'has-submenu-all',
@@ -108,17 +110,26 @@ const SubmenuOptionsEdit = (props) => {
  * @returns {string}
  */
 function generateClassNames(attributes) {
-	const { hasSubmenuBack, hasSubmenuLabel, hasSubmenuAll } = attributes;
+	const { overlayMenu, hasSubmenuBack, hasSubmenuLabel, hasSubmenuAll } =
+		attributes;
+
+	const isResponsive = overlayMenu === 'mobile' || overlayMenu === 'always';
 
 	const classesList = new TokenList();
-	if (hasSubmenuBack) {
-		classesList.add(classes.back);
-	}
-	if (hasSubmenuLabel) {
-		classesList.add(classes.label);
-	}
-	if (hasSubmenuAll) {
-		classesList.add(classes.all);
+	if (isResponsive) {
+		if (hasSubmenuBack) {
+			classesList.add(classes.back);
+			classesList.add(classes.slide);
+		} else {
+			classesList.add(classes.accordion);
+		}
+
+		if (hasSubmenuLabel) {
+			classesList.add(classes.label);
+		}
+		if (hasSubmenuAll) {
+			classesList.add(classes.all);
+		}
 	}
 
 	return classesList.toString();

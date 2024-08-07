@@ -49,7 +49,7 @@ class Navigation implements Bootable {
 	public function boot(): void {
 
 		// Add extension classes.
-		add_filter( 'render_block_core/navigation', [ $this, 'add_extension_classes' ], 10, 2 );
+		add_filter( 'render_block_core/navigation', [ $this, 'add_classes' ], 10, 2 );
 
 		// Add context for submenu attributes.
 		add_filter( 'block_type_metadata', [ $this, 'add_context' ] );
@@ -71,14 +71,23 @@ class Navigation implements Bootable {
 	 *
 	 * @return string
 	 */
-	public function add_extension_classes( string $block_content, array $block ): string {
+	public function add_classes( string $block_content, array $block ): string {
+
+		$is_responsive = ! isset( $block['attrs']['overlayMenu'] ) || isset( $block['attrs']['overlayMenu'] ) && $block['attrs']['overlayMenu'] !== 'never' ?? false;
+
+		if ( ! $is_responsive ) {
+			return $block_content;
+		}
 
 		$tags = new WP_HTML_Tag_Processor( $block_content );
 
 		$tags->next_tag( [ 'class_name' => 'wp-block-navigation' ] );
 
 		if ( isset( $block['attrs']['hasSubmenuBack'] ) && $block['attrs']['hasSubmenuBack'] ) {
+			$tags->add_class( 'is-style-slide' );
 			$tags->add_class( 'has-submenu-back' );
+		} else {
+			$tags->add_class( 'is-style-accordion' );
 		}
 
 		if ( isset( $block['attrs']['hasSubmenuLabel'] ) && $block['attrs']['hasSubmenuLabel'] ) {
