@@ -35,6 +35,7 @@
 		"webpack-remove-empty-scripts": "^1.0"
 	},
 	"dependencies": {
+		"@10up/block-components": "^1.19.1",
 		"modern-normalize": "^2.0.0"
 	}
 }

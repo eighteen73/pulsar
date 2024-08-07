@@ -113,19 +113,6 @@
 					"900": "#312D82",
 					"950": "#201C50"
 				},
-				"tertiary": {
-					"50": "#F1F9FA",
-					"100": "#DBEDF2",
-					"200": "#BBDDE6",
-					"300": "#8CC4D4",
-					"400": "#56A2BA",
-					"500": "#3F91AD",
-					"600": "#336E87",
-					"700": "#2F5A6F",
-					"800": "#2D4C5D",
-					"900": "#2A414F",
-					"950": "#172935"
-				},
 				"error": {
 					"50": "#FEF2F2",
 					"100": "#FEE2E2",
@@ -169,12 +156,12 @@
 			},
 			"layout": {
 				"content": "768px",
-				"wide": "1280px"
+				"wide": "1536px"
 			},
 			"spacing": {
 				"blockGap": "var:preset|spacing|md",
-				"edge": "clamp(var(--wp--preset--spacing--lg), 5.3333px + 5.8333vw, var(--wp--preset--spacing--3-xl))",
-				"group": "var:preset|spacing|4-xl"
+				"groupGap": "var:preset|spacing|4-xl",
+				"edge": "clamp(var(--wp--preset--spacing--lg), 5.3333px + 5.8333vw, var(--wp--preset--spacing--3-xl))"
 			},
 			"lineHeight": {
 				"none": "1",
@@ -201,11 +188,11 @@
 				"full": "9999px"
 			},
 			"boxShadow": {
-				"2-xs": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-				"xs": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-				"sm": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-				"md": "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-				"lg": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+				"2-xs": "0 1px 2px 0 hsl(from var(--wp--custom--color--neutral--500) h s l / 0.5)",
+				"xs": "0 4px 6px -1px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.1), 0 2px 4px -1px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.06)",
+				"sm": "0 10px 15px -3px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.1), 0 4px 6px -2px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.05)",
+				"md": "0 20px 25px -5px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.1), 0 10px 10px -5px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.04)",
+				"lg": "0 25px 50px -12px hsl(from var(--wp--custom--color--neutral--500) h s l / 0.25)"
 			},
 			"transitionDuration": {
 				"quick": "100ms",
@@ -237,29 +224,9 @@
 					"ratio": "16/9"
 				},
 				{
-					"name": "Extra Wide (Univisium) - 2:1",
-					"slug": "2-1",
-					"ratio": "2/1"
-				},
-				{
-					"name": "Cinema - 21:9",
-					"slug": "21-9",
-					"ratio": "21/9"
-				},
-				{
 					"name": "Portrait - 3:4",
 					"slug": "3-4",
 					"ratio": "3/4"
-				},
-				{
-					"name": "Classic Portrait - 2:3",
-					"slug": "2-3",
-					"ratio": "2/3"
-				},
-				{
-					"name": "Tall - 9:16",
-					"slug": "9-16",
-					"ratio": "9/16"
 				}
 			],
 			"defaultAspectRatios": false,
