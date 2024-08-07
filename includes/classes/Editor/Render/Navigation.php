@@ -36,7 +36,8 @@ class Navigation implements Bootable {
 		'open'    => 'navigation-open',
 		'close'   => 'navigation-close',
 		'submenu' => 'navigation-submenu',
-		'back'    => 'navigation-back',
+		'back'    => 'navigation-submenu-back',
+		'all'     => 'navigation-submenu-all',
 	];
 
 	/**
@@ -50,12 +51,15 @@ class Navigation implements Bootable {
 		// Add extension classes.
 		add_filter( 'render_block_core/navigation', [ $this, 'add_extension_classes' ], 10, 2 );
 
+		// Add context for submenu attributes.
+		add_filter( 'block_type_metadata', [ $this, 'add_context' ] );
+
 		// Update icons
 		add_filter( 'render_block_core/navigation', [ $this, 'modify_open_icon' ], 10, 2 );
 		add_filter( 'render_block', [ $this, 'modify_submenu_icon' ], 10, 2 );
 
 		// Add submenu header
-		add_filter( 'render_block', [ $this, 'prepend_submenu_header' ], 10, 2 );
+		add_filter( 'render_block', [ $this, 'prepend_submenu_header' ], 10, 3 );
 	}
 
 	/**
@@ -72,13 +76,63 @@ class Navigation implements Bootable {
 		$tags = new WP_HTML_Tag_Processor( $block_content );
 
 		$tags->next_tag( [ 'class_name' => 'wp-block-navigation' ] );
-		$tags->add_class( 'has-submenu-back', $block['attrs']['hasSubmenuBack'] ?? false );
-		$tags->add_class( 'has-submenu-label', $block['attrs']['hasSubmenuLabel'] ?? false );
-		$tags->add_class( 'has-submenu-all', $block['attrs']['hasSubmenuAll'] ?? false );
+
+		if ( isset( $block['attrs']['hasSubmenuBack'] ) && $block['attrs']['hasSubmenuBack'] ) {
+			$tags->add_class( 'has-submenu-back' );
+		}
+
+		if ( isset( $block['attrs']['hasSubmenuLabel'] ) && $block['attrs']['hasSubmenuLabel'] ) {
+			$tags->add_class( 'has-submenu-label' );
+		}
+
+		if ( isset( $block['attrs']['hasSubmenuAll'] ) && $block['attrs']['hasSubmenuAll'] ) {
+			$tags->add_class( 'has-submenu-all' );
+		}
 
 		$block_content = $tags->get_updated_html();
 
 		return $block_content;
+	}
+
+	/**
+	 * Add additional context to the navigation block and submenu blocks.
+	 * This is used to conditionally render the submenu header and its contents.
+	 *
+	 * @param array $metadata The block metadata.
+	 *
+	 * @return array
+	 */
+	public function add_context( $metadata ) {
+		if ( isset( $metadata['name'] ) && in_array( $metadata['name'], $this->submenu_blocks ) ) {
+			$metadata['usesContext'] ??= [];
+			$metadata['usesContext'][] = 'hasSubmenuBack';
+			$metadata['usesContext'][] = 'hasSubmenuLabel';
+			$metadata['usesContext'][] = 'hasSubmenuAll';
+		}
+
+		if ( isset( $metadata['name'] ) && 'core/navigation' === $metadata['name'] ) {
+			$metadata['attributes']['hasSubmenuBack'] = [
+				'type'    => 'boolean',
+				'default' => false,
+			];
+
+			$metadata['attributes']['hasSubmenuLabel'] = [
+				'type' => 'boolean',
+				'default' => false,
+			];
+
+			$metadata['attributes']['hasSubmenuAll'] = [
+				'type' => 'boolean',
+				'default' => false,
+			];
+
+			$metadata['providesContext']                  ??= [];
+			$metadata['providesContext']['hasSubmenuBack']  = 'hasSubmenuBack';
+			$metadata['providesContext']['hasSubmenuLabel'] = 'hasSubmenuLabel';
+			$metadata['providesContext']['hasSubmenuAll']   = 'hasSubmenuAll';
+		}
+
+		return $metadata;
 	}
 
 	/**
@@ -137,20 +191,43 @@ class Navigation implements Bootable {
 	 *
 	 * @param string $block_content The block content.
 	 * @param array  $block         The block.
+	 * @param \WP_Block $instance   The block instance.
 	 *
 	 * @return string
 	 */
-	public function prepend_submenu_header( string $block_content, array $block ): string {
+	public function prepend_submenu_header( string $block_content, array $block, \WP_Block $instance ): string {
 
 		if ( ! in_array( $block['blockName'], $this->submenu_blocks, true ) ) {
 			return $block_content;
 		}
 
+		$has_submenu_back  = $instance->context['hasSubmenuBack'] ??= false;
+		$has_submenu_label = $instance->context['hasSubmenuLabel'] ??= false;
+		$has_submenu_all   = $instance->context['hasSubmenuAll'] ??= false;
+
+		if ( ! $has_submenu_back ) {
+			return $block_content;
+		}
+
+		$back_args = $has_submenu_back ? [
+			'icon' => render_svg( $this->icons['back'] ),
+			'text' => __( 'Back', 'pulsar' ),
+		] : false;
+
+		$label_args = $has_submenu_label ? [
+			'text' => $block['attrs']['label'],
+		] : false;
+
+		$all_args = $has_submenu_all ? [
+			'url'  => $block['attrs']['url'],
+			'text' => __( 'View all', 'pulsar' ) . '<span class="screen-reader-text"> ' . $block['attrs']['label'] . '</span>',
+			'icon' => render_svg( $this->icons['all'] ),
+		] : false;
+
 		$back_button = $this->submenu_header_markup(
-			__( 'Back', 'pulsar' ),
-			$block['attrs']['label'],
-			$block['attrs']['url'] ?? '',
-			__( 'View all', 'pulsar' ) . '<span class="screen-reader-text"> ' . $block['attrs']['label'] . '</span>',
+			$back_args,
+			$label_args,
+			$all_args,
 		);
 
 		// Find the opening UL tag and add the back button within it.
@@ -162,39 +239,82 @@ class Navigation implements Bootable {
 	/**
 	 * Render the submenu header markup.
 	 *
-	 * @param string $back_text The back text.
-	 * @param string $label     The submenu title.
-	 * @param string $all_url   The view all URL.
-	 * @param string $all_text  The view all text.
+	 * @param array|bool $back  The back button arguments.
+	 * @param array|bool $label The label arguments.
+	 * @param array|bool $all   The all button arguments.
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
-	public function submenu_header_markup( $back_text, $label, $all_url, $all_text ): string {
+	public function submenu_header_markup( array|bool $back, array|bool $label, array|bool $all ): mixed {
 
-		$back_icon = render_svg( $this->icons['back'] );
+		// Set default arguments for the back button.
+		$back = $back ? wp_parse_args(
+			$back,
+			[
+				'icon' => render_svg( $this->icons['back'] ),
+				'text' => __( 'Back', 'pulsar' ),
+			]
+		) : false;
 
-		return sprintf(
-			'<li class="wp-block-navigation-item wp-block-navigation-submenu__header">
-				<button
+		// Set default arguments for the label.
+		$label = $label ? wp_parse_args(
+			$label,
+			[
+				'text' => '',
+			]
+		) : false;
+
+		// Set default arguments for the all button.
+		$all = $all ? wp_parse_args(
+			$all,
+			[
+				'url'  => '',
+				'text' => __( 'View all', 'pulsar' ),
+				'icon' => render_svg( $this->icons['all'] ),
+			]
+		) : false;
+
+		// Bail if no back button is set.
+		if ( ! $back ) {
+			return false;
+		}
+
+		// Build the back button markup.
+		$back_markup = sprintf(
+			'<button
 					class="wp-block-navigation-item__content wp-block-navigation-submenu__back"
 					data-wp-on--click="actions.toggleMenuOnClick"
 				>
 					%1$s %2$s
-				</button>
+				</button>',
+			$back['icon'],
+			$back['text'],
+		);
 
-				<span class="wp-block-navigation-submenu__label">
-					%3$s
-				</span>
+		// Build the label markup.
+		$label_markup = $label ? sprintf(
+			'<span class="wp-block-navigation-submenu__label">%s</span>',
+			$label['text'],
+		) : '';
 
-				<a href="%4$s" class="wp-block-navigation-submenu__all">
-					%5$s
-				</a>
+		// Build the all button markup.
+		$all_markup = $all ? sprintf(
+			'<a href="%1$s" class="wp-block-navigation-submenu__all">
+					%2$s %3$s
+				</a>',
+			$all['url'],
+			$all['text'],
+			$all['icon'],
+		) : '';
+
+		// Build the header markup.
+		return sprintf(
+			'<li class="wp-block-navigation-item wp-block-navigation-submenu__header">
+				%1$s %2$s %3$s
 			</li>',
-			$back_icon,
-			$back_text,
-			$label,
-			$all_url,
-			$all_text,
+			$back_markup,
+			$label_markup,
+			$all_markup,
 		);
 	}
 }
