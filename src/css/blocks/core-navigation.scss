@@ -90,6 +90,7 @@
 		background-color: inherit;
 		display: flex;
 		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--2-xs);
 		justify-content: space-between;
 
 		&:where(.has-child) {
@@ -119,45 +120,24 @@
 	&__submenu-container {
 		background-color: inherit;
 		color: inherit;
-		display: none;
+		display: flex;
 		flex-direction: column;
 		transition: all var(--wp--custom--transition-duration--quick);
 		visibility: hidden;
 		width: 100%;
 		z-index: 1;
 
-		:not(.hidden-by-default) & {
+		:where(:not(.hidden-by-default)) & {
 			align-items: normal;
-			background-color: inherit;
 			height: 0;
 			left: 0;
-			min-width: 250px;
+			min-width: 200px;
 			opacity: 0;
 			position: absolute;
 			top: 100%;
 			transform: none;
 			width: 0;
 			z-index: 2;
-
-			// Display a submenu when the parent is hovered
-			.has-child:where(:not(.open-on-click)):hover > & {
-				@media (--lg) {
-					height: auto;
-					min-width: 250px;
-					opacity: 1;
-					overflow: visible;
-					visibility: visible;
-
-					&:where(:not(.wp-block-pulsar-navigation-megamenu__container)) {
-						width: auto;
-					}
-				}
-			}
-		}
-
-		// Display a submenu when the parent is hovered
-		.has-child:where(.open-on-hover-click):hover > & {
-
 		}
 
 		&:empty {
@@ -176,9 +156,9 @@
 		}
 	}
 
-	// Display a submenu when the button is clicked
-	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container {
-		display: flex;
+	// Display a submenu when the button is clicked or when the parent is hovered
+	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container,
+	.has-child:not(.open-on-click):hover > .wp-block-navigation__submenu-container {
 		height: auto;
 		opacity: 1;
 		overflow: visible;
@@ -206,325 +186,322 @@
 
 		svg {
 			stroke: currentcolor;
+		}
+	}
+
+	// Nested submenus
+	.has-child .has-child {
+
+		// Icon not on mobile when in a submenu should point right
+		.wp-block-navigation__submenu-icon {
 			transform: rotate(-90deg);
-
-			@media (--lg) {
-				transform: rotate(0);
-			}
 		}
-
-		// // Icon not on mobile when in a submenu should point right
-		// .has-child #{$block}__submenu-container & svg {
-		// 	@media (--lg) {
-		// 		transform: rotate(-90deg);
-		// 	}
-		// }
 	}
 }
 
-///
-/// 2. Responsive navigation.
-///
-/// Behaviour is controlled by the overlay menu option in the editor.
-///
-/// All styles for responsive behaviour should be within this block
-/// Markup should be structured as follows:
-///
-/// <nav class="wp-block-navigation is-responsive">
-/// 	<button class="wp-block-navigation__responsive-container-open">
-/// 	<div class="wp-block-navigation__responsive-close">
-/// 		<div class="wp-block-navigation__responsive-dialog">
-/// 			<button class="wp-block-navigation__responsive-container-close">
-/// 			<div class="wp-block-navigation__responsive-container-content">
-/// 				<ul class="wp-block-navigation__container">
-/// 					<li class="wp-block-navigation-item">
-/// 						<a class="wp-block-navigation-item__content">
-/// 							<span class="wp-block-navigation-item__label">
-///						<li class="wp-block-navigation-item wp-block-navigation-submenu has-child">
-///							<a class="wp-block-navigation-item__content">
-/// 						<button class="wp-block-navigation-submenu__toggle">
-/// 						<ul class="wp-block-navigation__submenu-container">
-/// 							<li class="wp-block-navigation-submenu__header">
-/// 								<button class="wp-block-navigation-submenu__back">
-/// 								<span class="wp-block-navigation-submenu__label">
-/// 								<a class="wp-block-navigation-submenu__all">
-///
-///
-.wp-block-navigation:where(.is-responsive) {
+// ///
+// /// 2. Responsive navigation.
+// ///
+// /// Behaviour is controlled by the overlay menu option in the editor.
+// ///
+// /// All styles for responsive behaviour should be within this block
+// /// Markup should be structured as follows:
+// ///
+// /// <nav class="wp-block-navigation is-responsive">
+// /// 	<button class="wp-block-navigation__responsive-container-open">
+// /// 	<div class="wp-block-navigation__responsive-close">
+// /// 		<div class="wp-block-navigation__responsive-dialog">
+// /// 			<button class="wp-block-navigation__responsive-container-close">
+// /// 			<div class="wp-block-navigation__responsive-container-content">
+// /// 				<ul class="wp-block-navigation__container">
+// /// 					<li class="wp-block-navigation-item">
+// /// 						<a class="wp-block-navigation-item__content">
+// /// 							<span class="wp-block-navigation-item__label">
+// ///						<li class="wp-block-navigation-item wp-block-navigation-submenu has-child">
+// ///							<a class="wp-block-navigation-item__content">
+// /// 						<button class="wp-block-navigation-submenu__toggle">
+// /// 						<ul class="wp-block-navigation__submenu-container">
+// /// 							<li class="wp-block-navigation-submenu__header">
+// /// 								<button class="wp-block-navigation-submenu__back">
+// /// 								<span class="wp-block-navigation-submenu__label">
+// /// 								<a class="wp-block-navigation-submenu__all">
+// ///
+// ///
+// .wp-block-navigation:where(.is-responsive) {
 
-	// The navigation toggle button directly in the <nav> element
-	.wp-block-navigation__responsive-container-open {
-		align-items: center;
-		background-color: transparent;
-		border: 0;
-		cursor: pointer;
-		display: flex;
-		font-family: inherit;
-		font-size: inherit;
-		font-weight: inherit;
-		gap: inherit;
-		justify-content: center;
-		padding: 0;
+// 	// The navigation toggle button directly in the <nav> element
+// 	.wp-block-navigation__responsive-container-open {
+// 		align-items: center;
+// 		background-color: transparent;
+// 		border: 0;
+// 		cursor: pointer;
+// 		display: flex;
+// 		font-family: inherit;
+// 		font-size: inherit;
+// 		font-weight: inherit;
+// 		gap: inherit;
+// 		justify-content: center;
+// 		padding: 0;
 
-		// If overlay menu isn't set to always, hide the button on desktop
-		&:where(:not(.always-shown)) {
-			@media (--lg) {
-				display: none;
-			}
-		}
+// 		// If overlay menu isn't set to always, hide the button on desktop
+// 		&:where(:not(.always-shown)) {
+// 			@media (--lg) {
+// 				display: none;
+// 			}
+// 		}
 
-		svg {
-			&:first-child:where(:not(:only-child)) {
-				:where(.has-modal-open) & {
-					display: none;
-				}
-			}
+// 		svg {
+// 			&:first-child:where(:not(:only-child)) {
+// 				:where(.has-modal-open) & {
+// 					display: none;
+// 				}
+// 			}
 
-			&:last-child:where(:not(:only-child)) {
-				display: none;
+// 			&:last-child:where(:not(:only-child)) {
+// 				display: none;
 
-				:where(.has-modal-open) & {
-					display: block;
-				}
-			}
-		}
-	}
+// 				:where(.has-modal-open) & {
+// 					display: block;
+// 				}
+// 			}
+// 		}
+// 	}
 
-	// The main container for the navigation
-	//  Directly  within the <nav> element
-	.wp-block-navigation__responsive-container {
-		background-color: inherit;
-		gap: inherit;
-		height: var(--navigation-height);
-		left: 0;
-		opacity: 0;
-		position: absolute;
-		top: 100%;
-		transition: all var(--wp--custom--transition-duration--quick);
-		visibility: hidden;
-		width: 100%;
-		z-index: 1;
+// 	// The main container for the navigation
+// 	//  Directly  within the <nav> element
+// 	.wp-block-navigation__responsive-container {
+// 		background-color: inherit;
+// 		gap: inherit;
+// 		height: var(--navigation-height);
+// 		left: 0;
+// 		opacity: 0;
+// 		position: absolute;
+// 		top: 100%;
+// 		transition: all var(--wp--custom--transition-duration--quick);
+// 		visibility: hidden;
+// 		width: 100%;
+// 		z-index: 1;
 
-		// Class added when menu is opened
-		&:where(.is-menu-open) {
-			opacity: 1;
-			visibility: visible;
-		}
+// 		// Class added when menu is opened
+// 		&:where(.is-menu-open) {
+// 			opacity: 1;
+// 			visibility: visible;
+// 		}
 
-		// When not hidden by default option, show the navigation
-		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
-			@media (--lg) {
-				background-color: inherit;
-				display: block;
-				height: auto;
-				opacity: 1;
-				position: static;
-				visibility: visible;
-				width: 100%;
-				z-index: auto;
-			}
-		}
+// 		// When not hidden by default option, show the navigation
+// 		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
+// 			@media (--lg) {
+// 				background-color: inherit;
+// 				display: block;
+// 				height: auto;
+// 				opacity: 1;
+// 				position: static;
+// 				visibility: visible;
+// 				width: 100%;
+// 				z-index: auto;
+// 			}
+// 		}
 
-		// These are required due to the way colors are applied.
-		&:not(.is-menu-open.is-menu-open) {
-			background-color: inherit !important; // stylelint-disable-line declaration-no-important
-			color: inherit !important; // stylelint-disable-line declaration-no-important
-		}
-	}
+// 		// These are required due to the way colors are applied.
+// 		&:not(.is-menu-open.is-menu-open) {
+// 			background-color: inherit !important; // stylelint-disable-line declaration-no-important
+// 			color: inherit !important; // stylelint-disable-line declaration-no-important
+// 		}
+// 	}
 
-	// Another wrapper
-	.wp-block-navigation__responsive-close {
-		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
-		height: 100%;
-		width: 100%;
-	}
+// 	// Another wrapper
+// 	.wp-block-navigation__responsive-close {
+// 		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
+// 		height: 100%;
+// 		width: 100%;
+// 	}
 
-	// Another wrapper
-	.wp-block-navigation__responsive-dialog {
-		gap: inherit;
-		height: 100%;
-	}
+// 	// Another wrapper
+// 	.wp-block-navigation__responsive-dialog {
+// 		gap: inherit;
+// 		height: 100%;
+// 	}
 
-	// The main <ul> element
-	.wp-block-navigation__container {
-		--navigation-layout-direction: column;
-		--navigation-layout-align: stretch;
-		--navigation-layout-wrap: nowrap;
-		gap: 0;
-		height: 100%;
+// 	// The main <ul> element
+// 	.wp-block-navigation__container {
+// 		--navigation-layout-direction: column;
+// 		--navigation-layout-align: stretch;
+// 		--navigation-layout-wrap: nowrap;
+// 		gap: 0;
+// 		height: 100%;
 
-		@media (--lg) {
-			--navigation-layout-direction: row;
-			--navigation-layout-align: initial;
-			--navigation-layout-wrap: wrap;
-			gap: inherit;
-			height: auto;
-		}
-	}
+// 		@media (--lg) {
+// 			--navigation-layout-direction: row;
+// 			--navigation-layout-align: initial;
+// 			--navigation-layout-wrap: wrap;
+// 			gap: inherit;
+// 			height: auto;
+// 		}
+// 	}
 
-	// When navigation is set to always be a hamburger, always set as vertical
-	:where(.hidden-by-default) .wp-block-navigation__container {
-		--navigation-layout-direction: column;
-		--navigation-layout-align: stretch;
-		--navigation-layout-wrap: nowrap;
-	}
+// 	// When navigation is set to always be a hamburger, always set as vertical
+// 	:where(.hidden-by-default) .wp-block-navigation__container {
+// 		--navigation-layout-direction: column;
+// 		--navigation-layout-align: stretch;
+// 		--navigation-layout-wrap: nowrap;
+// 	}
 
-	// The default close button
-	// Style wise we tend to hide this and use the open button as a toggle instead.
-	.wp-block-navigation__responsive-container-close {
-		display: none;
+// 	// The default close button
+// 	// Style wise we tend to hide this and use the open button as a toggle instead.
+// 	.wp-block-navigation__responsive-container-close {
+// 		display: none;
 
-		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
-			@media (--lg) {
-				display: none;
-			}
-		}
-	}
+// 		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
+// 			@media (--lg) {
+// 				display: none;
+// 			}
+// 		}
+// 	}
 
-	.wp-block-navigation__submenu-container {
-		background-color: inherit;
-	}
+// 	.wp-block-navigation__submenu-container {
+// 		background-color: inherit;
+// 	}
 
-	// Display a submenu when the button is clicked
-	// This is important and controls both the mobile and desktop behaviour.
-	.wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
-		opacity: 1;
-		overflow: visible;
-		transform: translateX(0);
-		visibility: visible;
-	}
+// 	// Display a submenu when the button is clicked
+// 	// This is important and controls both the mobile and desktop behaviour.
+// 	.wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
+// 		opacity: 1;
+// 		overflow: visible;
+// 		transform: translateX(0);
+// 		visibility: visible;
+// 	}
 
-	// The last wrapper before the <ul> element
-	.wp-block-navigation__responsive-container-content {
-		gap: inherit;
-		height: 100%;
-	}
+// 	// The last wrapper before the <ul> element
+// 	.wp-block-navigation__responsive-container-content {
+// 		gap: inherit;
+// 		height: 100%;
+// 	}
 
-	.wp-block-navigation-item {
-		column-gap: var(--wp--preset--spacing--2-xs);
-	}
+// 	.wp-block-navigation-item {
+// 		column-gap: var(--wp--preset--spacing--2-xs);
+// 	}
 
-	.wp-block-navigation-submenu__header {
-		display: flex;
-		flex-wrap: nowrap;
-		gap: var(--wp--preset--spacing--2-xs);
-		justify-content: space-between;
+// 	.wp-block-navigation-submenu__header {
+// 		display: flex;
+// 		flex-wrap: nowrap;
+// 		gap: var(--wp--preset--spacing--2-xs);
+// 		justify-content: space-between;
 
-		svg {
-			height: 16px;
-			width: 16px;
-		}
-	}
+// 		svg {
+// 			height: 16px;
+// 			width: 16px;
+// 		}
+// 	}
 
-	.wp-block-navigation-submenu__back {
-		align-items: center;
-		background-color: transparent;
-		border: 0;
-		color: inherit;
-		cursor: pointer;
-		display: flex;
-		flex: 0 0 auto;
-		font-size: inherit;
-		gap: var(--wp--preset--spacing--2-xs);
-		margin-right: auto;
-		padding: 0;
-	}
+// 	.wp-block-navigation-submenu__back {
+// 		align-items: center;
+// 		background-color: transparent;
+// 		border: 0;
+// 		color: inherit;
+// 		cursor: pointer;
+// 		display: flex;
+// 		flex: 0 0 auto;
+// 		font-size: inherit;
+// 		gap: var(--wp--preset--spacing--2-xs);
+// 		margin-right: auto;
+// 		padding: 0;
+// 	}
 
-	.wp-block-navigation-submenu__label {
-		flex: 0 0 auto;
-		font-size: inherit;
-	}
+// 	.wp-block-navigation-submenu__label {
+// 		flex: 0 0 auto;
+// 		font-size: inherit;
+// 	}
 
-	.wp-block-navigation-submenu__all {
-		align-items: center;
-		background-color: transparent;
-		border: 0;
-		color: inherit;
-		cursor: pointer;
-		display: flex;
-		flex: 0 0 auto;
-		font-size: inherit;
-		gap: var(--wp--preset--spacing--2-xs);
-		margin-left: auto;
-		padding: 0;
-	}
+// 	.wp-block-navigation-submenu__all {
+// 		align-items: center;
+// 		background-color: transparent;
+// 		border: 0;
+// 		color: inherit;
+// 		cursor: pointer;
+// 		display: flex;
+// 		flex: 0 0 auto;
+// 		font-size: inherit;
+// 		gap: var(--wp--preset--spacing--2-xs);
+// 		margin-left: auto;
+// 		padding: 0;
+// 	}
 
-	///
-	/// 3. Sliding style submenu.
-	///
-	&:where(.has-submenu-back) {
-		.wp-block-navigation__submenu-icon {
+// 	///
+// 	/// 3. Sliding style submenu.
+// 	///
+// 	&:where(.has-submenu-back) {
+// 		.wp-block-navigation__submenu-icon {
 
-			// Rotate the icon to point to the way the submenu will slide in.
-			svg {
-				transform: rotate(-90deg);
-			}
-		}
+// 			// Rotate the icon to point to the way the submenu will slide in.
+// 			svg {
+// 				transform: rotate(-90deg);
+// 			}
+// 		}
 
-		.wp-block-navigation__submenu-container {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			left: 0;
-			overflow: hidden;
-			position: absolute;
-			right: 0;
-			top: 0;
-			transform: translateX(-100%);
-			transition: all var(--wp--custom--transition-duration--quick);
-			visibility: hidden;
-			z-index: 1;
+// 		.wp-block-navigation__submenu-container {
+// 			display: flex;
+// 			flex-direction: column;
+// 			height: 100%;
+// 			left: 0;
+// 			overflow: hidden;
+// 			position: absolute;
+// 			right: 0;
+// 			top: 0;
+// 			transform: translateX(-100%);
+// 			transition: all var(--wp--custom--transition-duration--quick);
+// 			visibility: hidden;
+// 			z-index: 1;
 
-			&.has-background {
-				padding: 0;
-			}
-		}
-	}
+// 			&.has-background {
+// 				padding: 0;
+// 			}
+// 		}
+// 	}
 
-	///
-	/// 4. Accordion style submenu
-	///
-	&:not(.has-submenu-back) {
-		.wp-block-navigation__submenu-container {
-			height: auto;
-			position: static;
-		}
+// 	///
+// 	/// 4. Accordion style submenu
+// 	///
+// 	&:not(.has-submenu-back) {
+// 		.wp-block-navigation__submenu-container {
+// 			height: auto;
+// 			position: static;
+// 		}
 
-		.wp-block-navigation__submenu-icon {
-			svg {
-				transform: rotate(0);
-			}
-		}
+// 		.wp-block-navigation__submenu-icon {
+// 			svg {
+// 				transform: rotate(0);
+// 			}
+// 		}
 
-		.wp-block-navigation-submenu__toggle[aria-expanded="true"] {
-			svg {
-				transform: rotate(180deg);
-			}
-		}
-	}
+// 		.wp-block-navigation-submenu__toggle[aria-expanded="true"] {
+// 			svg {
+// 				transform: rotate(180deg);
+// 			}
+// 		}
+// 	}
 
-	// Hide the submenu header on desktop as long as the menu is not hidden by default (always hamburger).
-	&:where(:not(.hidden-by-default)) .wp-block-navigation-submenu__header {
-		@media (--lg) {
-			display: none;
-		}
-	}
+// 	// Hide the submenu header on desktop as long as the menu is not hidden by default (always hamburger).
+// 	&:where(:not(.hidden-by-default)) .wp-block-navigation-submenu__header {
+// 		@media (--lg) {
+// 			display: none;
+// 		}
+// 	}
 
-	// When there is a seperate
-	// :where(.open-on-hover-click) .wp-block-navigation-submenu__toggle {
-	// 	aspect-ratio: 1 / 1;
-	// 	border: 1px solid;
-	// 	cursor: pointer;
-	// 	height: 100%;
-	// 	margin: 0;
-	// 	width: auto;
+// 	// When there is a seperate
+// 	// :where(.open-on-hover-click) .wp-block-navigation-submenu__toggle {
+// 	// 	aspect-ratio: 1 / 1;
+// 	// 	border: 1px solid;
+// 	// 	cursor: pointer;
+// 	// 	height: 100%;
+// 	// 	margin: 0;
+// 	// 	width: auto;
 
-	// 	@media (--lg) {
-	// 		aspect-ratio: unset;
-	// 		border: unset;
-	// 		cursor: unset;
-	// 		height: auto;
-	// 		width: auto;
-	// 	}
-	// }
-}
+// 	// 	@media (--lg) {
+// 	// 		aspect-ratio: unset;
+// 	// 		border: unset;
+// 	// 		cursor: unset;
+// 	// 		height: auto;
+// 	// 		width: auto;
+// 	// 	}
+// 	// }
+// }
