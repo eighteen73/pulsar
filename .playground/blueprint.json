@@ -12,7 +12,7 @@
 			"step": "installTheme",
 			"themeZipFile": {
 				"resource": "url",
-				"url": "https://github.com/eighteen73/pulsar/archive/refs/heads/main.zip"
+				"url": "https://github-proxy.com/proxy/?repo=eighteen73/pulsar&branch=main"
 			},
 			"options": {
 				"activate": true
@@ -22,7 +22,7 @@
 			"step": "installPlugin",
 			"pluginZipFile": {
 				"resource": "url",
-				"url": "https://github.com/eighteen73/pulsar-blocks/archive/refs/heads/main.zip"
+				"url": "https://github-proxy.com/proxy/?repo=eighteen73/pulsar-blocks&branch=main"
 			}
 		},
 		{
