@@ -33,8 +33,8 @@ const additionalAttributes = {
  * @type {object}
  */
 const classes = {
-	slide: 'is-style-slide',
-	accordion: 'is-style-accordion',
+	slide: 'is-submenu-style-slide',
+	accordion: 'is-submenu-style-accordion',
 	back: 'has-submenu-back',
 	label: 'has-submenu-label',
 	all: 'has-submenu-all',
@@ -118,8 +118,8 @@ function generateClassNames(attributes) {
 	const classesList = new TokenList();
 	if (isResponsive) {
 		if (hasSubmenuBack) {
-			classesList.add(classes.back);
 			classesList.add(classes.slide);
+			classesList.add(classes.back);
 		} else {
 			classesList.add(classes.accordion);
 		}

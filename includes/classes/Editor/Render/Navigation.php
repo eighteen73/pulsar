@@ -16,6 +16,13 @@ use function Pulsar\render_svg;
  */
 class Navigation implements Bootable {
 
+	protected array $classes = [
+		'submenu-slide'     => 'is-submenu-style-slide',
+		'submenu-accordion' => 'is-submenu-style-accordion',
+		'submenu-back'      => 'has-submenu-back',
+		'submenu-label'     => 'has-submenu-label',
+		'submenu-all'       => 'has-submenu-all',
+	];
 
 	/**
 	 * The submenu blocks.
@@ -84,18 +91,18 @@ class Navigation implements Bootable {
 		$tags->next_tag( [ 'class_name' => 'wp-block-navigation' ] );
 
 		if ( isset( $block['attrs']['hasSubmenuBack'] ) && $block['attrs']['hasSubmenuBack'] ) {
-			$tags->add_class( 'is-style-slide' );
-			$tags->add_class( 'has-submenu-back' );
+			$tags->add_class( $this->classes['submenu-slide'] );
+			$tags->add_class( $this->classes['submenu-back'] );
 		} else {
-			$tags->add_class( 'is-style-accordion' );
+			$tags->add_class( $this->classes['submenu-accordion'] );
 		}
 
 		if ( isset( $block['attrs']['hasSubmenuLabel'] ) && $block['attrs']['hasSubmenuLabel'] ) {
-			$tags->add_class( 'has-submenu-label' );
+			$tags->add_class( $this->classes['submenu-label'] );
 		}
 
 		if ( isset( $block['attrs']['hasSubmenuAll'] ) && $block['attrs']['hasSubmenuAll'] ) {
-			$tags->add_class( 'has-submenu-all' );
+			$tags->add_class( $this->classes['submenu-all'] );
 		}
 
 		$block_content = $tags->get_updated_html();
