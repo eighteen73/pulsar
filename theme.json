@@ -63,9 +63,14 @@
 					"color": "var:custom|color|secondary|500"
 				},
 				{
-					"name": "Tertiary",
-					"slug": "tertiary",
-					"color": "var:custom|color|tertiary|500"
+					"name": "Neutral: 0",
+					"slug": "neutral-0",
+					"color": "var:custom|color|neutral|0"
+				},
+				{
+					"name": "Neutral: 1000",
+					"slug": "neutral-1000",
+					"color": "var:custom|color|neutral|1000"
 				}
 			],
 			"text": false
@@ -85,7 +90,7 @@
 					"800": "#3F474D",
 					"900": "#383D42",
 					"950": "#25282C",
-					"1000": "#00000"
+					"1000": "#000000"
 				},
 				"primary": {
 					"50": "#F4F6FB",
