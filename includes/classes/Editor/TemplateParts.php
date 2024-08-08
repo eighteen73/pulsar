@@ -23,7 +23,6 @@ class TemplateParts implements Bootable {
 	 * @return void
 	 */
 	public function boot(): void {
-		add_filter( 'default_wp_template_part_areas', [ $this, 'template_part_areas' ] );
 		add_action( 'rest_api_init', [ $this, 'register_template_parts_route' ] );
 	}
 
