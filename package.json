@@ -26,7 +26,6 @@
 		"@wordpress/icons": "^9.31.0",
 		"@wordpress/prettier-config": "^2.20.0",
 		"@wordpress/scripts": "^26.6",
-		"alpinejs": "^3.12",
 		"fast-glob": "^3.3.0",
 		"merge-jsons-webpack-plugin": "^2.0.1",
 		"postcss-preset-env": "^9.0.0",
