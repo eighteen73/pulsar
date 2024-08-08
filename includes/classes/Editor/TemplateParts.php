@@ -28,25 +28,6 @@ class TemplateParts implements Bootable {
 	}
 
 	/**
-	 * Add custom template part areas.
-	 *
-	 * @param array $areas The default areas.
-	 *
-	 * @return array
-	 */
-	public function template_part_areas( array $areas ): array {
-		$areas[] = array(
-			'area'        => 'megamenu',
-			'area_tag'    => 'div',
-			'description' => __( 'Megamenu templates are used to create sections of a megamenu.', 'pulsar' ),
-			'icon'        => 'layout',
-			'label'       => __( 'Megamenu', 'pulsar' ),
-		);
-
-		return $areas;
-	}
-
-	/**
 	 * Register the route for the template parts.
 	 *
 	 * @return void
