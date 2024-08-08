@@ -2,7 +2,7 @@
 @use "sass:map";
 @use "sass:list";
 
-/// Adjusts the `--wp--custom--layout--content` css variable,
+/// Adjusts the `--wp--style--global--wide-size` css variable,
 /// which is used for the container per breakpoint.
 /// This lets the container behave like Tailwind, where it
 /// snaps to sizes at breakpoints.

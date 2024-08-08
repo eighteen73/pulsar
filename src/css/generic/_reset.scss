@@ -1,15 +1,6 @@
 @import "~modern-normalize/modern-normalize.css";
 
-button {
-	color: inherit;
-}
-
-img,
-picture {
-	height: auto;
-	max-width: 100%;
-}
-
+/// Reset margins.
 body,
 h1,
 h2,
@@ -21,30 +12,4 @@ blockquote,
 dl,
 dd {
 	margin-block-end: 0;
-}
-
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-	scroll-margin-block: var(--wp--custom--spacing--group-gap);
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-	display: block;
-	max-width: 100%;
-	vertical-align: bottom;
-}
-
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-
-button {
-	padding: 0; // Safari adds large default padding to a button.
 }

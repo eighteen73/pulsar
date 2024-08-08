@@ -8,9 +8,21 @@ html {
 
 body {
 	font-family: var(--wp--preset--font-family--primary);
-	font-size: var(--wp--preset--font-size--md);
+	font-size: var(--wp--preset--font-size--lg);
 	-webkit-font-smoothing: antialiased;
-	line-height: var(--wp--custom--line-height--relaxed);
+	letter-spacing: var(--wp--custom--letter-spacing--tight);
+	line-height: var(--wp--custom--line-height--normal);
 
 	@include container-sizes(sm, md, lg, xl, 2-xl);
+}
+
+/// Selection styles.
+::selection {
+	background: var(--wp--custom--color--primary--500);
+	color: var(--wp--custom--color--neutral--0);
+}
+
+/// Anything that has been anchored to should have extra scroll margin.
+:target {
+	scroll-margin-block: var(--wp--custom--spacing--group-gap);
 }

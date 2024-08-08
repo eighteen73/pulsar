@@ -88,69 +88,45 @@
 					"1000": "#00000"
 				},
 				"primary": {
-					"50": "#FEF2F3",
-					"100": "#FEE5E7",
-					"200": "#FCCFD5",
-					"300": "#F9A8B2",
-					"400": "#F4788A",
-					"500": "#E93756",
-					"600": "#D7274F",
-					"700": "#B51B40",
-					"800": "#98193C",
-					"900": "#821939",
-					"950": "#48091B"
+					"50": "#F4F6FB",
+					"100": "#E8ECF6",
+					"200": "#CBD8EC",
+					"300": "#9DB7DC",
+					"400": "#6890C8",
+					"500": "#4573B2",
+					"600": "#335A96",
+					"700": "#2B4879",
+					"800": "#273E65",
+					"900": "#253655",
+					"950": "#090D15"
 				},
 				"secondary": {
-					"50": "#EEF2FF",
-					"100": "#E0E7FF",
-					"200": "#C6D1FF",
-					"300": "#A4B2FD",
-					"400": "#8089F9",
-					"500": "#6162F3",
-					"600": "#4F44E7",
-					"700": "#4436CC",
-					"800": "#382FA4",
-					"900": "#312D82",
-					"950": "#201C50"
+					"50": "#F6F4FB",
+					"100": "#ECE8F6",
+					"200": "#D1CBEC",
+					"300": "#A89DDC",
+					"400": "#7868C8",
+					"500": "#5745B2",
+					"600": "#463396",
+					"700": "#3B2B79",
+					"800": "#342765",
+					"900": "#302555",
+					"950": "#0C0915"
 				},
 				"error": {
-					"50": "#FEF2F2",
-					"100": "#FEE2E2",
-					"200": "#FECACA",
-					"300": "#FCA5A5",
-					"400": "#F87171",
-					"500": "#EF4444",
-					"600": "#DC2626",
-					"700": "#B91C1C",
-					"800": "#991B1B",
-					"900": "#7F1D1D",
-					"950": "#450A0A"
+					"100": "#FFCDD2",
+					"500": "#F44336",
+					"900": "#B71C1C"
 				},
 				"warning": {
-					"50": "#FFFFEA",
-					"100": "#FFFBC5",
-					"200": "#FFF885",
-					"300": "#FFED46",
-					"400": "#FFDF1B",
-					"500": "#FFBF00",
-					"600": "#E29300",
-					"700": "#BB6802",
-					"800": "#985008",
-					"900": "#7C420B",
-					"950": "#482200"
+					"100": "#F9EACC",
+					"500": "#EDB95E",
+					"900": "#C75F18"
 				},
 				"success": {
-					"50": "#EDFCF4",
-					"100": "#D3F8E3",
-					"200": "#AAF0CD",
-					"300": "#73E2B1",
-					"400": "#3BCC91",
-					"500": "#19BC7F",
-					"600": "#0C8F61",
-					"700": "#097350",
-					"800": "#0A5B41",
-					"900": "#094B36",
-					"950": "#042A1F"
+					"100": "#E0F4D3",
+					"500": "#67C23A",
+					"900": "#29491E"
 				},
 				"focus": "var:custom|color|primary|300"
 			},
@@ -159,9 +135,11 @@
 				"wide": "1536px"
 			},
 			"spacing": {
-				"blockGap": "var:preset|spacing|md",
+				"blockGap": "var:preset|spacing|lg",
 				"groupGap": "var:preset|spacing|4-xl",
-				"edge": "clamp(var(--wp--preset--spacing--lg), 5.3333px + 5.8333vw, var(--wp--preset--spacing--3-xl))"
+				"rowGap": "var:preset|spacing|2-xl",
+				"columnGap": "var:preset|spacing|2-xl",
+				"edge": "clamp(var(--wp--preset--spacing--xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--4-xl))"
 			},
 			"lineHeight": {
 				"none": "1",
@@ -185,7 +163,7 @@
 				"md": "clamp(16px, 2.5vw, 24px)",
 				"lg": "clamp(24px, 3.5vw, 48px)",
 				"xl": "clamp(48px, 4.5vw, 96px)",
-				"full": "9999px"
+				"full": "100%"
 			},
 			"boxShadow": {
 				"2-xs": "0 1px 2px 0 hsl(from var(--wp--custom--color--neutral--500) h s l / 0.5)",
@@ -257,74 +235,74 @@
 			"padding": true,
 			"spacingSizes": [
 				{
-					"name": "4px",
+					"name": "2XS (4px)",
 					"size": "4px",
-					"slug": "3-xs"
-				},
-				{
-					"name": "8px",
-					"size": "8px",
 					"slug": "2-xs"
 				},
 				{
-					"name": "12px",
-					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
+					"name": "XS (8px)",
+					"size": "8px",
 					"slug": "xs"
 				},
 				{
-					"name": "16px",
-					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
+					"name": "SM (12px)",
+					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
 					"slug": "sm"
 				},
 				{
-					"name": "24px",
-					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
+					"name": "MD (16px)",
+					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
 					"slug": "md"
 				},
 				{
-					"name": "32px",
-					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
+					"name": "LG (24px)",
+					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
 					"slug": "lg"
 				},
 				{
-					"name": "48px",
-					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
+					"name": "XL (32px)",
+					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
 					"slug": "xl"
 				},
 				{
-					"name": "64px",
-					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
+					"name": "2XL (48px)",
+					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
 					"slug": "2-xl"
 				},
 				{
-					"name": "80px",
-					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
+					"name": "3XL (64px)",
+					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
 					"slug": "3-xl"
 				},
 				{
-					"name": "96px",
-					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
+					"name": "4XL (80px)",
+					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
 					"slug": "4-xl"
 				},
 				{
-					"name": "112px",
-					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
+					"name": "5XL (96px)",
+					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
 					"slug": "5-xl"
 				},
 				{
-					"name": "128px",
-					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
+					"name": "6XL (112px)",
+					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
 					"slug": "6-xl"
 				},
 				{
-					"name": "154px",
-					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
+					"name": "7XL (128px)",
+					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
 					"slug": "7-xl"
 				},
 				{
-					"name": "186px",
-					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
+					"name": "8XL (154px)",
+					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
 					"slug": "8-xl"
+				},
+				{
+					"name": "9XL (186px)",
+					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
+					"slug": "9-xl"
 				}
 			],
 			"units": [
@@ -365,82 +343,91 @@
 				{
 					"name": "2XS",
 					"slug": "2-xs",
-					"size": "15px",
-					"fluid": {
-						"min": "13px",
-						"max": "15px"
-					}
+					"size": "11px",
+					"fluid": false
 				},
 				{
 					"name": "XS",
 					"slug": "xs",
-					"size": "16px",
-					"fluid": {
-						"min": "16px",
-						"max": "16px"
-					}
+					"size": "12px",
+					"fluid": false
 				},
 				{
-					"name": "Small",
+					"name": "SM",
 					"slug": "sm",
-					"size": "18px",
-					"fluid": {
-						"min": "18px",
-						"max": "18px"
-					}
+					"size": "14px",
+					"fluid": false
 				},
 				{
-					"name": "Medium",
+					"name": "MD",
 					"slug": "md",
-					"size": "20px",
-					"fluid": {
-						"min": "18px",
-						"max": "20px"
-					}
+					"size": "16px",
+					"fluid": false
 				},
 				{
-					"name": "Large",
+					"name": "LG",
 					"slug": "lg",
-					"size": "24px",
-					"fluid": {
-						"min": "24px",
-						"max": "24px"
-					}
+					"size": "18px",
+					"fluid": false
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "35px",
-					"fluid": {
-						"min": "22px",
-						"max": "35px"
-					}
+					"size": "20px",
+					"fluid": false
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
-					"size": "44px",
+					"size": "25px",
 					"fluid": {
-						"min": "25px",
-						"max": "44px"
+						"min": "23px",
+						"max": "25px"
 					}
 				},
 				{
 					"name": "3XL",
 					"slug": "3-xl",
-					"size": "50px",
+					"size": "30px",
 					"fluid": {
-						"min": "37px",
-						"max": "50px"
+						"min": "25px",
+						"max": "30px"
 					}
 				},
 				{
 					"name": "4XL",
 					"slug": "4-xl",
-					"size": "63px",
+					"size": "37px",
 					"fluid": {
-						"min": "43px",
-						"max": "63px"
+						"min": "28px",
+						"max": "37px"
+					}
+				},
+				{
+					"name": "5XL",
+					"slug": "5-xl",
+					"size": "45px",
+					"fluid": {
+						"min": "32px",
+						"max": "45px"
+					}
+				},
+				{
+					"name": "6XL",
+					"slug": "6-xl",
+					"size": "55px",
+					"fluid": {
+						"min": "37px",
+						"max": "55px"
+					}
+				},
+				{
+					"name": "7XL",
+					"slug": "7-xl",
+					"size": "96px",
+					"fluid": {
+						"min": "37px",
+						"max": "96px"
 					}
 				}
 			],
