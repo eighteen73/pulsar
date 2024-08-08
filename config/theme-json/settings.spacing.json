@@ -10,74 +10,74 @@
 			"padding": true,
 			"spacingSizes": [
 				{
-					"name": "4px",
+					"name": "2XS (4px)",
 					"size": "4px",
-					"slug": "3-xs"
-				},
-				{
-					"name": "8px",
-					"size": "8px",
 					"slug": "2-xs"
 				},
 				{
-					"name": "12px",
-					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
+					"name": "XS (8px)",
+					"size": "8px",
 					"slug": "xs"
 				},
 				{
-					"name": "16px",
-					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
+					"name": "SM (12px)",
+					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
 					"slug": "sm"
 				},
 				{
-					"name": "24px",
-					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
+					"name": "MD (16px)",
+					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
 					"slug": "md"
 				},
 				{
-					"name": "32px",
-					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
+					"name": "LG (24px)",
+					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
 					"slug": "lg"
 				},
 				{
-					"name": "48px",
-					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
+					"name": "XL (32px)",
+					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
 					"slug": "xl"
 				},
 				{
-					"name": "64px",
-					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
+					"name": "2XL (48px)",
+					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
 					"slug": "2-xl"
 				},
 				{
-					"name": "80px",
-					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
+					"name": "3XL (64px)",
+					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
 					"slug": "3-xl"
 				},
 				{
-					"name": "96px",
-					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
+					"name": "4XL (80px)",
+					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
 					"slug": "4-xl"
 				},
-        {
-					"name": "112px",
-					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
+				{
+					"name": "5XL (96px)",
+					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
 					"slug": "5-xl"
 				},
         {
-					"name": "128px",
-					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
+					"name": "6XL (112px)",
+					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
 					"slug": "6-xl"
 				},
         {
-					"name": "154px",
-					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
+					"name": "7XL (128px)",
+					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
 					"slug": "7-xl"
 				},
         {
-					"name": "186px",
-					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
+					"name": "8XL (154px)",
+					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
 					"slug": "8-xl"
+				},
+        {
+					"name": "9XL (186px)",
+					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
+					"slug": "9-xl"
 				}
 			],
 			"units": ["%", "px", "em", "rem", "vh", "vw"]
