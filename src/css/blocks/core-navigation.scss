@@ -316,6 +316,7 @@ $responsive_breakpoint: --lg;
 		z-index: 1;
 
 		// Class added when menu is opened
+		// This is where the overlay can be animated differently if needed.
 		&:where(.is-menu-open) {
 			opacity: 1;
 			visibility: visible;
@@ -339,6 +340,25 @@ $responsive_breakpoint: --lg;
 		&:not(.is-menu-open.is-menu-open) {
 			background-color: inherit !important; // stylelint-disable-line declaration-no-important
 			color: inherit !important; // stylelint-disable-line declaration-no-important
+		}
+
+		// The default close button
+		// Style wise we tend to hide this and use the open button as a toggle instead.
+		.wp-block-navigation__responsive-container-close {
+			display: none;
+		}
+
+		// When the menu is always hidden, assume it's a modal and set the position to fixed
+		&:where(.hidden-by-default) {
+			inset: 0;
+			position: fixed;
+
+			.wp-block-navigation__responsive-container-close {
+				display: flex;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
 		}
 	}
 
@@ -376,18 +396,6 @@ $responsive_breakpoint: --lg;
 		--navigation-layout-direction: column;
 		--navigation-layout-align: stretch;
 		--navigation-layout-wrap: nowrap;
-	}
-
-	// The default close button
-	// Style wise we tend to hide this and use the open button as a toggle instead.
-	.wp-block-navigation__responsive-container-close {
-		display: none;
-
-		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
-			@media ($responsive_breakpoint) {
-				display: none;
-			}
-		}
 	}
 
 	.wp-block-navigation__submenu-container {

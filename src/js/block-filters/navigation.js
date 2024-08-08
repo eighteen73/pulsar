@@ -1,7 +1,6 @@
 // WordPress dependencies.
 import { InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl, PanelBody } from '@wordpress/components';
-import { addFilter } from '@wordpress/hooks';
 import TokenList from '@wordpress/token-list';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -116,6 +115,7 @@ function generateClassNames(attributes) {
 	const isResponsive = overlayMenu === 'mobile' || overlayMenu === 'always';
 
 	const classesList = new TokenList();
+
 	if (isResponsive) {
 		if (hasSubmenuBack) {
 			classesList.add(classes.slide);
