@@ -24,10 +24,15 @@
 					"slug": "secondary",
 					"color": "var:custom|color|secondary|500"
 				},
-				{
-					"name": "Tertiary",
-					"slug": "tertiary",
-					"color": "var:custom|color|tertiary|500"
+        {
+					"name": "Neutral: 0",
+					"slug": "neutral-0",
+					"color": "var:custom|color|neutral|0"
+				},
+        {
+					"name": "Neutral: 1000",
+					"slug": "neutral-1000",
+					"color": "var:custom|color|neutral|1000"
 				}
 			],
 			"text": false
