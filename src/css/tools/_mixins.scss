@@ -82,3 +82,15 @@
 	width: auto #{$important};
 	z-index: 0;
 }
+
+/// Display a submenu.
+/// Unfortunately a placeholder doesn't work within a media query, so a mixin was the next best thing.
+///
+@mixin submenu-show() {
+	height: auto;
+	opacity: 1;
+	overflow: visible;
+	transform: translateX(0);
+	visibility: visible;
+	width: auto;
+}

@@ -10,7 +10,7 @@
 /// 5. Accordion style submenu.
 ///
 
-$responsive_breakpoint: --lg;
+$responsive-breakpoint: --lg;
 
 .has-modal-open {
 	overflow: hidden;
@@ -40,6 +40,9 @@ $responsive_breakpoint: --lg;
 
 	// Set a consistent size for icons.
 	--navigation-icon-size: 10px;
+
+	// Set a consistent width for submenus
+	--navigation-submenu-width: 200px;
 
 	gap: var(--navigation-gap);
 
@@ -101,6 +104,10 @@ $responsive_breakpoint: --lg;
 		flex-wrap: wrap;
 		gap: var(--navigation-item-gap);
 		justify-content: space-between;
+
+		&:where(.has-child) {
+			position: relative;
+		}
 	}
 
 	// A single menu link/button
@@ -121,6 +128,10 @@ $responsive_breakpoint: --lg;
 		color: inherit;
 		display: flex;
 		flex-direction: column;
+		left: 0;
+		min-width: var(--navigation-submenu-width);
+		position: absolute;
+		top: 100%;
 		transition: all var(--wp--custom--transition-duration--quick);
 		visibility: hidden;
 		width: 100%;
@@ -135,17 +146,27 @@ $responsive_breakpoint: --lg;
 		&.has-background {
 			padding: 0;
 		}
+
+		// Nested submenus should be positioned to the right
+		.wp-block-navigation__submenu-container {
+			left: 100%;
+			top: 0;
+		}
+	}
+
+	// Nested children
+	:where(.has-child) :where(.has-child) {
+
+		// Icon should point to the right for nested submenus when the menu is not hidden by default
+		.wp-block-navigation__submenu-icon,
+		.wp-block-navigation__submenu-icon[aria-expanded="true"] {
+			transform: rotate(-90deg);
+		}
 	}
 
 	/// Display a submenu when the button is clicked or when the parent is hovered when open-on-hover-click is set
-	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container,
-	.has-child:not(.open-on-click):hover > .wp-block-navigation__submenu-container {
-		height: auto;
-		opacity: 1;
-		overflow: visible;
-		transform: translateX(0);
-		visibility: visible;
-		width: auto;
+	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container {
+		@include submenu-show;
 	}
 
 	// The submenu icon
@@ -176,11 +197,11 @@ $responsive_breakpoint: --lg;
 
 		// When the submenu is not hidden by default, style as a dropdown
 		.wp-block-navigation__submenu-container {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				align-items: normal;
 				height: 0;
 				left: 0;
-				min-width: 200px;
+				min-width: var(--navigation-submenu-width);
 				opacity: 0;
 				position: absolute;
 				top: 100%;
@@ -191,7 +212,7 @@ $responsive_breakpoint: --lg;
 
 			// Nested submenus should be positioned to the right
 			.wp-block-navigation__submenu-container {
-				@media ($responsive_breakpoint) {
+				@media ($responsive-breakpoint) {
 					left: 100%;
 					top: 0;
 				}
@@ -200,24 +221,24 @@ $responsive_breakpoint: --lg;
 
 		.wp-block-navigation__submenu-icon,
 		.wp-block-navigation__submenu-icon[aria-expanded="true"] {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				transform: rotate(0);
 			}
 		}
 
 		.has-child {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				position: relative;
 			}
 		}
 
 		// Nested children
-		.has-child .has-child {
+		:where(.has-child) :where(.has-child) {
 
 			// Icon should point to the right for nested submenus when the menu is not hidden by default
 			.wp-block-navigation__submenu-icon,
 			.wp-block-navigation__submenu-icon[aria-expanded="true"] {
-				@media ($responsive_breakpoint) {
+				@media ($responsive-breakpoint) {
 					transform: rotate(-90deg);
 				}
 			}
@@ -225,7 +246,7 @@ $responsive_breakpoint: --lg;
 
 		// Hide the submenu header on desktop
 		.wp-block-navigation-submenu__header {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				display: none;
 			}
 		}
@@ -278,7 +299,7 @@ $responsive_breakpoint: --lg;
 
 		// If overlay menu isn't set to always, hide the button on desktop
 		&:where(:not(.always-shown)) {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				display: none;
 			}
 		}
@@ -324,7 +345,7 @@ $responsive_breakpoint: --lg;
 
 		// When not hidden by default option, show the navigation
 		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
-			@media ($responsive_breakpoint) {
+			@media ($responsive-breakpoint) {
 				background-color: inherit;
 				display: block;
 				height: auto;
@@ -383,7 +404,7 @@ $responsive_breakpoint: --lg;
 		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
 		height: 100%;
 
-		@media ($responsive_breakpoint) {
+		@media ($responsive-breakpoint) {
 			--navigation-layout-direction: row;
 			--navigation-layout-align: initial;
 			--navigation-layout-wrap: wrap;
@@ -405,10 +426,7 @@ $responsive_breakpoint: --lg;
 	// Display a submenu when the button is clicked
 	// This is important and controls both the mobile and desktop behaviour.
 	.wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
-		opacity: 1;
-		overflow: visible;
-		transform: translateX(0);
-		visibility: visible;
+		@include submenu-show;
 	}
 
 	// The last wrapper before the <ul> element
