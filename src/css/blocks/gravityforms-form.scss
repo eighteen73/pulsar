@@ -1,0 +1,239 @@
+@use "../tools" as *;
+
+.gform_wrapper {
+	margin-top: 0;
+
+	.gform_fields {
+		display: grid;
+		gap: var(--wp--custom--spacing--block-gap);
+
+		@media (--md) {
+			grid-template-columns: repeat(12, 1fr);
+		}
+	}
+
+	.gfield {
+		grid-column: 1 / -1;
+
+		@media (--md) {
+			&--width-quarter {
+				grid-column: span 3;
+			}
+
+			&--width-third {
+				grid-column: span 4;
+			}
+
+			&--width-five-twelfths {
+				grid-column: span 5;
+			}
+
+			&--width-half {
+				grid-column: span 6;
+			}
+
+			&--width-seven-twelfths {
+				grid-column: span 7;
+			}
+
+			&--width-two-thirds {
+				grid-column: span 8;
+			}
+
+			&--width-three-quarter {
+				grid-column: span 9;
+			}
+		}
+	}
+
+	.hidden_label {
+		> .gfield_label {
+			@include hide-visually;
+		}
+	}
+
+	.gform_required_legend {
+		display: none;
+	}
+
+	.gfield_required {
+		color: var(--wp--custom--color--text--error);
+	}
+
+	.gfield_label {
+		margin-bottom: var(--wp--preset--spacing--xs);
+
+		> .gfield_required {
+			margin-left: var(--wp--preset--spacing--2-xs);
+		}
+	}
+
+	.ginput_container {
+		> :where(input, select):where(:not([type="radio"], [type="checkbox"])) {
+			width: 100%;
+		}
+	}
+
+	.gfield--type-captcha {
+		label {
+			@include hide-visually;
+		}
+	}
+
+	.ginput_container_radio,
+	.ginput_container_checkbox,
+	.ginput_container_consent {
+		label {
+			display: inline-block;
+			margin: 0;
+			vertical-align: middle;
+		}
+	}
+
+	.ginput_container_consent {
+		display: inline-grid;
+		gap: var(--wp--preset--spacing--xs);
+		grid-template-columns: minmax(16px, max-content) auto;
+
+		input {
+			position: relative;
+			top: 4px;
+		}
+	}
+
+	.gform_confirmation_message {
+		text-align: center;
+	}
+
+	.gform_button {
+	}
+
+	.gform_validation_errors {
+		margin-bottom: var(--wp--preset--spacing--lg);
+	}
+
+	.gform_footer {
+		margin-top: var(--wp--preset--spacing--xl);
+	}
+
+	.gform_submission_error {
+		color: var(--wp--custom--color--text--error);
+		font-size: var(--wp--preset--font-size--md);
+		font-weight: 400;
+		margin-top: 0;
+		text-transform: none;
+
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	.gfield_error {
+		input,
+		select,
+		textarea {
+			border-color: var(--wp--custom--color--text--error);
+		}
+	}
+
+	.validation_message {
+		color: var(--wp--custom--color--text--error);
+		margin-top: var(--wp--preset--spacing--xs);
+	}
+
+	.gform_title {
+		@include hide-visually;
+	}
+
+	.gform_hidden {
+		display: none;
+	}
+
+	.gform_validation_container {
+		display: none !important;
+		left: -9999px;
+		position: absolute !important;
+	}
+}
+
+.gform_ajax_spinner {
+	display: none;
+}
+
+.gform_button__loading {
+	animation: 1000ms rotate linear infinite;
+	border: 3px solid;
+	border-color:
+		var(--wp--custom--color--neutral--0) #0000
+		var(--wp--custom--color--neutral--0) #0000;
+	border-radius: 50%;
+	box-sizing: border-box;
+	display: inline-block;
+	height: 24px;
+	position: relative;
+	scale: 0.6;
+	visibility: hidden;
+	width: 24px;
+
+	.is-loading & {
+		visibility: visible;
+	}
+
+	&::before,
+	&::after {
+		border: 5px solid transparent;
+		border-bottom-color: var(--wp--custom--color--neutral--0);
+		content: "";
+		left: 0;
+		position: absolute;
+		top: 0;
+		transform: translate(-5px, 9.5px) rotate(-35deg);
+	}
+
+	&::after {
+		border-color: var(--wp--custom--color--neutral--0) #0000 #0000 #0000;
+		transform: translate(16px, 1.5px) rotate(-35deg);
+	}
+}
+
+@keyframes rotate {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.grecaptcha-badge {
+	visibility: hidden !important; // stylelint-disable-line declaration-no-important
+}
+
+.gform-theme-datepicker {
+	background-color: var(--wp--custom--color--neutral--0);
+	border: 1px solid var(--wp--custom--color--primary--200);
+	padding: var(--wp--preset--spacing--xs);
+
+	.ui-datepicker-header {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--2-xs);
+		justify-content: space-between;
+	}
+
+	.ui-datepicker-title {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--2-xs);
+		width: 100%;
+	}
+
+	.ui-datepicker-calendar {
+		width: 100%;
+
+		thead {
+			text-align: left;
+		}
+	}
+
+	.ui-state-active {
+		text-decoration: underline;
+	}
+}
