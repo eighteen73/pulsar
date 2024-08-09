@@ -150,8 +150,10 @@ label {
 }
 
 // Make sure buttons inherit color in Safari.
+// Also remove padding by default.
 button {
 	color: inherit;
+	padding: 0;
 }
 
 ::-webkit-datetime-edit-fields-wrapper {

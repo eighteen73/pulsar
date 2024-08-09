@@ -8,8 +8,4 @@
 	color: var(--wp--custom--color--neutral--1000);
 	display: inline-flex;
 	padding: var(--wp--preset--spacing--sm);
-
-	&:focus-visible {
-		background-color: var(--wp--custom--color--focus);
-	}
 }
