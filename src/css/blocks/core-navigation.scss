@@ -166,7 +166,7 @@ $responsive-breakpoint: --lg;
 
 	/// Display a submenu when the button is clicked or when the parent is hovered when open-on-hover-click is set
 	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container {
-		@include submenu-show;
+		@include show-submenu;
 	}
 
 	// The submenu icon
@@ -426,7 +426,7 @@ $responsive-breakpoint: --lg;
 	// Display a submenu when the button is clicked
 	// This is important and controls both the mobile and desktop behaviour.
 	.wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
-		@include submenu-show;
+		@include show-submenu;
 	}
 
 	// The last wrapper before the <ul> element
