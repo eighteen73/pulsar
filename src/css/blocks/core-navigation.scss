@@ -4,7 +4,7 @@
 /// As navigation is complex, here is a breakdown of the different parts:
 ///
 /// 1. Standard non-responsive navigation.
-/// 1a. Special rules for when the menu is not hidden by default.
+/// 2. Special rules for when the menu is not hidden by default.
 /// 3. Responsive navigation.
 /// 4. Sliding style submenu.
 /// 5. Accordion style submenu.
@@ -190,7 +190,7 @@ $responsive-breakpoint: --lg;
 	}
 
 	///
-	/// 1a. Special rules for when the menu is not hidden by default.
+	/// 2. Special rules for when the menu is not hidden by default.
 	/// These are deliberately high specificity to override the default styles.
 	///
 	.wp-block-navigation__responsive-container:not(.hidden-by-default) {
@@ -254,7 +254,7 @@ $responsive-breakpoint: --lg;
 }
 
 ///
-/// 2. Responsive navigation.
+/// 3. Responsive navigation.
 ///
 /// Behaviour is controlled by the overlay menu option in the editor.
 ///
@@ -485,7 +485,7 @@ $responsive-breakpoint: --lg;
 	}
 
 	///
-	/// 3. Sliding style submenu.
+	/// 4. Sliding style submenu.
 	///
 	&:where(.is-submenu-style-slide) {
 
@@ -512,7 +512,7 @@ $responsive-breakpoint: --lg;
 	}
 
 	///
-	/// 4. Accordion style submenu
+	/// 5. Accordion style submenu
 	///
 	&:where(.is-submenu-style-accordion) {
 		.wp-block-navigation__submenu-container {

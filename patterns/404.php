@@ -2,10 +2,12 @@
 /**
  * Title: 404
  * Slug: pulsar/404
- * Description:
+ * Description: A 404 page.
  * Categories: content
- * Inserter: false
+ * Post Types:
+ * Viewport Width:
  * Keywords: 404
+ * Inserter: false
  *
  * @package pulsar
  */
