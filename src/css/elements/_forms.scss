@@ -74,6 +74,10 @@ select {
 	@include field-range;
 }
 
+[type="submit"] {
+	@include button-base;
+}
+
 ::-webkit-datetime-edit-fields-wrapper {
 	padding: 0;
 }

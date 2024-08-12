@@ -470,6 +470,27 @@
 		}
 	},
 	"styles": {
+		"elements": {
+			"button": {
+				"border": {
+					"color": "",
+					"radius": "",
+					"width": ""
+				},
+				"color": {
+					"background": "",
+					"text": ""
+				},
+				"spacing": {
+					"padding": {}
+				},
+				"typography": {
+					"lineHeight": "",
+					"fontSize": "",
+					"fontFamily": ""
+				}
+			}
+		},
 		"spacing": {
 			"blockGap": "var(--wp--custom--spacing--block-gap)",
 			"padding": {

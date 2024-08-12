@@ -1,11 +1,41 @@
 @use "../tools" as *;
 
-// Specificity of the core button styles are hard to override unfortunately.
+.wp-block-button {
+	--width-gap: var(--wp--preset--spacing--md);
+
+	&:where(.has-custom-width) {
+		max-width: none;
+
+		.wp-block-button__link {
+			width: 100%;
+		}
+	}
+
+	&:where(.wp-block-button__width-25) {
+		width: calc(25% - (var(--width-gap) * 0.75));
+	}
+
+	&:where(.wp-block-button__width-50) {
+		width: calc(50% - (var(--width-gap) * 0.5));
+	}
+
+	&:where(.wp-block-button__width-75) {
+		width: calc(75% - (var(--width-gap) * 0.25));
+
+	}
+
+	&:where(.wp-block-button__width-100) {
+		flex-basis: 100%;
+		width: 100%;
+	}
+
+	:where(.is-vertical) > & {
+		--width-gap: 0;
+	}
+}
+
 .wp-element-button,
-.wp-block-button .wp-block-button__link {
-	background-color: var(--wp--custom--color--primary--500);
-	border-radius: 0;
-	color: var(--wp--custom--color--neutral--1000);
-	display: inline-flex;
-	padding: var(--wp--preset--spacing--sm);
+.wp-block-button__link {
+	@include button-base;
+	@include button-style(primary);
 }

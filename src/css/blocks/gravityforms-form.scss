@@ -12,6 +12,20 @@
 		}
 	}
 
+	.ginput_complex {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--custom--spacing--block-gap);
+
+		> * {
+			flex: 1;
+		}
+
+		.ginput_full {
+			flex: 0 0 100%;
+		}
+	}
+
 	.gfield {
 		grid-column: 1 / -1;
 
@@ -106,6 +120,13 @@
 	}
 
 	.gform_button {
+		@include button-base;
+
+		&::before {
+			content: "";
+			height: 24px;
+			width: 24px;
+		}
 	}
 
 	.gform_validation_errors {
@@ -132,13 +153,13 @@
 		input,
 		select,
 		textarea {
-			border-color: var(--wp--custom--color--text--error);
+			border-color: var(--wp--custom--color--border--error);
 		}
 	}
 
 	.validation_message {
 		color: var(--wp--custom--color--text--error);
-		margin-top: var(--wp--preset--spacing--xs);
+		margin-top: var(--wp--preset--spacing--sm);
 	}
 
 	.gform_title {
@@ -147,6 +168,12 @@
 
 	.gform_hidden {
 		display: none;
+	}
+
+	.gfield_visibility_hidden {
+		left: -9999px;
+		position: absolute;
+		visibility: hidden;
 	}
 
 	.gform_validation_container {
@@ -164,8 +191,8 @@
 	animation: 1000ms rotate linear infinite;
 	border: 3px solid;
 	border-color:
-		var(--wp--custom--color--neutral--0) #0000
-		var(--wp--custom--color--neutral--0) #0000;
+		currentcolor #0000
+		currentcolor #0000;
 	border-radius: 50%;
 	box-sizing: border-box;
 	display: inline-block;
@@ -182,7 +209,7 @@
 	&::before,
 	&::after {
 		border: 5px solid transparent;
-		border-bottom-color: var(--wp--custom--color--neutral--0);
+		border-bottom-color: currentcolor;
 		content: "";
 		left: 0;
 		position: absolute;
@@ -191,7 +218,7 @@
 	}
 
 	&::after {
-		border-color: var(--wp--custom--color--neutral--0) #0000 #0000 #0000;
+		border-color: currentcolor #0000 #0000 #0000;
 		transform: translate(16px, 1.5px) rotate(-35deg);
 	}
 }
@@ -199,41 +226,5 @@
 @keyframes rotate {
 	100% {
 		transform: rotate(360deg);
-	}
-}
-
-.grecaptcha-badge {
-	visibility: hidden !important; // stylelint-disable-line declaration-no-important
-}
-
-.gform-theme-datepicker {
-	background-color: var(--wp--custom--color--neutral--0);
-	border: 1px solid var(--wp--custom--color--primary--200);
-	padding: var(--wp--preset--spacing--xs);
-
-	.ui-datepicker-header {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--wp--preset--spacing--2-xs);
-		justify-content: space-between;
-	}
-
-	.ui-datepicker-title {
-		display: flex;
-		flex-direction: column;
-		gap: var(--wp--preset--spacing--2-xs);
-		width: 100%;
-	}
-
-	.ui-datepicker-calendar {
-		width: 100%;
-
-		thead {
-			text-align: left;
-		}
-	}
-
-	.ui-state-active {
-		text-decoration: underline;
 	}
 }
