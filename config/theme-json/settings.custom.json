@@ -61,26 +61,37 @@
 					"900": "#29491E"
 				},
         "text": {
+          "default": "var:custom|color|neutral|900",
           "primary": "var:custom|color|neutral|950",
           "secondary": "var:custom|color|neutral|700",
           "accent": "var:custom|color|primary|500",
           "invert": "var:custom|color|neutral|0",
-          "disabled": "var:custom|color|neutral|400",
-          "link": "var:custom|color|primary|500"
+          "active": "var:custom|color|neutral|400",
+          "inactive": "var:custom|color|neutral|400",
+          "error": "var:custom|color|error|900",
+          "warning": "var:custom|color|warning|900",
+          "success": "var:custom|color|success|900",
+          "link": "var:custom|color|primary|500",
+          "link-invert": "var:custom|color|primary|200"
         },
         "surface": {
           "default": "var:custom|color|neutral|0",
-          "invert": "var:custom|color|neutral|1000",
           "primary": "var:custom|color|primary|500",
           "secondary": "var:custom|color|secondary|500",
-          "neutral": "var:custom|color|primary|50"
+          "accent": "var:custom|color|primary|50",
+          "invert": "var:custom|color|neutral|1000",
+          "active": "var:custom|color|neutral|400",
+          "inactive": "var:custom|color|neutral|400",
+          "error": "var:custom|color|error|100",
+          "warning": "var:custom|color|warning|100",
+          "success": "var:custom|color|success|100"
         },
         "border": {
           "default": "var:custom|color|neutral|500",
           "primary": "var:custom|color|primary|500",
           "invert": "var:custom|color|neutral|0",
-          "inactive": "var:custom|color|neutral|200",
           "active": "var:custom|color|secondary|500",
+          "inactive": "var:custom|color|neutral|200",
           "error": "var:custom|color|error|500",
           "warning": "var:custom|color|warning|500",
           "success": "var:custom|color|success|500"
