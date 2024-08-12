@@ -12,7 +12,7 @@
 			"step": "installTheme",
 			"themeZipFile": {
 				"resource": "url",
-				"url": "https://github-proxy.com/proxy/?repo=eighteen73/pulsar&branch=feature/wordpress-6.6"
+				"url": "https://github-proxy.com/proxy/?repo=eighteen73/pulsar&branch=main"
 			},
 			"options": {
 				"activate": true
