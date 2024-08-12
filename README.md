@@ -8,7 +8,7 @@
 
 The theme demo is hosted on WordPress Playground, which is a system that runs WordPress directly in your browser. You can fully test the theme as if you were running it on your own site.
 
-[Playground Demo](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/eighteen73/pulsar/.playground/blueprint.json)
+[Playground Demo](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/eighteen73/pulsar/main/.playground/blueprint.json)
 
 ## Requirements
 
