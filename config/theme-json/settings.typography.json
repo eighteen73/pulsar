@@ -1,85 +1,121 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"version": 2,
+	"version": 3,
 	"settings": {
 		"typography": {
 			"customFontSize": false,
+      "defaultFontSizes": false,
 			"dropCap": false,
 			"fluid": true,
 			"fontFamilies": [
 				{
-					"name": "Sans",
-					"slug": "sans",
-					"fontFamily": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
-				},
-				{
-					"name": "Serif",
-					"slug": "serif",
-					"fontFamily": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+					"name": "Primary",
+					"slug": "primary",
+					"fontFamily": "'Inter', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "auto",
+              "fontWeight": "100 900",
+              "fontDisplay": "swap",
+		          "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/inter/InterVariable-Italic.woff2",
+                "file:./assets/fonts/inter/InterVariable.woff2"
+              ]
+            }
+          ]
 				}
 			],
 			"fontSizes": [
-				{
-					"name": "Small",
+        {
+					"name": "2XS",
+					"slug": "2-xs",
+					"size": "11px",
+					"fluid": false
+				},
+        {
+					"name": "XS",
+					"slug": "xs",
+					"size": "12px",
+					"fluid": false
+				},
+        {
+					"name": "SM",
 					"slug": "sm",
 					"size": "14px",
-					"fluid": {
-						"min": "12px",
-						"max": "14px"
-					}
+					"fluid": false
 				},
 				{
-					"name": "Base",
-					"slug": "base",
-					"size": "18px",
-					"fluid": {
-						"min": "16px",
-						"max": "18px"
-					}
-				},
-				{
-					"name": "Medium",
+					"name": "MD",
 					"slug": "md",
-					"size": "22px",
-					"fluid": {
-						"min": "18px",
-						"max": "22px"
-					}
+					"size": "16px",
+					"fluid": false
 				},
 				{
-					"name": "Large",
+					"name": "LG",
 					"slug": "lg",
-					"size": "28px",
-					"fluid": {
-						"min": "22px",
-						"max": "28px"
-					}
+					"size": "18px",
+					"fluid": false
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "35px",
-					"fluid": {
-						"min": "28px",
-						"max": "35px"
-					}
+					"size": "20px",
+					"fluid": false
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
-					"size": "44px",
+					"size": "25px",
 					"fluid": {
-						"min": "35px",
-						"max": "44px"
+						"min": "23px",
+						"max": "25px"
 					}
 				},
 				{
 					"name": "3XL",
 					"slug": "3-xl",
+					"size": "30px",
+					"fluid": {
+						"min": "25px",
+						"max": "30px"
+					}
+				},
+        {
+					"name": "4XL",
+					"slug": "4-xl",
+					"size": "37px",
+					"fluid": {
+						"min": "28px",
+						"max": "37px"
+					}
+				},
+        {
+					"name": "5XL",
+					"slug": "5-xl",
+					"size": "45px",
+					"fluid": {
+						"min": "32px",
+						"max": "45px"
+					}
+				},
+        {
+					"name": "6XL",
+					"slug": "6-xl",
 					"size": "55px",
 					"fluid": {
-						"min": "44px",
+						"min": "37px",
 						"max": "55px"
+					}
+				},
+        {
+					"name": "7XL",
+					"slug": "7-xl",
+					"size": "96px",
+					"fluid": {
+						"min": "37px",
+						"max": "96px"
 					}
 				}
 			],

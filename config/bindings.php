@@ -14,4 +14,5 @@ return [
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Editor\TemplateParts::class,
 	Pulsar\Editor\Render\Navigation::class,
+	Pulsar\ThirdParty\GravityForms::class,
 ];

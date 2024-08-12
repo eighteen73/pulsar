@@ -1,0 +1,201 @@
+@use "../../settings" as *;
+
+/// Input styles.
+@mixin field-input() {
+	appearance: none;
+	background-color: var(--wp--custom--color--surface--default);
+	border: 1px solid var(--wp--custom--color--border--default);
+	border-radius: 0;
+	box-shadow: none;
+	display: block;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--line-height--normal);
+	padding-block: var(--wp--preset--spacing--sm);
+	padding-inline: var(--wp--preset--spacing--md);
+	width: 100%;
+
+	&:focus {
+		border-color: var(--wp--custom--color--border--active);
+		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	&:disabled {
+		border-color: var(--wp--custom--color--border--inactive);
+		color: var(--wp--custom--color--text--disabled);
+		cursor: not-allowed;
+	}
+
+	::placeholder {
+		color: var(--wp--custom--color--text--disabled);
+		opacity: 1;
+	}
+}
+
+/// Textarea styles.
+@mixin field-textarea() {
+	@include field-input;
+}
+
+/// Select styles.
+/// @param {Boolean} $multiple - Whether the select is a multiple select.
+///
+@mixin field-select($multiple: false) {
+	appearance: none;
+	border: 1px solid var(--wp--custom--color--border--default);
+	border-radius: 0;
+	box-shadow: none;
+	display: block;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--line-height--normal);
+	width: 100%;
+
+	@if not $multiple {
+		background-color: var(--wp--custom--color--surface--default);
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+		background-position: right var(--wp--preset--spacing--sm) center;
+		background-repeat: no-repeat;
+		background-size: 1.5em 1.5em;
+		padding-block: var(--wp--preset--spacing--sm);
+		padding-left: var(--wp--preset--spacing--md);
+		padding-right: var(--wp--preset--spacing--2-xl);
+		print-color-adjust: exact;
+	} @else {
+		padding-block: var(--wp--preset--spacing--sm);
+		padding-inline: var(--wp--preset--spacing--md);
+	}
+
+	&:focus {
+		border-color: var(--wp--custom--color--border--active);
+		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	&:disabled {
+		border-color: var(--wp--custom--color--border--inactive);
+		color: var(--wp--custom--color--text--disabled);
+		cursor: not-allowed;
+	}
+}
+
+/// File input styles.
+@mixin field-file() {
+	background: unset;
+	border-color: inherit;
+	border-radius: 0;
+	border-width: 0;
+	font-size: unset;
+	line-height: inherit;
+	padding: 0;
+
+	&:focus {
+		border-color: var(--wp--custom--color--border--active);
+		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+}
+
+/// Checkbox styles.
+@mixin field-checkbox() {
+	appearance: none;
+	background-color: var(--wp--custom--color--surface--default);
+	background-origin: border-box;
+	border: 1px solid var(--wp--custom--color--border--default);
+	border-radius: 0;
+	color: var(--wp--custom--color--surface--primary);
+	display: inline-block;
+	flex-shrink: 0;
+	height: 16px;
+	margin-right: var(--wp--preset--spacing--2-xs);
+	padding: 0;
+	print-color-adjust: exact;
+	user-select: none;
+	vertical-align: middle;
+	width: 16px;
+
+	&:focus {
+		box-shadow: var(--wp--custom--color--surface--default) 0 0 0 1px, var(--wp--custom--color--border--active) 0 0 0 3px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	&:checked {
+		background-color: currentcolor;
+		background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		border-color: transparent;
+
+		&:hover,
+		&:focus {
+			background-color: currentcolor;
+			border-color: transparent;
+		}
+	}
+
+	&:indeterminate {
+		background-color: currentcolor;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3E%3C/svg%3E");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		border-color: transparent;
+
+		&:hover,
+		&:focus {
+			background-color: currentcolor;
+			border-color: transparent;
+		}
+	}
+}
+
+/// Radio styles.
+@mixin field-radio() {
+	appearance: none;
+	background-color: var(--wp--custom--color--surface--default);
+	background-origin: border-box;
+	border: 1px solid var(--wp--custom--color--border--default);
+	border-radius: 100%;
+	color: var(--wp--custom--color--surface--primary);
+	display: inline-block;
+	flex-shrink: 0;
+	height: 16px;
+	margin-right: var(--wp--preset--spacing--2-xs);
+	padding: 0;
+	print-color-adjust: exact;
+	user-select: none;
+	vertical-align: middle;
+	width: 16px;
+
+	&:focus {
+		box-shadow: var(--wp--custom--color--surface--default) 0 0 0 1px, var(--wp--custom--color--border--active) 0 0 0 3px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	&:checked {
+		background-color: currentcolor;
+		background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		border-color: transparent;
+
+		&:hover,
+		&:focus {
+			background-color: currentcolor;
+			border-color: transparent;
+		}
+	}
+}
+
+/// Range styles.
+@mixin field-range() {
+	accent-color: var(--wp--custom--color--surface--primary);
+}

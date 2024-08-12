@@ -7,9 +7,18 @@ html {
 }
 
 body {
-	font-family: var(--wp--preset--font-family--sans);
-	font-size: var(--wp--preset--font-size--base);
-	line-height: var(--wp--custom--line-height--relaxed);
+	background-color: var(--wp--custom--color--surface--default);
+	color: var(--wp--custom--color--text--default);
+	font-family: var(--wp--preset--font-family--primary);
+	font-size: var(--wp--preset--font-size--lg);
+	-webkit-font-smoothing: antialiased;
+	letter-spacing: var(--wp--custom--letter-spacing--tight);
+	line-height: var(--wp--custom--line-height--normal);
 
-	@include container-sizes(sm, md, lg, xl);
+	@include container-sizes(sm, md, lg, xl, 2-xl);
+}
+
+/// Anything that has been anchored to should have extra scroll margin.
+:target {
+	scroll-margin-block: var(--wp--custom--spacing--group-gap);
 }

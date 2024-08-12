@@ -1,36 +1,4 @@
-@use "../settings" as *;
-@use "sass:map";
-@use "sass:list";
-
-/// Adjusts the `--wp--custom--layout--content` css variable,
-/// which is used for the container per breakpoint.
-/// This lets the container behave like Tailwind, where it
-/// snaps to sizes at breakpoints.
-/// This should be used on the `<body>` tag.
-@mixin container-sizes($sizes...) {
-	@each $size in $sizes {
-		$breakpoint: map.get($breakpoints, $size);
-
-		@media (--#{$size}) {
-			--wp--custom--layout--content: #{$breakpoint};
-		}
-	}
-}
-
-/// This recreates what WordPress adds to blocks
-/// when a block is layout constrained.
-/// This recreates the `has-global-padding` and `is-layout-constrained`
-/// classes and should be applied to the parent element.
-@mixin container() {
-	padding-left: var(--wp--style--root--padding-left);
-	padding-right: var(--wp--style--root--padding-right);
-
-	> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-		margin-left: auto;
-		margin-right: auto;
-		max-width: var(--wp--style--global--content-size);
-	}
-}
+@use "../../settings" as *;
 
 /// Add styles for dark mode.
 /// Can target both prefers-color-scheme, and
@@ -81,4 +49,32 @@
 	white-space: normal #{$important};
 	width: auto #{$important};
 	z-index: 0;
+}
+
+///
+/// @mixin icon
+/// @description A mixin for creating icons using a mask. Typically used with pseudo-elements.
+///
+/// @param {string} $icon - The name of the icon. The icon should be in the SVG format in the assets/svg directory.
+/// @param {string} $size - The size of the pseudo-element (default: 16px).
+/// @param {string} $color - The color of the pseudo-element (default: currentcolor).
+///
+/// @example Usage:
+///   .my-element::after {
+///     @include pseudo-icon('icon', 24px, var(--wp--custom--color--text--primary));
+///   }
+///
+@mixin icon($icon, $size: 16px, $color: currentcolor) {
+	background-color: $color;
+	content: "";
+	display: inline-block;
+	height: $size;
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+	width: $size;
+
+	@if $icon {
+		mask-image: url("/assets/svg/#{$icon}.svg");
+	}
 }

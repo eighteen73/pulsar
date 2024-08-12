@@ -1,9 +1,24 @@
 @use "../tools" as *;
 
+///
+/// As navigation is complex, here is a breakdown of the different parts:
+///
+/// 1. Standard non-responsive navigation.
+/// 2. Special rules for when the menu is not hidden by default.
+/// 3. Responsive navigation.
+/// 4. Sliding style submenu.
+/// 5. Accordion style submenu.
+///
+
+$responsive-breakpoint: --lg;
+
 .has-modal-open {
 	overflow: hidden;
 }
 
+///
+/// 1. Standard non-responsive navigation.
+///
 .wp-block-navigation {
 	$block: &;
 
@@ -19,6 +34,15 @@
 
 	// A default gap between menu items
 	--navigation-gap: var(--wp--preset--spacing--md);
+
+	// A default gap between an icon
+	--navigation-item-gap: var(--wp--preset--spacing--2-xs);
+
+	// Set a consistent size for icons.
+	--navigation-icon-size: 10px;
+
+	// Set a consistent width for submenus
+	--navigation-submenu-width: 200px;
 
 	gap: var(--navigation-gap);
 
@@ -61,41 +85,206 @@
 		display: flex;
 		flex-direction: var(--navigation-layout-direction, initial);
 		flex-wrap: var(--navigation-layout-wrap, wrap);
-		gap: inherit;
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
 		justify-content: var(--navigation-layout-justify, initial);
 		list-style: none;
 		margin: 0;
 		padding: 0;
-
-		&:where(.is-responsive) {
-			--navigation-layout-direction: column;
-			--navigation-layout-align: stretch;
-			--navigation-layout-wrap: nowrap;
-			gap: 0;
-			height: 100%;
-
-			@media (--lg) {
-				--navigation-layout-direction: row;
-				--navigation-layout-align: initial;
-				--navigation-layout-wrap: wrap;
-				gap: inherit;
-				height: auto;
-			}
-
-			:where(.hidden-by-default) & {
-				--navigation-layout-direction: column;
-				--navigation-layout-align: stretch;
-				--navigation-layout-wrap: nowrap;
-			}
-		}
 
 		&:only-child {
 			flex-grow: 1;
 		}
 	}
 
-	// The menu toggle button
-	&__responsive-container-open {
+	// The menu <li> element
+	&-item {
+		align-items: center;
+		background-color: inherit;
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--navigation-item-gap);
+		justify-content: space-between;
+
+		&:where(.has-child) {
+			position: relative;
+		}
+	}
+
+	// A single menu link/button
+	&-item__content {
+		background-color: inherit;
+		border: 0;
+		color: inherit;
+		cursor: pointer;
+		display: block;
+		flex: 1 1 0%;
+		text-align: left;
+		text-decoration: none;
+	}
+
+	// A submenu container
+	&__submenu-container {
+		background-color: inherit;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		left: 0;
+		min-width: var(--navigation-submenu-width);
+		position: absolute;
+		top: 100%;
+		transition: all var(--wp--custom--transition-duration--quick);
+		visibility: hidden;
+		width: 100%;
+		z-index: 1;
+
+		// Hide empty submenus
+		&:empty {
+			display: none;
+		}
+
+		// If the submenu has a background, remove padding
+		&.has-background {
+			padding: 0;
+		}
+
+		// Nested submenus should be positioned to the right
+		.wp-block-navigation__submenu-container {
+			left: 100%;
+			top: 0;
+		}
+	}
+
+	// Nested children
+	:where(.has-child) :where(.has-child) {
+
+		// Icon should point to the right for nested submenus when the menu is not hidden by default
+		.wp-block-navigation__submenu-icon,
+		.wp-block-navigation__submenu-icon[aria-expanded="true"] {
+			transform: rotate(-90deg);
+		}
+	}
+
+	/// Display a submenu when the button is clicked or when the parent is hovered when open-on-hover-click is set
+	:where([aria-expanded="true"]) ~ .wp-block-navigation__submenu-container {
+		@include show-submenu;
+	}
+
+	// The submenu icon
+	// This can either be a separate button or part of the menu item, depending on the CMS options set.
+	&__submenu-icon {
+		align-items: center;
+		align-self: center;
+		background-color: inherit;
+		border: 0;
+		color: currentcolor;
+		display: flex;
+		font-size: inherit;
+		justify-content: center;
+		padding: 0;
+
+		svg {
+			height: var(--navigation-icon-size);
+			stroke: currentcolor;
+			width: var(--navigation-icon-size);
+		}
+	}
+
+	///
+	/// 2. Special rules for when the menu is not hidden by default.
+	/// These are deliberately high specificity to override the default styles.
+	///
+	.wp-block-navigation__responsive-container:not(.hidden-by-default) {
+
+		// When the submenu is not hidden by default, style as a dropdown
+		.wp-block-navigation__submenu-container {
+			@media ($responsive-breakpoint) {
+				align-items: normal;
+				height: 0;
+				left: 0;
+				min-width: var(--navigation-submenu-width);
+				opacity: 0;
+				position: absolute;
+				top: 100%;
+				transform: none;
+				width: 0;
+				z-index: 2;
+			}
+
+			// Nested submenus should be positioned to the right
+			.wp-block-navigation__submenu-container {
+				@media ($responsive-breakpoint) {
+					left: 100%;
+					top: 0;
+				}
+			}
+		}
+
+		.wp-block-navigation__submenu-icon,
+		.wp-block-navigation__submenu-icon[aria-expanded="true"] {
+			@media ($responsive-breakpoint) {
+				transform: rotate(0);
+			}
+		}
+
+		.has-child {
+			@media ($responsive-breakpoint) {
+				position: relative;
+			}
+		}
+
+		// Nested children
+		:where(.has-child) :where(.has-child) {
+
+			// Icon should point to the right for nested submenus when the menu is not hidden by default
+			.wp-block-navigation__submenu-icon,
+			.wp-block-navigation__submenu-icon[aria-expanded="true"] {
+				@media ($responsive-breakpoint) {
+					transform: rotate(-90deg);
+				}
+			}
+		}
+
+		// Hide the submenu header on desktop
+		.wp-block-navigation-submenu__header {
+			@media ($responsive-breakpoint) {
+				display: none;
+			}
+		}
+	}
+}
+
+///
+/// 3. Responsive navigation.
+///
+/// Behaviour is controlled by the overlay menu option in the editor.
+///
+/// All styles for responsive behaviour should be within this block
+/// Markup should be structured as follows:
+///
+/// <nav class="wp-block-navigation is-responsive">
+/// 	<button class="wp-block-navigation__responsive-container-open">
+/// 	<div class="wp-block-navigation__responsive-close">
+/// 		<div class="wp-block-navigation__responsive-dialog">
+/// 			<button class="wp-block-navigation__responsive-container-close">
+/// 			<div class="wp-block-navigation__responsive-container-content">
+/// 				<ul class="wp-block-navigation__container">
+/// 					<li class="wp-block-navigation-item">
+/// 						<a class="wp-block-navigation-item__content">
+/// 							<span class="wp-block-navigation-item__label">
+///						<li class="wp-block-navigation-item wp-block-navigation-submenu has-child">
+///							<a class="wp-block-navigation-item__content">
+/// 						<button class="wp-block-navigation-submenu__toggle">
+/// 						<ul class="wp-block-navigation__submenu-container">
+/// 							<li class="wp-block-navigation-submenu__header">
+/// 								<button class="wp-block-navigation-submenu__back">
+/// 								<span class="wp-block-navigation-submenu__label">
+/// 								<a class="wp-block-navigation-submenu__all">
+///
+///
+.wp-block-navigation:where(.is-responsive) {
+
+	// The navigation toggle button directly in the <nav> element
+	.wp-block-navigation__responsive-container-open {
 		align-items: center;
 		background-color: transparent;
 		border: 0;
@@ -104,12 +293,13 @@
 		font-family: inherit;
 		font-size: inherit;
 		font-weight: inherit;
-		gap: inherit;
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
 		justify-content: center;
 		padding: 0;
 
+		// If overlay menu isn't set to always, hide the button on desktop
 		&:where(:not(.always-shown)) {
-			@media (--lg) {
+			@media ($responsive-breakpoint) {
 				display: none;
 			}
 		}
@@ -131,11 +321,11 @@
 		}
 	}
 
-	// The main container for the menu
-	&__responsive-container {
-		// background-color: inherit;
-		background-color: var(--wp--custom--color--base);
-		gap: inherit;
+	// The main container for the navigation
+	//  Directly  within the <nav> element
+	.wp-block-navigation__responsive-container {
+		background-color: inherit;
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
 		height: var(--navigation-height);
 		left: 0;
 		opacity: 0;
@@ -147,14 +337,15 @@
 		z-index: 1;
 
 		// Class added when menu is opened
+		// This is where the overlay can be animated differently if needed.
 		&:where(.is-menu-open) {
 			opacity: 1;
 			visibility: visible;
 		}
 
-		// When not hidden by default option, show the menu
+		// When not hidden by default option, show the navigation
 		&:where(:not(.hidden-by-default):not(.is-menu-open)) {
-			@media (--lg) {
+			@media ($responsive-breakpoint) {
 				background-color: inherit;
 				display: block;
 				height: auto;
@@ -171,194 +362,170 @@
 			background-color: inherit !important; // stylelint-disable-line declaration-no-important
 			color: inherit !important; // stylelint-disable-line declaration-no-important
 		}
+
+		// The default close button
+		// Style wise we tend to hide this and use the open button as a toggle instead.
+		.wp-block-navigation__responsive-container-close {
+			display: none;
+		}
+
+		// When the menu is always hidden, assume it's a modal and set the position to fixed
+		&:where(.hidden-by-default) {
+			inset: 0;
+			position: fixed;
+
+			.wp-block-navigation__responsive-container-close {
+				display: flex;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+		}
 	}
 
-	&__responsive-close {
-		gap: inherit;
+	// Another wrapper
+	.wp-block-navigation__responsive-close {
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
 		height: 100%;
 		width: 100%;
 	}
 
-	// The default close button
-	&__responsive-container-close {
-		display: none;
+	// Another wrapper
+	.wp-block-navigation__responsive-dialog {
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
+		height: 100%;
+	}
 
-		:where(:not(.hidden-by-default):not(.is-menu-open)) & {
-			@media (--lg) {
-				display: none;
-			}
+	// The main <ul> element
+	.wp-block-navigation__container {
+		--navigation-layout-direction: column;
+		--navigation-layout-align: stretch;
+		--navigation-layout-wrap: nowrap;
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
+		height: 100%;
+
+		@media ($responsive-breakpoint) {
+			--navigation-layout-direction: row;
+			--navigation-layout-align: initial;
+			--navigation-layout-wrap: wrap;
+			height: auto;
 		}
 	}
 
-	&__responsive-dialog {
-		gap: inherit;
-		height: 100%;
+	// When navigation is set to always be a hamburger, always set as vertical
+	:where(.hidden-by-default) .wp-block-navigation__container {
+		--navigation-layout-direction: column;
+		--navigation-layout-align: stretch;
+		--navigation-layout-wrap: nowrap;
 	}
 
-	&__responsive-container-content {
-		gap: inherit;
-		height: 100%;
-	}
-
-	// The menu <li> element
-	&-item {
-		align-items: center;
+	.wp-block-navigation__submenu-container {
 		background-color: inherit;
+	}
+
+	// Display a submenu when the button is clicked
+	// This is important and controls both the mobile and desktop behaviour.
+	.wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container {
+		@include show-submenu;
+	}
+
+	// The last wrapper before the <ul> element
+	.wp-block-navigation__responsive-container-content {
+		gap: inherit; // Pass the gap to the children so the CMS block spacing is respected
+		height: 100%;
+	}
+
+	.wp-block-navigation-item {
+		column-gap: var(--navigation-item-gap);
+	}
+
+	.wp-block-navigation-submenu__header {
 		display: flex;
+		flex-wrap: nowrap;
+		gap: var(--navigation-item-gap);
 		justify-content: space-between;
 
-		&:where(.has-child) {
-			@media (--lg) {
-				position: relative;
-			}
+		svg {
+			height: var(--navigation-icon-size);
+			width: var(--navigation-icon-size);
 		}
 	}
 
-	// A single menu link/button
-	&-item__content {
+	.wp-block-navigation-submenu__back {
+		align-items: center;
 		background-color: transparent;
 		border: 0;
 		color: inherit;
 		cursor: pointer;
-		display: block;
-		flex: 1 1 0%;
-		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
-		text-align: left;
-		text-decoration: none;
-
-		@media (--lg) {
-			padding: 0;
-		}
-	}
-
-	// Back button
-	&-item__back {
-		@media (--lg) {
-			display: none;
-		}
-	}
-
-	// A submenu container
-	&__submenu-container {
-		background-color: var(--wp--custom--color--base);
-		color: inherit;
 		display: flex;
-		flex-direction: column;
-		height: 100%;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transform: translateX(-100%);
-		transition: all var(--wp--custom--transition-duration--quick);
-		visibility: hidden;
-		z-index: 1;
-
-		@media (--lg) {
-			align-items: normal;
-			background-color: inherit;
-			height: 0;
-			left: 0;
-			min-width: 250px;
-			opacity: 0;
-			top: 100%;
-			transform: none;
-			width: 0;
-			z-index: 2;
-		}
-
-		// Display a submenu when the parent is hovered
-		.has-child:where(:not(.open-on-click)):hover > & {
-			@media (--lg) {
-				height: auto;
-				min-width: 250px;
-				opacity: 1;
-				overflow: visible;
-				visibility: visible;
-
-				&:where(:not(.wp-block-pulsar-navigation-megamenu__container)) {
-					width: auto;
-				}
-			}
-		}
-
-		&:empty {
-			display: none;
-		}
-
-		& & {
-			@media (--lg) {
-				left: 100%;
-				top: 0;
-			}
-		}
-
-		&.has-background {
-			padding: 0;
-		}
-	}
-
-	// Display a submenu when the button is clicked
-	:where([aria-expanded="true"]) ~ &__submenu-container {
-		opacity: 1;
-		overflow: visible;
-		transform: translateX(0);
-		visibility: visible;
-
-		@media (--lg) {
-			height: auto;
-			width: auto;
-		}
-	}
-
-	// The submenu icon
-	&__submenu-icon {
-		align-items: center;
-		align-self: center;
-		background-color: inherit;
-		border: 0;
-		color: currentcolor;
-		display: flex;
+		flex: 0 0 auto;
 		font-size: inherit;
-		height: 10px;
-		justify-content: center;
-		margin-left: var(--wp--preset--spacing--xs);
+		gap: var(--navigation-item-gap);
+		margin-right: auto;
 		padding: 0;
-		width: 10px;
+	}
 
-		svg {
-			stroke: currentcolor;
+	.wp-block-navigation-submenu__label {
+		flex: 0 0 auto;
+		font-size: inherit;
+	}
+
+	.wp-block-navigation-submenu__all {
+		align-items: center;
+		background-color: transparent;
+		border: 0;
+		color: inherit;
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 auto;
+		font-size: inherit;
+		gap: var(--navigation-item-gap);
+		margin-left: auto;
+		padding: 0;
+	}
+
+	///
+	/// 4. Sliding style submenu.
+	///
+	&:where(.is-submenu-style-slide) {
+
+		// Rotate the icon to point to the way the submenu will slide in.
+		:where(.wp-block-navigation__submenu-icon) {
 			transform: rotate(-90deg);
-
-			@media (--lg) {
-				transform: rotate(0);
-			}
 		}
 
-		// Icon not on mobile when in a submenu should point right
-		.has-child #{$block}__submenu-container & svg {
-			@media (--lg) {
-				transform: rotate(-90deg);
-			}
-		}
-
-		// When the icon is also the toggle, make it more clickable
-		:where(.is-responsive) &:where(#{$block}-submenu__toggle) {
-			aspect-ratio: 1 / 1;
-			border: 1px solid;
-			cursor: pointer;
+		:where(.wp-block-navigation__submenu-container) {
+			bottom: 0;
 			height: 100%;
-			margin: 0;
-			width: auto;
+			left: 0;
+			overflow: hidden;
+			position: absolute;
+			right: 0;
+			top: 0;
+			transform: translateX(-100%);
 
-			@media (--lg) {
-				aspect-ratio: unset;
-				border: unset;
-				cursor: unset;
-				height: auto;
-				margin-left: var(--wp--preset--spacing--xs);
-				width: auto;
+		}
+
+		:where(.has-child) {
+			position: static;
+		}
+	}
+
+	///
+	/// 5. Accordion style submenu
+	///
+	&:where(.is-submenu-style-accordion) {
+		.wp-block-navigation__submenu-container {
+			min-width: 100%;
+			position: static;
+		}
+
+		// Rotate the icon to indicate open/close
+		.wp-block-navigation__submenu-icon {
+			transform: rotate(0);
+
+			&[aria-expanded="true"] {
+				transform: rotate(180deg);
 			}
 		}
 	}
