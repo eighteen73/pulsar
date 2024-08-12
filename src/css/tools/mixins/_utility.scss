@@ -50,3 +50,31 @@
 	width: auto #{$important};
 	z-index: 0;
 }
+
+///
+/// @mixin icon
+/// @description A mixin for creating icons using a mask. Typically used with pseudo-elements.
+///
+/// @param {string} $icon - The name of the icon. The icon should be in the SVG format in the assets/svg directory.
+/// @param {string} $size - The size of the pseudo-element (default: 16px).
+/// @param {string} $color - The color of the pseudo-element (default: currentcolor).
+///
+/// @example Usage:
+///   .my-element::after {
+///     @include pseudo-icon('icon', 24px, var(--wp--custom--color--text--primary));
+///   }
+///
+@mixin icon($icon, $size: 16px, $color: currentcolor) {
+	background-color: $color;
+	content: "";
+	display: inline-block;
+	height: $size;
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+	width: $size;
+
+	@if $icon {
+		mask-image: url("/assets/svg/#{$icon}.svg");
+	}
+}
