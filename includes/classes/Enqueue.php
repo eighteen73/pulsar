@@ -61,13 +61,11 @@ class Enqueue implements Bootable {
 			get_theme_file_uri( 'dist/js/app.js' ),
 			Asset::attribute( 'app', 'js', 'dependencies' ),
 			Asset::attribute( 'app', 'js', 'version' ),
-			true
+			[
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			],
 		);
-
-		// Load WordPress' comment-reply script where appropriate.
-		if ( is_singular() && get_option( 'thread_comments' ) && comments_open() ) {
-			wp_enqueue_script( 'comment-reply' );
-		}
 	}
 
 	/**
@@ -173,7 +171,10 @@ class Enqueue implements Bootable {
 			get_theme_file_uri( 'dist/js/editor.js' ),
 			Asset::attribute( 'editor-scripts', 'js', 'dependencies' ),
 			Asset::attribute( 'editor-scripts', 'js', 'version' ),
-			true,
+			[
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			],
 		);
 	}
 
