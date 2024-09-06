@@ -173,7 +173,6 @@ class Enqueue implements Bootable {
 			Asset::attribute( 'editor-scripts', 'js', 'version' ),
 			[
 				'in_footer' => true,
-				'strategy'  => 'defer',
 			],
 		);
 	}
