@@ -34,11 +34,35 @@
 	}
 
 	.quantity {
+		display: flex;
 		margin-bottom: 0;
 
 		.qty {
+			appearance: textfield;
+			border: 0;
 			margin: 0;
-			width: 100px;
+			padding: 0;
+			text-align: center;
+			width: 60px;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+
+		&__button {
+			background: none;
+			border: 0;
+			cursor: pointer;
+			padding: 0;
+			text-align: center;
+			width: 30px;
+
+			&:hover {
+				background: none;
+			}
 		}
 	}
 }
