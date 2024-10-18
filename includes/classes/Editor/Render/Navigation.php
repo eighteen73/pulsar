@@ -16,6 +16,11 @@ use function Pulsar\render_svg;
  */
 class Navigation implements Bootable {
 
+	/**
+	 * The classes applied to the navigation block.
+	 *
+	 * @var array
+	 */
 	protected array $classes = [
 		'submenu-slide'     => 'is-submenu-style-slide',
 		'submenu-accordion' => 'is-submenu-style-accordion',
@@ -173,7 +178,7 @@ class Navigation implements Bootable {
 		$close_icon    = render_svg( $this->icons['close'] );
 
 		// Find the closing SVG tag and add another SVG after it.
-		$block_content = preg_replace('/\<svg width(.*?)\<\/svg\>/', $open_icon . $close_icon, $block_content, 1 );
+		$block_content = preg_replace( '/\<svg width(.*?)\<\/svg\>/', $open_icon . $close_icon, $block_content, 1 );
 
 		return $block_content;
 	}
@@ -205,8 +210,8 @@ class Navigation implements Bootable {
 	/**
 	 * Prepend a header to a submenu.
 	 *
-	 * @param string $block_content The block content.
-	 * @param array  $block         The block.
+	 * @param string    $block_content The block content.
+	 * @param array     $block         The block.
 	 * @param \WP_Block $instance   The block instance.
 	 *
 	 * @return string

@@ -25,7 +25,7 @@ class GravityForms implements Bootable {
 	public function boot(): void {
 
 		// Check if Gravity Forms is active.
-		if ( ! class_exists('GFForms' ) ) {
+		if ( ! class_exists( 'GFForms' ) ) {
 			return;
 		}
 
