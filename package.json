@@ -2,9 +2,11 @@
 	"name": "pulsar",
 	"version": "1.0.0",
 	"scripts": {
-		"watch": "wp-scripts start --output-path=dist --webpack-copy-php",
-		"hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
-		"production": "wp-scripts build --output-path=dist --webpack-copy-php",
+		"start": "wp-scripts start --output-path=dist --webpack-copy-php",
+		"start:hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
+		"build": "wp-scripts build --output-path=dist --webpack-copy-php",
+		"watch": "npm run start",
+		"production": "npm run build",
 		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
 		"lint:css": "stylelint './src/css/**/*.scss'",
 		"lint:js": "eslint './src/js/**/*.js'",
@@ -14,10 +16,14 @@
 		"format:php": "./vendor/bin/phpcbf .",
 		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
 		"i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
-		"i18n:pot": "npx node-wp-i18n makepot"
+		"i18n:pot": "npx node-wp-i18n makepot",
+		"packages-update": "wp-scripts packages-update",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses"
 	},
 	"engines": {
-		"node": ">=18.0.0"
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0"
 	},
 	"devDependencies": {
 		"@eighteen73/eslint-config-wordpress": "^1.0.0",
