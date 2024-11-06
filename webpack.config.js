@@ -89,6 +89,9 @@ const pulsarConfig = {
 						loader: 'sass-loader',
 						options: {
 							sourceMap: true, // Required for resolve-url-loader
+							sassOptions: {
+								includePaths: [__dirname + '/src/css'],
+							},
 						},
 					},
 				],
