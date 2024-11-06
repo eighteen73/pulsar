@@ -29,7 +29,10 @@ function theme( string $abstract = '' ) {
 
 		foreach ( $bindings as $binding ) {
 			$classes[ $binding ] = new $binding();
-			$classes[ $binding ]->boot();
+
+			if ( $classes[ $binding ]->can_boot() ) {
+				$classes[ $binding ]->boot();
+			}
 		}
 	}
 

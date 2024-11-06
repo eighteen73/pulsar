@@ -34,6 +34,15 @@ class Enqueue implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Theme stylesheets.
 	 *
 	 * @return void

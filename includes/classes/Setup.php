@@ -26,6 +26,15 @@ class Setup implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Set up theme support.
 	 *
 	 * @return void

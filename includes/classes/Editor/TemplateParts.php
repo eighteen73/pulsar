@@ -27,6 +27,15 @@ class TemplateParts implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Register the route for the template parts.
 	 *
 	 * @return void

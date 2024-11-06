@@ -75,6 +75,15 @@ class Navigation implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Add extension classes to the navigation block front end output.
 	 * Ass the navigation block is dynamic, the classes need adding here too.
 	 *

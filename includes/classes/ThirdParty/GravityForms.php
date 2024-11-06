@@ -24,17 +24,21 @@ class GravityForms implements Bootable {
 	 */
 	public function boot(): void {
 
-		// Check if Gravity Forms is active.
-		if ( ! class_exists( 'GFForms' ) ) {
-			return;
-		}
-
 		// Disable Gravity Forms styles.
 		add_filter( 'gform_disable_css', '__return_true' );
 
 		// Change Gravity Forms submit button to a button element.
 		// This allows us to use pseudo elements to style the button.
 		add_filter( 'gform_submit_button', [ $this, 'input_to_button' ], 10, 2 );
+	}
+
+	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return class_exists( 'GFForms' );
 	}
 
 	/**

@@ -26,6 +26,15 @@ class Patterns implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Retrieve the config for this class.
 	 *
 	 * @return array
