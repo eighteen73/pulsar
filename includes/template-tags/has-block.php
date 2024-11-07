@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file contains the implementation of the `has_block` function, which is used to recursively search a block instance for a specific block, including an optional attribute check.
+ *
+ * @package Pulsar
+ */
+
 namespace Pulsar;
 
 /**

@@ -94,7 +94,7 @@ class Navigation implements Bootable {
 	 */
 	public function add_classes( string $block_content, array $block ): string {
 
-		$is_responsive = ! isset( $block['attrs']['overlayMenu'] ) || isset( $block['attrs']['overlayMenu'] ) && $block['attrs']['overlayMenu'] !== 'never' ?? false;
+		$is_responsive = ( ! isset( $block['attrs']['overlayMenu'] ) || ( isset( $block['attrs']['overlayMenu'] ) && $block['attrs']['overlayMenu'] !== 'never' ) ) ?? false;
 
 		if ( ! $is_responsive ) {
 			return $block_content;
