@@ -180,14 +180,32 @@ class Navigation implements Bootable {
 		$tags = new WP_HTML_Tag_Processor( $block_content );
 
 		$tags->next_tag( [ 'class_name' => 'wp-block-navigation__responsive-container-open' ] );
-		$tags->set_attribute( 'data-wp-on-async--click', 'actions.toggleMenuOnClick' );
+		$tags->set_attribute( 'data-wp-class--has-modal-open', 'state.isMenuOpen' );
 
 		$block_content = $tags->get_updated_html();
 		$open_icon     = render_svg( $this->icons['open'] );
 		$close_icon    = render_svg( $this->icons['close'] );
 
+		if ( ! isset( $block['attrs']['overlayMenu'] ) || $block['attrs']['overlayMenu'] !== 'never' ) {
+			// Render the additional button
+			$additional_button = '<button aria-label="Close menu" class="wp-block-navigation__responsive-container-close" 
+				data-wp-on-async--click="actions.closeMenuOnClick" data-wp-class--has-modal-open="state.isMenuOpen">' . 
+				$close_icon . 
+				'</button>';
+		}
+
 		// Find the closing SVG tag and add another SVG after it.
-		$block_content = preg_replace( '/\<svg width(.*?)\<\/svg\>/', $open_icon . $close_icon, $block_content, 1 );
+		$block_content = preg_replace('/\<svg width(.*?)\<\/svg\>/', $open_icon, $block_content, 1 );
+
+		if ( isset( $additional_button ) ) {
+			// Use regex to append the button as the first child inside the <nav> tag
+			$block_content = preg_replace(
+				'/<nav([^>]*)>/',
+				'<nav$1>' . $additional_button,
+				$block_content,
+				1 // Ensures only the first <nav> is targeted
+			);
+		}
 
 		return $block_content;
 	}
