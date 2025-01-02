@@ -284,7 +284,8 @@ $responsive-breakpoint: --lg;
 .wp-block-navigation:where(.is-responsive) {
 
 	// The navigation toggle button directly in the <nav> element
-	.wp-block-navigation__responsive-container-open {
+	.wp-block-navigation__responsive-container-open,
+	.wp-block-navigation__responsive-container-close {
 		align-items: center;
 		background-color: transparent;
 		border: 0;
@@ -304,20 +305,16 @@ $responsive-breakpoint: --lg;
 			}
 		}
 
-		svg {
-			&:first-child:where(:not(:only-child)) {
-				:where(.has-modal-open) & {
-					display: none;
-				}
-			}
+		&:where(.has-modal-open) {
+			display: none;
+		}
+	}
 
-			&:last-child:where(:not(:only-child)) {
-				display: none;
+	.wp-block-navigation__responsive-container-close {
+		display: none;
 
-				:where(.has-modal-open) & {
-					display: block;
-				}
-			}
+		&.has-modal-open {
+			display: block;
 		}
 	}
 
