@@ -10,7 +10,7 @@ import { registerBlockExtension } from '@10up/block-components';
 
 /**
  * additionalAttributes object
- * @type {object}
+ * @type {Object}
  */
 const additionalAttributes = {
 	hasSubmenuBack: {
@@ -29,7 +29,7 @@ const additionalAttributes = {
 
 /**
  * classes object
- * @type {object}
+ * @type {Object}
  */
 const classes = {
 	slide: 'is-submenu-style-slide',
@@ -41,8 +41,8 @@ const classes = {
 
 /**
  * SubmenuOptionsEdit
- * @param {object} props
- * @returns {object} JSX
+ * @param {Object} props
+ * @return {Object} JSX
  */
 const SubmenuOptionsEdit = (props) => {
 	const { attributes, setAttributes } = props;
@@ -60,7 +60,7 @@ const SubmenuOptionsEdit = (props) => {
 				hasSubmenuAll: false,
 			});
 		}
-	}, [overlayMenu]);
+	}, [isResponsive, attributes, setAttributes]);
 
 	return (
 		<InspectorControls>
@@ -105,8 +105,8 @@ const SubmenuOptionsEdit = (props) => {
  * a function to generate the new className string that should get added to
  * the wrapping element of the block.
  *
- * @param {object} attributes block attributes
- * @returns {string}
+ * @param {Object} attributes block attributes
+ * @return {string} The generated class names.
  */
 function generateClassNames(attributes) {
 	const { overlayMenu, hasSubmenuBack, hasSubmenuLabel, hasSubmenuAll } =

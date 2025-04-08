@@ -3,7 +3,7 @@ import { addFilter } from '@wordpress/hooks';
 /**
  * Helper function to update the align attribute.
  *
- * @param {Object} settings The block settings.
+ * @param {Object} settings  The block settings.
  * @param {string} alignment The alignment value.
  *
  * @return {Object} The updated settings.
@@ -24,9 +24,9 @@ const updateAlign = (settings, alignment) => {
 /**
  * Update the align attribute for a specific variation.
  *
- * @param {Object} settings The block settings.
+ * @param {Object} settings      The block settings.
  * @param {string} variationName The name of the variation to update.
- * @param {string} alignValue The align value to set.
+ * @param {string} alignValue    The align value to set.
  *
  * @return {Object} The updated settings.
  */
@@ -46,7 +46,7 @@ const updateVariationAlign = (settings, variationName, alignValue) => {
  * Set the default align attribute for blocks.
  *
  * @param {Object} settings The block settings.
- * @param {string} name The block name.
+ * @param {string} name     The block name.
  *
  * @return {Object} The updated settings.
  */
