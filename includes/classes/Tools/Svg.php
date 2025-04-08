@@ -135,7 +135,7 @@ class Svg {
 
 		if ( $this->id ) {
 			// If the file is a URL, assume it came from the media library
-			$svg = file_get_contents( $this->file );
+			$svg = file_get_contents( $this->file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 			if ( ! $svg ) {
 				return '';
@@ -144,7 +144,7 @@ class Svg {
 			// Otherwise, treat it as a file path relative to the theme
 			$path = trim( 'assets/svg', '/' );
 			$file = $path ? "{$path}/{$this->file}" : $this->file;
-			$svg = file_get_contents( get_theme_file_path( $file ) );
+			$svg  = file_get_contents( get_theme_file_path( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 			if ( ! $svg ) {
 				return '';

@@ -51,7 +51,7 @@ class Setup implements Bootable {
 	 * @return void
 	 */
 	public function image_sizes(): void {
-		// add_image_size( '4x3', 640, 480, true );
+		add_image_size( 'extra-large', 1536, 0, false );
 	}
 
 	/**
@@ -62,11 +62,16 @@ class Setup implements Bootable {
 	 * @return array
 	 */
 	public function image_size_names( array $sizes ): array {
-		return array_merge(
-			$sizes,
-			[
-				// 'example' => __( 'Example' ),
-			]
-		);
+		$position = array_search( 'full', array_keys( $sizes ), true );
+
+		$custom_sizes = [
+			'extra-large' => __( 'Extra Large', 'pulsar' ),
+		];
+
+		$sizes = array_slice( $sizes, 0, $position, true ) +
+				$custom_sizes +
+				array_slice( $sizes, $position, null, true );
+
+		return $sizes;
 	}
 }

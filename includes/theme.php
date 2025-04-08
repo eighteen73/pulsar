@@ -14,13 +14,13 @@ use Pulsar\Tools\Config;
  * without using the singleton pattern and gives third-party devs easy access to
  * the objects if they need to unhook actions/filters added by the classes.
  *
- * Child theme authors can access the objects via `theme( $abstract )`.
+ * Child theme authors can access the objects via `theme( $class_name )`.
  *
  * @access public
- * @param  string $abstract The class abstract
+ * @param  string $class_name The class name
  * @return mixed
  */
-function theme( string $abstract = '' ) {
+function theme( string $class_name = '' ) {
 	static $classes = null;
 
 	// On first run, create new components and boot them.
@@ -36,7 +36,7 @@ function theme( string $abstract = '' ) {
 		}
 	}
 
-	return $abstract ? $classes[ $abstract ] : $classes;
+	return $class_name ? $classes[ $class_name ] : $classes;
 }
 
 /**

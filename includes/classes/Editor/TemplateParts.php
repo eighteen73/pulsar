@@ -45,8 +45,8 @@ class TemplateParts implements Bootable {
 			'pulsar/v1',
 			'/template-parts',
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_template_parts' ],
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_template_parts' ],
 				'permission_callback' => function () {
 					return current_user_can( 'edit_posts' );
 				},
@@ -70,7 +70,7 @@ class TemplateParts implements Bootable {
 			foreach ( $iterator as $file ) {
 				if ( $file->isFile() && $file->getExtension() === 'php' ) {
 					$template_data = $this->get_template_part_data( $file->getPathname() );
-					$templates[] = [
+					$templates[]   = [
 						'title' => $template_data['title'],
 						'slug'  => $template_data['slug'],
 					];

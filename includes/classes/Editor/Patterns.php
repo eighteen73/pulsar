@@ -43,12 +43,12 @@ class Patterns implements Bootable {
 		return Config::get( 'pattern-categories' );
 	}
 
-	 /**
-	  * Registers custom block patterns and categories.
-	  *
-	  * @access public
-	  * @return void
-	  */
+	/**
+	 * Registers custom block patterns and categories.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	public function register_categories(): void {
 
 		$categories = $this->config() ?: [];

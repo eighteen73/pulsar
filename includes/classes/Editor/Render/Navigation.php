@@ -133,7 +133,7 @@ class Navigation implements Bootable {
 	 * @return array
 	 */
 	public function add_context( $metadata ) {
-		if ( isset( $metadata['name'] ) && in_array( $metadata['name'], $this->submenu_blocks ) ) {
+		if ( isset( $metadata['name'] ) && in_array( $metadata['name'], $this->submenu_blocks, true ) ) {
 			$metadata['usesContext'] ??= [];
 			$metadata['usesContext'][] = 'hasSubmenuBack';
 			$metadata['usesContext'][] = 'hasSubmenuLabel';
@@ -147,12 +147,12 @@ class Navigation implements Bootable {
 			];
 
 			$metadata['attributes']['hasSubmenuLabel'] = [
-				'type' => 'boolean',
+				'type'    => 'boolean',
 				'default' => false,
 			];
 
 			$metadata['attributes']['hasSubmenuAll'] = [
-				'type' => 'boolean',
+				'type'    => 'boolean',
 				'default' => false,
 			];
 

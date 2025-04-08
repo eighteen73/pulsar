@@ -72,8 +72,8 @@ class Blocks implements Bootable {
 			foreach ( $block_json_files as $filename ) {
 				$block_folder = dirname( $filename );
 				register_block_type( $block_folder );
-			};
-		};
+			}
+		}
 	}
 
 	/**
