@@ -177,9 +177,9 @@
 	}
 
 	.gform_validation_container {
-		display: none !important;
+		display: none !important; // stylelint-disable-line declaration-no-important
 		left: -9999px;
-		position: absolute !important;
+		position: absolute !important; // stylelint-disable-line declaration-no-important
 	}
 }
 
