@@ -51,7 +51,7 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_style(
 			'pulsar-app-styles',
-			get_theme_file_uri( 'dist/css/app.css' ),
+			get_theme_file_uri( 'build/css/app.css' ),
 			[],
 			Asset::attribute( 'app', 'css', 'version' ),
 			'screen, print',
@@ -67,7 +67,7 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_script(
 			'pulsar-app-scripts',
-			get_theme_file_uri( 'dist/js/app.js' ),
+			get_theme_file_uri( 'build/js/app.js' ),
 			Asset::attribute( 'app', 'js', 'dependencies' ),
 			Asset::attribute( 'app', 'js', 'version' ),
 			[
@@ -90,14 +90,14 @@ class Enqueue implements Bootable {
 	public function block_styles(): void {
 
 		// Gets all the block stylesheets.
-		$files = glob( get_theme_file_path( 'dist/css/blocks/*.css' ) );
+		$files = glob( get_theme_file_path( 'build/css/blocks/*.css' ) );
 
 		foreach ( $files as $file ) {
 
 			// Gets the filename without the path or extension.
 			$name = str_replace(
 				[
-					get_theme_file_path( 'dist/css/blocks/' ),
+					get_theme_file_path( 'build/css/blocks/' ),
 					'.css',
 				],
 				'',
@@ -126,8 +126,8 @@ class Enqueue implements Bootable {
 				$block,
 				[
 					'handle' => "pulsar-block-{$name}",
-					'src'    => get_theme_file_uri( "dist/css/blocks/{$name}.css" ),
-					'path'   => get_theme_file_path( "dist/css/blocks/{$name}.css" ),
+					'src'    => get_theme_file_uri( "build/css/blocks/{$name}.css" ),
+					'path'   => get_theme_file_path( "build/css/blocks/{$name}.css" ),
 					'deps'   => Asset::attribute( $name, 'css/blocks', 'dependencies' ),
 					'ver'    => Asset::attribute( $name, 'css/blocks', 'version' ),
 					'media'  => 'screen, print',
@@ -163,7 +163,7 @@ class Enqueue implements Bootable {
 
 		add_editor_style(
 			[
-				'dist/css/editor.css',
+				'build/css/editor.css',
 			]
 		);
 	}
@@ -177,7 +177,7 @@ class Enqueue implements Bootable {
 
 		wp_enqueue_script(
 			'pulsar-editor-scripts',
-			get_theme_file_uri( 'dist/js/editor.js' ),
+			get_theme_file_uri( 'build/js/editor.js' ),
 			Asset::attribute( 'editor-scripts', 'js', 'dependencies' ),
 			Asset::attribute( 'editor-scripts', 'js', 'version' ),
 			[

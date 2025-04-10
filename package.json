@@ -2,9 +2,9 @@
 	"name": "pulsar",
 	"version": "1.0.0",
 	"scripts": {
-		"start": "wp-scripts start --output-path=dist --webpack-copy-php",
-		"start:hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
-		"build": "wp-scripts build --output-path=dist --webpack-copy-php",
+		"start": "wp-scripts start --webpack-copy-php",
+		"start:hot": "wp-scripts start --hot --webpack-copy-php",
+		"build": "wp-scripts build --webpack-copy-php",
 		"watch": "npm run start",
 		"production": "npm run build",
 		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",

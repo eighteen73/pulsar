@@ -62,7 +62,7 @@ class Blocks implements Bootable {
 	 */
 	public function register_custom_blocks(): void {
 
-		$blocks_directory = get_theme_file_path( '/dist/blocks/' );
+		$blocks_directory = get_theme_file_path( '/build/blocks/' );
 
 		// Register all the blocks in the theme.
 		if ( file_exists( $blocks_directory ) ) {
