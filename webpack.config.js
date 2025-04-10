@@ -1,9 +1,8 @@
 const wordpressConfig = require('@wordpress/scripts/config/webpack.config');
-const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
-const { getWordPressSrcDirectory } = require('@wordpress/scripts/utils');
+const { getProjectSourcePath } = require('@wordpress/scripts/utils');
 const { mergeWithRules } = require('webpack-merge');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // eslint-disable-line
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
 const { basename } = require('path');
@@ -47,6 +46,8 @@ function getBlockStylesEntryPoints() {
 	return entry;
 }
 
+const defaultEntryPoints = wordpressConfig.entry();
+
 /**
  * Pulsars default config.
  */
@@ -62,12 +63,12 @@ const pulsarConfig = {
 							url: false,
 						},
 					},
-					{
-						loader: require.resolve('resolve-url-loader'),
-						options: {
-							root: __dirname,
-						},
-					},
+					// {
+					// 	loader: require.resolve('resolve-url-loader'),
+					// 	options: {
+					// 		root: __dirname,
+					// 	},
+					// },
 				],
 			},
 			{
@@ -79,18 +80,19 @@ const pulsarConfig = {
 							url: false,
 						},
 					},
+					// {
+					// 	loader: require.resolve('resolve-url-loader'),
+					// 	options: {
+					// 		root: __dirname,
+					// 	},
+					// },
 					{
-						loader: require.resolve('resolve-url-loader'),
-						options: {
-							root: __dirname,
-						},
-					},
-					{
-						loader: 'sass-loader',
+						loader: require.resolve('sass-loader'),
 						options: {
 							sourceMap: true, // Required for resolve-url-loader
 							sassOptions: {
 								includePaths: [__dirname + '/src/css'],
+								loadPaths: [__dirname + '/src/css'],
 							},
 						},
 					},
@@ -106,27 +108,23 @@ const pulsarConfig = {
 	},
 	stats: 'minimal',
 	entry: {
-		...getWebpackEntryPoints(),
+		...defaultEntryPoints,
 		...getBlockStylesEntryPoints(),
 		'css/app': ['./src/css/app.scss'],
 		'css/editor': ['./src/css/editor.scss'],
 		'js/app': ['./src/js/app.js'],
 		'js/editor': ['./src/js/editor.js'],
 	},
-	output: {
-		path: __dirname + '/dist',
-		publicPath: './',
-	},
 	devServer: {
 		hot: true,
-		static: __dirname + '/dist/',
+		static: __dirname + '/build/',
 		allowedHosts: 'all',
 		host: 'localhost',
 		port: 1873,
 		proxy: {
-			'/dist': {
+			'/build': {
 				pathRewrite: {
-					'^/dist': '',
+					'^/build': '',
 				},
 			},
 		},
@@ -136,7 +134,7 @@ const pulsarConfig = {
 			patterns: [
 				{
 					from: '**/*.{svg,jpg,png}',
-					context: getWordPressSrcDirectory(),
+					context: getProjectSourcePath(),
 					noErrorOnMissing: true,
 				},
 			],
