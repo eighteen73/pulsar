@@ -38,6 +38,7 @@ class Setup implements Bootable {
 
 	/**
 	 * Set the number of products per page.
+	 * Multiples of 12 is ideal depending on the number of columns in the grid - this works for 2, 3 and 4 columns.
 	 *
 	 * @param \WP_Query $query The WP_Query instance.
 	 * @return void
@@ -48,7 +49,7 @@ class Setup implements Bootable {
 		}
 
 		if ( is_post_type_archive( 'product' ) ) {
-			$query->set( 'posts_per_page', 12 );
+			$query->set( 'posts_per_page', 24 );
 		}
 	}
 }

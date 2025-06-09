@@ -1,9 +1,9 @@
 @use "../tools" as *;
 
 .wc-block-product-template {
-	--column-gap: var(--wp--custom--layout--block-gap);
-	--row-gap: calc(var(--column-gap) * 2);
-	--min-width: 200px;
+	--column-gap: var(--wp--preset--spacing--xl);
+	--row-gap: var(--wp--preset--spacing--2-xl);
+	--min-width: 220px;
 
 	gap: var(--row-gap) var(--column-gap);
 
