@@ -27,6 +27,16 @@ class Setup implements Bootable {
 	}
 
 	/**
+	 * Checks if WooCommerce is active.
+	 *
+	 * @access public
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return class_exists( 'WooCommerce' );
+	}
+
+	/**
 	 * Set the number of products per page.
 	 *
 	 * @param \WP_Query $query The WP_Query instance.
