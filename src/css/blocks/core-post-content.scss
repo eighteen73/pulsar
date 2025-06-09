@@ -1,20 +1,11 @@
-@use "../tools" as *;
+@use "tools" as *;
 
 .wp-block-post-content {
-	// Add a larger gap between content followed by a heading.
-	* + :where(h1, h2, h3, h4, h5, h6) {
-		margin-block-start: var(--wp--preset--spacing--2-xl);
-	}
-
-	// Add a smaller gap after a heading.
-	:where(h1, h2, h3, h4, h5, h6) + * {
-		margin-block-start: var(--wp--preset--spacing--lg);
-	}
 
 	// Set consistent block spacing between sections (top level groups).
 	// This has to be fairly specific due to cores styling for block gap.
-	> .wp-block-group + .wp-block-group:where(:not(.has-background)) {
-		margin-block-start: var(--wp--custom--layout--block-gap-section);
+	> .wp-block-group + .wp-block-group {
+		margin-block-start: var(--wp--custom--spacing--group-gap);
 	}
 
 	// Assume two groups with a background should sit flush together.

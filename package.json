@@ -2,38 +2,45 @@
 	"name": "pulsar",
 	"version": "1.0.0",
 	"scripts": {
-		"watch": "wp-scripts start --output-path=dist --webpack-copy-php",
-		"hot": "wp-scripts start --hot --output-path=dist --webpack-copy-php",
-		"production": "wp-scripts build --output-path=dist --webpack-copy-php",
+		"start": "wp-scripts start --webpack-copy-php",
+		"start:hot": "wp-scripts start --hot --webpack-copy-php",
+		"build": "wp-scripts build --webpack-copy-php",
+		"watch": "npm run start",
+		"production": "npm run build",
 		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-		"lint:css": "stylelint './src/css/**/*.scss'",
-		"lint:js": "eslint './src/js/**/*.js'",
+		"lint:css": "stylelint './src/css/**/*.scss' --allow-empty-input",
+		"lint:js": "eslint './src/js/**/*.js' --no-error-on-unmatched-pattern",
 		"lint:php": "./vendor/bin/phpcs .",
-		"format:css": "stylelint --fix './src/css/**/*.scss'",
-		"format:js": "eslint --fix './src/js/**/*.js'",
+		"format:css": "stylelint --fix './src/css/**/*.scss' --allow-empty-input",
+		"format:js": "eslint --fix './src/js/**/*.js' --no-error-on-unmatched-pattern",
 		"format:php": "./vendor/bin/phpcbf .",
 		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
 		"i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
-		"i18n:pot": "npx node-wp-i18n makepot"
+		"i18n:pot": "npx node-wp-i18n makepot",
+		"packages-update": "wp-scripts packages-update",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses"
 	},
 	"engines": {
-		"node": ">=18.0.0"
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0"
 	},
 	"devDependencies": {
+		"@eighteen73/browserslist-config-wordpress": "^1.0.0",
 		"@eighteen73/eslint-config-wordpress": "^1.0.0",
 		"@eighteen73/stylelint-config-wordpress": "^1.0.0",
-		"@wordpress/browserslist-config": "^5.18",
-		"@wordpress/icons": "^9.31.0",
-		"@wordpress/prettier-config": "^2.20.0",
-		"@wordpress/scripts": "^26.6",
-		"alpinejs": "^3.12",
+		"@wordpress/icons": "^10.21.0",
+		"@wordpress/prettier-config": "^4.21.0",
+		"@wordpress/scripts": "^30.14.1",
 		"fast-glob": "^3.3.0",
 		"merge-jsons-webpack-plugin": "^2.0.1",
 		"postcss-preset-env": "^9.0.0",
+		"resolve-url-loader": "^5.0.0",
 		"webpack-merge": "^5.9.0",
 		"webpack-remove-empty-scripts": "^1.0"
 	},
 	"dependencies": {
+		"@10up/block-components": "^1.19.1",
 		"modern-normalize": "^2.0.0"
 	}
 }

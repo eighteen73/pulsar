@@ -3,49 +3,6 @@
 @use "sass:list";
 @use "sass:map";
 
-/// Used to output a theme.json equivalent css custom property.
-///
-/// @param {string} $key - theme.json key to retrieve.
-/// @param {string|list} $value - theme.json value to retrieve from key.
-///
-/// @example
-/// 	theme(color, primary)
-/// 	// var(--wp--custom--color--primary)
-///
-/// @return {string} The css variable.
-///
-@function theme($key, $values...) {
-	$selector: "";
-
-	@for $i from 0 to length($values) {
-		$value: list.nth($values, $i + 1);
-		$selector: #{$selector}--#{$value};
-	}
-
-	@return var(--wp--custom--#{$key}#{split-string($selector, "-")});
-}
-
-/// Used to output a theme.json equivalent css custom property for a colour.
-///
-/// @param {string|list} $value - theme.json value to retrieve from `color` key.
-///
-/// @example
-/// 	color(grey, light)
-/// 	// var(--wp--custom--color--grey--light)
-///
-/// @return {string} The css variable.
-///
-@function color($values...) {
-	$selector: "";
-
-	@for $i from 0 to length($values) {
-		$value: list.nth($values, $i + 1);
-		$selector: #{$selector}--#{$value};
-	}
-
-	@return var(--wp--custom--color#{split-string($selector, "-")});
-}
-
 /// Check if a string contains a number.
 ///
 /// @param {string} $string - The string to check.

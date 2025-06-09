@@ -46,6 +46,15 @@ class Blocks implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Registers custom blocks.
 	 *
 	 * @access public
@@ -53,7 +62,7 @@ class Blocks implements Bootable {
 	 */
 	public function register_custom_blocks(): void {
 
-		$blocks_directory = get_theme_file_path( '/dist/blocks/' );
+		$blocks_directory = get_theme_file_path( '/build/blocks/' );
 
 		// Register all the blocks in the theme.
 		if ( file_exists( $blocks_directory ) ) {
@@ -63,8 +72,8 @@ class Blocks implements Bootable {
 			foreach ( $block_json_files as $filename ) {
 				$block_folder = dirname( $filename );
 				register_block_type( $block_folder );
-			};
-		};
+			}
+		}
 	}
 
 	/**

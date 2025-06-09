@@ -26,6 +26,15 @@ class Patterns implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Retrieve the config for this class.
 	 *
 	 * @return array
@@ -34,12 +43,12 @@ class Patterns implements Bootable {
 		return Config::get( 'pattern-categories' );
 	}
 
-	 /**
-	  * Registers custom block patterns and categories.
-	  *
-	  * @access public
-	  * @return void
-	  */
+	/**
+	 * Registers custom block patterns and categories.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	public function register_categories(): void {
 
 		$categories = $this->config() ?: [];

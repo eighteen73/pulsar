@@ -1,7 +1,5 @@
 /.idea
 /node_modules
 /vendor
-/dist/mix/dev
-/config/browsersync.json
 npm-debug.log
 yarn-error.log

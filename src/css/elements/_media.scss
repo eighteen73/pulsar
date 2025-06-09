@@ -1,0 +1,12 @@
+@use "tools" as *;
+
+img,
+picture,
+video,
+audio,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	vertical-align: bottom;
+}

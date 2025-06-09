@@ -1,4 +1,4 @@
-@use "../tools" as *;
+@use "tools" as *;
 
 // Dont style lists within a <nav> element as lists by default.
 // Low specificity for easier overrides.

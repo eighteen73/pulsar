@@ -1,12 +1,13 @@
 const wordpressConfig = require('@wordpress/scripts/config/webpack.config');
-const { getWebpackEntryPoints } = require('@wordpress/scripts/utils/config');
-const { getWordPressSrcDirectory } = require('@wordpress/scripts/utils');
+const { getProjectSourcePath } = require('@wordpress/scripts/utils');
 const { mergeWithRules } = require('webpack-merge');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // eslint-disable-line -- part of @wordpress/scripts
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
 const { basename } = require('path');
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 /**
  * Converts a legacy path to the entry pair supported by webpack, e.g.:
@@ -62,6 +63,12 @@ const pulsarConfig = {
 							url: false,
 						},
 					},
+					{
+						loader: require.resolve('resolve-url-loader'),
+						options: {
+							root: __dirname,
+						},
+					},
 				],
 			},
 			{
@@ -70,7 +77,27 @@ const pulsarConfig = {
 					{
 						loader: require.resolve('css-loader'),
 						options: {
+							importLoaders: 1,
+							sourceMap: !isProduction,
+							modules: {
+								auto: true,
+							},
 							url: false,
+						},
+					},
+					{
+						loader: require.resolve('resolve-url-loader'),
+						options: {
+							root: __dirname,
+						},
+					},
+					{
+						loader: require.resolve('sass-loader'),
+						options: {
+							sourceMap: true, // Required for resolve-url-loader
+							sassOptions: {
+								loadPaths: [__dirname + '/src/css'],
+							},
 						},
 					},
 				],
@@ -85,27 +112,23 @@ const pulsarConfig = {
 	},
 	stats: 'minimal',
 	entry: {
-		...getWebpackEntryPoints(),
+		...wordpressConfig.entry(),
 		...getBlockStylesEntryPoints(),
 		'css/app': ['./src/css/app.scss'],
 		'css/editor': ['./src/css/editor.scss'],
 		'js/app': ['./src/js/app.js'],
 		'js/editor': ['./src/js/editor.js'],
 	},
-	output: {
-		path: __dirname + '/dist',
-		publicPath: './',
-	},
 	devServer: {
 		hot: true,
-		static: __dirname + '/dist/',
+		static: __dirname + '/build/',
 		allowedHosts: 'all',
 		host: 'localhost',
 		port: 1873,
 		proxy: {
-			'/dist': {
+			'/build': {
 				pathRewrite: {
-					'^/dist': '',
+					'^/build': '',
 				},
 			},
 		},
@@ -115,7 +138,7 @@ const pulsarConfig = {
 			patterns: [
 				{
 					from: '**/*.{svg,jpg,png}',
-					context: getWordPressSrcDirectory(),
+					context: getProjectSourcePath(),
 					noErrorOnMissing: true,
 				},
 			],
@@ -128,10 +151,16 @@ const pulsarConfig = {
 			files: [
 				'./config/theme-json/base.json',
 				'./config/theme-json/settings.general.json',
+				'./config/theme-json/settings.background.json',
 				'./config/theme-json/settings.blocks.json',
+				'./config/theme-json/settings.border.json',
 				'./config/theme-json/settings.color.json',
 				'./config/theme-json/settings.custom.json',
+				'./config/theme-json/settings.dimensions.json',
 				'./config/theme-json/settings.layout.json',
+				'./config/theme-json/settings.lightbox.json',
+				'./config/theme-json/settings.position.json',
+				'./config/theme-json/settings.shadow.json',
 				'./config/theme-json/settings.spacing.json',
 				'./config/theme-json/settings.typography.json',
 				'./config/theme-json/styles.json',
@@ -145,7 +174,49 @@ const pulsarConfig = {
 	],
 };
 
-module.exports = mergeWithRules({
+// Instead of trying to modify the WordPress config after merging,
+// we'll directly modify the WordPress config before merging
+const modifiedWordpressConfig = { ...wordpressConfig };
+
+// Find the SCSS rule in the WordPress config
+const scssRuleIndex = modifiedWordpressConfig.module.rules.findIndex(
+	(rule) => rule.test && rule.test.toString().includes('sc|sa)ss')
+);
+
+if (scssRuleIndex !== -1) {
+	const scssRule = modifiedWordpressConfig.module.rules[scssRuleIndex];
+
+	// Find the sass-loader in the array
+	const sassLoaderIndex = scssRule.use.findIndex(
+		(loader) =>
+			typeof loader === 'object' &&
+			loader.loader &&
+			loader.loader.includes('sass-loader')
+	);
+
+	if (sassLoaderIndex !== -1) {
+		// Check if resolve-url-loader is already in the array
+		const hasResolveUrlLoader = scssRule.use.some(
+			(loader) =>
+				typeof loader === 'object' &&
+				loader.loader &&
+				loader.loader.includes('resolve-url-loader')
+		);
+
+		// If resolve-url-loader is not already present, insert it before sass-loader
+		if (!hasResolveUrlLoader) {
+			scssRule.use.splice(sassLoaderIndex, 0, {
+				loader: require.resolve('resolve-url-loader'),
+				options: {
+					root: __dirname,
+				},
+			});
+		}
+	}
+}
+
+// Now merge with our custom config
+const config = mergeWithRules({
 	module: {
 		rules: {
 			test: 'match',
@@ -155,4 +226,6 @@ module.exports = mergeWithRules({
 			},
 		},
 	},
-})(wordpressConfig, pulsarConfig);
+})(modifiedWordpressConfig, pulsarConfig);
+
+module.exports = config;

@@ -1,27 +1,43 @@
-@use "../tools" as *;
+@use "tools" as *;
 
 h1,
 h2,
 h3,
-h4 {
-	font-family: var(--wp--preset--font-family--serif);
+h4,
+h5,
+h6 {
+	color: var(--wp--custom--color--text--primary);
+	font-family: var(--wp--preset--font-family--primary);
 	font-weight: 600;
-	line-height: var(--wp--custom--line-height--tight);
-	margin-bottom: 0;
+	letter-spacing: var(--wp--custom--letter-spacing--tighter);
 }
 
 h1 {
-	font-size: var(--wp--preset--font-size--3-xl);
+	font-size: var(--wp--preset--font-size--5-xl);
+	line-height: var(--wp--custom--line-height--none);
 }
 
 h2 {
-	font-size: var(--wp--preset--font-size--2-xl);
+	font-size: var(--wp--preset--font-size--4-xl);
+	line-height: var(--wp--custom--line-height--tight);
 }
 
 h3 {
-	font-size: var(--wp--preset--font-size--xl);
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: var(--wp--custom--line-height--tight);
 }
 
 h4 {
+	font-size: var(--wp--preset--font-size--2-xl);
+	line-height: var(--wp--custom--line-height--tight);
+}
+
+h5 {
+	font-size: var(--wp--preset--font-size--xl);
+	line-height: var(--wp--custom--line-height--tight);
+}
+
+h6 {
 	font-size: var(--wp--preset--font-size--lg);
+	line-height: var(--wp--custom--line-height--tight);
 }
