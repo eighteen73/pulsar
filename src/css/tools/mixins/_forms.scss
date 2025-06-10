@@ -1,5 +1,21 @@
 @use "../../settings" as *;
 
+/// Focus styles.
+@mixin field-focus() {
+	border-color: var(--wp--custom--color--border--active);
+	box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
+
+/// Label styles.
+@mixin field-label() {
+	display: block;
+	font-size: var(--wp--preset--font-size--lg);
+	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
 /// Input styles.
 @mixin field-input() {
 	appearance: none;
@@ -16,10 +32,7 @@
 	width: 100%;
 
 	&:focus {
-		border-color: var(--wp--custom--color--border--active);
-		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
-		outline: 2px solid transparent;
-		outline-offset: 2px;
+		@include field-focus;
 	}
 
 	&:disabled {
@@ -69,10 +82,7 @@
 	}
 
 	&:focus {
-		border-color: var(--wp--custom--color--border--active);
-		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
-		outline: 2px solid transparent;
-		outline-offset: 2px;
+		@include field-focus;
 	}
 
 	&:disabled {
@@ -93,10 +103,7 @@
 	padding: 0;
 
 	&:focus {
-		border-color: var(--wp--custom--color--border--active);
-		box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
-		outline: 2px solid transparent;
-		outline-offset: 2px;
+		@include field-focus;
 	}
 }
 

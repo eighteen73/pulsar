@@ -15,7 +15,7 @@ body {
 	letter-spacing: var(--wp--custom--letter-spacing--tight);
 	line-height: var(--wp--custom--line-height--normal);
 
-	@include container-sizes(sm, md, lg, xl, 2-xl);
+	@include container-sizes(sm, md, lg, xl);
 }
 
 /// Anything that has been anchored to should have extra scroll margin.

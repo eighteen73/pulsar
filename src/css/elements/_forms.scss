@@ -11,8 +11,7 @@ textarea {
 }
 
 label {
-	display: block;
-	margin-bottom: var(--wp--preset--spacing--sm);
+	@include field-label;
 
 	&:last-child {
 		margin-bottom: 0;

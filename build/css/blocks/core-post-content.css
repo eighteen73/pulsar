@@ -1,0 +1,1 @@
+.wp-block-post-content>.wp-block-group+.wp-block-group{margin-top:var(--wp--custom--spacing--group-gap)}.wp-block-post-content>.wp-block-group:where(.has-background)+.wp-block-group:where(.has-background){margin-top:0}
