@@ -24,6 +24,7 @@ class Setup implements Bootable {
 	 */
 	public function boot(): void {
 		add_action( 'pre_get_posts', [ $this, 'products_per_page' ] );
+		add_filter( 'woocommerce_get_price_html', [ $this, 'from_variation_price' ], 10, 2 );
 	}
 
 	/**
@@ -51,5 +52,20 @@ class Setup implements Bootable {
 		if ( is_post_type_archive( 'product' ) ) {
 			$query->set( 'posts_per_page', 24 );
 		}
+	}
+
+	/**
+	 * Adjust a variable product price to show From {price}
+	 *
+	 * @param string                           $price The price html.
+	 * @param \WC_Product|\WC_Product_Variable $product The product object.
+	 * @return string
+	 */
+	public function from_variation_price( string $price, \WC_Product|\WC_Product_Variable $product ): string {
+		if ( $product->is_type( 'variable' ) && $product->get_variation_price( 'min' ) !== $product->get_variation_price( 'max' ) ) {
+			return '<span class="wc-block-components-product-price__prefix">From </span>' . wc_price( $product->get_variation_price( 'min' ) );
+		}
+
+		return $price;
 	}
 }
