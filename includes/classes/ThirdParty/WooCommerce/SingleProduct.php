@@ -28,8 +28,13 @@ class SingleProduct implements Bootable {
 		add_action( 'woocommerce_before_quantity_input_field', [ $this, 'quantity_minus_button' ], 10 );
 		add_action( 'woocommerce_after_quantity_input_field', [ $this, 'quantity_plus_button' ], 10 );
 		add_action( 'woocommerce_before_single_product', [ $this, 'quantity_buttons_script' ] );
+
+		// Variation price and description.
 		add_action( 'woocommerce_before_single_product', [ $this, 'variation_price_to_product_price' ] );
 		add_action( 'woocommerce_before_single_product', [ $this, 'variation_description_to_product_description' ] );
+
+		// Remove the description heading.
+		add_filter( 'woocommerce_product_description_heading', '__return_null' );
 	}
 
 	/**
