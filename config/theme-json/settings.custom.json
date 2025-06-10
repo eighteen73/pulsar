@@ -3,9 +3,6 @@
 	"version": 3,
 	"settings": {
 		"custom": {
-      "global":{
-
-      },
 			"color": {
 				"neutral": {
 					"0": "#ffffff",
@@ -102,7 +99,7 @@
 			},
 			"layout": {
 				"content": "768px",
-				"wide": "1536px"
+				"wide": "1280px"
 			},
 			"spacing": {
 				"blockGap": "var:preset|spacing|lg",
