@@ -1,8 +1,14 @@
 @use "../tools" as *;
 
 .woocommerce div.product .wc-block-add-to-cart-form form.cart {
+	gap: var(--wp--custom--spacing--block-gap);
 	grid-template-columns: min-content 1fr;
 	margin-bottom: 0;
+
+	&::before,
+	&::after {
+		content: none;
+	}
 
 	table.variations {
 		margin-bottom: var(--wp--custom--spacing--block-gap);
