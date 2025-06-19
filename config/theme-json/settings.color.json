@@ -3,7 +3,7 @@
 	"version": 3,
 	"settings": {
 		"color": {
-			"background": false,
+			"background": true,
 			"custom": false,
 			"customDuotone": false,
 			"customGradient": false,
@@ -15,27 +15,52 @@
 			"link": false,
 			"palette": [
 				{
-					"name": "Primary",
-					"slug": "primary",
-					"color": "var:custom|color|primary|500"
+					"name": "Brand",
+					"slug": "brand",
+					"color": "var:custom|color|primitive|primary|600"
 				},
 				{
-					"name": "Secondary",
-					"slug": "secondary",
-					"color": "var:custom|color|secondary|500"
+					"name": "Brand Accent",
+					"slug": "brand-accent",
+					"color": "var:custom|color|primitive|primary|100"
 				},
-        {
-					"name": "Neutral: 0",
-					"slug": "neutral-0",
-					"color": "var:custom|color|neutral|0"
+				{
+					"name": "Complementary",
+					"slug": "complementary",
+					"color": "var:custom|color|primitive|secondary|600"
 				},
-        {
-					"name": "Neutral: 1000",
-					"slug": "neutral-1000",
-					"color": "var:custom|color|neutral|1000"
+				{
+					"name": "Complementary Accent",
+					"slug": "complementary-accent",
+					"color": "var:custom|color|primitive|secondary|100"
+				},
+				{
+					"name": "Contrast",
+					"slug": "contrast",
+					"color": "var:custom|color|primitive|neutral|800"
+				},
+				{
+					"name": "Contrast Accent",
+					"slug": "contrast-accent",
+					"color": "var:custom|color|primitive|neutral|200"
+				},
+				{
+					"name": "Base",
+					"slug": "base",
+					"color": "var:custom|color|primitive|neutral|0"
+				},
+				{
+					"name": "Base Accent",
+					"slug": "base-accent",
+					"color": "var:custom|color|primitive|neutral|600"
+				},
+				{
+					"name": "Tint",
+					"slug": "tint",
+					"color": "var:custom|color|primitive|neutral|100"
 				}
 			],
-			"text": false
+			"text": true
 		}
 	}
 }

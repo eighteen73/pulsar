@@ -4,9 +4,9 @@
 	"settings": {
 		"border": {
 			"color": false,
-      "radius": false,
-      "style": false,
-      "width": false
+			"radius": false,
+			"style": false,
+			"width": false
 		}
 	}
 }

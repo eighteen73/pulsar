@@ -4,7 +4,7 @@
 	"settings": {
 		"typography": {
 			"customFontSize": false,
-      "defaultFontSizes": false,
+			"defaultFontSizes": false,
 			"dropCap": false,
 			"fluid": true,
 			"fontFamilies": [
@@ -12,110 +12,68 @@
 					"name": "Primary",
 					"slug": "primary",
 					"fontFamily": "'Inter', sans-serif",
-          "fontFace": [
-            {
-              "fontFamily": "Inter",
-              "fontStyle": "auto",
-              "fontWeight": "100 900",
-              "fontDisplay": "swap",
-		          "fontStretch": "normal",
-              "src": [
-                "file:./assets/fonts/inter/InterVariable-Italic.woff2",
-                "file:./assets/fonts/inter/InterVariable.woff2"
-              ]
-            }
-          ]
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontStyle": "auto",
+							"fontWeight": "100 900",
+							"fontDisplay": "swap",
+							"fontStretch": "normal",
+							"src": [
+								"file:./assets/fonts/inter/InterVariable-Italic.woff2",
+								"file:./assets/fonts/inter/InterVariable.woff2"
+							]
+						}
+					]
 				}
 			],
 			"fontSizes": [
-        {
-					"name": "2XS",
-					"slug": "2-xs",
-					"size": "11px",
-					"fluid": false
-				},
-        {
+				{
 					"name": "XS",
 					"slug": "xs",
-					"size": "12px",
+					"size": "14px",
 					"fluid": false
 				},
-        {
+				{
 					"name": "SM",
 					"slug": "sm",
-					"size": "14px",
+					"size": "16px",
 					"fluid": false
 				},
 				{
 					"name": "MD",
 					"slug": "md",
-					"size": "16px",
-					"fluid": false
+					"size": "18px",
+					"fluid": {
+						"min": "16px",
+						"max": "18px"
+					}
 				},
 				{
 					"name": "LG",
 					"slug": "lg",
-					"size": "18px",
-					"fluid": false
+					"size": "26px",
+					"fluid": {
+						"min": "18px",
+						"max": "26px"
+					}
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "20px",
-					"fluid": false
+					"size": "44px",
+					"fluid": {
+						"min": "26px",
+						"max": "44px"
+					}
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
-					"size": "25px",
+					"size": "70px",
 					"fluid": {
-						"min": "23px",
-						"max": "25px"
-					}
-				},
-				{
-					"name": "3XL",
-					"slug": "3-xl",
-					"size": "30px",
-					"fluid": {
-						"min": "25px",
-						"max": "30px"
-					}
-				},
-        {
-					"name": "4XL",
-					"slug": "4-xl",
-					"size": "37px",
-					"fluid": {
-						"min": "28px",
-						"max": "37px"
-					}
-				},
-        {
-					"name": "5XL",
-					"slug": "5-xl",
-					"size": "45px",
-					"fluid": {
-						"min": "32px",
-						"max": "45px"
-					}
-				},
-        {
-					"name": "6XL",
-					"slug": "6-xl",
-					"size": "55px",
-					"fluid": {
-						"min": "37px",
-						"max": "55px"
-					}
-				},
-        {
-					"name": "7XL",
-					"slug": "7-xl",
-					"size": "96px",
-					"fluid": {
-						"min": "37px",
-						"max": "96px"
+						"min": "44px",
+						"max": "70px"
 					}
 				}
 			],
