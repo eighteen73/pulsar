@@ -1,18 +1,19 @@
 @use "../../settings" as *;
+@use "utility" as *;
 
 /// Button base styles.
 @mixin button-base() {
 	align-items: center;
 	border: unset;
-	border-radius: unset;
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-shadow: unset;
 	cursor: pointer;
 	display: inline-flex;
-	gap: var(--wp--preset--spacing--2-xs);
+	gap: var(--wp--preset--spacing--xs);
 	justify-content: center;
-	padding: var(--wp--preset--spacing--sm);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
 	text-align: center;
-	transition: all var(--wp--custom--transition-duration--quick);
+	transition: all var(--wp--custom--transition--duration--quick) var(--wp--custom--transition--timing--ease-in);
 }
 
 /// Button style.
@@ -21,12 +22,16 @@
 ///
 @mixin button-style($style: primary) {
 	@if $style == primary {
-		background-color: var(--wp--custom--color--surface--primary);
-		color: var(--wp--custom--color--text--invert);
+		background-color: var(--wp--preset--color--brand);
+		color: var(--wp--preset--color--base);
 
 		&:hover,
 		&:active {
-			background-color: var(--wp--custom--color--primary--100);
+			opacity: 0.8;
+		}
+
+		&:focus-visible {
+			@include focus-ring;
 		}
 	}
 }

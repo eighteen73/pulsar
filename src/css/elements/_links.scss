@@ -1,6 +1,10 @@
 @use "tools" as *;
 
 :where(a:not(.wp-element-button)) {
-	color: var(--wp--custom--color--text--link);
+	color: var(--wp--preset--color--contrast);
 	text-decoration: underline;
+
+	&:focus-visible {
+		@include focus-block;
+	}
 }

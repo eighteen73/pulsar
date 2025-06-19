@@ -11,12 +11,7 @@ textarea {
 }
 
 label {
-	display: block;
-	margin-bottom: var(--wp--preset--spacing--sm);
-
-	&:last-child {
-		margin-bottom: 0;
-	}
+	@include label;
 }
 
 fieldset {

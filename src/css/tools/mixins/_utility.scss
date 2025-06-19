@@ -78,3 +78,26 @@
 		mask-image: url("/assets/svg/#{$icon}.svg");
 	}
 }
+
+/// Set the focus ring style.
+/// @param {Color} $color - The color of the focus ring.
+///
+@mixin focus-ring($color: var(--wp--custom--color--focus)) {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+}
+
+/// Set the focus block style.
+/// @param {Color} $surface - The color of the focus block surface.
+/// @param {Color} $text - The color of the focus block text.
+///
+@mixin focus-block(
+    $surface: var(--wp--custom--color--focus),
+    $text: var(--wp--custom--color--focus-accent)
+) {
+    &:focus-visible {
+        background-color: $surface;
+        color: $text;
+        outline: none;
+    }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pulsar/template-part",
+  "description": "Allows using PHP templates for template parts.",
+  "version": "0.1.0",
+  "title": "Theme Template Part",
+  "category": "text",
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": true,
+    "lock": true,
+    "multiple": true,
+    "interactivity": {
+      "clientNavigation": true
+    }
+  },
+  "usesContext": [
+    "postId",
+    "postType",
+    "queryId"
+  ],
+  "attributes": {
+    "slug": {
+      "type": "string"
+    },
+    "lock": {
+      "type": "object",
+      "default": {
+        "move": true,
+        "remove": true
+      }
+    }
+  },
+  "textdomain": "pulsar",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
