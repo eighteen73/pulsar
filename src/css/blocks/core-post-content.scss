@@ -12,4 +12,8 @@
 	> .wp-block-group:where(.has-background) + .wp-block-group:where(.has-background) {
 		margin-block-start: 0;
 	}
+
+	> .wp-block-group > * + :where(.wp-block-columns, .is-layout-grid) {
+		margin-block-start: var(--wp--custom--spacing--row-gap);
+	}
 }

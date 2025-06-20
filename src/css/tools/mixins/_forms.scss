@@ -116,13 +116,13 @@
 
 /// Checkbox styles.
 @mixin field-checkbox() {
-	--icon-size: 16px;
+	--icon-size: 24px;
 
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
 	border: 1px solid var(--wp--custom--color--border);
-	border-radius: 0;
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
 	color: var(--wp--preset--color--brand);
 	display: inline-block;
 	flex-shrink: 0;
@@ -177,7 +177,7 @@
 
 /// Radio styles.
 @mixin field-radio() {
-	--icon-size: 16px;
+	--icon-size: 24px;
 
 	appearance: none;
 	background-color: var(--wp--preset--color--base);

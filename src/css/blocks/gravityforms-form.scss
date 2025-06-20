@@ -60,6 +60,12 @@
 		}
 	}
 
+	.gfield_radio,
+	.gfield_checkbox {
+		display: grid;
+		gap: var(--wp--preset--spacing--sm);
+	}
+
 	.hidden_label {
 		> .gfield_label {
 			@include hide-visually;
