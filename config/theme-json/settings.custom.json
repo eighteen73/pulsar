@@ -75,8 +75,7 @@
 				"border-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
-				"is-rounded": 0,
-				"is-dark-mode": 0
+				"is-rounded": 0
 			},
 			"layout": {
 				"content": "768px",
@@ -102,8 +101,8 @@
 			},
 			"typography": {
 				"weight": {
-					"regular": 400,
-					"bold": 600
+					"body": 400,
+					"heading": 600
 				},
 				"lineHeight": {
 					"none": "1",
@@ -123,8 +122,8 @@
 			},
 			"transition": {
 				"duration": {
-					"quick": "100ms",
-					"normal": "250ms",
+					"quick": "150ms",
+					"normal": "300ms",
 					"slow": "600ms"
 				},
 				"timing": {

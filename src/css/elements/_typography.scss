@@ -8,7 +8,7 @@ h5,
 h6 {
 	color: var(--wp--custom--color--text--primary);
 	font-family: var(--wp--preset--font-family--primary);
-	font-weight: var(--wp--custom--typography--weight--bold);
+	font-weight: var(--wp--custom--typography--weight--heading);
 	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
 	text-wrap: balance;
 }
@@ -48,5 +48,5 @@ p {
 }
 
 strong {
-	font-weight: var(--wp--custom--typography--weight--bold);
+	font-weight: var(--wp--custom--typography--weight--heading);
 }

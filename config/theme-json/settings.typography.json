@@ -61,18 +61,27 @@
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "44px",
+					"size": "33px",
 					"fluid": {
 						"min": "26px",
-						"max": "44px"
+						"max": "33px"
 					}
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
+					"size": "44px",
+					"fluid": {
+						"min": "33px",
+						"max": "44px"
+					}
+				},
+				{
+					"name": "3XL",
+					"slug": "3-xl",
 					"size": "70px",
 					"fluid": {
-						"min": "44px",
+						"min": "33px",
 						"max": "70px"
 					}
 				}

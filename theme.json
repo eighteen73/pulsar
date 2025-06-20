@@ -158,8 +158,7 @@
 				"border-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
-				"is-rounded": 0,
-				"is-dark-mode": 0
+				"is-rounded": 0
 			},
 			"layout": {
 				"content": "768px",
@@ -185,8 +184,8 @@
 			},
 			"typography": {
 				"weight": {
-					"regular": 400,
-					"bold": 600
+					"body": 400,
+					"heading": 600
 				},
 				"lineHeight": {
 					"none": "1",
@@ -206,8 +205,8 @@
 			},
 			"transition": {
 				"duration": {
-					"quick": "100ms",
-					"normal": "250ms",
+					"quick": "150ms",
+					"normal": "300ms",
 					"slow": "600ms"
 				},
 				"timing": {
@@ -437,18 +436,27 @@
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "44px",
+					"size": "33px",
 					"fluid": {
 						"min": "26px",
-						"max": "44px"
+						"max": "33px"
 					}
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
+					"size": "44px",
+					"fluid": {
+						"min": "33px",
+						"max": "44px"
+					}
+				},
+				{
+					"name": "3XL",
+					"slug": "3-xl",
 					"size": "70px",
 					"fluid": {
-						"min": "44px",
+						"min": "33px",
 						"max": "70px"
 					}
 				}
