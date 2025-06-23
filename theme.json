@@ -86,6 +86,7 @@
 			"text": true
 		},
 		"custom": {
+			"global": {},
 			"color": {
 				"primitive": {
 					"neutral": {

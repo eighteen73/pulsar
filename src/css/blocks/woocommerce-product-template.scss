@@ -1,0 +1,17 @@
+@use "../tools" as *;
+
+.wc-block-product-template {
+	--column-gap: var(--wp--preset--spacing--xl);
+	--row-gap: var(--wp--preset--spacing--2-xl);
+	--min-width: 220px;
+
+	gap: var(--row-gap) var(--column-gap);
+
+	&__responsive {
+		@for $i from 2 through 6 {
+			&.columns-#{$i} {
+				grid-template-columns: repeat(auto-fill, minmax(max(var(--min-width), calc(100% / #{$i} - var(--column-gap))), 1fr));
+			}
+		}
+	}
+}

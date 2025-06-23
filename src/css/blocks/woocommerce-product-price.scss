@@ -1,0 +1,17 @@
+@use "../tools" as *;
+
+.wp-block-woocommerce-product-price {
+	font-weight: 600;
+
+	span {
+		vertical-align: middle;
+	}
+
+	del {
+		color: var(--wp--custom--color--text--inactive);
+	}
+
+	.wc-block-components-product-price__prefix {
+		font-size: 70%;
+	}
+}

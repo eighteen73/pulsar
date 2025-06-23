@@ -1,0 +1,131 @@
+@use "../tools" as *;
+
+.woocommerce div.product .wc-block-add-to-cart-form form.cart {
+	gap: var(--wp--custom--spacing--block-gap);
+	grid-template-columns: min-content 1fr;
+	margin-bottom: 0;
+
+	&::before,
+	&::after {
+		content: none;
+	}
+
+	table.variations {
+		margin-bottom: var(--wp--custom--spacing--block-gap);
+
+		tbody {
+			align-items: flex-start;
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--custom--spacing--block-gap);
+		}
+
+		tr {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--xs);
+			width: 100%;
+
+			th {
+				line-height: inherit;
+				padding: 0;
+
+				label {
+					font-weight: 600;
+				}
+			}
+
+			td {
+				line-height: inherit;
+				padding: 0;
+
+				select {
+					@include field-select();
+					margin: 0;
+				}
+			}
+		}
+
+		.reset_variations {
+			display: none !important; // stylelint-disable-line declaration-no-important
+		}
+	}
+
+	button.single_add_to_cart_button {
+		margin-bottom: 0;
+	}
+
+	.variations_button {
+		gap: var(--wp--custom--spacing--block-gap);
+		grid-template-columns: min-content 1fr;
+	}
+
+	.single_add_to_cart_button {
+		width: 100%;
+	}
+
+	.input-text {
+		font-size: inherit;
+		padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--xl);
+	}
+
+	.quantity {
+		border: 1px solid var(--wp--custom--color--border--default);
+		display: flex;
+		margin: 0;
+		padding: var(--wp--preset--spacing--sm);
+
+		&:focus-within {
+			border-color: var(--wp--custom--color--border--active);
+			box-shadow: var(--wp--custom--color--border--active) 0 0 0 1px;
+			outline: 2px solid transparent;
+			outline-offset: 2px;
+		}
+
+		.qty {
+			appearance: textfield;
+			border: 0;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			width: 60px;
+
+			&:focus {
+				box-shadow: none;
+				outline: none;
+			}
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+
+		&__button {
+			background: none;
+			border: 0;
+			cursor: pointer;
+			padding: 0;
+			position: relative;
+			text-align: center;
+			width: 24px;
+			z-index: 1;
+
+			&:hover {
+				background: none;
+			}
+
+			&:focus-visible {
+				@include field-focus;
+			}
+		}
+	}
+
+	// Hide single variation
+	// We are updating the variation description and price via JavaScript
+	.single_variation {
+		display: none !important; // stylelint-disable-line declaration-no-important
+	}
+}
