@@ -35,6 +35,12 @@ class SingleProduct implements Bootable {
 
 		// Remove the description heading.
 		add_filter( 'woocommerce_product_description_heading', '__return_null' );
+
+		// Remove the reviews heading.
+		add_filter( 'woocommerce_product_reviews_heading', '__return_null' );
+
+		// Remove the additional information heading.
+		add_filter( 'woocommerce_product_additional_information_heading', '__return_null' );
 	}
 
 	/**

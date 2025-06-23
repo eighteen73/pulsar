@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pulsar/woocommerce-product-details-accordion",
+  "description": "Display a product's description, attributes, and reviews in an accordion.",
+  "version": "1.0.0",
+  "title": "Product Details Accordion",
+  "category": "woocommerce",
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": true,
+    "lock": true,
+    "multiple": false,
+    "align": true
+  },
+  "attributes": {
+    "openMultiple": {
+      "type": "boolean",
+      "default": true
+    },
+    "startOpen": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "textdomain": "pulsar",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php",
+  "style": "file:./style-index.css"
+}

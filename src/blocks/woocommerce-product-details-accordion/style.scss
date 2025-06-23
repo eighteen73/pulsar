@@ -1,0 +1,103 @@
+@use "tools" as *;
+
+.wp-block-pulsar-woocommerce-product-details-accordion {
+	$block: &;
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--sm);
+
+	&__details {
+		background-color: var(--wp--preset--color--tint);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	}
+
+	&__summary {
+		align-items: center;
+		cursor: pointer;
+		display: flex;
+		font-size: var(--wp--preset--font-size--md);
+		font-weight: var(--wp--custom--typography--weight--heading);
+		justify-content: space-between;
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+
+		&::marker {
+			content: none;
+		}
+
+		&:focus-visible {
+			@include focus-block;
+		}
+
+		&::after {
+			@include icon(plus);
+		}
+	}
+
+	&__details[open] {
+		#{$block}__summary {
+			&::after {
+				@include icon(minus);
+			}
+		}
+	}
+
+	&__content {
+		max-width: 75ch;
+		padding-bottom: var(--wp--preset--spacing--lg);
+		padding-inline: var(--wp--preset--spacing--md);
+
+		> :first-child {
+			margin-top: 0;
+		}
+	}
+
+	// Product attributes table
+	.woocommerce-product-attributes {
+		border: 0;
+		margin: 0;
+
+		th {
+			background-color: transparent !important; // stylelint-disable-line declaration-no-important
+			border: 0;
+			font-weight: 600;
+			line-height: unset;
+			padding: 0;
+			text-align: left;
+		}
+
+		td {
+			background-color: transparent !important; // stylelint-disable-line declaration-no-important
+			border: 0;
+			font-style: normal;
+			line-height: unset;
+			padding: 0;
+			text-align: left;
+
+			p {
+				padding: 0;
+			}
+		}
+
+		tr:not(:last-child) th,
+		tr:not(:last-child) td {
+			padding-bottom: var(--wp--custom--spacing--block-gap);
+		}
+	}
+
+	.woocommerce-Reviews { // stylelint-disable-line selector-class-pattern
+		h2 {
+			display: none;
+		}
+
+		.commentlist {
+			padding-left: 0;
+
+			.comment-text {
+				border: 1px solid var(--wp--custom--color--border--default) !important; // stylelint-disable-line declaration-no-important
+				border-radius: 0 !important; // stylelint-disable-line declaration-no-important
+				padding: var(--wp--custom--spacing--block-gap) !important; // stylelint-disable-line declaration-no-important
+			}
+		}
+	}
+}

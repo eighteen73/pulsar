@@ -2,7 +2,7 @@
 
 // Styles are applied here rather than theme.json so styles can be more easily shared.
 .wp-element-button {
-	@include button();
+	// @include button();
 
 	&:focus-visible {
 		background-color: var(--wp--custom--color--focus);
