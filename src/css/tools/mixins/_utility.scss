@@ -83,8 +83,9 @@
 /// @param {Color} $color - The color of the focus ring.
 ///
 @mixin focus-ring($color: var(--wp--custom--color--focus)) {
-    outline: 2px solid $color;
-    outline-offset: 2px;
+	outline: 2px solid $color;
+	outline-offset: 2px;
+	transition: unset;
 }
 
 /// Set the focus block style.
@@ -92,12 +93,13 @@
 /// @param {Color} $text - The color of the focus block text.
 ///
 @mixin focus-block(
-    $surface: var(--wp--custom--color--focus),
-    $text: var(--wp--custom--color--focus-accent)
+	$surface: var(--wp--custom--color--focus),
+	$text: var(--wp--custom--color--focus-accent)
 ) {
-    &:focus-visible {
-        background-color: $surface;
-        color: $text;
-        outline: none;
-    }
+	&:focus-visible {
+		background-color: $surface;
+		color: $text;
+		outline: none;
+		transition: unset;
+	}
 }

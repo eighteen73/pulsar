@@ -12,7 +12,10 @@
     "inserter": true,
     "lock": true,
     "multiple": false,
-    "align": true
+    "align": true,
+    "spacing": {
+      "margin": true
+    }
   },
   "attributes": {
     "openMultiple": {

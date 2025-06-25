@@ -1,6 +1,7 @@
 @use "tools" as *;
 
 .wp-block-columns {
+	--block-gap: var(--wp--custom--spacing--block-gap);
 
 	// Trump cores `.is-layout-flex` selector as it doesn't apply to columns.
 	&:not([class^="are-vertically-aligned"]) {

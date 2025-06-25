@@ -1,7 +1,5 @@
 @use "../tools" as *;
 
 .wp-block-woocommerce-product-sale-badge .wc-block-components-product-sale-badge {
-	background-color: var(--wp--custom--color--surface--default);
-	border: none;
-	border-radius: 0;
+	@include wc-sale-badge;
 }

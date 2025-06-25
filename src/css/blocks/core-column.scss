@@ -1,6 +1,8 @@
 @use "tools" as *;
 
 .wp-block-column {
+	--wp--custom--spacing--block-gap: var(--wp--style--block-gap); // Reset the block gap, as we set a custom one for 2 columns.
+
 	flex-basis: 0;
 	flex-grow: 1;
 

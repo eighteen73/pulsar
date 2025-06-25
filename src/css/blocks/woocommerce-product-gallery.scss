@@ -6,7 +6,7 @@
 	}
 
 	.wc-block-product-gallery-large-image {
-		border: 1px solid var(--wp--custom--color--border--default);
+		border: 1px solid var(--wp--custom--color--border);
 	}
 
 	.wc-block-product-gallery-thumbnails {
@@ -14,7 +14,7 @@
 	}
 
 	.wc-block-product-gallery-thumbnails__thumbnail {
-		border: 1px solid var(--wp--custom--color--border--default);
+		border: 1px solid var(--wp--custom--color--border);
 	}
 
 	.wc-block-product-gallery-large-image-next-previous-container {
@@ -31,23 +31,28 @@
 		}
 
 		button {
+			align-items: center;
+			display: flex;
 			height: 44px;
+			justify-content: center;
 			width: 44px;
 
 			&:not(:disabled):hover {
-				background-color: var(--wp--custom--color--surface--default);
-				color: var(--wp--custom--color--text--default);
+				background-color: var(--wp--preset--color--base);
+				color: var(--wp--preset--color--contrast);
+			}
+
+			&:focus-visible {
+				@include focus-ring;
 			}
 		}
 
-		.wc-block-product-gallery-large-image-next-previous-left {
-			&::before {
+		.wc-block-product-gallery-large-image-next-previous__button {
+			&:first-child::before {
 				@include icon(chevron-left);
 			}
-		}
 
-		.wc-block-product-gallery-large-image-next-previous-right {
-			&::before {
+			&:last-child::before {
 				@include icon(chevron-right);
 			}
 		}

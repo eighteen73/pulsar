@@ -64,14 +64,14 @@
 				},
 				"focus": "#fd0",
 				"focus-accent": "var:custom|color|primitive|neutral|800",
-				"error": "var:custom|color|primitive|error|500",
+				"error": "var:custom|color|primitive|error|900",
 				"error-accent": "var:custom|color|primitive|error|100",
 				"warning": "var:custom|color|primitive|warning|500",
 				"warning-accent": "var:custom|color|primitive|warning|100",
 				"success": "var:custom|color|primitive|success|500",
 				"success-accent": "var:custom|color|primitive|success|100",
 				"shadow": "var:custom|color|primitive|neutral|900",
-				"border": "var:custom|color|primitive|neutral|500",
+				"border": "var:custom|color|primitive|neutral|100",
 				"border-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
@@ -84,9 +84,9 @@
 			"spacing": {
 				"blockGap": "var:preset|spacing|xl",
 				"groupGap": "var:preset|spacing|5-xl",
-				"rowGap": "var:preset|spacing|3-xl",
+				"rowGap": "var:preset|spacing|2-xl",
 				"columnGap": "var:preset|spacing|3-xl",
-				"edge": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--5-xl))"
+				"edge": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--6-xl))"
 			},
 			"border": {
 				"radius": {

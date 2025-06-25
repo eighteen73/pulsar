@@ -1,17 +1,15 @@
 @use "../tools" as *;
 
 .wp-block-woocommerce-product-price {
-	font-weight: 600;
-
-	span {
-		vertical-align: middle;
-	}
+	font-weight: var(--wp--custom--typography--weight--heading);
+	line-height: var(--wp--custom--typography--line-height--none);
 
 	del {
-		color: var(--wp--custom--color--text--inactive);
+		font-weight: var(--wp--custom--typography--weight--body);
 	}
 
-	.wc-block-components-product-price__prefix {
+	.wc-block-components-product-price__prefix,
+	del {
 		font-size: 70%;
 	}
 }

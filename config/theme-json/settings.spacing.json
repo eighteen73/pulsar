@@ -70,14 +70,9 @@
 					"slug": "8-xl"
 				},
 				{
-					"name": "9XL (154px)",
-					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
+					"name": "9XL (166px)",
+					"size": "clamp(128px, 119.3333px + 2.7083vw, 166px)",
 					"slug": "9-xl"
-				},
-				{
-					"name": "10XL (186px)",
-					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
-					"slug": "10-xl"
 				}
 			],
 			"units": ["%", "px", "em", "rem", "vh", "vw"]
