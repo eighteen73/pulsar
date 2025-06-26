@@ -1,0 +1,89 @@
+@use "../tools" as *;
+
+.wp-block-woocommerce-mini-cart-contents {
+	.wc-block-components-drawer__close-wrapper .wc-block-components-drawer__close {
+		align-items: center;
+		background-color: var(--wp--preset--color--base); // stylelint-disable-line declaration-no-important
+		display: flex;
+		height: 44px;
+		justify-content: center;
+		margin: unset;
+		padding: unset !important; // stylelint-disable-line declaration-no-important
+		top: var(--wp--preset--spacing--2-xl);
+		width: 44px;
+
+		&:focus-visible {
+			@include focus-ring;
+		}
+
+		&::before {
+			@include icon(close);
+			color: var(--wp--preset--color--contrast);
+		}
+
+		svg {
+			display: none;
+		}
+	}
+
+	.wc-block-mini-cart__title {
+		border-bottom: 1px solid var(--wp--custom--color--border);
+		color: var(--wp--preset--color--contrast);
+		font-size: var(--wp--preset--font-size--xl);
+		margin: unset;
+		mask-image: unset;
+		padding: var(--wp--preset--spacing--2-xl);
+		z-index: unset;
+	}
+
+	.wp-block-woocommerce-mini-cart-title-items-counter-block {
+		color: var(--wp--preset--color--base-accent);
+		font-weight: var(--wp--custom--typography--weight--body);
+	}
+
+	.wc-block-mini-cart__items {
+		padding: var(--wp--preset--spacing--2-xl);
+	}
+
+	.wc-block-mini-cart__footer {
+		background-color: var(--wp--preset--color--tint);
+		padding: var(--wp--preset--spacing--2-xl);
+
+		&::after {
+			content: none;
+		}
+
+		.wc-block-mini-cart__footer-subtotal {
+			font-size: var(--wp--preset--font-size--lg);
+
+			.wc-block-components-totals-item__label {
+				font-weight: var(--wp--custom--typography--weight--heading);
+			}
+
+			.wc-block-components-totals-item__value {
+				font-weight: var(--wp--custom--typography--weight--body);
+			}
+
+			.wc-block-components-totals-item__description {
+				font-size: var(--wp--preset--font-size--md);
+				margin-top: var(--wp--preset--spacing--lg);
+			}
+		}
+	}
+
+	.wc-block-mini-cart__footer-actions {
+		margin-top: var(--wp--preset--spacing--3-xl);
+	}
+
+	.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__quantity .wc-block-cart-item__remove-link {
+		color: var(--wp--custom--color--error);
+
+		&:hover {
+			color: var(--wp--custom--color--error);
+		}
+	}
+}
+
+.wc-block-mini-cart__drawer {
+	font-size: inherit;
+}
