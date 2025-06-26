@@ -32,6 +32,7 @@
 
 		button {
 			align-items: center;
+			background-color: unset;
 			display: flex;
 			height: 44px;
 			justify-content: center;
@@ -55,6 +56,32 @@
 			&:last-child::before {
 				@include icon(chevron-right);
 			}
+		}
+	}
+
+	.wc-block-product-gallery-dialog {
+		border: unset;
+	}
+
+	.wc-block-product-gallery-dialog__close-button {
+		align-items: center;
+		background-color: var(--wp--preset--color--base);
+		display: flex;
+		height: 44px;
+		justify-content: center;
+		width: 44px;
+
+		&:focus-visible {
+			@include focus-ring;
+		}
+
+		&::before {
+			@include icon(close);
+			color: var(--wp--preset--color--contrast);
+		}
+
+		svg {
+			display: none;
 		}
 	}
 }

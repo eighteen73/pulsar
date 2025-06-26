@@ -2,10 +2,11 @@
 
 .woocommerce div.product .wc-block-add-to-cart-form {
 	form.cart {
+		border-top: 1px solid var(--wp--custom--color--border);
 		gap: var(--wp--custom--spacing--block-gap);
 		grid-template-columns: min-content 1fr;
 		margin-bottom: 0;
-		padding: 0;
+		padding: var(--wp--custom--spacing--block-gap) 0 0 0;
 
 		&::before,
 		&::after {

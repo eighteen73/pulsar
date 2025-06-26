@@ -13,4 +13,10 @@
 			right: var(--wp--preset--spacing--sm);
 		}
 	}
+
+	a {
+		&:focus-visible {
+			@include focus-ring;
+		}
+	}
 }
