@@ -2,7 +2,7 @@
 
 .wp-block-woocommerce-product-image {
 	.wc-block-components-product-sale-badge {
-		@include wc-sale-badge;
+		@include wc-product-sale-badge;
 		top: var(--wp--preset--spacing--sm);
 
 		&--align-left {

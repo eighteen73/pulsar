@@ -6,7 +6,7 @@
 	}
 
 	.wp-block-post-title {
-		max-width: unset;
+		max-width: var();
 	}
 }
 
@@ -133,6 +133,29 @@
 			@include button-base;
 			@include button-style(primary);
 		}
+	}
 
+	.wc-block-cart .wc-block-cart__submit-container--sticky {
+		@media (--lg-down) {
+			background-color: var(--wp--preset--color--base) !important; // stylelint-disable-line declaration-no-important
+			bottom: 0;
+			left: 0;
+			padding: var(--wp--preset--spacing--2-xl);
+			position: fixed;
+			width: 100%;
+			z-index: 9999;
+
+			&::before {
+				box-shadow: 0 -10px 20px 10px currentcolor;
+				color: var(--wp--preset--color--contrast);
+				content: "";
+				height: 100%;
+				left: 0;
+				opacity: 0.3;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+		}
 	}
 }

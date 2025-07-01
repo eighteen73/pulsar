@@ -1,4 +1,6 @@
-@mixin wc-sale-badge() {
+@use "utility" as *;
+
+@mixin wc-product-sale-badge() {
 	background-color: var(--wp--custom--color--error);
 	border: unset;
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
@@ -8,4 +10,79 @@
 	font-weight: var(--wp--custom--typography--weight--heading);
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
 	text-transform: unset;
+}
+
+@mixin wc-sale-badge() {
+	background-color: var(--wp--preset--color--base);
+	border: 1px solid currentcolor;
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--weight--heading);
+	line-height: var(--wp--custom--typography--line-height--none);
+	padding: var(--wp--preset--spacing--sm);
+	text-transform: uppercase;
+}
+
+@mixin wc-quantity-selector() {
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	box-sizing: content-box;
+	display: flex;
+	margin: unset;
+	position: relative;
+	width: 100px;
+
+	&::after {
+		border: 1px solid var(--wp--custom--color--border);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	}
+
+	.wc-block-components-quantity-selector__input {
+		appearance: textfield;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+		color: currentcolor;
+		flex: 1 1 auto;
+		font-size: var(--wp--preset--font-size--md);
+		font-weight: var(--wp--custom--typography--weight--heading);
+		line-height: 1;
+		margin: 0;
+		min-width: 40px;
+		order: 2;
+		padding: var(--wp--preset--spacing--md) 0;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	> .wc-block-components-quantity-selector__button {
+		background: none transparent;
+		border: 0;
+		box-shadow: none;
+		color: currentcolor;
+		cursor: pointer;
+		font-size: var(--wp--preset--font-size--sm);
+		font-style: normal;
+		font-weight: var(--wp--custom--typography--weight--body);
+		margin: 0;
+		min-width: 30px;
+		opacity: 1;
+		padding: 0;
+		text-align: center;
+		text-decoration: none;
+
+		&:focus-visible {
+			@include focus-block;
+		}
+	}
+
+	> .wc-block-components-quantity-selector__button--minus {
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) 0 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+		order: 1;
+	}
+
+	> .wc-block-components-quantity-selector__button--plus {
+		border-radius: 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) 0;
+		order: 3;
+	}
 }

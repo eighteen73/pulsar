@@ -1,5 +1,5 @@
 @use "../tools" as *;
 
 .wp-block-woocommerce-product-sale-badge .wc-block-components-product-sale-badge {
-	@include wc-sale-badge;
+	@include wc-product-sale-badge;
 }
