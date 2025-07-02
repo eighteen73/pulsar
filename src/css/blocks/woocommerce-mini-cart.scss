@@ -9,8 +9,12 @@
 		justify-content: center;
 		margin: unset;
 		padding: unset !important; // stylelint-disable-line declaration-no-important
-		top: var(--wp--preset--spacing--2-xl);
+		top: var(--wp--preset--spacing--xl);
 		width: 44px;
+
+		@media (--lg) {
+			top: var(--wp--preset--spacing--2-xl);
+		}
 
 		&:focus-visible {
 			@include focus-ring;
@@ -175,4 +179,13 @@
 
 .wc-block-components-drawer {
 	background-color: var(--wp--preset--color--base);
+}
+
+.wc-block-mini-cart__badge {
+	aspect-ratio: 1 / 1;
+	background-color: var(--wp--preset--color--brand);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--weight--heading);
+	height: 24px;
+	width: 24px;
 }
