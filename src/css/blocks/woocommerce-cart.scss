@@ -63,9 +63,12 @@
 
 			td {
 				border-top: unset;
+				padding-block: var(--wp--preset--spacing--2-xl);
+				padding-left: var(--wp--preset--spacing--xl);
 			}
 
 			.wc-block-cart-item__image {
+				padding-left: unset;
 				width: 82px;
 
 				@media (--lg) {
@@ -124,14 +127,99 @@
 			}
 		}
 
+		.wc-block-cart-item__product {
+			.wc-block-components-product-name {
+				font-size: var(--wp--preset--font-size--md);
+				font-weight: var(--wp--custom--typography--weight--heading);
+				margin: unset;
+				text-decoration: none;
+			}
+
+			.wc-block-components-product-price {
+				margin-top: var(--wp--preset--spacing--xs);
+
+				.wc-block-components-product-price__regular {
+					display: none;
+
+					@media (--xs) {
+						display: inline;
+						font-size: 70%;
+						margin-right: var(--wp--preset--spacing--xs);
+					}
+				}
+			}
+
+			.wc-block-components-product-price__value {
+				margin: unset;
+			}
+
+			.wc-block-components-product-metadata__description {
+				display: none;
+			}
+
+			.wc-block-components-sale-badge {
+				display: none;
+			}
+
+			.wc-block-components-product-metadata {
+				font-size: var(--wp--preset--font-size--xs);
+				margin-bottom: unset;
+				margin-top: var(--wp--preset--spacing--lg);
+			}
+
+			.wc-block-cart-item__quantity {
+				align-items: center;
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--wp--preset--spacing--lg);
+				margin-top: var(--wp--preset--spacing--lg);
+			}
+
+			.wc-block-components-quantity-selector {
+				@include wc-quantity-selector;
+			}
+
+			.wc-block-cart-item__quantity .wc-block-cart-item__remove-link {
+				color: var(--wp--custom--color--error);
+				font-size: var(--wp--preset--font-size--sm);
+
+				&:hover {
+					color: var(--wp--custom--color--error);
+				}
+
+				&:focus-visible {
+					@include focus-block;
+				}
+			}
+
+			.wc-block-components-product-details__name {
+				font-weight: var(--wp--custom--typography--weight--body);
+			}
+		}
+
+		.wc-block-cart-item__total {
+			.wc-block-components-product-price {
+				font-weight: var(--wp--custom--typography--weight--heading);
+			}
+
+			.wc-block-components-sale-badge {
+				display: none;
+
+				@media (--xs) {
+					@include wc-sale-badge;
+					display: inline-block;
+					margin-top: var(--wp--preset--spacing--sm);
+				}
+			}
+		}
+
 		.wc-block-cart__submit {
 			margin-bottom: unset;
 			margin-top: var(--wp--preset--spacing--md);
 		}
 
 		.wc-block-components-button:not(.is-link) {
-			@include button-base;
-			@include button-style(primary);
+			@include button(primary);
 		}
 	}
 

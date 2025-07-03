@@ -16,5 +16,6 @@ return [
 	Pulsar\Editor\TemplateParts::class,
 	Pulsar\ThirdParty\GravityForms::class,
 	Pulsar\ThirdParty\WooCommerce\Setup::class,
+	Pulsar\ThirdParty\WooCommerce\Account::class,
 	Pulsar\ThirdParty\WooCommerce\SingleProduct::class,
 ];

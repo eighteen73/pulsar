@@ -1,37 +1,44 @@
 @use "../../settings" as *;
 @use "utility" as *;
 
-/// Button base styles.
-@mixin button-base() {
+/// Button styles.
+///
+/// @param {string} $style - The style of the button.
+///
+/// @example scss - Primary button
+/// .button {
+///   @include button(primary);
+/// }
+///
+@mixin button($style: primary) {
 	align-items: center;
-	border: unset;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-shadow: unset;
 	cursor: pointer;
 	display: inline-flex;
 	gap: var(--wp--preset--spacing--xs);
 	justify-content: center;
-	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
 	text-align: center;
 	transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
-}
 
-/// Button style.
-///
-/// @param {string} $style - The style of the button.
-///
-@mixin button-style($style: primary) {
+	@if $style == primary or $style == secondary {
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+	}
+
 	@if $style == primary {
 		background-color: var(--wp--preset--color--brand);
+		border: unset;
 		color: var(--wp--preset--color--base);
+	}
 
-		&:hover,
-		&:active {
-			opacity: 0.8;
-		}
+	@if $style == secondary {
+		background-color: transparent;
+		border: 2px solid var(--wp--preset--color--brand);
+		color: var(--wp--preset--color--brand);
+	}
 
-		&:focus-visible {
-			@include focus-ring;
-		}
+	@if $style == link {
+		border: unset;
+		padding: unset;
 	}
 }

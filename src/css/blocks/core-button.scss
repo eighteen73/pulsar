@@ -36,6 +36,5 @@
 
 .wp-element-button,
 .wp-block-button__link {
-	@include button-base;
-	@include button-style(primary);
+	@include button(primary);
 }

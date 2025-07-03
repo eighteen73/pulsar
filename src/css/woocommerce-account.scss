@@ -1,0 +1,138 @@
+@use "tools" as *;
+
+.woocommerce-account {
+	.site-main {
+		background-color: var(--wp--preset--color--tint);
+		padding-block: var(--wp--custom--spacing--group-gap);
+	}
+
+	// Logged out styles
+	&:not(.logged-in) {
+		.woocommerce {
+			max-width: var(--wp--custom--layout--content);
+		}
+
+		.entry-content {
+			margin-top: unset;
+		}
+
+		.wp-block-post-title {
+			display: none;
+		}
+
+		.login,
+		.register {
+			border: unset;
+			margin: unset;
+			padding: unset;
+		}
+
+		.u-columns {
+			background-color: var(--wp--preset--color--base);
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--2-xl);
+			padding: var(--wp--preset--spacing--3-xl);
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+
+		.col-1,
+		.col-2 {
+			float: unset;
+			width: 100%;
+
+			> :first-child {
+				margin-top: 0;
+			}
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+
+			p {
+				color: var(--wp--preset--color--base-accent);
+			}
+		}
+
+		.col-2 {
+			border-top: 1px solid var(--wp--custom--color--border);
+			padding-top: var(--wp--preset--spacing--2-xl);
+		}
+
+		.woocommerce-form-login__submit {
+			float: unset;
+			margin: unset;
+			margin-top: var(--wp--custom--spacing--block-gap);
+			width: 100%;
+		}
+
+		.woocommerce-form-register__submit {
+			@include button(secondary);
+			width: 100%;
+		}
+
+		.woocommerce-form {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--custom--spacing--block-gap);
+			margin-top: var(--wp--preset--spacing--sm);
+
+			.form-row {
+				margin: unset;
+				padding: unset;
+
+				&::before,
+				&::after {
+					content: none;
+				}
+
+				.input-text {
+					@include field-input;
+				}
+			}
+
+			> * {
+				margin-top: unset;
+			}
+
+			label {
+				@include label;
+			}
+
+			.woocommerce-form-login__rememberme {
+				margin-bottom: unset;
+			}
+
+			.woocommerce-form__label-for-checkbox {
+				align-items: center;
+				display: flex;
+				font-weight: var(--wp--custom--typography--weight--body);
+				gap: var(--wp--preset--spacing--sm);
+				margin-bottom: unset;
+			}
+
+			.lost_password {
+				margin: unset;
+			}
+
+			wc-order-attribution-inputs {
+				display: none;
+			}
+
+			.woocommerce-privacy-policy-text {
+				> :first-child {
+					margin-top: 0;
+				}
+
+				> :last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}

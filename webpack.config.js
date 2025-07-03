@@ -116,6 +116,7 @@ const pulsarConfig = {
 		...getBlockStylesEntryPoints(),
 		'css/app': ['./src/css/app.scss'],
 		'css/editor': ['./src/css/editor.scss'],
+		'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
 		'js/app': ['./src/js/app.js'],
 		'js/editor': ['./src/js/editor.js'],
 	},

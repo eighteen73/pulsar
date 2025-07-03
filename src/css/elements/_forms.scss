@@ -70,7 +70,7 @@ select {
 }
 
 [type="submit"] {
-	@include button-base;
+	@include button(primary);
 }
 
 ::-webkit-datetime-edit-fields-wrapper {

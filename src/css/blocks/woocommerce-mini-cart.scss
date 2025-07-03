@@ -113,6 +113,7 @@
 
 			.wc-block-cart-item__quantity .wc-block-cart-item__remove-link {
 				color: var(--wp--custom--color--error);
+				font-size: var(--wp--preset--font-size--sm);
 				margin-top: var(--wp--preset--spacing--md);
 
 				&:hover {

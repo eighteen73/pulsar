@@ -3,9 +3,10 @@
 /// Label styles.
 @mixin label() {
 	display: block;
-	margin-bottom: var(--wp--preset--spacing--sm);
-	font-weight: var(--wp--custom--typography--weight--heading);
 	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--weight--heading);
+	line-height: inherit;
+	margin-bottom: var(--wp--preset--spacing--sm);
 
 	&:last-child {
 		margin-bottom: 0;

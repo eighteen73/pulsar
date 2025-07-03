@@ -126,7 +126,7 @@
 	}
 
 	.gform_button {
-		@include button-base;
+		@include button(primary);
 	}
 
 	.gform_validation_errors {
