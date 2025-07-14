@@ -1,9 +1,189 @@
 @use "tools" as *;
 
+$account-links: (
+	dashboard: woocommerce/account/dashboard,
+	orders: woocommerce/account/orders,
+	downloads: woocommerce/account/downloads,
+	edit-address: woocommerce/account/edit-address,
+	edit-account: woocommerce/account/edit-account,
+	bookings: woocommerce/account/bookings,
+	members-area: woocommerce/account/members-area,
+	subscriptions: woocommerce/account/subscriptions,
+	customer-logout: woocommerce/account/customer-logout,
+);
+
 .woocommerce-account {
 	.site-main {
 		background-color: var(--wp--preset--color--tint);
 		padding-block: var(--wp--custom--spacing--group-gap);
+
+		.wp-block-post-title {
+			@media (--xl) {
+				display: none;
+			}
+
+			+ .wp-block-heading {
+				display: none;
+
+				@media (--xl) {
+					display: block;
+				}
+			}
+		}
+
+		.woocommerce {
+			max-width: var(--wp--custom--layout--wide);
+
+			@media (--xl) {
+				align-items: flex-start;
+				display: flex;
+				gap: var(--wp--preset--spacing--5-xl);
+			}
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+	}
+
+	.woocommerce-MyAccount-content__title {
+		display: none;
+		margin-top: unset;
+
+		@media (--xl) {
+			display: block;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+	}
+
+	&.woocommerce-dashboard {
+		.woocommerce-MyAccount-back {
+			display: none;
+		}
+
+		.woocommerce-MyAccount-content {
+			display: none;
+		}
+
+		.woocommerce-MyAccount-navigation {
+			display: block;
+			width: 100%;
+
+			ul {
+				display: grid;
+				gap: var(--wp--custom--spacing--block-gap);
+				grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+			}
+
+			// Dashboard is hidden on the dashboard page.
+			.woocommerce-MyAccount-navigation-link--dashboard {
+				display: none;
+			}
+
+			a {
+				background-color: var(--wp--preset--color--base);
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				flex-direction: column;
+				justify-content: center;
+				padding: var(--wp--preset--spacing--3-xl);
+			}
+		}
+	}
+
+	.entry-content {
+		margin-top: var(--wp--custom--spacing--row-gap);
+	}
+
+	.woocommerce-MyAccount-back {
+		margin-bottom: var(--wp--preset--spacing--md);
+
+		.wp-block-button__link::before {
+			@include icon(arrow-left, 12px);
+		}
+
+		@media (--xl) {
+			display: none;
+		}
+	}
+
+	.woocommerce-MyAccount-content {
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--3-xl);
+		width: 100%;
+
+		@media (--xl) {
+			flex: 1;
+		}
+	}
+
+	.woocommerce-MyAccount-navigation {
+		display: none;
+		float: unset;
+		width: 100%;
+
+		@media (--xl) {
+			display: block;
+			width: 250px;
+		}
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--lg);
+			margin: unset;
+		}
+
+		li {
+			padding: unset;
+
+			&.is-active a {
+				background-color: var(--wp--preset--color--brand-accent);
+				color: var(--wp--preset--color--brand);
+				text-decoration: none;
+
+			}
+
+			a {
+				align-items: center;
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+				color: var(--wp--preset--color--contrast);
+				display: flex;
+				font-size: var(--wp--preset--font-size--sm);
+				font-weight: var(--wp--custom--typography--weight--heading);
+				gap: var(--wp--preset--spacing--sm);
+				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+				text-decoration: none;
+				transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+
+				&:hover {
+					background-color: var(--wp--preset--color--brand-accent);
+					text-decoration: none;
+				}
+
+				&:focus-visible {
+					@include focus-ring;
+					background-color: transparent;
+				}
+			}
+		}
+
+		.woocommerce-MyAccount-navigation-link {
+			@each $link, $icon in $account-links {
+				&--#{$link} a::before {
+					@include icon($icon, 20px);
+				}
+			}
+
+			&--customer-logout a {
+				color: var(--wp--custom--color--error);
+
+				&:hover {
+					background-color: var(--wp--custom--color--error-accent);
+				}
+			}
+		}
 	}
 
 	// Logged out styles
@@ -94,6 +274,13 @@
 				.input-text {
 					@include field-input;
 				}
+
+				em {
+					color: var(--wp--preset--color--base-accent);
+					font-size: var(--wp--preset--font-size--sm);
+					font-style: normal;
+					margin-top: var(--wp--preset--spacing--sm);
+				}
 			}
 
 			> * {
@@ -134,5 +321,128 @@
 				}
 			}
 		}
+	}
+
+	.woocommerce-form,
+	form {
+		display: grid;
+		gap: var(--wp--custom--spacing--block-gap);
+		grid-template-columns: repeat(2, 1fr);
+
+		.clear {
+			display: none;
+		}
+
+		fieldset {
+			display: grid;
+			gap: var(--wp--custom--spacing--block-gap);
+			grid-column: 1 / -1;
+			grid-template-columns: repeat(2, 1fr);
+			margin-top: var(--wp--preset--spacing--3-xl);
+		}
+
+		legend {
+			@include legend;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+
+		.form-row {
+			grid-column: 1 / -1;
+			margin: unset;
+			padding: unset;
+			width: 100%;
+
+			&-first {
+				grid-column: 1;
+			}
+
+			&-last {
+				grid-column: 2;
+			}
+
+			&::before,
+			&::after {
+				content: none;
+			}
+
+			.input-text {
+				@include field-input;
+			}
+		}
+
+		> * {
+			margin-top: unset;
+		}
+
+		label {
+			@include label;
+		}
+	}
+}
+
+.woocommerce-page .woocommerce-customer-details address {
+	border: unset;
+	margin-top: var(--wp--custom--spacing--block-gap);
+	padding: 0;
+}
+
+.woocommerce .woocommerce-customer-details {
+	.woocommerce-customer-details--email,
+	.woocommerce-customer-details--phone {
+		padding-left: unset;
+
+		&::before {
+			content: none;
+		}
+	}
+}
+
+.woocommerce-page {
+	.woocommerce-order-details__title,
+	.woocommerce-column__title,
+	.woocommerce-customer-details h2 {
+		@include heading(h3);
+		font-weight: var(--wp--custom--typography--weight--heading);
+	}
+}
+
+.woocommerce-account {
+	.addresses .title {
+		align-items: center;
+		display: flex;
+		gap: var(--wp--preset--spacing--sm);
+		justify-content: space-between;
+
+		&::before,
+		&::after {
+			content: none;
+		}
+
+		h2 {
+			@include heading(h3);
+			font-weight: var(--wp--custom--typography--weight--heading);
+			margin: unset;
+		}
+
+		.edit {
+			align-items: center;
+			display: inline-flex;
+			font-size: var(--wp--preset--font-size--sm);
+			gap: var(--wp--preset--spacing--sm);
+			margin: unset;
+
+			&::before {
+				@include icon(woocommerce/edit-address, 12px);
+			}
+		}
+	}
+
+	address {
+		font-style: normal;
+		margin-top: var(--wp--custom--spacing--block-gap);
+	}
+
+	.col2-set {
+		margin-top: var(--wp--custom--spacing--row-gap);
 	}
 }

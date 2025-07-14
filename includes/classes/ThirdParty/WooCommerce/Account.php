@@ -25,6 +25,8 @@ class Account implements Bootable {
 	public function boot(): void {
 		add_action( 'woocommerce_login_form_start', [ $this, 'login_intro_text' ] );
 		add_action( 'woocommerce_register_form_start', [ $this, 'register_intro_text' ] );
+
+		add_action( 'woocommerce_account_content', [ $this, 'content_title' ], PHP_INT_MIN );
 	}
 
 	/**
@@ -55,5 +57,22 @@ class Account implements Bootable {
 	 */
 	public function register_intro_text(): void {
 		echo '<p>' . esc_html__( 'Creating an account is easy and only takes a few minutes', 'pulsar' ) . '</p>';
+	}
+
+	/**
+	 * Adds a title to the account content.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function content_title(): void {
+		global $wp_query;
+		if ( ! is_null( $wp_query ) && is_wc_endpoint_url() ) {
+			$endpoint = WC()->query->get_current_endpoint();
+			$title = WC()->query->get_endpoint_title( $endpoint );
+			echo '<h2 class="woocommerce-MyAccount-content__title">' . esc_html( $title ) . '</h2>';
+		} else {
+			the_title( '<h2 class="woocommerce-MyAccount-content__title">', '</h2>' );
+		}
 	}
 }

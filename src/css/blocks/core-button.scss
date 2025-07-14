@@ -32,6 +32,18 @@
 	:where(.is-vertical) > & {
 		--width-gap: 0;
 	}
+
+	&.is-style-secondary {
+		.wp-block-button__link {
+			@include button(secondary);
+		}
+	}
+
+	&.is-style-link {
+		.wp-block-button__link {
+			@include button(link);
+		}
+	}
 }
 
 .wp-element-button,

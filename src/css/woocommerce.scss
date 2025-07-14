@@ -1,4 +1,103 @@
+@use "tools" as *;
+
 .woocommerce .stars a,
 .woocommerce .star-rating {
-	color: var(--wp--custom--color--surface--primary);
+	color: var(--wp--preset--color--brand);
+}
+
+.woocommerce-page {
+	table.shop_table {
+		border: unset;
+		font-size: var(--wp--preset--font-size--xs);
+		margin: var(--wp--custom--spacing--block-gap) 0 0;
+
+		th,
+		td {
+			padding: var(--wp--preset--spacing--sm) 0;
+
+			@media (--md) {
+				padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+			}
+		}
+
+		thead th {
+			background-color: var(--wp--preset--color--tint);
+			font-weight: var(--wp--custom--typography--weight--heading);
+			text-transform: uppercase;
+		}
+
+		tbody {
+			th,
+			td {
+				border: unset;
+			}
+		}
+
+		tr:where(:not(:first-child)) {
+			th,
+			td {
+				@media (--md) {
+					border-top: 1px solid var(--wp--custom--color--border);
+				}
+			}
+		}
+
+		tr:nth-child(even) td {
+			background-color: unset;
+		}
+
+		tr + tr {
+			border-top: 1px solid var(--wp--custom--color--border);
+			margin-top: var(--wp--preset--spacing--lg);
+			padding-top: var(--wp--preset--spacing--lg);
+
+			@media (--md) {
+				border-top: unset;
+				margin-top: unset;
+				padding-top: unset;
+			}
+		}
+
+		tfoot th {
+			border-top: 1px solid var(--wp--custom--color--border);
+			font-weight: var(--wp--custom--typography--weight--heading);
+		}
+
+		.woocommerce-button {
+			@include button(link);
+			margin: unset;
+
+			&:where(.view) {
+				@include button(primary);
+				width: 100%;
+
+				@media (--md) {
+					@include button(link);
+					width: auto;
+				}
+			}
+		}
+	}
+}
+
+.woocommerce-password-strength {
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--weight--heading);
+	padding: var(--wp--preset--spacing--md);
+}
+
+.woocommerce-password-hint {
+	color: var(--wp--preset--color--base-accent);
+	font-size: var(--wp--preset--font-size--sm);
+	margin-top: var(--wp--preset--spacing--md);
+}
+
+.form-row {
+	em {
+		color: var(--wp--preset--color--base-accent);
+		display: block;
+		font-size: var(--wp--preset--font-size--sm);
+		font-style: normal;
+		margin-top: var(--wp--preset--spacing--md);
+	}
 }

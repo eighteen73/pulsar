@@ -13,6 +13,14 @@
 	}
 }
 
+/// Legend styles.
+@mixin legend() {
+	font-size: var(--wp--preset--font-size--lg);
+	font-weight: var(--wp--custom--typography--weight--heading);
+	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
 /// Input styles.
 @mixin field-input() {
 	appearance: none;

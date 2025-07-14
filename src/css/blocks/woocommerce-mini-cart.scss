@@ -44,10 +44,6 @@
 		color: var(--wp--preset--color--base-accent);
 		font-size: 70%;
 		font-weight: var(--wp--custom--typography--weight--body);
-
-		@media (--xs) {
-			font-size: 100%;
-		}
 	}
 
 	.wc-block-mini-cart__items {
@@ -65,6 +61,7 @@
 
 		.wc-block-cart-item__product {
 			.wc-block-components-product-name {
+				color: var(--wp--preset--color--contrast);
 				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--weight--heading);
 				margin: unset;

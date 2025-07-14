@@ -80,7 +80,7 @@
 				{
 					"name": "Tint",
 					"slug": "tint",
-					"color": "var:custom|color|primitive|neutral|100"
+					"color": "var:custom|color|primitive|neutral|50"
 				}
 			],
 			"text": true
@@ -104,33 +104,33 @@
 						"1000": "#000000"
 					},
 					"primary": {
-						"50": "#F4F6FB",
-						"100": "#E8ECF6",
-						"200": "#CBD8EC",
-						"300": "#9DB7DC",
-						"400": "#6890C8",
-						"500": "#4573B2",
-						"600": "#335A96",
-						"700": "#2B4879",
-						"800": "#273E65",
-						"900": "#253655",
-						"950": "#090D15"
+						"50": "#F4F2FF",
+						"100": "#EBE6FF",
+						"200": "#DAD1FF",
+						"300": "#BFACFF",
+						"400": "#A17EFF",
+						"500": "#8549FF",
+						"600": "#7724FF",
+						"700": "#6913EE",
+						"800": "#580FC8",
+						"900": "#4C0FA9",
+						"950": "#2B066F"
 					},
 					"secondary": {
-						"50": "#F6F4FB",
-						"100": "#ECE8F6",
-						"200": "#D1CBEC",
-						"300": "#A89DDC",
-						"400": "#7868C8",
-						"500": "#5745B2",
-						"600": "#463396",
-						"700": "#3B2B79",
-						"800": "#342765",
-						"900": "#302555",
-						"950": "#0C0915"
+						"50": "#FAFEE7",
+						"100": "#F3FCCB",
+						"200": "#E7F99D",
+						"300": "#D6F36E",
+						"400": "#BDE635",
+						"500": "#9FCC16",
+						"600": "#7BA30D",
+						"700": "#5D7C0F",
+						"800": "#4B6212",
+						"900": "#3F5314",
+						"950": "#202E05"
 					},
 					"error": {
-						"100": "#FFCDD2",
+						"100": "#FFF1F2",
 						"500": "#F44336",
 						"900": "#B71C1C"
 					},
@@ -146,6 +146,7 @@
 					}
 				},
 				"focus": "#fd0",
+				"link": "var:custom|color|primitive|primary|500",
 				"focus-accent": "var:custom|color|primitive|neutral|800",
 				"error": "var:custom|color|primitive|error|900",
 				"error-accent": "var:custom|color|primitive|error|100",
@@ -167,7 +168,7 @@
 			"spacing": {
 				"blockGap": "var:preset|spacing|xl",
 				"groupGap": "var:preset|spacing|5-xl",
-				"rowGap": "var:preset|spacing|2-xl",
+				"rowGap": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--4-xl))",
 				"columnGap": "var:preset|spacing|3-xl",
 				"edge": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--6-xl))"
 			},

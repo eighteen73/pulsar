@@ -57,7 +57,7 @@
 				{
 					"name": "Tint",
 					"slug": "tint",
-					"color": "var:custom|color|primitive|neutral|100"
+					"color": "var:custom|color|primitive|neutral|50"
 				}
 			],
 			"text": true

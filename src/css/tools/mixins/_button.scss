@@ -29,6 +29,10 @@
 		background-color: var(--wp--preset--color--brand);
 		border: unset;
 		color: var(--wp--preset--color--base);
+
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 
 	@if $style == secondary {
@@ -38,7 +42,9 @@
 	}
 
 	@if $style == link {
+		background-color: transparent;
 		border: unset;
+		color: var(--wp--preset--color--brand);
 		padding: unset;
 	}
 }
