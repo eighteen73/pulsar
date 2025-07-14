@@ -31,6 +31,22 @@
 			td {
 				border: unset;
 			}
+
+			th {
+				display: block;
+				font-weight: var(--wp--custom--typography--weight--heading);
+
+				@media (--md-down) {
+					&::before {
+						content: attr(data-title) ": ";
+						font-weight: var(--wp--custom--typography--weight--heading);
+					}
+
+					a {
+						float: right;
+					}
+				}
+			}
 		}
 
 		tr:where(:not(:first-child)) {
@@ -100,4 +116,56 @@
 		font-style: normal;
 		margin-top: var(--wp--preset--spacing--md);
 	}
+}
+
+.woocommerce-page {
+	.select2-container .select2-search--dropdown .select2-search__field {
+		@include field-input;
+	}
+
+	form .form-row {
+		.select2-container {
+			font-size: inherit;
+		}
+
+		.select2-container .select2-selection--single .select2-selection__arrow {
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+			background-position: right var(--wp--preset--spacing--md) center;
+			background-repeat: no-repeat;
+			background-size: 1.5em 1.5em;
+			right: var(--wp--preset--spacing--md);
+		}
+
+		.select2-selection--single .select2-selection__rendered {
+			color: var(--wp--preset--color--contrast);
+			padding-block: var(--wp--preset--spacing--md);
+			padding-inline: var(--wp--preset--spacing--lg);
+		}
+
+		.select2-selection,
+		.select2-dropdown {
+			border: 1px solid var(--wp--custom--color--border);
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+			color: var(--wp--preset--color--contrast);
+		}
+
+		.select2-search--dropdown {
+			padding: 0 var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+		}
+	}
+
+	.select2-dropdown {
+		color: var(--wp--preset--color--contrast);
+	}
+}
+
+.select2-container .select2-dropdown {
+	border: 1px solid var(--wp--custom--color--border);
+
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default .select2-results__option--highlighted[data-selected] {
+	background-color: var(--wp--preset--color--brand-accent);
+	color: var(--wp--preset--color--contrast);
 }

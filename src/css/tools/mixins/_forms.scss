@@ -28,6 +28,7 @@
 	border: 1px solid var(--wp--custom--color--border);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-shadow: none;
+	color: var(--wp--preset--color--contrast);
 	display: block;
 	font-family: inherit;
 	font-size: var(--wp--preset--font-size--md);
@@ -65,7 +66,6 @@
 ///
 @mixin field-select($multiple: false) {
 	--icon-size: 1.5em;
-
 	appearance: none;
 	border: 1px solid var(--wp--custom--color--border);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
