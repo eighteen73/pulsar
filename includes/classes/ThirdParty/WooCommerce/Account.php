@@ -33,7 +33,7 @@ class Account implements Bootable {
 	 * Checks if WooCommerce is active.
 	 *
 	 * @access public
-	 * @return bool
+	 * @return bool`
 	 */
 	public function can_boot(): bool {
 		return class_exists( 'WooCommerce' );

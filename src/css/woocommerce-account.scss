@@ -46,115 +46,180 @@ $account-links: (
 				content: none;
 			}
 		}
+	}
 
-		.woocommerce-MyAccount-content__title {
+	.woocommerce-MyAccount-content__title {
+		display: none;
+		margin-top: unset;
+
+		@media (--xl) {
+			display: block;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+	}
+
+	.entry-content {
+		margin-top: var(--wp--custom--spacing--row-gap);
+	}
+
+	.woocommerce-MyAccount-back {
+		margin-bottom: var(--wp--preset--spacing--md);
+
+		.wp-block-button__link::before {
+			@include icon(arrow-left, 12px);
+		}
+
+		@media (--xl) {
 			display: none;
-			margin-top: unset;
+		}
+	}
 
-			@media (--xl) {
-				display: block;
-				margin-bottom: var(--wp--custom--spacing--block-gap);
-			}
+	.woocommerce-MyAccount-content {
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--3-xl);
+		width: 100%;
+
+		@media (--xl) {
+			flex: 1;
+		}
+	}
+
+	.woocommerce-MyAccount-navigation {
+		display: none;
+		float: unset;
+		width: 100%;
+
+		@media (--xl) {
+			display: block;
+			width: 250px;
 		}
 
-		.entry-content {
-			margin-top: var(--wp--custom--spacing--row-gap);
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--lg);
+			margin: unset;
 		}
 
-		.woocommerce-MyAccount-back {
-			margin-bottom: var(--wp--preset--spacing--md);
+		li {
+			padding: unset;
 
-			.wp-block-button__link::before {
-				@include icon(arrow-left, 12px);
+			&.is-active a {
+				background-color: var(--wp--preset--color--brand-accent);
+				color: var(--wp--preset--color--brand);
+				text-decoration: none;
 			}
 
-			@media (--xl) {
-				display: none;
-			}
-		}
-
-		.woocommerce-MyAccount-content {
-			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
-			padding: var(--wp--preset--spacing--3-xl);
-			width: 100%;
-
-			@media (--xl) {
-				flex: 1;
-			}
-		}
-
-		.woocommerce-MyAccount-navigation {
-			display: none;
-			float: unset;
-			width: 100%;
-
-			@media (--xl) {
-				display: block;
-				width: 250px;
-			}
-
-			ul {
+			a {
+				align-items: center;
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+				color: var(--wp--preset--color--contrast);
 				display: flex;
-				flex-direction: column;
-				gap: var(--wp--preset--spacing--lg);
-				margin: unset;
-			}
+				font-size: var(--wp--preset--font-size--sm);
+				font-weight: var(--wp--custom--typography--weight--heading);
+				gap: var(--wp--preset--spacing--sm);
+				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+				text-decoration: none;
+				transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
-			li {
-				padding: unset;
-
-				&.is-active a {
+				&:hover {
 					background-color: var(--wp--preset--color--brand-accent);
-					color: var(--wp--preset--color--brand);
 					text-decoration: none;
 				}
 
-				a {
-					align-items: center;
-					border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
-					color: var(--wp--preset--color--contrast);
-					display: flex;
-					font-size: var(--wp--preset--font-size--sm);
-					font-weight: var(--wp--custom--typography--weight--heading);
-					gap: var(--wp--preset--spacing--sm);
-					padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
-					text-decoration: none;
-					transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+				&:focus-visible {
+					@include focus-ring;
+					background-color: var(--wp--preset--color--brand-accent);
+				}
+			}
+		}
 
-					&:hover {
-						background-color: var(--wp--preset--color--brand-accent);
-						text-decoration: none;
-					}
-
-					&:focus-visible {
-						@include focus-ring;
-						background-color: var(--wp--preset--color--brand-accent);
-					}
+		.woocommerce-MyAccount-navigation-link {
+			@each $link, $icon in $account-links {
+				&--#{$link} a::before {
+					@include icon($icon, 20px);
 				}
 			}
 
-			.woocommerce-MyAccount-navigation-link {
-				@each $link, $icon in $account-links {
-					&--#{$link} a::before {
-						@include icon($icon, 20px);
-					}
-				}
+			&--customer-logout a {
+				color: var(--wp--custom--color--error);
 
-				&--customer-logout a {
-					color: var(--wp--custom--color--error);
-
-					&:hover,
-					&:focus-visible {
-						background-color: var(--wp--custom--color--error-accent);
-					}
+				&:hover,
+				&:focus-visible {
+					background-color: var(--wp--custom--color--error-accent);
 				}
 			}
 		}
 	}
 
-	.col2-set {
-		margin-top: var(--wp--custom--spacing--row-gap);
+	.woocommerce-form,
+	.woocommerce-address-fields__field-wrapper,
+	form {
+		display: grid;
+		gap: var(--wp--custom--spacing--block-gap);
+		grid-template-columns: repeat(2, 1fr);
+
+		.clear {
+			display: none;
+		}
+
+		h2 {
+			grid-column: 1 / -1;
+		}
+
+		.woocommerce-address-fields {
+			grid-column: 1 / -1;
+		}
+
+		fieldset {
+			display: grid;
+			gap: var(--wp--custom--spacing--block-gap);
+			grid-column: 1 / -1;
+			grid-template-columns: repeat(2, 1fr);
+			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+		}
+
+		legend {
+			@include legend;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+
+		.form-row {
+			grid-column: 1 / -1;
+			margin: unset;
+			padding: unset;
+			width: 100%;
+
+			&-first {
+				grid-column: 1;
+			}
+
+			&-last {
+				grid-column: 2;
+			}
+
+			&::before,
+			&::after {
+				content: none;
+			}
+
+			input.input-text {
+				@include field-input;
+			}
+		}
+
+		> * {
+			margin-top: unset;
+		}
+
+		label {
+			@include label;
+		}
+
+		.wp-element-button {
+			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+		}
 	}
 
 	// Logged out styles
@@ -374,10 +439,9 @@ $account-links: (
 
 	// Addresses styles
 	.addresses .title {
-		align-items: center;
 		display: flex;
+		flex-direction: column;
 		gap: var(--wp--preset--spacing--sm);
-		justify-content: space-between;
 
 		&::before,
 		&::after {
@@ -393,7 +457,7 @@ $account-links: (
 		.edit {
 			align-items: center;
 			display: inline-flex;
-			font-size: var(--wp--preset--font-size--sm);
+			font-size: var(--wp--preset--font-size--xs);
 			gap: var(--wp--preset--spacing--sm);
 			margin: unset;
 
@@ -403,6 +467,16 @@ $account-links: (
 		}
 	}
 
+	.woocommerce-Addresses {
+		margin-top: var(--wp--custom--spacing--block-gap);
+	}
+
+	.woocommerce-Address {
+		border: 1px solid var(--wp--custom--color--border);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--2-xl);
+	}
+
 	address {
 		font-style: normal;
 		margin-top: var(--wp--custom--spacing--block-gap);
@@ -410,72 +484,14 @@ $account-links: (
 
 	// Edit address styles
 
-	// Account details styles
-}
+	&:where(.woocommerce-edit-address) {
 
-.woocommerce-account {
-	.woocommerce-form,
-	.woocommerce-address-fields__field-wrapper,
-	form {
-		display: grid;
-		gap: var(--wp--custom--spacing--block-gap);
-		grid-template-columns: repeat(2, 1fr);
-
-		.clear {
+		// Long winded way of hiding the duplicate page title.
+		// Unfortunately the main addresses and edit address screens have the same body class.
+		.woocommerce-MyAccount-content:where(:has(.woocommerce-address-fields)) .woocommerce-MyAccount-content__title {
 			display: none;
 		}
-
-		h2 {
-			grid-column: 1 / -1;
-		}
-
-		.woocommerce-address-fields {
-			grid-column: 1 / -1;
-		}
-
-		fieldset {
-			display: grid;
-			gap: var(--wp--custom--spacing--block-gap);
-			grid-column: 1 / -1;
-			grid-template-columns: repeat(2, 1fr);
-			margin-top: var(--wp--preset--spacing--3-xl);
-		}
-
-		legend {
-			@include legend;
-			margin-bottom: var(--wp--custom--spacing--block-gap);
-		}
-
-		.form-row {
-			grid-column: 1 / -1;
-			margin: unset;
-			padding: unset;
-			width: 100%;
-
-			&-first {
-				grid-column: 1;
-			}
-
-			&-last {
-				grid-column: 2;
-			}
-
-			&::before,
-			&::after {
-				content: none;
-			}
-
-			input.input-text {
-				@include field-input;
-			}
-		}
-
-		> * {
-			margin-top: unset;
-		}
-
-		label {
-			@include label;
-		}
 	}
+
+	// Account details styles
 }
