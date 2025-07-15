@@ -417,8 +417,8 @@ $account-links: (
 		}
 
 		h2 {
+			@include heading-base;
 			@include heading(h3);
-			font-weight: var(--wp--custom--typography--weight--heading);
 		}
 	}
 
@@ -430,8 +430,8 @@ $account-links: (
 		}
 
 		.woocommerce-order-details__title {
+			@include heading-base;
 			@include heading(h3);
-			font-weight: var(--wp--custom--typography--weight--heading);
 		}
 	}
 
@@ -449,8 +449,8 @@ $account-links: (
 		}
 
 		h2 {
+			@include heading-base;
 			@include heading(h3);
-			font-weight: var(--wp--custom--typography--weight--heading);
 			margin: unset;
 		}
 

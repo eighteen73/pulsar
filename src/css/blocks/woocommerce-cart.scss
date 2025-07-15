@@ -3,10 +3,11 @@
 .woocommerce-cart {
 	.site-main {
 		background-color: var(--wp--preset--color--tint);
-	}
+		padding-block: var(--wp--custom--spacing--group-gap);
 
-	.wp-block-post-title {
-		max-width: var();
+		.wp-block-post-title {
+			max-width: var(--wp--custom--layout--wide);
+		}
 	}
 }
 

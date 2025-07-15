@@ -1,0 +1,127 @@
+@use "../tools" as *;
+
+.woocommerce-checkout {
+	.site-main {
+		background-color: var(--wp--preset--color--tint);
+		padding-block: var(--wp--custom--spacing--group-gap);
+
+		.wp-block-post-title {
+			max-width: var(--wp--custom--layout--wide);
+		}
+
+		.entry-content {
+			margin-top: var(--wp--custom--spacing--row-gap);
+		}
+	}
+}
+
+.wp-block-woocommerce-checkout {
+	padding: unset;
+
+	.wc-block-components-sidebar-layout {
+		gap: var(--wp--preset--spacing--3-xl);
+		margin: unset;
+
+		@media (--lg) {
+			flex-direction: row;
+			flex-wrap: nowrap;
+		}
+	}
+
+	.wc-block-checkout__main {
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--2-xl);
+	}
+
+	.wc-block-checkout__sidebar {
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		margin: unset;
+		padding: var(--wp--preset--spacing--2-xl);
+
+		.wc-block-components-totals-coupon,
+		.wc-block-components-totals-item {
+			padding-inline: unset;
+		}
+	}
+
+	.wp-block-woocommerce-checkout-order-summary-block {
+		border: unset;
+	}
+
+	.wc-block-components-order-summary {
+		padding: unset;
+	}
+
+	.wc-block-components-checkout-order-summary__title {
+		margin: unset;
+
+		.wc-block-components-checkout-order-summary__title-text {
+			@include heading-base;
+			@include heading(h3);
+			margin: unset;
+		}
+	}
+
+	.wc-block-components-title {
+		@include heading-base;
+		@include heading(h3);
+		margin: unset;
+	}
+
+	.wc-block-components-checkout-step__description {
+		color: var(--wp--preset--color--base-accent);
+	}
+
+	.wc-block-components-checkbox__label {
+		font-weight: var(--wp--custom--typography--weight--body);
+	}
+
+	.wc-block-components-text-input,
+	.wc-block-components-text-input.is-active {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--sm);
+
+		input[type="email"],
+		input[type="number"],
+		input[type="password"],
+		input[type="tel"],
+		input[type="text"],
+		input[type="url"] {
+			@include field-input;
+		}
+
+		label {
+			@include label;
+			order: -1;
+			position: static;
+			transform: unset;
+		}
+	}
+
+	.wc-block-components-textarea {
+		@include field-textarea;
+	}
+
+	.wc-block-components-checkbox {
+		.wc-block-components-checkbox__input[type="checkbox"] {
+			@include field-checkbox;
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+
+		.wc-block-components-checkbox__mark {
+			display: none;
+		}
+
+		label {
+			display: flex;
+			gap: var(--wp--preset--spacing--sm);
+		}
+	}
+}
