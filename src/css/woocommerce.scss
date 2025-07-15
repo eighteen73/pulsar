@@ -1,23 +1,22 @@
 @use "tools" as *;
 
+// Star rating styles.
 .woocommerce .stars a,
 .woocommerce .star-rating {
 	color: var(--wp--preset--color--brand);
 }
 
 .woocommerce-page {
+
+	// Shop table styles.
 	table.shop_table {
 		border: unset;
 		font-size: var(--wp--preset--font-size--xs);
-		margin: var(--wp--custom--spacing--block-gap) 0 0;
+		margin: unset;
 
 		th,
 		td {
-			padding: var(--wp--preset--spacing--sm) 0;
-
-			@media (--md) {
-				padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
-			}
+			padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
 		}
 
 		thead th {
@@ -33,19 +32,7 @@
 			}
 
 			th {
-				display: block;
 				font-weight: var(--wp--custom--typography--weight--heading);
-
-				@media (--md-down) {
-					&::before {
-						content: attr(data-title) ": ";
-						font-weight: var(--wp--custom--typography--weight--heading);
-					}
-
-					a {
-						float: right;
-					}
-				}
 			}
 		}
 
@@ -94,6 +81,33 @@
 			}
 		}
 	}
+
+	// Responsive table styles.
+	table.shop_table_responsive {
+		th,
+		td {
+			padding: var(--wp--preset--spacing--sm) 0;
+
+			@media (--md) {
+				padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+			}
+		}
+
+		tbody th {
+			@media (--md-down) {
+				display: block;
+
+				&::before {
+					content: attr(data-title) ": ";
+					font-weight: var(--wp--custom--typography--weight--heading);
+				}
+
+				a {
+					float: right;
+				}
+			}
+		}
+	}
 }
 
 .woocommerce-password-strength {
@@ -118,6 +132,8 @@
 	}
 }
 
+// Select2 styles.
+// Some styles need to be scoped, but some need to be global.
 .woocommerce-page {
 	.select2-container .select2-search--dropdown .select2-search__field {
 		@include field-input;

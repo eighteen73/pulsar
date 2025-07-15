@@ -18,7 +18,11 @@
 	gap: var(--wp--preset--spacing--xs);
 	justify-content: center;
 	text-align: center;
-	transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+	transition:
+		color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		background-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		border-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		opacity var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
 	@if $style == primary or $style == secondary {
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
@@ -33,12 +37,20 @@
 		&:hover {
 			opacity: 0.8;
 		}
+
+		&:focus-visible {
+			@include focus-ring;
+		}
 	}
 
 	@if $style == secondary {
 		background-color: transparent;
 		border: 2px solid var(--wp--preset--color--brand);
 		color: var(--wp--preset--color--brand);
+
+		&:focus-visible {
+			@include focus-ring;
+		}
 	}
 
 	@if $style == link {
@@ -46,5 +58,9 @@
 		border: unset;
 		color: var(--wp--preset--color--brand);
 		padding: unset;
+
+		&:focus-visible {
+			@include focus-block;
+		}
 	}
 }
