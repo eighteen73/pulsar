@@ -152,7 +152,7 @@
 				"error-accent": "var:custom|color|primitive|error|100",
 				"warning": "var:custom|color|primitive|warning|500",
 				"warning-accent": "var:custom|color|primitive|warning|100",
-				"success": "var:custom|color|primitive|success|500",
+				"success": "var:custom|color|primitive|success|900",
 				"success-accent": "var:custom|color|primitive|success|100",
 				"shadow": "var:custom|color|primitive|neutral|900",
 				"border": "var:custom|color|primitive|neutral|100",

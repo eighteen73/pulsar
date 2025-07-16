@@ -6,14 +6,17 @@
 		padding-block: var(--wp--custom--spacing--group-gap);
 
 		.wp-block-post-title {
+			margin-top: unset;
 			max-width: var(--wp--custom--layout--wide);
+		}
+
+		.entry-content {
+			margin-top: var(--wp--custom--spacing--row-gap);
 		}
 	}
 }
 
 .wp-block-woocommerce-cart {
-	padding-block: var(--wp--custom--spacing--group-gap);
-
 	.wp-block-woocommerce-filled-cart-block {
 		flex-direction: column;
 		gap: var(--wp--preset--spacing--3-xl);
@@ -28,7 +31,7 @@
 		.wc-block-cart__main {
 			background-color: var(--wp--preset--color--base);
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
-			padding: var(--wp--preset--spacing--2-xl);
+			padding: 0 var(--wp--preset--spacing--2-xl);
 			width: 100%;
 
 			@media (--lg) {
@@ -78,6 +81,7 @@
 			}
 
 			.wc-block-components-product-name {
+				color: var(--wp--preset--color--contrast);
 				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--weight--heading);
 				text-decoration: none;
@@ -85,9 +89,8 @@
 		}
 
 		.wp-block-woocommerce-cart-order-summary-block {
-			> * + * {
-				border-top: 1px solid var(--wp--custom--color--border);
-			}
+			border-bottom: 1px solid var(--wp--custom--color--border);
+			margin-bottom: var(--wp--preset--spacing--xl);
 
 			.wc-block-cart__totals-title {
 				display: none;
@@ -109,8 +112,14 @@
 				padding: unset;
 			}
 
-			.wc-block-components-totals-wrapper:where(:not(:empty)) {
+			.wc-block-components-totals-wrapper {
 				padding-block: var(--wp--preset--spacing--xl);
+			}
+
+			.wc-block-components-totals-wrapper:empty,
+			.wc-block-components-totals-wrapper:has(> :only-child:empty) {
+				border: unset;
+				padding: unset;
 			}
 
 			.wc-block-components-totals-footer-item {
@@ -244,6 +253,23 @@
 				position: absolute;
 				right: 0;
 				top: 0;
+			}
+		}
+	}
+
+	.wc-block-components-totals-coupon__form {
+		gap: var(--wp--preset--spacing--sm);
+
+		label {
+			@include hide-visually;
+			position: absolute !important; // stylelint-disable-line declaration-no-important -- make sure the label is hidden and not taking up space
+		}
+
+		.wc-block-components-totals-coupon__input {
+			margin: unset;
+
+			input[type="text"] {
+				@include field-input;
 			}
 		}
 	}

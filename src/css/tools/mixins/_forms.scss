@@ -2,6 +2,7 @@
 
 /// Label styles.
 @mixin label() {
+	color: var(--wp--preset--color--contrast);
 	display: block;
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: var(--wp--custom--typography--weight--heading);
