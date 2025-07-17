@@ -11,7 +11,7 @@
     "reusable": false,
     "inserter": true,
     "lock": true,
-    "multiple": false,
+    "multiple": true,
     "align": true,
     "spacing": {
       "margin": true

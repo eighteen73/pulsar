@@ -141,15 +141,6 @@ $account-links: (
 					@include icon($icon, 20px);
 				}
 			}
-
-			&--customer-logout a {
-				color: var(--wp--custom--color--error);
-
-				&:hover,
-				&:focus-visible {
-					background-color: var(--wp--custom--color--error-accent);
-				}
-			}
 		}
 	}
 
@@ -391,11 +382,22 @@ $account-links: (
 				flex-direction: column;
 				justify-content: center;
 				padding: var(--wp--preset--spacing--3-xl);
+
+				&:hover {
+					background-color: var(--wp--preset--color--brand-accent);
+				}
+			}
+
+			.woocommerce-MyAccount-navigation-link--customer-logout a {
+				color: var(--wp--custom--color--error);
+
+				&:hover,
+				&:focus-visible {
+					background-color: var(--wp--custom--color--error-accent);
+				}
 			}
 		}
 	}
-
-	// Orders styles
 
 	// Single order styles
 	.woocommerce-customer-details {
@@ -483,7 +485,6 @@ $account-links: (
 	}
 
 	// Edit address styles
-
 	&:where(.woocommerce-edit-address) {
 
 		// Long winded way of hiding the duplicate page title.
@@ -492,6 +493,4 @@ $account-links: (
 			display: none;
 		}
 	}
-
-	// Account details styles
 }
