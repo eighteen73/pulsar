@@ -98,7 +98,7 @@
 			background-color: var(--wp--preset--color--brand);
 			border-radius: 50%;
 			color: var(--wp--preset--color--base);
-			font-size: var(--wp--preset--font-size--xs);
+			font-size: 60%;
 			font-weight: var(--wp--custom--typography--weight--heading);
 			height: 24px;
 			width: 24px;
@@ -283,14 +283,19 @@
 		padding-top: var(--wp--preset--spacing--3-xl);
 	}
 
-	.wc-block-components-totals-footer-item .wc-block-components-totals-item__label,
-	.wp-block-woocommerce-checkout-order-summary-subtotal-block {
+	.wc-block-components-totals-item__label {
+		font-size: var(--wp--preset--font-size--md);
 		font-weight: var(--wp--custom--typography--weight--heading);
 	}
 
-	.wc-block-components-totals-footer-item .wc-block-components-totals-item__label,
-	.wc-block-components-totals-footer-item .wc-block-components-totals-item__value {
+	.wc-block-components-totals-item__value {
 		font-size: var(--wp--preset--font-size--md);
+		font-weight: var(--wp--custom--typography--weight--body);
+
+		strong,
+		.wc-block-components-formatted-money-amount {
+			font-weight: inherit;
+		}
 	}
 
 	.wc-block-components-totals-coupon__form {
@@ -308,5 +313,60 @@
 
 	.wp-block-woocommerce-checkout-actions-block .wc-block-checkout__actions_row .wc-block-components-checkout-place-order-button {
 		@include button(primary);
+	}
+
+	.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+	.wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+		box-shadow: inset 0 0 0 1px var(--wp--custom--color--border);
+	}
+
+	.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control__option::after,
+	.wc-block-components-radio-control--highlight-checked div.wc-block-components-radio-control-accordion-option::after {
+		content: none;
+	}
+
+	.wc-block-components-radio-control-accordion-content {
+		padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
+	}
+
+	.wc-block-checkout__payment-method .wc-block-components-radio-control__option,
+	.wc-block-checkout__payment-method .wc-block-components-radio-control__option:first-child,
+	.wc-block-checkout__payment-method .wc-block-components-radio-control__option:last-child {
+		padding-bottom: var(--wp--preset--spacing--lg);
+		padding-left: var(--wp--preset--spacing--4-xl);
+		padding-right: var(--wp--preset--spacing--xl);
+		padding-top: var(--wp--preset--spacing--xl);
+	}
+
+	.wc-block-checkout__shipping-option .wc-block-components-radio-control__option {
+		padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--4-xl);
+	}
+
+	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__label {
+		font-weight: var(--wp--custom--typography--weight--body);
+	}
+
+	.wc-block-checkout__payment-method .wc-block-components-radio-control__option .wc-block-components-radio-control__input {
+		left: var(--wp--preset--spacing--xl);
+	}
+
+	.wc-block-components-radio-control {
+		&::after {
+			content: none;
+		}
+	}
+
+	.wc-block-components-radio-control-accordion-content {
+		color: var(--wp--preset--color--base-accent);
+		font-size: var(--wp--preset--font-size--sm);
+	}
+
+	.wc-block-components-radio-control .wc-block-components-radio-control__input {
+		@include field-radio;
+
+		&::before {
+			content: none;
+		}
 	}
 }
