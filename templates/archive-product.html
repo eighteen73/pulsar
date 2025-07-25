@@ -15,11 +15,20 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"metadata":{"name":"Product sorting and filters"},"className":"","layout":{"type":"constrained"}} -->
-	<div class="wp-block-group">
-		<!-- wp:group {"className":"alignwide","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+	<!-- wp:group {"metadata":{"name":"Product sorting and filters"},"align":"wide","className":"","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignwide">
+		<!-- wp:group {"className":"alignwide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 		<div class="wp-block-group alignwide">
-			<!-- wp:woocommerce/catalog-sorting {"className":""} /-->
+			<!-- wp:group {"className":"","style":{"spacing":{"blockGap":"var:preset|spacing|md"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+			<div class="wp-block-group">
+				<!-- wp:pulsar/facetwp-filters {"filtersModalId":"PzZSiLBMx2Z","className":""} -->
+					<!-- wp:pulsar/facetwp-filter {"filterId":"HO3hWVbnNwX","filterLabel":"Categories","className":""} -->
+						<!-- wp:pulsar/facetwp-facet {"facetName":"categories","className":""} /-->
+					<!-- /wp:pulsar/facetwp-filter -->
+				<!-- /wp:pulsar/facetwp-filters -->
+			</div>
+			<!-- /wp:group -->
+
 			<!-- wp:woocommerce/product-results-count {"className":""} /-->
 		</div>
 		<!-- /wp:group -->
