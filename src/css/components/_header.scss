@@ -9,6 +9,7 @@
 		font-size: unset;
 		line-height: 1;
 		margin: 0;
+		max-width: 200px;
 	}
 
 	&__logo-link {
@@ -16,7 +17,7 @@
 		display: inline-block;
 	}
 
-	&__icon {
-		width: 200px;
+	&__logo-image {
+		width: 100%;
 	}
 }

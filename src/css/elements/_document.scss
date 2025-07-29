@@ -20,3 +20,8 @@ body {
 :target {
 	scroll-margin-block: var(--wp--custom--spacing--group-gap);
 }
+
+// Set border color to theme color.
+* {
+	border-color: var(--wp--custom--color--border);
+}

@@ -1,11 +1,11 @@
 @use "../tools" as *;
 
 .wp-block-woocommerce-product-price {
-	font-weight: var(--wp--custom--typography--weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	line-height: var(--wp--custom--typography--line-height--none);
 
 	del {
-		font-weight: var(--wp--custom--typography--weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 
 	.wc-block-components-product-price__prefix,

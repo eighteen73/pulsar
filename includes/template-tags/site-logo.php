@@ -31,8 +31,8 @@ function get_site_logo( array $args = [] ): string {
 			'logo'        => $args['logo'] ?? 'logo',
 			'tag'         => is_front_page() ? 'h1' : 'div',
 			'class'       => $args['class'] ?? 'site-header__logo',
-			'link_class'  => 'site-header__logo-link',
-			'image_class' => 'site-header__logo-image',
+			'link_class'  => $args['link_class'] ?? 'site-header__logo-link',
+			'image_class' => $args['image_class'] ?? 'site-header__logo-image',
 		]
 	);
 
@@ -41,7 +41,7 @@ function get_site_logo( array $args = [] ): string {
 	$logo  = render_svg(
 		$args['logo'],
 		[
-			'class' => 'site-header__icon',
+			'class' => $args['image_class'],
 			'title' => $title,
 		],
 	);

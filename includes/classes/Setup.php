@@ -55,7 +55,10 @@ class Setup implements Bootable {
 
 		register_nav_menus(
 			[
-				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
+				'primary'  => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
+				'footer-1' => esc_html_x( 'Footer 1', 'nav menu location', 'pulsar' ),
+				'footer-2' => esc_html_x( 'Footer 2', 'nav menu location', 'pulsar' ),
+				'legal'    => esc_html_x( 'Legal', 'nav menu location', 'pulsar' ),
 			]
 		);
 	}

@@ -101,7 +101,7 @@
 				}
 			},
 			"typography": {
-				"weight": {
+				"fontWeight": {
 					"body": 400,
 					"heading": 600
 				},

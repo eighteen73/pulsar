@@ -7,7 +7,7 @@
 	color: var(--wp--preset--color--base);
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
 	text-transform: unset;
 }
@@ -18,7 +18,7 @@
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
 	color: var(--wp--preset--color--contrast);
 	font-size: var(--wp--preset--font-size--xs);
-	font-weight: var(--wp--custom--typography--weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	line-height: var(--wp--custom--typography--line-height--none);
 	padding: var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
@@ -45,7 +45,7 @@
 		color: currentcolor;
 		flex: 1 1 auto;
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--weight--heading);
+		font-weight: var(--wp--custom--typography--font-weight--heading);
 		line-height: 1;
 		margin: 0;
 		min-width: 40px;
@@ -63,7 +63,7 @@
 		cursor: pointer;
 		font-size: var(--wp--preset--font-size--sm);
 		font-style: normal;
-		font-weight: var(--wp--custom--typography--weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 		margin: 0;
 		min-width: 30px;
 		opacity: 1;

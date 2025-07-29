@@ -3,7 +3,7 @@
 /// Add styles for dark mode.
 /// Can target both prefers-color-scheme, and
 /// via a data attribute on the body.
-@mixin dark() {
+@mixin dark-mode() {
 	@media (prefers-color-scheme: dark) {
 		@content;
 	}

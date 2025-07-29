@@ -83,7 +83,7 @@
 			.wc-block-components-product-name {
 				color: var(--wp--preset--color--contrast);
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 				text-decoration: none;
 			}
 		}
@@ -128,19 +128,19 @@
 
 			.wc-block-components-totals-item__label {
 				font-size: inherit;
-				font-weight: var(--wp--custom--typography--weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 			}
 
 			.wc-block-components-totals-item__value {
 				font-size: inherit;
-				font-weight: var(--wp--custom--typography--weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--body);
 			}
 		}
 
 		.wc-block-cart-item__product {
 			.wc-block-components-product-name {
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 				margin: unset;
 				text-decoration: none;
 			}
@@ -203,13 +203,13 @@
 			}
 
 			.wc-block-components-product-details__name {
-				font-weight: var(--wp--custom--typography--weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--body);
 			}
 		}
 
 		.wc-block-cart-item__total {
 			.wc-block-components-product-price {
-				font-weight: var(--wp--custom--typography--weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 			}
 
 			.wc-block-components-sale-badge {

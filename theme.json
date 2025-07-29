@@ -20,7 +20,7 @@
 			}
 		},
 		"border": {
-			"color": false,
+			"color": true,
 			"radius": false,
 			"style": false,
 			"width": false
@@ -184,7 +184,7 @@
 				}
 			},
 			"typography": {
-				"weight": {
+				"fontWeight": {
 					"body": 400,
 					"heading": 600
 				},

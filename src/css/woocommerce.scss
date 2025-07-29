@@ -21,7 +21,7 @@
 
 		thead th {
 			background-color: var(--wp--preset--color--tint);
-			font-weight: var(--wp--custom--typography--weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 			text-transform: uppercase;
 		}
 
@@ -32,7 +32,7 @@
 			}
 
 			th {
-				font-weight: var(--wp--custom--typography--weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 			}
 		}
 
@@ -63,7 +63,7 @@
 
 		tfoot th {
 			border-top: 1px solid var(--wp--custom--color--border);
-			font-weight: var(--wp--custom--typography--weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 		}
 
 		.woocommerce-button {
@@ -99,7 +99,7 @@
 
 				&::before {
 					content: attr(data-title) ": ";
-					font-weight: var(--wp--custom--typography--weight--heading);
+					font-weight: var(--wp--custom--typography--font-weight--heading);
 				}
 
 				a {
@@ -112,7 +112,7 @@
 
 .woocommerce-password-strength {
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	padding: var(--wp--preset--spacing--md);
 }
 
@@ -192,7 +192,7 @@
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	color: var(--wp--preset--color--contrast);
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	gap: var(--wp--preset--spacing--md);
 	line-height: var(--wp--custom--typography--line-height--normal);
 	margin-block: var(--wp--preset--spacing--lg);

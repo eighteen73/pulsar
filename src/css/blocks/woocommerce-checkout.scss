@@ -99,7 +99,7 @@
 			border-radius: 50%;
 			color: var(--wp--preset--color--base);
 			font-size: 60%;
-			font-weight: var(--wp--custom--typography--weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 			height: 24px;
 			width: 24px;
 		}
@@ -107,7 +107,7 @@
 		.wc-block-components-product-name {
 			color: var(--wp--preset--color--contrast);
 			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 			margin: unset;
 			text-decoration: none;
 		}
@@ -127,7 +127,7 @@
 			}
 
 			.wc-block-formatted-money-amount {
-				font-weight: var(--wp--custom--typography--weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--body);
 			}
 		}
 
@@ -153,7 +153,7 @@
 		}
 
 		.wc-block-components-product-details__name {
-			font-weight: var(--wp--custom--typography--weight--body);
+			font-weight: var(--wp--custom--typography--font-weight--body);
 		}
 	}
 
@@ -184,12 +184,12 @@
 		padding: var(--wp--preset--spacing--xl);
 
 		address .wc-block-components-address-card__address-section:first-child {
-			font-weight: var(--wp--custom--typography--weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 		}
 	}
 
 	.wc-block-components-checkbox__label {
-		font-weight: var(--wp--custom--typography--weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 
 	.wc-block-components-text-input,
@@ -285,12 +285,12 @@
 
 	.wc-block-components-totals-item__label {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--weight--heading);
+		font-weight: var(--wp--custom--typography--font-weight--heading);
 	}
 
 	.wc-block-components-totals-item__value {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 
 		strong,
 		.wc-block-components-formatted-money-amount {
@@ -344,7 +344,7 @@
 	}
 
 	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__label {
-		font-weight: var(--wp--custom--typography--weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 
 	.wc-block-checkout__payment-method .wc-block-components-radio-control__option .wc-block-components-radio-control__input {
