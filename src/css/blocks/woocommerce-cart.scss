@@ -274,3 +274,9 @@
 		}
 	}
 }
+
+.wp-block-woocommerce-empty-cart-block {
+	background-color: var(--wp--preset--color--base);
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+	padding: var(--wp--preset--spacing--2-xl);
+}

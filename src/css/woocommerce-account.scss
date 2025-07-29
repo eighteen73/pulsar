@@ -221,6 +221,15 @@ $account-links: (
 
 		.woocommerce {
 			display: block;
+
+			// Registration on the account page is disabled.
+			&:not(:has(.u-columns)) {
+				background-color: var(--wp--preset--color--base);
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				float: unset;
+				padding: var(--wp--preset--spacing--3-xl);
+				width: 100%;
+			}
 		}
 
 		.login,

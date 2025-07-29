@@ -1,0 +1,32 @@
+@use "tools" as *;
+
+.wp-block-pulsar-facetwp-filters {
+	&__open-modal {
+		@include button(primary);
+		width: 100%;
+
+		@media (--lg) {
+			display: none;
+		}
+
+		&::before {
+			@include icon(filter);
+		}
+	}
+
+	&__modal-apply {
+		@include button(primary);
+	}
+
+	&__modal-reset {
+		@include button(secondary);
+	}
+
+	&__modal-clear {
+		@include button(link);
+	}
+
+	[hidden] {
+		display: none !important; // stylelint-disable-line declaration-no-important
+	}
+}

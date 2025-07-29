@@ -9,6 +9,7 @@ domReady(() => {
 		'core/button',
 		'woocommerce/mini-cart-checkout-button-block',
 		'woocommerce/mini-cart-cart-button-block',
+		'woocommerce/mini-cart-shopping-button-block',
 	];
 
 	blocks.forEach((block) => {

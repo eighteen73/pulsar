@@ -187,3 +187,13 @@
 	height: 24px;
 	width: 24px;
 }
+
+.wp-block-woocommerce-empty-mini-cart-contents-block {
+	.wc-block-mini-cart__empty-cart-wrapper {
+		padding: var(--wp--preset--spacing--xl);
+
+		> :first-child {
+			margin-top: 0;
+		}
+	}
+}
