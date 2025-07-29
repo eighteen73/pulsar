@@ -21,6 +21,7 @@ class Setup implements Bootable {
 	 */
 	public function boot(): void {
 		add_action( 'after_setup_theme', [ $this, 'supports' ], 5 );
+		add_action( 'init', [ $this, 'menus' ] );
 		add_action( 'init', [ $this, 'image_sizes' ] );
 		add_filter( 'image_size_names_choose', [ $this, 'image_size_names' ] );
 	}
@@ -43,6 +44,20 @@ class Setup implements Bootable {
 
 		// Disable core block patterns.
 		remove_theme_support( 'core-block-patterns' );
+	}
+
+	/**
+	 * Register menus.
+	 *
+	 * @return void
+	 */
+	public function menus(): void {
+
+		register_nav_menus(
+			[
+				'primary' => esc_html_x( 'Primary', 'nav menu location', 'pulsar' ),
+			]
+		);
 	}
 
 	/**
