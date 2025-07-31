@@ -183,6 +183,13 @@
 					"full": "100%"
 				}
 			},
+			"shadow": {
+				"xs": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.5)",
+				"sm": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.06)",
+				"md": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.05)",
+				"lg": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 10px 10px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.04)",
+				"xl": "0 25px 50px -12px hsl(from var(--wp--custom--color--shadow) h s l / 0.25)"
+			},
 			"typography": {
 				"fontWeight": {
 					"body": 400,
@@ -267,27 +274,27 @@
 				{
 					"name": "XS",
 					"slug": "xs",
-					"value": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.5)"
+					"value": "var|custom|shadow|xs"
 				},
 				{
 					"name": "SM",
 					"slug": "sm",
-					"value": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.06)"
+					"value": "var|custom|shadow|sm"
 				},
 				{
 					"name": "MD",
 					"slug": "md",
-					"value": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.05)"
+					"value": "var|custom|shadow|md"
 				},
 				{
 					"name": "LG",
 					"slug": "lg",
-					"value": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 10px 10px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.04)"
+					"value": "var|custom|shadow|lg"
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"value": "0 25px 50px -12px hsl(from var(--wp--custom--color--shadow) h s l / 0.25)"
+					"value": "var|custom|shadow|xl"
 				}
 			]
 		},

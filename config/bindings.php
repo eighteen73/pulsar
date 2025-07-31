@@ -12,7 +12,6 @@ return [
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Patterns::class,
-	Pulsar\Editor\Render\Navigation::class,
 	Pulsar\Editor\TemplateParts::class,
 	Pulsar\ThirdParty\GravityForms::class,
 	Pulsar\ThirdParty\WooCommerce\Setup::class,
