@@ -36,21 +36,21 @@
             {
               "fontFamily": "Figtree",
               "fontStyle": "normal",
-              "fontWeight": "600",
+              "fontWeight": "700",
               "fontDisplay": "swap",
               "fontStretch": "normal",
               "src": [
-                "file:./assets/fonts/figtree/figtree-v8-latin-600.woff2"
+                "file:./assets/fonts/figtree/figtree-v8-latin-700.woff2"
               ]
             },
             {
               "fontFamily": "Figtree",
               "fontStyle": "italic",
-              "fontWeight": "600",
+              "fontWeight": "700",
               "fontDisplay": "swap",
               "fontStretch": "normal",
               "src": [
-                "file:./assets/fonts/figtree/figtree-v8-latin-600italic.woff2"
+                "file:./assets/fonts/figtree/figtree-v8-latin-700italic.woff2"
               ]
             }
           ]
@@ -83,21 +83,21 @@
             {
               "fontFamily": "Figtree",
               "fontStyle": "normal",
-              "fontWeight": "600",
+              "fontWeight": "700",
               "fontDisplay": "swap",
               "fontStretch": "normal",
               "src": [
-                "file:./assets/fonts/figtree/figtree-v8-latin-600.woff2"
+                "file:./assets/fonts/figtree/figtree-v8-latin-700.woff2"
               ]
             },
             {
               "fontFamily": "Figtree",
               "fontStyle": "italic",
-              "fontWeight": "600",
+              "fontWeight": "700",
               "fontDisplay": "swap",
               "fontStretch": "normal",
               "src": [
-                "file:./assets/fonts/figtree/figtree-v8-latin-600italic.woff2"
+                "file:./assets/fonts/figtree/figtree-v8-latin-700italic.woff2"
               ]
             }
           ]
