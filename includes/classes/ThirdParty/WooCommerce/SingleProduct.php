@@ -29,9 +29,8 @@ class SingleProduct implements Bootable {
 		add_action( 'woocommerce_after_quantity_input_field', [ $this, 'quantity_plus_button' ], 10 );
 		add_action( 'woocommerce_before_single_product', [ $this, 'quantity_buttons_script' ] );
 
-		// Variation price and description.
+		// Variation price.
 		add_action( 'woocommerce_before_single_product', [ $this, 'variation_price_to_product_price' ] );
-		add_action( 'woocommerce_before_single_product', [ $this, 'variation_description_to_product_description' ] );
 
 		// Remove the description heading.
 		add_filter( 'woocommerce_product_description_heading', '__return_null' );
@@ -126,29 +125,6 @@ class SingleProduct implements Bootable {
 				$('[data-is-descendent-of-single-product-template=true] .wc-block-components-product-price').html('" . $price . "');
 			});
 			"
-		);
-	}
-
-	/**
-	 * Variation description to product description
-	 * This is to ensure that the description is updated when a variation is selected.
-	 *
-	 * @return void
-	 */
-	public function variation_description_to_product_description() {
-		global $product;
-		$description = $product->get_description();
-
-		wc_enqueue_js(
-			"
-			$(document).on('show_variation', 'form.cart', function( event, variation ) {
-				if(variation.variation_description) $('.wp-block-post-content').html(variation.variation_description);
-				$('.woocommerce-variation-description').hide();
-			});
-			$(document).on('hide_variation', 'form.cart', function( event, variation ) {
-				$('.wp-block-post-content').html('" . $description . "');
-			});
-		"
 		);
 	}
 }
