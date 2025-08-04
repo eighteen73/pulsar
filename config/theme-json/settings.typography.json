@@ -1,98 +1,174 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"version": 3,
-	"settings": {
-		"typography": {
-			"customFontSize": false,
-			"defaultFontSizes": false,
-			"dropCap": false,
-			"fluid": true,
-			"fontFamilies": [
-				{
-					"name": "Primary",
-					"slug": "primary",
-					"fontFamily": "'Inter', sans-serif",
-					"fontFace": [
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "auto",
-							"fontWeight": "100 900",
-							"fontDisplay": "swap",
-							"fontStretch": "normal",
-							"src": [
-								"file:./assets/fonts/inter/InterVariable-Italic.woff2",
-								"file:./assets/fonts/inter/InterVariable.woff2"
-							]
-						}
-					]
-				}
-			],
-			"fontSizes": [
-				{
-					"name": "XS",
-					"slug": "xs",
-					"size": "14px",
-					"fluid": false
-				},
-				{
-					"name": "SM",
-					"slug": "sm",
-					"size": "16px",
-					"fluid": false
-				},
-				{
-					"name": "MD",
-					"slug": "md",
-					"size": "18px",
-					"fluid": {
-						"min": "16px",
-						"max": "18px"
-					}
-				},
-				{
-					"name": "LG",
-					"slug": "lg",
-					"size": "26px",
-					"fluid": {
-						"min": "18px",
-						"max": "26px"
-					}
-				},
-				{
-					"name": "XL",
-					"slug": "xl",
-					"size": "33px",
-					"fluid": {
-						"min": "26px",
-						"max": "33px"
-					}
-				},
-				{
-					"name": "2XL",
-					"slug": "2-xl",
-					"size": "44px",
-					"fluid": {
-						"min": "33px",
-						"max": "44px"
-					}
-				},
-				{
-					"name": "3XL",
-					"slug": "3-xl",
-					"size": "70px",
-					"fluid": {
-						"min": "33px",
-						"max": "70px"
-					}
-				}
-			],
-			"fontStyle": false,
-			"fontWeight": false,
-			"letterSpacing": false,
-			"lineHeight": false,
-			"textColumns": true,
-			"textDecoration": false,
-			"textTransform": false
-		}
-	}
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "typography": {
+      "customFontSize": false,
+      "defaultFontSizes": false,
+      "dropCap": false,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "name": "Primary",
+          "slug": "primary",
+          "fontFamily": "'Figtree', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-600.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "600",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-600italic.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Secondary",
+          "slug": "secondary",
+          "fontFamily": "'Figtree', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-600.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "600",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-600italic.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "XS",
+          "slug": "xs",
+          "size": "14px",
+          "fluid": false
+        },
+        {
+          "name": "SM",
+          "slug": "sm",
+          "size": "16px",
+          "fluid": false
+        },
+        {
+          "name": "MD",
+          "slug": "md",
+          "size": "18px",
+          "fluid": {
+            "min": "16px",
+            "max": "18px"
+          }
+        },
+        {
+          "name": "LG",
+          "slug": "lg",
+          "size": "26px",
+          "fluid": {
+            "min": "18px",
+            "max": "26px"
+          }
+        },
+        {
+          "name": "XL",
+          "slug": "xl",
+          "size": "33px",
+          "fluid": {
+            "min": "26px",
+            "max": "33px"
+          }
+        },
+        {
+          "name": "2XL",
+          "slug": "2-xl",
+          "size": "44px",
+          "fluid": {
+            "min": "33px",
+            "max": "44px"
+          }
+        },
+        {
+          "name": "3XL",
+          "slug": "3-xl",
+          "size": "70px",
+          "fluid": {
+            "min": "33px",
+            "max": "70px"
+          }
+        }
+      ],
+      "fontStyle": false,
+      "fontWeight": false,
+      "letterSpacing": false,
+      "lineHeight": false,
+      "textColumns": true,
+      "textDecoration": false,
+      "textTransform": false
+    }
+  }
 }
