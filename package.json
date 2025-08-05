@@ -55,7 +55,15 @@
     "extends": "@eighteen73/eslint-config-wordpress"
   },
   "stylelint": {
-    "extends": "@eighteen73/stylelint-config-wordpress"
+    "extends": "@eighteen73/stylelint-config-wordpress",
+    "rules": {
+      "custom-property-pattern": [
+        "^wp--([a-z0-9]+(-[a-z0-9]+)*)(--([a-z0-9]+(-[a-z0-9]+)*)){1,}$|^pb--([a-z0-9]+(-[a-z0-9]+)*)(--([a-z0-9]+(-[a-z0-9]+)*)){1,}$",
+        {
+          "message": "Expected custom property name to wp--kebab--case or pb--kebab--case"
+        }
+      ]
+    }
   },
   "prettier": {
     "extends": "@wordpress/prettier-config"
