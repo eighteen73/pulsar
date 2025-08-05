@@ -52,7 +52,7 @@
 				{
 					"name": "Base Accent",
 					"slug": "base-accent",
-					"color": "var:custom|color|primitive|neutral|600"
+					"color": "var:custom|color|primitive|neutral|700"
 				},
 				{
 					"name": "Tint",
