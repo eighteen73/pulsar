@@ -37,7 +37,7 @@
 				{
 					"name": "Contrast",
 					"slug": "contrast",
-					"color": "var:custom|color|primitive|neutral|800"
+					"color": "var:custom|color|primitive|neutral|950"
 				},
 				{
 					"name": "Contrast Accent",
