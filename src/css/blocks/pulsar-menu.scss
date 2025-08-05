@@ -42,7 +42,7 @@
 				}
 
 				&:where(.has-open-submenu),
-				&:hover {
+				&:where(.submenu-opens-on-hover):hover {
 					> #{$block}__link {
 						&::after {
 							transform: scaleX(1);
