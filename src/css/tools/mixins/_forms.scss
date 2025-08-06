@@ -26,7 +26,7 @@
 @mixin field-input() {
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
-	border: 1px solid var(--wp--custom--color--border);
+	border: 1px solid var(--wp--custom--color--border-input);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-shadow: none;
 	color: var(--wp--preset--color--contrast);
@@ -45,16 +45,16 @@
 		outline-offset: 2px;
 	}
 
-	// &:disabled {
-	// 	border-color: var(--wp--preset--color--base-accent);
-	// 	color: var(--wp--preset--color--base-accent);
-	// 	cursor: not-allowed;
-	// }
+	&:disabled {
+		border-color: var(--wp--preset--color--base-accent);
+		color: var(--wp--preset--color--base-accent);
+		cursor: not-allowed;
+	}
 
-	// &::placeholder {
-	// 	color: var(--wp--preset--color--base-accent);
-	// 	opacity: 1;
-	// }
+	&::placeholder {
+		color: var(--wp--preset--color--base-accent);
+		opacity: 1;
+	}
 }
 
 /// Textarea styles.
@@ -68,7 +68,7 @@
 @mixin field-select($multiple: false) {
 	--icon-size: 1.5em;
 	appearance: none;
-	border: 1px solid var(--wp--custom--color--border);
+	border: 1px solid var(--wp--custom--color--border-input);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-shadow: none;
 	display: block;
@@ -131,7 +131,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
-	border: 1px solid var(--wp--custom--color--border);
+	border: 1px solid var(--wp--custom--color--border-input);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
 	color: var(--wp--preset--color--brand);
 	display: inline-block;
@@ -192,7 +192,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
-	border: 1px solid var(--wp--custom--color--border);
+	border: 1px solid var(--wp--custom--color--border-input);
 	border-radius: 100%;
 	color: var(--wp--preset--color--brand);
 	display: inline-block;
@@ -226,7 +226,7 @@
 		}
 	}
 
-	& + label {
+	+ label {
 		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 }

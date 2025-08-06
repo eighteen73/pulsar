@@ -73,7 +73,9 @@
 				"success-accent": "var:custom|color|primitive|success|100",
 				"shadow": "var:custom|color|primitive|neutral|900",
 				"border": "var:custom|color|primitive|neutral|100",
-				"border-invert": "var:custom|color|primitive|neutral|200"
+				"border-invert": "var:custom|color|primitive|neutral|200",
+        "border-input": "var:custom|color|primitive|neutral|400",
+        "border-input-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
 				"is-rounded": 0

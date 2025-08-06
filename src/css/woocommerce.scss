@@ -160,7 +160,7 @@
 
 		.select2-selection,
 		.select2-dropdown {
-			border: 1px solid var(--wp--custom--color--border);
+			border: 1px solid var(--wp--custom--color--border-input);
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 			color: var(--wp--preset--color--contrast);
 		}
@@ -176,7 +176,7 @@
 }
 
 .select2-container .select2-dropdown {
-	border: 1px solid var(--wp--custom--color--border);
+	border: 1px solid var(--wp--custom--color--border-input);
 
 }
 

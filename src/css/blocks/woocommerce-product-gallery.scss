@@ -11,6 +11,10 @@
 
 	.wc-block-product-gallery-thumbnails {
 		gap: var(--wp--preset--spacing--sm);
+
+		.wc-block-product-gallery-thumbnails__scrollable {
+			scrollbar-width: none;
+		}
 	}
 
 	.wc-block-product-gallery-thumbnails__thumbnail {

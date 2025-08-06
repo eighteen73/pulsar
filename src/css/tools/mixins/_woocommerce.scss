@@ -33,8 +33,15 @@
 	width: 100px;
 
 	&::after {
-		border: 1px solid var(--wp--custom--color--border);
+		border: 1px solid var(--wp--custom--color--border-input);
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	}
+
+	&:focus-within::after {
+		border-color: var(--wp--preset--color--brand);
+		box-shadow: var(--wp--preset--color--brand) 0 0 0 1px;
+		outline: 2px solid transparent;
+		outline-offset: 2px;
 	}
 
 	.wc-block-components-quantity-selector__input {
