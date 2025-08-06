@@ -38,7 +38,7 @@
 	padding-inline: var(--wp--preset--spacing--lg);
 	width: 100%;
 
-	:focus {
+	&:focus {
 		border-color: var(--wp--preset--color--brand);
 		box-shadow: var(--wp--preset--color--brand) 0 0 0 1px;
 		outline: 2px solid transparent;
