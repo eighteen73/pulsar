@@ -1,5 +1,10 @@
 @use "tools" as *;
 
 .site-main {
+	flex: 1 0 auto;
 	margin: 0;
+
+	> .wp-block-group + .wp-block-group {
+		margin-block-start: var(--wp--custom--spacing--group-gap);
+	}
 }

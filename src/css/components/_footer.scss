@@ -1,5 +1,50 @@
 @use "tools" as *;
 
 .site-footer {
+	font-size: var(--wp--preset--font-size--sm);
 	margin: 0;
+
+	&__logo {
+		max-width: 200px;
+	}
+
+	&__logo-link {
+		color: unset;
+		display: inline-block;
+	}
+
+	&__logo-image {
+		width: 100%;
+	}
+
+	&__copyright {
+		font-size: var(--wp--preset--font-size--sm);
+		font-weight: var(--wp--custom--typography--font-weight--body);
+	}
+
+	&__credit {
+		display: inline-flex;
+		flex-wrap: wrap;
+		font-size: var(--wp--preset--font-size--sm);
+		font-weight: var(--wp--custom--typography--font-weight--body);
+		gap: var(--wp--preset--spacing--xs);
+		text-decoration: none;
+
+		&::after {
+			content: none;
+		}
+
+		&:hover,
+		&:focus-visible {
+			color: var(--wp--custom--color--text--invert);
+			text-decoration: none;
+		}
+
+		svg {
+			position: relative;
+			top: 2px;
+			width: 10ch;
+		}
+	}
+
 }

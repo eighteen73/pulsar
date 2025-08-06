@@ -4,79 +4,74 @@
 	"settings": {
 		"spacing": {
 			"blockGap": true,
-      "defaultSpacingSizes": false,
-      "customSpacingSize": false,
+			"defaultSpacingSizes": false,
+			"customSpacingSize": false,
 			"margin": true,
 			"padding": true,
 			"spacingSizes": [
 				{
-					"name": "2XS (4px)",
+					"name": "XS (4px)",
 					"size": "4px",
-					"slug": "2-xs"
-				},
-				{
-					"name": "XS (8px)",
-					"size": "8px",
 					"slug": "xs"
 				},
 				{
-					"name": "SM (12px)",
-					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
+					"name": "SM (8px)",
+					"size": "8px",
 					"slug": "sm"
 				},
 				{
-					"name": "MD (16px)",
-					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
+					"name": "MD (12px)",
+					"size": "clamp(10px, 6.6667px + 0.4167vw, 12px)",
 					"slug": "md"
 				},
 				{
-					"name": "LG (24px)",
-					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
+					"name": "LG (16px)",
+					"size": "clamp(12px, 10.6667px + 0.4167vw, 16px)",
 					"slug": "lg"
 				},
 				{
-					"name": "XL (32px)",
-					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
+					"name": "XL (24px)",
+					"size": "clamp(16px, 13.3333px + 0.8333vw, 24px)",
 					"slug": "xl"
 				},
 				{
-					"name": "2XL (48px)",
-					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
+					"name": "2XL (32px)",
+					"size": "clamp(24px, 21.3333px + 0.8333vw, 32px)",
 					"slug": "2-xl"
 				},
 				{
-					"name": "3XL (64px)",
-					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
+					"name": "3XL (48px)",
+					"size": "clamp(32px, 26.6667px + 1.6667vw, 48px)",
 					"slug": "3-xl"
 				},
 				{
-					"name": "4XL (80px)",
-					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
+					"name": "4XL (64px)",
+					"size": "clamp(40px, 42.6667px + 1.6667vw, 64px)",
 					"slug": "4-xl"
 				},
 				{
-					"name": "5XL (96px)",
-					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
+					"name": "5XL (80px)",
+					"size": "clamp(48px, 37.3333px + 3.3333vw, 80px)",
 					"slug": "5-xl"
 				},
-        {
-					"name": "6XL (112px)",
-					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
+				{
+					"name": "6XL (96px)",
+					"size": "clamp(64px, 53.3333px + 3.3333vw, 96px)",
 					"slug": "6-xl"
 				},
-        {
-					"name": "7XL (128px)",
-					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
+				{
+					"name": "7XL (112px)",
+					"size": "clamp(80px, 69.3333px + 3.3333vw, 112px)",
 					"slug": "7-xl"
 				},
-        {
-					"name": "8XL (154px)",
-					"size": "clamp(128px, 119.3333px + 2.7083vw, 154px)",
+				{
+					"name": "8XL (128px)",
+					"size": "clamp(96px, 85.3333px + 3.3333vw, 128px)",
 					"slug": "8-xl"
 				},
-        {
-					"name": "9XL (186px)",
-					"size": "clamp(154px, 143.3333px + 3.3333vw, 186px)",
+				{
+					"name": "9XL (166px)",
+					"size": "clamp(128px, 119.3333px + 2.7083vw, 166px)",
 					"slug": "9-xl"
 				}
 			],

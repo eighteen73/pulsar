@@ -1,0 +1,505 @@
+@use "tools" as *;
+
+// Account icons
+$account-links: (
+	dashboard: woocommerce/account/dashboard,
+	orders: woocommerce/account/orders,
+	downloads: woocommerce/account/downloads,
+	edit-address: woocommerce/account/edit-address,
+	edit-account: woocommerce/account/edit-account,
+	bookings: woocommerce/account/bookings,
+	members-area: woocommerce/account/members-area,
+	subscriptions: woocommerce/account/subscriptions,
+	customer-logout: woocommerce/account/customer-logout,
+);
+
+.woocommerce-account {
+
+	// General styles
+	.site-main {
+		background-color: var(--wp--preset--color--tint);
+		padding-block: var(--wp--custom--spacing--group-gap);
+
+		// On larger screens we hide the title, as its duplicated for styling purposes.
+		.wp-block-post-title {
+			@media (--xl) {
+				display: none;
+			}
+
+			+ .wp-block-heading {
+				display: none;
+
+				@media (--xl) {
+					display: block;
+				}
+			}
+		}
+
+		.woocommerce {
+			align-items: flex-start;
+			display: flex;
+			gap: var(--wp--preset--spacing--5-xl);
+			max-width: var(--wp--custom--layout--wide);
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+	}
+
+	.woocommerce-MyAccount-content__title {
+		display: none;
+		margin-top: unset;
+
+		@media (--xl) {
+			display: block;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+	}
+
+	.entry-content {
+		margin-top: var(--wp--custom--spacing--row-gap);
+	}
+
+	.woocommerce-MyAccount-back {
+		margin-bottom: var(--wp--preset--spacing--md);
+
+		.wp-block-button__link::before {
+			@include icon(arrow-left, 12px);
+		}
+
+		@media (--xl) {
+			display: none;
+		}
+	}
+
+	.woocommerce-MyAccount-content {
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--3-xl);
+		width: 100%;
+
+		@media (--xl) {
+			flex: 1;
+		}
+	}
+
+	.woocommerce-MyAccount-navigation {
+		display: none;
+		float: unset;
+		width: 100%;
+
+		@media (--xl) {
+			display: block;
+			width: 250px;
+		}
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--lg);
+			margin: unset;
+		}
+
+		li {
+			padding: unset;
+
+			&.is-active a {
+				background-color: var(--wp--preset--color--brand-accent);
+				color: var(--wp--preset--color--brand);
+				text-decoration: none;
+			}
+
+			a {
+				align-items: center;
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+				color: var(--wp--preset--color--contrast);
+				display: flex;
+				font-size: var(--wp--preset--font-size--sm);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
+				gap: var(--wp--preset--spacing--sm);
+				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+				text-decoration: none;
+				transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+
+				&:hover {
+					background-color: var(--wp--preset--color--brand-accent);
+					text-decoration: none;
+				}
+
+				&:focus-visible {
+					@include focus-ring;
+					background-color: var(--wp--preset--color--brand-accent);
+				}
+			}
+		}
+
+		.woocommerce-MyAccount-navigation-link {
+			@each $link, $icon in $account-links {
+				&--#{$link} a::before {
+					@include icon($icon, 20px);
+				}
+			}
+		}
+	}
+
+	.woocommerce-form,
+	.woocommerce-address-fields__field-wrapper,
+	form {
+		display: grid;
+		gap: var(--wp--custom--spacing--block-gap);
+		grid-template-columns: repeat(2, 1fr);
+
+		.clear {
+			display: none;
+		}
+
+		h2 {
+			grid-column: 1 / -1;
+		}
+
+		.woocommerce-address-fields {
+			grid-column: 1 / -1;
+		}
+
+		fieldset {
+			display: grid;
+			gap: var(--wp--custom--spacing--block-gap);
+			grid-column: 1 / -1;
+			grid-template-columns: repeat(2, 1fr);
+			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+		}
+
+		legend {
+			@include legend;
+			margin-bottom: var(--wp--custom--spacing--block-gap);
+		}
+
+		.form-row {
+			grid-column: 1 / -1;
+			margin: unset;
+			padding: unset;
+			width: 100%;
+
+			&-first {
+				grid-column: 1;
+			}
+
+			&-last {
+				grid-column: 2;
+			}
+
+			&::before,
+			&::after {
+				content: none;
+			}
+
+			input.input-text {
+				@include field-input;
+			}
+		}
+
+		> * {
+			margin-top: unset;
+		}
+
+		label {
+			@include label;
+		}
+
+		.wp-element-button {
+			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+		}
+	}
+
+	// Logged out styles
+	&:not(.logged-in) {
+		.woocommerce-MyAccount-back {
+			display: none;
+		}
+
+		.woocommerce {
+			display: block;
+
+			// Registration on the account page is disabled.
+			&:not(:has(.u-columns)) {
+				background-color: var(--wp--preset--color--base);
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				float: unset;
+				padding: var(--wp--preset--spacing--3-xl);
+				width: 100%;
+			}
+		}
+
+		.login,
+		.register {
+			border: unset;
+			margin: unset;
+			padding: unset;
+		}
+
+		.u-columns {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--preset--spacing--2-xl);
+			margin-top: unset;
+
+			@media (--lg) {
+				flex-direction: row;
+			}
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+
+		.col-1,
+		.col-2 {
+			background-color: var(--wp--preset--color--base);
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			float: unset;
+			padding: var(--wp--preset--spacing--3-xl);
+			width: 100%;
+
+			> :first-child {
+				margin-top: 0;
+			}
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+
+			p {
+				color: var(--wp--preset--color--base-accent);
+			}
+		}
+
+		.col-2 {
+			border-top: 1px solid var(--wp--custom--color--border);
+			padding-top: var(--wp--preset--spacing--2-xl);
+		}
+
+		.woocommerce-form-login__submit {
+			float: unset;
+			margin: unset;
+			margin-top: var(--wp--custom--spacing--block-gap);
+			width: 100%;
+		}
+
+		.woocommerce-form-register__submit {
+			@include button(secondary);
+			width: 100%;
+		}
+
+		.woocommerce-form {
+			display: flex;
+			flex-direction: column;
+			gap: var(--wp--custom--spacing--block-gap);
+			margin-top: var(--wp--preset--spacing--sm);
+
+			.form-row {
+				margin: unset;
+				padding: unset;
+
+				&::before,
+				&::after {
+					content: none;
+				}
+
+				.input-text {
+					@include field-input;
+				}
+
+				em {
+					color: var(--wp--preset--color--base-accent);
+					font-size: var(--wp--preset--font-size--sm);
+					font-style: normal;
+					margin-top: var(--wp--preset--spacing--sm);
+				}
+			}
+
+			> * {
+				margin-top: unset;
+			}
+
+			label {
+				@include label;
+			}
+
+			.woocommerce-form-login__rememberme {
+				margin-bottom: unset;
+			}
+
+			.woocommerce-form__label-for-checkbox {
+				align-items: center;
+				display: flex;
+				font-weight: var(--wp--custom--typography--font-weight--body);
+				gap: var(--wp--preset--spacing--sm);
+				margin-bottom: unset;
+			}
+
+			.lost_password {
+				margin: unset;
+			}
+
+			wc-order-attribution-inputs {
+				display: none;
+			}
+
+			.woocommerce-privacy-policy-text {
+				> :first-child {
+					margin-top: 0;
+				}
+
+				> :last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	// Dashboard styles
+	&.woocommerce-dashboard {
+		.woocommerce-MyAccount-back {
+			display: none;
+		}
+
+		.woocommerce-MyAccount-content {
+			display: none;
+		}
+
+		.woocommerce-MyAccount-navigation {
+			display: block;
+			width: 100%;
+
+			ul {
+				display: grid;
+				gap: var(--wp--custom--spacing--block-gap);
+				grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+			}
+
+			// Dashboard link is hidden on the dashboard page.
+			.woocommerce-MyAccount-navigation-link--dashboard {
+				display: none;
+			}
+
+			li a {
+				background-color: var(--wp--preset--color--base);
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				flex-direction: column;
+				justify-content: center;
+				padding: var(--wp--preset--spacing--3-xl);
+
+				&:hover {
+					background-color: var(--wp--preset--color--brand-accent);
+				}
+			}
+
+			.woocommerce-MyAccount-navigation-link--customer-logout a {
+				color: var(--wp--custom--color--error);
+
+				&:hover,
+				&:focus-visible {
+					background-color: var(--wp--custom--color--error-accent);
+				}
+			}
+		}
+	}
+
+	// Single order styles
+	.woocommerce-customer-details {
+		margin: var(--wp--custom--spacing--row-gap) 0 0;
+
+		address {
+			border: unset;
+			margin-top: var(--wp--custom--spacing--block-gap);
+			padding: 0;
+		}
+
+		.woocommerce-customer-details--email,
+		.woocommerce-customer-details--phone {
+			padding-left: unset;
+
+			&::before {
+				content: none;
+			}
+		}
+
+		h2 {
+			@include heading-base;
+			@include heading(h3);
+		}
+	}
+
+	.woocommerce-order-details {
+		margin: var(--wp--custom--spacing--row-gap) 0 0;
+
+		.woocommerce-table--order-details {
+			margin-top: var(--wp--custom--spacing--block-gap);
+		}
+
+		.woocommerce-order-details__title {
+			@include heading-base;
+			@include heading(h3);
+		}
+	}
+
+	// Downloads styles
+
+	// Addresses styles
+	.addresses .title {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--sm);
+
+		&::before,
+		&::after {
+			content: none;
+		}
+
+		h2 {
+			@include heading-base;
+			@include heading(h3);
+			margin: unset;
+		}
+
+		.edit {
+			align-items: center;
+			display: inline-flex;
+			font-size: var(--wp--preset--font-size--xs);
+			gap: var(--wp--preset--spacing--sm);
+			margin: unset;
+
+			&::before {
+				@include icon(woocommerce/edit-address, 12px);
+			}
+		}
+	}
+
+	.woocommerce-Addresses {
+		margin-top: var(--wp--custom--spacing--block-gap);
+	}
+
+	.woocommerce-Address {
+		border: 1px solid var(--wp--custom--color--border);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		padding: var(--wp--preset--spacing--2-xl);
+	}
+
+	address {
+		font-style: normal;
+		margin-top: var(--wp--custom--spacing--block-gap);
+	}
+
+	// Edit address styles
+	&:where(.woocommerce-edit-address) {
+
+		// Long winded way of hiding the duplicate page title.
+		// Unfortunately the main addresses and edit address screens have the same body class.
+		.woocommerce-MyAccount-content:where(:has(.woocommerce-address-fields)) .woocommerce-MyAccount-content__title {
+			display: none;
+		}
+	}
+}

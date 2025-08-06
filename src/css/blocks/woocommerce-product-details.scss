@@ -1,0 +1,106 @@
+@use "../tools" as *;
+
+.woocommerce .product .wp-block-woocommerce-product-details .woocommerce-tabs {
+	.tabs {
+		display: flex;
+		gap: var(--wp--custom--spacing--block-gap);
+		margin: 0;
+		padding: 0;
+
+		&::before {
+			content: none;
+		}
+
+		li {
+			background-color: transparent;
+			border: 0;
+			border-bottom: 2px solid transparent;
+			border-radius: unset;
+			color: var(--wp--preset--color--contrast);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
+			margin: unset;
+			padding: unset;
+
+			&::before,
+			&::after {
+				content: none;
+			}
+
+			&.active {
+				background: unset;
+				border-bottom-color: var(--wp--preset--color--brand);
+
+				&::before,
+				&::after {
+					content: none;
+				}
+			}
+
+			a {
+				padding: 0 0 var(--wp--preset--spacing--sm) 0;
+			}
+		}
+	}
+
+	.panel {
+		margin: unset;
+		padding-top: var(--wp--custom--spacing--block-gap);
+
+		> :first-child {
+			margin-top: 0;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Product attributes table
+	.woocommerce-product-attributes {
+		border: 0;
+		margin: 0;
+
+		th {
+			background-color: transparent !important; // stylelint-disable-line declaration-no-important
+			border: 0;
+			font-weight: 600;
+			line-height: unset;
+			padding: 0;
+			text-align: left;
+		}
+
+		td {
+			background-color: transparent !important; // stylelint-disable-line declaration-no-important
+			border: 0;
+			font-style: normal;
+			line-height: unset;
+			padding: 0;
+			text-align: left;
+
+			p {
+				padding: 0;
+			}
+		}
+
+		tr:not(:last-child) th,
+		tr:not(:last-child) td {
+			padding-bottom: var(--wp--custom--spacing--block-gap);
+		}
+	}
+
+	.woocommerce-Reviews {
+		h2 {
+			display: none;
+		}
+
+		.commentlist {
+			padding-left: 0;
+
+			.comment-text {
+				border: 1px solid var(--wp--custom--color--border--default) !important; // stylelint-disable-line declaration-no-important
+				border-radius: 0 !important; // stylelint-disable-line declaration-no-important
+				padding: var(--wp--custom--spacing--block-gap) !important; // stylelint-disable-line declaration-no-important
+			}
+		}
+	}
+}

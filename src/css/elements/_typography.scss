@@ -1,0 +1,42 @@
+@use "tools" as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@include heading-base;
+}
+
+h1 {
+	@include heading("h1");
+}
+
+h2 {
+	@include heading("h2");
+}
+
+h3 {
+	@include heading("h3");
+}
+
+h4 {
+	@include heading("h4");
+}
+
+h5 {
+	@include heading("h5");
+}
+
+h6 {
+	@include heading("h6");
+}
+
+p {
+	text-wrap: pretty;
+}
+
+strong {
+	font-weight: var(--wp--custom--typography--font-weight--heading);
+}

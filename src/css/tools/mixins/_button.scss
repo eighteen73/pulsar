@@ -1,32 +1,66 @@
 @use "../../settings" as *;
+@use "utility" as *;
 
-/// Button base styles.
-@mixin button-base() {
-	align-items: center;
-	border: unset;
-	border-radius: unset;
-	box-shadow: unset;
-	cursor: pointer;
-	display: inline-flex;
-	gap: var(--wp--preset--spacing--2-xs);
-	justify-content: center;
-	padding: var(--wp--preset--spacing--sm);
-	text-align: center;
-	transition: all var(--wp--custom--transition-duration--quick);
-}
-
-/// Button style.
+/// Button styles.
 ///
 /// @param {string} $style - The style of the button.
 ///
-@mixin button-style($style: primary) {
-	@if $style == primary {
-		background-color: var(--wp--custom--color--surface--primary);
-		color: var(--wp--custom--color--text--invert);
+/// @example scss - Primary button
+/// .button {
+///   @include button(primary);
+/// }
+///
+@mixin button($style: primary) {
+	align-items: center;
+	box-shadow: unset;
+	cursor: pointer;
+	display: inline-flex;
+	gap: var(--wp--preset--spacing--sm);
+	justify-content: center;
+	text-align: center;
+	transition:
+		color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		background-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		border-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
+		opacity var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
-		&:hover,
-		&:active {
-			background-color: var(--wp--custom--color--primary--100);
+	@if $style == primary or $style == secondary {
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+	}
+
+	@if $style == primary {
+		background-color: var(--wp--preset--color--brand);
+		border: unset;
+		color: var(--wp--preset--color--base);
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		&:focus-visible {
+			@include focus-ring;
+		}
+	}
+
+	@if $style == secondary {
+		background-color: transparent;
+		border: 2px solid var(--wp--preset--color--brand);
+		color: var(--wp--preset--color--brand);
+
+		&:focus-visible {
+			@include focus-ring;
+		}
+	}
+
+	@if $style == link {
+		background-color: transparent;
+		border: unset;
+		color: var(--wp--preset--color--brand);
+		padding: unset;
+
+		&:focus-visible {
+			@include focus-block;
 		}
 	}
 }

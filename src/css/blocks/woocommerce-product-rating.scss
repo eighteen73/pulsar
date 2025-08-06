@@ -1,0 +1,17 @@
+@use "../tools" as *;
+
+.wp-block-woocommerce-product-rating {
+	.wc-block-components-product-rating__reviews_count a {
+		color: var(--wp--custom--color--text--secondary);
+		font-size: var(--wp--preset--font-size--sm);
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.wc-block-grid__product-rating__stars {
+		color: var(--wp--custom--color--surface--primary);
+	}
+}

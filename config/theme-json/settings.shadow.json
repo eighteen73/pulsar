@@ -4,7 +4,33 @@
 	"settings": {
 		"shadow": {
 			"defaultPresets": false,
-			"presets": []
+			"presets": [
+        {
+          "name": "XS",
+          "slug": "xs",
+          "value": "var|custom|shadow|xs"
+        },
+        {
+          "name": "SM",
+          "slug": "sm",
+          "value": "var|custom|shadow|sm"
+        },
+        {
+          "name": "MD",
+          "slug": "md",
+          "value": "var|custom|shadow|md"
+        },
+        {
+          "name": "LG",
+          "slug": "lg",
+          "value": "var|custom|shadow|lg"
+        },
+        {
+          "name": "XL",
+          "slug": "xl",
+          "value": "var|custom|shadow|xl"
+        }
+      ]
 		}
 	}
 }

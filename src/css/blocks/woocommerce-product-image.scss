@@ -1,0 +1,22 @@
+@use "../tools" as *;
+
+.wp-block-woocommerce-product-image {
+	.wc-block-components-product-sale-badge {
+		@include wc-product-sale-badge;
+		top: var(--wp--preset--spacing--sm);
+
+		&--align-left {
+			left: var(--wp--preset--spacing--sm);
+		}
+
+		&--align-right {
+			right: var(--wp--preset--spacing--sm);
+		}
+	}
+
+	a {
+		&:focus-visible {
+			@include focus-ring;
+		}
+	}
+}

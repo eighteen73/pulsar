@@ -1,131 +1,174 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"version": 3,
-	"settings": {
-		"typography": {
-			"customFontSize": false,
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "typography": {
+      "customFontSize": false,
       "defaultFontSizes": false,
-			"dropCap": false,
-			"fluid": true,
-			"fontFamilies": [
-				{
-					"name": "Primary",
-					"slug": "primary",
-					"fontFamily": "'Inter', sans-serif",
+      "dropCap": false,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "name": "Primary",
+          "slug": "primary",
+          "fontFamily": "'Figtree', sans-serif",
           "fontFace": [
             {
-              "fontFamily": "Inter",
-              "fontStyle": "auto",
-              "fontWeight": "100 900",
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "400",
               "fontDisplay": "swap",
-		          "fontStretch": "normal",
+              "fontStretch": "normal",
               "src": [
-                "file:./assets/fonts/inter/InterVariable-Italic.woff2",
-                "file:./assets/fonts/inter/InterVariable.woff2"
+                "file:./assets/fonts/figtree/figtree-v8-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-700.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "700",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-700italic.woff2"
               ]
             }
           ]
-				}
-			],
-			"fontSizes": [
+        },
         {
-					"name": "2XS",
-					"slug": "2-xs",
-					"size": "11px",
-					"fluid": false
-				},
+          "name": "Secondary",
+          "slug": "secondary",
+          "fontFamily": "'Figtree', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-regular.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-italic.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-700.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Figtree",
+              "fontStyle": "italic",
+              "fontWeight": "700",
+              "fontDisplay": "swap",
+              "fontStretch": "normal",
+              "src": [
+                "file:./assets/fonts/figtree/figtree-v8-latin-700italic.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
         {
-					"name": "XS",
-					"slug": "xs",
-					"size": "12px",
-					"fluid": false
-				},
+          "name": "XS",
+          "slug": "xs",
+          "size": "14px",
+          "fluid": false
+        },
         {
-					"name": "SM",
-					"slug": "sm",
-					"size": "14px",
-					"fluid": false
-				},
-				{
-					"name": "MD",
-					"slug": "md",
-					"size": "16px",
-					"fluid": false
-				},
-				{
-					"name": "LG",
-					"slug": "lg",
-					"size": "18px",
-					"fluid": false
-				},
-				{
-					"name": "XL",
-					"slug": "xl",
-					"size": "20px",
-					"fluid": false
-				},
-				{
-					"name": "2XL",
-					"slug": "2-xl",
-					"size": "25px",
-					"fluid": {
-						"min": "23px",
-						"max": "25px"
-					}
-				},
-				{
-					"name": "3XL",
-					"slug": "3-xl",
-					"size": "30px",
-					"fluid": {
-						"min": "25px",
-						"max": "30px"
-					}
-				},
+          "name": "SM",
+          "slug": "sm",
+          "size": "16px",
+          "fluid": false
+        },
         {
-					"name": "4XL",
-					"slug": "4-xl",
-					"size": "37px",
-					"fluid": {
-						"min": "28px",
-						"max": "37px"
-					}
-				},
+          "name": "MD",
+          "slug": "md",
+          "size": "18px",
+          "fluid": {
+            "min": "16px",
+            "max": "18px"
+          }
+        },
         {
-					"name": "5XL",
-					"slug": "5-xl",
-					"size": "45px",
-					"fluid": {
-						"min": "32px",
-						"max": "45px"
-					}
-				},
+          "name": "LG",
+          "slug": "lg",
+          "size": "26px",
+          "fluid": {
+            "min": "18px",
+            "max": "26px"
+          }
+        },
         {
-					"name": "6XL",
-					"slug": "6-xl",
-					"size": "55px",
-					"fluid": {
-						"min": "37px",
-						"max": "55px"
-					}
-				},
+          "name": "XL",
+          "slug": "xl",
+          "size": "33px",
+          "fluid": {
+            "min": "26px",
+            "max": "33px"
+          }
+        },
         {
-					"name": "7XL",
-					"slug": "7-xl",
-					"size": "96px",
-					"fluid": {
-						"min": "37px",
-						"max": "96px"
-					}
-				}
-			],
-			"fontStyle": false,
-			"fontWeight": false,
-			"letterSpacing": false,
-			"lineHeight": false,
-			"textColumns": true,
-			"textDecoration": false,
-			"textTransform": false
-		}
-	}
+          "name": "2XL",
+          "slug": "2-xl",
+          "size": "44px",
+          "fluid": {
+            "min": "33px",
+            "max": "44px"
+          }
+        },
+        {
+          "name": "3XL",
+          "slug": "3-xl",
+          "size": "70px",
+          "fluid": {
+            "min": "33px",
+            "max": "70px"
+          }
+        }
+      ],
+      "fontStyle": false,
+      "fontWeight": false,
+      "letterSpacing": false,
+      "lineHeight": false,
+      "textColumns": true,
+      "textDecoration": false,
+      "textTransform": false
+    }
+  }
 }

@@ -25,6 +25,7 @@ class Enqueue implements Bootable {
 	public function boot(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_scripts' ], 10 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'woocommerce_styles' ], 10 );
 		add_action( 'after_setup_theme', [ $this, 'block_styles' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'disabled_block_styles' ], 999 );
 		add_action( 'after_setup_theme', [ $this, 'editor_styles' ] );
@@ -75,6 +76,29 @@ class Enqueue implements Bootable {
 				'strategy'  => 'defer',
 			],
 		);
+	}
+
+	/**
+	 * WooCommerce stylesheets.
+	 *
+	 * @return void
+	 */
+	public function woocommerce_styles(): void {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'pulsar-woocommerce-styles',
+			get_theme_file_uri( 'build/css/woocommerce.css' ),
+		);
+
+		if ( \is_account_page() ) {
+			wp_enqueue_style(
+				'pulsar-woocommerce-account-styles',
+				get_theme_file_uri( 'build/css/woocommerce-account.css' ),
+			);
+		}
 	}
 
 	/**

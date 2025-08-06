@@ -1,6 +1,7 @@
 @use "tools" as *;
 
 .wp-block-columns {
+	--block-gap: var(--wp--custom--spacing--block-gap);
 
 	// Trump cores `.is-layout-flex` selector as it doesn't apply to columns.
 	&:not([class^="are-vertically-aligned"]) {
@@ -35,11 +36,25 @@
 		@media (--sm) {
 			flex-direction: row;
 		}
+
+		// Use column gap if there are only two columns.
+		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
+			@media (--sm) {
+				--wp--custom--spacing--block-gap: var(--wp--custom--spacing--column-gap);
+			}
+		}
 	}
 
 	&:where(.is-stacked-on-md) {
 		@media (--md) {
 			flex-direction: row;
+
+			// Use column gap if there are only two columns.
+			&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
+				@media (--md) {
+					--wp--custom--spacing--block-gap: var(--wp--custom--spacing--column-gap);
+				}
+			}
 		}
 	}
 
@@ -47,11 +62,25 @@
 		@media (--lg) {
 			flex-direction: row;
 		}
+
+		// Use column gap if there are only two columns.
+		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
+			@media (--lg) {
+				--wp--custom--spacing--block-gap: var(--wp--custom--spacing--column-gap);
+			}
+		}
 	}
 
 	&:where(.is-stacked-on-xl) {
 		@media (--xl) {
 			flex-direction: row;
+		}
+
+		// Use column gap if there are only two columns.
+		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
+			@media (--xl) {
+				--wp--custom--spacing--block-gap: var(--wp--custom--spacing--column-gap);
+			}
 		}
 	}
 }

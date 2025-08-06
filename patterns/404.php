@@ -16,8 +16,8 @@
 
 <!-- wp:group {"tagName":"main","className":"site-main","layout":{"type":"constrained"}} -->
 <main class="wp-block-group site-main">
-	<!-- wp:group {"className":"","style":{"spacing":{"padding":{"top":"var:preset|spacing|4-xl","bottom":"var:preset|spacing|4-xl"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--4-xl);padding-bottom:var(--wp--preset--spacing--4-xl)">
+	<!-- wp:group {"className":"","style":{"spacing":{"padding":{"top":"var:preset|spacing|5-xl","bottom":"var:preset|spacing|5-xl"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--5-xl);padding-bottom:var(--wp--preset--spacing--5-xl)">
 		<!-- wp:heading {"textAlign":"center","level":1,"className":""} -->
 		<h1 class="wp-block-heading has-text-align-center"><?php echo esc_html_e( '404: Nothing Found', 'pulsar' ); ?></h1>
 		<!-- /wp:heading -->

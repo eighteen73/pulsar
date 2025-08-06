@@ -1,0 +1,6 @@
+@use "../tools" as *;
+
+.wp-block-pulsar-woocommerce-product-details-accordion {
+	--pb--wc-product-details-accordion--gap: var(--wp--preset--spacing--lg);
+	--pb--wc-product-details-accordion--details--summary--font-weight: var(--wp--custom--typography--font-weight--heading);
+}

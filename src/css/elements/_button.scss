@@ -1,0 +1,6 @@
+@use "../tools" as *;
+
+// Styles are applied here rather than theme.json so styles can be more easily shared.
+.wp-element-button {
+	@include button(primary);
+}

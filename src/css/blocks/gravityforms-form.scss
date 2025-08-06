@@ -60,6 +60,12 @@
 		}
 	}
 
+	.gfield_radio,
+	.gfield_checkbox {
+		display: grid;
+		gap: var(--wp--preset--spacing--sm);
+	}
+
 	.hidden_label {
 		> .gfield_label {
 			@include hide-visually;
@@ -71,14 +77,14 @@
 	}
 
 	.gfield_required {
-		color: var(--wp--custom--color--text--error);
+		color: var(--wp--custom--color--error);
 	}
 
 	.gfield_label {
-		margin-bottom: var(--wp--preset--spacing--xs);
+		@include label;
 
 		> .gfield_required {
-			margin-left: var(--wp--preset--spacing--2-xs);
+			margin-left: var(--wp--preset--spacing--xs);
 		}
 	}
 
@@ -106,7 +112,7 @@
 
 	.ginput_container_consent {
 		display: inline-grid;
-		gap: var(--wp--preset--spacing--xs);
+		gap: var(--wp--preset--spacing--sm);
 		grid-template-columns: minmax(16px, max-content) auto;
 
 		input {
@@ -120,27 +126,21 @@
 	}
 
 	.gform_button {
-		@include button-base;
-
-		&::before {
-			content: "";
-			height: 24px;
-			width: 24px;
-		}
+		@include button(primary);
 	}
 
 	.gform_validation_errors {
-		margin-bottom: var(--wp--preset--spacing--lg);
+		margin-bottom: var(--wp--preset--spacing--xl);
 	}
 
 	.gform_footer {
-		margin-top: var(--wp--preset--spacing--xl);
+		margin-top: var(--wp--preset--spacing--2-xl);
 	}
 
 	.gform_submission_error {
-		color: var(--wp--custom--color--text--error);
+		color: var(--wp--custom--color--error);
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: 400;
+		font-weight: var(--wp--custom--typography--font-weight--body);
 		margin-top: 0;
 		text-transform: none;
 
@@ -153,17 +153,22 @@
 		input,
 		select,
 		textarea {
-			border-color: var(--wp--custom--color--border--error);
+			border-color: var(--wp--custom--color--error);
 		}
 	}
 
 	.validation_message {
-		color: var(--wp--custom--color--text--error);
+		color: var(--wp--custom--color--error);
 		margin-top: var(--wp--preset--spacing--sm);
 	}
 
 	.gform_title {
 		@include hide-visually;
+	}
+
+	.gsection_description {
+		color: var(--wp--preset--color--base-accent);
+		margin-top: var(--wp--preset--spacing--sm);
 	}
 
 	.gform_hidden {
@@ -180,51 +185,5 @@
 		display: none !important; // stylelint-disable-line declaration-no-important
 		left: -9999px;
 		position: absolute !important; // stylelint-disable-line declaration-no-important
-	}
-}
-
-.gform_ajax_spinner {
-	display: none;
-}
-
-.gform_button__loading {
-	animation: 1000ms rotate linear infinite;
-	border: 3px solid;
-	border-color:
-		currentcolor #0000
-		currentcolor #0000;
-	border-radius: 50%;
-	box-sizing: border-box;
-	display: inline-block;
-	height: 24px;
-	position: relative;
-	scale: 0.6;
-	visibility: hidden;
-	width: 24px;
-
-	.is-loading & {
-		visibility: visible;
-	}
-
-	&::before,
-	&::after {
-		border: 5px solid transparent;
-		border-bottom-color: currentcolor;
-		content: "";
-		left: 0;
-		position: absolute;
-		top: 0;
-		transform: translate(-5px, 9.5px) rotate(-35deg);
-	}
-
-	&::after {
-		border-color: currentcolor #0000 #0000 #0000;
-		transform: translate(16px, 1.5px) rotate(-35deg);
-	}
-}
-
-@keyframes rotate {
-	100% {
-		transform: rotate(360deg);
 	}
 }

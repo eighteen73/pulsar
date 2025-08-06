@@ -3,24 +3,9 @@
 	"version": 3,
 	"settings": {
 		"blocks": {
-			"core/button": {
-				"color": {
-					"background": true
-				}
-			},
 			"core/column": {
 				"spacing": {
 					"units": ["%", "px", "vw"]
-				}
-			},
-			"core/group": {
-				"color": {
-					"background": true
-				}
-			},
-			"core/heading": {
-				"color": {
-					"text": true
 				}
 			}
 		}

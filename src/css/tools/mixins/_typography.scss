@@ -1,0 +1,41 @@
+@use "../../settings" as *;
+
+@mixin heading-base {
+	color: var(--wp--custom--color--text--primary);
+	font-family: var(--wp--preset--font-family--primary);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
+	letter-spacing: var(--wp--custom--typography--letter-spacing--normal);
+	text-wrap: balance;
+}
+
+@mixin heading($size) {
+	@if $size == "h1" {
+		font-size: var(--wp--preset--font-size--2-xl);
+		line-height: var(--wp--custom--typography--line-height--none);
+	}
+
+	@if $size == "h2" {
+		font-size: var(--wp--preset--font-size--xl);
+		line-height: var(--wp--custom--typography--line-height--tight);
+	}
+
+	@if $size == "h3" {
+		font-size: var(--wp--preset--font-size--lg);
+		line-height: var(--wp--custom--typography--line-height--tight);
+	}
+
+	@if $size == "h4" {
+		font-size: var(--wp--preset--font-size--md);
+		line-height: var(--wp--custom--typography--line-height--tight);
+	}
+
+	@if $size == "h5" {
+		font-size: var(--wp--preset--font-size--sm);
+		line-height: var(--wp--custom--typography--line-height--tight);
+	}
+
+	@if $size == "h6" {
+		font-size: var(--wp--preset--font-size--xs);
+		line-height: var(--wp--custom--typography--line-height--tight);
+	}
+}
