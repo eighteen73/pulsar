@@ -33,8 +33,9 @@
 					line-height: inherit;
 					padding: 0;
 
+					// stylelint-disable-next-line max-nesting-depth
 					label {
-						font-weight: 600;
+						font-weight: var(--wp--custom--typography--font-weight--heading);
 					}
 				}
 
@@ -42,6 +43,7 @@
 					line-height: inherit;
 					padding: 0;
 
+					// stylelint-disable-next-line max-nesting-depth
 					select {
 						@include field-select();
 						margin: 0;

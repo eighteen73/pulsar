@@ -74,6 +74,7 @@
 				.wc-block-components-product-price__regular {
 					display: none;
 
+					// stylelint-disable-next-line max-nesting-depth
 					@media (--xs) {
 						display: inline;
 						font-size: 70%;

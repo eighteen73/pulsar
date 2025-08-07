@@ -1,0 +1,64 @@
+@use "tools" as *;
+
+.wp-block-pulsar-tabs {
+	$block: &;
+
+	&:where([data-collapses="true"]) {
+
+		#{$block}__select {
+			display: block;
+		}
+
+		#{$block}__list {
+			display: none;
+		}
+
+		&:where([data-collapses-on="sm"]) {
+			@media (--sm) {
+				#{$block}__select {
+					display: none;
+				}
+
+				#{$block}__list {
+					display: flex;
+				}
+			}
+		}
+
+		&:where([data-collapses-on="md"]) {
+			@media (--md) {
+				#{$block}__select {
+					display: none;
+				}
+
+				#{$block}__list {
+					display: flex;
+				}
+			}
+		}
+
+		&:where([data-collapses-on="lg"]) {
+			@media (--lg) {
+				#{$block}__select {
+					display: none;
+				}
+
+				#{$block}__list {
+					display: flex;
+				}
+			}
+		}
+
+		&:where([data-collapses-on="xl"]) {
+			@media (--xl) {
+				#{$block}__select {
+					display: none;
+				}
+
+				#{$block}__list {
+					display: flex;
+				}
+			}
+		}
+	}
+}

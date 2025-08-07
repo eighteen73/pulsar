@@ -18,14 +18,17 @@
 			> #{$block}__item {
 				--active-underline-width: calc(100% + var(--pb--menu--item--gap) + var(--pb--menu--submenu-toggle--size));
 
-				&:where(:not(.has-submenu)) {
+				&:where(:not(.has-submenu)),
+				&:where(.submenu-opens-on-click) {
 					--active-underline-width: 100%;
 				}
 
-				> #{$block}__link {
+				> #{$block}__link,
+				&:where(.submenu-opens-on-click) > #{$block}__submenu-toggle {
 					--pb--menu--link--padding: var(--wp--preset--spacing--sm) 0;
 					position: relative;
 
+					// stylelint-disable-next-line max-nesting-depth
 					&::after {
 						background-color: var(--wp--preset--color--brand);
 						border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
@@ -37,13 +40,16 @@
 						transform: scaleX(0);
 						transform-origin: center;
 						transition: transform var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
-						width: var(--active-underline-width);
+						width: var(--active-underline-width); // stylelint-disable-line custom-property-pattern
 					}
 				}
 
 				&:where(.has-open-submenu),
+				&:where(.current-menu-item),
 				&:where(.submenu-opens-on-hover):hover {
-					> #{$block}__link {
+					> #{$block}__link,
+					> #{$block}__submenu-toggle {
+						// stylelint-disable-next-line max-nesting-depth
 						&::after {
 							transform: scaleX(1);
 						}
@@ -67,6 +73,11 @@
 		#{$block}__submenu {
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--spacing--sm));
 			box-shadow: var(--wp--custom--shadow--md);
+
+			.current-menu-item > #{$block}__link {
+				background-color: var(--wp--preset--color--brand);
+				color: var(--wp--preset--color--base);
+			}
 		}
 
 		#{$block}__submenu-items {

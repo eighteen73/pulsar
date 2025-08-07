@@ -63,7 +63,7 @@
 		th {
 			background-color: transparent !important; // stylelint-disable-line declaration-no-important
 			border: 0;
-			font-weight: 600;
+			font-weight: var(--wp--custom--typography--font-weight--heading);
 			line-height: unset;
 			padding: 0;
 			text-align: left;

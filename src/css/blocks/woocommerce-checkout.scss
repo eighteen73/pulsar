@@ -327,6 +327,8 @@
 	}
 
 	.wc-block-components-radio-control-accordion-content {
+		color: var(--wp--preset--color--base-accent);
+		font-size: var(--wp--preset--font-size--sm);
 		padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
 	}
 
@@ -355,11 +357,6 @@
 		&::after {
 			content: none;
 		}
-	}
-
-	.wc-block-components-radio-control-accordion-content {
-		color: var(--wp--preset--color--base-accent);
-		font-size: var(--wp--preset--font-size--sm);
 	}
 
 	.wc-block-components-radio-control .wc-block-components-radio-control__input {

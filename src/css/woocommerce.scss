@@ -108,33 +108,7 @@
 			}
 		}
 	}
-}
 
-.woocommerce-password-strength {
-	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--font-weight--heading);
-	padding: var(--wp--preset--spacing--md);
-}
-
-.woocommerce-password-hint {
-	color: var(--wp--preset--color--base-accent);
-	font-size: var(--wp--preset--font-size--sm);
-	margin-top: var(--wp--preset--spacing--md);
-}
-
-.form-row {
-	em {
-		color: var(--wp--preset--color--base-accent);
-		display: block;
-		font-size: var(--wp--preset--font-size--sm);
-		font-style: normal;
-		margin-top: var(--wp--preset--spacing--md);
-	}
-}
-
-// Select2 styles.
-// Some styles need to be scoped, but some need to be global.
-.woocommerce-page {
 	.select2-container .select2-search--dropdown .select2-search__field {
 		@include field-input;
 	}
@@ -172,6 +146,28 @@
 
 	.select2-dropdown {
 		color: var(--wp--preset--color--contrast);
+	}
+}
+
+.woocommerce-password-strength {
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
+	padding: var(--wp--preset--spacing--md);
+}
+
+.woocommerce-password-hint {
+	color: var(--wp--preset--color--base-accent);
+	font-size: var(--wp--preset--font-size--sm);
+	margin-top: var(--wp--preset--spacing--md);
+}
+
+.form-row {
+	em {
+		color: var(--wp--preset--color--base-accent);
+		display: block;
+		font-size: var(--wp--preset--font-size--sm);
+		font-style: normal;
+		margin-top: var(--wp--preset--spacing--md);
 	}
 }
 
