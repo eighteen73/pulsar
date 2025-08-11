@@ -3,7 +3,7 @@
  * The main logo
  *
  * Title: Header: logo
- * slug: header/logo
+ * Slug: header/logo
  *
  * @package Pulsar
  */

@@ -3,7 +3,7 @@
  * The Copyright
  *
  * Title: Footer: copyright
- * slug: footer/copyright
+ * Slug: footer/copyright
  *
  * @package Pulsar
  */

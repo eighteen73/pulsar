@@ -3,7 +3,7 @@
  * The footer credit
  *
  * Title: Footer: Credit
- * slug: footer/credit
+ * Slug: footer/credit
  *
  * @package Pulsar
  */
