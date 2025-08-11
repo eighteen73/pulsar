@@ -3,6 +3,14 @@
 	"version": 3,
 	"settings": {
 		"blocks": {
+			"core/button": {
+        "settings": {
+          "color": {
+            "background": false,
+			      "text": false
+          }
+        }
+      },
 			"core/column": {
 				"spacing": {
 					"units": ["%", "px", "vw"]
