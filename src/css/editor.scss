@@ -5,8 +5,10 @@
  * which gets more specific as we drill down each layer.  This keeps your
  * style code lean and organized.
  *
- * The bulk of your code should be within the `/components` folder.  By
- * default, we follow the Block-Element-Modifier (BEM) system in our HTML.
+ * The bulk of your code should be within the `/components` folder, unless
+ * its a block. A block stylesheet is loaded on demand.
+ *
+ * By default, we follow the Block-Element-Modifier (BEM) system in our HTML.
  * Each "block" is a "component" in our CSS.
  */
 
@@ -53,11 +55,12 @@
 
 @use "patterns";
 
-/// Vendor Styles.
+/// Third Party Styles.
 ///
 /// Styles specifically for 3rd parties like Splide, FacetWP, Gravity Forms etc.
+/// Note: If styling is for a 3rd party block, it should have a block specific file instead.
 
-// @use "vendor/example";
+@use "third-party";
 
 /// Utilities.
 ///
@@ -66,3 +69,9 @@
 /// go, but only if necessary.
 
 @use "utilities";
+
+/// Editor Styles.
+///
+/// Editor styles and overrides.
+
+@use "editor-styles";
