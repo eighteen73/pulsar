@@ -55,7 +55,7 @@ jobs:
           find . -type f \( -name "*.php" -o -name "style.css" \) -exec sed -i 's/pulsar/quasar/g' {} +
 
           # Replace the package name in composer.json for Packagist
-          sed -i 's|"eighteen73/pulsar"|"eighteen73-theme/quasar"|g' composer.json
+          sed -i 's|"eighteen73/pulsar"|"eighteen73/quasar"|g' composer.json
 
           # Replace the theme description using a secret
           sed -i "s/Description: .*/Description: ${{ secrets.QUASAR_DESCRIPTION }}/" style.css
@@ -85,19 +85,18 @@ jobs:
           # Use rsync to sync files, excluding all development-related files and folders
           echo "Syncing files to destination..."
           rsync -av --progress --delete . ../gitlab-repo/ \
+            --exclude ".editorconfig" \
             --exclude ".git" \
             --exclude ".github" \
-            --exclude ".playground" \
-            --exclude "node_modules" \
-            --exclude ".editorconfig" \
             --exclude ".gitignore" \
+            --exclude ".playground" \
+            --exclude "config/theme-json" \
+            --exclude "node_modules" \
+            --exclude "src" \
+            --exclude "vendor" \
             --exclude "package.json" \
             --exclude "package-lock.json" \
             --exclude "phpcs.xml" \
-            --exclude "src" \
-            --exclude "vendor" \
-            --exclude "composer.json" \
-            --exclude "composer.lock" \
             --exclude "webpack.config.js"
 
           # Change directory into the destination repo
