@@ -3,7 +3,7 @@
  * The footer logo
  *
  * Title: Footer: logo
- * slug: footer/logo
+ * Slug: footer/logo
  *
  * @package Pulsar
  */
