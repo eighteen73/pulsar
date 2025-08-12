@@ -74,27 +74,36 @@ jobs:
           GIT_USER: ${{ secrets.GIT_COMMIT_USER || 'GitHub Actions' }}
           GIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL || 'actions@github.com' }}
         run: |
-          # Configure Git with the specified user details
-          git config --global user.name "${GIT_USER}"
-          git config --global user.email "${GIT_EMAIL}"
+          # Configure Git
+          git config --global user.name "${{ secrets.GIT_COMMIT_USER || 'GitHub Actions' }}"
+          git config --global user.email "${{ secrets.GIT_COMMIT_EMAIL || 'actions@github.com' }}"
 
-          # Clone the GitLab repository using the access token
+          # Clone the GitLab repository
           echo "Cloning GitLab repository..."
-          git clone "https://oauth2:${GITLAB_TOKEN}@${GITLAB_URL}/${GITLAB_REPO}" ../gitlab-repo
+          git clone "https://oauth2:${{ secrets.QUASAR_GITLAB_ACCESS_TOKEN }}@${{ secrets.QUASAR_GITLAB_URL }}/${{ secrets.QUASAR_GITLAB_REPO }}" ../gitlab-repo
 
+          # Use rsync to sync files, excluding all development-related files and folders
+          echo "Syncing files to destination..."
+          rsync -av --progress --delete . ../gitlab-repo/ \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude ".playground" \
+            --exclude "node_modules" \
+            --exclude ".editorconfig" \
+            --exclude ".gitignore" \
+            --exclude "package.json" \
+            --exclude "package-lock.json" \
+            --exclude "phpcs.xml" \
+            --exclude "src" \
+            --exclude "vendor" \
+            --exclude "composer.json" \
+            --exclude "composer.lock" \
+            --exclude "webpack.config.js"
+
+          # Change directory into the destination repo
           cd ../gitlab-repo
 
-          # Clear out old files from the destination
-          echo "Clearing old files..."
-          find . -path ./.git -prune -o -exec rm -rf {} + 2>/dev/null
-
-          # Copy the newly built theme from the original workspace
-          echo "Copying new files..."
-          rsync -av --progress ../${{ github.event.repository.name }}/ . \
-            --exclude ".git" \
-            --exclude ".github"
-
-          # Commit the changes
+          # Commit and push the changes
           echo "Committing and tagging..."
           git add .
 
@@ -104,10 +113,8 @@ jobs:
             echo "No changes to commit."
           fi
 
-          # Force-update the tag to match the release
           git tag -f ${{ github.ref_name }}
 
-          # Push the changes and tags to the GitLab repository
           echo "Pushing to GitLab..."
           git push origin main
           git push origin --tags -f
