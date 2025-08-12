@@ -1,81 +1,65 @@
-name: Release Quasar Version
-
-on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-quasar'
-
-jobs:
-  build-and-release:
-    name: Build and Release Quasar Theme
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          coverage: none
-
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-dev
-
-      - name: Install NPM Dependencies
-        run: npm install
-
-      - name: Build Assets
-        run: npm run build
-
-      - name: Prepare Clean Tag and Release Title
-        id: prep
-        run: |
-          TAG=${{ github.ref_name }}
-          CLEAN_TAG=$(echo "$TAG" | sed -e 's/-quasar$//')
-          VERSION=$(echo "$CLEAN_TAG" | sed -e 's/^v//')
-          TITLE="Quasar v$VERSION"
-          echo "title=$TITLE" >> $GITHUB_OUTPUT
-          echo "tag=$CLEAN_TAG" >> $GITHUB_OUTPUT
-
-      - name: Bump Theme Version
-        run: |
-          sed -i "s/Version: .*/Version: ${{ steps.prep.outputs.VERSION }}/" style.css
-
-      - name: Find and Replace Theme Name and Description
-        run: |
-          # Replace theme name, namespace, and text domain
-          find . -type f \( -name "*.php" -o -name "style.css" \) -exec sed -i 's/Pulsar/Quasar/g' {} +
-          find . -type f \( -name "*.php" -o -name "style.css" \) -exec sed -i 's/pulsar/quasar/g' {} +
-
-          # Replace the package name in composer.json for Packagist
-          sed -i 's|"eighteen73/pulsar"|"eighteen73/quasar"|g' composer.json
-
-          # Replace the theme description using a secret
-          sed -i "s/Description: .*/Description: ${{ secrets.QUASAR_DESCRIPTION }}/" style.css
-
-      - name: Replace Theme Screenshot
-        run: curl -L "${{ secrets.QUASAR_SCREENSHOT_URL }}" -o screenshot.png
-
-      - name: Clean up development files before distribution
-        run: |
-          rm -rf .editorconfig .git .github .gitignore .playground "config/theme-json" node_modules src vendor package.json package-lock.json phpcs.xml webpack.config.js
-
+# This is the final, most reliable step to push to your GitHub repo
       - name: Push to GitHub Distribution Repository
-        uses: cpina/github-action-push-to-another-repo@v1.7.0
-        with:
-          ssh-private-key: ${{ secrets.QUASAR_DEPLOY_KEY }}
-          source-directory: '.'
-          destination-github-username: 'eighteen73'
-          destination-repository-name: 'quasar'
-          destination-branch: 'main'
-          commit-message: 'Release ${{ steps.prep.outputs.tag }}'
-          target-directory: '.'
-          tag: ${{ steps.prep.outputs.tag }}
+        env:
+          # Secret for the Deploy Key
+          DEPLOY_KEY: ${{ secrets.QUASAR_DEPLOY_KEY }}
+          # Secrets for the Git commit author (optional)
+          GIT_USER: ${{ secrets.GIT_COMMIT_USER || 'GitHub Actions' }}
+          GIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL || 'actions@github.com' }}
+        run: |
+          # --- 1. PREPARE THE CLEAN TAG ---
+          ORIGINAL_TAG=${{ github.ref_name }}
+          CLEAN_TAG=$(echo $ORIGINAL_TAG | sed -e 's/-quasar$//')
+          echo "Original Tag: $ORIGINAL_TAG, Clean Tag: $CLEAN_TAG"
+
+          # --- 2. SET UP SSH FOR PUSHING ---
+          echo "Setting up SSH..."
+          mkdir -p ~/.ssh
+          echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+          # --- 3. CONFIGURE GIT AND CLONE ---
+          echo "Configuring Git..."
+          git config --global user.name "${GIT_USER}"
+          git config --global user.email "${GIT_EMAIL}"
+
+          echo "Cloning destination repository..."
+          git clone git@github.com:eighteen73/quasar.git ../quasar-dist
+
+          # --- 4. SYNC FILES ---
+          echo "Syncing files to destination..."
+          rsync -av --delete . ../quasar-dist/ \
+            --exclude ".editorconfig" \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude ".gitignore" \
+            --exclude ".playground" \
+            --exclude "config/theme-json" \
+            --exclude "node_modules" \
+            --exclude "src" \
+            --exclude "vendor" \
+            --exclude "package.json" \
+            --exclude "package-lock.json" \
+            --exclude "phpcs.xml" \
+            --exclude "webpack.config.js"
+
+          cd ../quasar-dist
+
+          # --- 5. COMMIT, TAG, AND PUSH ---
+          echo "Committing, tagging, and pushing..."
+          git add .
+
+          if ! git diff --staged --quiet; then
+            git commit -m "Release $CLEAN_TAG"
+          else
+            echo "No changes to commit."
+          fi
+
+          # Create the new, clean tag
+          git tag -f $CLEAN_TAG
+
+          echo "Pushing to destination..."
+          git push origin main
+          # Push the new tag, deleting the old one on the remote if it exists
+          git push origin $CLEAN_TAG --force
