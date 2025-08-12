@@ -39,8 +39,8 @@ jobs:
         id: prep
         run: |
           TAG=${{ github.ref_name }}
-          VERSION=$(echo $TAG | sed -e 's/^v//' -e 's/-spark$//')
-          TITLE="Spark v$VERSION"
+          VERSION=$(echo $TAG | sed -e 's/^v//' -e 's/-quasar$//')
+          TITLE="Quasar v$VERSION"
           echo "release_title=$TITLE" >> $GITHUB_ENV
 
       - name: Bump Theme Version
