@@ -50,17 +50,24 @@ jobs:
         run: |
           sed -i "s/Version: .*/Version: ${{ steps.prep.outputs.version }}/" style.css
 
-      - name: Find and Replace Theme Name and Description
+      - name: Find and Replace All Theme References
         run: |
-          # Replace theme name, namespace, and text domain
-          find . -type f \( -name "*.php" -o -name "style.css" \) -exec sed -i 's/Pulsar/Quasar/g' {} +
-          find . -type f \( -name "*.php" -o -name "style.css" \) -exec sed -i 's/pulsar/quasar/g' {} +
+          # 1. Replace the general 'Pulsar' name (e.g., in PHP class names)
+          find . -type f -name "*.php" -exec sed -i 's/Pulsar/Quasar/g' {} +
 
-          # Replace the package name in composer.json for Packagist
+          # 2. Specifically handle the pattern slugs first
+          find . -type f -name "*.php" -exec sed -i 's/"slug":"pulsar\//\"slug\":\"quasar\//g' {} +
+
+          # 3. Now, replace all other lowercase 'pulsar' instances (like text domains)
+          find . -type f -name "*.php" -exec sed -i 's/pulsar/quasar/g' {} +
+
+          # 4. Update the theme header in style.css
+          sed -i -e 's/Theme Name:.*Pulsar/Theme Name:       Quasar/' \
+                 -e 's/Text Domain:.*pulsar/Text Domain:     quasar/' \
+                 -e "s/Description: .*/Description: ${{ secrets.QUASAR_DESCRIPTION }}/" style.css
+
+          # 5. Update the package name in composer.json
           sed -i 's|"eighteen73/pulsar"|"eighteen73/quasar"|g' composer.json
-
-          # Replace the theme description using a secret
-          sed -i "s/Description: .*/Description: ${{ secrets.QUASAR_DESCRIPTION }}/" style.css
 
       - name: Replace Theme Screenshot
         run: curl -L "${{ secrets.QUASAR_SCREENSHOT_URL }}" -o screenshot.png
