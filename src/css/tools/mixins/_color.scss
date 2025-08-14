@@ -1,0 +1,47 @@
+@use "sass:list";
+
+/// Apply styles when the current element has specific background colors
+///
+/// @param {List} $colors - List of color names to target (e.g., 'brand', 'brand-accent')
+///
+/// @example
+///   .wp-block-group {
+///     @include when-color-scheme(brand, brand-accent) {
+///       display: none;
+///     }
+///   }
+///   // Compiles to: .wp-block-group:where(:is(.has-brand-background-color, .has-brand-accent-background-color))
+@mixin when-color-scheme($colors...) {
+	$selectors: ();
+
+	@each $color in $colors {
+		$selectors: list.append($selectors, ".has-#{$color}-background-color", comma);
+	}
+
+	&:where(:is(#{$selectors})) {
+		@content;
+	}
+}
+
+/// Apply styles when the current element is a descendant of an element with specific background colors
+///
+/// @param {List} $colors - List of color names to target (e.g., 'brand', 'brand-accent')
+///
+/// @example
+///   .wp-block-button {
+///     @include when-descendant-of-color-scheme(brand, brand-accent) {
+///       border-color: white;
+///     }
+///   }
+///   // Compiles to: :where(:is(.has-brand-background-color, .has-brand-accent-background-color)) .wp-block-button
+@mixin when-descendant-of-color-scheme($colors...) {
+	$selectors: ();
+
+	@each $color in $colors {
+		$selectors: list.append($selectors, ".has-#{$color}-background-color", comma);
+	}
+
+	:where(:is(#{$selectors})) & {
+		@content;
+	}
+}
