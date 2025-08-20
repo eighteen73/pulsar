@@ -81,11 +81,11 @@ class SingleProduct implements Bootable {
 			document.querySelector('form.cart').addEventListener('click', function(event) {
 				if (event.target.classList.contains('quantity__button')) {
 					event.preventDefault();
-					var qty = event.target.closest('form.cart').querySelector('.qty');
-					var val = parseFloat(qty.value);
-					var max = parseFloat(qty.getAttribute('max'));
-					var min = parseFloat(qty.getAttribute('min'));
-					var step = parseFloat(qty.getAttribute('step'));
+					var qty = event.target.closest('.quantity').querySelector('.qty');
+					var val = qty.value ? parseFloat(qty.value) : 0;
+					var max = qty.getAttribute('max') ? parseFloat(qty.getAttribute('max')) : false;
+					var min = qty.getAttribute('min') ? parseFloat(qty.getAttribute('min')) : false;
+					var step = qty.getAttribute('step') ? parseFloat(qty.getAttribute('step')) : 1;
 					if (event.target.classList.contains('quantity__button--plus')) {
 						if (max && (max <= val)) {
 							qty.value = max;
@@ -93,9 +93,9 @@ class SingleProduct implements Bootable {
 							qty.value = val + step;
 						}
 					} else {
-						if (min && (min >= val)) {
+						if (min >= val) {
 							qty.value = min;
-						} else if (val > 1) {
+						} else {
 							qty.value = val - step;
 						}
 					}
