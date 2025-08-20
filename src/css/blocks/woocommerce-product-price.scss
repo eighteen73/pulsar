@@ -12,4 +12,20 @@
 	del {
 		font-size: 70%;
 	}
+
+	// Subscriptions
+	.wcsatt-sub-options {
+		color: var(--wp--preset--color--base-accent);
+		display: block;
+		font-size: var(--wp--preset--font-size--sm);
+		font-weight: var(--wp--custom--typography--font-weight--body);
+
+		.wcsatt-dash {
+			display: none;
+		}
+
+		del {
+			display: none;
+		}
+	}
 }

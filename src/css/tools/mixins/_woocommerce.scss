@@ -25,7 +25,7 @@
 }
 
 @mixin wc-quantity-selector() {
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	box-sizing: content-box;
 	display: flex;
 	margin: unset;
@@ -34,7 +34,7 @@
 
 	&::after {
 		border: 1px solid var(--wp--custom--color--border-input);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
 	}
 
 	&:focus-within::after {
