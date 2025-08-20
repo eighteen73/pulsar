@@ -4,6 +4,10 @@
 	font-weight: var(--wp--custom--typography--font-weight--heading);
 	line-height: var(--wp--custom--typography--line-height--none);
 
+	// .amount {
+	// 	display: block;
+	// }
+
 	del {
 		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
@@ -16,7 +20,6 @@
 	// Subscriptions
 	.wcsatt-sub-options {
 		color: var(--wp--preset--color--base-accent);
-		display: block;
 		font-size: var(--wp--preset--font-size--sm);
 		font-weight: var(--wp--custom--typography--font-weight--body);
 
@@ -27,5 +30,11 @@
 		del {
 			display: none;
 		}
+	}
+
+	.wcsatt-sub-discount {
+		color: var(--wp--preset--color--base-accent);
+		font-size: var(--wp--preset--font-size--sm);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 }

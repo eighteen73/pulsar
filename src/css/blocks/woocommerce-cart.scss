@@ -135,6 +135,23 @@
 				font-size: inherit;
 				font-weight: var(--wp--custom--typography--font-weight--body);
 			}
+
+			.wcs-recurring-totals-panel {
+				padding: unset;
+
+				.wcs-recurring-totals-panel__title {
+					font-size: var(--wp--preset--font-size--md);
+					font-weight: var(--wp--custom--typography--font-weight--heading);
+				}
+
+				.wc-block-components-totals-item__description {
+					font-weight: var(--wp--custom--typography--font-weight--body);
+				}
+
+				.wc-block-components-totals-wrapper:last-child {
+					padding-bottom: unset;
+				}
+			}
 		}
 
 		.wc-block-cart-item__product {

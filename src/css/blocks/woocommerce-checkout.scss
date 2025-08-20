@@ -131,6 +131,11 @@
 			}
 		}
 
+		.wc-block-components-order-summary-item__total-price {
+			font-weight: var(--wp--custom--typography--font-weight--body);
+			line-height: var(--wp--custom--typography--line-height--tight);
+		}
+
 		.wc-block-components-product-price__value {
 			margin: unset;
 		}
@@ -364,6 +369,27 @@
 
 		&::before {
 			content: none;
+		}
+	}
+
+	.wcs-recurring-totals-panel {
+		padding: unset;
+
+		.wcs-recurring-totals-panel__details {
+			padding-inline: unset;
+		}
+
+		.wcs-recurring-totals-panel__title {
+			font-size: var(--wp--preset--font-size--md);
+			font-weight: var(--wp--custom--typography--font-weight--heading);
+		}
+
+		.wc-block-components-totals-item__description {
+			font-weight: var(--wp--custom--typography--font-weight--body);
+		}
+
+		.wc-block-components-totals-wrapper:last-child {
+			padding-bottom: unset;
 		}
 	}
 }

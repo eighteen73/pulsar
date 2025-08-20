@@ -221,12 +221,11 @@
 
 		.wcsatt-sub-discount {
 			background-color: var(--wp--preset--color--brand);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--lg));
 			color: var(--wp--preset--color--base);
 			font-weight: var(--wp--custom--typography--font-weight--heading);
 			line-height: var(--wp--custom--typography--line-height--none);
-			margin-left: auto;
-			padding: var(--wp--preset--spacing--sm);
+			padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
 		}
 
 		.wcsatt-options-product-wrapper {
@@ -235,6 +234,16 @@
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
 			font-weight: var(--wp--custom--typography--font-weight--body);
 			padding: var(--wp--preset--spacing--xl);
+		}
+
+		.subscription-price {
+			ins {
+				font-weight: var(--wp--custom--typography--font-weight--body);
+			}
+
+			del {
+				display: none;
+			}
 		}
 	}
 }
