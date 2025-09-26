@@ -143,7 +143,7 @@
 	}
 
 	.wc-block-mini-cart__footer {
-		background-color: var(--wp--preset--color--tint);
+		background-color: var(--wp--preset--color--tint-primary);
 		padding: var(--wp--preset--spacing--2-xl);
 
 		&::after {
@@ -183,7 +183,7 @@
 
 .wc-block-mini-cart__badge {
 	aspect-ratio: 1 / 1;
-	background-color: var(--wp--preset--color--brand);
+	background-color: var(--wp--preset--color--brand-primary);
 	color: var(--wp--preset--color--base);
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--heading);

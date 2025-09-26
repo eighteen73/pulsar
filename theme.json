@@ -46,24 +46,34 @@
 			"link": false,
 			"palette": [
 				{
-					"name": "Brand",
-					"slug": "brand",
+					"name": "Brand: Primary",
+					"slug": "brand-primary",
 					"color": "var:custom|color|primitive|primary|600"
 				},
 				{
-					"name": "Brand Accent",
-					"slug": "brand-accent",
+					"name": "Brand: Secondary",
+					"slug": "brand-secondary",
 					"color": "var:custom|color|primitive|primary|100"
 				},
 				{
-					"name": "Complementary",
-					"slug": "complementary",
+					"name": "Accent: Primary",
+					"slug": "accent-primary",
 					"color": "var:custom|color|primitive|secondary|600"
 				},
 				{
-					"name": "Complementary Accent",
-					"slug": "complementary-accent",
-					"color": "var:custom|color|primitive|secondary|100"
+					"name": "Accent: Secondary",
+					"slug": "accent-secondary",
+					"color": "var:custom|color|primitive|primary|100"
+				},
+				{
+					"name": "Tint: Primary",
+					"slug": "tint-primary",
+					"color": "var:custom|color|primitive|neutral|50"
+				},
+				{
+					"name": "Tint: Secondary",
+					"slug": "tint-secondary",
+					"color": "var:custom|color|primitive|neutral|100"
 				},
 				{
 					"name": "Contrast",
@@ -71,24 +81,9 @@
 					"color": "var:custom|color|primitive|neutral|950"
 				},
 				{
-					"name": "Contrast Accent",
-					"slug": "contrast-accent",
-					"color": "var:custom|color|primitive|neutral|200"
-				},
-				{
 					"name": "Base",
 					"slug": "base",
 					"color": "var:custom|color|primitive|neutral|0"
-				},
-				{
-					"name": "Base Accent",
-					"slug": "base-accent",
-					"color": "var:custom|color|primitive|neutral|700"
-				},
-				{
-					"name": "Tint",
-					"slug": "tint",
-					"color": "var:custom|color|primitive|neutral|50"
 				}
 			],
 			"text": true
@@ -153,8 +148,8 @@
 						"900": "#29491E"
 					}
 				},
-				"focus": "#fd0",
 				"link": "var:custom|color|primitive|primary|500",
+				"focus": "#fd0",
 				"focus-accent": "var:custom|color|primitive|neutral|800",
 				"error": "var:custom|color|primitive|error|900",
 				"error-accent": "var:custom|color|primitive|error|100",

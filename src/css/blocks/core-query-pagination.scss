@@ -22,11 +22,11 @@
 		text-decoration: none;
 
 		&:hover {
-			border-bottom: 2px solid var(--wp--preset--color--brand);
+			border-bottom: 2px solid var(--wp--preset--color--brand-primary);
 		}
 
 		&:where(.current) {
-			border-bottom: 2px solid var(--wp--preset--color--brand);
+			border-bottom: 2px solid var(--wp--preset--color--brand-primary);
 			color: var(--wp--preset--color--contrast);
 		}
 	}

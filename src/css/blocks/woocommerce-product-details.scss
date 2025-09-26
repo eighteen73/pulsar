@@ -28,7 +28,7 @@
 
 			&.active {
 				background: unset;
-				border-bottom-color: var(--wp--preset--color--brand);
+				border-bottom-color: var(--wp--preset--color--brand-primary);
 
 				&::before,
 				&::after {

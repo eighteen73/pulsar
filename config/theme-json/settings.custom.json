@@ -62,8 +62,8 @@
 						"900": "#29491E"
 					}
 				},
-				"focus": "#fd0",
 				"link": "var:custom|color|primitive|primary|500",
+				"focus": "#fd0",
 				"focus-accent": "var:custom|color|primitive|neutral|800",
 				"error": "var:custom|color|primitive|error|900",
 				"error-accent": "var:custom|color|primitive|error|100",

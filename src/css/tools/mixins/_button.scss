@@ -30,7 +30,7 @@
 	}
 
 	@if $style == primary {
-		background-color: var(--wp--preset--color--brand);
+		background-color: var(--wp--preset--color--brand-primary);
 		border: unset;
 		color: var(--wp--preset--color--base);
 
@@ -45,8 +45,8 @@
 
 	@if $style == secondary {
 		background-color: transparent;
-		border: 2px solid var(--wp--preset--color--brand);
-		color: var(--wp--preset--color--brand);
+		border: 2px solid var(--wp--preset--color--brand-primary);
+		color: var(--wp--preset--color--brand-primary);
 
 		&:focus-visible {
 			@include focus-ring;
@@ -56,7 +56,7 @@
 	@if $style == link {
 		background-color: transparent;
 		border: unset;
-		color: var(--wp--preset--color--brand);
+		color: var(--wp--preset--color--brand-primary);
 		padding: unset;
 
 		&:focus-visible {

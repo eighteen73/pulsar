@@ -3,7 +3,7 @@
 // Star rating styles.
 .woocommerce .stars a,
 .woocommerce .star-rating {
-	color: var(--wp--preset--color--brand);
+	color: var(--wp--preset--color--brand-primary);
 }
 
 .woocommerce-page {
@@ -20,7 +20,7 @@
 		}
 
 		thead th {
-			background-color: var(--wp--preset--color--tint);
+			background-color: var(--wp--preset--color--tint-primary);
 			font-weight: var(--wp--custom--typography--font-weight--heading);
 			text-transform: uppercase;
 		}
@@ -178,7 +178,7 @@
 
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option--highlighted[data-selected] {
-	background-color: var(--wp--preset--color--brand-accent);
+	background-color: var(--wp--preset--color--brand-secondary);
 	color: var(--wp--preset--color--contrast);
 }
 

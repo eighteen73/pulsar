@@ -38,8 +38,8 @@
 	}
 
 	&:focus-within::after {
-		border-color: var(--wp--preset--color--brand);
-		box-shadow: var(--wp--preset--color--brand) 0 0 0 1px;
+		border-color: var(--wp--preset--color--brand-primary);
+		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 	}

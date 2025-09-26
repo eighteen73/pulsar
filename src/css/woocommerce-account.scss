@@ -17,7 +17,7 @@ $account-links: (
 
 	// General styles
 	.site-main {
-		background-color: var(--wp--preset--color--tint);
+		background-color: var(--wp--preset--color--tint-primary);
 		padding-block: var(--wp--custom--spacing--group-gap);
 
 		// On larger screens we hide the title, as its duplicated for styling purposes.
@@ -106,8 +106,8 @@ $account-links: (
 			padding: unset;
 
 			&.is-active a {
-				background-color: var(--wp--preset--color--brand-accent);
-				color: var(--wp--preset--color--brand);
+				background-color: var(--wp--preset--color--brand-secondary);
+				color: var(--wp--preset--color--brand-primary);
 				text-decoration: none;
 			}
 
@@ -124,13 +124,13 @@ $account-links: (
 				transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
 				&:hover {
-					background-color: var(--wp--preset--color--brand-accent);
+					background-color: var(--wp--preset--color--brand-secondary);
 					text-decoration: none;
 				}
 
 				&:focus-visible {
 					@include focus-ring;
-					background-color: var(--wp--preset--color--brand-accent);
+					background-color: var(--wp--preset--color--brand-secondary);
 				}
 			}
 		}
@@ -393,7 +393,7 @@ $account-links: (
 				padding: var(--wp--preset--spacing--3-xl);
 
 				&:hover {
-					background-color: var(--wp--preset--color--brand-accent);
+					background-color: var(--wp--preset--color--brand-secondary);
 				}
 			}
 

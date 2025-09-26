@@ -2,7 +2,7 @@
 
 .woocommerce-checkout {
 	.site-main {
-		background-color: var(--wp--preset--color--tint);
+		background-color: var(--wp--preset--color--tint-primary);
 		padding-block: var(--wp--custom--spacing--group-gap);
 
 		.wp-block-post-title {
@@ -95,7 +95,7 @@
 		.wc-block-components-order-summary-item__quantity {
 			align-items: center;
 			aspect-ratio: 1;
-			background-color: var(--wp--preset--color--brand);
+			background-color: var(--wp--preset--color--brand-primary);
 			border-radius: 50%;
 			color: var(--wp--preset--color--base);
 			font-size: 60%;
