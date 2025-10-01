@@ -91,12 +91,18 @@ class Enqueue implements Bootable {
 		wp_enqueue_style(
 			'pulsar-woocommerce-styles',
 			get_theme_file_uri( 'build/css/woocommerce.css' ),
+			Asset::attribute( 'woocommerce', 'css', 'dependencies' ),
+			Asset::attribute( 'woocommerce', 'css', 'version' ),
+			'screen, print',
 		);
 
 		if ( \is_account_page() ) {
 			wp_enqueue_style(
 				'pulsar-woocommerce-account-styles',
 				get_theme_file_uri( 'build/css/woocommerce-account.css' ),
+				Asset::attribute( 'woocommerce-account', 'css', 'dependencies' ),
+				Asset::attribute( 'woocommerce-account', 'css', 'version' ),
+				'screen, print',
 			);
 		}
 	}

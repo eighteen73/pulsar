@@ -102,15 +102,21 @@ class Config {
 	private static function merge_bindings( $parent_config, $child_config ) {
 
 		// Extract base class names from child config
-		$child_base_classes = array_map( function( $class ) {
-			return basename( str_replace( '\\', '/', $class ) );
-		}, $child_config );
+		$child_base_classes = array_map(
+			function ( $class_name ) {
+				return basename( str_replace( '\\', '/', $class_name ) );
+			},
+			$child_config
+		);
 
 		// Filter out parent classes that are being overridden
-		$filtered_parent = array_filter( $parent_config, function( $class ) use ( $child_base_classes ) {
-			$base_class = basename( str_replace( '\\', '/', $class ) );
-			return ! in_array( $base_class, $child_base_classes, true );
-		});
+		$filtered_parent = array_filter(
+			$parent_config,
+			function ( $class_name ) use ( $child_base_classes ) {
+				$base_class = basename( str_replace( '\\', '/', $class_name ) );
+				return ! in_array( $base_class, $child_base_classes, true );
+			}
+		);
 
 		// Merge filtered parent classes with child classes
 		return array_merge( array_values( $filtered_parent ), $child_config );
@@ -130,6 +136,6 @@ class Config {
 
 		$file_data = get_file_data( $child_file, [ 'merge' => 'Merge' ] );
 		return ! empty( $file_data['merge'] ) &&
-			   strtolower( trim( $file_data['merge'] ) ) === 'true';
+				strtolower( trim( $file_data['merge'] ) ) === 'true';
 	}
 }
