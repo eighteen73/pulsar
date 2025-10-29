@@ -1,0 +1,3 @@
+{
+	"extends": "@eighteen73/stylelint-config-wordpress"
+}
