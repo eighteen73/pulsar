@@ -42,27 +42,5 @@
   "dependencies": {
     "@10up/block-components": "^1.19.1",
     "modern-normalize": "^2.0.0"
-  },
-  "babel": {
-    "presets": [
-      "@wordpress/babel-preset-default"
-    ]
-  },
-  "browserslist": [
-    "extends @eighteen73/browserslist-config-wordpress"
-  ],
-  "eslintConfig": {
-    "extends": "@eighteen73/eslint-config-wordpress"
-  },
-  "stylelint": {
-    "extends": "@eighteen73/stylelint-config-wordpress"
-  },
-  "prettier": {
-    "extends": "@wordpress/prettier-config"
-  },
-  "postcss": {
-    "plugins": {
-      "postcss-preset-env": {}
-    }
   }
 }
