@@ -12,6 +12,14 @@ const { basename } = require('path');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const entries = {
+	'css/app': ['./src/css/app.scss'],
+	'css/editor': ['./src/css/editor.scss'],
+	'css/woocommerce': ['./src/css/woocommerce.scss'],
+	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
+	'js/app': ['./src/js/app.js'],
+	'js/editor': ['./src/js/editor.js'],
+};
 /**
  * Converts a legacy path to the entry pair supported by webpack, e.g.:
  * `./entry-one.js` -> `[ 'entry-one', './entry-one.js] ]`
@@ -118,12 +126,7 @@ const pulsarConfig = {
 	entry: {
 		...scriptConfig.entry(),
 		...getBlockStylesEntryPoints(),
-		'css/app': ['./src/css/app.scss'],
-		'css/editor': ['./src/css/editor.scss'],
-		'css/woocommerce': ['./src/css/woocommerce.scss'],
-		'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
-		'js/app': ['./src/js/app.js'],
-		'js/editor': ['./src/js/editor.js'],
+		...entries,
 	},
 	devServer: {
 		hot: true,
