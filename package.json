@@ -19,7 +19,8 @@
     "i18n:pot": "npx node-wp-i18n makepot",
     "packages-update": "wp-scripts packages-update",
     "check-engines": "wp-scripts check-engines",
-    "check-licenses": "wp-scripts check-licenses"
+    "check-licenses": "wp-scripts check-licenses",
+    "create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar"
   },
   "engines": {
     "node": ">=20.0.0",
