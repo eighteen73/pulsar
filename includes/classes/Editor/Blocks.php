@@ -61,19 +61,10 @@ class Blocks implements Bootable {
 	 * @return void
 	 */
 	public function register_custom_blocks(): void {
-
-		$blocks_directory = get_theme_file_path( '/build/blocks/' );
-
-		// Register all the blocks in the theme.
-		if ( file_exists( $blocks_directory ) ) {
-			$block_json_files = glob( $blocks_directory . '*/block.json' );
-
-			// auto register all blocks that were found.
-			foreach ( $block_json_files as $filename ) {
-				$block_folder = dirname( $filename );
-				register_block_type( $block_folder );
-			}
-		}
+		wp_register_block_types_from_metadata_collection(
+			get_theme_file_path( 'build/blocks' ),
+			get_theme_file_path( 'build/blocks-manifest.php' ),
+		);
 	}
 
 	/**
