@@ -47,16 +47,14 @@ const stylesheetPathToEntry = (path) => {
 function getBlockStylesEntryPoints() {
 	const styles = glob('./src/css/blocks/*.scss');
 
-	const entry = {};
-	styles.forEach((fileArg) => {
-		const [entryName, path] = fileArg.includes('=')
-			? fileArg.split('=')
-			: stylesheetPathToEntry(fileArg);
-		entry['css/blocks/' + entryName] = path;
-	});
-	process.env.WP_ENTRY = JSON.stringify(entry);
-
-	return entry;
+	return Object.fromEntries(
+		styles.map((fileArg) => {
+			const [entryName, path] = fileArg.includes('=')
+				? fileArg.split('=')
+				: stylesheetPathToEntry(fileArg);
+			return ['css/blocks/' + entryName, [path]];
+		})
+	);
 }
 
 /**
@@ -185,15 +183,15 @@ const pulsarConfig = {
 
 // Instead of trying to modify the WordPress config after merging,
 // we'll directly modify the WordPress config before merging
-const modifiedWordpressConfig = { ...scriptConfig };
+const modifiedScriptConfig = { ...scriptConfig };
 
 // Find the SCSS rule in the WordPress config
-const scssRuleIndex = modifiedWordpressConfig.module.rules.findIndex(
+const scssRuleIndex = modifiedScriptConfig.module.rules.findIndex(
 	(rule) => rule.test && rule.test.toString().includes('sc|sa)ss')
 );
 
 if (scssRuleIndex !== -1) {
-	const scssRule = modifiedWordpressConfig.module.rules[scssRuleIndex];
+	const scssRule = modifiedScriptConfig.module.rules[scssRuleIndex];
 
 	// Find the sass-loader in the array
 	const sassLoaderIndex = scssRule.use.findIndex(
@@ -225,7 +223,7 @@ if (scssRuleIndex !== -1) {
 }
 
 // Now merge with our custom config
-const mergedConfig = mergeWithRules({
+const mergedScriptConfig = mergeWithRules({
 	module: {
 		rules: {
 			test: 'match',
@@ -235,6 +233,6 @@ const mergedConfig = mergeWithRules({
 			},
 		},
 	},
-})(modifiedWordpressConfig, pulsarConfig);
+})(modifiedScriptConfig, pulsarConfig);
 
-module.exports = [mergedConfig, moduleConfig];
+module.exports = [mergedScriptConfig, moduleConfig];
