@@ -15,7 +15,7 @@ export default function Edit({ attributes: { slug }, setAttributes }) {
 				setTemplateParts(response);
 			})
 			.catch((error) => {
-				console.error(error);
+				console.error(error); // eslint-disable-line no-console
 			});
 	}, []);
 

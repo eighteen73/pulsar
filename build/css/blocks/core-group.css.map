@@ -1,0 +1,1 @@
+{"version":3,"file":"css/blocks/core-group.css","mappings":";;;AAGC;EACC;EAAA;AAUF,C","sources":["webpack://pulsar/./src/css/blocks/core-group.scss"],"sourcesContent":["@use \"tools\" as *;\n\n.wp-block-group {\n\t&:where(.has-background) {\n\t\tpadding-block: var(--wp--custom--spacing--group-gap);\n\t}\n}\n"],"names":[],"sourceRoot":""}
