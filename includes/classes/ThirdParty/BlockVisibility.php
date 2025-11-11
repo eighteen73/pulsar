@@ -10,7 +10,7 @@ namespace Pulsar\ThirdParty;
 use Pulsar\Contracts\Bootable;
 
 /**
- * Gravity Forms class.
+ * Block Visibility class.
  *
  * @access public
  */
