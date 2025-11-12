@@ -13,6 +13,7 @@ return [
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Editor\TemplateParts::class,
+	Pulsar\ThirdParty\BlockVisibility::class,
 	Pulsar\ThirdParty\GravityForms::class,
 	Pulsar\ThirdParty\WooCommerce\Setup::class,
 	Pulsar\ThirdParty\WooCommerce\Account::class,
