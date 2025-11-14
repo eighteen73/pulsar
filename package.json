@@ -30,7 +30,7 @@
     "@eighteen73/browserslist-config-wordpress": "^1.0.1",
     "@eighteen73/eslint-config-wordpress": "^1.0.3",
     "@eighteen73/stylelint-config-wordpress": "^1.2.3",
-    "@wordpress/icons": "^10.21.0",
+    "@wordpress/icons": "^11.2.0",
     "@wordpress/prettier-config": "^4.21.0",
     "@wordpress/scripts": "^30.14.1",
     "fast-glob": "^3.3.0",
