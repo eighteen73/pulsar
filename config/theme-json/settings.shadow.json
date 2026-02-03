@@ -8,27 +8,27 @@
         {
           "name": "XS",
           "slug": "xs",
-          "value": "var|custom|shadow|xs"
+          "shadow": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.05)"
         },
         {
           "name": "SM",
           "slug": "sm",
-          "value": "var|custom|shadow|sm"
+          "shadow": "0 1px 3px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 1px 2px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
         },
         {
           "name": "MD",
           "slug": "md",
-          "value": "var|custom|shadow|md"
+          "shadow": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
         },
         {
           "name": "LG",
           "slug": "lg",
-          "value": "var|custom|shadow|lg"
+          "shadow": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -4px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
         },
         {
           "name": "XL",
           "slug": "xl",
-          "value": "var|custom|shadow|xl"
+          "shadow": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 8px 10px -6px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
         }
       ]
 		}
