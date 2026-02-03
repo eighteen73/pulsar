@@ -74,8 +74,8 @@
 				"shadow": "var:custom|color|primitive|neutral|900",
 				"border": "var:custom|color|primitive|neutral|100",
 				"border-invert": "var:custom|color|primitive|neutral|200",
-        "border-input": "var:custom|color|primitive|neutral|400",
-        "border-input-invert": "var:custom|color|primitive|neutral|200"
+				"border-input": "var:custom|color|primitive|neutral|400",
+				"border-input-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
 				"is-rounded": 0
@@ -102,13 +102,6 @@
 					"full": "100%"
 				}
 			},
-      "shadow": {
-        "xs": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.5)",
-        "sm": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.06)",
-        "md": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.05)",
-        "lg": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 10px 10px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.04)",
-        "xl": "0 25px 50px -12px hsl(from var(--wp--custom--color--shadow) h s l / 0.25)"
-      },
 			"typography": {
 				"fontWeight": {
 					"body": 400,
