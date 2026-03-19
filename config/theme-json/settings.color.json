@@ -27,12 +27,17 @@
 				{
 					"name": "Accent: Primary",
 					"slug": "accent-primary",
-					"color": "var:custom|color|primitive|secondary|600"
+					"color": "var:custom|color|primitive|neutral|700"
 				},
 				{
 					"name": "Accent: Secondary",
 					"slug": "accent-secondary",
-					"color": "var:custom|color|primitive|primary|100"
+					"color": "var:custom|color|primitive|secondary|500"
+				},
+        {
+					"name": "Accent: Tertiary",
+					"slug": "accent-tertiary",
+					"color": "var:custom|color|primitive|neutral|400"
 				},
         {
 					"name": "Tint: Primary",
@@ -42,7 +47,7 @@
         {
 					"name": "Tint: Secondary",
 					"slug": "tint-secondary",
-					"color": "var:custom|color|primitive|neutral|100"
+					"color": "var:custom|color|primitive|secondary|100"
 				},
 				{
 					"name": "Contrast",
