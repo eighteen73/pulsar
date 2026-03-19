@@ -3,7 +3,7 @@
 @mixin wc-product-sale-badge() {
 	background-color: var(--wp--custom--color--error);
 	border: unset;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--base);
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--sm);
@@ -15,7 +15,7 @@
 @mixin wc-sale-badge() {
 	background-color: var(--wp--preset--color--base);
 	border: 1px solid currentcolor;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--contrast);
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
@@ -25,7 +25,7 @@
 }
 
 @mixin wc-quantity-selector() {
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-sizing: content-box;
 	display: flex;
 	margin: unset;
@@ -34,7 +34,7 @@
 
 	&::after {
 		border: 1px solid var(--wp--custom--color--border-input);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	}
 
 	&:focus-within::after {
@@ -84,12 +84,12 @@
 	}
 
 	> .wc-block-components-quantity-selector__button--minus {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) 0 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) 0 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 		order: 1;
 	}
 
 	> .wc-block-components-quantity-selector__button--plus {
-		border-radius: 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs)) 0;
+		border-radius: 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) 0;
 		order: 3;
 	}
 }

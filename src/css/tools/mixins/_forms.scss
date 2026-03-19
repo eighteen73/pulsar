@@ -27,7 +27,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	color: var(--wp--preset--color--contrast);
 	display: block;
@@ -69,7 +69,7 @@
 	--icon-size: 1.5em;
 	appearance: none;
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	display: block;
 	font-family: inherit;
@@ -132,7 +132,7 @@
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--brand-primary);
 	display: inline-block;
 	flex-shrink: 0;

@@ -15,6 +15,7 @@
 	box-shadow: unset;
 	cursor: pointer;
 	display: inline-flex;
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	gap: var(--wp--preset--spacing--sm);
 	justify-content: center;
 	text-align: center;
@@ -25,7 +26,7 @@
 		opacity var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
 	@if $style == primary or $style == secondary {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
 	}
 

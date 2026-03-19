@@ -135,7 +135,7 @@
 		.select2-selection,
 		.select2-dropdown {
 			border: 1px solid var(--wp--custom--color--border-input);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 			color: var(--wp--preset--color--contrast);
 		}
 
@@ -185,7 +185,7 @@
 // Notice banner styles.
 .wc-block-components-notice-banner {
 	border: unset;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	color: var(--wp--preset--color--contrast);
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: var(--wp--custom--typography--font-weight--heading);

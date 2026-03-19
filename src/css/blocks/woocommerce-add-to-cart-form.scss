@@ -81,7 +81,7 @@
 
 		.quantity {
 			border: 1px solid var(--wp--custom--color--border-input);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 			display: flex;
 			margin: 0;
 			padding: var(--wp--preset--spacing--sm);
@@ -143,7 +143,7 @@
 
 	.stock {
 		border: 2px solid currentcolor;
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 		display: inline-flex;
 		font-size: var(--wp--preset--font-size--sm);
 		font-weight: var(--wp--custom--typography--font-weight--heading);
@@ -177,7 +177,7 @@
 
 			label {
 				border: 1px solid var(--wp--custom--color--border);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 				font-weight: var(--wp--custom--typography--font-weight--body);
 				padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--4-xl);
 				position: relative;
@@ -221,7 +221,7 @@
 
 		.wcsatt-sub-discount {
 			background-color: var(--wp--preset--color--brand-primary);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--lg));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--lg));
 			color: var(--wp--preset--color--base);
 			font-weight: var(--wp--custom--typography--font-weight--heading);
 			line-height: var(--wp--custom--typography--line-height--none);
@@ -231,7 +231,7 @@
 		.wcsatt-options-product-wrapper {
 			background-color: var(--wp--preset--color--tint-primary);
 			border: 1px solid var(--wp--custom--color--border-input);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 			font-weight: var(--wp--custom--typography--font-weight--body);
 			padding: var(--wp--preset--spacing--xl);
 		}

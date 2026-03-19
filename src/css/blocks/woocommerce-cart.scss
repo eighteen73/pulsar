@@ -30,7 +30,7 @@
 
 		.wc-block-cart__main {
 			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 			padding: 0 var(--wp--preset--spacing--2-xl);
 			width: 100%;
 
@@ -41,7 +41,7 @@
 
 		.wc-block-cart__sidebar {
 			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 			margin: unset;
 			padding: var(--wp--preset--spacing--2-xl);
 			width: 100%;
@@ -295,6 +295,6 @@
 
 .wp-block-woocommerce-empty-cart-block {
 	background-color: var(--wp--preset--color--base);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 	padding: var(--wp--preset--spacing--2-xl);
 }

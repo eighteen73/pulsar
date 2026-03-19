@@ -76,7 +76,7 @@ $account-links: (
 
 	.woocommerce-MyAccount-content {
 		background-color: var(--wp--preset--color--base);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 		padding: var(--wp--preset--spacing--3-xl);
 		width: 100%;
 
@@ -113,7 +113,7 @@ $account-links: (
 
 			a {
 				align-items: center;
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 				color: var(--wp--preset--color--contrast);
 				display: flex;
 				font-size: var(--wp--preset--font-size--sm);
@@ -225,7 +225,7 @@ $account-links: (
 			// Registration on the account page is disabled.
 			&:not(:has(.u-columns)) {
 				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 				float: unset;
 				padding: var(--wp--preset--spacing--3-xl);
 				width: 100%;
@@ -258,7 +258,7 @@ $account-links: (
 		.col-1,
 		.col-2 {
 			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 			float: unset;
 			padding: var(--wp--preset--spacing--3-xl);
 			width: 100%;
@@ -387,7 +387,7 @@ $account-links: (
 
 			li a {
 				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 				flex-direction: column;
 				justify-content: center;
 				padding: var(--wp--preset--spacing--3-xl);
@@ -484,7 +484,7 @@ $account-links: (
 
 	.woocommerce-Address {
 		border: 1px solid var(--wp--custom--color--border);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 		padding: var(--wp--preset--spacing--2-xl);
 	}
 
