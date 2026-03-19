@@ -4,12 +4,14 @@
 
 	// Set consistent block spacing between sections (top level groups).
 	// This has to be fairly specific due to cores styling for block gap.
-	> .wp-block-group + .wp-block-group {
+	> .wp-block-group + .wp-block-group,
+	> .wp-block-group:where(:has(> .wp-block-cover)) + .wp-block-group {
 		margin-block-start: var(--wp--custom--spacing--group-gap);
 	}
 
 	// Assume two groups with a background should sit flush together.
-	> .wp-block-group:where(.has-background) + .wp-block-group:where(.has-background) {
+	> .wp-block-group:where(.has-background) + .wp-block-group:where(.has-background),
+	> .wp-block-group:where(:has(> .wp-block-cover)) + .wp-block-group:where(.has-background) {
 		margin-block-start: 0;
 	}
 
