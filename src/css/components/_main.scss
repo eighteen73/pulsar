@@ -1,6 +1,11 @@
 @use "tools" as *;
 
-.site-main {
+:root :where(.wp-site-blocks) > .site-main {
+	margin-block-start: 0;
+}
+
+.site-main,
+.woocommerce {
 	flex: 1 0 auto;
 	margin: 0;
 
