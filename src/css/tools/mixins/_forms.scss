@@ -66,7 +66,7 @@
 /// @param {Boolean} $multiple - Whether the select is a multiple select.
 ///
 @mixin field-select($multiple: false) {
-	--icon-size: 1.5em;
+	--icon-size: 1em;
 	appearance: none;
 	border: 1px solid var(--wp--custom--color--border-input);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
@@ -79,7 +79,7 @@
 
 	@if not $multiple {
 		background-color: var(--wp--preset--color--base);
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiI+PC9wYXRoPjwvc3ZnPg==");
 		background-position: right var(--wp--preset--spacing--md) center;
 		background-repeat: no-repeat;
 		background-size: var(--icon-size) var(--icon-size);
