@@ -24,10 +24,9 @@ class SingleProduct implements Bootable {
 	 */
 	public function boot(): void {
 
-		// Quantity buttons.
-		add_action( 'woocommerce_before_quantity_input_field', [ $this, 'quantity_minus_button' ], 10 );
-		add_action( 'woocommerce_after_quantity_input_field', [ $this, 'quantity_plus_button' ], 10 );
-		add_action( 'woocommerce_before_single_product', [ $this, 'quantity_buttons_script' ] );
+		// Remove non-block related/upsell products.
+		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 
 		// Variation price.
 		add_action( 'woocommerce_before_single_product', [ $this, 'variation_price_to_product_price' ] );
@@ -50,59 +49,6 @@ class SingleProduct implements Bootable {
 	 */
 	public function can_boot(): bool {
 		return class_exists( 'WooCommerce' );
-	}
-
-	/**
-	 * Quantity: Output minus button
-	 *
-	 * @return void
-	 */
-	public function quantity_minus_button(): void {
-		echo '<button class="quantity__button quantity__button--minus">-</button>';
-	}
-
-	/**
-	 * Quantity: Output plus button
-	 *
-	 * @return void
-	 */
-	public function quantity_plus_button() {
-		echo '<button class="quantity__button quantity__button--plus">+</button>';
-	}
-
-	/**
-	 * Quantity: buttons script
-	 *
-	 * @return void
-	 */
-	public function quantity_buttons_script() {
-		wc_enqueue_js(
-			"
-			document.querySelector('form.cart').addEventListener('click', function(event) {
-				if (event.target.classList.contains('quantity__button')) {
-					event.preventDefault();
-					var qty = event.target.closest('.quantity').querySelector('.qty');
-					var val = qty.value ? parseFloat(qty.value) : 0;
-					var max = qty.getAttribute('max') ? parseFloat(qty.getAttribute('max')) : false;
-					var min = qty.getAttribute('min') ? parseFloat(qty.getAttribute('min')) : false;
-					var step = qty.getAttribute('step') ? parseFloat(qty.getAttribute('step')) : 1;
-					if (event.target.classList.contains('quantity__button--plus')) {
-						if (max && (max <= val)) {
-							qty.value = max;
-						} else {
-							qty.value = val + step;
-						}
-					} else {
-						if (min >= val) {
-							qty.value = min;
-						} else {
-							qty.value = val - step;
-						}
-					}
-				}
-			});
-			"
-		);
 	}
 
 	/**
