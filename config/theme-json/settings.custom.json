@@ -74,7 +74,7 @@
 				"shadow": "var:custom|color|primitive|neutral|900",
 				"border": "var:custom|color|primitive|neutral|200",
 				"border-invert": "var:custom|color|primitive|neutral|800",
-				"border-input": "var:custom|color|primitive|neutral|400",
+				"border-input": "var:custom|color|primitive|neutral|300",
 				"border-input-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {

@@ -42,7 +42,7 @@
         {
 					"name": "Tint: Primary",
 					"slug": "tint-primary",
-					"color": "var:custom|color|primitive|neutral|50"
+					"color": "var:custom|color|primitive|secondary|50"
 				},
         {
 					"name": "Tint: Secondary",

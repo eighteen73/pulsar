@@ -29,9 +29,46 @@
 		},
 		"border": {
 			"color": true,
-			"radius": false,
+			"radius": true,
 			"style": false,
-			"width": false
+			"width": false,
+			"radiusSizes": [
+				{
+					"name": "xs",
+					"slug": "xs",
+					"size": "4px"
+				},
+				{
+					"name": "sm",
+					"slug": "sm",
+					"size": "8px"
+				},
+				{
+					"name": "md",
+					"slug": "md",
+					"size": "clamp(10px, 1.5vw, 16px)"
+				},
+				{
+					"name": "lg",
+					"slug": "lg",
+					"size": "clamp(16px, 2.5vw, 24px)"
+				},
+				{
+					"name": "xl",
+					"slug": "xl",
+					"size": "clamp(24px, 3.5vw, 48px)"
+				},
+				{
+					"name": "2-xl",
+					"slug": "2-xl",
+					"size": "clamp(48px, 4.5vw, 96px)"
+				},
+				{
+					"name": "full",
+					"slug": "full",
+					"size": "100%"
+				}
+			]
 		},
 		"color": {
 			"background": true,
@@ -58,22 +95,27 @@
 				{
 					"name": "Accent: Primary",
 					"slug": "accent-primary",
-					"color": "var:custom|color|primitive|secondary|600"
+					"color": "var:custom|color|primitive|neutral|700"
 				},
 				{
 					"name": "Accent: Secondary",
 					"slug": "accent-secondary",
-					"color": "var:custom|color|primitive|primary|100"
+					"color": "var:custom|color|primitive|secondary|500"
+				},
+				{
+					"name": "Accent: Tertiary",
+					"slug": "accent-tertiary",
+					"color": "var:custom|color|primitive|neutral|400"
 				},
 				{
 					"name": "Tint: Primary",
 					"slug": "tint-primary",
-					"color": "var:custom|color|primitive|neutral|50"
+					"color": "var:custom|color|primitive|secondary|50"
 				},
 				{
 					"name": "Tint: Secondary",
 					"slug": "tint-secondary",
-					"color": "var:custom|color|primitive|neutral|100"
+					"color": "var:custom|color|primitive|secondary|100"
 				},
 				{
 					"name": "Contrast",
@@ -92,63 +134,63 @@
 			"color": {
 				"primitive": {
 					"neutral": {
-						"0": "#ffffff",
-						"50": "#F5F6F7",
-						"100": "#EDEFF1",
-						"200": "#D8DCDF",
-						"300": "#B5BEC4",
-						"400": "#8D9AA3",
-						"500": "#6F7E88",
-						"600": "#5A666F",
-						"700": "#49535B",
-						"800": "#3F474D",
-						"900": "#383D42",
-						"950": "#25282C",
+						"0": "#FFFFFF",
+						"50": "#F8FAFC",
+						"100": "#F1F5F9",
+						"200": "#E2E8F0",
+						"300": "#CBD5E1",
+						"400": "#94A3B8",
+						"500": "#64748B",
+						"600": "#475569",
+						"700": "#334155",
+						"800": "#1E293B",
+						"900": "#0F172A",
+						"950": "#020617",
 						"1000": "#000000"
 					},
 					"primary": {
-						"50": "#F4F2FF",
-						"100": "#EBE6FF",
-						"200": "#DAD1FF",
-						"300": "#BFACFF",
-						"400": "#A17EFF",
-						"500": "#8549FF",
-						"600": "#7724FF",
-						"700": "#6913EE",
-						"800": "#580FC8",
-						"900": "#4C0FA9",
-						"950": "#2B066F"
+						"50": "#F8FAFF",
+						"100": "#EDF2FF",
+						"200": "#D1DBF0",
+						"300": "#A3B6D9",
+						"400": "#6F89BC",
+						"500": "#4D669C",
+						"600": "#3B4E7A",
+						"700": "#2F3E61",
+						"800": "#25314D",
+						"900": "#1C253B",
+						"950": "#111724"
 					},
 					"secondary": {
-						"50": "#FAFEE7",
-						"100": "#F3FCCB",
-						"200": "#E7F99D",
-						"300": "#D6F36E",
-						"400": "#BDE635",
-						"500": "#9FCC16",
-						"600": "#7BA30D",
-						"700": "#5D7C0F",
-						"800": "#4B6212",
-						"900": "#3F5314",
-						"950": "#202E05"
+						"50": "#FFF9F2",
+						"100": "#FEEED9",
+						"200": "#FBD8B1",
+						"300": "#F7BD81",
+						"400": "#F29D4F",
+						"500": "#D97706",
+						"600": "#B45309",
+						"700": "#92400E",
+						"800": "#78350F",
+						"900": "#5F2A0C",
+						"950": "#3D1A07"
 					},
 					"error": {
-						"100": "#FFF1F2",
+						"100": "#FEE2E2",
 						"500": "#F44336",
-						"900": "#B71C1C"
+						"900": "#7F1D1D"
 					},
 					"warning": {
-						"100": "#F9EACC",
-						"500": "#EDB95E",
+						"100": "#FEF3C7",
+						"500": "#F59E0B",
 						"900": "#C75F18"
 					},
 					"success": {
-						"100": "#E0F4D3",
+						"100": "#DCFCE7",
 						"500": "#67C23A",
-						"900": "#29491E"
+						"900": "#14532D"
 					}
 				},
-				"link": "var:custom|color|primitive|primary|500",
+				"link": "var:custom|color|primitive|primary|600",
 				"focus": "#fd0",
 				"focus-accent": "var:custom|color|primitive|neutral|800",
 				"error": "var:custom|color|primitive|error|900",
@@ -158,9 +200,9 @@
 				"success": "var:custom|color|primitive|success|900",
 				"success-accent": "var:custom|color|primitive|success|100",
 				"shadow": "var:custom|color|primitive|neutral|900",
-				"border": "var:custom|color|primitive|neutral|100",
-				"border-invert": "var:custom|color|primitive|neutral|200",
-				"border-input": "var:custom|color|primitive|neutral|400",
+				"border": "var:custom|color|primitive|neutral|200",
+				"border-invert": "var:custom|color|primitive|neutral|800",
+				"border-input": "var:custom|color|primitive|neutral|300",
 				"border-input-invert": "var:custom|color|primitive|neutral|200"
 			},
 			"global": {
@@ -172,28 +214,11 @@
 			},
 			"spacing": {
 				"blockGap": "var:preset|spacing|xl",
+				"blockGapSmall": "var:preset|spacing|md",
 				"groupGap": "var:preset|spacing|5-xl",
 				"rowGap": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--4-xl))",
 				"columnGap": "var:preset|spacing|3-xl",
 				"edge": "clamp(var(--wp--preset--spacing--2-xl), 5.3333px + 5.8333vw, var(--wp--preset--spacing--6-xl))"
-			},
-			"border": {
-				"radius": {
-					"xs": "4px",
-					"sm": "8px",
-					"md": "clamp(10px, 1.5vw, 16px)",
-					"lg": "clamp(16px, 2.5vw, 24px)",
-					"xl": "clamp(24px, 3.5vw, 48px)",
-					"2-xl": "clamp(48px, 4.5vw, 96px)",
-					"full": "100%"
-				}
-			},
-			"shadow": {
-				"xs": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.5)",
-				"sm": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.06)",
-				"md": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.05)",
-				"lg": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 10px 10px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.04)",
-				"xl": "0 25px 50px -12px hsl(from var(--wp--custom--color--shadow) h s l / 0.25)"
 			},
 			"typography": {
 				"fontWeight": {
@@ -271,7 +296,7 @@
 			"allowEditing": false
 		},
 		"position": {
-			"sticky": false
+			"sticky": true
 		},
 		"shadow": {
 			"defaultPresets": false,
@@ -279,27 +304,27 @@
 				{
 					"name": "XS",
 					"slug": "xs",
-					"value": "var|custom|shadow|xs"
+					"shadow": "0 1px 2px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.05)"
 				},
 				{
 					"name": "SM",
 					"slug": "sm",
-					"value": "var|custom|shadow|sm"
+					"shadow": "0 1px 3px 0 hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 1px 2px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
 				},
 				{
 					"name": "MD",
 					"slug": "md",
-					"value": "var|custom|shadow|md"
+					"shadow": "0 4px 6px -1px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 2px 4px -2px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
 				},
 				{
 					"name": "LG",
 					"slug": "lg",
-					"value": "var|custom|shadow|lg"
+					"shadow": "0 10px 15px -3px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 4px 6px -4px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"value": "var|custom|shadow|xl"
+					"shadow": "0 20px 25px -5px hsl(from var(--wp--custom--color--shadow) h s l / 0.1), 0 8px 10px -6px hsl(from var(--wp--custom--color--shadow) h s l / 0.1)"
 				}
 			]
 		},
@@ -491,17 +516,14 @@
 					"name": "XS",
 					"slug": "xs",
 					"size": "14px",
-					"fluid": false
+					"fluid": {
+						"min": "13px",
+						"max": "14px"
+					}
 				},
 				{
 					"name": "SM",
 					"slug": "sm",
-					"size": "16px",
-					"fluid": false
-				},
-				{
-					"name": "MD",
-					"slug": "md",
 					"size": "18px",
 					"fluid": {
 						"min": "16px",
@@ -509,39 +531,57 @@
 					}
 				},
 				{
+					"name": "MD",
+					"slug": "md",
+					"size": "23px",
+					"fluid": {
+						"min": "20px",
+						"max": "23px"
+					}
+				},
+				{
 					"name": "LG",
 					"slug": "lg",
-					"size": "26px",
+					"size": "28px",
 					"fluid": {
-						"min": "18px",
-						"max": "26px"
+						"min": "25px",
+						"max": "28px"
 					}
 				},
 				{
 					"name": "XL",
 					"slug": "xl",
-					"size": "33px",
+					"size": "35px",
 					"fluid": {
-						"min": "26px",
-						"max": "33px"
+						"min": "31px",
+						"max": "35px"
 					}
 				},
 				{
 					"name": "2XL",
 					"slug": "2-xl",
-					"size": "44px",
+					"size": "43px",
 					"fluid": {
-						"min": "33px",
-						"max": "44px"
+						"min": "39px",
+						"max": "43px"
 					}
 				},
 				{
 					"name": "3XL",
 					"slug": "3-xl",
-					"size": "70px",
+					"size": "54px",
 					"fluid": {
-						"min": "33px",
-						"max": "70px"
+						"min": "49px",
+						"max": "54px"
+					}
+				},
+				{
+					"name": "4XL",
+					"slug": "4-xl",
+					"size": "69px",
+					"fluid": {
+						"min": "61px",
+						"max": "69px"
 					}
 				}
 			],
@@ -584,7 +624,15 @@
 			}
 		}
 	},
-	"customTemplates": [],
+	"customTemplates": [
+		{
+			"name": "page-with-title",
+			"title": "Page With Title",
+			"postTypes": [
+				"page"
+			]
+		}
+	],
 	"templateParts": [
 		{
 			"area": "header",
@@ -595,6 +643,11 @@
 			"area": "footer",
 			"name": "footer",
 			"title": "Footer"
+		},
+		{
+			"area": "uncategorized",
+			"name": "breadcrumbs",
+			"title": "Breadcrumbs"
 		}
 	]
 }
