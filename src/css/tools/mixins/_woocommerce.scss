@@ -1,7 +1,8 @@
 @use "utility" as *;
+@use "forms" as *;
 
 @mixin wc-product-sale-badge() {
-	background-color: var(--wp--custom--color--error);
+	background-color: var(--wp--preset--color--accent-secondary);
 	border: unset;
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--base);
@@ -13,83 +14,64 @@
 }
 
 @mixin wc-sale-badge() {
-	background-color: var(--wp--preset--color--base);
-	border: 1px solid currentcolor;
+	background-color: var(--wp--custom--color--primitive--success--100);
+	border: none;
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--preset--color--contrast);
+	color: var(--wp--custom--color--primitive--success--900);
 	font-size: var(--wp--preset--font-size--xs);
-	font-weight: var(--wp--custom--typography--font-weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--body);
 	line-height: var(--wp--custom--typography--line-height--none);
 	padding: var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
 }
 
 @mixin wc-quantity-selector() {
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-	box-sizing: content-box;
-	display: flex;
-	margin: unset;
-	position: relative;
-	width: 100px;
+	border: unset;
+	border-radius: unset;
+	gap: var(--wp--preset--spacing--xs);
 
-	&::after {
-		border: 1px solid var(--wp--custom--color--border-input);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-	}
-
-	&:focus-within::after {
-		border-color: var(--wp--preset--color--brand-primary);
-		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
-		outline: 2px solid transparent;
-		outline-offset: 2px;
-	}
-
+	.qty,
 	.wc-block-components-quantity-selector__input {
-		appearance: textfield;
-		background: transparent;
-		border: 0;
-		box-shadow: none;
-		color: currentcolor;
-		flex: 1 1 auto;
-		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--font-weight--heading);
-		line-height: 1;
-		margin: 0;
-		min-width: 40px;
-		order: 2;
-		padding: var(--wp--preset--spacing--md) 0;
-		text-align: center;
-		vertical-align: middle;
+		@include field-input;
+		-webkit-appearance: textfield;
+		border: 1px solid var(--wp--custom--color--border-input);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		font-size: var(--wp--preset--font-size--xs);
+		max-width: unset;
+		padding: unset;
+		width: 70px;
+
+		&:focus {
+			box-shadow: none;
+		}
 	}
 
-	> .wc-block-components-quantity-selector__button {
-		background: none transparent;
+	.wc-block-components-quantity-selector__button {
 		border: 0;
-		box-shadow: none;
-		color: currentcolor;
-		cursor: pointer;
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 		font-size: var(--wp--preset--font-size--sm);
-		font-style: normal;
-		font-weight: var(--wp--custom--typography--font-weight--body);
-		margin: 0;
-		min-width: 30px;
-		opacity: 1;
-		padding: 0;
-		text-align: center;
-		text-decoration: none;
+		width: 42px;
+
+		&:where(:not(:disabled)):hover {
+			background-color: var(--wp--preset--color--tint-primary);
+		}
+
+		&:focus {
+			box-shadow: none;
+		}
 
 		&:focus-visible {
 			@include focus-block;
 		}
 	}
+}
 
-	> .wc-block-components-quantity-selector__button--minus {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) 0 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-		order: 1;
+@mixin wc-trash-icon() {
+	&::after {
+		@include icon("icons/trash", 24px);
 	}
 
-	> .wc-block-components-quantity-selector__button--plus {
-		border-radius: 0 calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs)) 0;
-		order: 3;
+	svg {
+		display: none;
 	}
 }
