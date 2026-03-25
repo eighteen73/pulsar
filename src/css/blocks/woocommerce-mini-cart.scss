@@ -117,6 +117,10 @@
 			}
 		}
 
+		.wc-block-cart-item__remove-link {
+			@include wc-trash-icon;
+		}
+
 		.wc-block-cart-item__total {
 			.wc-block-components-product-price {
 				font-size: var(--wp--preset--font-size--sm);
