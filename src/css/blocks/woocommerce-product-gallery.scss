@@ -1,6 +1,16 @@
 @use "tools" as *;
 
 .wp-block-woocommerce-product-gallery {
+	&.wp-block-woocommerce-product-gallery {
+		gap: var(--wp--preset--spacing--md);
+	}
+
+	// Large image inner blocks.
+	.wc-block-product-gallery-large-image__inner-blocks {
+
+		left: var(--wp--preset--spacing--sm);
+		width: calc(100% - calc(var(--wp--preset--spacing--sm) * 2));
+	}
 
 	// Gallery thumbnails.
 	.wc-block-product-gallery-thumbnails__scrollable {
