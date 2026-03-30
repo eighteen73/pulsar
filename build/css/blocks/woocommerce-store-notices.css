@@ -1,1 +1,1 @@
-.woocommerce .wc-block-store-notices .wc-block-components-notice-banner{border-radius:0}
+.wp-block-woocommerce-store-notices .wc-block-components-notice-banner:first-child{margin-top:0}

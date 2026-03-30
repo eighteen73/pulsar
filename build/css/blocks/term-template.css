@@ -1,0 +1,18 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!../../../../node_modules/resolve-url-loader/index.js??ruleSet[1].rules[4].use[3]!../../../../node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[4]!./src/css/blocks/term-template.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.wp-block-term-template .wp-block-term {
+  position: relative;
+}
+.wp-block-term-template .wp-block-term-name a::before {
+  background-color: var(--wp--preset--color--primary);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+/*# sourceMappingURL=term-template.css.map*/
