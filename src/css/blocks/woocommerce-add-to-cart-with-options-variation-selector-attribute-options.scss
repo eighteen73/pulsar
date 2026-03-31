@@ -1,0 +1,24 @@
+@use "tools" as *;
+
+.woocommerce .wp-block-woocommerce-add-to-cart-with-options-variation-selector-attribute-options {
+	.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pills {
+		gap: var(--wp--preset--spacing--lg);
+	}
+
+	.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill {
+		border-color: var(--wp--custom--color--border);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		font-weight: var(--wp--custom--typography--font-weight--body);
+		margin-bottom: 0;
+		padding-block: var(--wp--preset--spacing--sm);
+		padding-inline: var(--wp--preset--spacing--xl);
+
+		&:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:checked),
+		&:hover:not(:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:disabled)) {
+			--pill-background-color: var(--wp--preset--color--tint-primary);
+
+			background-color: var(--pill-background-color);
+			border-color: var(--pill-background-color);
+		}
+	}
+}
