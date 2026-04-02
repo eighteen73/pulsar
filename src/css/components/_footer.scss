@@ -47,4 +47,13 @@
 		}
 	}
 
+	.has-contrast-background-color {
+		.site-footer__legal {
+			color: var(--wp--preset--color--base);
+
+			:where(a:not(.wp-element-button)) {
+				color: inherit;
+			}
+		}
+	}
 }
