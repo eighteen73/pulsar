@@ -6,7 +6,6 @@
 	display: block;
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
-	line-height: inherit;
 	margin-bottom: var(--wp--preset--spacing--sm);
 
 	&:last-child {
@@ -32,7 +31,7 @@
 	color: var(--wp--preset--color--contrast);
 	display: block;
 	font-family: inherit;
-	font-size: var(--wp--preset--font-size--md);
+	font-size: var(--wp--preset--font-size--sm);
 	line-height: var(--wp--custom--typography--line-height--normal);
 	padding-block: var(--wp--preset--spacing--md);
 	padding-inline: var(--wp--preset--spacing--lg);
