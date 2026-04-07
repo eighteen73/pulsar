@@ -56,4 +56,14 @@
 			}
 		}
 	}
+
+	&__secure-checkout {
+		align-items: center;
+		display: inline-flex;
+		gap: var(--wp--preset--spacing--xs);
+
+		&::after {
+			@include icon("icons/lock", 24px);
+		}
+	}
 }
