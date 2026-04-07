@@ -138,8 +138,11 @@
 
 				@media (--xs) {
 					@include wc-sale-badge;
-					display: inline-block;
 					margin-top: var(--wp--preset--spacing--sm);
+
+					&:where(:not([hidden])) {
+						display: inline-block;
+					}
 				}
 			}
 		}
