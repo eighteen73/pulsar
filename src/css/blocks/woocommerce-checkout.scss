@@ -95,6 +95,13 @@
 
 		.wc-block-components-order-summary-item__image {
 			padding-bottom: unset;
+			width: 75px;
+
+			img {
+				border-radius: calc(var(--wp--preset--border-radius--xs) * var(--wp--custom--global--is-rounded));
+				max-width: 100%;
+				width: 100%;
+			}
 		}
 
 		.wc-block-components-order-summary-item__description {
