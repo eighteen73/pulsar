@@ -116,7 +116,7 @@ $account-links: (
 				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 				color: var(--wp--preset--color--contrast);
 				display: flex;
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--font-weight--heading);
 				gap: var(--wp--preset--spacing--sm);
 				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
@@ -314,7 +314,7 @@ $account-links: (
 
 				em {
 					color: var(--wp--preset--color--base-accent);
-					font-size: var(--wp--preset--font-size--sm);
+					font-size: var(--wp--preset--font-size--md);
 					font-style: normal;
 					margin-top: var(--wp--preset--spacing--sm);
 				}
@@ -468,7 +468,7 @@ $account-links: (
 		.edit {
 			align-items: center;
 			display: inline-flex;
-			font-size: var(--wp--preset--font-size--xs);
+			font-size: var(--wp--preset--font-size--sm);
 			gap: var(--wp--preset--spacing--sm);
 			margin: unset;
 

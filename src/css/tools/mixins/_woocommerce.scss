@@ -10,7 +10,7 @@
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
-	text-transform: unset;
+	text-transform: uppercase;
 }
 
 @mixin wc-sale-badge() {
@@ -18,7 +18,7 @@
 	border: none;
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--custom--color--primitive--success--900);
-	font-size: var(--wp--preset--font-size--xs);
+	font-size: var(--wp--preset--font-size--sm);
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	line-height: var(--wp--custom--typography--line-height--none);
 	padding: var(--wp--preset--spacing--sm);
@@ -36,7 +36,7 @@
 		-webkit-appearance: textfield;
 		border: 1px solid var(--wp--custom--color--border-input);
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-		font-size: var(--wp--preset--font-size--xs);
+		font-size: var(--wp--preset--font-size--sm);
 		max-width: unset;
 		padding: unset;
 		width: 70px;
