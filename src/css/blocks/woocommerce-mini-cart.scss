@@ -1,5 +1,9 @@
 @use "../tools" as *;
 
+.wc-block-mini-cart__quantity-badge {
+	@include wc-cart-icon;
+}
+
 .wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-contents {
 	.wc-block-components-drawer__close-wrapper .wc-block-components-drawer__close {
 		align-items: center;

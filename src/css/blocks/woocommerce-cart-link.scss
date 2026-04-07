@@ -3,5 +3,8 @@
 .wp-block-woocommerce-cart-link {
 	.wc-block-cart-link {
 		@include button(secondary);
+		@include wc-cart-icon;
+
+		flex-direction: row-reverse;
 	}
 }

@@ -76,3 +76,13 @@
 		display: none;
 	}
 }
+
+@mixin wc-cart-icon() {
+	&::after {
+		@include icon("icons/cart", 24px);
+	}
+
+	svg {
+		display: none;
+	}
+}
