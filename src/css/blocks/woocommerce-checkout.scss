@@ -76,6 +76,10 @@
 		font-size: var(--wp--preset--font-size--sm);
 		padding: unset;
 
+		.wc-block-components-order-summary {
+			padding: unset;
+		}
+
 		.wc-block-components-order-summary-item {
 			font-size: var(--wp--preset--font-size--sm);
 			padding-block: var(--wp--preset--spacing--lg);
