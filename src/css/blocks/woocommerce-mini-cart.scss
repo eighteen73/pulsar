@@ -65,8 +65,14 @@
 			}
 		}
 
-		.wc-block-cart-item__image > img {
-			display: none;
+		.wc-block-cart-item__image {
+			[hidden] {
+				display: none;
+			}
+
+			img {
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			}
 		}
 
 		.wc-block-cart-item__product {
