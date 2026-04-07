@@ -86,3 +86,30 @@
 		display: none;
 	}
 }
+
+@mixin wc-coupon-form() {
+	gap: 0;
+
+	.wc-block-components-totals-coupon__input {
+		margin: unset;
+
+		label {
+			@include label;
+			font-weight: var(--wp--custom--typography--font-weight--body);
+			left: var(--wp--preset--spacing--lg);
+		}
+	}
+
+	#wc-block-components-totals-coupon__input-coupon {
+		@include field-input;
+		border-bottom-right-radius: unset;
+		border-top-right-radius: unset;
+		height: 60px;
+	}
+
+	.wc-block-components-totals-coupon__button {
+		border-bottom-left-radius: unset;
+		border-top-left-radius: unset;
+		text-transform: uppercase;
+	}
+}

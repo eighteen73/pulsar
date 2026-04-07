@@ -144,4 +144,8 @@
 			font-weight: var(--wp--custom--typography--font-weight--heading);
 		}
 	}
+
+	.wc-block-components-totals-coupon__form {
+		@include wc-coupon-form;
+	}
 }

@@ -395,16 +395,7 @@
 	}
 
 	.wc-block-components-totals-coupon__form {
-		gap: var(--wp--preset--spacing--sm);
-
-		label {
-			@include hide-visually;
-			position: absolute !important; // stylelint-disable-line declaration-no-important -- make sure the label is hidden and not taking up space
-		}
-
-		.wc-block-components-totals-coupon__input {
-			margin: unset;
-		}
+		@include wc-coupon-form;
 	}
 
 	.wp-block-woocommerce-checkout-actions-block .wc-block-checkout__actions_row {
