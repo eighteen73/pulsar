@@ -201,6 +201,10 @@
 		}
 	}
 
+	.wc-block-components-checkout-step__heading-container {
+		margin-bottom: var(--wp--preset--spacing--xl);
+	}
+
 	.wc-block-components-title {
 		@include heading-base;
 		@include heading(h3);
@@ -310,7 +314,6 @@
 		flex-direction: column;
 		gap: var(--wp--preset--spacing--sm);
 		height: unset;
-		margin-top: var(--wp--custom--spacing--block-gap);
 
 		select {
 			@include field-select;
@@ -414,10 +417,15 @@
 		}
 	}
 
+	.wc-block-components-radio-control-accordion-option + .wc-block-components-radio-control-accordion-option {
+		margin-top: var(--wp--preset--spacing--md);
+	}
+
 	.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
 	.wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+		background-color: var(--wp--preset--color--brand-secondary);
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-		box-shadow: inset 0 0 0 1px var(--wp--custom--color--border);
+		box-shadow: inset 0 0 0 1px var(--wp--custom--color--border-invert);
 	}
 
 	.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control__option::after,
@@ -431,21 +439,46 @@
 		padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
 	}
 
+	.wc-block-components-radio-control__description,
+	.wc-block-components-radio-control__label,
+	.wc-block-components-radio-control__secondary-description,
+	.wc-block-components-radio-control__secondary-label {
+		font-size: var(--wp--preset--font-size--sm);
+	}
+
+	.wc-block-components-radio-control__option {
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		box-shadow: inset 0 0 0 1px var(--wp--custom--color--border);
+
+		+ .wc-block-components-radio-control__option {
+			margin-top: var(--wp--preset--spacing--md);
+		}
+	}
+
 	.wc-block-checkout__payment-method .wc-block-components-radio-control__option,
 	.wc-block-checkout__payment-method .wc-block-components-radio-control__option:first-child,
 	.wc-block-checkout__payment-method .wc-block-components-radio-control__option:last-child {
 		padding-bottom: var(--wp--preset--spacing--lg);
 		padding-left: var(--wp--preset--spacing--4-xl);
-		padding-right: var(--wp--preset--spacing--xl);
-		padding-top: var(--wp--preset--spacing--xl);
+		padding-right: var(--wp--preset--spacing--lg);
+		padding-top: var(--wp--preset--spacing--lg);
+	}
+
+	.wc-block-components-radio-control__option-checked {
+		box-shadow: unset;
 	}
 
 	.wc-block-checkout__shipping-option .wc-block-components-radio-control__option {
-		padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl) var(--wp--preset--spacing--4-xl);
+		padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--4-xl);
 	}
 
 	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__label {
+		font-size: var(--wp--preset--font-size--sm);
 		font-weight: var(--wp--custom--typography--font-weight--body);
+	}
+
+	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__input {
+		left: var(--wp--preset--spacing--lg);
 	}
 
 	.wc-block-checkout__payment-method .wc-block-components-radio-control__option .wc-block-components-radio-control__input {
