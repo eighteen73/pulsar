@@ -53,6 +53,11 @@
 
 	.wp-block-woocommerce-checkout-order-summary-block {
 		border: unset;
+
+		.checkout-order-summary-block-fill {
+			border: unset;
+			border-radius: unset;
+		}
 	}
 
 	.wc-block-components-totals-wrapper {

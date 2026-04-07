@@ -66,4 +66,10 @@
 			@include icon("icons/lock", 24px);
 		}
 	}
+
+	&__checkout-row {
+		@media (--lg) {
+			justify-content: space-between;
+		}
+	}
 }

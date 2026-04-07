@@ -7,4 +7,12 @@
 
 		flex-direction: row-reverse;
 	}
+
+	.wc-block-cart-link__text {
+		display: none;
+
+		@media (--lg) {
+			display: block;
+		}
+	}
 }
