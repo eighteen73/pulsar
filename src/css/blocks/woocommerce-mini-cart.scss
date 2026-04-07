@@ -66,12 +66,12 @@
 		}
 
 		.wc-block-cart-item__image {
-			img {
-				border-radius: calc(var(--wp--preset--border-radius--xs) * var(--wp--custom--global--is-rounded));
+			[hidden] {
+				display: none;
 			}
 
-			> img {
-				display: none;
+			img {
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 			}
 		}
 

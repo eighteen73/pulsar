@@ -35,4 +35,12 @@
 			text-decoration: none;
 		}
 	}
+
+	.wp-block-image {
+		img {
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			height: 100%;
+			width: 100%;
+		}
+	}
 }

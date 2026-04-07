@@ -7,9 +7,10 @@
 
 	// Large image inner blocks.
 	.wc-block-product-gallery-large-image__inner-blocks {
-
-		left: var(--wp--preset--spacing--sm);
-		width: calc(100% - calc(var(--wp--preset--spacing--sm) * 2));
+		height: calc(100% - calc(var(--wp--preset--spacing--lg) * 2));
+		left: var(--wp--preset--spacing--lg);
+		top: var(--wp--preset--spacing--lg);
+		width: calc(100% - calc(var(--wp--preset--spacing--lg) * 2));
 	}
 
 	// Gallery thumbnails.
