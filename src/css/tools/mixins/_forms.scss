@@ -4,7 +4,7 @@
 @mixin label() {
 	color: var(--wp--preset--color--contrast);
 	display: block;
-	font-size: var(--wp--preset--font-size--sm);
+	font-size: var(--wp--preset--font-size--md);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
 	margin-bottom: var(--wp--preset--spacing--sm);
 
@@ -15,7 +15,7 @@
 
 /// Legend styles.
 @mixin legend() {
-	font-size: var(--wp--preset--font-size--lg);
+	font-size: var(--wp--preset--font-size--xl);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
 	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
 	margin-bottom: var(--wp--preset--spacing--sm);
@@ -31,7 +31,7 @@
 	color: var(--wp--preset--color--contrast);
 	display: block;
 	font-family: inherit;
-	font-size: var(--wp--preset--font-size--sm);
+	font-size: var(--wp--preset--font-size--md);
 	line-height: var(--wp--custom--typography--line-height--normal);
 	padding-block: var(--wp--preset--spacing--md);
 	padding-inline: var(--wp--preset--spacing--lg);

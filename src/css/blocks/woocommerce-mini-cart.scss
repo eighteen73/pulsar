@@ -39,7 +39,7 @@
 		border-bottom-style: solid;
 		border-bottom-width: 1px;
 		color: var(--wp--preset--color--contrast);
-		font-size: var(--wp--preset--font-size--sm);
+		font-size: var(--wp--preset--font-size--2-xl);
 		margin: unset;
 		mask-image: unset;
 		padding: var(--wp--preset--spacing--xl);
@@ -52,7 +52,7 @@
 
 	.wp-block-woocommerce-mini-cart-title-items-counter-block {
 		color: var(--wp--preset--color--accent-tertiary);
-		font-size: var(--wp--preset--font-size--xs);
+		font-size: var(--wp--preset--font-size--md);
 		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 
@@ -86,7 +86,7 @@
 
 			.wc-block-components-product-name {
 				color: var(--wp--preset--color--contrast);
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--font-weight--heading);
 				line-height: var(--wp--custom--typography--line-height--tight);
 				margin: unset;
@@ -94,7 +94,7 @@
 			}
 
 			.wc-block-components-product-price {
-				font-size: var(--wp--preset--font-size--xs);
+				font-size: var(--wp--preset--font-size--sm);
 				margin-top: var(--wp--preset--spacing--xs);
 
 				.wc-block-components-product-price__regular {
@@ -103,7 +103,6 @@
 					// stylelint-disable-next-line max-nesting-depth
 					@media (--xs) {
 						display: inline;
-						font-size: 80%;
 						margin-right: var(--wp--preset--spacing--xs);
 					}
 				}
@@ -122,7 +121,7 @@
 			}
 
 			.wc-block-components-product-metadata {
-				font-size: var(--wp--preset--font-size--xs);
+				font-size: var(--wp--preset--font-size--sm);
 				margin-bottom: unset;
 				margin-top: var(--wp--preset--spacing--lg);
 			}
@@ -142,7 +141,7 @@
 
 		.wc-block-cart-item__total {
 			.wc-block-components-product-price {
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--font-weight--heading);
 				line-height: var(--wp--custom--typography--line-height--tight);
 			}
@@ -175,17 +174,17 @@
 			font-size: var(--wp--preset--font-size--lg);
 
 			.wc-block-components-totals-item__label {
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--xl);
 				font-weight: var(--wp--custom--typography--font-weight--heading);
 			}
 
 			.wc-block-components-totals-item__value {
-				font-size: var(--wp--preset--font-size--sm);
-				font-weight: var(--wp--custom--typography--font-weight--body);
+				font-size: var(--wp--preset--font-size--lg);
+				font-weight: var(--wp--custom--typography--font-weight--heading);
 			}
 
 			.wc-block-components-totals-item__description {
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--md);
 				margin-top: var(--wp--preset--spacing--lg);
 			}
 		}
