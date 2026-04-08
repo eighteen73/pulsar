@@ -35,9 +35,13 @@
 			transform: translateY(100%);
 			transition: transform var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1), opacity var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1);
 
-			.added_to_cart {
-				@include button(primary);
+			.added_to_cart,
+			.wp-block-button__link {
+				@include button(primary, small);
+				font-size: inherit;
+				line-height: inherit;
 				margin: 0;
+				text-decoration: none;
 			}
 		}
 	}
