@@ -4,4 +4,17 @@
 	h2.wp-block-heading {
 		@include heading("h2");
 	}
+
+	.is-product-collection-layout-carousel {
+		padding: 0;
+
+		.wc-block-product {
+			@media (--lg) {
+				flex-basis: 25%;
+				flex-grow: 0;
+				flex-shrink: 1;
+				min-width: unset;
+			}
+		}
+	}
 }
