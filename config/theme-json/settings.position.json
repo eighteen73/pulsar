@@ -3,7 +3,7 @@
 	"version": 3,
 	"settings": {
 		"position": {
-      "sticky": false
+      "sticky": true
     }
 	}
 }

@@ -4,9 +4,8 @@
 @mixin label() {
 	color: var(--wp--preset--color--contrast);
 	display: block;
-	font-size: var(--wp--preset--font-size--sm);
+	font-size: var(--wp--preset--font-size--md);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
-	line-height: inherit;
 	margin-bottom: var(--wp--preset--spacing--sm);
 
 	&:last-child {
@@ -16,7 +15,7 @@
 
 /// Legend styles.
 @mixin legend() {
-	font-size: var(--wp--preset--font-size--lg);
+	font-size: var(--wp--preset--font-size--xl);
 	font-weight: var(--wp--custom--typography--font-weight--heading);
 	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
 	margin-bottom: var(--wp--preset--spacing--sm);
@@ -27,7 +26,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	color: var(--wp--preset--color--contrast);
 	display: block;
@@ -66,20 +65,20 @@
 /// @param {Boolean} $multiple - Whether the select is a multiple select.
 ///
 @mixin field-select($multiple: false) {
-	--icon-size: 1.5em;
+	--icon-size: 1em;
 	appearance: none;
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	display: block;
 	font-family: inherit;
-	font-size: var(--wp--preset--font-size--md);
+	font-size: var(--wp--preset--font-size--sm);
 	line-height: var(--wp--custom--typography--line-height--normal);
 	width: 100%;
 
 	@if not $multiple {
 		background-color: var(--wp--preset--color--base);
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiI+PC9wYXRoPjwvc3ZnPg==");
 		background-position: right var(--wp--preset--spacing--md) center;
 		background-repeat: no-repeat;
 		background-size: var(--icon-size) var(--icon-size);
@@ -97,6 +96,8 @@
 		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
+		padding-block: var(--wp--preset--spacing--md);
+		padding-inline: var(--wp--preset--spacing--lg);
 	}
 
 	&:disabled {
@@ -132,7 +133,7 @@
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
 	border: 1px solid var(--wp--custom--color--border-input);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--brand-primary);
 	display: inline-block;
 	flex-shrink: 0;

@@ -31,7 +31,7 @@
 					// stylelint-disable-next-line max-nesting-depth
 					&::after {
 						background-color: var(--wp--preset--color--brand-primary);
-						border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+						border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 						bottom: 0;
 						content: "";
 						height: 3px;
@@ -84,7 +84,7 @@
 			--pb--menu--items--gap: 0;
 			--pb--menu--item--hover-background-color: var(--wp--preset--color--brand-secondary);
 			--pb--menu--item--hover-color: var(--wp--preset--color--brand-primary);
-			--pb--menu--item--border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--xs));
+			--pb--menu--item--border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 			--pb--menu--link--padding: var(--wp--preset--spacing--md);
 		}
 	}

@@ -1,0 +1,27 @@
+@use "tools" as *;
+
+.wc-block-next-previous-buttons {
+	.wc-block-next-previous-buttons__button {
+		align-items: center;
+		background-color: var(--wp--preset--color--base);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		display: flex;
+		justify-content: center;
+
+		&:first-child::before {
+			@include icon("chevron-left");
+		}
+
+		&:last-child::before {
+			@include icon("chevron-right");
+		}
+
+		&[aria-disabled="true"]::before {
+			opacity: 0.3;
+		}
+
+		svg {
+			display: none;
+		}
+	}
+}

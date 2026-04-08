@@ -1,0 +1,9 @@
+@use "../tools" as *;
+
+.pattern-shop-by-category {
+	.wp-block-term-template.is-layout-grid {
+		@media (--md-down) {
+			grid-template-columns: 1fr;
+		}
+	}
+}

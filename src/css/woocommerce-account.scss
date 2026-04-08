@@ -76,7 +76,7 @@ $account-links: (
 
 	.woocommerce-MyAccount-content {
 		background-color: var(--wp--preset--color--base);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 		padding: var(--wp--preset--spacing--3-xl);
 		width: 100%;
 
@@ -113,10 +113,10 @@ $account-links: (
 
 			a {
 				align-items: center;
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 				color: var(--wp--preset--color--contrast);
 				display: flex;
-				font-size: var(--wp--preset--font-size--sm);
+				font-size: var(--wp--preset--font-size--md);
 				font-weight: var(--wp--custom--typography--font-weight--heading);
 				gap: var(--wp--preset--spacing--sm);
 				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
@@ -225,7 +225,7 @@ $account-links: (
 			// Registration on the account page is disabled.
 			&:not(:has(.u-columns)) {
 				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 				float: unset;
 				padding: var(--wp--preset--spacing--3-xl);
 				width: 100%;
@@ -258,7 +258,7 @@ $account-links: (
 		.col-1,
 		.col-2 {
 			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 			float: unset;
 			padding: var(--wp--preset--spacing--3-xl);
 			width: 100%;
@@ -314,7 +314,7 @@ $account-links: (
 
 				em {
 					color: var(--wp--preset--color--base-accent);
-					font-size: var(--wp--preset--font-size--sm);
+					font-size: var(--wp--preset--font-size--md);
 					font-style: normal;
 					margin-top: var(--wp--preset--spacing--sm);
 				}
@@ -387,7 +387,7 @@ $account-links: (
 
 			li a {
 				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 				flex-direction: column;
 				justify-content: center;
 				padding: var(--wp--preset--spacing--3-xl);
@@ -468,7 +468,7 @@ $account-links: (
 		.edit {
 			align-items: center;
 			display: inline-flex;
-			font-size: var(--wp--preset--font-size--xs);
+			font-size: var(--wp--preset--font-size--sm);
 			gap: var(--wp--preset--spacing--sm);
 			margin: unset;
 
@@ -484,7 +484,7 @@ $account-links: (
 
 	.woocommerce-Address {
 		border: 1px solid var(--wp--custom--color--border);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--md));
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 		padding: var(--wp--preset--spacing--2-xl);
 	}
 

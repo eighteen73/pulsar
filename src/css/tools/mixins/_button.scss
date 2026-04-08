@@ -4,17 +4,23 @@
 /// Button styles.
 ///
 /// @param {string} $style - The style of the button.
+/// @param {string} $size - The size of the button. Possible values: default, small.
 ///
 /// @example scss - Primary button
 /// .button {
 ///   @include button(primary);
 /// }
 ///
-@mixin button($style: primary) {
+@mixin button($style: primary, $size: default) {
+	--button-padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+	--button-font-size: var(--wp--preset--font-size--md);
+
 	align-items: center;
 	box-shadow: unset;
 	cursor: pointer;
 	display: inline-flex;
+	font-size: var(--button-font-size);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	gap: var(--wp--preset--spacing--sm);
 	justify-content: center;
 	text-align: center;
@@ -24,9 +30,17 @@
 		border-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
 		opacity var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
 
+	@if $size == small {
+		--button-font-size: var(--wp--preset--font-size--sm);
+	}
+
 	@if $style == primary or $style == secondary {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--custom--border--radius--sm));
-		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		padding: var(--button-padding);
+
+		@if $size == small {
+			--button-padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+		}
 	}
 
 	@if $style == primary {

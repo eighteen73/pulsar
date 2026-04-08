@@ -1,7 +1,7 @@
 @use "tools" as *;
 
 .site-footer {
-	font-size: var(--wp--preset--font-size--sm);
+	font-size: var(--wp--preset--font-size--md);
 	margin: 0;
 
 	&__logo {
@@ -47,4 +47,29 @@
 		}
 	}
 
+	.has-contrast-background-color {
+		.site-footer__legal {
+			color: var(--wp--preset--color--base);
+
+			:where(a:not(.wp-element-button)) {
+				color: inherit;
+			}
+		}
+	}
+
+	&__secure-checkout {
+		align-items: center;
+		display: inline-flex;
+		gap: var(--wp--preset--spacing--xs);
+
+		&::after {
+			@include icon("icons/lock", 24px);
+		}
+	}
+
+	&__checkout-row {
+		@media (--lg) {
+			justify-content: space-between;
+		}
+	}
 }

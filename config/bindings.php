@@ -11,6 +11,7 @@ return [
 	Pulsar\Setup::class,
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
+	Pulsar\Editor\Bindings::class,
 	Pulsar\Editor\Patterns::class,
 	Pulsar\Editor\TemplateParts::class,
 	Pulsar\ThirdParty\BlockVisibility::class,

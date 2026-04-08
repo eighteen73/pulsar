@@ -1,0 +1,18 @@
+@use "tools" as *;
+
+.wp-block-woocommerce-cart-link {
+	.wc-block-cart-link {
+		@include button(secondary);
+		@include wc-cart-icon;
+
+		flex-direction: row-reverse;
+	}
+
+	.wc-block-cart-link__text {
+		display: none;
+
+		@media (--lg) {
+			display: block;
+		}
+	}
+}
