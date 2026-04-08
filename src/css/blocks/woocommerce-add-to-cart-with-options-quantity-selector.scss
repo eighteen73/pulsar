@@ -1,8 +1,6 @@
 @use "tools" as *;
 
 .woocommerce .wp-block-woocommerce-add-to-cart-with-options-quantity-selector {
-	order: -1;
-
 	.quantity {
 		@include wc-quantity-selector;
 	}
