@@ -27,6 +27,9 @@
 				}
 			}
 		},
+		"blockVisibility": {
+			"allowEditing": true
+		},
 		"border": {
 			"color": true,
 			"radius": true,
@@ -593,6 +596,10 @@
 			"textColumns": true,
 			"textDecoration": false,
 			"textTransform": false
+		},
+		"viewport": {
+			"mobile": "480px",
+			"tablet": "768px"
 		}
 	},
 	"styles": {
