@@ -28,7 +28,8 @@ class GravityForms implements Bootable {
 		add_filter( 'gform_disable_css', '__return_true' );
 
 		// Change Gravity Forms submit button to a button element.
-		// This allows us to use pseudo elements to style the button.
+		add_filter( 'gform_next_button', [ $this, 'input_to_button' ], 10, 2 );
+		add_filter( 'gform_previous_button', [ $this, 'input_to_button' ], 10, 2 );
 		add_filter( 'gform_submit_button', [ $this, 'input_to_button' ], 10, 2 );
 	}
 
@@ -42,23 +43,32 @@ class GravityForms implements Bootable {
 	}
 
 	/**
-	 * Converts inputs to buttons so they can have pseudo elements applied.
-	 *
-	 * @param string $button The button element.
-	 * @param array  $form   The form data.
-	 *
-	 * @return string
-	 */
+	* Filters the next, previous and submit buttons.
+	* Replaces the form's <input> buttons with <button> while maintaining attributes from original <input>.
+	*
+	* @param string $button Contains the <input> tag to be filtered.
+	* @param array  $form    Contains all the properties of the current form.
+	*
+	* @return string The filtered button.
+	*/
 	public function input_to_button( $button, $form ): string {
-		// save attribute string to $button_match[1]
-		preg_match( '/<input([^\/>]*)(\s\/)*>/', $button, $button_match );
+		$fragment = \WP_HTML_Processor::create_fragment( $button );
+		$fragment->next_token();
 
-		$button_text = ! empty( $form['button']['text'] ) ? $form['button']['text'] : __( 'Submit', 'pulsar' );
+		$attributes      = array( 'id', 'type', 'class', 'onclick' );
+		$data_attributes = $fragment->get_attribute_names_with_prefix( 'data-' );
+		if ( ! empty( $data_attributes ) ) {
+			$attributes = array_merge( $attributes, $data_attributes );
+		}
 
-		// remove value attribute (since we aren't using an input)
-		$button_atts = str_replace( "value='" . $form['button']['text'] . "' ", '', $button_match[1] );
+		$new_attributes = array();
+		foreach ( $attributes as $attribute ) {
+			$value = $fragment->get_attribute( $attribute );
+			if ( ! empty( $value ) ) {
+				$new_attributes[] = sprintf( '%s="%s"', $attribute, esc_attr( $value ) );
+			}
+		}
 
-		// create the button element with the button text inside the button element instead of set as the value
-		return '<button onclick=this.classList.add("is-loading") ' . $button_atts . '><span class="gform_button__text">' . esc_html( $button_text ) . '</span><span class="gform_button__loading"></span></button>';
+		return sprintf( '<button %s><span>%s</span></button>', implode( ' ', $new_attributes ), esc_html( $fragment->get_attribute( 'value' ) ) );
 	}
 }
