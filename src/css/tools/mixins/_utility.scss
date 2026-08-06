@@ -20,7 +20,7 @@
 /// @param {Boolean} $enforce - Use `!important` on applied properties
 ///
 @mixin hide-visually($enforce: false) {
-	$important: if($enforce, "!important", null);
+	$important: if(sass($enforce): "!important");
 
 	border: 0 #{$important};
 	clip: rect(1px, 1px, 1px, 1px) #{$important};
@@ -39,7 +39,7 @@
 /// @param {Boolean} $enforce - Use `!important` on applied properties.
 ///
 @mixin show-visually($enforce: false) {
-	$important: if($enforce, "!important", null);
+	$important: if(sass($enforce): "!important");
 
 	clip: auto #{$important};
 	clip-path: none #{$important};

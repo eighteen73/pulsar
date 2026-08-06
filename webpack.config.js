@@ -105,7 +105,6 @@ const pulsarConfig = {
 						options: {
 							sourceMap: true, // Required for resolve-url-loader
 							sassOptions: {
-								silenceDeprecations: ['mixed-decls'],
 								loadPaths: [__dirname + '/src/css'],
 							},
 						},
