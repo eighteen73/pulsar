@@ -17,8 +17,11 @@ const entries = {
 	'css/editor': ['./src/css/editor.scss'],
 	'css/woocommerce': ['./src/css/woocommerce.scss'],
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
-	'js/app': ['./src/js/app.js'],
 	'js/editor': ['./src/js/editor.js'],
+};
+
+const moduleEntries = {
+	'js/app': ['./src/js/app.js'],
 };
 /**
  * Converts a legacy path to the entry pair supported by webpack, e.g.:
@@ -236,4 +239,12 @@ const mergedScriptConfig = mergeWithRules({
 	},
 })(modifiedScriptConfig, pulsarConfig);
 
-module.exports = [mergedScriptConfig, moduleConfig];
+const mergedModuleConfig = {
+	...moduleConfig,
+	entry: {
+		...moduleConfig.entry(),
+		...moduleEntries,
+	},
+};
+
+module.exports = [mergedScriptConfig, mergedModuleConfig];
