@@ -225,8 +225,8 @@
 			},
 			"typography": {
 				"fontWeight": {
-					"body": 400,
-					"heading": 700
+					"primary": 400,
+					"secondary": 700
 				},
 				"lineHeight": {
 					"none": "1",

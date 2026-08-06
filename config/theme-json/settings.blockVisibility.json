@@ -3,7 +3,7 @@
 	"version": 3,
 	"settings": {
 		"blockVisibility": {
-      "allowEditing": true
-    }
+			"allowEditing": true
+		}
 	}
 }

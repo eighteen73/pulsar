@@ -3,8 +3,8 @@
 	"version": 3,
 	"settings": {
 		"viewport": {
-      "mobile": "480px",
+			"mobile": "480px",
 			"tablet": "768px"
-    }
+		}
 	}
 }
