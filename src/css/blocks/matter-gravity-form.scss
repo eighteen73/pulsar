@@ -67,6 +67,27 @@
 			:is(input, select) + label {
 				margin-top: var(--wp--preset--spacing--sm);
 			}
+
+			.hour_minute_colon {
+				display: none;
+			}
+
+			.gfield_time_ampm {
+				margin-left: 0;
+			}
+
+			.ginput_address_city,
+			.ginput_address_country,
+			.ginput_address_state,
+			.ginput_address_zip {
+				flex: unset;
+				width: calc(50% - (var(--wp--custom--spacing--block-gap) / 2));
+			}
+		}
+
+		.ginput_container_time {
+			max-width: 110px;
+			width: 100%;
 		}
 
 		.gf_clear_complex {
