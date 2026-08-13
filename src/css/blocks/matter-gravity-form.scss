@@ -151,6 +151,15 @@
 			grid-template-columns: minmax(16px, max-content) auto;
 		}
 
+		.ginput_container_date {
+			position: relative;
+
+			.ui-datepicker-trigger {
+				position: absolute;
+				right: var(--wp--preset--spacing--lg);
+			}
+		}
+
 		.gform_confirmation_message {
 			text-align: center;
 		}
@@ -231,6 +240,109 @@
 			display: none !important; // stylelint-disable-line declaration-no-important
 			left: -9999px;
 			position: absolute !important; // stylelint-disable-line declaration-no-important
+		}
+	}
+}
+
+.gravity-theme {
+	&.ui-datepicker {
+		--datepicker-border-color: var(--wp--custom--color--border-input);
+		--datepicker-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		--datepicker-cell-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		--datepicker-cell-padding: 1px;
+		--datepicker-cell-size: 40px;
+		--datepicker-color: var(--wp--preset--color--contrast);
+		--datepicker-color-disabled: var(--wp--custom--color--primitive--neutral--400);
+		--datepicker-color-hover: var(--wp--preset--color--brand-secondary);
+		--datepicker-color-selected: var(--wp--preset--color--brand-primary);
+		--datepicker-color-selected-text: var(--wp--preset--color--base);
+		--datepicker-gap: var(--wp--preset--spacing--sm);
+		--datepicker-max-width: 300px;
+		--datepicker-padding: var(--wp--preset--spacing--lg);
+		--datepicker-shadow: var(--wp--preset--shadow--md);
+		--datepicker-transition-duration: var(--wp--custom--transition--duration--normal);
+		--datepicker-transition-timing: var(--wp--custom--transition--timing--ease-out);
+
+		border: 1px solid var(--datepicker-border-color);
+		border-radius: var(--datepicker-border-radius);
+		box-shadow: var(--datepicker-shadow);
+		max-width: var(--datepicker-max-width);
+		padding: var(--datepicker-padding);
+
+		.ui-datepicker-header {
+			align-items: center;
+			gap: var(--datepicker-gap);
+			justify-content: space-between;
+
+			.ui-datepicker-prev,
+			.ui-datepicker-next {
+				position: static;
+				transform: none;
+				width: auto;
+			}
+
+			.ui-datepicker-next {
+				order: 3;
+			}
+
+			.ui-datepicker-title {
+				display: flex;
+				flex-grow: 1;
+				gap: var(--datepicker-gap);
+			}
+
+			select {
+				@include field-select;
+
+				color: var(--datepicker-color);
+				margin: 0 !important; // stylelint-disable-line declaration-no-important
+				padding-inline: var(--datepicker-padding);
+				text-align-last: left !important; // stylelint-disable-line declaration-no-important
+			}
+		}
+
+		.ui-datepicker-calendar {
+			color: var(--datepicker-color);
+
+			th span,
+			.ui-state-default {
+				block-size: 100%;
+				border: unset;
+				border-radius: var(--datepicker-cell-border-radius);
+				color: inherit;
+				inline-size: 100%;
+				transition:
+					color var(--datepicker-transition-duration) var(--datepicker-transition-timing),
+					background-color var(--datepicker-transition-duration) var(--datepicker-transition-timing);
+			}
+
+			th,
+			td {
+				block-size: var(--datepicker-cell-size);
+				padding: var(--datepicker-cell-padding);
+			}
+
+			td:not(.ui-state-disabled):not(.ui-datepicker-current-day) a:hover,
+			.ui-state-highlight {
+				background: var(--datepicker-color-hover);
+			}
+
+			td:not(.ui-state-disabled) a:focus-visible {
+				@include focus-ring;
+			}
+
+			.ui-datepicker-current-day .ui-state-default {
+				background: var(--datepicker-color-selected);
+				color: var(--datepicker-color-selected-text);
+			}
+
+			.ui-state-disabled .ui-state-default {
+				background: unset;
+				border: unset;
+				border-radius: unset;
+				box-shadow: unset;
+				color: var(--datepicker-color-disabled);
+			}
 		}
 	}
 }
