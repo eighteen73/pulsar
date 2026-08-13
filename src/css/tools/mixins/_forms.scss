@@ -109,10 +109,11 @@
 
 /// File input styles.
 @mixin field-file() {
-	background: unset;
-	border-color: inherit;
-	border-radius: 0;
-	border-width: 0;
+	background: var(--wp--preset--color--base);
+	border: 1px solid var(--wp--custom--color--border-input);
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+	box-shadow: none;
+	color: var(--wp--preset--color--contrast);
 	font-size: unset;
 	line-height: inherit;
 	padding: 0;
@@ -122,6 +123,14 @@
 		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
+	}
+
+	&::file-selector-button {
+		background-color: var(--wp--custom--color--primitive--neutral--100);
+		border: none;
+		border-right: 1px solid var(--wp--custom--color--border-input);
+		margin-right: var(--wp--preset--spacing--lg);
+		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
 	}
 }
 
