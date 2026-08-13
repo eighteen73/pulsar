@@ -46,7 +46,7 @@
 		.ginput_complex {
 			display: flex;
 			flex-wrap: wrap;
-			gap: var(--wp--custom--spacing--block-gap);
+			gap: var(--gap);
 
 			label {
 				@include label;
@@ -81,13 +81,23 @@
 			.ginput_address_state,
 			.ginput_address_zip {
 				flex: unset;
-				width: calc(50% - (var(--wp--custom--spacing--block-gap) / 2));
+				width: calc(50% - (var(--gap) / 2));
 			}
 		}
 
 		.ginput_container_time {
 			max-width: 110px;
 			width: 100%;
+		}
+
+		.gfield_header_item + .gfield_header_item:not(.gfield_header_item--icons),
+		.gfield_list_group_item + .gfield_list_group_item {
+			margin-left: var(--gap);
+		}
+
+		.gfield_list_group,
+		.gfield_list_header {
+			margin-bottom: var(--gap);
 		}
 
 		.gf_clear_complex {
