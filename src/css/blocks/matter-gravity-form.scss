@@ -56,6 +56,7 @@
 
 			> * {
 				flex: 1;
+				margin-bottom: 0;
 				padding: 0 !important; // stylelint-disable-line declaration-no-important
 			}
 
@@ -95,9 +96,17 @@
 			margin-left: var(--gap);
 		}
 
-		.gfield_list_group,
-		.gfield_list_header {
+		.gfield_header_item {
+			font-size: inherit;
+			padding-top: 0;
+		}
+
+		.gfield_list_group {
 			margin-bottom: var(--gap);
+		}
+
+		.gfield_list_header {
+			margin-bottom: var(--wp--preset--spacing--sm);
 		}
 
 		.gf_clear_complex {
