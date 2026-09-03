@@ -24,9 +24,6 @@ class GravityForms implements Bootable {
 	 */
 	public function boot(): void {
 
-		// Disable Gravity Forms styles.
-		add_filter( 'gform_disable_css', '__return_true' );
-
 		// Change Gravity Forms submit button to a button element.
 		add_filter( 'gform_next_button', [ $this, 'input_to_button' ], 10, 2 );
 		add_filter( 'gform_previous_button', [ $this, 'input_to_button' ], 10, 2 );

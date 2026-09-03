@@ -1,0 +1,388 @@
+@use "tools" as *;
+
+.wp-block-matter-gravity-form {
+	--gap: var(--wp--custom--spacing--block-gap);
+
+	.gform_wrapper,
+	.gform_wrapper.gravity-theme {
+		margin-top: 0;
+
+		input[type="color"],
+		input[type="date"],
+		input[type="datetime-local"],
+		input[type="datetime"],
+		input[type="email"],
+		input[type="month"],
+		input[type="number"],
+		input[type="password"],
+		input[type="search"],
+		input[type="tel"],
+		input[type="text"],
+		input[type="time"],
+		input[type="url"],
+		input[type="week"],
+		select,
+		textarea {
+			@include field-input;
+		}
+
+		textarea {
+			@include field-textarea;
+		}
+
+		.gform_fields {
+			display: grid;
+			gap: var(--gap);
+
+			@media (--md) {
+				grid-template-columns: repeat(12, 1fr);
+			}
+		}
+
+		.ginput_full:not(:last-of-type) {
+			margin-bottom: 0;
+		}
+
+		.ginput_complex {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--gap);
+
+			label {
+				@include label;
+				font-weight: var(--wp--custom--typography--font-weight--primary);
+				padding-top: 0;
+			}
+
+			> * {
+				flex: 1;
+				margin-bottom: 0;
+				padding: 0 !important; // stylelint-disable-line declaration-no-important
+			}
+
+			.ginput_full {
+				flex: 0 0 100%;
+			}
+
+			label + :is(input, select),
+			:is(input, select) + label {
+				margin-top: var(--wp--preset--spacing--sm);
+			}
+
+			.hour_minute_colon {
+				display: none;
+			}
+
+			.gfield_time_ampm {
+				margin-left: 0;
+			}
+
+			.ginput_address_city,
+			.ginput_address_country,
+			.ginput_address_state,
+			.ginput_address_zip {
+				flex: unset;
+				width: calc(50% - (var(--gap) / 2));
+			}
+		}
+
+		.ginput_container_time {
+			max-width: 110px;
+			width: 100%;
+		}
+
+		.gfield_header_item + .gfield_header_item:not(.gfield_header_item--icons),
+		.gfield_list_group_item + .gfield_list_group_item {
+			margin-left: var(--gap);
+		}
+
+		.gfield_header_item {
+			font-size: inherit;
+			padding-top: 0;
+		}
+
+		.gfield_list_group {
+			margin-bottom: var(--gap);
+		}
+
+		.gfield_list_header {
+			margin-bottom: var(--wp--preset--spacing--sm);
+		}
+
+		.gf_clear_complex {
+			display: none;
+		}
+
+		.ginput_container_address {
+			margin-inline: 0;
+		}
+
+		.ginput_container {
+			.small {
+				width: calc(25% - var(--gap));
+			}
+
+			.medium {
+				width: calc(50% - var(--gap) / 2);
+			}
+
+			.large {
+				width: 100%;
+			}
+		}
+
+		.gfield_radio,
+		.gfield_checkbox {
+			display: grid;
+			gap: var(--wp--preset--spacing--sm);
+		}
+
+		.gform_required_legend {
+			display: none;
+		}
+
+		.gfield_required {
+			color: var(--wp--custom--color--error);
+			font-size: inherit;
+			font-style: inherit;
+			font-weight: inherit;
+			padding-inline-start: 0;
+		}
+
+		.gfield_label {
+			@include label;
+			padding-top: 0;
+
+			> .gfield_required {
+				margin-left: var(--wp--preset--spacing--xs);
+			}
+		}
+
+		.gfield_description {
+			font-size: inherit;
+			padding: 0;
+		}
+
+		.gform_drop_area {
+			background-color: transparent;
+			border-color: var(--wp--custom--color--border-input);
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			padding: var(--wp--preset--spacing--2-xl);
+
+			.button {
+				@include button(secondary);
+			}
+		}
+
+		.ginput_container_radio,
+		.ginput_container_checkbox,
+		.ginput_container_consent {
+			label {
+				display: inline-block;
+				font-size: inherit;
+				margin: 0;
+				vertical-align: middle;
+			}
+		}
+
+		.ginput_container_consent {
+			display: inline-grid;
+			gap: var(--wp--preset--spacing--sm);
+			grid-template-columns: minmax(16px, max-content) auto;
+		}
+
+		.ginput_container_date {
+			position: relative;
+
+			.ui-datepicker-trigger {
+				position: absolute;
+				right: var(--wp--preset--spacing--lg);
+			}
+		}
+
+		.gform_confirmation_message {
+			text-align: center;
+		}
+
+		.gform_button,
+		.gform-button {
+			@include button(primary);
+		}
+
+		.gform_validation_errors {
+			margin-bottom: var(--gap);
+		}
+
+		.gform_footer {
+			margin-top: calc(var(--gap) * 2);
+			padding: 0;
+
+			.gform-button {
+				margin-bottom: 0;
+			}
+		}
+
+		.gform_submission_error {
+			color: var(--wp--custom--color--error);
+			font-size: var(--wp--preset--font-size--md);
+			font-weight: var(--wp--custom--typography--font-weight--primary);
+			margin-top: 0;
+			text-transform: none;
+
+			&:focus {
+				outline: 0;
+			}
+		}
+
+		.gfield_error {
+			input,
+			select,
+			textarea {
+				border-color: var(--wp--custom--color--error);
+			}
+		}
+
+		.validation_message {
+			color: var(--wp--custom--color--error);
+			margin-top: var(--wp--preset--spacing--sm);
+		}
+
+		.gform_heading {
+			margin-bottom: var(--gap);
+		}
+
+		.gform_title {
+			margin-top: 0;
+		}
+
+		.gsection {
+			border-bottom: 1px solid var(--wp--custom--color--border);
+			padding: 0 0 var(--gap) 0;
+		}
+
+		.gsection_description {
+			color: var(--wp--preset--color--base-accent);
+			margin-bottom: 0;
+			margin-top: var(--wp--preset--spacing--sm);
+		}
+
+		.gform_hidden {
+			display: none;
+		}
+
+		.gfield_visibility_hidden {
+			left: -9999px;
+			position: absolute;
+			visibility: hidden;
+		}
+
+		.gform_validation_container {
+			display: none !important; // stylelint-disable-line declaration-no-important
+			left: -9999px;
+			position: absolute !important; // stylelint-disable-line declaration-no-important
+		}
+	}
+}
+
+.gravity-theme {
+	&.ui-datepicker {
+		--datepicker-border-color: var(--wp--custom--color--border-input);
+		--datepicker-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		--datepicker-cell-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		--datepicker-cell-padding: 1px;
+		--datepicker-cell-size: 40px;
+		--datepicker-color: var(--wp--preset--color--contrast);
+		--datepicker-color-disabled: var(--wp--custom--color--primitive--neutral--400);
+		--datepicker-color-hover: var(--wp--preset--color--brand-secondary);
+		--datepicker-color-selected: var(--wp--preset--color--brand-primary);
+		--datepicker-color-selected-text: var(--wp--preset--color--base);
+		--datepicker-gap: var(--wp--preset--spacing--sm);
+		--datepicker-max-width: 300px;
+		--datepicker-padding: var(--wp--preset--spacing--lg);
+		--datepicker-shadow: var(--wp--preset--shadow--md);
+		--datepicker-transition-duration: var(--wp--custom--transition--duration--normal);
+		--datepicker-transition-timing: var(--wp--custom--transition--timing--ease-out);
+
+		border: 1px solid var(--datepicker-border-color);
+		border-radius: var(--datepicker-border-radius);
+		box-shadow: var(--datepicker-shadow);
+		max-width: var(--datepicker-max-width);
+		padding: var(--datepicker-padding);
+
+		.ui-datepicker-header {
+			align-items: center;
+			gap: var(--datepicker-gap);
+			justify-content: space-between;
+
+			.ui-datepicker-prev,
+			.ui-datepicker-next {
+				position: static;
+				transform: none;
+				width: auto;
+			}
+
+			.ui-datepicker-next {
+				order: 3;
+			}
+
+			.ui-datepicker-title {
+				display: flex;
+				flex-grow: 1;
+				gap: var(--datepicker-gap);
+			}
+
+			select {
+				@include field-select;
+
+				color: var(--datepicker-color);
+				margin: 0 !important; // stylelint-disable-line declaration-no-important
+				padding-inline: var(--datepicker-padding);
+				text-align-last: left !important; // stylelint-disable-line declaration-no-important
+			}
+		}
+
+		.ui-datepicker-calendar {
+			color: var(--datepicker-color);
+
+			th span,
+			.ui-state-default {
+				block-size: 100%;
+				border: unset;
+				border-radius: var(--datepicker-cell-border-radius);
+				color: inherit;
+				inline-size: 100%;
+				transition:
+					color var(--datepicker-transition-duration) var(--datepicker-transition-timing),
+					background-color var(--datepicker-transition-duration) var(--datepicker-transition-timing);
+			}
+
+			th,
+			td {
+				block-size: var(--datepicker-cell-size);
+				padding: var(--datepicker-cell-padding);
+			}
+
+			td:not(.ui-state-disabled):not(.ui-datepicker-current-day) a:hover,
+			.ui-state-highlight {
+				background: var(--datepicker-color-hover);
+			}
+
+			td:not(.ui-state-disabled) a:focus-visible {
+				@include focus-ring;
+			}
+
+			.ui-datepicker-current-day .ui-state-default {
+				background: var(--datepicker-color-selected);
+				color: var(--datepicker-color-selected-text);
+			}
+
+			.ui-state-disabled .ui-state-default {
+				background: unset;
+				border: unset;
+				border-radius: unset;
+				box-shadow: unset;
+				color: var(--datepicker-color-disabled);
+			}
+		}
+	}
+}
