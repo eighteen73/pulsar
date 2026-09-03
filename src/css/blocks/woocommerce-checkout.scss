@@ -77,6 +77,7 @@
 	}
 
 	// Order summary styles.
+	// stylelint-disable-next-line no-duplicate-selectors
 	.wp-block-woocommerce-checkout-order-summary-block {
 		font-size: var(--wp--preset--font-size--md);
 		padding: unset;
@@ -182,6 +183,7 @@
 			margin: unset;
 		}
 
+		// stylelint-disable-next-line no-duplicate-selectors
 		.wc-block-components-product-details {
 			margin-top: var(--wp--preset--spacing--md);
 		}
