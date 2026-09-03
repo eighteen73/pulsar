@@ -39,7 +39,7 @@
 	$string: #{$string};
 
 	/// Loop over the string and check for a number.
-	@for $i from 1 through str-length($string) {
+	@for $i from 1 through string.length($string) {
 		$character: string.slice($string, $i, $i);
 		$next-character: string.slice($string, $i + 1, $i + 1);
 

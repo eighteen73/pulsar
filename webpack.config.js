@@ -17,8 +17,11 @@ const entries = {
 	'css/editor': ['./src/css/editor.scss'],
 	'css/woocommerce': ['./src/css/woocommerce.scss'],
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
-	'js/app': ['./src/js/app.js'],
 	'js/editor': ['./src/js/editor.js'],
+};
+
+const moduleEntries = {
+	'js/app': ['./src/js/app.js'],
 };
 /**
  * Converts a legacy path to the entry pair supported by webpack, e.g.:
@@ -105,7 +108,6 @@ const pulsarConfig = {
 						options: {
 							sourceMap: true, // Required for resolve-url-loader
 							sassOptions: {
-								silenceDeprecations: ['mixed-decls'],
 								loadPaths: [__dirname + '/src/css'],
 							},
 						},
@@ -160,6 +162,7 @@ const pulsarConfig = {
 				'./config/theme-json/settings.general.json',
 				'./config/theme-json/settings.background.json',
 				'./config/theme-json/settings.blocks.json',
+				'./config/theme-json/settings.blockVisibility.json',
 				'./config/theme-json/settings.border.json',
 				'./config/theme-json/settings.color.json',
 				'./config/theme-json/settings.custom.json',
@@ -170,6 +173,7 @@ const pulsarConfig = {
 				'./config/theme-json/settings.shadow.json',
 				'./config/theme-json/settings.spacing.json',
 				'./config/theme-json/settings.typography.json',
+				'./config/theme-json/settings.viewport.json',
 				'./config/theme-json/styles.json',
 				'./config/theme-json/customTemplates.json',
 				'./config/theme-json/templateParts.json',
@@ -235,4 +239,12 @@ const mergedScriptConfig = mergeWithRules({
 	},
 })(modifiedScriptConfig, pulsarConfig);
 
-module.exports = [mergedScriptConfig, moduleConfig];
+const mergedModuleConfig = {
+	...moduleConfig,
+	entry: {
+		...moduleConfig.entry(),
+		...moduleEntries,
+	},
+};
+
+module.exports = [mergedScriptConfig, mergedModuleConfig];

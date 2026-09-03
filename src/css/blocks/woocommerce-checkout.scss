@@ -77,6 +77,7 @@
 	}
 
 	// Order summary styles.
+	// stylelint-disable-next-line no-duplicate-selectors
 	.wp-block-woocommerce-checkout-order-summary-block {
 		font-size: var(--wp--preset--font-size--md);
 		padding: unset;
@@ -120,7 +121,7 @@
 			border-radius: 50%;
 			color: var(--wp--preset--color--base);
 			font-size: 60%;
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 			height: 24px;
 			width: 24px;
 		}
@@ -128,7 +129,7 @@
 		.wc-block-components-product-name {
 			color: var(--wp--preset--color--contrast);
 			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 			margin: unset;
 			text-decoration: none;
 		}
@@ -148,7 +149,7 @@
 			}
 
 			.wc-block-formatted-money-amount {
-				font-weight: var(--wp--custom--typography--font-weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--primary);
 			}
 		}
 
@@ -157,7 +158,7 @@
 		}
 
 		.wc-block-components-order-summary-item__total-price {
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 			line-height: var(--wp--custom--typography--line-height--tight);
 
 			.wc-block-formatted-money-amount {
@@ -182,12 +183,13 @@
 			margin: unset;
 		}
 
+		// stylelint-disable-next-line no-duplicate-selectors
 		.wc-block-components-product-details {
 			margin-top: var(--wp--preset--spacing--md);
 		}
 
 		.wc-block-components-product-details__name {
-			font-weight: var(--wp--custom--typography--font-weight--body);
+			font-weight: var(--wp--custom--typography--font-weight--primary);
 		}
 	}
 
@@ -222,13 +224,13 @@
 		padding: var(--wp--preset--spacing--xl);
 
 		address .wc-block-components-address-card__address-section:first-child {
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 		}
 	}
 
 	.wc-block-components-checkbox__label {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 
 	.wc-block-components-form .wc-block-components-text-input input:-webkit-autofill:focus,
@@ -296,7 +298,7 @@
 
 		label {
 			@include label;
-			font-weight: var(--wp--custom--typography--font-weight--body);
+			font-weight: var(--wp--custom--typography--font-weight--primary);
 			left: var(--wp--preset--spacing--lg);
 		}
 	}
@@ -373,12 +375,12 @@
 
 	.wc-block-components-totals-item__label {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 
 	.wc-block-components-totals-item__value {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 
 		strong,
 		.wc-block-components-formatted-money-amount {
@@ -390,7 +392,7 @@
 		.wc-block-components-totals-item__label,
 		.wc-block-components-totals-item__value {
 			font-size: var(--wp--preset--font-size--xl);
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 		}
 	}
 
@@ -465,7 +467,7 @@
 
 	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__label {
 		font-size: var(--wp--preset--font-size--md);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 
 	.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__input {
@@ -499,11 +501,11 @@
 
 		.wcs-recurring-totals-panel__title {
 			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 		}
 
 		.wc-block-components-totals-item__description {
-			font-weight: var(--wp--custom--typography--font-weight--body);
+			font-weight: var(--wp--custom--typography--font-weight--primary);
 		}
 
 		.wc-block-components-totals-wrapper:last-child {

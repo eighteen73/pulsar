@@ -43,25 +43,25 @@ class GravityForms implements Bootable {
 	}
 
 	/**
-	* Filters the next, previous and submit buttons.
-	* Replaces the form's <input> buttons with <button> while maintaining attributes from original <input>.
-	*
-	* @param string $button Contains the <input> tag to be filtered.
-	* @param array  $form    Contains all the properties of the current form.
-	*
-	* @return string The filtered button.
-	*/
+	 * Filters the next, previous and submit buttons.
+	 * Replaces the form's <input> buttons with <button> while maintaining attributes from original <input>.
+	 *
+	 * @param string $button Contains the <input> tag to be filtered.
+	 * @param array  $form    Contains all the properties of the current form.
+	 *
+	 * @return string The filtered button.
+	 */
 	public function input_to_button( $button, $form ): string {
 		$fragment = \WP_HTML_Processor::create_fragment( $button );
 		$fragment->next_token();
 
-		$attributes      = array( 'id', 'type', 'class', 'onclick' );
+		$attributes      = [ 'id', 'type', 'class', 'onclick' ];
 		$data_attributes = $fragment->get_attribute_names_with_prefix( 'data-' );
 		if ( ! empty( $data_attributes ) ) {
 			$attributes = array_merge( $attributes, $data_attributes );
 		}
 
-		$new_attributes = array();
+		$new_attributes = [];
 		foreach ( $attributes as $attribute ) {
 			$value = $fragment->get_attribute( $attribute );
 			if ( ! empty( $value ) ) {

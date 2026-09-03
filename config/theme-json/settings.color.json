@@ -34,17 +34,17 @@
 					"slug": "accent-secondary",
 					"color": "var:custom|color|primitive|secondary|500"
 				},
-        {
+				{
 					"name": "Accent: Tertiary",
 					"slug": "accent-tertiary",
 					"color": "var:custom|color|primitive|neutral|400"
 				},
-        {
+				{
 					"name": "Tint: Primary",
 					"slug": "tint-primary",
 					"color": "var:custom|color|primitive|secondary|50"
 				},
-        {
+				{
 					"name": "Tint: Secondary",
 					"slug": "tint-secondary",
 					"color": "var:custom|color|primitive|secondary|100"

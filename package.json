@@ -27,21 +27,21 @@
     "npm": ">=10.0.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^8.0.0",
     "@eighteen73/browserslist-config-wordpress": "^1.0.1",
-    "@eighteen73/eslint-config-wordpress": "^1.0.3",
-    "@eighteen73/stylelint-config-wordpress": "^1.2.3",
-    "@wordpress/icons": "^10.21.0",
-    "@wordpress/prettier-config": "^4.21.0",
-    "@wordpress/scripts": "^30.14.1",
-    "fast-glob": "^3.3.0",
+    "@eighteen73/eslint-config-wordpress": "^2.0.0",
+    "@eighteen73/stylelint-config-wordpress": "^2.0.0",
+    "@wordpress/icons": "^15.5.0",
+    "@wordpress/prettier-config": "^4.54.0",
+    "@wordpress/scripts": "^34.2.0",
+    "fast-glob": "^3.3.3",
     "merge-jsons-webpack-plugin": "^2.0.1",
-    "postcss-preset-env": "^9.0.0",
+    "postcss-preset-env": "^11.3.2",
     "resolve-url-loader": "^5.0.0",
-    "webpack-merge": "^5.9.0",
-    "webpack-remove-empty-scripts": "^1.0"
+    "webpack-merge": "^6.0.1",
+    "webpack-remove-empty-scripts": "^1.1.1"
   },
   "dependencies": {
-    "@10up/block-components": "^1.19.1",
     "modern-normalize": "^2.0.0"
   }
 }

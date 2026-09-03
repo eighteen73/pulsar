@@ -54,7 +54,7 @@
 
 			th {
 				font-size: var(--wp--preset--font-size--lg);
-				font-weight: var(--wp--custom--typography--font-weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--secondary);
 				text-transform: none;
 			}
 
@@ -84,7 +84,7 @@
 			.wc-block-components-product-name {
 				color: var(--wp--preset--color--contrast);
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--font-weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--secondary);
 				line-height: var(--wp--custom--typography--line-height--tight);
 				text-decoration: none;
 			}
@@ -126,7 +126,7 @@
 
 		.wc-block-cart__totals-title {
 			font-size: var(--wp--preset--font-size--lg);
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 			text-transform: none;
 		}
 
@@ -141,7 +141,7 @@
 
 		.wc-block-components-totals-footer-item .wc-block-components-totals-item__label,
 		.wc-block-components-totals-item__value .wc-block-formatted-money-amount {
-			font-weight: var(--wp--custom--typography--font-weight--heading);
+			font-weight: var(--wp--custom--typography--font-weight--secondary);
 		}
 	}
 
