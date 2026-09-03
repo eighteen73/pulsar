@@ -4,13 +4,13 @@
 	"settings": {
 		"blocks": {
 			"core/button": {
-        "settings": {
-          "color": {
-            "background": false,
-			      "text": false
-          }
-        }
-      },
+				"settings": {
+					"color": {
+						"background": false,
+						"text": false
+					}
+				}
+			},
 			"core/column": {
 				"spacing": {
 					"units": ["%", "px", "vw"]

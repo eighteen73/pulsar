@@ -19,14 +19,14 @@
 
 	&__copyright {
 		font-size: var(--wp--preset--font-size--sm);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 
 	&__credit {
 		display: inline-flex;
 		flex-wrap: wrap;
 		font-size: var(--wp--preset--font-size--sm);
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 		gap: var(--wp--preset--spacing--xs);
 		text-decoration: none;
 

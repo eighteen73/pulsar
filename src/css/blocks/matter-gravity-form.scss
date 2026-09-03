@@ -50,7 +50,7 @@
 
 			label {
 				@include label;
-				font-weight: var(--wp--custom--typography--font-weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--primary);
 				padding-top: 0;
 			}
 
@@ -225,7 +225,7 @@
 		.gform_submission_error {
 			color: var(--wp--custom--color--error);
 			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--font-weight--body);
+			font-weight: var(--wp--custom--typography--font-weight--primary);
 			margin-top: 0;
 			text-transform: none;
 

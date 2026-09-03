@@ -5,7 +5,7 @@
 	color: var(--wp--preset--color--contrast);
 	display: block;
 	font-size: var(--wp--preset--font-size--md);
-	font-weight: var(--wp--custom--typography--font-weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
 	margin-bottom: var(--wp--preset--spacing--sm);
 
 	&:last-child {
@@ -16,7 +16,7 @@
 /// Legend styles.
 @mixin legend() {
 	font-size: var(--wp--preset--font-size--xl);
-	font-weight: var(--wp--custom--typography--font-weight--heading);
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
 	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
 	margin-bottom: var(--wp--preset--spacing--sm);
 }
@@ -191,7 +191,7 @@
 	}
 
 	+ label {
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 }
 
@@ -237,7 +237,7 @@
 	}
 
 	+ label {
-		font-weight: var(--wp--custom--typography--font-weight--body);
+		font-weight: var(--wp--custom--typography--font-weight--primary);
 	}
 }
 

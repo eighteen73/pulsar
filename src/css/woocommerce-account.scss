@@ -117,7 +117,7 @@ $account-links: (
 				color: var(--wp--preset--color--contrast);
 				display: flex;
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--font-weight--heading);
+				font-weight: var(--wp--custom--typography--font-weight--secondary);
 				gap: var(--wp--preset--spacing--sm);
 				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
 				text-decoration: none;
@@ -335,7 +335,7 @@ $account-links: (
 			.woocommerce-form__label-for-checkbox {
 				align-items: center;
 				display: flex;
-				font-weight: var(--wp--custom--typography--font-weight--body);
+				font-weight: var(--wp--custom--typography--font-weight--primary);
 				gap: var(--wp--preset--spacing--sm);
 				margin-bottom: unset;
 			}
