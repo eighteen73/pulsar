@@ -22,3 +22,43 @@
 		@include focus-ring;
 	}
 }
+
+// Vertical: the list beside the panels, marker on the inline end.
+.wp-block-matter-tabs.is-vertical {
+	column-gap: var(--wp--preset--spacing--2-xl);
+
+	> .wp-block-matter-tabs__list {
+		border-block-end: 0;
+		border-inline-end: 1px solid var(--scheme--border);
+		gap: 0;
+		margin-block-end: 0;
+	}
+
+	.wp-block-matter-tabs__tab {
+		border-block-end: 0;
+		border-inline-end: 2px solid transparent;
+		margin-block-end: 0;
+		margin-inline-end: -1px;
+		padding-inline-end: var(--wp--preset--spacing--xl);
+		text-align: start;
+
+		&[aria-selected="true"] {
+			border-inline-end-color: var(--scheme--link);
+		}
+	}
+}
+
+// Dropdown shown below the block's chosen breakpoint.
+.wp-block-matter-tabs__select {
+	border: 1px solid var(--scheme--border-strong);
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+	color: inherit;
+	font: inherit;
+	margin-block-end: var(--wp--preset--spacing--xl);
+	padding: var(--wp--preset--spacing--md);
+	width: 100%;
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
