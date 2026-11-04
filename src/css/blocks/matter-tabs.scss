@@ -1,0 +1,24 @@
+@use "../tools" as *;
+
+/// Pulsar styling for Matter's tabs.
+.wp-block-matter-tabs__list {
+	border-block-end: 1px solid var(--scheme--border);
+	gap: var(--wp--preset--spacing--xl);
+	margin-block-end: var(--wp--preset--spacing--xl);
+}
+
+.wp-block-matter-tabs__tab {
+	border-block-end: 2px solid transparent;
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	margin-block-end: -1px;
+	padding-block: var(--wp--preset--spacing--md);
+
+	&[aria-selected="true"] {
+		border-block-end-color: var(--scheme--link);
+		color: var(--scheme--link);
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}

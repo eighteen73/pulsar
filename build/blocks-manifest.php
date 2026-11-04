@@ -400,7 +400,9 @@ return array(
 							'core/image',
 							'core/video',
 							'core/embed',
-							'matter/collapsible'
+							'matter/collapsible',
+							'matter/accordion',
+							'matter/tabs'
 						),
 						'template' => array(
 							array(
