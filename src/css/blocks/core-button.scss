@@ -50,3 +50,18 @@
 .wp-block-button__link {
 	@include button(primary);
 }
+
+// Button icons (Matter button icon extension).
+.wp-block-button__link.has-icon {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-button__icon {
+	display: inline-flex;
+
+	svg {
+		fill: currentcolor;
+		height: 1em;
+		width: 1em;
+	}
+}

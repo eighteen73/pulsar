@@ -26,6 +26,7 @@ class Matter implements Bootable {
 		add_filter( 'matter_settings_fields', [ $this, 'settings_fields' ] );
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
+		add_filter( 'matter_button_icon_collections', fn() => [ 'pulsar' ] );
 	}
 
 	/**
