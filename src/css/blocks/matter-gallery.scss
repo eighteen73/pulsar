@@ -1,0 +1,75 @@
+@use "../tools" as *;
+
+/// Pulsar gallery variants. The variant sets the crop ratio here and the image
+/// size in config/matter.php, so every image in a gallery matches.
+.wp-block-matter-gallery {
+	--gallery-gap: var(--wp--preset--spacing--md);
+	--gallery-ratio: 1;
+
+	&.is-style-landscape {
+		--gallery-ratio: 4 / 3;
+	}
+
+	.wp-block-image img {
+		aspect-ratio: var(--gallery-ratio);
+		display: block;
+		height: auto;
+		object-fit: cover;
+		width: 100%;
+	}
+}
+
+.wp-block-matter-gallery.is-grid .wp-block-matter-gallery__items {
+	gap: var(--gallery-gap);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	@media (--md) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	@media (--lg) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+// Carousel layout (the carousel block's own Pulsar styles only load with it).
+.wp-block-matter-gallery .wp-block-matter-carousel {
+	--carousel-gap: var(--gallery-gap);
+	--carousel-per-view: 2;
+
+	@media (--md) {
+		--carousel-per-view: 3;
+	}
+
+	@media (--lg) {
+		--carousel-per-view: 4;
+	}
+}
+
+.wp-block-matter-gallery .wp-block-matter-carousel__track {
+	gap: var(--carousel-gap);
+
+	> * {
+		flex-basis: calc((100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
+	}
+}
+
+.wp-block-matter-gallery .wp-block-matter-carousel__controls {
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-gallery__more {
+	@include button(secondary);
+
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-gallery__open,
+.wp-block-matter-gallery__more,
+.wp-block-matter-carousel__prev,
+.wp-block-matter-carousel__next,
+.wp-block-matter-carousel__dot {
+	&:focus-visible {
+		@include focus-ring;
+	}
+}

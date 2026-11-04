@@ -9,6 +9,8 @@
  *
  * Carousel options: loop (bool), align (start|center|end), slidesToScroll
  * (int|'auto'), autoplay (seconds, 0 = off), arrows (bool), dots (bool).
+ * Gallery options: imageSize (a registered image size), plus the carousel
+ * options for its carousel layout.
  *
  * @package Pulsar
  */
@@ -30,9 +32,17 @@ return [
 		],
 	],
 	'matter/gallery'  => [
-		// Options for the gallery's carousel style.
-		'default' => [
+		// Gallery variants set the image size here and the crop ratio in
+		// src/css/blocks/matter-gallery.scss. Carousel options apply to the
+		// gallery's carousel layout.
+		'default'   => [
+			'label'          => __( 'Square', 'pulsar' ),
+			'imageSize'      => 'medium_large',
 			'slidesToScroll' => 'auto',
+		],
+		'landscape' => [
+			'label'     => __( 'Landscape', 'pulsar' ),
+			'imageSize' => 'large',
 		],
 	],
 ];
