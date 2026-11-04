@@ -3,7 +3,9 @@
 	"version": 3,
 	"settings": {
 		"color": {
-			"background": true,
+			"background": false,
+			"button": false,
+			"caption": false,
 			"custom": false,
 			"customDuotone": false,
 			"customGradient": false,
@@ -12,55 +14,56 @@
 			"defaultPalette": false,
 			"duotone": [],
 			"gradients": [],
+			"heading": false,
 			"link": false,
 			"palette": [
 				{
 					"name": "Brand: Primary",
 					"slug": "brand-primary",
-					"color": "var:custom|color|primitive|primary|600"
+					"color": "#3B4E7A"
 				},
 				{
 					"name": "Brand: Secondary",
 					"slug": "brand-secondary",
-					"color": "var:custom|color|primitive|primary|100"
+					"color": "#EDF2FF"
 				},
 				{
 					"name": "Accent: Primary",
 					"slug": "accent-primary",
-					"color": "var:custom|color|primitive|neutral|700"
+					"color": "#4B5563"
 				},
 				{
 					"name": "Accent: Secondary",
 					"slug": "accent-secondary",
-					"color": "var:custom|color|primitive|secondary|500"
+					"color": "#D97706"
 				},
 				{
 					"name": "Accent: Tertiary",
 					"slug": "accent-tertiary",
-					"color": "var:custom|color|primitive|neutral|400"
+					"color": "#9CA3AF"
 				},
 				{
 					"name": "Tint: Primary",
 					"slug": "tint-primary",
-					"color": "var:custom|color|primitive|secondary|50"
+					"color": "#FFF9F2"
 				},
 				{
 					"name": "Tint: Secondary",
 					"slug": "tint-secondary",
-					"color": "var:custom|color|primitive|secondary|100"
+					"color": "#FEEED9"
 				},
 				{
 					"name": "Contrast",
 					"slug": "contrast",
-					"color": "var:custom|color|primitive|neutral|950"
+					"color": "#030712"
 				},
 				{
 					"name": "Base",
 					"slug": "base",
-					"color": "var:custom|color|primitive|neutral|0"
+					"color": "#FFFFFF"
 				}
 			],
-			"text": true
+			"text": false
 		}
 	}
 }

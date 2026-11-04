@@ -2,7 +2,7 @@
 
 /// Label styles.
 @mixin label() {
-	color: var(--wp--preset--color--contrast);
+	color: var(--scheme--text);
 	display: block;
 	font-size: var(--wp--preset--font-size--md);
 	font-weight: var(--wp--custom--typography--font-weight--secondary);
@@ -25,7 +25,7 @@
 @mixin field-input() {
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
-	border: 1px solid var(--wp--custom--color--border-input);
+	border: 1px solid var(--scheme--border-strong);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	color: var(--wp--preset--color--contrast);
@@ -45,13 +45,13 @@
 	}
 
 	&:disabled {
-		border-color: var(--wp--preset--color--base-accent);
-		color: var(--wp--preset--color--base-accent);
+		border-color: var(--scheme--muted);
+		color: var(--scheme--muted);
 		cursor: not-allowed;
 	}
 
 	&::placeholder {
-		color: var(--wp--preset--color--base-accent);
+		color: var(--scheme--muted);
 		opacity: 1;
 	}
 }
@@ -67,7 +67,7 @@
 @mixin field-select($multiple: false) {
 	--icon-size: 1em;
 	appearance: none;
-	border: 1px solid var(--wp--custom--color--border-input);
+	border: 1px solid var(--scheme--border-strong);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	display: block;
@@ -101,8 +101,8 @@
 	}
 
 	&:disabled {
-		border-color: var(--wp--preset--color--base-accent);
-		color: var(--wp--preset--color--base-accent);
+		border-color: var(--scheme--muted);
+		color: var(--scheme--muted);
 		cursor: not-allowed;
 	}
 }
@@ -110,7 +110,7 @@
 /// File input styles.
 @mixin field-file() {
 	background: var(--wp--preset--color--base);
-	border: 1px solid var(--wp--custom--color--border-input);
+	border: 1px solid var(--scheme--border-strong);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 	box-shadow: none;
 	color: var(--wp--preset--color--contrast);
@@ -126,9 +126,9 @@
 	}
 
 	&::file-selector-button {
-		background-color: var(--wp--custom--color--primitive--neutral--100);
+		background-color: var(--wp--custom--color--neutral--100);
 		border: none;
-		border-right: 1px solid var(--wp--custom--color--border-input);
+		border-right: 1px solid var(--scheme--border-strong);
 		margin-right: var(--wp--preset--spacing--lg);
 		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
 	}
@@ -141,7 +141,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
-	border: 1px solid var(--wp--custom--color--border-input);
+	border: 1px solid var(--scheme--border-strong);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 	color: var(--wp--preset--color--brand-primary);
 	display: inline-block;
@@ -202,7 +202,7 @@
 	appearance: none;
 	background-color: var(--wp--preset--color--base);
 	background-origin: border-box;
-	border: 1px solid var(--wp--custom--color--border-input);
+	border: 1px solid var(--scheme--border-strong);
 	border-radius: 100%;
 	color: var(--wp--preset--color--brand-primary);
 	display: inline-block;

@@ -17,13 +17,6 @@ use WP_Block_Type_Registry;
  */
 class Blocks implements Bootable {
 
-
-	// Quick dev. toggle to re-enable all blocks while testing.
-	const ENABLE_ALL_BLOCKS = true;
-
-	// Should all Pulsar registered blocks be included without having to list them.
-	const ENABLE_ALL_PULSAR_BLOCKS = true;
-
 	/**
 	 * Bootstraps the class' actions/filters.
 	 *
@@ -34,9 +27,6 @@ class Blocks implements Bootable {
 
 		// Load individual block CSS files on demand.
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
-
-		// Remove the default SVG filters from the body.
-		remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
 
 		// Register custom blocks.
 		add_action( 'init', [ $this, 'register_custom_blocks' ] );
@@ -68,31 +58,67 @@ class Blocks implements Bootable {
 	}
 
 	/**
-	 * Limit the blocks that are allowed to content editors.
+	 * Limit the blocks that are available to content editors.
 	 *
-	 * @param array|bool               $block_editor_context Array of block type slugs, or boolean to enable/disable all
-	 * @param \WP_Block_Editor_Context $editor_context       The current block editor context
+	 * Only applies to editors with a post (the post editor). The Site Editor is
+	 * developer-only and keeps every block.
+	 *
+	 * @param array|bool              $allowed_blocks Array of block type slugs, or boolean to enable/disable all.
+	 * @param WP_Block_Editor_Context $editor_context The current block editor context.
 	 * @return array|bool
 	 */
-	public function allowed_blocks( array|bool $block_editor_context, \WP_Block_Editor_Context $editor_context ): array|bool {
-		if ( self::ENABLE_ALL_BLOCKS || empty( $editor_context->post ) ) {
-			return $block_editor_context;
+	public function allowed_blocks( array|bool $allowed_blocks, WP_Block_Editor_Context $editor_context ): array|bool {
+		if ( empty( $editor_context->post ) || false === $allowed_blocks ) {
+			return $allowed_blocks;
 		}
 
-		if ( self::ENABLE_ALL_PULSAR_BLOCKS ) {
-			$registry      = WP_Block_Type_Registry::get_instance();
-			$block_names   = array_keys( $registry->get_all_registered() );
-			$pulsar_blocks = array_filter(
-				$block_names,
-				function ( $key ) {
-					return strpos( $key, 'pulsar/' ) !== false;
-				},
-			);
+		$config = Config::get( 'allowed-blocks' );
 
-			// Merge the pulsar_blocks array with the allowed-blocks array
-			return array_merge( Config::get( 'allowed-blocks' ) ?? [], $pulsar_blocks );
+		if ( empty( $config ) ) {
+			return $allowed_blocks;
 		}
 
-		return Config::get( 'allowed-blocks' ) ?? $block_editor_context;
+		$allowed = $this->expand_wildcards( $config );
+
+		// Respect restrictions applied earlier by other code.
+		if ( is_array( $allowed_blocks ) ) {
+			$allowed = array_values( array_intersect( $allowed, $allowed_blocks ) );
+		}
+
+		/**
+		 * Filters the blocks available to content editors.
+		 *
+		 * @param string[]                $allowed        Allowed block names.
+		 * @param WP_Block_Editor_Context $editor_context The current block editor context.
+		 */
+		return apply_filters( 'pulsar_allowed_blocks', $allowed, $editor_context );
+	}
+
+	/**
+	 * Expand `namespace/*` entries into every registered block in that namespace.
+	 *
+	 * @param string[] $entries Block names and namespace wildcards.
+	 * @return string[]
+	 */
+	private function expand_wildcards( array $entries ): array {
+		$registered = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+		$blocks     = [];
+
+		foreach ( $entries as $entry ) {
+			if ( ! str_ends_with( $entry, '/*' ) ) {
+				$blocks[] = $entry;
+				continue;
+			}
+
+			$prefix = substr( $entry, 0, -1 );
+
+			foreach ( $registered as $name ) {
+				if ( str_starts_with( $name, $prefix ) ) {
+					$blocks[] = $name;
+				}
+			}
+		}
+
+		return array_values( array_unique( $blocks ) );
 	}
 }

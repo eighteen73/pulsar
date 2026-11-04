@@ -61,16 +61,20 @@ class SingleProduct implements Bootable {
 		global $product;
 		$price = $product->get_price_html();
 
+		$selector = '[data-is-descendent-of-single-product-template=true] .wc-block-components-product-price';
+
 		wc_enqueue_js(
-			"
-			$(document).on('show_variation', 'form.cart', function( event, variation ) {
-				if(variation.price_html) $('[data-is-descendent-of-single-product-template=true] .wc-block-components-product-price').html(variation.price_html);
-				$('.woocommerce-variation-price').hide();
-			});
-			$(document).on('hide_variation', 'form.cart', function( event, variation ) {
-				$('[data-is-descendent-of-single-product-template=true] .wc-block-components-product-price').html('" . $price . "');
-			});
-			"
+			sprintf(
+				'$(document).on("show_variation", "form.cart", function( event, variation ) {
+					if ( variation.price_html ) $(%1$s).html( variation.price_html );
+					$(".woocommerce-variation-price").hide();
+				});
+				$(document).on("hide_variation", "form.cart", function() {
+					$(%1$s).html( %2$s );
+				});',
+				wp_json_encode( $selector ),
+				wp_json_encode( $price )
+			)
 		);
 	}
 }

@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
-  "settings": {
-    "dimensions": {
-      "aspectRatio": true,
-      "aspectRatios": [
-        {
+	"settings": {
+		"dimensions": {
+			"aspectRatio": false,
+			"aspectRatios": [
+				{
 					"name": "Square - 1:1",
 					"slug": "square",
 					"ratio": "1"
@@ -30,9 +30,12 @@
 					"slug": "3-4",
 					"ratio": "3/4"
 				}
-      ],
-      "defaultAspectRatios": false,
-      "minHeight": false
-    }
-  }
+			],
+			"defaultAspectRatios": false,
+			"height": false,
+			"minHeight": false,
+			"minWidth": false,
+			"width": false
+		}
+	}
 }

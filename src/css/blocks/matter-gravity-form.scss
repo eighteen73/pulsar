@@ -165,7 +165,7 @@
 
 		.gform_drop_area {
 			background-color: transparent;
-			border-color: var(--wp--custom--color--border-input);
+			border-color: var(--scheme--border-strong);
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 			padding: var(--wp--preset--spacing--2-xl);
 
@@ -256,12 +256,12 @@
 		}
 
 		.gsection {
-			border-bottom: 1px solid var(--wp--custom--color--border);
+			border-bottom: 1px solid var(--scheme--border);
 			padding: 0 0 var(--gap) 0;
 		}
 
 		.gsection_description {
-			color: var(--wp--preset--color--base-accent);
+			color: var(--scheme--muted);
 			margin-bottom: 0;
 			margin-top: var(--wp--preset--spacing--sm);
 		}
@@ -286,13 +286,13 @@
 
 .gravity-theme {
 	&.ui-datepicker {
-		--datepicker-border-color: var(--wp--custom--color--border-input);
+		--datepicker-border-color: var(--scheme--border-strong);
 		--datepicker-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 		--datepicker-cell-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 		--datepicker-cell-padding: 1px;
 		--datepicker-cell-size: 40px;
 		--datepicker-color: var(--wp--preset--color--contrast);
-		--datepicker-color-disabled: var(--wp--custom--color--primitive--neutral--400);
+		--datepicker-color-disabled: var(--wp--custom--color--neutral--400);
 		--datepicker-color-hover: var(--wp--preset--color--brand-secondary);
 		--datepicker-color-selected: var(--wp--preset--color--brand-primary);
 		--datepicker-color-selected-text: var(--wp--preset--color--base);

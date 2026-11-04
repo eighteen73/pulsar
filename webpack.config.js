@@ -9,13 +9,31 @@ const CopyWebpackPlugin = require('copy-webpack-plugin'); // eslint-disable-line
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
 const { basename } = require('path');
+const breakpoints = require('./config/breakpoints.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+/**
+ * Sass importer exposing `config/breakpoints.json` as `@use "pulsar:breakpoints"`.
+ *
+ * Keeps one breakpoint source for SCSS, PHP and JavaScript.
+ */
+const breakpointsImporter = {
+	canonicalize(url) {
+		return url === 'pulsar:breakpoints' ? new URL(url) : null;
+	},
+	load() {
+		const entries = Object.entries(breakpoints)
+			.map(([name, size]) => `"${name}": ${size}`)
+			.join(', ');
+
+		return { contents: `$breakpoints: (${entries});`, syntax: 'scss' };
+	},
+};
 
 const entries = {
 	'css/app': ['./src/css/app.scss'],
 	'css/editor': ['./src/css/editor.scss'],
-	'css/woocommerce': ['./src/css/woocommerce.scss'],
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
 	'js/editor': ['./src/js/editor.js'],
 };
@@ -109,6 +127,7 @@ const pulsarConfig = {
 							sourceMap: true, // Required for resolve-url-loader
 							sassOptions: {
 								loadPaths: [__dirname + '/src/css'],
+								importers: [breakpointsImporter],
 							},
 						},
 					},
@@ -173,7 +192,6 @@ const pulsarConfig = {
 				'./config/theme-json/settings.shadow.json',
 				'./config/theme-json/settings.spacing.json',
 				'./config/theme-json/settings.typography.json',
-				'./config/theme-json/settings.viewport.json',
 				'./config/theme-json/styles.json',
 				'./config/theme-json/customTemplates.json',
 				'./config/theme-json/templateParts.json',

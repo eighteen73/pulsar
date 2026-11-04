@@ -84,14 +84,6 @@ class Enqueue implements Bootable {
 			return;
 		}
 
-		wp_enqueue_style(
-			'pulsar-woocommerce-styles',
-			get_theme_file_uri( 'build/css/woocommerce.css' ),
-			Asset::attribute( 'woocommerce', 'css', 'dependencies' ),
-			Asset::attribute( 'woocommerce', 'css', 'version' ),
-			'screen, print',
-		);
-
 		if ( \is_account_page() ) {
 			wp_enqueue_style(
 				'pulsar-woocommerce-account-styles',
@@ -105,7 +97,7 @@ class Enqueue implements Bootable {
 
 	/**
 	 * Enqueues block-specific stylesheets so that they only load when the block
-	 * is in use. Block styles are stored under `/assets/css/blocks` are
+	 * is in use. Block styles built to `/build/css/blocks` are
 	 * automatically enqueued. Each file should be named
 	 * `{$block_namespace}-{$block_slug}.css`.
 	 *
@@ -204,8 +196,8 @@ class Enqueue implements Bootable {
 		wp_enqueue_script(
 			'pulsar-editor-scripts',
 			get_theme_file_uri( 'build/js/editor.js' ),
-			Asset::attribute( 'editor-scripts', 'js', 'dependencies' ),
-			Asset::attribute( 'editor-scripts', 'js', 'version' ),
+			Asset::attribute( 'editor', 'js', 'dependencies' ),
+			Asset::attribute( 'editor', 'js', 'version' ),
 			[
 				'in_footer' => true,
 			],

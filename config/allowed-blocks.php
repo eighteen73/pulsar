@@ -1,11 +1,17 @@
 <?php
 /**
- * List all the blocks that you wish to be made available to content editors.
+ * Blocks available to content editors in the post editor.
  *
- * Note: Custom blocks also need to be added to this array.
+ * Clients compose pages from developer-built sections and components, filling
+ * them with core content blocks. Layout blocks (group, columns, cover etc.) are
+ * deliberately excluded: layout decisions live in section blocks.
  *
- * A restrictive but useful default has been included.
- * Return an empty array if you wish to remove this restriction.
+ * Entries ending in `/*` allow every registered block in that namespace,
+ * including child blocks (inner-only blocks are still restricted by their own
+ * `parent`/`ancestor`/`inserter` settings).
+ *
+ * Templates and template parts are developer-owned files and may use any block.
+ * Return an empty array to remove the restriction entirely.
  *
  * @see https://wordpress.org/documentation/article/blocks-list/
  *
@@ -13,43 +19,24 @@
  */
 
 return [
-	// Text
+	// Text.
 	'core/heading',
+	'core/paragraph',
 	'core/list',
 	'core/list-item',
-	'core/paragraph',
 	'core/quote',
 	'core/table',
 
-	// Media
-	'core/cover',
-	'core/embed',
-	'core/gallery',
+	// Media.
 	'core/image',
-	'core/media-text',
 	'core/video',
+	'core/embed',
 
-	// Design
-	'core/button',
+	// Actions.
 	'core/buttons',
-	'core/column',
-	'core/columns',
-	'core/group',
+	'core/button',
 
-	// Theme
-	'core/archive-title',
-	'core/post-title',
-	'core/post-excerpt',
-	'core/post-featured-image',
-	'core/post-content',
-	'core/query-loop',
-	'core/query-title',
-	'core/search',
-	'core/search-results-title',
-	'core/template-part',
-
-	// WooCommerce
-
-	// Pulsar
-	'pulsar/template-part',
+	// Sections and components.
+	'pulsar/*',
+	'matter/*',
 ];

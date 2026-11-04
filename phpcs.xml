@@ -20,4 +20,7 @@
 	</rule>
 
 	<rule ref="Eighteen73-WordPress-Default" />
+
+	<!-- Minimum supported PHP version. -->
+	<config name="testVersion" value="8.3-"/>
 </ruleset>

@@ -44,9 +44,9 @@
 	}
 
 	@if $style == primary {
-		background-color: var(--wp--preset--color--brand-primary);
+		background-color: var(--scheme--button-background);
 		border: unset;
-		color: var(--wp--preset--color--base);
+		color: var(--scheme--button-text);
 
 		&:hover {
 			opacity: 0.8;
@@ -59,8 +59,8 @@
 
 	@if $style == secondary {
 		background-color: transparent;
-		border: 2px solid var(--wp--preset--color--brand-primary);
-		color: var(--wp--preset--color--brand-primary);
+		border: 2px solid var(--scheme--button-background);
+		color: var(--scheme--button-background);
 
 		&:focus-visible {
 			@include focus-ring;
@@ -70,7 +70,7 @@
 	@if $style == link {
 		background-color: transparent;
 		border: unset;
-		color: var(--wp--preset--color--brand-primary);
+		color: var(--scheme--link);
 		padding: unset;
 
 		&:focus-visible {

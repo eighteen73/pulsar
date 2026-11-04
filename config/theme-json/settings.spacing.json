@@ -3,11 +3,11 @@
 	"version": 3,
 	"settings": {
 		"spacing": {
-			"blockGap": true,
-			"defaultSpacingSizes": false,
+			"blockGap": false,
 			"customSpacingSize": false,
-			"margin": true,
-			"padding": true,
+			"defaultSpacingSizes": false,
+			"margin": false,
+			"padding": false,
 			"spacingSizes": [
 				{
 					"name": "XS (4px)",
@@ -75,7 +75,14 @@
 					"slug": "9-xl"
 				}
 			],
-			"units": ["%", "px", "em", "rem", "vh", "vw"]
+			"units": [
+				"%",
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw"
+			]
 		}
 	}
 }

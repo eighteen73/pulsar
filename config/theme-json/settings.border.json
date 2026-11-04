@@ -3,10 +3,8 @@
 	"version": 3,
 	"settings": {
 		"border": {
-			"color": true,
-			"radius": true,
-			"style": false,
-			"width": false,
+			"color": false,
+			"radius": false,
 			"radiusSizes": [
 				{
 					"name": "xs",
@@ -43,7 +41,9 @@
 					"slug": "full",
 					"size": "100%"
 				}
-			]
+			],
+			"style": false,
+			"width": false
 		}
 	}
 }

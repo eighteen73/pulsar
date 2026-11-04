@@ -1,12 +1,8 @@
-/// Map of breakpoints.
-$breakpoints: (
-	xs: 480px,
-	sm: 640px,
-	md: 768px,
-	lg: 1024px,
-	xl: 1280px,
-	2-xl: 1536px,
-);
+@use "pulsar:breakpoints" as config;
+
+/// Map of breakpoints, generated from `config/breakpoints.json`
+/// (the single source shared with PHP and JavaScript).
+$breakpoints: config.$breakpoints;
 
 /// Generate a min-width and max-width query for each size.
 @each $breakpoint-name, $breakpoint-size in $breakpoints {

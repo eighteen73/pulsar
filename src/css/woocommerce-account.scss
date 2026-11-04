@@ -18,7 +18,7 @@ $account-links: (
 	// General styles
 	.site-main {
 		background-color: var(--wp--preset--color--tint-primary);
-		padding-block: var(--wp--custom--spacing--group-gap);
+		padding-block: var(--wp--custom--spacing--section-gap);
 
 		// On larger screens we hide the title, as its duplicated for styling purposes.
 		.wp-block-post-title {
@@ -272,12 +272,12 @@ $account-links: (
 			}
 
 			p {
-				color: var(--wp--preset--color--base-accent);
+				color: var(--scheme--muted);
 			}
 		}
 
 		.col-2 {
-			border-top: 1px solid var(--wp--custom--color--border);
+			border-top: 1px solid var(--scheme--border);
 			padding-top: var(--wp--preset--spacing--2-xl);
 		}
 
@@ -313,7 +313,7 @@ $account-links: (
 				}
 
 				em {
-					color: var(--wp--preset--color--base-accent);
+					color: var(--scheme--muted);
 					font-size: var(--wp--preset--font-size--md);
 					font-style: normal;
 					margin-top: var(--wp--preset--spacing--sm);
@@ -402,7 +402,7 @@ $account-links: (
 
 				&:hover,
 				&:focus-visible {
-					background-color: var(--wp--custom--color--error-accent);
+					background-color: var(--wp--custom--color--error-surface);
 				}
 			}
 		}
@@ -483,7 +483,7 @@ $account-links: (
 	}
 
 	.woocommerce-Address {
-		border: 1px solid var(--wp--custom--color--border);
+		border: 1px solid var(--scheme--border);
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
 		padding: var(--wp--preset--spacing--2-xl);
 	}

@@ -14,9 +14,10 @@ The theme demo is hosted on WordPress Playground, which is a system that runs Wo
 
 Make sure all dependencies have been installed before moving on:
 
-- [WordPress](https://wordpress.org/) >= 6.6
-- [PHP](https://secure.php.net/manual/en/install.php) >= 7.4.0
-- [Node.js](http://nodejs.org/) >= 16
+- [WordPress](https://wordpress.org/) >= 7.1
+- [PHP](https://secure.php.net/manual/en/install.php) >= 8.3
+- [Node.js](http://nodejs.org/) >= 20
+- [Matter](https://github.com/eighteen73/matter) >= 1.0
 
 ## Theme development
 
@@ -24,5 +25,5 @@ Make sure all dependencies have been installed before moving on:
 
 ### Build commands
 
-- `npm run watch` — Compile assets when file changes are made, start Browsersync session
+- `npm run start` — Compile assets when file changes are made
 - `npm run build` — Compile assets for production

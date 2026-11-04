@@ -14,10 +14,10 @@
 }
 
 @mixin wc-sale-badge() {
-	background-color: var(--wp--custom--color--primitive--success--100);
+	background-color: var(--wp--custom--color--success-surface);
 	border: none;
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--custom--color--primitive--success--900);
+	color: var(--wp--custom--color--success);
 	font-size: var(--wp--preset--font-size--sm);
 	font-weight: var(--wp--custom--typography--font-weight--primary);
 	line-height: var(--wp--custom--typography--line-height--none);
@@ -34,7 +34,7 @@
 	.wc-block-components-quantity-selector__input {
 		@include field-input;
 		-webkit-appearance: textfield;
-		border: 1px solid var(--wp--custom--color--border-input);
+		border: 1px solid var(--scheme--border-strong);
 		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
 		font-size: var(--wp--preset--font-size--sm);
 		max-width: unset;

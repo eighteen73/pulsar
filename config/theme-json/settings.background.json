@@ -4,7 +4,8 @@
 	"settings": {
 		"background": {
 			"backgroundImage": false,
-			"backgroundSize": false
+			"backgroundSize": false,
+			"gradient": false
 		}
 	}
 }

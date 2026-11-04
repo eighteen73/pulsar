@@ -1,22 +1,3 @@
-@use "../../settings" as *;
-@use "sass:map";
-@use "sass:list";
-
-/// Adjusts the `--wp--style--global--wide-size` css variable,
-/// which is used for the container per breakpoint.
-/// This lets the container behave like Tailwind, where it
-/// snaps to sizes at breakpoints.
-/// This should be used on the `<body>` tag.
-@mixin container-sizes($sizes...) {
-	@each $size in $sizes {
-		$breakpoint: map.get($breakpoints, $size);
-
-		@media (--#{$size}) {
-			--wp--style--global--wide-size: #{$breakpoint};
-		}
-	}
-}
-
 /// This recreates what WordPress adds to blocks
 /// when a block is layout constrained.
 /// This recreates the `has-global-padding` and `is-layout-constrained`

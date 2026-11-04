@@ -10,6 +10,6 @@
 	margin: 0;
 
 	> .wp-block-group + .wp-block-group {
-		margin-block-start: var(--wp--custom--spacing--group-gap);
+		margin-block-start: var(--wp--custom--spacing--section-gap);
 	}
 }
