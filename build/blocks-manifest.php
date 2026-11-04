@@ -402,7 +402,9 @@ return array(
 							'core/embed',
 							'matter/collapsible',
 							'matter/accordion',
-							'matter/tabs'
+							'matter/tabs',
+							'matter/carousel',
+							'matter/gallery'
 						),
 						'template' => array(
 							array(

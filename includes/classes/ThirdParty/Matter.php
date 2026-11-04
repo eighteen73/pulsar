@@ -25,6 +25,7 @@ class Matter implements Bootable {
 	public function boot(): void {
 		add_filter( 'matter_settings_fields', [ $this, 'settings_fields' ] );
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
+		add_filter( 'matter_variants', [ $this, 'variants' ] );
 	}
 
 	/**
@@ -57,5 +58,15 @@ class Matter implements Bootable {
 		$theme = wp_json_file_decode( get_theme_file_path( 'config/breakpoints.json' ), [ 'associative' => true ] );
 
 		return is_array( $theme ) ? $theme : $breakpoints;
+	}
+
+	/**
+	 * Block variants from `config/matter.php`, merged over Matter's defaults.
+	 *
+	 * @param array $variants Matter's variants.
+	 * @return array
+	 */
+	public function variants( array $variants ): array {
+		return array_replace_recursive( $variants, Config::get( 'matter' ) );
 	}
 }
