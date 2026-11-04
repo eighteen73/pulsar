@@ -11,6 +11,9 @@
  * (int|'auto'), autoplay (seconds, 0 = off), arrows (bool), dots (bool).
  * Gallery options: imageSize (a registered image size), plus the carousel
  * options for its carousel layout.
+ * Tabs options: dropdownBelow (a breakpoint from breakpoints.json, or false
+ * to switch `.wp-block-matter-tabs.has-dropdown` in your own CSS) — used by
+ * tabs set to "Show as a dropdown on smaller screens".
  *
  * @package Pulsar
  */
@@ -29,6 +32,11 @@ return [
 			'loop'     => true,
 			'autoplay' => 6,
 			'arrows'   => false,
+		],
+	],
+	'matter/tabs'     => [
+		'default' => [
+			'dropdownBelow' => 'md',
 		],
 	],
 	'matter/gallery'  => [
