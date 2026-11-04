@@ -309,7 +309,8 @@ return array(
 							'core/list',
 							'core/quote',
 							'core/table',
-							'core/buttons'
+							'core/buttons',
+							'matter/collapsible'
 						),
 						'template' => array(
 							array(
@@ -398,7 +399,8 @@ return array(
 							'core/buttons',
 							'core/image',
 							'core/video',
-							'core/embed'
+							'core/embed',
+							'matter/collapsible'
 						),
 						'template' => array(
 							array(

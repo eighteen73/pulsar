@@ -24,7 +24,8 @@
             "core/buttons",
             "core/image",
             "core/video",
-            "core/embed"
+            "core/embed",
+            "matter/collapsible"
           ],
           "template": [
             [

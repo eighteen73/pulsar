@@ -45,7 +45,8 @@
             "core/list",
             "core/quote",
             "core/table",
-            "core/buttons"
+            "core/buttons",
+            "matter/collapsible"
           ],
           "template": [
             [
