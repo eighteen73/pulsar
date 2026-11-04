@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pulsar/text",
+  "version": "1.0.0",
+  "title": "Text",
+  "category": "sections",
+  "description": "Formatted text: headings, paragraphs, lists and quotes.",
+  "icon": "text",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "matter": {
+      "scheme": true,
+      "align": "full",
+      "slots": {
+        "content": {
+          "allowedBlocks": [
+            "core/heading",
+            "core/paragraph",
+            "core/list",
+            "core/quote",
+            "core/table",
+            "core/buttons",
+            "core/image",
+            "core/video",
+            "core/embed"
+          ],
+          "template": [
+            [
+              "core/heading",
+              {
+                "level": 2,
+                "placeholder": "Heading"
+              }
+            ],
+            [
+              "core/paragraph",
+              {
+                "placeholder": "Write some text…"
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "textdomain": "pulsar"
+}

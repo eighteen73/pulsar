@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pulsar/media-text",
+  "version": "1.0.0",
+  "title": "Media and text",
+  "category": "sections",
+  "description": "An image alongside text. Choose which side the image sits on.",
+  "icon": "align-pull-left",
+  "styles": [
+    {
+      "name": "default",
+      "label": "Image first",
+      "isDefault": true
+    },
+    {
+      "name": "media-end",
+      "label": "Image last"
+    }
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "matter": {
+      "scheme": true,
+      "align": "full",
+      "slots": {
+        "media": {
+          "allowedBlocks": [
+            "core/image",
+            "core/video",
+            "core/embed"
+          ],
+          "template": [
+            [
+              "core/image",
+              {}
+            ]
+          ]
+        },
+        "content": {
+          "allowedBlocks": [
+            "core/heading",
+            "core/paragraph",
+            "core/list",
+            "core/quote",
+            "core/table",
+            "core/buttons"
+          ],
+          "template": [
+            [
+              "core/heading",
+              {
+                "level": 2,
+                "placeholder": "Heading"
+              }
+            ],
+            [
+              "core/paragraph",
+              {
+                "placeholder": "Write some text…"
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "textdomain": "pulsar",
+  "render": "file:./render.php"
+}

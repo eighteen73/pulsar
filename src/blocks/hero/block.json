@@ -1,0 +1,68 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pulsar/hero",
+	"version": "1.0.0",
+	"title": "Hero",
+	"category": "sections",
+	"description": "Page introduction with a heading, text, buttons and an image.",
+	"icon": "cover-image",
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"matter": {
+			"scheme": true,
+			"align": "full",
+			"slots": {
+				"content": {
+					"allowedBlocks": [
+						"core/heading",
+						"core/paragraph",
+						"core/buttons"
+					],
+					"template": [
+						[
+							"core/heading",
+							{
+								"level": 1,
+								"placeholder": "Page heading"
+							}
+						],
+						[
+							"core/paragraph",
+							{
+								"placeholder": "Introduce the page\u2026"
+							}
+						],
+						[
+							"core/buttons",
+							{},
+							[
+								[
+									"core/button",
+									{
+										"placeholder": "Call to action"
+									}
+								]
+							]
+						]
+					]
+				},
+				"media": {
+					"allowedBlocks": [
+						"core/image"
+					],
+					"template": [
+						[
+							"core/image",
+							{}
+						]
+					],
+					"templateLock": "contentOnly"
+				}
+			}
+		}
+	},
+	"textdomain": "pulsar",
+	"render": "file:./render.php"
+}

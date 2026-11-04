@@ -1,0 +1,27 @@
+@use "../tools" as *;
+
+/// Cards sit inside the Cards section, so they aren't full-width bands.
+.wp-block-pulsar-card {
+	border: 1px solid var(--scheme--border);
+	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+	overflow: hidden;
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__media img {
+		aspect-ratio: 3 / 2;
+		display: block;
+		height: auto;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	&__content {
+		flex: 1;
+		padding: var(--wp--preset--spacing--xl);
+	}
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pulsar/card",
+  "version": "1.0.0",
+  "title": "Card",
+  "category": "sections",
+  "description": "An image, heading, text and link. Used inside Cards.",
+  "icon": "index-card",
+  "parent": [
+    "matter/slot"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "matter": {
+      "scheme": true,
+      "tagName": "article",
+      "slots": {
+        "media": {
+          "allowedBlocks": [
+            "core/image"
+          ],
+          "template": [
+            [
+              "core/image",
+              {}
+            ]
+          ],
+          "templateLock": "contentOnly"
+        },
+        "content": {
+          "allowedBlocks": [
+            "core/heading",
+            "core/paragraph",
+            "core/list",
+            "core/buttons"
+          ],
+          "template": [
+            [
+              "core/heading",
+              {
+                "level": 3,
+                "placeholder": "Card heading"
+              }
+            ],
+            [
+              "core/paragraph",
+              {
+                "placeholder": "Describe this card…"
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "textdomain": "pulsar"
+}

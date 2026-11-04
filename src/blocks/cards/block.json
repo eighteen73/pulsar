@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pulsar/cards",
+	"version": "1.0.0",
+	"title": "Cards",
+	"category": "sections",
+	"description": "An introduction followed by a grid of cards.",
+	"icon": "grid-view",
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"matter": {
+			"scheme": true,
+			"align": "full",
+			"slots": {
+				"intro": {
+					"allowedBlocks": [
+						"core/heading",
+						"core/paragraph",
+						"core/buttons"
+					],
+					"template": [
+						[
+							"core/heading",
+							{
+								"level": 2,
+								"placeholder": "Heading"
+							}
+						]
+					]
+				},
+				"items": {
+					"allowedBlocks": [
+						"pulsar/card"
+					],
+					"template": [
+						[
+							"pulsar/card",
+							{}
+						],
+						[
+							"pulsar/card",
+							{}
+						],
+						[
+							"pulsar/card",
+							{}
+						]
+					]
+				}
+			}
+		}
+	},
+	"textdomain": "pulsar",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,25 @@
+@use "../tools" as *;
+
+.wp-block-pulsar-hero {
+	&__inner {
+		align-items: center;
+		display: grid;
+		gap: var(--wp--custom--spacing--column-gap);
+
+		@media (--md) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	&__content {
+		max-width: var(--wp--style--global--content-size);
+	}
+
+	&__media img {
+		aspect-ratio: 4 / 3;
+		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--lg));
+		height: auto;
+		object-fit: cover;
+		width: 100%;
+	}
+}

@@ -1,0 +1,61 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pulsar/cta",
+	"version": "1.0.0",
+	"title": "Call to action",
+	"category": "sections",
+	"description": "A short message with buttons, usually in a stronger colour scheme.",
+	"icon": "megaphone",
+	"attributes": {
+		"scheme": {
+			"type": "string",
+			"default": "brand"
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"matter": {
+			"scheme": true,
+			"align": "full",
+			"slots": {
+				"content": {
+					"allowedBlocks": [
+						"core/heading",
+						"core/paragraph",
+						"core/buttons"
+					],
+					"template": [
+						[
+							"core/heading",
+							{
+								"level": 2,
+								"placeholder": "Heading"
+							}
+						],
+						[
+							"core/paragraph",
+							{
+								"placeholder": "Supporting text\u2026"
+							}
+						],
+						[
+							"core/buttons",
+							{},
+							[
+								[
+									"core/button",
+									{
+										"placeholder": "Call to action"
+									}
+								]
+							]
+						]
+					]
+				}
+			}
+		}
+	},
+	"textdomain": "pulsar"
+}
