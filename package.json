@@ -1,47 +1,47 @@
 {
-  "name": "pulsar",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "wp-scripts start --webpack-copy-php --experimental-modules --blocks-manifest",
-    "start:hot": "wp-scripts start --hot --webpack-copy-php --experimental-modules --blocks-manifest",
-    "build": "wp-scripts build --webpack-copy-php --experimental-modules --blocks-manifest",
-    "watch": "npm run start",
-    "production": "npm run build",
-    "lint": "npm run lint:css && npm run lint:js && npm run lint:php",
-    "lint:css": "stylelint './src/css/**/*.scss' --allow-empty-input",
-    "lint:js": "eslint './src/js/**/*.js' --no-error-on-unmatched-pattern",
-    "lint:php": "./vendor/bin/phpcs .",
-    "format:css": "stylelint --fix './src/css/**/*.scss' --allow-empty-input",
-    "format:js": "eslint --fix './src/js/**/*.js' --no-error-on-unmatched-pattern",
-    "format:php": "./vendor/bin/phpcbf .",
-    "i18n": "npm run i18n:textdomain && npm run i18n:pot",
-    "i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
-    "i18n:pot": "npx node-wp-i18n makepot",
-    "packages-update": "wp-scripts packages-update",
-    "check-engines": "wp-scripts check-engines",
-    "check-licenses": "wp-scripts check-licenses",
-    "create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar"
-  },
-  "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
-  },
-  "devDependencies": {
-    "@babel/runtime": "^8.0.0",
-    "@eighteen73/browserslist-config-wordpress": "^1.0.1",
-    "@eighteen73/eslint-config-wordpress": "^2.0.0",
-    "@eighteen73/stylelint-config-wordpress": "^2.0.0",
-    "@wordpress/icons": "^15.5.0",
-    "@wordpress/prettier-config": "^4.54.0",
-    "@wordpress/scripts": "^34.2.0",
-    "fast-glob": "^3.3.3",
-    "merge-jsons-webpack-plugin": "^2.0.1",
-    "postcss-preset-env": "^11.3.2",
-    "resolve-url-loader": "^5.0.0",
-    "webpack-merge": "^6.0.1",
-    "webpack-remove-empty-scripts": "^1.1.1"
-  },
-  "dependencies": {
-    "modern-normalize": "^2.0.0"
-  }
+	"name": "pulsar",
+	"version": "6.0.0",
+	"scripts": {
+		"start": "wp-scripts start --webpack-copy-php --experimental-modules --blocks-manifest",
+		"start:hot": "wp-scripts start --hot --webpack-copy-php --experimental-modules --blocks-manifest",
+		"build": "wp-scripts build --webpack-copy-php --experimental-modules --blocks-manifest",
+		"watch": "npm run start",
+		"production": "npm run build",
+		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
+		"lint:css": "stylelint './src/css/**/*.scss' --allow-empty-input",
+		"lint:js": "eslint './src/js/**/*.js' --no-error-on-unmatched-pattern",
+		"lint:php": "./vendor/bin/phpcs .",
+		"format:css": "stylelint --fix './src/css/**/*.scss' --allow-empty-input",
+		"format:js": "eslint --fix './src/js/**/*.js' --no-error-on-unmatched-pattern",
+		"format:php": "./vendor/bin/phpcbf .",
+		"i18n": "npm run i18n:textdomain && npm run i18n:pot",
+		"i18n:textdomain": "npx node-wp-i18n addtextdomain --exclude=vendor,node_modules",
+		"i18n:pot": "npx node-wp-i18n makepot",
+		"packages-update": "wp-scripts packages-update",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar"
+	},
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0"
+	},
+	"devDependencies": {
+		"@babel/runtime": "^8.0.0",
+		"@eighteen73/browserslist-config-wordpress": "^1.0.1",
+		"@eighteen73/eslint-config-wordpress": "^2.0.0",
+		"@eighteen73/stylelint-config-wordpress": "^2.0.0",
+		"@wordpress/icons": "^15.5.0",
+		"@wordpress/prettier-config": "^4.54.0",
+		"@wordpress/scripts": "^34.2.0",
+		"fast-glob": "^3.3.3",
+		"merge-jsons-webpack-plugin": "^2.0.1",
+		"postcss-preset-env": "^11.3.2",
+		"resolve-url-loader": "^5.0.0",
+		"webpack-merge": "^6.0.1",
+		"webpack-remove-empty-scripts": "^1.1.1"
+	},
+	"dependencies": {
+		"modern-normalize": "^2.0.0"
+	}
 }

@@ -9,6 +9,7 @@
 
 return [
 	Pulsar\Setup::class,
+	Pulsar\Requirements::class,
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Bindings::class,
