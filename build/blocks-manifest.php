@@ -5,14 +5,14 @@ return array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
 		'name' => 'pulsar/template-part',
-		'description' => 'Allows using PHP templates for template parts.',
+		'description' => 'Renders a version-controlled PHP template part from the theme template-parts folder.',
 		'version' => '0.1.0',
 		'title' => 'Theme Template Part',
 		'category' => 'theme',
 		'supports' => array(
 			'html' => false,
 			'reusable' => false,
-			'inserter' => true,
+			'inserter' => false,
 			'lock' => true,
 			'multiple' => true,
 			'interactivity' => array(

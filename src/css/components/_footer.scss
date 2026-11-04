@@ -1,8 +1,32 @@
 @use "tools" as *;
 
+/// Site footer (template-parts/site-footer.php).
 .site-footer {
+	border-block-start: 1px solid var(--scheme--border);
 	font-size: var(--wp--preset--font-size--md);
-	margin: 0;
+
+	&__inner {
+		margin-inline: auto;
+		max-width: calc(var(--wp--style--global--wide-size) + var(--wp--style--root--padding-left) + var(--wp--style--root--padding-right));
+		padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+	}
+
+	&__main {
+		display: grid;
+		gap: var(--wp--preset--spacing--3-xl);
+		padding-block: var(--wp--preset--spacing--3-xl);
+
+		@media (--md) {
+			grid-template-columns: 1fr 2fr;
+		}
+	}
+
+	&__brand {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--lg);
+		justify-items: start;
+	}
 
 	&__logo {
 		max-width: 200px;
@@ -17,9 +41,56 @@
 		width: 100%;
 	}
 
+	&__contact {
+		display: flex;
+		flex-direction: column;
+		font-style: normal;
+		gap: var(--wp--preset--spacing--xs);
+
+		p {
+			margin: 0;
+		}
+	}
+
+	&__social {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--md);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	&__social-link {
+		color: var(--scheme--text);
+		display: inline-flex;
+
+		svg {
+			fill: currentcolor;
+			height: 24px;
+			width: 24px;
+		}
+	}
+
+	&__menus {
+		display: grid;
+		gap: var(--wp--preset--spacing--xl);
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	}
+
+	&__legal {
+		align-items: center;
+		border-block-start: 1px solid var(--scheme--border);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+		justify-content: space-between;
+		padding-block: var(--wp--preset--spacing--lg);
+	}
+
 	&__copyright {
 		font-size: var(--wp--preset--font-size--sm);
-		font-weight: var(--wp--custom--typography--font-weight--primary);
+		margin: 0;
 	}
 
 	&__credit {
@@ -47,29 +118,14 @@
 		}
 	}
 
-	.has-contrast-background-color {
-		.site-footer__legal {
-			color: var(--wp--preset--color--base);
-
-			:where(a:not(.wp-element-button)) {
-				color: inherit;
-			}
-		}
-	}
-
 	&__secure-checkout {
 		align-items: center;
 		display: inline-flex;
 		gap: var(--wp--preset--spacing--xs);
+		margin: 0;
 
 		&::after {
 			@include icon("icons/lock", 24px);
-		}
-	}
-
-	&__checkout-row {
-		@media (--lg) {
-			justify-content: space-between;
 		}
 	}
 }

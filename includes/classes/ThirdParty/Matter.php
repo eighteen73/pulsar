@@ -24,6 +24,7 @@ class Matter implements Bootable {
 	 */
 	public function boot(): void {
 		add_filter( 'matter_settings_fields', [ $this, 'settings_fields' ] );
+		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 	}
 
 	/**
@@ -43,5 +44,18 @@ class Matter implements Bootable {
 	 */
 	public function settings_fields( array $fields ): array {
 		return array_merge( $fields, Config::get( 'settings' ) );
+	}
+
+	/**
+	 * Breakpoints from `config/breakpoints.json`, the theme's single source
+	 * (also compiled into the SCSS breakpoint map).
+	 *
+	 * @param array<string, string> $breakpoints Matter's defaults.
+	 * @return array<string, string>
+	 */
+	public function breakpoints( array $breakpoints ): array {
+		$theme = wp_json_file_decode( get_theme_file_path( 'config/breakpoints.json' ), [ 'associative' => true ] );
+
+		return is_array( $theme ) ? $theme : $breakpoints;
 	}
 }

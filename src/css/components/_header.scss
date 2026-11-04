@@ -1,8 +1,23 @@
 @use "tools" as *;
 
+/// Site header (template-parts/site-header.php).
+/// Below `lg` the navigation is an off-canvas panel opened by the menu toggle;
+/// from `lg` it sits inline between the logo and the actions.
 .site-header {
-	margin: 0;
+	background-color: var(--scheme--background);
 	position: relative;
+	z-index: 10;
+
+	&__inner {
+		align-items: center;
+		display: flex;
+		gap: var(--wp--preset--spacing--xl);
+		justify-content: space-between;
+		margin-inline: auto;
+		max-width: calc(var(--wp--style--global--wide-size) + var(--wp--style--root--padding-left) + var(--wp--style--root--padding-right));
+		padding-block: var(--wp--preset--spacing--xl);
+		padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+	}
 
 	&__logo {
 		font-family: unset;
@@ -19,5 +34,28 @@
 
 	&__logo-image {
 		width: 100%;
+	}
+
+	&__navigation {
+		@media (--lg) {
+			flex: 1 1 auto;
+
+			.matter-panel__content {
+				align-items: center;
+				display: flex;
+				gap: var(--wp--preset--spacing--xl);
+				justify-content: flex-end;
+			}
+		}
+	}
+
+	&__actions {
+		align-items: center;
+		display: flex;
+		gap: var(--wp--preset--spacing--md);
+	}
+
+	&__menu-toggle {
+		font-size: var(--wp--preset--font-size--lg);
 	}
 }

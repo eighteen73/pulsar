@@ -1,0 +1,40 @@
+@use "tools" as *;
+
+/// Theme styling for Matter menus (Eighteen73\Matter\menu()).
+/// Matter provides behaviour and functional layout; presentation lives here.
+.matter-menu {
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
+
+	.current-menu-item > .matter-menu__link,
+	.current-menu-ancestor > .matter-menu__link,
+	.current-menu-ancestor > .matter-menu__toggle {
+		color: var(--scheme--link);
+	}
+}
+
+.matter-menu__link {
+	color: inherit;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.matter-menu__link,
+.matter-menu__toggle,
+.matter-menu__back {
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+// Footer menus are simple vertical lists.
+.site-footer__menu .matter-menu__items {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.site-footer__legal-menu .matter-menu__items {
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--md);
+}

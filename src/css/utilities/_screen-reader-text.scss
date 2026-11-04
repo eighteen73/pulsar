@@ -1,0 +1,10 @@
+@use "tools" as *;
+
+/// Core's visually-hidden class (used by WordPress and Matter markup).
+.screen-reader-text {
+	@include hide-visually;
+
+	&:focus {
+		@include show-visually;
+	}
+}
