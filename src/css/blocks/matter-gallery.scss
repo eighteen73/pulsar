@@ -1,34 +1,14 @@
 @use "../tools" as *;
 
-/// Pulsar gallery variants. The variant sets the crop ratio here and the image
-/// size in config/matter.php, so every image in a gallery matches.
+/// Pulsar gallery. Editors choose the columns and aspect ratio (options in
+/// config/matter.php and theme.json's aspect ratio presets); the grid shows
+/// fewer columns where images would be narrower than --gallery-min-width.
 .wp-block-matter-gallery {
 	--gallery-gap: var(--wp--preset--spacing--md);
-	--gallery-ratio: 1;
-
-	&.is-style-landscape {
-		--gallery-ratio: 4 / 3;
-	}
+	--gallery-min-width: 9rem;
 
 	.wp-block-image img {
-		aspect-ratio: var(--gallery-ratio);
 		display: block;
-		height: auto;
-		object-fit: cover;
-		width: 100%;
-	}
-}
-
-.wp-block-matter-gallery.is-grid .wp-block-matter-gallery__items {
-	gap: var(--gallery-gap);
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-
-	@media (--md) {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-
-	@media (--lg) {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 }
 

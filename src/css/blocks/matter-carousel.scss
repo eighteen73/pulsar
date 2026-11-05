@@ -29,7 +29,9 @@
 	flex-basis: calc((100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
 }
 
-.wp-block-matter-carousel__track img {
+// Images within slides, e.g. cards. Carousels of only images use the aspect
+// ratio chosen in the editor (`.has-image-aspect-ratio`).
+.wp-block-matter-carousel:not(.has-image-aspect-ratio) .wp-block-matter-carousel__track img {
 	aspect-ratio: 16 / 9;
 	display: block;
 	height: auto;
@@ -37,7 +39,7 @@
 	width: 100%;
 }
 
-.wp-block-matter-carousel.is-style-cards .wp-block-matter-carousel__track img {
+.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio) .wp-block-matter-carousel__track img {
 	aspect-ratio: 4 / 3;
 }
 

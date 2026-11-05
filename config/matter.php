@@ -9,8 +9,11 @@
  *
  * Carousel options: loop (bool), align (start|center|end), slidesToScroll
  * (int|'auto'), autoplay (seconds, 0 = off), arrows (bool), dots (bool).
- * Gallery options: imageSize (a registered image size), plus the carousel
- * options for its carousel layout.
+ * Carousels of only images also take aspectRatio: the default crop, a slug
+ * from theme.json's aspect ratio presets or 'auto' (editors can change it).
+ * Gallery options: imageSize (a registered image size), columns (the column
+ * counts editors can choose; [] to set columns in CSS only), defaultColumns,
+ * aspectRatio (as above), plus the carousel options for its carousel layout.
  * Tabs options: dropdownBelow (a breakpoint from breakpoints.json, or false
  * to switch `.wp-block-matter-tabs.has-dropdown` in your own CSS) — used by
  * tabs set to "Show as a dropdown on smaller screens".
@@ -21,7 +24,8 @@
 return [
 	'matter/carousel' => [
 		'default' => [
-			'label' => __( 'Single', 'pulsar' ),
+			'label'       => __( 'Single', 'pulsar' ),
+			'aspectRatio' => '16-9',
 		],
 		'cards'   => [
 			'label'          => __( 'Cards', 'pulsar' ),
@@ -40,17 +44,13 @@ return [
 		],
 	],
 	'matter/gallery'  => [
-		// Gallery variants set the image size here and the crop ratio in
-		// src/css/blocks/matter-gallery.scss. Carousel options apply to the
-		// gallery's carousel layout.
-		'default'   => [
-			'label'          => __( 'Square', 'pulsar' ),
-			'imageSize'      => 'medium_large',
+		// Carousel options apply to the gallery's carousel layout.
+		'default' => [
+			'imageSize'      => 'large',
+			'columns'        => [ 2, 3, 4 ],
+			'defaultColumns' => 4,
+			'aspectRatio'    => 'square',
 			'slidesToScroll' => 'auto',
-		],
-		'landscape' => [
-			'label'     => __( 'Landscape', 'pulsar' ),
-			'imageSize' => 'large',
 		],
 	],
 ];
