@@ -8,7 +8,11 @@
  * defaults; others inherit `default`.
  *
  * Carousel options: loop (bool), align (start|center|end), slidesToScroll
- * (int|'auto'), autoplay (seconds, 0 = off), arrows (bool), dots (bool).
+ * (int|'auto'), autoplay (seconds per slide, 0 = off), autoScroll (continuous
+ * speed, 0 = off), controls (groups of parts by position: before, stage —
+ * over the slides — and after; parts: prev, next, dots, progress, timer,
+ * counter, play, thumbnails, expand), thumbnailSize. Place and style the
+ * parts in src/css/blocks/matter-carousel.scss.
  * Carousels of only images also take aspectRatio: the default crop, a slug
  * from theme.json's aspect ratio presets or 'auto' (editors can change it).
  * Gallery options: imageSize (a registered image size), columns (the column
@@ -35,7 +39,7 @@ return [
 			'label'    => __( 'Slideshow', 'pulsar' ),
 			'loop'     => true,
 			'autoplay' => 6,
-			'arrows'   => false,
+			'controls' => [ 'after' => [ 'dots', 'play' ] ],
 		],
 	],
 	'matter/tabs'     => [
