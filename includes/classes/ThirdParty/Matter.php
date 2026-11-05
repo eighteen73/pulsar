@@ -27,6 +27,25 @@ class Matter implements Bootable {
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
 		add_filter( 'matter_icon_collections', fn() => [ 'pulsar' ] );
+		add_filter( 'matter_carousel_slides', [ $this, 'carousel_slides' ] );
+	}
+
+	/**
+	 * What a new carousel can hold, with the variant (config/matter.php) it
+	 * starts as. Matter offers images, posts and products; cards are added.
+	 * A slide type's block needs `matter/carousel` in its block.json `parent`.
+	 *
+	 * @return array
+	 */
+	public function carousel_slides(): array {
+		return [
+			'core/image'  => [ 'variant' => 'slides' ],
+			'pulsar/card' => [
+				'label'   => __( 'Cards', 'pulsar' ),
+				'variant' => 'cards',
+			],
+			'core/query'  => [ 'variant' => 'cards' ],
+		];
 	}
 
 	/**

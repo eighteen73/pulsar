@@ -8,10 +8,11 @@ return array(
 		'version' => '1.0.0',
 		'title' => 'Card',
 		'category' => 'sections',
-		'description' => 'An image, heading, text and link. Used inside Cards.',
+		'description' => 'An image, heading, text and link. Used inside Cards and carousels.',
 		'icon' => 'index-card',
 		'parent' => array(
-			'matter/slot'
+			'matter/slot',
+			'matter/carousel'
 		),
 		'supports' => array(
 			'html' => false,
