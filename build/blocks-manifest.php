@@ -8,7 +8,7 @@ return array(
 		'version' => '1.0.0',
 		'title' => 'Card',
 		'category' => 'sections',
-		'description' => 'An image, heading, text and link. Used inside Cards and carousels.',
+		'description' => 'An image, heading and text, linking on its button or as a whole card. Used inside Cards and carousels.',
 		'icon' => 'index-card',
 		'parent' => array(
 			'matter/slot',
@@ -20,6 +20,7 @@ return array(
 			'matter' => array(
 				'scheme' => true,
 				'tagName' => 'article',
+				'link' => true,
 				'slots' => array(
 					'media' => array(
 						'allowedBlocks' => array(

@@ -24,4 +24,23 @@
 		flex: 1;
 		padding: var(--wp--preset--spacing--xl);
 	}
+
+	// Linked as a whole (Matter's link support): the heading is the link.
+	&.has-link {
+		transition: border-color var(--wp--custom--transition--duration--quick);
+
+		&:hover {
+			border-color: var(--scheme--border-strong);
+		}
+
+		// The heading keeps its look (over the theme's link styles).
+		.matter-link {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		&:hover .matter-link {
+			text-decoration: underline;
+		}
+	}
 }
