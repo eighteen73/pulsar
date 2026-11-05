@@ -71,8 +71,9 @@
 			border: 1px solid var(--scheme--border);
 			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
 			box-shadow: var(--wp--preset--shadow--lg);
+			gap: 0;
 			margin-block-start: var(--wp--preset--spacing--xs);
-			padding-block: var(--wp--preset--spacing--xs);
+			padding: 0;
 		}
 
 		.wp-block-matter-tabs__tab {
