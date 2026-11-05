@@ -27,7 +27,8 @@
 .wp-block-matter-tabs.is-vertical {
 	column-gap: var(--wp--preset--spacing--2-xl);
 
-	> .wp-block-matter-tabs__list {
+	> .wp-block-matter-tabs__list,
+	> .wp-block-matter-tabs__nav > .wp-block-matter-tabs__list {
 		border-block-end: 0;
 		border-inline-end: 1px solid var(--scheme--border);
 		gap: 0;
@@ -48,17 +49,41 @@
 	}
 }
 
-// Dropdown shown below the block's chosen breakpoint.
-.wp-block-matter-tabs__select {
+// Dropdown on smaller screens (below md, config/matter.php): a button showing
+// the current tab opens the tab list as a menu.
+.wp-block-matter-tabs__toggle {
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-	color: inherit;
-	font: inherit;
-	margin-block-end: var(--wp--preset--spacing--xl);
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
 	padding: var(--wp--preset--spacing--md);
-	width: 100%;
 
 	&:focus-visible {
 		@include focus-ring;
+	}
+}
+
+@media (--md-down) {
+	.wp-block-matter-tabs.has-dropdown > .wp-block-matter-tabs__nav {
+		margin-block-end: var(--wp--preset--spacing--xl);
+
+		> .wp-block-matter-tabs__list {
+			background: var(--scheme--background);
+			border: 1px solid var(--scheme--border);
+			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			box-shadow: var(--wp--preset--shadow--lg);
+			margin-block-start: var(--wp--preset--spacing--xs);
+			padding-block: var(--wp--preset--spacing--xs);
+		}
+
+		.wp-block-matter-tabs__tab {
+			border: 0;
+			margin: 0;
+			padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+			width: 100%;
+
+			&[aria-selected="true"] {
+				color: var(--scheme--link);
+			}
+		}
 	}
 }
