@@ -1,10 +1,19 @@
 @use "../tools" as *;
 
-/// Pulsar slide layouts for Matter carousels. Matter provides behaviour; the
-/// variant (block style) decides slides per view here.
+/// Pulsar styling for Matter carousels (also included by matter-gallery.scss,
+/// as the gallery's carousel layout uses the same markup). Matter provides
+/// behaviour and the control parts chosen in config/matter.php; the variant
+/// (block style) decides slides per view and where the controls sit here.
+///
+/// Reference variants, to keep, restyle or delete per project:
+/// - Hero: arrows, an autoplay timer and pause in a row below.
+/// - Logo ticker: a continuously scrolling row of logos.
+/// - Peek: the next slide peeks in; square arrows over the slide, and
+///   shrinking vertical dots beside it.
 .wp-block-matter-carousel {
 	--carousel-gap: var(--wp--preset--spacing--xl);
 	--carousel-per-view: 1;
+	--carousel-button-size: 2.75rem;
 
 	&.is-style-cards {
 		--carousel-per-view: 1;
@@ -29,9 +38,9 @@
 	flex-basis: calc((100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
 }
 
-// Images within slides, e.g. cards. Carousels of only images use the aspect
-// ratio chosen in the editor (`.has-image-aspect-ratio`).
-.wp-block-matter-carousel:not(.has-image-aspect-ratio) .wp-block-matter-carousel__track img {
+// Images within slides, e.g. cards. Carousels of only images, and galleries,
+// use the aspect ratio chosen in the editor.
+.wp-block-matter-carousel:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items) .wp-block-matter-carousel__track img {
 	aspect-ratio: 16 / 9;
 	display: block;
 	height: auto;
@@ -39,19 +48,185 @@
 	width: 100%;
 }
 
-.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio) .wp-block-matter-carousel__track img {
+.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items) .wp-block-matter-carousel__track img {
 	aspect-ratio: 4 / 3;
 }
 
+// Controls.
 .wp-block-matter-carousel__controls {
-	margin-block-start: var(--wp--preset--spacing--lg);
+	gap: var(--wp--preset--spacing--sm);
+
+	&.is-before {
+		margin-block-end: var(--wp--preset--spacing--lg);
+	}
+
+	&.is-after {
+		margin-block-start: var(--wp--preset--spacing--lg);
+	}
+
+	&.is-stage {
+		padding: var(--wp--preset--spacing--md);
+	}
 }
 
 .wp-block-matter-carousel__prev,
 .wp-block-matter-carousel__next,
 .wp-block-matter-carousel__play,
+.wp-block-matter-carousel__expand {
+	background: var(--scheme--background);
+	border: 1px solid var(--scheme--border-strong);
+	color: var(--scheme--text);
+	height: var(--carousel-button-size);
+	width: var(--carousel-button-size);
+}
+
 .wp-block-matter-carousel__dot {
+	background: var(--scheme--text);
+}
+
+.wp-block-matter-carousel__progress,
+.wp-block-matter-carousel__timer {
+	background: var(--scheme--border);
+}
+
+.wp-block-matter-carousel__progress-bar,
+.wp-block-matter-carousel__timer-bar {
+	background: var(--scheme--link);
+}
+
+.wp-block-matter-carousel__counter {
+	font-weight: var(--wp--custom--typography--font-weight--secondary);
+}
+
+.wp-block-matter-carousel__thumbnails {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-matter-carousel__thumbnail {
+	border-color: transparent;
+
+	&[aria-current] {
+		border-color: var(--scheme--link);
+	}
+}
+
+.wp-block-matter-carousel__prev,
+.wp-block-matter-carousel__next,
+.wp-block-matter-carousel__play,
+.wp-block-matter-carousel__expand,
+.wp-block-matter-carousel__dot,
+.wp-block-matter-carousel__thumbnail {
 	&:focus-visible {
 		@include focus-ring;
+	}
+}
+
+// Hero: [←][→] ———timer——— … [❚❚]
+.wp-block-matter-carousel.is-style-hero {
+	.wp-block-matter-carousel__controls.is-after {
+		justify-content: flex-start;
+	}
+
+	.wp-block-matter-carousel__prev,
+	.wp-block-matter-carousel__next,
+	.wp-block-matter-carousel__play {
+		background: var(--scheme--text);
+		border: 0;
+		color: var(--scheme--background);
+	}
+
+	.wp-block-matter-carousel__timer {
+		flex: 0 1 50%;
+		margin-inline-start: var(--wp--preset--spacing--md);
+	}
+
+	.wp-block-matter-carousel__play {
+		margin-inline-start: auto;
+	}
+}
+
+// Logo ticker: logos at their own shape, muted.
+.wp-block-matter-carousel.is-style-ticker {
+	--carousel-gap: var(--wp--preset--spacing--3-xl);
+	--carousel-per-view: 3;
+
+	@media (--md) {
+		--carousel-per-view: 5;
+	}
+
+	@media (--lg) {
+		--carousel-per-view: 6;
+	}
+
+	.wp-block-matter-carousel__track > .wp-block-image {
+		align-self: center;
+	}
+
+	.wp-block-matter-carousel__track img {
+		filter: grayscale(1);
+		height: auto;
+		max-height: 4rem;
+		object-fit: contain;
+		opacity: 0.7;
+		width: 100%;
+	}
+
+	// The pause button moving content needs, kept small.
+	.wp-block-matter-carousel__play {
+		--carousel-button-size: 2rem;
+		font-size: 0.75rem;
+	}
+}
+
+// Peek: the next slide peeks in; dots beside the slides.
+.wp-block-matter-carousel.is-style-peek {
+	--carousel-gap: var(--wp--preset--spacing--xs);
+	--carousel-per-view: 1.12;
+	align-items: center;
+	column-gap: var(--wp--preset--spacing--md);
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+
+	// Arrows in the current slide's corner (not over the peeking one).
+	.wp-block-matter-carousel__controls.is-stage {
+		align-items: flex-end;
+		gap: 2px;
+		inset-inline-end: calc(100% - (100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
+		justify-content: flex-end;
+		padding: 0;
+	}
+
+	.wp-block-matter-carousel__prev,
+	.wp-block-matter-carousel__next {
+		background: var(--scheme--link);
+		border: 0;
+		border-radius: 0;
+		color: var(--scheme--background);
+	}
+
+	.wp-block-matter-carousel__controls.is-after {
+		margin: 0;
+	}
+
+	.wp-block-matter-carousel__dots {
+		align-items: center;
+		flex-direction: column;
+	}
+
+	// Dots shrink away from the current one; only the nearest show.
+	.wp-block-matter-carousel__dot {
+		transition: scale var(--wp--custom--transition--duration--quick);
+
+		&[data-distance="2"] {
+			scale: 0.75;
+		}
+
+		&[data-distance="3"] {
+			scale: 0.5;
+		}
+
+		&:not([data-distance="0"], [data-distance="1"], [data-distance="2"], [data-distance="3"]) {
+			display: none;
+		}
 	}
 }

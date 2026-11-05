@@ -41,6 +41,28 @@ return [
 			'autoplay' => 6,
 			'controls' => [ 'after' => [ 'dots', 'play' ] ],
 		],
+		// Reference variants (see src/css/blocks/matter-carousel.scss):
+		// keep, restyle or delete per project.
+		'hero'    => [
+			'label'    => __( 'Hero', 'pulsar' ),
+			'loop'     => true,
+			'autoplay' => 6,
+			'controls' => [ 'after' => [ 'prev', 'next', 'timer', 'play' ] ],
+		],
+		'ticker'  => [
+			'label'       => __( 'Logo ticker', 'pulsar' ),
+			'loop'        => true,
+			'autoScroll'  => 1,
+			'aspectRatio' => 'auto',
+			'controls'    => [],
+		],
+		'peek'    => [
+			'label'    => __( 'Peek', 'pulsar' ),
+			'controls' => [
+				'stage' => [ 'prev', 'next' ],
+				'after' => [ 'dots' ],
+			],
+		],
 	],
 	'matter/tabs'     => [
 		'default' => [
@@ -55,6 +77,18 @@ return [
 			'defaultColumns' => 4,
 			'aspectRatio'    => 'square',
 			'slidesToScroll' => 'auto',
+		],
+		// Reference variant for the carousel layout (see
+		// src/css/blocks/matter-gallery.scss).
+		'thumbnails' => [
+			'label'          => __( 'Thumbnails', 'pulsar' ),
+			'slidesToScroll' => 1,
+			'aspectRatio'    => '4-3',
+			'thumbnailSize'  => 'medium',
+			'controls'       => [
+				'stage' => [ 'prev', 'next', 'expand' ],
+				'after' => [ 'thumbnails' ],
+			],
 		],
 	],
 ];

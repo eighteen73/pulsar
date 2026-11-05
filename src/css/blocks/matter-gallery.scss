@@ -1,5 +1,8 @@
 @use "../tools" as *;
 
+// The carousel layout uses the carousel's markup and styles.
+@use "matter-carousel";
+
 /// Pulsar gallery. Editors choose the columns and aspect ratio (options in
 /// config/matter.php and theme.json's aspect ratio presets); the grid shows
 /// fewer columns where images would be narrower than --gallery-min-width.
@@ -12,7 +15,7 @@
 	}
 }
 
-// Carousel layout (the carousel block's own Pulsar styles only load with it).
+// Carousel layout: slides per view (the carousel's styles are included above).
 .wp-block-matter-gallery .wp-block-matter-carousel {
 	--carousel-gap: var(--gallery-gap);
 	--carousel-per-view: 2;
@@ -26,16 +29,47 @@
 	}
 }
 
-.wp-block-matter-gallery .wp-block-matter-carousel__track {
-	gap: var(--carousel-gap);
-
-	> * {
-		flex-basis: calc((100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
+// Thumbnails (reference variant): one image at a time, arrows and expand over
+// it, and a strip of thumbnails below.
+.wp-block-matter-gallery.is-style-thumbnails {
+	.wp-block-matter-carousel {
+		--carousel-per-view: 1;
 	}
-}
 
-.wp-block-matter-gallery .wp-block-matter-carousel__controls {
-	margin-block-start: var(--wp--preset--spacing--lg);
+	.wp-block-matter-carousel__controls.is-stage {
+		align-items: center;
+	}
+
+	.wp-block-matter-carousel__expand {
+		inset-block-start: var(--wp--preset--spacing--md);
+		inset-inline-end: var(--wp--preset--spacing--md);
+		position: absolute;
+	}
+
+	.wp-block-matter-carousel__prev,
+	.wp-block-matter-carousel__next,
+	.wp-block-matter-carousel__expand {
+		border: 0;
+		box-shadow: var(--wp--preset--shadow--sm);
+	}
+
+	.wp-block-matter-carousel__controls.is-after {
+		background: var(--scheme--surface, rgb(0 0 0 / 5%));
+		margin: 0;
+		padding: var(--wp--preset--spacing--md);
+	}
+
+	.wp-block-matter-carousel__thumbnails {
+		flex: 1;
+	}
+
+	.wp-block-matter-carousel__thumbnail {
+		aspect-ratio: 4 / 3;
+		border-width: 2px;
+		height: auto;
+		opacity: 1;
+		width: calc((100% - 2 * var(--wp--preset--spacing--sm)) / 3);
+	}
 }
 
 .wp-block-matter-gallery__more {

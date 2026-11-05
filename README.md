@@ -35,7 +35,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards). Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
 | `config/settings.php` | Site Settings fields (contact, social, header call to action, footer). |
-| `config/matter.php` | Matter variants (e.g. carousel Single / Cards / Slideshow). |
+| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow, plus reference Hero, Logo ticker and Peek styles; gallery Thumbnails). Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`) and `template-part`. |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
