@@ -28,6 +28,33 @@ class Matter implements Bootable {
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
 		add_filter( 'matter_icon_collections', fn() => [ 'pulsar' ] );
 		add_filter( 'matter_carousel_slides', [ $this, 'carousel_slides' ] );
+		add_filter( 'matter_archive_default_content', [ $this, 'archive_default_content' ], 10, 2 );
+	}
+
+	/**
+	 * Archives without their own content show (and editors customising one
+	 * start from) a pattern: patterns/archive-404.php, archive-search.php,
+	 * or archive.php for the rest. Add e.g. `pulsar/archive-product` to give
+	 * an archive type its own.
+	 *
+	 * @param string                             $content Matter's default.
+	 * @param \Eighteen73\Matter\Archives\Target $target  The archive.
+	 * @return string
+	 */
+	public function archive_default_content( string $content, $target ): string {
+		$registry = \WP_Block_Patterns_Registry::get_instance();
+		$slugs    = match ( $target->type ) {
+			'404', 'search' => [ "pulsar/archive-{$target->type}" ],
+			default         => [ 'pulsar/archive-' . $target->post_type(), 'pulsar/archive' ],
+		};
+
+		foreach ( $slugs as $slug ) {
+			if ( $registry->is_registered( $slug ) ) {
+				return (string) ( $registry->get_registered( $slug )['content'] ?? $content );
+			}
+		}
+
+		return $content;
 	}
 
 	/**

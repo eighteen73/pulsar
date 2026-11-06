@@ -111,6 +111,17 @@ Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
 
 **Megamenus.** In Appearance › Menus, tick "Display submenu as a megamenu" on a top-level item: its second-level items become column headings (use `#` links) and third-level items their links. Optionally attach a panel from `template-parts/megamenu/`: each PHP file with a `Title:` header is offered in the item's "Megamenu panel" list, and receives the menu item as `$args['item']`. `megamenu/contact.php` is an example: it shows the item's description, contact details and the header call to action from Appearance › Options.
 
+## Archives, search and 404
+
+`index.html` (blog, categories, tags, authors, dates), `archive-product.html`, `taxonomy-product_cat.html`, `search.html` and `404.html` each have fixed parts plus Matter's `matter/archive-content` around the list. The fixed parts are breadcrumbs, notices, subcategories and the search form, and they're hidden when empty. Editors add content above and below the list in Appearance › Archive content (see Matter's README).
+
+Archives without their own content show a pattern, which is also where editors start when they customise one:
+- `patterns/archive.php`: the archive's title and description, then the list;
+- `archive-search.php`;
+- `archive-404.php`.
+
+Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across, Feature first) are in `config/matter.php` and styled in `src/css/blocks/matter-archive-loop.scss`.
+
 ## Rendering blocks from PHP
 
 ```php

@@ -14,13 +14,28 @@
 	}
 }
 
+// An archive's list (Matter archive content) is a band like a section,
+// between the sections editors add above and below it.
+.wp-block-matter-archive-loop {
+	padding-block: var(--wp--custom--spacing--section-gap);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+
+	> * {
+		margin-inline: auto;
+		max-width: var(--wp--style--global--wide-size);
+	}
+}
+
+$section-parents: ".wp-block-post-content, .wp-block-matter-archive-content";
+$bands: ".is-section, .wp-block-matter-archive-loop";
+
 // Stacked sections touch; each provides its own vertical padding.
-:where(.wp-block-post-content) > .is-section + .is-section {
+:where(#{$section-parents}) > :is(#{$bands}) + :is(#{$bands}) {
 	margin-block-start: 0;
 }
 
-// Two adjacent sections in the same scheme read as one band, so collapse the gap.
-:where(.wp-block-post-content) > .is-section:not(.has-scheme) + .is-section:not(.has-scheme) {
+// Two adjacent bands in the same scheme read as one band, so collapse the gap.
+:where(#{$section-parents}) > :is(#{$bands}):not(.has-scheme) + :is(#{$bands}):not(.has-scheme) {
 	padding-block-start: 0;
 }
 

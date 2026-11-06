@@ -23,6 +23,9 @@
  * Tabs options: dropdownBelow (a breakpoint from breakpoints.json, or false
  * to switch `.wp-block-matter-tabs.has-dropdown` in your own CSS) — used by
  * tabs set to "Show as a dropdown on smaller screens".
+ * Archive list (the posts or products in archive content): no options; each
+ * variant is a layout for the template's list, styled in
+ * src/css/blocks/matter-archive-loop.scss.
  *
  * @package Pulsar
  */
@@ -41,7 +44,7 @@ return [
 			'label'    => __( 'Slideshow', 'pulsar' ),
 			'loop'     => true,
 			'autoplay' => 6,
-			'controls' => [ 'after' => [ 'dots', 'play' ] ],
+			'controls' => [ 'before' => [ 'dots' ] ],
 		],
 		// Reference variants (see src/css/blocks/matter-carousel.scss):
 		// keep, restyle or delete per project.
@@ -49,7 +52,7 @@ return [
 			'label'    => __( 'Hero', 'pulsar' ),
 			'loop'     => true,
 			'autoplay' => 6,
-			'controls' => [ 'after' => [ 'prev', 'next', 'timer', 'play' ] ],
+			'controls' => [ 'after' => [ 'prev', 'next', 'play' ] ],
 		],
 		'ticker'  => [
 			'label'       => __( 'Logo ticker', 'pulsar' ),
@@ -64,6 +67,17 @@ return [
 				'stage' => [ 'prev', 'next' ],
 				'after' => [ 'dots' ],
 			],
+		],
+	],
+	'matter/archive-loop' => [
+		'default' => [
+			'label' => __( 'Three across', 'pulsar' ),
+		],
+		'four'    => [
+			'label' => __( 'Four across', 'pulsar' ),
+		],
+		'feature' => [
+			'label' => __( 'Feature first', 'pulsar' ),
 		],
 	],
 	'matter/tabs'     => [
