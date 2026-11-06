@@ -1,6 +1,7 @@
 @use "../tools" as *;
 
 .wp-block-pulsar-cta__content {
+	margin-inline: auto;
 	max-width: var(--wp--style--global--content-size);
 	text-align: center;
 
