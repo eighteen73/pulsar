@@ -109,7 +109,7 @@ The editor's colour, spacing, layout, border and typography controls are switche
 
 Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
 
-**Megamenu panels.** Add PHP files to `template-parts/megamenu/` with a `Title:` header. They can then be attached to top-level menu items in Appearance › Menus.
+**Megamenus.** In Appearance › Menus, tick "Display submenu as a megamenu" on a top-level item: its second-level items become column headings (use `#` links) and third-level items their links. Optionally attach a panel from `template-parts/megamenu/`: each PHP file with a `Title:` header is offered in the item's "Megamenu panel" list, and receives the menu item as `$args['item']`. `megamenu/contact.php` is an example: it shows the item's description, contact details and the header call to action from Site Settings.
 
 ## Rendering blocks from PHP
 
