@@ -17,7 +17,9 @@
  * from theme.json's aspect ratio presets or 'auto' (editors can change it).
  * Gallery options: imageSize (a registered image size), columns (the column
  * counts editors can choose; [] to set columns in CSS only), defaultColumns,
- * aspectRatio (as above), plus the carousel options for its carousel layout.
+ * aspectRatio (as above), captions (the default caption style: 'tooltip',
+ * 'overlay' or 'hidden'; editors can change it), plus the carousel options
+ * for its carousel layout.
  * Tabs options: dropdownBelow (a breakpoint from breakpoints.json, or false
  * to switch `.wp-block-matter-tabs.has-dropdown` in your own CSS) — used by
  * tabs set to "Show as a dropdown on smaller screens".
