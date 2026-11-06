@@ -1,6 +1,6 @@
 <?php
 /**
- * Header call to action, from Site Settings.
+ * Header call to action, from Appearance > Options.
  *
  * Title: Header: call to action
  * Slug: header/cta

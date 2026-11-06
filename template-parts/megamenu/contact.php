@@ -6,7 +6,7 @@
  * top-level menu item in Appearance > Menus ("Megamenu panel"). Panels are
  * developer-built, so their markup is version controlled; their content can
  * still come from the client: here the menu item's description and the
- * contact details and call to action from Site Settings.
+ * contact details and call to action from Appearance > Options.
  *
  * Copy this file to add more panels (e.g. featured products or the latest
  * post). The `Title:` header names it in the panel list.

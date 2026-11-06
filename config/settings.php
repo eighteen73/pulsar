@@ -2,7 +2,7 @@
 /**
  * Site settings fields.
  *
- * Site-wide content clients can edit from the "Site Settings" page (provided by
+ * Site-wide content clients can edit from Appearance › Options (provided by
  * Matter). Read values with `Matter\setting( 'section.field' )`, or bind them to
  * blocks with the `matter/setting` block bindings source.
  *

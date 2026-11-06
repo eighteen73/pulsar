@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer copyright, from Site Settings.
+ * Footer copyright, from Appearance > Options.
  *
  * Supports `{year}` and `{site}` placeholders.
  *

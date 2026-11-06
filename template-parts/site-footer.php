@@ -4,7 +4,7 @@
  *
  * Version-controlled footer, rendered in templates with
  * `<!-- wp:pulsar/template-part {"slug":"site-footer"} /-->`.
- * Editable content comes from Appearance > Menus and Site Settings.
+ * Editable content comes from Appearance > Menus and Appearance > Options.
  *
  * Title: Site footer
  * Slug: site-footer

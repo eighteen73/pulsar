@@ -6,7 +6,7 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 
 - **Clients** build pages from **sections** (Hero, Text, Media and text, Cards, Call to action…) and fill them with core content blocks: headings, paragraphs, lists, buttons, images and video.
 - **Clients choose** a colour scheme and a variant, never colours, spacing or widths.
-- **Header and footer** are PHP, so they stay in version control. Clients edit menus (Appearance › Menus) and site-wide content (Site Settings).
+- **Header and footer** are PHP, so they stay in version control. Clients edit menus (Appearance › Menus) and site-wide content (Appearance › Options).
 - **The Site Editor** is only available on local/development environments (via Orbit).
 
 ## Requirements
@@ -34,7 +34,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | --- | --- |
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards). Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
-| `config/settings.php` | Site Settings fields (contact, social, header call to action, footer). |
+| `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). |
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow, plus reference Hero, Logo ticker and Peek styles; gallery Thumbnails). Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`) and `template-part`. |
@@ -102,14 +102,14 @@ The editor's colour, spacing, layout, border and typography controls are switche
 
 `site-footer.php` contains:
 - the logo;
-- contact details and social links (from Site Settings);
+- contact details and social links (from Appearance › Options);
 - the footer and legal menus;
 - the copyright (`{year}` and `{site}` placeholders);
 - the credit.
 
 Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
 
-**Megamenus.** In Appearance › Menus, tick "Display submenu as a megamenu" on a top-level item: its second-level items become column headings (use `#` links) and third-level items their links. Optionally attach a panel from `template-parts/megamenu/`: each PHP file with a `Title:` header is offered in the item's "Megamenu panel" list, and receives the menu item as `$args['item']`. `megamenu/contact.php` is an example: it shows the item's description, contact details and the header call to action from Site Settings.
+**Megamenus.** In Appearance › Menus, tick "Display submenu as a megamenu" on a top-level item: its second-level items become column headings (use `#` links) and third-level items their links. Optionally attach a panel from `template-parts/megamenu/`: each PHP file with a `Title:` header is offered in the item's "Megamenu panel" list, and receives the menu item as `$args['item']`. `megamenu/contact.php` is an example: it shows the item's description, contact details and the header call to action from Appearance › Options.
 
 ## Rendering blocks from PHP
 

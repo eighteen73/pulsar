@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer contact details, from Site Settings.
+ * Footer contact details, from Appearance > Options.
  *
  * Title: Footer: contact details
  * Slug: footer/contact

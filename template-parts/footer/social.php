@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer social links, from Site Settings.
+ * Footer social links, from Appearance > Options.
  *
  * Icons come from core's social link block.
  *
