@@ -61,36 +61,70 @@ A section is a block with named content slots. Its layout lives in code, so chan
 
 ## Colour schemes and tokens
 
-Schemes are defined in `config/theme-json/settings.custom.json` under `custom.scheme`: `default`, `tint`, `brand` and `contrast`. Each scheme sets these tokens:
-- background
-- text
-- heading
-- muted
-- link
-- border
-- border-strong
-- button-background
-- button-text
+Tokens come in two layers, and components only ever use the second:
+- **Presets** are the raw scales: every colour, spacing step, font size, radius and shadow. They live in `config/theme-json/settings.*.json`.
+- **Roles** say what a value is for: scheme colours, spacing roles, font weights. They live in `config/theme-json/settings.custom.json` and point at presets.
 
-Matter maps the active scheme onto `--scheme--{token}`. Elements, buttons, links and sections read those tokens, so nested content adapts automatically.
+### Palette
 
-**Token reference:**
+`settings.color.json` holds every colour the site has, named by rank, not by lightness:
+- `brand-primary`, then `-secondary`/`-tertiary` if the brand has them; `accent-primary`, `accent-secondary`… for supporting colours.
+- `-subtle` (paler) and `-strong` (deeper) versions of each, written as `color-mix(in oklch, var(--wp--preset--color--brand-primary) 12%, white)` and `… 70%, black)`. Swap in a hex when the design specifies one. Mix towards white and black, not `base` and `contrast`: a tinted `contrast` shifts the hue.
+- `neutral-50` to `neutral-950`, `base` (page background) and `contrast` (text).
+- `status-error`, `status-warning`, `status-success`, `status-info`, each with `-subtle`; and `focus`.
 
-| Variable | Use |
+### Schemes
+
+`custom.scheme` defines `default`, `subtle`, `brand` and `contrast`. Every scheme sets all 11 roles, each pointing at the palette:
+
+| Role | For |
 | --- | --- |
-| `--wp--preset--color--{slug}` | Palette: brand-primary, brand-secondary, accent-primary/secondary/tertiary, tint-primary/secondary, contrast, base |
-| `--scheme--{token}` | Colours for the current scheme (prefer these in component CSS) |
-| `--wp--custom--color--neutral--{50–900}` | Neutral ramp |
-| `--wp--custom--color--{error,warning,success}` / `…-surface` | Feedback colours |
-| `--wp--custom--color--focus`, `--wp--custom--color--focus-contrast`, `--wp--custom--color--shadow` | Focus ring, shadows |
-| `--wp--preset--spacing--{xs…9-xl}` | Spacing scale |
-| `--wp--custom--spacing--{edge,block-gap,section-gap,row-gap,column-gap}` | Layout spacing roles |
-| `--wp--preset--font-size--{xs…5-xl}` | Type scale |
-| `--wp--custom--typography--{font-weight,line-height,letter-spacing}--*` | Type details |
-| `--wp--preset--border-radius--*`, `--wp--custom--global--is-rounded` | Radii (multiply by `is-rounded`) |
-| `--wp--custom--transition--{duration,timing}--*` | Motion |
+| `background` | The section's background |
+| `background-surface` | Things that sit on it and need to stand apart: cards, inputs, accordion panels |
+| `background-fill` | Strong solid fills: buttons, badges, the active tab |
+| `text` | Body text |
+| `text-subtle` | Secondary text: dates, captions, help text |
+| `text-heading` | Headings |
+| `text-link` | Links |
+| `text-fill` | Text and icons on `background-fill` |
+| `border` | Dividers and card outlines |
+| `border-strong` | Input borders and anything that must be seen (3:1) |
+| `highlight` | Small accents: eyebrows, icons, active indicators |
+
+Matter writes the `default` scheme onto `:root` as `--scheme--{role}` and swaps in another on `.has-scheme-{slug}`, so nested content adapts. Component CSS uses `var(--scheme--text-link)` and the like with no fallback: a missing role should look wrong in review. Read the palette directly only for one-off marks, such as text over a darkened image. In templates, put `has-scheme has-scheme-{slug}` on a wrapper, never palette colour classes; `.has-text-subtle` sets subtle text. Client-facing scheme names come from the `matter_scheme_labels` filter.
+
+### Spacing, type and the rest
+
+| Variable | Values |
+| --- | --- |
+| `--wp--preset--spacing--{slug}` | `xs` 4, `sm` 8, `md` 8→12, `lg` 12→16, `xl` 16→24, `2-xl` 24→32, `3-xl` 32→48, `4-xl` 48→64, `5-xl` 64→96, `6-xl` 96→128 (px, 320px → 1440px screens) |
+| `--wp--custom--spacing--edge` | Page side padding, 24→96 |
+| `--wp--custom--spacing--gutter` | Gaps between columns and grid items, 32→48 |
+| `--wp--custom--spacing--section` | Padding above and below a section, 64→96 |
+| `--wp--style--block-gap` | Space between blocks in a flow (`xl`), WordPress's own variable |
+| `--wp--preset--font-size--{slug}` | `xs` 12, `sm` 14, `md` 16 (body), `lg` 19→20, `xl` 23→25, `2-xl` 28→31, `3-xl` 33→39, `4-xl` 40→49, `5-xl` 48→61 |
+| `--wp--custom--typography--font-weight--{body,heading,label}` | 400, 700, and `label` (buttons, form labels, menus, tabs, prices) follows `heading` unless set |
+| `--wp--custom--typography--line-height--{none,tight,normal}` | 1, 1.1, 1.5 |
+| `--wp--preset--border-radius--{xs,sm,md,lg,full}` | 4, 8, 10→16, 16→24, pill; each multiplied by `--wp--custom--roundness` (0 square, 1 default, 1.5 rounder) |
+| `--wp--preset--shadow--{xs,sm,md,lg}` | Tinted from `neutral-900` |
+| `--wp--custom--transition--duration--{quick,normal}` | 150ms, 300ms |
+| `--wp--style--global--content-size` / `--wide-size` | 768px / 1440px |
+
+Headings map to sizes in `src/css/tools/mixins/_typography.scss`: `h1` `4-xl`, `h2` `3-xl`, `h3` `2-xl`, `h4` `xl`, `h5` `lg`, `h6` `md`. `5-xl` is free for display headings.
+
+The fluid sizes come from [Utopia](https://utopia.fyi) with 320px and 1440px as the screen range: type at 16px body, ratio 1.2 → 1.25; spacing as one-up pairs (each step from the one below to its own size). Regenerate there rather than hand-writing a `clamp()`. Font sizes are `{min, max}` pairs in `settings.typography.json`, which WordPress turns into `clamp()`s using `settings.typography.fluid`; spacing sizes and roles are written as Utopia's `clamp()`s. If a font needs larger body text, change `md` to 16→18 and regenerate the steps above it.
 
 The editor's colour, spacing, layout, border and typography controls are switched off in `theme.json`. Presets still generate their variables.
+
+### Designer handover
+
+Ask the designer for:
+- one hex per colour, ranked by use: `brand-primary` at minimum, plus `base` and `contrast`. A paler or deeper version of a colour is its `-subtle` or `-strong`; only give a hex if the default mix isn't right. Greys always go in `neutral-*`.
+- the schemes the site needs (usually two to four), each as the 11 roles above, picked from the palette.
+- fonts and weights for body, headings and labels; body size if not 16px.
+- roundness (square, default or rounder) and whether section spacing differs from 64→96.
+
+Name the Figma variables the same way (`brand-primary`, `background-fill`, `spacing/xl`) so a design maps straight onto theme.json.
 
 ## Header, footer and menus
 
