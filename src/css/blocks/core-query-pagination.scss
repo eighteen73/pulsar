@@ -13,8 +13,8 @@
 	}
 
 	.page-numbers {
-		color: var(--scheme--muted);
-		font-weight: var(--wp--custom--typography--font-weight--secondary);
+		color: var(--scheme--text-subtle);
+		font-weight: var(--wp--custom--typography--font-weight--label);
 		line-height: var(--wp--custom--typography--line-height--none);
 		min-width: 34px;
 		padding: var(--wp--preset--spacing--sm);
@@ -22,12 +22,12 @@
 		text-decoration: none;
 
 		&:hover {
-			border-bottom: 2px solid var(--wp--preset--color--brand-primary);
+			border-bottom: 2px solid var(--scheme--highlight);
 		}
 
 		&:where(.current) {
-			border-bottom: 2px solid var(--wp--preset--color--brand-primary);
-			color: var(--wp--preset--color--contrast);
+			border-bottom: 2px solid var(--scheme--highlight);
+			color: var(--scheme--text);
 		}
 	}
 

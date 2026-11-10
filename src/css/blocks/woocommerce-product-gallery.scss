@@ -26,30 +26,30 @@
 
 	// Main image.
 	.wc-block-product-gallery-large-image__wrapper {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+		border-radius: var(--wp--preset--border-radius--md);
 		overflow: clip;
 	}
 
 	// Thumbnails
 	.wc-block-product-gallery-thumbnails__thumbnail img {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		border-radius: var(--wp--preset--border-radius--sm);
 	}
 
 	// Dialog.
 	:where(.wc-block-product-gallery-dialog) {
-		background-color: var(--wp--preset--color--base);
+		background-color: var(--scheme--background);
 		border: none;
 	}
 
 	// Dialog content.
 	.wc-block-product-gallery-dialog__content img {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+		border-radius: var(--wp--preset--border-radius--md);
 	}
 
 	// Dialog close button.
 	.wc-block-product-gallery-dialog__close-button {
 		&::before {
-			@include icon("icons/x", 32px, var(--wp--preset--color--contrast));
+			@include icon("icons/x", 32px, var(--scheme--text));
 		}
 
 		svg {

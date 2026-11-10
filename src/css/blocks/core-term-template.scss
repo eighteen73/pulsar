@@ -6,8 +6,12 @@
 	}
 
 	.wp-block-term-name {
+		a {
+			color: inherit;
+		}
+
 		a::before {
-			background-color: var(--wp--preset--color--brand-primary);
+			background-color: var(--scheme--background-fill);
 			content: "";
 			height: 100%;
 			left: 0;
@@ -20,8 +24,9 @@
 
 	.shop-by-category-buttons {
 		align-items: flex-start;
-		background: linear-gradient(180deg, rgb(from var(--wp--custom--color--shadow) r g b / 0) 40%, rgb(from var(--wp--custom--color--shadow) r g b / 0.78) 100%);
+		background: linear-gradient(180deg, rgb(from var(--wp--preset--color--neutral-900) r g b / 0) 40%, rgb(from var(--wp--preset--color--neutral-900) r g b / 0.78) 100%);
 		bottom: 0;
+		color: var(--wp--preset--color--base); // Over a darkened image, so always light whatever the scheme.
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -31,6 +36,14 @@
 		position: absolute;
 		width: 100%;
 
+		a {
+			color: inherit;
+		}
+
+		.wp-block-term-name {
+			color: inherit;
+		}
+
 		.wp-block-term-name a {
 			text-decoration: none;
 		}
@@ -38,7 +51,7 @@
 
 	.wp-block-image {
 		img {
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			border-radius: var(--wp--preset--border-radius--sm);
 			height: 100%;
 			width: 100%;
 		}

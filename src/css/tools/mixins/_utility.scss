@@ -69,7 +69,7 @@
 /// Set the focus ring style.
 /// @param {Color} $color - The color of the focus ring.
 ///
-@mixin focus-ring($color: var(--wp--custom--color--focus)) {
+@mixin focus-ring($color: var(--wp--preset--color--focus)) {
 	outline: 2px solid $color !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 	outline-offset: 2px !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
@@ -80,8 +80,8 @@
 /// @param {Color} $text - The color of the focus block text.
 ///
 @mixin focus-block(
-	$surface: var(--wp--custom--color--focus),
-	$text: var(--wp--custom--color--focus-contrast)
+	$surface: var(--wp--preset--color--focus),
+	$text: var(--wp--preset--color--contrast)
 ) {
 	&:focus-visible {
 		background-color: $surface !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible

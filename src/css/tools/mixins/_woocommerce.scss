@@ -2,24 +2,24 @@
 @use "forms" as *;
 
 @mixin wc-product-sale-badge() {
-	background-color: var(--wp--preset--color--accent-secondary);
+	background-color: var(--scheme--highlight);
 	border: unset;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--preset--color--base);
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: var(--scheme--background);
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--xs);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
 }
 
 @mixin wc-sale-badge() {
-	background-color: var(--wp--custom--color--success-surface);
+	background-color: var(--wp--preset--color--status-success-subtle);
 	border: none;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--custom--color--success);
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: var(--wp--preset--color--status-success);
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--font-weight--primary);
+	font-weight: var(--wp--custom--typography--font-weight--body);
 	line-height: var(--wp--custom--typography--line-height--none);
 	padding: var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
@@ -35,7 +35,7 @@
 		@include field-input;
 		-webkit-appearance: textfield;
 		border: 1px solid var(--scheme--border-strong);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		border-radius: var(--wp--preset--border-radius--xs);
 		font-size: var(--wp--preset--font-size--sm);
 		max-width: unset;
 		padding: unset;
@@ -48,12 +48,12 @@
 
 	.wc-block-components-quantity-selector__button {
 		border: 0;
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		border-radius: var(--wp--preset--border-radius--xs);
 		font-size: var(--wp--preset--font-size--sm);
 		width: 42px;
 
 		&:where(:not(:disabled)):hover {
-			background-color: var(--wp--preset--color--tint-primary);
+			background-color: var(--scheme--background-surface);
 		}
 
 		&:focus {
@@ -69,7 +69,7 @@
 @mixin wc-trash-icon() {
 	&::after {
 		@include icon("icons/trash", 24px);
-		color: var(--wp--custom--color--error);
+		color: var(--wp--preset--color--status-error);
 	}
 
 	svg {
@@ -95,7 +95,7 @@
 
 		label {
 			@include label;
-			font-weight: var(--wp--custom--typography--font-weight--primary);
+			font-weight: var(--wp--custom--typography--font-weight--body);
 			left: var(--wp--preset--spacing--lg);
 		}
 	}

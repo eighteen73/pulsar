@@ -1,7 +1,7 @@
 @use "../tools" as *;
 
 .woocommerce .product .wp-block-woocommerce-product-details .wp-block-matter-tabs {
-	background-color: var(--wp--preset--color--tint-primary);
+	background-color: var(--scheme--background-surface);
 	padding-inline: var(--wp--custom--spacing--edge);
 
 	@media (--lg) {
@@ -28,24 +28,24 @@
 
 	.wp-block-matter-tabs__tab {
 		border: none;
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		border-radius: var(--wp--preset--border-radius--sm);
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-		font-weight: var(--wp--custom--typography--font-weight--secondary);
+		font-weight: var(--wp--custom--typography--font-weight--label);
 		padding-block: var(--wp--preset--spacing--lg);
 		padding-inline: var(--wp--preset--spacing--2-xl);
 
 		&:where([aria-selected="true"]) {
-			background-color: var(--wp--preset--color--brand-secondary);
+			background-color: var(--scheme--background);
 
 			@media (--lg) {
-				background-color: var(--wp--preset--color--tint-primary);
+				background-color: var(--scheme--background-surface);
 			}
 		}
 	}
 
 	.wp-block-matter-tab {
-		background-color: var(--wp--preset--color--tint-primary);
+		background-color: var(--scheme--background-surface);
 		padding-block: var(--wp--preset--spacing--2-xl);
 
 		@media (--lg) {

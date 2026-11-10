@@ -1,7 +1,7 @@
-/// Muted (secondary) text, following the active colour scheme.
+/// Subtle (secondary) text, following the active colour scheme.
 /// Developer-only utility for templates; clients don't pick colours.
-.has-muted-color {
-	color: var(--scheme--muted);
+.has-text-subtle {
+	color: var(--scheme--text-subtle);
 
 	a {
 		color: inherit;

@@ -3,7 +3,7 @@
 /// Cards sit inside the Cards section, so they aren't full-width bands.
 .wp-block-pulsar-card {
 	border: 1px solid var(--scheme--border);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+	border-radius: var(--wp--preset--border-radius--md);
 	overflow: hidden;
 
 	&__inner {

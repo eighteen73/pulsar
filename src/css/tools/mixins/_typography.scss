@@ -1,10 +1,9 @@
 @use "../../settings" as *;
 
 @mixin heading-base {
-	color: var(--scheme--heading);
-	font-family: var(--wp--preset--font-family--primary);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
-	letter-spacing: var(--wp--custom--typography--letter-spacing--normal);
+	color: var(--scheme--text-heading);
+	font-family: var(--wp--preset--font-family--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	text-wrap: balance;
 }
 

@@ -4,7 +4,7 @@
 	&__inner {
 		align-items: center;
 		display: grid;
-		gap: var(--wp--custom--spacing--column-gap);
+		gap: var(--wp--custom--spacing--gutter);
 
 		@media (--md) {
 			grid-template-columns: 1fr 1fr;

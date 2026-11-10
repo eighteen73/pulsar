@@ -91,11 +91,11 @@
 
 .wp-block-matter-carousel__progress-bar,
 .wp-block-matter-carousel__timer-bar {
-	background: var(--scheme--link);
+	background: var(--scheme--text-link);
 }
 
 .wp-block-matter-carousel__counter {
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 }
 
 .wp-block-matter-carousel__thumbnails {
@@ -106,7 +106,7 @@
 	border-color: transparent;
 
 	&[aria-current] {
-		border-color: var(--scheme--link);
+		border-color: var(--scheme--text-link);
 	}
 }
 
@@ -198,7 +198,7 @@
 
 	.wp-block-matter-carousel__prev,
 	.wp-block-matter-carousel__next {
-		background: var(--scheme--link);
+		background: var(--scheme--text-link);
 		border: 0;
 		border-radius: 0;
 		color: var(--scheme--background);

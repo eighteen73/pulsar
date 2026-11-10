@@ -4,7 +4,7 @@
 	&__inner {
 		display: flex;
 		flex-direction: column;
-		gap: var(--wp--custom--spacing--row-gap);
+		gap: var(--wp--preset--spacing--4-xl);
 	}
 
 	&__intro {
@@ -14,7 +14,7 @@
 	// The items slot is the grid; its children are pulsar/card sections.
 	&__items.wp-block-matter-slot {
 		display: grid;
-		gap: var(--wp--custom--spacing--column-gap);
+		gap: var(--wp--custom--spacing--gutter);
 		grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
 
 		> * + * {

@@ -54,7 +54,7 @@
 
 			th {
 				font-size: var(--wp--preset--font-size--lg);
-				font-weight: var(--wp--custom--typography--font-weight--secondary);
+				font-weight: var(--wp--custom--typography--font-weight--label);
 				text-transform: none;
 			}
 
@@ -82,9 +82,9 @@
 			}
 
 			.wc-block-components-product-name {
-				color: var(--wp--preset--color--contrast);
+				color: var(--scheme--text);
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--font-weight--secondary);
+				font-weight: var(--wp--custom--typography--font-weight--label);
 				line-height: var(--wp--custom--typography--line-height--tight);
 				text-decoration: none;
 			}
@@ -95,7 +95,7 @@
 			}
 
 			.wc-block-cart-item__image img {
-				border-radius: calc(var(--wp--preset--border-radius--xs) * var(--wp--custom--global--is-rounded));
+				border-radius: var(--wp--preset--border-radius--xs);
 			}
 
 			.wc-block-cart-item__prices {
@@ -126,7 +126,7 @@
 
 		.wc-block-cart__totals-title {
 			font-size: var(--wp--preset--font-size--lg);
-			font-weight: var(--wp--custom--typography--font-weight--secondary);
+			font-weight: var(--wp--custom--typography--font-weight--label);
 			text-transform: none;
 		}
 
@@ -141,7 +141,7 @@
 
 		.wc-block-components-totals-footer-item .wc-block-components-totals-item__label,
 		.wc-block-components-totals-item__value .wc-block-formatted-money-amount {
-			font-weight: var(--wp--custom--typography--font-weight--secondary);
+			font-weight: var(--wp--custom--typography--font-weight--label);
 		}
 	}
 

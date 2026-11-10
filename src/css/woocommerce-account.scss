@@ -17,8 +17,8 @@ $account-links: (
 
 	// General styles
 	.site-main {
-		background-color: var(--wp--preset--color--tint-primary);
-		padding-block: var(--wp--custom--spacing--section-gap);
+		background-color: var(--scheme--background-surface);
+		padding-block: var(--wp--custom--spacing--section);
 
 		// On larger screens we hide the title, as its duplicated for styling purposes.
 		.wp-block-post-title {
@@ -39,7 +39,7 @@ $account-links: (
 			align-items: flex-start;
 			display: flex;
 			gap: var(--wp--preset--spacing--5-xl);
-			max-width: var(--wp--custom--layout--wide);
+			max-width: var(--wp--style--global--wide-size);
 
 			&::before,
 			&::after {
@@ -54,12 +54,12 @@ $account-links: (
 
 		@media (--xl) {
 			display: block;
-			margin-bottom: var(--wp--custom--spacing--block-gap);
+			margin-bottom: var(--wp--style--block-gap);
 		}
 	}
 
 	.entry-content {
-		margin-top: var(--wp--custom--spacing--row-gap);
+		margin-top: var(--wp--preset--spacing--4-xl);
 	}
 
 	.woocommerce-MyAccount-back {
@@ -75,8 +75,8 @@ $account-links: (
 	}
 
 	.woocommerce-MyAccount-content {
-		background-color: var(--wp--preset--color--base);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+		background-color: var(--scheme--background);
+		border-radius: var(--wp--preset--border-radius--md);
 		padding: var(--wp--preset--spacing--3-xl);
 		width: 100%;
 
@@ -106,31 +106,31 @@ $account-links: (
 			padding: unset;
 
 			&.is-active a {
-				background-color: var(--wp--preset--color--brand-secondary);
-				color: var(--wp--preset--color--brand-primary);
+				background-color: var(--scheme--background-surface);
+				color: var(--scheme--text-link);
 				text-decoration: none;
 			}
 
 			a {
 				align-items: center;
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-				color: var(--wp--preset--color--contrast);
+				border-radius: var(--wp--preset--border-radius--sm);
+				color: var(--scheme--text);
 				display: flex;
 				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--font-weight--secondary);
+				font-weight: var(--wp--custom--typography--font-weight--label);
 				gap: var(--wp--preset--spacing--sm);
 				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
 				text-decoration: none;
-				transition: all var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+				transition: all var(--wp--custom--transition--duration--normal) ease-out;
 
 				&:hover {
-					background-color: var(--wp--preset--color--brand-secondary);
+					background-color: var(--scheme--background-surface);
 					text-decoration: none;
 				}
 
 				&:focus-visible {
 					@include focus-ring;
-					background-color: var(--wp--preset--color--brand-secondary);
+					background-color: var(--scheme--background-surface);
 				}
 			}
 		}
@@ -148,7 +148,7 @@ $account-links: (
 	.woocommerce-address-fields__field-wrapper,
 	form {
 		display: grid;
-		gap: var(--wp--custom--spacing--block-gap);
+		gap: var(--wp--style--block-gap);
 		grid-template-columns: repeat(2, 1fr);
 
 		.clear {
@@ -165,15 +165,15 @@ $account-links: (
 
 		fieldset {
 			display: grid;
-			gap: var(--wp--custom--spacing--block-gap);
+			gap: var(--wp--style--block-gap);
 			grid-column: 1 / -1;
 			grid-template-columns: repeat(2, 1fr);
-			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+			margin-top: calc(var(--wp--preset--spacing--4-xl) - var(--wp--style--block-gap));
 		}
 
 		legend {
 			@include legend;
-			margin-bottom: var(--wp--custom--spacing--block-gap);
+			margin-bottom: var(--wp--style--block-gap);
 		}
 
 		.form-row {
@@ -209,7 +209,7 @@ $account-links: (
 		}
 
 		.wp-element-button {
-			margin-top: calc(var(--wp--custom--spacing--row-gap) - var(--wp--custom--spacing--block-gap));
+			margin-top: calc(var(--wp--preset--spacing--4-xl) - var(--wp--style--block-gap));
 		}
 	}
 
@@ -224,8 +224,8 @@ $account-links: (
 
 			// Registration on the account page is disabled.
 			&:not(:has(.u-columns)) {
-				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+				background-color: var(--scheme--background);
+				border-radius: var(--wp--preset--border-radius--md);
 				float: unset;
 				padding: var(--wp--preset--spacing--3-xl);
 				width: 100%;
@@ -257,8 +257,8 @@ $account-links: (
 
 		.col-1,
 		.col-2 {
-			background-color: var(--wp--preset--color--base);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+			background-color: var(--scheme--background);
+			border-radius: var(--wp--preset--border-radius--md);
 			float: unset;
 			padding: var(--wp--preset--spacing--3-xl);
 			width: 100%;
@@ -272,7 +272,7 @@ $account-links: (
 			}
 
 			p {
-				color: var(--scheme--muted);
+				color: var(--scheme--text-subtle);
 			}
 		}
 
@@ -284,7 +284,7 @@ $account-links: (
 		.woocommerce-form-login__submit {
 			float: unset;
 			margin: unset;
-			margin-top: var(--wp--custom--spacing--block-gap);
+			margin-top: var(--wp--style--block-gap);
 			width: 100%;
 		}
 
@@ -296,7 +296,7 @@ $account-links: (
 		.woocommerce-form {
 			display: flex;
 			flex-direction: column;
-			gap: var(--wp--custom--spacing--block-gap);
+			gap: var(--wp--style--block-gap);
 			margin-top: var(--wp--preset--spacing--sm);
 
 			.form-row {
@@ -313,7 +313,7 @@ $account-links: (
 				}
 
 				em {
-					color: var(--scheme--muted);
+					color: var(--scheme--text-subtle);
 					font-size: var(--wp--preset--font-size--md);
 					font-style: normal;
 					margin-top: var(--wp--preset--spacing--sm);
@@ -335,7 +335,7 @@ $account-links: (
 			.woocommerce-form__label-for-checkbox {
 				align-items: center;
 				display: flex;
-				font-weight: var(--wp--custom--typography--font-weight--primary);
+				font-weight: var(--wp--custom--typography--font-weight--body);
 				gap: var(--wp--preset--spacing--sm);
 				margin-bottom: unset;
 			}
@@ -376,7 +376,7 @@ $account-links: (
 
 			ul {
 				display: grid;
-				gap: var(--wp--custom--spacing--block-gap);
+				gap: var(--wp--style--block-gap);
 				grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
 			}
 
@@ -386,23 +386,23 @@ $account-links: (
 			}
 
 			li a {
-				background-color: var(--wp--preset--color--base);
-				border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+				background-color: var(--scheme--background);
+				border-radius: var(--wp--preset--border-radius--md);
 				flex-direction: column;
 				justify-content: center;
 				padding: var(--wp--preset--spacing--3-xl);
 
 				&:hover {
-					background-color: var(--wp--preset--color--brand-secondary);
+					background-color: var(--scheme--background-surface);
 				}
 			}
 
 			.woocommerce-MyAccount-navigation-link--customer-logout a {
-				color: var(--wp--custom--color--error);
+				color: var(--wp--preset--color--status-error);
 
 				&:hover,
 				&:focus-visible {
-					background-color: var(--wp--custom--color--error-surface);
+					background-color: var(--wp--preset--color--status-error-subtle);
 				}
 			}
 		}
@@ -410,11 +410,11 @@ $account-links: (
 
 	// Single order styles
 	.woocommerce-customer-details {
-		margin: var(--wp--custom--spacing--row-gap) 0 0;
+		margin: var(--wp--preset--spacing--4-xl) 0 0;
 
 		address {
 			border: unset;
-			margin-top: var(--wp--custom--spacing--block-gap);
+			margin-top: var(--wp--style--block-gap);
 			padding: 0;
 		}
 
@@ -434,10 +434,10 @@ $account-links: (
 	}
 
 	.woocommerce-order-details {
-		margin: var(--wp--custom--spacing--row-gap) 0 0;
+		margin: var(--wp--preset--spacing--4-xl) 0 0;
 
 		.woocommerce-table--order-details {
-			margin-top: var(--wp--custom--spacing--block-gap);
+			margin-top: var(--wp--style--block-gap);
 		}
 
 		.woocommerce-order-details__title {
@@ -479,18 +479,18 @@ $account-links: (
 	}
 
 	.woocommerce-Addresses {
-		margin-top: var(--wp--custom--spacing--block-gap);
+		margin-top: var(--wp--style--block-gap);
 	}
 
 	.woocommerce-Address {
 		border: 1px solid var(--scheme--border);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+		border-radius: var(--wp--preset--border-radius--md);
 		padding: var(--wp--preset--spacing--2-xl);
 	}
 
 	address {
 		font-style: normal;
-		margin-top: var(--wp--custom--spacing--block-gap);
+		margin-top: var(--wp--style--block-gap);
 	}
 
 	// Edit address styles

@@ -7,15 +7,15 @@
 
 	.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill {
 		border-color: var(--scheme--border);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-		font-weight: var(--wp--custom--typography--font-weight--primary);
+		border-radius: var(--wp--preset--border-radius--sm);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 		margin-bottom: 0;
 		padding-block: var(--wp--preset--spacing--sm);
 		padding-inline: var(--wp--preset--spacing--xl);
 
 		&:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:checked),
 		&:hover:not(:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:disabled)) {
-			--pill-background-color: var(--wp--preset--color--tint-primary);
+			--pill-background-color: var(--scheme--background-surface);
 
 			background-color: var(--pill-background-color);
 			border-color: var(--pill-background-color);

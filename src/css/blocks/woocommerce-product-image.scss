@@ -2,7 +2,7 @@
 
 .wp-block-woocommerce-product-image {
 	img {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+		border-radius: var(--wp--preset--border-radius--md);
 	}
 
 	.wc-block-components-product-sale-badge {

@@ -20,22 +20,22 @@
 	cursor: pointer;
 	display: inline-flex;
 	font-size: var(--button-font-size);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
 	justify-content: center;
 	text-align: center;
 	transition:
-		color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
-		background-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
-		border-color var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out),
-		opacity var(--wp--custom--transition--duration--normal) var(--wp--custom--transition--timing--ease-out);
+		color var(--wp--custom--transition--duration--normal) ease-out,
+		background-color var(--wp--custom--transition--duration--normal) ease-out,
+		border-color var(--wp--custom--transition--duration--normal) ease-out,
+		opacity var(--wp--custom--transition--duration--normal) ease-out;
 
 	@if $size == small {
 		--button-font-size: var(--wp--preset--font-size--sm);
 	}
 
 	@if $style == primary or $style == secondary {
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+		border-radius: var(--wp--preset--border-radius--sm);
 		padding: var(--button-padding);
 
 		@if $size == small {
@@ -44,9 +44,9 @@
 	}
 
 	@if $style == primary {
-		background-color: var(--scheme--button-background);
+		background-color: var(--scheme--background-fill);
 		border: unset;
-		color: var(--scheme--button-text);
+		color: var(--scheme--text-fill);
 
 		&:hover {
 			opacity: 0.8;
@@ -59,8 +59,8 @@
 
 	@if $style == secondary {
 		background-color: transparent;
-		border: 2px solid var(--scheme--button-background);
-		color: var(--scheme--button-background);
+		border: 2px solid var(--scheme--background-fill);
+		color: var(--scheme--background-fill);
 
 		&:focus-visible {
 			@include focus-ring;
@@ -70,7 +70,7 @@
 	@if $style == link {
 		background-color: transparent;
 		border: unset;
-		color: var(--scheme--link);
+		color: var(--scheme--text-link);
 		padding: unset;
 
 		&:focus-visible {

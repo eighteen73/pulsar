@@ -1,7 +1,7 @@
 @use "tools" as *;
 
 .wp-block-matter-gravity-form {
-	--gap: var(--wp--custom--spacing--block-gap);
+	--gap: var(--wp--style--block-gap);
 
 	.gform_wrapper,
 	.gform_wrapper.gravity-theme {
@@ -50,7 +50,7 @@
 
 			label {
 				@include label;
-				font-weight: var(--wp--custom--typography--font-weight--primary);
+				font-weight: var(--wp--custom--typography--font-weight--body);
 				padding-top: 0;
 			}
 
@@ -142,7 +142,7 @@
 		}
 
 		.gfield_required {
-			color: var(--wp--custom--color--error);
+			color: var(--wp--preset--color--status-error);
 			font-size: inherit;
 			font-style: inherit;
 			font-weight: inherit;
@@ -166,7 +166,7 @@
 		.gform_drop_area {
 			background-color: transparent;
 			border-color: var(--scheme--border-strong);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			border-radius: var(--wp--preset--border-radius--sm);
 			padding: var(--wp--preset--spacing--2-xl);
 
 			.button {
@@ -223,9 +223,9 @@
 		}
 
 		.gform_submission_error {
-			color: var(--wp--custom--color--error);
+			color: var(--wp--preset--color--status-error);
 			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--font-weight--primary);
+			font-weight: var(--wp--custom--typography--font-weight--body);
 			margin-top: 0;
 			text-transform: none;
 
@@ -238,12 +238,12 @@
 			input,
 			select,
 			textarea {
-				border-color: var(--wp--custom--color--error);
+				border-color: var(--wp--preset--color--status-error);
 			}
 		}
 
 		.validation_message {
-			color: var(--wp--custom--color--error);
+			color: var(--wp--preset--color--status-error);
 			margin-top: var(--wp--preset--spacing--sm);
 		}
 
@@ -261,7 +261,7 @@
 		}
 
 		.gsection_description {
-			color: var(--scheme--muted);
+			color: var(--scheme--text-subtle);
 			margin-bottom: 0;
 			margin-top: var(--wp--preset--spacing--sm);
 		}
@@ -287,21 +287,21 @@
 .gravity-theme {
 	&.ui-datepicker {
 		--datepicker-border-color: var(--scheme--border-strong);
-		--datepicker-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-		--datepicker-cell-border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
+		--datepicker-border-radius: var(--wp--preset--border-radius--sm);
+		--datepicker-cell-border-radius: var(--wp--preset--border-radius--xs);
 		--datepicker-cell-padding: 1px;
 		--datepicker-cell-size: 40px;
-		--datepicker-color: var(--wp--preset--color--contrast);
-		--datepicker-color-disabled: var(--wp--custom--color--neutral--400);
-		--datepicker-color-hover: var(--wp--preset--color--brand-secondary);
-		--datepicker-color-selected: var(--wp--preset--color--brand-primary);
-		--datepicker-color-selected-text: var(--wp--preset--color--base);
+		--datepicker-color: var(--scheme--text);
+		--datepicker-color-disabled: var(--wp--preset--color--neutral-400);
+		--datepicker-color-hover: var(--scheme--background-surface);
+		--datepicker-color-selected: var(--scheme--background-fill);
+		--datepicker-color-selected-text: var(--scheme--text-fill);
 		--datepicker-gap: var(--wp--preset--spacing--sm);
 		--datepicker-max-width: 300px;
 		--datepicker-padding: var(--wp--preset--spacing--lg);
 		--datepicker-shadow: var(--wp--preset--shadow--md);
 		--datepicker-transition-duration: var(--wp--custom--transition--duration--normal);
-		--datepicker-transition-timing: var(--wp--custom--transition--timing--ease-out);
+		--datepicker-transition-timing: ease-out;
 
 		border: 1px solid var(--datepicker-border-color);
 		border-radius: var(--datepicker-border-radius);

@@ -9,13 +9,13 @@
 
 .wp-block-matter-tabs__tab {
 	border-block-end: 2px solid transparent;
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	margin-block-end: -1px;
 	padding-block: var(--wp--preset--spacing--md);
 
 	&[aria-selected="true"] {
-		border-block-end-color: var(--scheme--link);
-		color: var(--scheme--link);
+		border-block-end-color: var(--scheme--text-link);
+		color: var(--scheme--text-link);
 	}
 
 	&:focus-visible {
@@ -44,7 +44,7 @@
 		text-align: start;
 
 		&[aria-selected="true"] {
-			border-inline-end-color: var(--scheme--link);
+			border-inline-end-color: var(--scheme--text-link);
 		}
 	}
 }
@@ -53,8 +53,8 @@
 // the current tab opens the tab list as a menu.
 .wp-block-matter-tabs__toggle {
 	border: 1px solid var(--scheme--border-strong);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	border-radius: var(--wp--preset--border-radius--sm);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	padding: var(--wp--preset--spacing--md);
 
 	&:focus-visible {
@@ -69,7 +69,7 @@
 		> .wp-block-matter-tabs__list {
 			background: var(--scheme--background);
 			border: 1px solid var(--scheme--border);
-			border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+			border-radius: var(--wp--preset--border-radius--sm);
 			box-shadow: var(--wp--preset--shadow--lg);
 			gap: 0;
 			margin-block-start: var(--wp--preset--spacing--xs);
@@ -83,7 +83,7 @@
 			width: 100%;
 
 			&[aria-selected="true"] {
-				color: var(--scheme--link);
+				color: var(--scheme--text-link);
 			}
 		}
 	}

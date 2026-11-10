@@ -3,12 +3,12 @@
 /// Theme styling for Matter menus (Eighteen73\Matter\menu()).
 /// Matter provides behaviour and functional layout; presentation lives here.
 .matter-menu {
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 
 	.current-menu-item > .matter-menu__link,
 	.current-menu-ancestor > .matter-menu__link,
 	.current-menu-ancestor > .matter-menu__toggle {
-		color: var(--scheme--link);
+		color: var(--scheme--text-link);
 	}
 }
 
@@ -41,7 +41,7 @@
 
 // Megamenu column headings (second-level items).
 .is-megamenu .is-column > .matter-menu__link {
-	color: var(--scheme--muted);
+	color: var(--scheme--text-subtle);
 	font-size: var(--wp--preset--font-size--sm);
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
@@ -62,14 +62,14 @@
 }
 
 .megamenu-panel {
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--md));
+	border-radius: var(--wp--preset--border-radius--md);
 	display: flex;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--sm);
 	padding: var(--wp--preset--spacing--xl);
 
 	&__title {
-		color: var(--scheme--heading);
+		color: var(--scheme--text-heading);
 		font-size: var(--wp--preset--font-size--lg);
 		margin: 0;
 	}
@@ -87,7 +87,7 @@
 		padding: 0;
 
 		a {
-			color: var(--scheme--link);
+			color: var(--scheme--text-link);
 		}
 	}
 

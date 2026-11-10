@@ -5,7 +5,7 @@
 	color: var(--scheme--text);
 	display: block;
 	font-size: var(--wp--preset--font-size--md);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	margin-bottom: var(--wp--preset--spacing--sm);
 
 	&:last-child {
@@ -16,19 +16,19 @@
 /// Legend styles.
 @mixin legend() {
 	font-size: var(--wp--preset--font-size--xl);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
-	letter-spacing: var(--wp--custom--typography--letter-spacing--tighter);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	letter-spacing: -0.05em;
 	margin-bottom: var(--wp--preset--spacing--sm);
 }
 
 /// Input styles.
 @mixin field-input() {
 	appearance: none;
-	background-color: var(--wp--preset--color--base);
+	background-color: var(--scheme--background-surface);
 	border: 1px solid var(--scheme--border-strong);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+	border-radius: var(--wp--preset--border-radius--sm);
 	box-shadow: none;
-	color: var(--wp--preset--color--contrast);
+	color: var(--scheme--text);
 	display: block;
 	font-family: inherit;
 	font-size: var(--wp--preset--font-size--md);
@@ -38,20 +38,20 @@
 	width: 100%;
 
 	&:focus {
-		border-color: var(--wp--preset--color--brand-primary);
-		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
+		border-color: var(--scheme--highlight);
+		box-shadow: var(--scheme--highlight) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 	}
 
 	&:disabled {
-		border-color: var(--scheme--muted);
-		color: var(--scheme--muted);
+		border-color: var(--scheme--text-subtle);
+		color: var(--scheme--text-subtle);
 		cursor: not-allowed;
 	}
 
 	&::placeholder {
-		color: var(--scheme--muted);
+		color: var(--scheme--text-subtle);
 		opacity: 1;
 	}
 }
@@ -68,7 +68,7 @@
 	--icon-size: 1em;
 	appearance: none;
 	border: 1px solid var(--scheme--border-strong);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+	border-radius: var(--wp--preset--border-radius--sm);
 	box-shadow: none;
 	display: block;
 	font-family: inherit;
@@ -77,7 +77,7 @@
 	width: 100%;
 
 	@if not $multiple {
-		background-color: var(--wp--preset--color--base);
+		background-color: var(--scheme--background-surface);
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiI+PC9wYXRoPjwvc3ZnPg==");
 		background-position: right var(--wp--preset--spacing--md) center;
 		background-repeat: no-repeat;
@@ -92,8 +92,8 @@
 	}
 
 	&:focus {
-		border-color: var(--wp--preset--color--brand-primary);
-		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
+		border-color: var(--scheme--highlight);
+		box-shadow: var(--scheme--highlight) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 		padding-block: var(--wp--preset--spacing--md);
@@ -101,32 +101,32 @@
 	}
 
 	&:disabled {
-		border-color: var(--scheme--muted);
-		color: var(--scheme--muted);
+		border-color: var(--scheme--text-subtle);
+		color: var(--scheme--text-subtle);
 		cursor: not-allowed;
 	}
 }
 
 /// File input styles.
 @mixin field-file() {
-	background: var(--wp--preset--color--base);
+	background: var(--scheme--background-surface);
 	border: 1px solid var(--scheme--border-strong);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--sm));
+	border-radius: var(--wp--preset--border-radius--sm);
 	box-shadow: none;
-	color: var(--wp--preset--color--contrast);
+	color: var(--scheme--text);
 	font-size: unset;
 	line-height: inherit;
 	padding: 0;
 
 	&:focus {
-		border-color: var(--wp--preset--color--brand-primary);
-		box-shadow: var(--wp--preset--color--brand-primary) 0 0 0 1px;
+		border-color: var(--scheme--highlight);
+		box-shadow: var(--scheme--highlight) 0 0 0 1px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 	}
 
 	&::file-selector-button {
-		background-color: var(--wp--custom--color--neutral--100);
+		background-color: var(--wp--preset--color--neutral-100);
 		border: none;
 		border-right: 1px solid var(--scheme--border-strong);
 		margin-right: var(--wp--preset--spacing--lg);
@@ -139,11 +139,11 @@
 	--icon-size: 24px;
 
 	appearance: none;
-	background-color: var(--wp--preset--color--base);
+	background-color: var(--scheme--background-surface);
 	background-origin: border-box;
 	border: 1px solid var(--scheme--border-strong);
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--preset--color--brand-primary);
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: var(--scheme--background-fill);
 	display: inline-block;
 	flex-shrink: 0;
 	height: var(--icon-size);
@@ -155,7 +155,7 @@
 	width: var(--icon-size);
 
 	&:focus {
-		box-shadow: var(--wp--preset--color--base) 0 0 0 1px, var(--wp--preset--color--brand-primary) 0 0 0 3px;
+		box-shadow: var(--scheme--background) 0 0 0 1px, var(--scheme--highlight) 0 0 0 3px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 	}
@@ -191,7 +191,7 @@
 	}
 
 	+ label {
-		font-weight: var(--wp--custom--typography--font-weight--primary);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 }
 
@@ -200,11 +200,11 @@
 	--icon-size: 24px;
 
 	appearance: none;
-	background-color: var(--wp--preset--color--base);
+	background-color: var(--scheme--background-surface);
 	background-origin: border-box;
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: 100%;
-	color: var(--wp--preset--color--brand-primary);
+	color: var(--scheme--background-fill);
 	display: inline-block;
 	flex-shrink: 0;
 	height: var(--icon-size);
@@ -216,7 +216,7 @@
 	width: var(--icon-size);
 
 	&:focus {
-		box-shadow: var(--wp--preset--color--base) 0 0 0 1px, var(--wp--preset--color--brand-primary) 0 0 0 3px;
+		box-shadow: var(--scheme--background) 0 0 0 1px, var(--scheme--highlight) 0 0 0 3px;
 		outline: 2px solid transparent;
 		outline-offset: 2px;
 	}
@@ -237,11 +237,11 @@
 	}
 
 	+ label {
-		font-weight: var(--wp--custom--typography--font-weight--primary);
+		font-weight: var(--wp--custom--typography--font-weight--body);
 	}
 }
 
 /// Range styles.
 @mixin field-range() {
-	accent-color: var(--wp--preset--color--brand-primary);
+	accent-color: var(--scheme--background-fill);
 }

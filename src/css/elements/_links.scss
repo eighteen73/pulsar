@@ -1,7 +1,7 @@
 @use "tools" as *;
 
 :where(a:not(.wp-element-button)) {
-	color: var(--scheme--link);
+	color: var(--scheme--text-link);
 	text-decoration: underline;
 
 	&:focus-visible {
