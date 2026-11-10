@@ -12,7 +12,7 @@
 
 use function Eighteen73\Matter\setting;
 
-if ( ! function_exists( 'Eighteen73\Matter\setting' ) || ! function_exists( 'block_core_social_link_get_icon' ) ) {
+if ( ! function_exists( 'block_core_social_link_get_icon' ) ) {
 	return;
 }
 

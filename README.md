@@ -14,7 +14,7 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 - [WordPress](https://wordpress.org/) 7.1+
 - [PHP](https://www.php.net/) 8.3+
 - [Node.js](https://nodejs.org/) 20+
-- [Matter](https://github.com/eighteen73/matter) 1.0+, for sections, schemes, menus, panels and site settings. An admin notice warns if it's missing.
+- [Matter](https://github.com/eighteen73/matter) 1.0+, for sections, schemes, menus, panels and site settings. It's a must-use plugin installed by Composer (`eighteen73/matter`), so it's always active and the theme uses it without checking. An admin notice warns if Composer has installed an older version or none.
 - [Orbit](https://github.com/eighteen73/orbit), recommended. It disables the Site Editor and ignores database template overrides outside development.
 
 ## Development

@@ -3,11 +3,13 @@
  * Matter integration.
  *
  * Feeds the theme's configuration (settings fields, breakpoints…) into Matter.
+ * Matter is a must-use plugin, so it's always loaded and the theme uses it
+ * without checking.
  *
  * @package Pulsar
  */
 
-namespace Pulsar\ThirdParty;
+namespace Pulsar;
 
 use Pulsar\Contracts\Bootable;
 use Pulsar\Tools\Config;
@@ -81,7 +83,7 @@ class Matter implements Bootable {
 	 * @return bool
 	 */
 	public function can_boot(): bool {
-		return class_exists( \Eighteen73\Matter\Plugin::class );
+		return true;
 	}
 
 	/**

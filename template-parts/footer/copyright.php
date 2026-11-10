@@ -10,9 +10,7 @@
  * @package Pulsar
  */
 
-$pulsar_copyright = function_exists( 'Eighteen73\Matter\setting' )
-	? (string) Eighteen73\Matter\setting( 'footer.copyright', '{year} {site}' )
-	: '{year} {site}';
+$pulsar_copyright = (string) Eighteen73\Matter\setting( 'footer.copyright', '{year} {site}' );
 
 $pulsar_copyright = strtr(
 	$pulsar_copyright,

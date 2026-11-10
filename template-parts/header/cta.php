@@ -10,10 +10,6 @@
 
 use function Eighteen73\Matter\setting;
 
-if ( ! function_exists( 'Eighteen73\Matter\setting' ) ) {
-	return;
-}
-
 $pulsar_cta_label = setting( 'header.cta_label' );
 $pulsar_cta_url   = setting( 'header.cta_url' );
 

@@ -14,7 +14,6 @@
 
 use function Eighteen73\Matter\menu;
 
-$pulsar_has_matter = function_exists( 'Eighteen73\Matter\menu' );
 ?>
 <footer class="site-footer">
 	<div class="site-footer__inner">
@@ -27,35 +26,31 @@ $pulsar_has_matter = function_exists( 'Eighteen73\Matter\menu' );
 				?>
 			</div>
 
-			<?php if ( $pulsar_has_matter ) : ?>
-				<div class="site-footer__menus">
-					<?php
-					foreach ( [ 'footer-1', 'footer-2' ] as $pulsar_location ) {
-						menu(
-							[
-								'location'    => $pulsar_location,
-								'orientation' => 'vertical',
-								'depth'       => 1,
-								'class'       => 'site-footer__menu',
-							]
-						);
-					}
-					?>
-				</div>
-			<?php endif; ?>
+			<div class="site-footer__menus">
+				<?php
+				foreach ( [ 'footer-1', 'footer-2' ] as $pulsar_location ) {
+					menu(
+						[
+							'location'    => $pulsar_location,
+							'orientation' => 'vertical',
+							'depth'       => 1,
+							'class'       => 'site-footer__menu',
+						]
+					);
+				}
+				?>
+			</div>
 		</div>
 
 		<div class="site-footer__legal">
 			<?php
-			if ( $pulsar_has_matter ) {
-				menu(
-					[
-						'location' => 'legal',
-						'depth'    => 1,
-						'class'    => 'site-footer__legal-menu',
-					]
-				);
-			}
+			menu(
+				[
+					'location' => 'legal',
+					'depth'    => 1,
+					'class'    => 'site-footer__legal-menu',
+				]
+			);
 
 			get_template_part( 'template-parts/footer/copyright' );
 			get_template_part( 'template-parts/footer/credit' );

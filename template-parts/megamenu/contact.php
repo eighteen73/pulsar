@@ -18,10 +18,6 @@
 
 use function Eighteen73\Matter\setting;
 
-if ( ! function_exists( 'Eighteen73\Matter\setting' ) ) {
-	return;
-}
-
 $pulsar_item        = $args['item'] ?? null;
 $pulsar_description = $pulsar_item instanceof WP_Post ? trim( (string) $pulsar_item->description ) : '';
 $pulsar_phone       = setting( 'contact.phone' );

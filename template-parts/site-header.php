@@ -19,37 +19,34 @@ use function Eighteen73\Matter\menu;
 use function Eighteen73\Matter\panel;
 use function Eighteen73\Matter\panel_toggle;
 
-$pulsar_has_matter = function_exists( 'Eighteen73\Matter\menu' );
 ?>
 <header class="site-header">
 	<div class="site-header__inner">
 		<?php get_template_part( 'template-parts/header/logo' ); ?>
 
 		<?php
-		if ( $pulsar_has_matter ) {
-			panel(
-				'site-navigation',
-				function () {
-					menu(
-						[
-							'location' => 'primary',
-							'type'     => [
-								'drill-down',
-								'lg' => 'dropdown',
-							],
-							'label'    => __( 'Main', 'pulsar' ),
-						]
-					);
+		panel(
+			'site-navigation',
+			function () {
+				menu(
+					[
+						'location' => 'primary',
+						'type'     => [
+							'drill-down',
+							'lg' => 'dropdown',
+						],
+						'label'    => __( 'Main', 'pulsar' ),
+					]
+				);
 
-					get_template_part( 'template-parts/header/cta' );
-				},
-				[
-					'collapse_below' => 'lg',
-					'label'          => __( 'Main menu', 'pulsar' ),
-					'class'          => 'site-header__navigation',
-				]
-			);
-		}
+				get_template_part( 'template-parts/header/cta' );
+			},
+			[
+				'collapse_below' => 'lg',
+				'label'          => __( 'Main menu', 'pulsar' ),
+				'class'          => 'site-header__navigation',
+			]
+		);
 		?>
 
 		<div class="site-header__actions">
@@ -58,16 +55,14 @@ $pulsar_has_matter = function_exists( 'Eighteen73\Matter\menu' );
 				Pulsar\the_block( 'woocommerce/mini-cart' );
 			}
 
-			if ( $pulsar_has_matter ) {
-				panel_toggle(
-					'site-navigation',
-					[
-						'collapse_below' => 'lg',
-						'label'          => __( 'Menu', 'pulsar' ),
-						'class'          => 'site-header__menu-toggle',
-					]
-				);
-			}
+			panel_toggle(
+				'site-navigation',
+				[
+					'collapse_below' => 'lg',
+					'label'          => __( 'Menu', 'pulsar' ),
+					'class'          => 'site-header__menu-toggle',
+				]
+			);
 			?>
 		</div>
 	</div>

@@ -3,8 +3,9 @@
  * Theme requirements.
  *
  * Pulsar 6 relies on Matter 1.x for menus, panels, sections, colour schemes
- * and site settings. Without it the header renders only the logo, and
- * sections can't be edited.
+ * and site settings. Matter is a must-use plugin installed by Composer, so
+ * the theme never checks for it; this only warns when Composer has installed
+ * an older version, or none, rather than failing later with a fatal error.
  *
  * @package Pulsar
  */
@@ -56,7 +57,7 @@ class Requirements implements Bootable {
 			esc_html(
 				sprintf(
 					/* translators: %s: required Matter version */
-					__( 'The Pulsar theme needs the Matter plugin (version %s or later) for menus, sections and site settings.', 'pulsar' ),
+					__( 'The Pulsar theme needs Matter %s or later, installed as a must-use plugin by Composer (eighteen73/matter).', 'pulsar' ),
 					self::MATTER_VERSION
 				)
 			)

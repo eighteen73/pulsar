@@ -10,10 +10,6 @@
 
 use function Eighteen73\Matter\setting;
 
-if ( ! function_exists( 'Eighteen73\Matter\setting' ) ) {
-	return;
-}
-
 $pulsar_address = setting( 'contact.address' );
 $pulsar_phone   = setting( 'contact.phone' );
 $pulsar_email   = setting( 'contact.email' );
