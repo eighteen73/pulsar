@@ -1,7 +1,7 @@
 @use "tools" as *;
 
 .wp-block-matter-gravity-form {
-	--gap: var(--wp--style--block-gap);
+	--_form-gap: var(--wp--style--block-gap);
 
 	.gform_wrapper,
 	.gform_wrapper.gravity-theme {
@@ -32,7 +32,7 @@
 
 		.gform_fields {
 			display: grid;
-			gap: var(--gap);
+			gap: var(--_form-gap);
 
 			@media (--md) {
 				grid-template-columns: repeat(12, 1fr);
@@ -46,7 +46,7 @@
 		.ginput_complex {
 			display: flex;
 			flex-wrap: wrap;
-			gap: var(--gap);
+			gap: var(--_form-gap);
 
 			label {
 				@include label;
@@ -82,7 +82,7 @@
 			.ginput_address_state,
 			.ginput_address_zip {
 				flex: unset;
-				width: calc(50% - (var(--gap) / 2));
+				width: calc(50% - (var(--_form-gap) / 2));
 			}
 		}
 
@@ -93,7 +93,7 @@
 
 		.gfield_header_item + .gfield_header_item:not(.gfield_header_item--icons),
 		.gfield_list_group_item + .gfield_list_group_item {
-			margin-left: var(--gap);
+			margin-left: var(--_form-gap);
 		}
 
 		.gfield_header_item {
@@ -102,7 +102,7 @@
 		}
 
 		.gfield_list_group {
-			margin-bottom: var(--gap);
+			margin-bottom: var(--_form-gap);
 		}
 
 		.gfield_list_header {
@@ -119,11 +119,11 @@
 
 		.ginput_container {
 			.small {
-				width: calc(25% - var(--gap));
+				width: calc(25% - var(--_form-gap));
 			}
 
 			.medium {
-				width: calc(50% - var(--gap) / 2);
+				width: calc(50% - var(--_form-gap) / 2);
 			}
 
 			.large {
@@ -210,11 +210,11 @@
 		}
 
 		.gform_validation_errors {
-			margin-bottom: var(--gap);
+			margin-bottom: var(--_form-gap);
 		}
 
 		.gform_footer {
-			margin-top: calc(var(--gap) * 2);
+			margin-top: calc(var(--_form-gap) * 2);
 			padding: 0;
 
 			.gform-button {
@@ -248,7 +248,7 @@
 		}
 
 		.gform_heading {
-			margin-bottom: var(--gap);
+			margin-bottom: var(--_form-gap);
 		}
 
 		.gform_title {
@@ -257,7 +257,7 @@
 
 		.gsection {
 			border-bottom: 1px solid var(--scheme--border);
-			padding: 0 0 var(--gap) 0;
+			padding: 0 0 var(--_form-gap) 0;
 		}
 
 		.gsection_description {

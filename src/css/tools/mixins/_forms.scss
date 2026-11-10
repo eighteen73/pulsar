@@ -65,7 +65,7 @@
 /// @param {Boolean} $multiple - Whether the select is a multiple select.
 ///
 @mixin field-select($multiple: false) {
-	--icon-size: 1em;
+	--_select-icon-size: 1em;
 	appearance: none;
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: var(--wp--preset--border-radius--sm);
@@ -81,7 +81,7 @@
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiI+PC9wYXRoPjwvc3ZnPg==");
 		background-position: right var(--wp--preset--spacing--md) center;
 		background-repeat: no-repeat;
-		background-size: var(--icon-size) var(--icon-size);
+		background-size: var(--_select-icon-size) var(--_select-icon-size);
 		padding-block: var(--wp--preset--spacing--md);
 		padding-left: var(--wp--preset--spacing--lg);
 		padding-right: var(--wp--preset--spacing--3-xl);
@@ -136,7 +136,7 @@
 
 /// Checkbox styles.
 @mixin field-checkbox() {
-	--icon-size: 24px;
+	--_checkbox-size: 24px;
 
 	appearance: none;
 	background-color: var(--scheme--background-surface);
@@ -146,13 +146,13 @@
 	color: var(--scheme--background-fill);
 	display: inline-block;
 	flex-shrink: 0;
-	height: var(--icon-size);
+	height: var(--_checkbox-size);
 	margin-right: var(--wp--preset--spacing--xs);
 	padding: 0;
 	print-color-adjust: exact;
 	user-select: none;
 	vertical-align: middle;
-	width: var(--icon-size);
+	width: var(--_checkbox-size);
 
 	&:focus {
 		box-shadow: var(--scheme--background) 0 0 0 1px, var(--scheme--highlight) 0 0 0 3px;
@@ -197,7 +197,7 @@
 
 /// Radio styles.
 @mixin field-radio() {
-	--icon-size: 24px;
+	--_radio-size: 24px;
 
 	appearance: none;
 	background-color: var(--scheme--background-surface);
@@ -207,13 +207,13 @@
 	color: var(--scheme--background-fill);
 	display: inline-block;
 	flex-shrink: 0;
-	height: var(--icon-size);
+	height: var(--_radio-size);
 	margin-right: var(--wp--preset--spacing--xs);
 	padding: 0;
 	print-color-adjust: exact;
 	user-select: none;
 	vertical-align: middle;
-	width: var(--icon-size);
+	width: var(--_radio-size);
 
 	&:focus {
 		box-shadow: var(--scheme--background) 0 0 0 1px, var(--scheme--highlight) 0 0 0 3px;

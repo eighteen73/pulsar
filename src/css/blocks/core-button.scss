@@ -1,7 +1,7 @@
 @use "tools" as *;
 
 .wp-block-button {
-	--width-gap: var(--wp--preset--spacing--md);
+	--_button-width-gap: var(--wp--preset--spacing--md);
 
 	&:where(.has-custom-width) {
 		max-width: none;
@@ -12,15 +12,15 @@
 	}
 
 	&:where(.wp-block-button__width-25) {
-		width: calc(25% - (var(--width-gap) * 0.75));
+		width: calc(25% - (var(--_button-width-gap) * 0.75));
 	}
 
 	&:where(.wp-block-button__width-50) {
-		width: calc(50% - (var(--width-gap) * 0.5));
+		width: calc(50% - (var(--_button-width-gap) * 0.5));
 	}
 
 	&:where(.wp-block-button__width-75) {
-		width: calc(75% - (var(--width-gap) * 0.25));
+		width: calc(75% - (var(--_button-width-gap) * 0.25));
 
 	}
 
@@ -30,7 +30,7 @@
 	}
 
 	:where(.is-vertical) > & {
-		--width-gap: 0;
+		--_button-width-gap: 0;
 	}
 
 	&.is-style-secondary {

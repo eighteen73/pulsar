@@ -61,11 +61,11 @@
 
 	// Four thumbnails across, six from `md`; more scroll.
 	.wp-block-matter-carousel__thumbnails {
-		--thumbnails-per-view: 4;
+		--gallery-thumbnails-per-view: 4;
 		flex: 1;
 
 		@media (--md) {
-			--thumbnails-per-view: 6;
+			--gallery-thumbnails-per-view: 6;
 		}
 	}
 
@@ -74,7 +74,7 @@
 		border-width: 2px;
 		height: auto;
 		opacity: 1;
-		width: calc((100% - (var(--thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--thumbnails-per-view));
+		width: calc((100% - (var(--gallery-thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--gallery-thumbnails-per-view));
 	}
 }
 

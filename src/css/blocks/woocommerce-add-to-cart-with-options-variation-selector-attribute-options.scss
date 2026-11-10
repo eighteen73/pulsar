@@ -15,10 +15,10 @@
 
 		&:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:checked),
 		&:hover:not(:has(.wc-block-add-to-cart-with-options-variation-selector-attribute-options__pill-input:disabled)) {
-			--pill-background-color: var(--scheme--background-surface);
+			--_pill-background: var(--scheme--background-surface);
 
-			background-color: var(--pill-background-color);
-			border-color: var(--pill-background-color);
+			background-color: var(--_pill-background);
+			border-color: var(--_pill-background);
 		}
 	}
 }
