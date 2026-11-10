@@ -126,6 +126,26 @@ Ask the designer for:
 
 Name the Figma variables the same way (`brand-primary`, `background-fill`, `spacing/xl`) so a design maps straight onto theme.json.
 
+## CSS conventions
+
+The aim is no `!important`.
+
+**Specificity**
+- One BEM class per selector. Nest only for a part, modifier or state (`&__title`, `&.is-style-feature`, `&.is-open`).
+- Element styles (`h2`, `a`, `button`) stay at element specificity, or inside `:where()`, so any class beats them.
+- Matter's skin is wrapped in `:where()`, so a single class here always overrides it.
+- `!important` only to beat someone else's `!important` or inline style (WordPress's constrained layout, WooCommerce, Gravity Forms), or to guarantee accessibility (focus ring, visually hidden). Always with a `stylelint-disable-line` comment saying why.
+
+**Class names**
+- `.wp-block-{namespace}-{block}` and `__{element}` for its parts.
+- `.is-style-{variant}` for variants, `.has-{option}` for options, `.is-{state}` for states, `.has-scheme-{slug}` for schemes.
+
+**CSS variables**
+- Use the tokens above: `--scheme--{role}` for colour, presets and roles for everything else. No hex values in component CSS.
+- A component's own variables are `--{component}-{setting}`, and only for settings or values JavaScript sets. Matter's block settings (`--gallery-gap`, `--menu-duration`…) can be set on `:root` or on the block's class; see Matter's README.
+- Private helpers a component computes for itself are `--_{component}-{name}`.
+- A value used once is written as a property, not a variable.
+
 ## Header, footer and menus
 
 `template-parts/site-header.php` contains:
