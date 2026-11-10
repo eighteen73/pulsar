@@ -33,28 +33,17 @@
 		--_button-width-gap: 0;
 	}
 
-	&.is-style-secondary {
-		.wp-block-button__link {
-			@include button(secondary);
-		}
+	// The link already has the button base (elements/_button.scss).
+	&.is-style-secondary .wp-block-button__link {
+		@include button-variant(secondary);
 	}
 
-	&.is-style-link {
-		.wp-block-button__link {
-			@include button(link);
-		}
+	&.is-style-link .wp-block-button__link {
+		@include button-variant(link);
 	}
-}
-
-.wp-element-button,
-.wp-block-button__link {
-	@include button(primary);
 }
 
 // Button icons (Matter button icon extension).
-.wp-block-button__link.has-icon {
-	gap: var(--wp--preset--spacing--sm);
-}
 
 .wp-block-button__icon {
 	display: inline-flex;

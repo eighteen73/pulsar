@@ -1,80 +1,138 @@
 @use "../../settings" as *;
 @use "utility" as *;
 
-/// Button styles.
+/// Buttons.
 ///
-/// @param {string} $style - The style of the button.
-/// @param {string} $size - The size of the button. Possible values: default, small.
+/// A button is the base plus a variant. The base sets everything variants
+/// share (size, border width, type, states), so every variant is the same
+/// height. A variant only sets colours, through private variables; a size
+/// only sets spacing and font size.
 ///
-/// @example scss - Primary button
+/// @example scss - A new button
 /// .button {
-///   @include button(primary);
+///   @include button;                   // primary
 /// }
 ///
-@mixin button($style: primary, $size: default) {
-	--button-padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
-	--button-font-size: var(--wp--preset--font-size--md);
+/// .button--secondary {
+///   @include button(secondary, small);
+/// }
+///
+/// @example scss - Something that's already a button (has the base)
+/// .wp-block-button.is-style-secondary .wp-block-button__link {
+///   @include button-variant(secondary);
+/// }
+///
+/// @param {string} $variant - primary, secondary or link.
+/// @param {string} $size - default or small.
+///
+@mixin button($variant: primary, $size: default) {
+	@include button-base;
+	@include button-variant($variant);
+
+	@if $size != default {
+		@include button-size($size);
+	}
+}
+
+/// Shared structure. The border is always drawn (in the background colour
+/// when a variant has no visible border), and padding allows for it, so
+/// every variant has the same height.
+@mixin button-base {
+	--_button-border-width: 2px;
+	--_button-padding-block: var(--wp--preset--spacing--md);
+	--_button-padding-inline: var(--wp--preset--spacing--lg);
+	--_button-font-size: var(--wp--preset--font-size--md);
 
 	align-items: center;
-	box-shadow: unset;
+	background-color: var(--_button-background);
+	border: var(--_button-border-width) solid var(--_button-border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	box-shadow: none;
+	color: var(--_button-text);
 	cursor: pointer;
 	display: inline-flex;
-	font-size: var(--button-font-size);
+	font-family: inherit;
+	font-size: var(--_button-font-size);
 	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
 	justify-content: center;
+	line-height: var(--wp--custom--typography--line-height--tight);
+	padding:
+		calc(var(--_button-padding-block) - var(--_button-border-width))
+		calc(var(--_button-padding-inline) - var(--_button-border-width));
 	text-align: center;
+	text-decoration: none;
 	transition:
-		color var(--wp--custom--transition--duration--normal) ease-out,
-		background-color var(--wp--custom--transition--duration--normal) ease-out,
-		border-color var(--wp--custom--transition--duration--normal) ease-out,
-		opacity var(--wp--custom--transition--duration--normal) ease-out;
+		background-color var(--wp--custom--transition--duration--quick) ease-out,
+		border-color var(--wp--custom--transition--duration--quick) ease-out,
+		color var(--wp--custom--transition--duration--quick) ease-out;
 
-	@if $size == small {
-		--button-font-size: var(--wp--preset--font-size--sm);
+	&:hover {
+		background-color: var(--_button-background-hover);
+		border-color: var(--_button-border-hover);
+		color: var(--_button-text-hover);
 	}
 
-	@if $style == primary or $style == secondary {
-		border-radius: var(--wp--preset--border-radius--sm);
-		padding: var(--button-padding);
-
-		@if $size == small {
-			--button-padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
-		}
+	&:focus-visible {
+		@include focus-ring;
 	}
 
-	@if $style == primary {
-		background-color: var(--scheme--background-fill);
-		border: unset;
-		color: var(--scheme--text-fill);
+	&:disabled,
+	&[aria-disabled="true"] {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+/// Colours for a variant. Hovers move the fill towards the section's
+/// background, so they work in every scheme without changing text contrast.
+///
+/// @param {string} $variant - primary, secondary or link.
+@mixin button-variant($variant) {
+	@if $variant == primary {
+		--_button-background: var(--scheme--background-fill);
+		--_button-border: var(--scheme--background-fill);
+		--_button-text: var(--scheme--text-fill);
+		--_button-background-hover: color-mix(in oklch, var(--scheme--background-fill) 85%, var(--scheme--background));
+		--_button-border-hover: var(--_button-background-hover);
+		--_button-text-hover: var(--scheme--text-fill);
+	} @else if $variant == secondary {
+		--_button-background: transparent;
+		--_button-border: var(--scheme--background-fill);
+		--_button-text: var(--scheme--background-fill);
+		--_button-background-hover: var(--scheme--background-fill);
+		--_button-border-hover: var(--scheme--background-fill);
+		--_button-text-hover: var(--scheme--text-fill);
+	} @else if $variant == link {
+		--_button-border-width: 0px; // stylelint-disable-line length-zero-no-unit -- used in calc()
+		--_button-padding-block: 0px; // stylelint-disable-line length-zero-no-unit -- used in calc()
+		--_button-padding-inline: 0px; // stylelint-disable-line length-zero-no-unit -- used in calc()
+		--_button-background: transparent;
+		--_button-border: transparent;
+		--_button-text: var(--scheme--text-link);
+		--_button-background-hover: transparent;
+		--_button-border-hover: transparent;
+		--_button-text-hover: var(--scheme--text-link);
 
 		&:hover {
-			opacity: 0.8;
+			text-decoration: underline;
 		}
 
-		&:focus-visible {
-			@include focus-ring;
-		}
+		@include focus-block;
+	} @else {
+		@error "Unknown button variant: #{$variant}";
 	}
+}
 
-	@if $style == secondary {
-		background-color: transparent;
-		border: 2px solid var(--scheme--background-fill);
-		color: var(--scheme--background-fill);
-
-		&:focus-visible {
-			@include focus-ring;
-		}
-	}
-
-	@if $style == link {
-		background-color: transparent;
-		border: unset;
-		color: var(--scheme--text-link);
-		padding: unset;
-
-		&:focus-visible {
-			@include focus-block;
-		}
+/// Spacing and font size for a size.
+///
+/// @param {string} $size - small.
+@mixin button-size($size) {
+	@if $size == small {
+		--_button-padding-block: var(--wp--preset--spacing--sm);
+		--_button-padding-inline: var(--wp--preset--spacing--md);
+		--_button-font-size: var(--wp--preset--font-size--sm);
+	} @else {
+		@error "Unknown button size: #{$size}";
 	}
 }

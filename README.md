@@ -146,6 +146,11 @@ The aim is no `!important`.
 - Private helpers a component computes for itself are `--_{component}-{name}`.
 - A value used once is written as a property, not a variable.
 
+**Buttons**
+- Every button is the base plus a variant (`primary`, `secondary`, `link`) and optionally a size (`small`). The base draws the border on every variant and allows for it in the padding, so all buttons are the same height.
+- `@include button(secondary, small)` makes something a button. Anything that's already one (`.wp-element-button`, `.wp-block-button__link`) only needs `@include button-variant(secondary)` or `button-size(small)`, which set colours or spacing through private `--_button-*` variables.
+- Hovers mix the fill towards the section's background, so they work in every scheme.
+
 ## Header, footer and menus
 
 `template-parts/site-header.php` contains:

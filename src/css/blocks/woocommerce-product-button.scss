@@ -1,0 +1,9 @@
+@use "tools" as *;
+
+// WooCommerce removes the border and resets the line height with a
+// three-class selector. Match it so the button keeps the base's border and
+// height, the same as every other button.
+.wp-block-button.wc-block-components-product-button .wc-block-components-product-button__button {
+	border-style: solid;
+	line-height: var(--wp--custom--typography--line-height--tight);
+}

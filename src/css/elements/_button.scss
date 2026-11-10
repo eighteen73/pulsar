@@ -1,6 +1,8 @@
 @use "../tools" as *;
 
-// Styles are applied here rather than theme.json so styles can be more easily shared.
-.wp-element-button {
-	@include button(primary);
+// Every button gets the base and the primary colours here; variants
+// (core/button block styles) only change the colours, in blocks/core-button.scss.
+.wp-element-button,
+.wp-block-button__link {
+	@include button;
 }
