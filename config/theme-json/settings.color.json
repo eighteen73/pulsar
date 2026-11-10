@@ -18,49 +18,159 @@
 			"link": false,
 			"palette": [
 				{
-					"name": "Brand: Primary",
+					"name": "Brand primary",
 					"slug": "brand-primary",
-					"color": "#3B4E7A"
+					"color": "#1D2B4F"
 				},
 				{
-					"name": "Brand: Secondary",
-					"slug": "brand-secondary",
-					"color": "#EDF2FF"
+					"name": "Brand primary subtle",
+					"slug": "brand-primary-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--brand-primary) 12%, white)"
 				},
 				{
-					"name": "Accent: Primary",
+					"name": "Brand primary strong",
+					"slug": "brand-primary-strong",
+					"color": "color-mix(in oklch, var(--wp--preset--color--brand-primary) 70%, black)"
+				},
+				{
+					"name": "Accent primary",
 					"slug": "accent-primary",
-					"color": "#4B5563"
+					"color": "#B4472F"
 				},
 				{
-					"name": "Accent: Secondary",
+					"name": "Accent primary subtle",
+					"slug": "accent-primary-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--accent-primary) 12%, white)"
+				},
+				{
+					"name": "Accent primary strong",
+					"slug": "accent-primary-strong",
+					"color": "color-mix(in oklch, var(--wp--preset--color--accent-primary) 70%, black)"
+				},
+				{
+					"name": "Accent secondary",
 					"slug": "accent-secondary",
-					"color": "#D97706"
+					"color": "#E8B04B"
 				},
 				{
-					"name": "Accent: Tertiary",
-					"slug": "accent-tertiary",
-					"color": "#9CA3AF"
+					"name": "Accent secondary subtle",
+					"slug": "accent-secondary-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--accent-secondary) 12%, white)"
 				},
 				{
-					"name": "Tint: Primary",
-					"slug": "tint-primary",
-					"color": "#FFF9F2"
+					"name": "Accent secondary strong",
+					"slug": "accent-secondary-strong",
+					"color": "color-mix(in oklch, var(--wp--preset--color--accent-secondary) 70%, black)"
 				},
 				{
-					"name": "Tint: Secondary",
-					"slug": "tint-secondary",
-					"color": "#FEEED9"
+					"name": "Neutral 50",
+					"slug": "neutral-50",
+					"color": "#F6F6F6"
 				},
 				{
-					"name": "Contrast",
-					"slug": "contrast",
-					"color": "#030712"
+					"name": "Neutral 100",
+					"slug": "neutral-100",
+					"color": "#E7E7E7"
+				},
+				{
+					"name": "Neutral 200",
+					"slug": "neutral-200",
+					"color": "#D1D1D1"
+				},
+				{
+					"name": "Neutral 300",
+					"slug": "neutral-300",
+					"color": "#B0B0B0"
+				},
+				{
+					"name": "Neutral 400",
+					"slug": "neutral-400",
+					"color": "#888888"
+				},
+				{
+					"name": "Neutral 500",
+					"slug": "neutral-500",
+					"color": "#6D6D6D"
+				},
+				{
+					"name": "Neutral 600",
+					"slug": "neutral-600",
+					"color": "#5D5D5D"
+				},
+				{
+					"name": "Neutral 700",
+					"slug": "neutral-700",
+					"color": "#4F4F4F"
+				},
+				{
+					"name": "Neutral 800",
+					"slug": "neutral-800",
+					"color": "#454545"
+				},
+				{
+					"name": "Neutral 900",
+					"slug": "neutral-900",
+					"color": "#3D3D3D"
+				},
+				{
+					"name": "Neutral 950",
+					"slug": "neutral-950",
+					"color": "#1C1C1C"
 				},
 				{
 					"name": "Base",
 					"slug": "base",
 					"color": "#FFFFFF"
+				},
+				{
+					"name": "Contrast",
+					"slug": "contrast",
+					"color": "#121826"
+				},
+				{
+					"name": "Status error",
+					"slug": "status-error",
+					"color": "#B42318"
+				},
+				{
+					"name": "Status error subtle",
+					"slug": "status-error-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--status-error) 12%, white)"
+				},
+				{
+					"name": "Status warning",
+					"slug": "status-warning",
+					"color": "#B54708"
+				},
+				{
+					"name": "Status warning subtle",
+					"slug": "status-warning-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--status-warning) 12%, white)"
+				},
+				{
+					"name": "Status success",
+					"slug": "status-success",
+					"color": "#067647"
+				},
+				{
+					"name": "Status success subtle",
+					"slug": "status-success-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--status-success) 12%, white)"
+				},
+				{
+					"name": "Status info",
+					"slug": "status-info",
+					"color": "#175CD3"
+				},
+				{
+					"name": "Status info subtle",
+					"slug": "status-info-subtle",
+					"color": "color-mix(in oklch, var(--wp--preset--color--status-info) 12%, white)"
+				},
+				{
+					"name": "Focus",
+					"slug": "focus",
+					"color": "#FFDD00"
 				}
 			],
 			"text": false

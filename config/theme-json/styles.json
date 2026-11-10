@@ -2,29 +2,29 @@
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 3,
 	"styles": {
-    "elements": {
-      "button": {
-        "border": {
-          "color": "",
-          "radius": "",
-          "width": ""
-        },
-        "color": {
-          "background": "",
-          "text": ""
-        },
-        "spacing": {
-          "padding": {}
-        },
-        "typography": {
-          "lineHeight": "",
-          "fontSize": "",
-          "fontFamily": ""
-        }
-      }
-    },
+		"elements": {
+			"button": {
+				"border": {
+					"color": "",
+					"radius": "",
+					"width": ""
+				},
+				"color": {
+					"background": "",
+					"text": ""
+				},
+				"spacing": {
+					"padding": {}
+				},
+				"typography": {
+					"lineHeight": "",
+					"fontSize": "",
+					"fontFamily": ""
+				}
+			}
+		},
 		"spacing": {
-			"blockGap": "var(--wp--custom--spacing--block-gap)",
+			"blockGap": "var:preset|spacing|xl",
 			"padding": {
 				"left": "var(--wp--custom--spacing--edge)",
 				"right": "var(--wp--custom--spacing--edge)"

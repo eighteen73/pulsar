@@ -6,7 +6,10 @@
 			"customFontSize": false,
 			"defaultFontSizes": false,
 			"dropCap": false,
-			"fluid": true,
+			"fluid": {
+				"minViewportWidth": "320px",
+				"maxViewportWidth": "1440px"
+			},
 			"fontFamilies": [
 				{
 					"name": "Primary",
@@ -58,61 +61,21 @@
 				{
 					"name": "Secondary",
 					"slug": "secondary",
-					"fontFamily": "'Figtree', sans-serif",
-					"fontFace": [
-						{
-							"fontFamily": "Figtree",
-							"fontStyle": "normal",
-							"fontWeight": "400",
-							"fontDisplay": "swap",
-							"fontStretch": "normal",
-							"src": [
-								"file:./assets/fonts/figtree/figtree-v8-latin-regular.woff2"
-							]
-						},
-						{
-							"fontFamily": "Figtree",
-							"fontStyle": "italic",
-							"fontWeight": "400",
-							"fontDisplay": "swap",
-							"fontStretch": "normal",
-							"src": [
-								"file:./assets/fonts/figtree/figtree-v8-latin-italic.woff2"
-							]
-						},
-						{
-							"fontFamily": "Figtree",
-							"fontStyle": "normal",
-							"fontWeight": "700",
-							"fontDisplay": "swap",
-							"fontStretch": "normal",
-							"src": [
-								"file:./assets/fonts/figtree/figtree-v8-latin-700.woff2"
-							]
-						},
-						{
-							"fontFamily": "Figtree",
-							"fontStyle": "italic",
-							"fontWeight": "700",
-							"fontDisplay": "swap",
-							"fontStretch": "normal",
-							"src": [
-								"file:./assets/fonts/figtree/figtree-v8-latin-700italic.woff2"
-							]
-						}
-					]
+					"fontFamily": "var(--wp--preset--font-family--primary)"
 				}
 			],
 			"fontSizes": [
 				{
 					"name": "XS",
 					"slug": "xs",
-					"size": "12px"
+					"size": "12px",
+					"fluid": false
 				},
 				{
 					"name": "SM",
 					"slug": "sm",
-					"size": "14px"
+					"size": "14px",
+					"fluid": false
 				},
 				{
 					"name": "MD",
@@ -128,7 +91,7 @@
 					"slug": "lg",
 					"size": "20px",
 					"fluid": {
-						"min": "18px",
+						"min": "19px",
 						"max": "20px"
 					}
 				},
@@ -137,7 +100,7 @@
 					"slug": "xl",
 					"size": "25px",
 					"fluid": {
-						"min": "20px",
+						"min": "23px",
 						"max": "25px"
 					}
 				},
@@ -146,7 +109,7 @@
 					"slug": "2-xl",
 					"size": "31px",
 					"fluid": {
-						"min": "25px",
+						"min": "28px",
 						"max": "31px"
 					}
 				},
@@ -155,17 +118,17 @@
 					"slug": "3-xl",
 					"size": "39px",
 					"fluid": {
-						"min": "31px",
+						"min": "33px",
 						"max": "39px"
 					}
 				},
 				{
 					"name": "4XL",
 					"slug": "4-xl",
-					"size": "48px",
+					"size": "49px",
 					"fluid": {
-						"min": "39px",
-						"max": "48px"
+						"min": "40px",
+						"max": "49px"
 					}
 				},
 				{

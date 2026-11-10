@@ -5,8 +5,8 @@
 		"layout": {
 			"allowCustomContentAndWideSize": false,
 			"allowEditing": false,
-			"contentSize": "var:custom|layout|content",
-			"wideSize": "var:custom|layout|wide"
+			"contentSize": "768px",
+			"wideSize": "1440px"
 		}
 	}
 }

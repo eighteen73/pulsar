@@ -9,37 +9,27 @@
 				{
 					"name": "xs",
 					"slug": "xs",
-					"size": "4px"
+					"size": "calc(4px * var(--wp--custom--roundness))"
 				},
 				{
 					"name": "sm",
 					"slug": "sm",
-					"size": "8px"
+					"size": "calc(8px * var(--wp--custom--roundness))"
 				},
 				{
 					"name": "md",
 					"slug": "md",
-					"size": "clamp(10px, 1.5vw, 16px)"
+					"size": "calc(clamp(10px, 8.2857px + 0.5357vw, 16px) * var(--wp--custom--roundness))"
 				},
 				{
 					"name": "lg",
 					"slug": "lg",
-					"size": "clamp(16px, 2.5vw, 24px)"
-				},
-				{
-					"name": "xl",
-					"slug": "xl",
-					"size": "clamp(24px, 3.5vw, 48px)"
-				},
-				{
-					"name": "2-xl",
-					"slug": "2-xl",
-					"size": "clamp(48px, 4.5vw, 96px)"
+					"size": "calc(clamp(16px, 13.7143px + 0.7143vw, 24px) * var(--wp--custom--roundness))"
 				},
 				{
 					"name": "full",
 					"slug": "full",
-					"size": "100%"
+					"size": "calc(9999px * var(--wp--custom--roundness))"
 				}
 			],
 			"style": false,
