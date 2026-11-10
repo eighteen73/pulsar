@@ -49,7 +49,7 @@
 	// Dialog close button.
 	.wc-block-product-gallery-dialog__close-button {
 		&::before {
-			@include icon("icons/x", 32px, var(--scheme--text));
+			@include icon("ui/x", 32px, var(--scheme--text));
 		}
 
 		svg {

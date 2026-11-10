@@ -9,11 +9,11 @@
 		justify-content: center;
 
 		&:first-child::before {
-			@include icon("chevron-left");
+			@include icon("ui/caret-left");
 		}
 
 		&:last-child::before {
-			@include icon("chevron-right");
+			@include icon("ui/caret-right");
 		}
 
 		&[aria-disabled="true"]::before {

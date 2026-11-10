@@ -25,7 +25,7 @@
 		}
 
 		&::before {
-			@include icon("icons/x");
+			@include icon("ui/x");
 			color: var(--scheme--text);
 		}
 

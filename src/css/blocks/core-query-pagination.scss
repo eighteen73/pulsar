@@ -51,10 +51,10 @@
 	}
 
 	.wp-block-query-pagination-previous-arrow {
-		@include icon("icons/caret-left");
+		@include icon("ui/caret-left");
 	}
 
 	.wp-block-query-pagination-next-arrow {
-		@include icon("icons/caret-right");
+		@include icon("ui/caret-right");
 	}
 }

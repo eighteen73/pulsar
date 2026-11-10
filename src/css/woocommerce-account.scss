@@ -66,7 +66,7 @@ $account-links: (
 		margin-bottom: var(--wp--preset--spacing--md);
 
 		.wp-block-button__link::before {
-			@include icon(arrow-left, 12px);
+			@include icon("icons/arrow-left", 12px);
 		}
 
 		@media (--xl) {
@@ -473,7 +473,7 @@ $account-links: (
 			margin: unset;
 
 			&::before {
-				@include icon(woocommerce/edit-address, 12px);
+				@include icon("woocommerce/account/edit-address", 12px);
 			}
 		}
 	}

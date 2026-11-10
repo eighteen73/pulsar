@@ -28,7 +28,7 @@ function get_site_logo( array $args = [] ): string {
 	$args = wp_parse_args(
 		$args,
 		[
-			'logo'        => $args['logo'] ?? 'logo',
+			'logo'        => $args['logo'] ?? 'brand/logo',
 			'tag'         => is_front_page() ? 'h1' : 'div',
 			'class'       => $args['class'] ?? 'site-header__logo',
 			'link_class'  => $args['link_class'] ?? 'site-header__logo-link',

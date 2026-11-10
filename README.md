@@ -37,6 +37,10 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). |
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow, plus reference Hero, Logo ticker and Peek styles; gallery Thumbnails). Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
+| `assets/svg/icons/` | The button icons editors can pick from (registered as the `pulsar` icon collection). Add an icon here only if clients should see it. |
+| `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
+| `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). |
+| `assets/svg/woocommerce/account/` | My Account navigation icons. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`) and `template-part`. |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
 | `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |

@@ -68,7 +68,7 @@
 
 @mixin wc-trash-icon() {
 	&::after {
-		@include icon("icons/trash", 24px);
+		@include icon("ui/trash", 24px);
 		color: var(--wp--preset--color--status-error);
 	}
 

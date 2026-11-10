@@ -125,7 +125,7 @@
 		margin: 0;
 
 		&::after {
-			@include icon("icons/lock", 24px);
+			@include icon("ui/lock", 24px);
 		}
 	}
 }

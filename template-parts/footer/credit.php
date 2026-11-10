@@ -24,7 +24,7 @@ $pulsar_credit_url = add_query_arg(
 
 	<?php
 	Pulsar\display_svg(
-		'eighteen73',
+		'brand/eighteen73',
 		[
 			'class' => 'site-footer__credit-logo',
 			'title' => 'eighteen73',
