@@ -36,6 +36,12 @@ return [
 	'core/buttons',
 	'core/button',
 
+	// Posts and products carousels (Matter): the query block is the carousel.
+	// The inserter offers them as "Posts carousel" and "Products carousel"
+	// only, not plain Query Loops or Product Collections.
+	'core/query',
+	'woocommerce/product-collection',
+
 	// Sections and components.
 	'pulsar/*',
 	'matter/*',
