@@ -3,7 +3,6 @@
  * Title: Loop item
  * Slug: pulsar/loop-item
  * Description: How one post (or an item of any post type without its own pattern) shows in every loop and carousel, through Matter's loop item block. Add patterns/loop-item-{post_type}.php for a post type that needs its own.
- * Categories: query
  * Inserter: false
  *
  * @package pulsar
