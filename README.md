@@ -35,7 +35,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards), passed to Matter, which enforces it in the post editor. Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
 | `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). |
-| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow, plus reference Hero, Logo ticker and Peek styles; gallery Thumbnails). Styled in `src/css/blocks/matter-*.scss`. |
+| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
 | `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
@@ -44,7 +44,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
 | `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |
-| `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `site-header`, `site-footer`, checkout variants, and `header/`, `footer/`, `megamenu/` pieces. |
+| `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `site-header`, `site-footer`, checkout variants, and `header/` and `footer/` pieces. |
 | `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"site-header"} /-->` for the header and footer. |
 | `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
 | `patterns/loop-item-accordion.php`, `patterns/loop-item-tabs.php` | An item's content in an accordion or tabs of posts ("Posts accordion", "Posts tabs"): the excerpt with a link; the post's title is the heading or tab. Add `loop-item-{post_type}-accordion.php` (or `-tabs`) for a post type that needs its own, e.g. an FAQ's whole answer, and `loop-item-carousel.php` or `loop-item-{post_type}-carousel.php` for carousel slides unlike the post type's usual item. See Matter's README for the full order. |
@@ -174,7 +174,7 @@ The aim is no `!important`.
 
 Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
 
-**Megamenus.** In Appearance › Menus, tick "Display submenu as a megamenu" on a top-level item: its second-level items become column headings (use `#` links) and third-level items their links. Optionally attach a panel from `template-parts/megamenu/`: each PHP file with a `Title:` header is offered in the item's "Megamenu panel" list, and receives the menu item as `$args['item']`. `megamenu/contact.php` is an example: it shows the item's description, contact details and the header call to action from Appearance › Options.
+**Megamenus** aren't styled in the starter. Matter supports them (a menu item's "Display submenu as a megamenu"); see Matter's README for setting one up, with an example panel and CSS.
 
 ## Archives, search and 404
 

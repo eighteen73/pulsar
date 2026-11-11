@@ -3,7 +3,6 @@
  * Title: Search results
  * Slug: pulsar/archive-search
  * Description: Default search results content: the title, then the search form and results.
- * Categories: content
  * Inserter: false
  *
  * @package pulsar

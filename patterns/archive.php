@@ -3,7 +3,6 @@
  * Title: Archive
  * Slug: pulsar/archive
  * Description: Default archive content: the archive's title and description, then its list. Editors start from this when they customise an archive.
- * Categories: content
  * Inserter: false
  *
  * @package pulsar

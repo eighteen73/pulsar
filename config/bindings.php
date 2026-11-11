@@ -13,7 +13,6 @@ return [
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Bindings::class,
-	Pulsar\Editor\Patterns::class,
 	Pulsar\ThirdParty\GravityForms::class,
 	Pulsar\Matter::class,
 	Pulsar\ThirdParty\WooCommerce\Setup::class,

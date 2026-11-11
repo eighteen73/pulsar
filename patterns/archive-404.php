@@ -3,7 +3,6 @@
  * Title: Page not found
  * Slug: pulsar/archive-404
  * Description: Default 404 content.
- * Categories: content
  * Inserter: false
  *
  * @package pulsar

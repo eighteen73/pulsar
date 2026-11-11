@@ -46,28 +46,6 @@ return [
 			'autoplay' => 6,
 			'controls' => [ 'before' => [ 'dots' ] ],
 		],
-		// Reference variants (see src/css/blocks/matter-carousel.scss):
-		// keep, restyle or delete per project.
-		'hero'    => [
-			'label'    => __( 'Hero', 'pulsar' ),
-			'loop'     => true,
-			'autoplay' => 6,
-			'controls' => [ 'after' => [ 'prev', 'next', 'play' ] ],
-		],
-		'ticker'  => [
-			'label'       => __( 'Logo ticker', 'pulsar' ),
-			'loop'        => true,
-			'autoScroll'  => 1,
-			'aspectRatio' => 'auto',
-			'controls'    => [],
-		],
-		'peek'    => [
-			'label'    => __( 'Peek', 'pulsar' ),
-			'controls' => [
-				'stage' => [ 'prev', 'next' ],
-				'after' => [ 'dots' ],
-			],
-		],
 	],
 	'matter/archive-loop' => [
 		'default' => [
