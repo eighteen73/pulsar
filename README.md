@@ -46,7 +46,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |
 | `template-parts/` | PHP parts: `site-header`, `site-footer`, checkout variants, and `header/`, `footer/`, `megamenu/` pieces. |
 | `templates/` | Block templates. They use `<!-- wp:pulsar/template-part {"slug":"site-header"} /-->` for the header and footer. |
-| `patterns/card-product.php`, `patterns/card.php` | The card for each product, and for posts and any other post type, used by every loop and carousel through Matter's `matter/card` block. Add `patterns/card-{post_type}.php` for a post type that needs its own card. |
+| `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
 
 ## Sections
 

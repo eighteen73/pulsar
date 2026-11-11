@@ -1,8 +1,8 @@
 <?php
 /**
- * Title: Product card
- * Slug: pulsar/card-product
- * Description: The card for one product, used by every product loop and carousel through Matter's card block. Change it here and every list of products follows.
+ * Title: Product loop item
+ * Slug: pulsar/loop-item-product
+ * Description: How one product shows in every product loop and carousel, through Matter's loop item block. Change it here and every list of products follows.
  * Categories: woo-commerce
  * Inserter: false
  *
