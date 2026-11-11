@@ -32,20 +32,20 @@ npm run lint:css && npm run lint:js && npm run lint:php
 
 | Path | What |
 | --- | --- |
-| `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards). Templates may use any block. |
+| `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards), passed to Matter, which enforces it in the post editor. Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
 | `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). |
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow, plus reference Hero, Logo ticker and Peek styles; gallery Thumbnails). Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
-| `assets/svg/icons/` | The button icons editors can pick from (registered as the `pulsar` icon collection). Add an icon here only if clients should see it. |
+| `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
 | `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
 | `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). |
 | `assets/svg/woocommerce/account/` | My Account navigation icons. |
-| `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`) and `template-part`. |
+| `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
 | `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |
-| `template-parts/` | PHP parts: `site-header`, `site-footer`, checkout variants, and `header/`, `footer/`, `megamenu/` pieces. |
-| `templates/` | Block templates. They use `<!-- wp:pulsar/template-part {"slug":"site-header"} /-->` for the header and footer. |
+| `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `site-header`, `site-footer`, checkout variants, and `header/`, `footer/`, `megamenu/` pieces. |
+| `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"site-header"} /-->` for the header and footer. |
 | `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
 
 ## Sections

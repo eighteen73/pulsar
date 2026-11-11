@@ -28,6 +28,8 @@ class Matter implements Bootable {
 		add_filter( 'matter_settings_fields', [ $this, 'settings_fields' ] );
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
+		add_filter( 'matter_allowed_blocks', [ $this, 'allowed_blocks' ] );
+		add_filter( 'matter_theme_icons', [ $this, 'icons' ] );
 		add_filter( 'matter_icon_collections', fn() => [ 'pulsar' ] );
 		add_filter( 'matter_carousel_slides', [ $this, 'carousel_slides' ] );
 		add_filter( 'matter_archive_default_content', [ $this, 'archive_default_content' ], 10, 2 );
@@ -85,6 +87,34 @@ class Matter implements Bootable {
 	 */
 	public function can_boot(): bool {
 		return true;
+	}
+
+	/**
+	 * The blocks content editors can add, from `config/allowed-blocks.php`.
+	 *
+	 * @param string[] $blocks Blocks allowed elsewhere.
+	 * @return string[]
+	 */
+	public function allowed_blocks( array $blocks ): array {
+		return array_merge( $blocks, Config::get( 'allowed-blocks' ) );
+	}
+
+	/**
+	 * The theme's icons (`assets/svg/icons/`) are the `pulsar` icon
+	 * collection. Named here rather than after the theme's folder, because
+	 * icon names (`pulsar/arrow-right`) are saved in content.
+	 *
+	 * @param array $icons Matter's defaults.
+	 * @return array
+	 */
+	public function icons( array $icons ): array {
+		return array_merge(
+			$icons,
+			[
+				'collection' => 'pulsar',
+				'label'      => __( 'Theme icons', 'pulsar' ),
+			]
+		);
 	}
 
 	/**
