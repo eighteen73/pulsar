@@ -3,7 +3,7 @@
  * Site header.
  *
  * Version-controlled header, rendered in templates with
- * `<!-- wp:pulsar/template-part {"slug":"site-header"} /-->`.
+ * `<!-- wp:matter/template-part {"slug":"site-header"} /-->`.
  *
  * The primary menu sits in a responsive panel: an off-canvas drawer with a
  * drill-down menu below the `lg` breakpoint, an inline dropdown menu above it.
