@@ -47,6 +47,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `site-header`, `site-footer`, checkout variants, and `header/`, `footer/`, `megamenu/` pieces. |
 | `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"site-header"} /-->` for the header and footer. |
 | `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
+| `patterns/loop-item-accordion.php`, `patterns/loop-item-tabs.php` | An item's content in an accordion or tabs of posts ("Posts accordion", "Posts tabs"): the excerpt with a link; the post's title is the heading or tab. Add `loop-item-{post_type}-accordion.php` (or `-tabs`) for a post type that needs its own, e.g. an FAQ's whole answer, and `loop-item-carousel.php` or `loop-item-{post_type}-carousel.php` for carousel slides unlike the post type's usual item. See Matter's README for the full order. |
 
 ## Sections
 
