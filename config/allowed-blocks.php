@@ -10,6 +10,9 @@
  * including child blocks (inner-only blocks are still restricted by their own
  * `parent`/`ancestor`/`inserter` settings).
  *
+ * Allowing `matter/carousel` also allows its posts and products carousels
+ * (Matter adds the Query Loop and Product Collection blocks they're made of).
+ *
  * Templates and template parts are developer-owned files and may use any block.
  * Return an empty array to remove the restriction entirely.
  *

@@ -70,12 +70,13 @@ class Matter implements Bootable {
 	 */
 	public function carousel_slides(): array {
 		return [
-			'core/image'  => [ 'variant' => 'slides' ],
-			'pulsar/card' => [
+			'core/image'                     => [ 'variant' => 'slides' ],
+			'pulsar/card'                    => [
 				'label'   => __( 'Cards', 'pulsar' ),
 				'variant' => 'cards',
 			],
-			'core/query'  => [ 'variant' => 'cards' ],
+			'core/query'                     => [ 'variant' => 'cards' ],
+			'woocommerce/product-collection' => [ 'variant' => 'cards' ],
 		];
 	}
 
