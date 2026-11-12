@@ -42,6 +42,8 @@ class GravityForms implements Bootable {
 	/**
 	 * Filters the next, previous and submit buttons.
 	 * Replaces the form's <input> buttons with <button> while maintaining attributes from original <input>.
+	 * Buttons that are already <button>s (Gravity Forms 3's, whose label is
+	 * their content, not a `value`) are left as they are.
 	 *
 	 * @param string $button Contains the <input> tag to be filtered.
 	 * @param array  $form    Contains all the properties of the current form.
@@ -50,7 +52,10 @@ class GravityForms implements Bootable {
 	 */
 	public function input_to_button( $button, $form ): string {
 		$fragment = \WP_HTML_Processor::create_fragment( $button );
-		$fragment->next_token();
+
+		if ( ! $fragment || ! $fragment->next_tag() || 'INPUT' !== $fragment->get_tag() ) {
+			return $button;
+		}
 
 		$attributes      = [ 'id', 'type', 'class', 'onclick' ];
 		$data_attributes = $fragment->get_attribute_names_with_prefix( 'data-' );
