@@ -63,7 +63,7 @@ A section is a block with named content slots. Its layout lives in code, so chan
 **Slots:**
 - `allowedBlocks` limits what editors can add.
 - `templateLock: "contentOnly"` fixes the blocks and lets editors change only their content.
-- **Append** new slots: existing pages pick them up the next time they're edited.
+- Slots are matched by name, so they can be added, reordered or removed in any position. To rename one, list its old name (`"previously": [ "media" ]`) so existing content follows it. See Matter's README.
 
 ## Colour schemes and tokens
 
