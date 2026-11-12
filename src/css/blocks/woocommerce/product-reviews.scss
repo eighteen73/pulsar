@@ -44,3 +44,19 @@
 .wp-block-woocommerce-product-review-form .comment-form > p {
 	margin-block: 0 var(--wp--style--block-gap);
 }
+
+// "Save my name, email…": the checkbox beside its label.
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent label {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	margin: 0;
+}
+
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent input {
+	margin: 0;
+}
