@@ -22,6 +22,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: eighteen73/github-actions/.github/actions/lint@main
+        with:
+          node-version-file: .nvmrc
 
   browser-tests:
     name: Browser tests (wp-env)
