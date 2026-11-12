@@ -154,6 +154,8 @@
 	height: 24px;
 	margin: 0;
 	margin-inline-end: var(--wp--preset--spacing--xs);
+	// Square, even where a plugin sets the width (Product Bundles' `width: auto`).
+	min-width: 24px;
 	padding: 0;
 	place-content: center;
 	print-color-adjust: exact;

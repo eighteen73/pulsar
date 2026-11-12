@@ -35,6 +35,7 @@ const entries = {
 	'css/editor': ['./src/css/editor.scss'],
 	'css/woocommerce': ['./src/css/woocommerce.scss'],
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
+	'css/woocommerce-bookings': ['./src/css/woocommerce-bookings.scss'],
 	'js/editor': ['./src/js/editor.js'],
 };
 

@@ -89,8 +89,8 @@ class Enqueue implements Bootable {
 	 * WooCommerce stylesheets: its classic markup (forms, tables, order details,
 	 * payment methods) on every WooCommerce page, as it appears on My Account,
 	 * the customer payment page, order received and the classic cart and
-	 * checkout; and My Account's layout. After WooCommerce's own stylesheet,
-	 * which they override.
+	 * checkout; My Account's layout; and Bookings' form. After WooCommerce's
+	 * (and Bookings') own stylesheets, which they override.
 	 *
 	 * @return void
 	 */
@@ -121,6 +121,18 @@ class Enqueue implements Bootable {
 				get_theme_file_uri( 'build/css/woocommerce-account.css' ),
 				array_merge( Asset::attribute( 'woocommerce-account', 'css', 'dependencies' ), [ 'pulsar-woocommerce-styles' ] ),
 				Asset::attribute( 'woocommerce-account', 'css', 'version' ),
+				'screen, print',
+			);
+		}
+
+		// Bookings' form, after Bookings' own styles (which it loads on every
+		// page).
+		if ( wp_style_is( 'wc-bookings-styles', 'enqueued' ) ) {
+			wp_enqueue_style(
+				'pulsar-woocommerce-bookings-styles',
+				get_theme_file_uri( 'build/css/woocommerce-bookings.css' ),
+				array_merge( Asset::attribute( 'woocommerce-bookings', 'css', 'dependencies' ), [ 'wc-bookings-styles', 'pulsar-woocommerce-styles' ] ),
+				Asset::attribute( 'woocommerce-bookings', 'css', 'version' ),
 				'screen, print',
 			);
 		}

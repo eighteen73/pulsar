@@ -1,0 +1,248 @@
+/**
+ * WooCommerce Bookings' booking form: the persons and resource fields, the
+ * date picker (jQuery UI's), the time slots and the cost. Loads after Bookings'
+ * own styles (Enqueue::woocommerce_styles), whose colours are fixed (green
+ * days, a grey header) and mostly `!important`: these match its selectors one
+ * for one, and its `!important`s where it has them.
+ */
+
+/* stylelint-disable selector-max-specificity, selector-max-compound-selectors, declaration-no-important -- matching Bookings' frontend.css, noted per rule */
+
+@use "settings";
+@use "tools" as *;
+
+// The form: no box (Bookings' `.wc-bookings-booking-form`, 0,1,0), its fields
+// a column.
+.wc-bookings-booking-form {
+	border: 0;
+	display: grid;
+	gap: var(--wp--style--block-gap);
+	margin: 0 0 var(--wp--style--block-gap);
+	padding: 0;
+}
+
+.wc-bookings-booking-form .form-field {
+	margin: 0;
+}
+
+.wc-bookings-booking-form .form-field label {
+	@include label;
+}
+
+.wc-bookings-date-picker-timezone-block {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	margin-block: 0 var(--wp--preset--spacing--sm);
+	text-align: start;
+}
+
+// The calendar, in line with the fields, in the theme's type. (Bookings'
+// `.wc-bookings-booking-form .wc-bookings-date-picker`, 0,2,0, pads and
+// spaces it; jQuery UI's `.wc-bookings-booking-form .ui-widget`, 0,2,0, sets
+// Verdana.)
+.wc-bookings-booking-form .wc-bookings-date-picker {
+	margin: 0;
+	padding: 0;
+}
+
+.wc-bookings-booking-form .wc-bookings-date-picker .picker {
+	margin: 0;
+}
+
+.wc-bookings-booking-form .ui-widget {
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+// (Bookings' `.wc-bookings-date-picker .ui-widget-content`, 0,2,0.)
+.wc-bookings-date-picker .ui-widget-content {
+	background: var(--scheme--background);
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--md);
+	box-shadow: none;
+	color: var(--scheme--text);
+	overflow: hidden;
+}
+
+// Its header: the month, between previous and next. (Bookings'
+// `.wc-bookings-date-picker .ui-datepicker-header`, 0,2,0.)
+.wc-bookings-date-picker .ui-datepicker-header {
+	background: none;
+	border: 0;
+	border-block-end: 1px solid var(--scheme--border);
+	border-radius: 0;
+	color: var(--scheme--text);
+	text-transform: none;
+}
+
+.wc-bookings-date-picker .ui-datepicker .ui-datepicker-title {
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	line-height: var(--wp--custom--typography--line-height--tight);
+}
+
+// Previous and next. (Bookings' hover is
+// `.wc-bookings-date-picker .ui-datepicker .ui-datepicker-prev.ui-state-hover`,
+// 0,4,0.)
+.wc-bookings-date-picker .ui-datepicker :is(.ui-datepicker-prev, .ui-datepicker-next),
+.wc-bookings-date-picker .ui-datepicker :is(.ui-datepicker-prev, .ui-datepicker-next).ui-state-hover {
+	background: none;
+	color: var(--scheme--text);
+	cursor: pointer;
+	// The header's height, so jQuery UI centres the arrow in it.
+	height: 100%;
+	top: 0;
+}
+
+.wc-bookings-date-picker .ui-datepicker :is(.ui-datepicker-prev, .ui-datepicker-next).ui-state-disabled {
+	color: var(--scheme--text-subtle);
+	cursor: default;
+}
+
+// Their arrows: the theme's carets, not jQuery UI's sprite. (Bookings'
+// `.wc-bookings-date-picker .ui-datepicker-prev .ui-icon-circle-triangle-w`,
+// 0,3,0.)
+.wc-bookings-date-picker :is(.ui-datepicker-prev, .ui-datepicker-next) .ui-icon {
+	@include icon("ui/caret-left", 16px);
+	background-image: none;
+}
+
+.wc-bookings-date-picker .ui-datepicker-next .ui-icon {
+	@include icon-image("ui/caret-right");
+}
+
+// Days of the week. (Bookings' `.wc-bookings-date-picker .ui-datepicker th`,
+// 0,2,1.)
+.wc-bookings-date-picker .ui-datepicker th {
+	background: none;
+	border: 0;
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+// Days: those that can't be booked are quiet. (Bookings'
+// `.wc-bookings-date-picker .ui-datepicker td`, 0,2,1, and its
+// `td .ui-state-default`, 0,3,1.)
+.wc-bookings-date-picker .ui-datepicker td {
+	background: var(--scheme--background);
+	border-color: var(--scheme--border);
+}
+
+.wc-bookings-date-picker .ui-datepicker td.ui-datepicker-other-month {
+	background: var(--scheme--background);
+}
+
+.wc-bookings-date-picker .ui-datepicker td .ui-state-default {
+	color: var(--scheme--text-subtle);
+}
+
+// Days that can be booked: a tint, then the theme's fill on hover and once
+// chosen. (Bookings' `.wc-bookings-date-picker .ui-datepicker td.bookable a`,
+// 0,3,2, and `td.ui-datepicker-current-day a`, 0,3,2, both `!important`.)
+.wc-bookings-date-picker .ui-datepicker :is(td.bookable, td.partial_booked) a {
+	background-color: var(--scheme--background-surface) !important;
+	color: var(--scheme--text) !important;
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	text-shadow: none;
+	transition: background-color var(--wp--custom--transition--duration--quick) ease-out;
+}
+
+.wc-bookings-date-picker .ui-datepicker :is(td.bookable, td.partial_booked) a:hover,
+.wc-bookings-date-picker .ui-datepicker td.ui-datepicker-current-day a,
+.wc-bookings-date-picker .ui-datepicker td.bookable-range .ui-state-default {
+	background-color: var(--scheme--background-fill) !important;
+	color: var(--scheme--text-fill) !important;
+}
+
+.wc-bookings-date-picker .ui-datepicker td a:focus-visible {
+	@include focus-block;
+}
+
+// Fully booked days. (Bookings'
+// `.wc-bookings-date-picker .ui-datepicker td.fully_booked:not(.not_bookable_by_rules) a`,
+// 0,4,2, `!important`.)
+.wc-bookings-date-picker .ui-datepicker td.fully_booked:not(.not_bookable_by_rules) :is(a, span) {
+	background-color: var(--scheme--background) !important;
+	color: var(--scheme--text-subtle) !important;
+	text-decoration: line-through !important;
+	text-shadow: none;
+}
+
+// Time slots: a grid of equal buttons. Bookings sets each one's width and
+// height inline, to line up its floated list.
+.wc-bookings-booking-form .block-picker {
+	display: grid;
+	gap: var(--wp--preset--spacing--xs);
+	grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+	min-height: 0;
+}
+
+.wc-bookings-booking-form .block-picker li {
+	float: none;
+	min-width: 0;
+}
+
+// (Bookings' `.wc-bookings-booking-form .block-picker li:nth-child(odd) a`,
+// 0,3,2, and its `a.selected`, 0,3,2, `!important`.)
+.wc-bookings-booking-form .block-picker li:nth-child(n) a {
+	background: var(--scheme--background);
+	border: 1px solid var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	height: auto !important;
+	padding: var(--wp--preset--spacing--sm);
+	transition:
+		background-color var(--wp--custom--transition--duration--quick) ease-out,
+		color var(--wp--custom--transition--duration--quick) ease-out;
+	width: auto !important;
+}
+
+.wc-bookings-booking-form .block-picker li:nth-child(n) a:hover,
+.wc-bookings-booking-form .block-picker li a.selected {
+	background: var(--scheme--background-fill) !important;
+	border-color: var(--scheme--background-fill);
+	color: var(--scheme--text-fill) !important;
+}
+
+.wc-bookings-booking-form .block-picker li a:focus-visible {
+	@include focus-block;
+}
+
+.wc-bookings-booking-form .block-picker li a .booking-spaces-left {
+	color: inherit;
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+// (Bookings' `.wc-bookings-booking-form .block-picker li.fully_booked a`,
+// 0,3,2, `!important`.)
+.wc-bookings-booking-form .block-picker li.fully_booked a {
+	background-color: var(--scheme--background) !important;
+	border-color: var(--scheme--border) !important;
+	color: var(--scheme--text-subtle) !important;
+	opacity: 1;
+	text-shadow: none;
+}
+
+// The cost, once chosen. (Bookings' `.wc-bookings-booking-form .wc-bookings-booking-cost`,
+// 0,2,0, which reaches out into its form's padding.)
+.wc-bookings-booking-form .wc-bookings-booking-cost {
+	background: var(--scheme--background-surface);
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--sm);
+	margin: 0;
+	padding: var(--wp--preset--spacing--md);
+}
+
+// A day's tooltip (its availability). (Bookings' `.wc-bookings-date-tooltip`,
+// 0,1,0.)
+.wc-bookings-date-tooltip {
+	background-color: var(--scheme--background);
+	border-color: var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--sm);
+}
