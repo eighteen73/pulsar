@@ -1,61 +1,115 @@
 @use "tools" as *;
 
-/// Site header (template-parts/site-header.php).
-/// Below `lg` the navigation is an off-canvas panel opened by the menu toggle;
-/// from `lg` it sits inline between the logo and the actions.
+/// Site header (template-parts/header.php).
+/// Below `lg` the navigation is an off-canvas panel (Matter's panel) opened by
+/// the menu toggle, with a drill-down menu; from `lg` it sits inline between
+/// the logo and the actions, with dropdowns.
 .site-header {
 	background-color: var(--scheme--background);
 	position: relative;
 	z-index: 10;
+}
 
-	&__inner {
+.site-header__inner {
+	@include container;
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--xl);
+	justify-content: space-between;
+	padding-block: var(--wp--preset--spacing--xl);
+}
+
+.site-header__logo {
+	line-height: 1;
+	max-width: 200px;
+}
+
+.site-header__logo-link {
+	color: unset;
+	display: inline-block;
+}
+
+.site-header__logo-image {
+	width: 100%;
+}
+
+.site-header__actions {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--md);
+}
+
+// The navigation: inline from `lg`.
+.site-header__navigation {
+	@media (--lg) {
+		flex: 1 1 auto;
+	}
+}
+
+// The panel's content: in a row from `lg`; below it, off-canvas (Matter's
+// panel, `collapse_below: lg`), a drawer from the inline end over a dimmed
+// page.
+.site-header__navigation .matter-panel__content {
+	@media (--lg) {
 		align-items: center;
 		display: flex;
 		gap: var(--wp--preset--spacing--xl);
-		justify-content: space-between;
-		margin-inline: auto;
-		max-width: calc(var(--wp--style--global--wide-size) + var(--wp--style--root--padding-left) + var(--wp--style--root--padding-right));
-		padding-block: var(--wp--preset--spacing--xl);
-		padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+		justify-content: flex-end;
 	}
 
-	&__logo {
-		font-family: unset;
-		font-size: unset;
-		line-height: 1;
-		margin: 0;
-		max-width: 200px;
+	@media (--lg-down) {
+		background: var(--scheme--background);
+		box-shadow: var(--wp--preset--shadow--lg);
+		color: var(--scheme--text);
+		gap: var(--wp--preset--spacing--xl);
+		padding: var(--wp--preset--spacing--xl);
+		width: min(100vw, 26rem);
+	}
+}
+
+.site-header__navigation .matter-panel__backdrop {
+	@media (--lg-down) {
+		background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.5);
+	}
+}
+
+.site-header__navigation .matter-panel__close {
+	align-items: center;
+	color: inherit;
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+
+	&::before {
+		@include icon("ui/x", 24px);
 	}
 
-	&__logo-link {
-		color: unset;
-		display: inline-block;
+	&:focus-visible {
+		@include focus-ring;
 	}
+}
 
-	&__logo-image {
-		width: 100%;
+// The menu toggle: a hamburger that becomes a cross while the panel is open
+// (Matter's bars, sized here).
+.site-header__menu-toggle {
+	align-items: center;
+	color: inherit;
+	font-size: var(--wp--preset--font-size--lg);
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+
+	&:focus-visible {
+		@include focus-ring;
 	}
+}
 
-	&__navigation {
-		@media (--lg) {
-			flex: 1 1 auto;
+.site-header__menu-toggle .matter-panel-toggle__icon {
+	height: 1em;
+	width: 1.375em;
+}
 
-			.matter-panel__content {
-				align-items: center;
-				display: flex;
-				gap: var(--wp--preset--spacing--xl);
-				justify-content: flex-end;
-			}
-		}
-	}
-
-	&__actions {
-		align-items: center;
-		display: flex;
-		gap: var(--wp--preset--spacing--md);
-	}
-
-	&__menu-toggle {
-		font-size: var(--wp--preset--font-size--lg);
-	}
+.site-header__menu-toggle .matter-panel-toggle__icon > span {
+	border-radius: 1px;
+	height: 2px;
 }

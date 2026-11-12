@@ -20,10 +20,16 @@
 		input[type="text"],
 		input[type="time"],
 		input[type="url"],
-		input[type="week"],
-		select,
-		textarea {
+		input[type="week"] {
 			@include field-input;
+		}
+
+		select:not([multiple]) {
+			@include field-select;
+		}
+
+		select[multiple] {
+			@include field-select(true);
 		}
 
 		textarea {

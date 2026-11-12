@@ -1,15 +1,15 @@
 @use "tools" as *;
 
-/// Theme styling for Matter menus (Eighteen73\Matter\menu()).
-/// Matter provides behaviour and functional layout; presentation lives here.
+/// Matter menus (Eighteen73\Matter\menu()). Matter lays them out per type and
+/// shows and hides their parts (don't set `display` on toggle text, submenus or
+/// submenu headers); this is their look, so it doesn't depend on Matter's
+/// default skin.
+///
+/// The header's primary menu (template-parts/header.php) is a drill-down below
+/// `lg` and a dropdown from `lg`, so its type-specific look uses those
+/// breakpoints. The footer menus are single-level lists.
 .matter-menu {
 	font-weight: var(--wp--custom--typography--font-weight--label);
-
-	.current-menu-item > .matter-menu__link,
-	.current-menu-ancestor > .matter-menu__link,
-	.current-menu-ancestor > .matter-menu__toggle {
-		color: var(--scheme--text-link);
-	}
 }
 
 .matter-menu__link {
@@ -21,15 +21,124 @@
 	}
 }
 
-.matter-menu__link,
+.matter-menu :where(.current-menu-item, .current-menu-ancestor) > .matter-menu__link,
+.matter-menu .current-menu-ancestor > .matter-menu__toggle {
+	color: var(--scheme--text-link);
+}
+
 .matter-menu__toggle,
 .matter-menu__back {
+	color: inherit;
+	font: inherit;
+}
+
+.matter-menu__link,
+.matter-menu__toggle,
+.matter-menu__back,
+.matter-menu__view-all {
 	&:focus-visible {
 		@include focus-ring;
 	}
 }
 
-// Footer menus are simple vertical lists.
+.matter-menu__toggle::after {
+	@include icon("ui/caret-down", 0.75em);
+}
+
+.matter-menu__back::before {
+	@include icon("ui/caret-left", 0.75em);
+}
+
+// Header: dropdowns from `lg`. Submenus are panels in the scheme's background
+// (as drill-down panels are below `lg`); nested submenus fly out with a caret
+// pointing to them.
+.site-header__navigation .matter-menu__submenu {
+	background: var(--scheme--background);
+	color: var(--scheme--text);
+
+	@media (--lg) {
+		border: 1px solid var(--scheme--border);
+		border-radius: var(--wp--preset--border-radius--sm);
+		box-shadow: var(--wp--preset--shadow--md);
+		min-width: 12rem;
+		padding-block: var(--wp--preset--spacing--sm);
+	}
+}
+
+.site-header__navigation .matter-menu__submenu-items {
+	@media (--lg) {
+		gap: var(--wp--preset--spacing--xs);
+	}
+}
+
+// Items span the panel, so a nested submenu opens from its edge.
+:where(.site-header__navigation .matter-menu__submenu-items:not(.matter-menu__columns)) > .matter-menu__item {
+	@media (--lg) {
+		padding-inline: var(--wp--preset--spacing--md);
+	}
+}
+
+// Megamenus: columns, spaced like the page.
+.site-header__navigation .is-megamenu > .matter-menu__submenu {
+	@media (--lg) {
+		gap: var(--wp--preset--spacing--2-xl);
+		padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--2-xl);
+	}
+}
+
+.site-header__navigation .matter-menu__columns {
+	@media (--lg) {
+		gap: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--2-xl);
+	}
+}
+
+.site-header__navigation .matter-menu__submenu .matter-menu__toggle::after {
+	@media (--lg) {
+		@include icon-image("ui/caret-right");
+	}
+}
+
+// Header: a drill-down below `lg`. Each item is a row; submenus slide over
+// the menu with a sticky header (back, the parent's name, "View all").
+.site-header__navigation .matter-menu__item {
+	@media (--lg-down) {
+		border-block-end: 1px solid var(--scheme--border);
+		padding-block: var(--wp--preset--spacing--md);
+	}
+}
+
+.site-header__navigation .matter-menu__item.is-column {
+	@media (--lg-down) {
+		border: 0;
+		padding-block: 0;
+	}
+}
+
+.site-header__navigation .matter-menu__submenu-header {
+	@media (--lg-down) {
+		background: inherit;
+		border-block-end: 1px solid var(--scheme--border);
+		gap: var(--wp--preset--spacing--md);
+		padding-block: var(--wp--preset--spacing--md);
+	}
+}
+
+.site-header__navigation .matter-menu__parent-label {
+	font-weight: var(--wp--custom--typography--font-weight--heading);
+}
+
+.site-header__navigation .matter-menu__view-all {
+	color: var(--scheme--text-link);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.site-header__navigation .matter-menu__toggle::after {
+	@media (--lg-down) {
+		@include icon-image("ui/caret-right");
+	}
+}
+
+// Footer menus: simple lists.
 .site-footer__menu .matter-menu__items {
 	gap: var(--wp--preset--spacing--sm);
 }

@@ -1,19 +1,31 @@
 @use "tools" as *;
 
-/// Pulsar styling for Matter's tabs.
+/// Matter's tabs. Matter switches them; this is their look, so it doesn't
+/// depend on Matter's default skin. The selected tab has a border in the link
+/// colour over the list's border.
 .wp-block-matter-tabs__list {
 	border-block-end: 1px solid var(--scheme--border);
+	flex-wrap: wrap;
 	gap: var(--wp--preset--spacing--xl);
 	margin-block-end: var(--wp--preset--spacing--xl);
 }
 
 .wp-block-matter-tabs__tab {
+	align-items: center;
+	appearance: none;
+	background: none;
+	border: 0;
 	border-block-end: 2px solid transparent;
+	color: inherit;
+	cursor: pointer;
+	display: inline-flex;
+	font: inherit;
 	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--sm);
 	margin-block-end: -1px;
-	padding-block: var(--wp--preset--spacing--md);
+	padding: var(--wp--preset--spacing--md) 0;
+	text-align: start;
 
-	// The border marks the selected tab, not Matter's default underline.
 	&[aria-selected="true"] {
 		border-block-end-color: var(--scheme--text-link);
 		color: var(--scheme--text-link);
@@ -25,68 +37,104 @@
 	}
 }
 
-// Vertical: the list beside the panels, marker on the inline end.
+.wp-block-matter-tabs__icon {
+	display: flex;
+	flex: none;
+}
+
+.wp-block-matter-tabs__icon svg {
+	fill: currentcolor;
+	height: 1.25em;
+	width: 1.25em;
+}
+
+// Vertical: the list beside the panels, the border on its inline end.
 .wp-block-matter-tabs.is-vertical {
 	column-gap: var(--wp--preset--spacing--2-xl);
+	grid-template-columns: minmax(8rem, max-content) minmax(0, 1fr);
+}
 
-	> .wp-block-matter-tabs__list,
-	> .wp-block-matter-tabs__nav > .wp-block-matter-tabs__list {
-		border-block-end: 0;
-		border-inline-end: 1px solid var(--scheme--border);
-		gap: 0;
-		margin-block-end: 0;
-	}
+:where(.wp-block-matter-tabs.is-vertical, .wp-block-matter-tabs.is-vertical > .wp-block-matter-tabs__nav) > .wp-block-matter-tabs__list {
+	border-block-end: 0;
+	border-inline-end: 1px solid var(--scheme--border);
+	gap: 0;
+	margin-block-end: 0;
+}
 
-	.wp-block-matter-tabs__tab {
-		border-block-end: 0;
-		border-inline-end: 2px solid transparent;
-		margin-block-end: 0;
-		margin-inline-end: -1px;
-		padding-inline-end: var(--wp--preset--spacing--xl);
-		text-align: start;
+// Only the block's own tabs (tabs can hold tabs).
+:where(.wp-block-matter-tabs.is-vertical > .wp-block-matter-tabs__list, .wp-block-matter-tabs.is-vertical > .wp-block-matter-tabs__nav > .wp-block-matter-tabs__list) > .wp-block-matter-tabs__tab {
+	border-block-end: 0;
+	border-inline-end: 2px solid transparent;
+	margin-block-end: 0;
+	margin-inline-end: -1px;
+	padding-inline-end: var(--wp--preset--spacing--xl);
 
-		&[aria-selected="true"] {
-			border-inline-end-color: var(--scheme--text-link);
-		}
+	&[aria-selected="true"] {
+		border-inline-end-color: var(--scheme--text-link);
 	}
 }
 
-// Dropdown on smaller screens (below md, config/matter.php): a button showing
-// the current tab opens the tab list as a menu.
+// Dropdown on smaller screens (below md: `dropdownBelow` in config/matter.php):
+// a button showing the current tab opens the tab list as a menu.
 .wp-block-matter-tabs__toggle {
+	align-items: center;
+	appearance: none;
+	background: none;
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: var(--wp--preset--border-radius--sm);
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
 	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--sm);
 	padding: var(--wp--preset--spacing--md);
+	text-align: start;
+	width: 100%;
 
 	&:focus-visible {
 		@include focus-ring;
 	}
 }
 
-@media (--md-down) {
-	.wp-block-matter-tabs.has-dropdown > .wp-block-matter-tabs__nav {
+.wp-block-matter-tabs__toggle::after {
+	@include icon("ui/caret-down", 1rem);
+	margin-inline-start: auto;
+}
+
+.wp-block-matter-tabs__toggle[aria-expanded="true"]::after {
+	rotate: 180deg;
+}
+
+.wp-block-matter-tabs__current {
+	align-items: center;
+	display: inline-flex;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+:where(.wp-block-matter-tabs.has-dropdown) > .wp-block-matter-tabs__nav {
+	@media (--md-down) {
 		margin-block-end: var(--wp--preset--spacing--xl);
+	}
+}
 
-		> .wp-block-matter-tabs__list {
-			background: var(--scheme--background);
-			border: 1px solid var(--scheme--border);
-			border-radius: var(--wp--preset--border-radius--sm);
-			box-shadow: var(--wp--preset--shadow--lg);
-			gap: 0;
-			margin-block-start: var(--wp--preset--spacing--xs);
-			padding: 0;
-		}
+:where(.wp-block-matter-tabs.has-dropdown > .wp-block-matter-tabs__nav) > .wp-block-matter-tabs__list {
+	@media (--md-down) {
+		background: var(--scheme--background);
+		border: 1px solid var(--scheme--border);
+		border-radius: var(--wp--preset--border-radius--sm);
+		box-shadow: var(--wp--preset--shadow--lg);
+		gap: 0;
+		margin-block-start: var(--wp--preset--spacing--xs);
+		padding: 0;
+	}
+}
 
-		.wp-block-matter-tabs__tab {
-			border: 0;
-			margin: 0;
-			padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
-			width: 100%;
-
-			&[aria-selected="true"] {
-				color: var(--scheme--text-link);
-			}
-		}
+:where(.wp-block-matter-tabs.has-dropdown > .wp-block-matter-tabs__nav > .wp-block-matter-tabs__list) > .wp-block-matter-tabs__tab {
+	@media (--md-down) {
+		border: 0;
+		justify-content: flex-start;
+		margin: 0;
+		padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+		width: 100%;
 	}
 }

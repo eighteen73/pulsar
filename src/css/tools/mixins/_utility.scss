@@ -1,60 +1,24 @@
 @use "../../settings" as *;
 
-/// Makes an element visually hidden, but still accessible to keyboards and assistive devices.
-/// @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
-/// @link http://hugogiraudel.com/2016/10/13/css-hide-and-seek/
+/// An icon: an SVG from assets/svg as a mask, painted in a colour (the text
+/// colour by default). Typically on a pseudo-element.
 ///
-/// @param {Boolean} $enforce - Use `!important` on applied properties
+/// @param {string} $icon - The icon's path in assets/svg, without `.svg`, e.g. `ui/x`.
+/// @param {string} $size - Width and height (default: 16px).
+/// @param {string} $color - The colour (default: currentcolor).
 ///
-@mixin hide-visually($enforce: false) {
-	$important: if(sass($enforce): "!important");
-
-	border: 0 #{$important};
-	clip: rect(1px, 1px, 1px, 1px) #{$important};
-	clip-path: inset(50%) #{$important};
-	height: 1px #{$important};
-	overflow: hidden #{$important};
-	padding: 0 #{$important};
-	white-space: nowrap #{$important};
-	width: 1px #{$important};
-	word-wrap: normal #{$important};
-	z-index: 100000; // Above WP toolbar
-}
-
-/// This reverses `hide-visually()`.
-///
-/// @param {Boolean} $enforce - Use `!important` on applied properties.
-///
-@mixin show-visually($enforce: false) {
-	$important: if(sass($enforce): "!important");
-
-	clip: auto #{$important};
-	clip-path: none #{$important};
-	height: auto #{$important};
-	overflow: visible #{$important};
-	text-decoration: none;
-	white-space: normal #{$important};
-	width: auto #{$important};
-	z-index: 0;
-}
-
-///
-/// @mixin icon
-/// @description A mixin for creating icons using a mask. Typically used with pseudo-elements.
-///
-/// @param {string} $icon - The name of the icon. The icon should be in the SVG format in the assets/svg directory.
-/// @param {string} $size - The size of the pseudo-element (default: 16px).
-/// @param {string} $color - The color of the pseudo-element (default: currentcolor).
-///
-/// @example Usage:
+/// @example
 ///   .my-element::after {
-///     @include pseudo-icon('icon', 24px, var(--scheme--text));
+///     @include icon("ui/caret-down", 1rem);
 ///   }
-///
 @mixin icon($icon, $size: 16px, $color: currentcolor) {
 	background-color: $color;
 	content: "";
 	display: inline-block;
+	flex: none;
+	// In forced colours (high contrast) backgrounds are replaced, which would
+	// hide the icon; it keeps the text colour, which is the forced one.
+	forced-color-adjust: none;
 	height: $size;
 	mask-position: center;
 	mask-repeat: no-repeat;
@@ -66,6 +30,13 @@
 	}
 }
 
+/// Another icon, on an element already using `icon()`.
+///
+/// @param {string} $icon - The icon's path in assets/svg, without `.svg`.
+@mixin icon-image($icon) {
+	mask-image: url("/assets/svg/#{$icon}.svg");
+}
+
 /// Set the focus ring style.
 /// @param {Color} $color - The color of the focus ring.
 ///
@@ -75,7 +46,8 @@
 	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 }
 
-/// Set the focus block style.
+/// Set the focus block style (declarations only: use it in a `:focus-visible`
+/// rule).
 /// @param {Color} $surface - The color of the focus block surface.
 /// @param {Color} $text - The color of the focus block text.
 ///
@@ -83,10 +55,8 @@
 	$surface: var(--wp--preset--color--focus),
 	$text: var(--wp--preset--color--contrast)
 ) {
-	&:focus-visible {
-		background-color: $surface !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		color: $text !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		outline: none !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-	}
+	background-color: $surface !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	color: $text !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	outline: none !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
 }

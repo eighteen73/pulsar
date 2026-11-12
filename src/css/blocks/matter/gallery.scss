@@ -1,21 +1,22 @@
 @use "tools" as *;
 
-// The carousel layout uses the carousel's markup and styles: this stylesheet
-// depends on blocks/matter/carousel (Enqueue::STYLE_DEPENDENCIES).
-
-/// Pulsar gallery. Editors choose the columns and aspect ratio (options in
+/// Matter's gallery. Editors choose the columns and aspect ratio (options in
 /// config/matter.php and theme.json's aspect ratio presets); the grid shows
 /// fewer columns where images would be narrower than --gallery-min-width.
+/// Matter lays it out and runs the lightbox; this is its look, so it doesn't
+/// depend on Matter's default skin. The carousel layout uses the carousel's
+/// markup and styles: this stylesheet depends on carousel.scss
+/// (Enqueue::STYLE_DEPENDENCIES).
 .wp-block-matter-gallery {
 	--gallery-gap: var(--wp--preset--spacing--md);
 	--gallery-min-width: 9rem;
-
-	.wp-block-image img {
-		display: block;
-	}
 }
 
-// Carousel layout: slides per view (the carousel's styles are included above).
+.wp-block-matter-gallery .wp-block-image img {
+	display: block;
+}
+
+// Carousel layout: slides per view.
 .wp-block-matter-gallery .wp-block-matter-carousel {
 	--carousel-gap: var(--gallery-gap);
 	--carousel-per-view: 2;
@@ -29,66 +30,182 @@
 	}
 }
 
+// "View all N images".
+.wp-block-matter-gallery__more {
+	@include button(secondary);
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-gallery__open {
+	appearance: none;
+	background: none;
+	border: 0;
+	cursor: zoom-in;
+	padding: 0;
+}
+
+// Captions over images (the "overlay" and "tooltip" styles): light on dark,
+// to read over any image, whatever the scheme.
+.wp-block-matter-gallery.has-captions-overlay figcaption {
+	background: linear-gradient(transparent, rgb(from var(--wp--preset--color--neutral-900) r g b / 0.7));
+	color: var(--wp--preset--color--base);
+	font-size: var(--wp--preset--font-size--sm);
+	padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm);
+	text-align: start;
+}
+
+.wp-block-matter-gallery__caption-toggle {
+	align-items: center;
+	appearance: none;
+	background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.6);
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--full);
+	color: var(--wp--preset--color--base);
+	cursor: pointer;
+	display: inline-flex;
+	height: 2.75rem;
+	inset-block-end: var(--wp--preset--spacing--sm);
+	inset-inline-start: var(--wp--preset--spacing--sm);
+	justify-content: center;
+	padding: 0;
+	position: absolute;
+	width: 2.75rem;
+	z-index: 3;
+}
+
+.wp-block-matter-gallery__caption-toggle::before {
+	@include icon("ui/info", 20px);
+}
+
+.wp-block-matter-gallery__caption-toggle + figcaption {
+	background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.85);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--wp--preset--color--base);
+	font-size: var(--wp--preset--font-size--sm);
+	inset-block-end: calc(2.75rem + var(--wp--preset--spacing--md));
+	inset-inline-start: var(--wp--preset--spacing--sm);
+	max-width: calc(100% - 2 * var(--wp--preset--spacing--sm));
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+	text-align: start;
+}
+
+// The lightbox: full screen, light on dark.
+.wp-block-matter-gallery__lightbox {
+	background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.95);
+	color: var(--wp--preset--color--base);
+}
+
+.wp-block-matter-gallery__figure {
+	gap: var(--wp--preset--spacing--sm);
+	padding: var(--wp--preset--spacing--4-xl) var(--wp--preset--spacing--md) 0;
+}
+
+.wp-block-matter-gallery__figure figcaption {
+	font-size: var(--wp--preset--font-size--sm);
+	max-width: 60ch;
+	text-align: center;
+}
+
+.wp-block-matter-gallery__nav {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--xl);
+	justify-content: center;
+	padding: var(--wp--preset--spacing--md);
+}
+
+.wp-block-matter-gallery__close,
+.wp-block-matter-gallery__prev,
+.wp-block-matter-gallery__next {
+	align-items: center;
+	appearance: none;
+	background: none;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	display: inline-flex;
+	height: 3rem;
+	justify-content: center;
+	padding: 0;
+	width: 3rem;
+}
+
+.wp-block-matter-gallery__close {
+	inset-block-start: var(--wp--preset--spacing--md);
+	inset-inline-end: var(--wp--preset--spacing--md);
+	position: absolute;
+	z-index: 1;
+}
+
+.wp-block-matter-gallery__close::before {
+	@include icon("ui/x", 24px);
+}
+
+.wp-block-matter-gallery__prev::before {
+	@include icon("ui/arrow-left", 24px);
+}
+
+.wp-block-matter-gallery__next::before {
+	@include icon("ui/arrow-right", 24px);
+}
+
+.wp-block-matter-gallery__counter {
+	font-variant-numeric: tabular-nums;
+	text-align: center;
+}
+
 // Thumbnails (reference variant): one image at a time, arrows and expand over
-// it, and a strip of thumbnails below.
+// it, and a strip of thumbnails below (four across, six from `md`; more
+// scroll).
 .wp-block-matter-gallery.is-style-thumbnails {
-	.wp-block-matter-carousel {
-		--carousel-per-view: 1;
-	}
+	--_gallery-thumbnails-per-view: 4;
 
-	.wp-block-matter-carousel__controls.is-stage {
-		align-items: center;
-	}
-
-	.wp-block-matter-carousel__expand {
-		inset-block-start: var(--wp--preset--spacing--md);
-		inset-inline-end: var(--wp--preset--spacing--md);
-		position: absolute;
-	}
-
-	.wp-block-matter-carousel__prev,
-	.wp-block-matter-carousel__next,
-	.wp-block-matter-carousel__expand {
-		border: 0;
-		box-shadow: var(--wp--preset--shadow--sm);
-	}
-
-	.wp-block-matter-carousel__controls.is-after {
-		background: var(--scheme--background-surface, rgb(0 0 0 / 5%));
-		margin: 0;
-		padding: var(--wp--preset--spacing--md);
-	}
-
-	// Four thumbnails across, six from `md`; more scroll.
-	.wp-block-matter-carousel__thumbnails {
-		--gallery-thumbnails-per-view: 4;
-		flex: 1;
-
-		@media (--md) {
-			--gallery-thumbnails-per-view: 6;
-		}
-	}
-
-	.wp-block-matter-carousel__thumbnail {
-		aspect-ratio: 4 / 3;
-		border-width: 2px;
-		height: auto;
-		opacity: 1;
-		width: calc((100% - (var(--gallery-thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--gallery-thumbnails-per-view));
+	@media (--md) {
+		--_gallery-thumbnails-per-view: 6;
 	}
 }
 
-.wp-block-matter-gallery__more {
-	@include button(secondary);
+.wp-block-matter-gallery.is-style-thumbnails .wp-block-matter-carousel {
+	--carousel-per-view: 1;
+}
 
-	margin-block-start: var(--wp--preset--spacing--lg);
+:where(.wp-block-matter-gallery.is-style-thumbnails) .wp-block-matter-carousel__controls.is-stage {
+	align-items: center;
+}
+
+.wp-block-matter-gallery.is-style-thumbnails .wp-block-matter-carousel__expand {
+	inset-block-start: var(--wp--preset--spacing--md);
+	inset-inline-end: var(--wp--preset--spacing--md);
+	position: absolute;
+}
+
+.wp-block-matter-gallery.is-style-thumbnails :is(.wp-block-matter-carousel__prev, .wp-block-matter-carousel__next, .wp-block-matter-carousel__expand) {
+	border: 0;
+	box-shadow: var(--wp--preset--shadow--sm);
+}
+
+:where(.wp-block-matter-gallery.is-style-thumbnails) .wp-block-matter-carousel__controls.is-after {
+	background: var(--scheme--background-surface);
+	margin: 0;
+	padding: var(--wp--preset--spacing--md);
+}
+
+.wp-block-matter-gallery.is-style-thumbnails .wp-block-matter-carousel__thumbnails {
+	flex: 1;
+}
+
+.wp-block-matter-gallery.is-style-thumbnails .wp-block-matter-carousel__thumbnail {
+	aspect-ratio: 4 / 3;
+	height: auto;
+	width: calc((100% - (var(--_gallery-thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--_gallery-thumbnails-per-view));
 }
 
 .wp-block-matter-gallery__open,
 .wp-block-matter-gallery__more,
-.wp-block-matter-carousel__prev,
-.wp-block-matter-carousel__next,
-.wp-block-matter-carousel__dot {
+.wp-block-matter-gallery__caption-toggle,
+.wp-block-matter-gallery__close,
+.wp-block-matter-gallery__prev,
+.wp-block-matter-gallery__next {
 	&:focus-visible {
 		@include focus-ring;
 	}

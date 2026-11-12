@@ -1,40 +1,29 @@
 @use "tools" as *;
 
-/// Pulsar styling for Matter carousels (also included by matter-gallery.scss,
-/// as the gallery's carousel layout uses the same markup). Matter provides
-/// behaviour and the control parts chosen in config/matter.php; the variant
-/// (block style) decides slides per view and where the controls sit here.
+/// Matter's carousels (also the gallery's carousel layout, which loads this
+/// stylesheet: Enqueue::STYLE_DEPENDENCIES). Matter moves them and renders the
+/// controls chosen in config/matter.php; this is their look, so it doesn't
+/// depend on Matter's default skin. The variant (block style) sets slides per
+/// view and where the controls sit.
 .wp-block-matter-carousel {
+	--_carousel-button-size: 2.75rem;
 	--carousel-gap: var(--wp--preset--spacing--xl);
 	--carousel-per-view: 1;
-	--carousel-button-size: 2.75rem;
+}
 
-	&.is-style-cards {
-		--carousel-per-view: 1;
-
-		@media (--md) {
-			--carousel-per-view: 2;
-		}
-
-		@media (--lg) {
-			--carousel-per-view: 3;
-		}
+.wp-block-matter-carousel.is-style-cards {
+	@media (--md) {
+		--carousel-per-view: 2;
 	}
-}
 
-.wp-block-matter-carousel__track,
-.wp-block-matter-carousel.is-query :is(.wp-block-post-template, .wc-block-product-template) {
-	gap: var(--carousel-gap);
-}
-
-.wp-block-matter-carousel__track > *,
-.wp-block-matter-carousel.is-query :is(.wp-block-post-template, .wc-block-product-template) > * {
-	flex-basis: calc((100% - (var(--carousel-per-view) - 1) * var(--carousel-gap)) / var(--carousel-per-view));
+	@media (--lg) {
+		--carousel-per-view: 3;
+	}
 }
 
 // Images within slides, e.g. cards. Carousels of only images, and galleries,
 // use the aspect ratio chosen in the editor.
-.wp-block-matter-carousel:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items) .wp-block-matter-carousel__track img {
+:where(.wp-block-matter-carousel:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items)) .wp-block-matter-carousel__track img {
 	aspect-ratio: 16 / 9;
 	display: block;
 	height: auto;
@@ -42,45 +31,102 @@
 	width: 100%;
 }
 
-.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items) .wp-block-matter-carousel__track img {
+:where(.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items)) .wp-block-matter-carousel__track img {
 	aspect-ratio: 4 / 3;
 }
 
-// Controls.
+// Controls: groups before, over (the stage) and after the slides.
 .wp-block-matter-carousel__controls {
+	align-items: center;
+	display: flex;
 	gap: var(--wp--preset--spacing--sm);
-
-	&.is-before {
-		margin-block-end: var(--wp--preset--spacing--lg);
-	}
-
-	&.is-after {
-		margin-block-start: var(--wp--preset--spacing--lg);
-	}
-
-	&.is-stage {
-		padding: var(--wp--preset--spacing--md);
-	}
+	justify-content: center;
 }
 
+.wp-block-matter-carousel__controls.is-before {
+	margin-block-end: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-carousel__controls.is-after {
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-carousel__controls.is-stage {
+	justify-content: space-between;
+	padding: var(--wp--preset--spacing--md);
+}
+
+:where(.wp-block-matter-carousel__controls.is-stage) > :not(.wp-block-matter-carousel__prev, .wp-block-matter-carousel__next) {
+	align-self: flex-end;
+}
+
+// Buttons: round, in the scheme's background, with an icon.
 .wp-block-matter-carousel__prev,
 .wp-block-matter-carousel__next,
 .wp-block-matter-carousel__play,
 .wp-block-matter-carousel__expand {
+	align-items: center;
+	appearance: none;
 	background: var(--scheme--background);
 	border: 1px solid var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--full);
 	color: var(--scheme--text);
-	height: var(--carousel-button-size);
-	width: var(--carousel-button-size);
+	cursor: pointer;
+	display: inline-flex;
+	height: var(--_carousel-button-size);
+	justify-content: center;
+	padding: 0;
+	width: var(--_carousel-button-size);
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.4;
+	}
+}
+
+.wp-block-matter-carousel__prev::before {
+	@include icon("ui/arrow-left", 20px);
+}
+
+.wp-block-matter-carousel__next::before {
+	@include icon("ui/arrow-right", 20px);
+}
+
+.wp-block-matter-carousel__expand::before {
+	@include icon("ui/corners-out", 20px);
+}
+
+// Dots: smaller than a 24px target (WCAG 2.5.8), so spaced with their centres
+// 24px apart.
+.wp-block-matter-carousel__dots {
+	display: flex;
+	flex-wrap: wrap;
+	gap: calc(24px - 0.625rem);
 }
 
 .wp-block-matter-carousel__dot {
+	appearance: none;
 	background: var(--scheme--text);
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--full);
+	cursor: pointer;
+	forced-color-adjust: none;
+	height: 0.625rem;
+	opacity: 0.3;
+	padding: 0;
+	width: 0.625rem;
+
+	&[aria-current] {
+		opacity: 1;
+	}
 }
 
 .wp-block-matter-carousel__progress,
 .wp-block-matter-carousel__timer {
 	background: var(--scheme--border);
+	flex: 1;
+	height: 2px;
+	min-width: 4em;
 }
 
 .wp-block-matter-carousel__progress-bar,
@@ -89,15 +135,24 @@
 }
 
 .wp-block-matter-carousel__counter {
+	font-variant-numeric: tabular-nums;
 	font-weight: var(--wp--custom--typography--font-weight--label);
 }
 
 .wp-block-matter-carousel__thumbnails {
+	display: flex;
 	gap: var(--wp--preset--spacing--sm);
 }
 
 .wp-block-matter-carousel__thumbnail {
-	border-color: transparent;
+	appearance: none;
+	background: none;
+	border: 2px solid transparent;
+	cursor: pointer;
+	flex: none;
+	height: 4rem;
+	padding: 0;
+	width: 6rem;
 
 	&[aria-current] {
 		border-color: var(--scheme--text-link);

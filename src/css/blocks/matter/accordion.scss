@@ -1,7 +1,7 @@
 @use "tools" as *;
 
-/// Pulsar styling for Matter's accordion (Matter provides behaviour and
-/// functional layout only).
+/// Matter's accordion. Matter opens and closes it; this is its look, so it
+/// doesn't depend on Matter's default skin.
 .wp-block-matter-accordion-item {
 	border-block-end: 1px solid var(--scheme--border);
 }
@@ -11,12 +11,42 @@
 }
 
 .wp-block-matter-accordion-item__toggle {
+	align-items: center;
+	appearance: none;
+	background: none;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	display: flex;
+	font: inherit;
 	font-weight: var(--wp--custom--typography--font-weight--label);
-	padding-block: var(--wp--preset--spacing--lg);
+	gap: var(--wp--preset--spacing--md);
+	justify-content: space-between;
+	padding: var(--wp--preset--spacing--lg) 0;
+	text-align: start;
+	width: 100%;
 
 	&:focus-visible {
 		@include focus-ring;
 	}
+}
+
+// A caret that turns over while the item is open.
+.wp-block-matter-accordion-item__toggle::after {
+	@include icon("ui/caret-down", 1rem);
+	transition: rotate var(--wp--custom--transition--duration--normal);
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+.wp-block-matter-accordion-item__toggle[aria-expanded="true"]::after {
+	rotate: 180deg;
+}
+
+.wp-block-matter-accordion-item__content > :first-child {
+	margin-block-start: 0;
 }
 
 // Padding on the last child (not the panel) so closed panels collapse fully.

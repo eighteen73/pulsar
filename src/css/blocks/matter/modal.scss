@@ -1,0 +1,76 @@
+@use "tools" as *;
+
+/// Matter's modal: a centred dialog. Matter opens, closes and animates it;
+/// this is its look, so it doesn't depend on Matter's default skin.
+.wp-block-matter-modal {
+	background: var(--scheme--background);
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--md);
+	box-shadow: var(--wp--preset--shadow--lg);
+	color: var(--scheme--text);
+	max-height: calc(100dvh - 2rem);
+	max-width: calc(100vw - 2rem);
+	padding: 0;
+	width: 40rem;
+}
+
+.wp-block-matter-modal::backdrop {
+	background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.6);
+}
+
+.wp-block-matter-modal__content {
+	padding: var(--wp--preset--spacing--4-xl) var(--wp--preset--spacing--2-xl) var(--wp--preset--spacing--2-xl);
+}
+
+.wp-block-matter-modal__close,
+.wp-block-matter-modal__previous,
+.wp-block-matter-modal__next {
+	align-items: center;
+	appearance: none;
+	background: none;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0;
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+.wp-block-matter-modal__close {
+	inset-block-start: var(--wp--preset--spacing--sm);
+	inset-inline-end: var(--wp--preset--spacing--sm);
+	position: absolute;
+	z-index: 1;
+}
+
+.wp-block-matter-modal__close::before {
+	@include icon("ui/x", 24px);
+}
+
+// Previous and next, for grouped modals.
+.wp-block-matter-modal__group-nav {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+	justify-content: center;
+	margin-block-start: var(--wp--preset--spacing--2-xl);
+}
+
+.wp-block-matter-modal__previous::before {
+	@include icon("ui/caret-left", 20px);
+}
+
+.wp-block-matter-modal__next::before {
+	@include icon("ui/caret-right", 20px);
+}
+
+.wp-block-matter-modal__position {
+	font-size: var(--wp--preset--font-size--sm);
+	font-variant-numeric: tabular-nums;
+}
