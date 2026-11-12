@@ -176,42 +176,18 @@
 		</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"metadata":{"name":"Shop by Category"},"align":"full","className":"pattern-shop-by-category","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group alignfull pattern-shop-by-category">
+	<!-- wp:group {"metadata":{"name":"Shop by category"},"align":"full","className":"product-categories","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group alignfull product-categories">
 
-		<!-- wp:terms-query {"termQuery":{"perPage":3,"taxonomy":"product_cat","order":"asc","orderBy":"name","include":[],"hideEmpty":true,"showNested":true,"inherit":false},"align":"wide","className":""} -->
+		<!-- wp:terms-query {"termQuery":{"perPage":6,"taxonomy":"product_cat","order":"asc","orderBy":"name","include":[],"hideEmpty":true,"showNested":true,"inherit":false},"matterDisplay":{"type":"carousel","style":"cards"},"align":"wide","className":""} -->
 			<div class="wp-block-terms-query alignwide">
 
 			<!-- wp:heading {"className":""} -->
-				<h2 class="wp-block-heading">Shop by Category</h2>
+				<h2 class="wp-block-heading">Shop by category</h2>
 			<!-- /wp:heading -->
 
-			<!-- wp:term-template {"className":"","layout":{"type":"grid","columnCount":3,"minimumColumnWidth":null}} -->
-				<!-- wp:image {"aspectRatio":"1","scale":"cover","metadata":{"bindings":{"url":{"source":"pulsar/term-featured-image","args":{"size":"large"}},"alt":{"source":"core/term-data","args":{"field":"name"}}}},"className":"","style":{"layout":{"selfStretch":"fixed","flexSize":"64px"}}} -->
-					<figure class="wp-block-image">
-						<img alt="" style="aspect-ratio:1;object-fit:cover"/>
-					</figure>
-				<!-- /wp:image -->
-
-				<!-- wp:group {"className":"shop-by-category-buttons","style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"default"}} -->
-					<div class="wp-block-group shop-by-category-buttons">
-
-					<!-- wp:term-name {"level":3,"isLink":true,"className":""} /-->
-
-					<!-- wp:buttons {"className":""} -->
-						<div class="wp-block-buttons">
-
-						<!-- wp:button {"className":"is-style-link"} -->
-							<div class="wp-block-button is-style-link">
-								<a class="wp-block-button__link wp-element-button">Shop Now</a>
-							</div>
-						<!-- /wp:button -->
-
-						</div>
-					<!-- /wp:buttons -->
-
-					</div>
-				<!-- /wp:group -->
+			<!-- wp:term-template {"className":""} -->
+				<!-- wp:matter/loop-item /-->
 			<!-- /wp:term-template -->
 
 			</div>

@@ -1,0 +1,58 @@
+@use "../tools" as *;
+
+/// A category's card (patterns/loop-item-term-product_cat.php): square, its
+/// image (or the scheme's fill, without one) with its name and "Shop now"
+/// over a gradient at the foot. The name's link covers the card
+/// (blocks/core/term-template.scss).
+.term-card {
+	aspect-ratio: 1;
+	background-color: var(--scheme--background-fill);
+	border-radius: var(--wp--preset--border-radius--md);
+	overflow: hidden;
+	position: relative;
+}
+
+.term-card__image {
+	height: 100%;
+	margin: 0;
+}
+
+.term-card__image img {
+	border-radius: 0;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+// Over a darkened image (or the fill), so always light whatever the scheme.
+.term-card__content {
+	background: linear-gradient(180deg, rgb(from var(--wp--preset--color--neutral-900) r g b / 0) 40%, rgb(from var(--wp--preset--color--neutral-900) r g b / 0.78) 100%);
+	color: var(--wp--preset--color--base);
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--xs);
+	inset: 0;
+	justify-content: flex-end;
+	padding: var(--wp--preset--spacing--2-xl);
+	position: absolute;
+}
+
+.term-card__name,
+.term-card__name a {
+	color: inherit;
+	margin: 0;
+	text-decoration: none;
+}
+
+.term-card__cta {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	margin: 0;
+}
+
+.wp-block-term:hover .term-card__cta {
+	text-decoration: underline;
+}
+
+.term-card__name a:focus-visible {
+	@include focus-ring;
+}

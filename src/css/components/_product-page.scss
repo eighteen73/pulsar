@@ -10,8 +10,9 @@
 	}
 }
 
-// Related products: a carousel of product cards (Matter's carousel, "cards"
-// style), under its heading.
-.product-related .wp-block-heading {
+// Related products and "Shop by category": carousels of cards (Matter's
+// carousel, "cards" style; a grid when they all fit), under their headings.
+.product-related .wp-block-heading,
+.product-categories .wp-block-heading {
 	margin-block-end: var(--wp--preset--spacing--2-xl);
 }
