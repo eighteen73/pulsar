@@ -1,18 +1,23 @@
 @use "tools" as *;
 
-.wp-block-woocommerce-cart-link {
-	.wc-block-cart-link {
-		@include button(secondary);
-		@include wc-cart-icon;
+/// The cart link (the checkout's header, "Return to Basket"): a secondary
+/// button with the theme's cart icon after the text, which shows from lg.
+.wp-block-woocommerce-cart-link .wc-block-cart-link {
+	@include button(secondary);
+	@include wc-cart-icon;
+	flex-direction: row-reverse;
+}
 
-		flex-direction: row-reverse;
-	}
+// WooCommerce's `.wc-block-cart-link .wc-block-mini-cart__icon`, 0,2,0.
+.wc-block-cart-link .wc-block-mini-cart__icon {
+	display: none;
+}
 
-	.wc-block-cart-link__text {
-		display: none;
+// WooCommerce's `.wc-block-cart-link .wc-block-cart-link__text`, 0,2,0.
+.wc-block-cart-link .wc-block-cart-link__text {
+	display: none;
 
-		@media (--lg) {
-			display: block;
-		}
+	@media (--lg) {
+		display: block;
 	}
 }

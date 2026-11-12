@@ -1,6 +1,4 @@
-
-.wp-block-woocommerce-store-notices {
-	.wc-block-components-notice-banner:first-child {
-		margin-block-start: 0;
-	}
+/// Store notices: the first without a top margin.
+.wp-block-woocommerce-store-notices .wc-block-components-notice-banner:first-child {
+	margin-block-start: 0;
 }

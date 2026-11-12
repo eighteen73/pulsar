@@ -15,7 +15,8 @@
 	text-transform: uppercase;
 }
 
-@mixin wc-sale-badge() {
+/// A cart item's savings ("Save £10"), in the success colours.
+@mixin wc-savings-badge() {
 	background-color: var(--wp--preset--color--status-success-subtle);
 	border: none;
 	border-radius: var(--wp--preset--border-radius--xs);
@@ -27,91 +28,97 @@
 	text-transform: uppercase;
 }
 
+/// A quantity stepper (`.wc-block-components-quantity-selector`, or a classic
+/// form's `.quantity`): the field between its buttons, without WooCommerce's
+/// box around them.
 @mixin wc-quantity-selector() {
 	border: unset;
 	border-radius: unset;
 	gap: var(--wp--preset--spacing--xs);
+}
 
-	.qty,
-	.wc-block-components-quantity-selector__input {
-		@include field-input;
-		-webkit-appearance: textfield;
-		border: 1px solid var(--scheme--border-strong);
-		border-radius: var(--wp--preset--border-radius--xs);
-		font-size: var(--wp--preset--font-size--sm);
-		max-width: unset;
-		padding: unset;
-		width: 70px;
+/// A quantity stepper's field (`.wc-block-components-quantity-selector__input`,
+/// a classic form's `.qty`).
+@mixin wc-quantity-selector-input() {
+	@include field-input;
+	-webkit-appearance: textfield;
+	border: 1px solid var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--xs);
+	font-size: var(--wp--preset--font-size--sm);
+	max-width: unset;
+	padding: unset;
+	width: 70px;
 
-		&:focus {
-			box-shadow: none;
-		}
-	}
-
-	.wc-block-components-quantity-selector__button {
-		border: 0;
-		border-radius: var(--wp--preset--border-radius--xs);
-		font-size: var(--wp--preset--font-size--sm);
-		width: 42px;
-
-		&:where(:not(:disabled)):hover {
-			background-color: var(--scheme--background-surface);
-		}
-
-		&:focus {
-			box-shadow: none;
-		}
-
-		&:focus-visible {
-			@include focus-block;
-		}
+	&:focus {
+		box-shadow: none;
 	}
 }
 
+/// A quantity stepper's minus and plus buttons
+/// (`.wc-block-components-quantity-selector__button`).
+@mixin wc-quantity-selector-button() {
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--xs);
+	font-size: var(--wp--preset--font-size--sm);
+	width: 42px;
+
+	&:where(:not(:disabled)):hover {
+		background-color: var(--scheme--background-surface);
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+
+	&:focus-visible {
+		@include focus-block;
+	}
+}
+
+/// A cart item's remove link: the trash icon, in the error colour, after it.
+/// The caller hides WooCommerce's own icon (`.wc-block-cart-item__remove-link svg`).
 @mixin wc-trash-icon() {
 	&::after {
 		@include icon("ui/trash", 24px);
 		color: var(--wp--preset--color--status-error);
 	}
-
-	svg {
-		display: none;
-	}
 }
 
+/// The cart icon, after the element. The caller hides WooCommerce's own icon
+/// (its `svg`).
 @mixin wc-cart-icon() {
 	&::after {
 		@include icon("icons/cart", 24px);
 	}
+}
 
-	svg {
-		display: none;
+/// The coupon form's label (`.wc-block-components-totals-coupon__input label`),
+/// over the field like the checkout's.
+@mixin wc-coupon-label() {
+	@include label;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	left: var(--wp--preset--spacing--lg);
+}
+
+/// The coupon form's field (`.wc-block-components-totals-coupon__input input`),
+/// joined to the button on its right.
+@mixin wc-coupon-input() {
+	@include field-input;
+	border-bottom-right-radius: unset;
+	border-top-right-radius: unset;
+	height: 60px;
+
+	// WooCommerce moves the text under its label when focused.
+	&:focus {
+		padding-block: var(--wp--preset--spacing--md);
+		padding-inline: var(--wp--preset--spacing--lg);
 	}
 }
 
-@mixin wc-coupon-form() {
-	gap: 0;
-
-	.wc-block-components-totals-coupon__input {
-		margin: unset;
-
-		label {
-			@include label;
-			font-weight: var(--wp--custom--typography--font-weight--body);
-			left: var(--wp--preset--spacing--lg);
-		}
-	}
-
-	#wc-block-components-totals-coupon__input-coupon {
-		@include field-input;
-		border-bottom-right-radius: unset;
-		border-top-right-radius: unset;
-		height: 60px;
-	}
-
-	.wc-block-components-totals-coupon__button {
-		border-bottom-left-radius: unset;
-		border-top-left-radius: unset;
-		text-transform: uppercase;
-	}
+/// The coupon form's button (`.wc-block-components-totals-coupon__button`),
+/// joined to the field on its left.
+@mixin wc-coupon-button() {
+	border-bottom-left-radius: unset;
+	border-top-left-radius: unset;
+	text-transform: uppercase;
 }

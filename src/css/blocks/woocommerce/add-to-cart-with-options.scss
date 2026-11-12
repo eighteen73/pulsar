@@ -1,7 +1,47 @@
 @use "tools" as *;
 
-.woocommerce .wp-block-woocommerce-add-to-cart-with-options {
-	.wp-block-woocommerce-product-button {
-		flex-grow: 1;
-	}
+/// A product's add to cart form (parts/*-product-add-to-cart-with-options.html,
+/// and WooCommerce's classic `form.cart` for extensions' product types, e.g.
+/// Product Bundles, Bookings, Subscriptions). This loads with every product
+/// form (the quantity selector block is always inside it), after
+/// WooCommerce's block styles but before its classic woocommerce.css and
+/// woocommerce-blocktheme.css.
+
+// The add to cart button fills the row beside the quantity.
+.wc-block-add-to-cart-with-options .wp-block-woocommerce-product-button {
+	flex-grow: 1;
+}
+
+// Quantity steppers: simple and variable products' (the quantity selector
+// block), each item's in a grouped product, and the classic form's (WooCommerce
+// adds the stepper's classes and buttons to its `.quantity`).
+.wc-block-add-to-cart-with-options .quantity {
+	@include wc-quantity-selector;
+}
+
+// WooCommerce's `.woocommerce .quantity .qty` (0,3,0) sets the width, and
+// `.wc-block-components-quantity-selector input.wc-block-components-quantity-selector__input:focus`
+// (0,3,1) a focus ring, so focused this is 0,4,1.
+.wc-block-add-to-cart-with-options .quantity input.qty {
+	@include wc-quantity-selector-input;
+	// As tall as a button (the base's line height and padding), as the add to
+	// cart button stretches a simple product's; a grouped product's items and
+	// the classic form's sit on their own.
+	min-height: calc(var(--wp--preset--font-size--md) * var(--wp--custom--typography--line-height--tight) + 2 * var(--wp--preset--spacing--md));
+}
+
+.wc-block-add-to-cart-with-options .wc-block-components-quantity-selector__button {
+	@include wc-quantity-selector-button;
+}
+
+// The classic form. Its button is already the theme's (`.wp-element-button`).
+// stylelint-disable-next-line selector-max-specificity, selector-max-compound-selectors -- WooCommerce's block theme styles space the field from its stepper's plus: `.woocommerce div.product form.cart div.quantity .qty`, 0,5,3.
+.woocommerce div.product form.cart div.quantity input.qty {
+	margin-right: 0;
+}
+
+// stylelint-disable-next-line selector-max-specificity, selector-max-compound-selectors -- WooCommerce's `.woocommerce div.product form.cart .variations select`, 0,4,3, draws its own.
+.woocommerce div.product form.cart table.variations select {
+	@include field-select;
+	margin-right: 0;
 }

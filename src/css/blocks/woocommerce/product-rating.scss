@@ -1,17 +1,17 @@
 @use "tools" as *;
 
-.wp-block-woocommerce-product-rating {
-	.wc-block-components-product-rating__reviews_count a {
-		color: var(--scheme--text-subtle);
-		font-size: var(--wp--preset--font-size--sm);
-		text-decoration: none;
+/// A product's rating: the stars in the link colour, then the number of
+/// reviews (a link to them on the product page).
+.wp-block-woocommerce-product-rating .wc-block-components-product-rating__reviews_count a {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	text-decoration: none;
 
-		&:hover {
-			text-decoration: underline;
-		}
+	&:hover {
+		text-decoration: underline;
 	}
+}
 
-	.wc-block-grid__product-rating__stars {
-		color: var(--scheme--text-link);
-	}
+.wp-block-woocommerce-product-rating .wc-block-grid__product-rating__stars {
+	color: var(--scheme--text-link);
 }

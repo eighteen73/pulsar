@@ -21,21 +21,5 @@
 		"selector-max-compound-selectors": 4,
 		"selector-max-specificity": "0,3,1",
 		"selector-max-id": 0
-	},
-	"overrides": [
-		{
-			"files": [
-				"src/css/blocks/woocommerce/*.scss",
-				"src/css/tools/mixins/_woocommerce.scss"
-			],
-			"rules": {
-				"scss/selector-no-union-class-name": null,
-				"selector-nested-pattern": null,
-				"max-nesting-depth": null,
-				"selector-max-compound-selectors": null,
-				"selector-max-specificity": null,
-				"selector-max-id": null
-			}
-		}
-	]
+	}
 }

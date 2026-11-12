@@ -1,7 +1,0 @@
-@use "tools" as *;
-
-.woocommerce .wp-block-woocommerce-add-to-cart-with-options-quantity-selector {
-	.quantity {
-		@include wc-quantity-selector;
-	}
-}
