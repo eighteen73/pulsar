@@ -3,7 +3,6 @@
  * Checkout header: logo and a link back to the basket, without navigation.
  *
  * Title: Site header (checkout)
- * Slug: site-header-checkout
  *
  * @package Pulsar
  */

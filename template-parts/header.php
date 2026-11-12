@@ -3,14 +3,13 @@
  * Site header.
  *
  * Version-controlled header, rendered in templates with
- * `<!-- wp:matter/template-part {"slug":"site-header"} /-->`.
+ * `<!-- wp:matter/template-part {"slug":"header"} /-->`.
  *
  * The primary menu sits in a responsive panel: an off-canvas drawer with a
  * drill-down menu below the `lg` breakpoint, an inline dropdown menu above it.
  * Editable content comes from Appearance > Menus and Appearance > Options.
  *
  * Title: Site header
- * Slug: site-header
  *
  * @package Pulsar
  */

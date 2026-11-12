@@ -3,11 +3,10 @@
  * Site footer.
  *
  * Version-controlled footer, rendered in templates with
- * `<!-- wp:matter/template-part {"slug":"site-footer"} /-->`.
+ * `<!-- wp:matter/template-part {"slug":"footer"} /-->`.
  * Editable content comes from Appearance > Menus and Appearance > Options.
  *
  * Title: Site footer
- * Slug: site-footer
  *
  * @package Pulsar
  */

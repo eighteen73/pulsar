@@ -44,8 +44,8 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
 | `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |
-| `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `site-header`, `site-footer`, checkout variants, and `header/` and `footer/` pieces. |
-| `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"site-header"} /-->` for the header and footer. |
+| `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `header` and `footer` (the parts in `header/` and `footer/` are their pieces), and checkout variants. |
+| `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"header"} /-->` for the header and footer. |
 | `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
 | `patterns/loop-item-accordion.php`, `patterns/loop-item-tabs.php` | An item's content in an accordion or tabs of posts ("Posts accordion", "Posts tabs"): the excerpt with a link; the post's title is the heading or tab. Add `loop-item-{post_type}-accordion.php` (or `-tabs`) for a post type that needs its own, e.g. an FAQ's whole answer, and `loop-item-carousel.php` or `loop-item-{post_type}-carousel.php` for carousel slides unlike the post type's usual item. See Matter's README for the full order. |
 
@@ -159,13 +159,13 @@ The aim is no `!important`.
 
 ## Header, footer and menus
 
-`template-parts/site-header.php` contains:
+`template-parts/header.php` contains:
 - the logo;
 - the primary menu in a Matter panel: a drill-down drawer below `lg`, an inline dropdown from `lg`;
 - the header call to action;
 - the mini-cart.
 
-`site-footer.php` contains:
+`footer.php` contains:
 - the logo;
 - contact details and social links (from Appearance › Options);
 - the footer and legal menus;

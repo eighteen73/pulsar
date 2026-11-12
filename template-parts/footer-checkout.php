@@ -3,7 +3,6 @@
  * Checkout footer: legal links and a secure checkout notice.
  *
  * Title: Site footer (checkout)
- * Slug: site-footer-checkout
  *
  * @package Pulsar
  */
