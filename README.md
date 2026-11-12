@@ -13,7 +13,7 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 
 - [WordPress](https://wordpress.org/) 7.1+
 - [PHP](https://www.php.net/) 8.3+
-- [Node.js](https://nodejs.org/) 20+
+- [Node.js](https://nodejs.org/) 26+ (the LTS; `.nvmrc`)
 - [Matter](https://github.com/eighteen73/matter) 1.0+, for sections, schemes, menus, panels and site settings. It's a must-use plugin installed by Composer (`eighteen73/matter`), so it's always active and the theme uses it without checking. An admin notice warns if Composer has installed an older version or none.
 - [Orbit](https://github.com/eighteen73/orbit), recommended. Outside local and development environments it removes the Site Editor, blocks REST writes to templates, template parts and global styles, and ignores any saved in the database, so the theme's files are always what shows. **Without Orbit**, editors with `edit_theme_options` can open the Site Editor and change templates, the header and footer template blocks, and global styles, and those database copies then override the theme's files.
 
