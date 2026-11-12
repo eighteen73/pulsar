@@ -35,7 +35,7 @@ class Enqueue implements Bootable {
 	public function boot(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_styles' ], 10 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'theme_scripts' ], 10 );
-		add_action( 'wp_enqueue_scripts', [ $this, 'woocommerce_styles' ], 10 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'woocommerce_styles' ], 20 );
 		add_action( 'after_setup_theme', [ $this, 'block_styles' ] );
 		add_action( 'init', [ $this, 'register_block_style_dependencies' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'disabled_block_styles' ], 999 );
@@ -86,7 +86,11 @@ class Enqueue implements Bootable {
 	}
 
 	/**
-	 * WooCommerce stylesheets.
+	 * WooCommerce stylesheets: its classic markup (forms, tables, order details,
+	 * payment methods) on every WooCommerce page, as it appears on My Account,
+	 * the customer payment page, order received and the classic cart and
+	 * checkout; and My Account's layout. After WooCommerce's own stylesheet,
+	 * which they override.
 	 *
 	 * @return void
 	 */
@@ -95,11 +99,27 @@ class Enqueue implements Bootable {
 			return;
 		}
 
+		if ( ! ( \is_woocommerce() || \is_cart() || \is_checkout() || \is_account_page() ) ) {
+			return;
+		}
+
+		// WooCommerce registers it at this hook's default priority; a site can
+		// switch it off (`woocommerce_enqueue_styles`).
+		$after = wp_style_is( 'woocommerce-general', 'registered' ) ? [ 'woocommerce-general' ] : [];
+
+		wp_enqueue_style(
+			'pulsar-woocommerce-styles',
+			get_theme_file_uri( 'build/css/woocommerce.css' ),
+			array_merge( Asset::attribute( 'woocommerce', 'css', 'dependencies' ), $after ),
+			Asset::attribute( 'woocommerce', 'css', 'version' ),
+			'screen, print',
+		);
+
 		if ( \is_account_page() ) {
 			wp_enqueue_style(
 				'pulsar-woocommerce-account-styles',
 				get_theme_file_uri( 'build/css/woocommerce-account.css' ),
-				Asset::attribute( 'woocommerce-account', 'css', 'dependencies' ),
+				array_merge( Asset::attribute( 'woocommerce-account', 'css', 'dependencies' ), [ 'pulsar-woocommerce-styles' ] ),
 				Asset::attribute( 'woocommerce-account', 'css', 'version' ),
 				'screen, print',
 			);

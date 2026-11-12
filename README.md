@@ -221,4 +221,11 @@ This works for dynamic blocks only. It runs them through core's render pipeline,
 
 ## WooCommerce
 
-Shop, product, cart, checkout and account templates are block templates in `templates/`. Their styles are in `src/css/blocks/woocommerce/` and `src/css/woocommerce-account.scss`.
+Shop, product, cart, checkout, order received and account templates are block templates in `templates/`.
+
+- **Product pages:** the details (description, additional information, reviews) are an accordion; the rating's "customer reviews" link (`#reviews`) opens the reviews. A variable product's options are chips (`parts/variable-product-add-to-cart-with-options.html`).
+- **Order received** is built from WooCommerce's order confirmation blocks (`patterns/order-confirmation.php`).
+- **Blocks** are styled per block in `src/css/blocks/woocommerce/`.
+- **WooCommerce's classic markup** (My Account's forms, orders, addresses; the customer payment page that payment links open; the classic cart and checkout; extensions' templates) is styled in `src/css/woocommerce.scss`, loaded on every WooCommerce page after WooCommerce's own stylesheet; My Account's layout and navigation in `src/css/woocommerce-account.scss`.
+- **Everywhere:** WooCommerce's colour and form variables (`--wc-*`) are mapped to the scheme, and notices use the status colours (`src/css/third-party/_woocommerce.scss`), so WooCommerce's own styles and extensions follow the theme.
+- WooCommerce's stylesheets stay on: Pulsar overrides them, matching their specificity where it has to (each case is commented).

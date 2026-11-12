@@ -1,11 +1,13 @@
 @use "utility" as *;
 @use "forms" as *;
 
+/// A product's sale badge: the scheme's fill, with its text colour (a pair
+/// with guaranteed contrast).
 @mixin wc-product-sale-badge() {
-	background-color: var(--scheme--highlight);
+	background-color: var(--scheme--background-fill);
 	border: unset;
 	border-radius: var(--wp--preset--border-radius--xs);
-	color: var(--scheme--background);
+	color: var(--scheme--text-fill);
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--label);

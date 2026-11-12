@@ -1,55 +1,65 @@
 @use "tools" as *;
 
+/// Product lists (Product Collection's product template): a grid of the
+/// theme's product cards (patterns/loop-item-product.php).
 .wc-block-product-template {
 	--_product-template-column-gap: var(--wp--preset--spacing--2-xl);
-	--_product-template-row-gap: var(--wp--preset--spacing--3-xl);
 	--_product-template-min-width: 220px;
+	gap: var(--wp--preset--spacing--3-xl) var(--_product-template-column-gap);
+}
 
-	gap: var(--_product-template-row-gap) var(--_product-template-column-gap);
+// The editor's columns where there's room; fewer below the minimum width.
+@for $i from 2 through 6 {
+	.wc-block-product-template__responsive.columns-#{$i} {
+		grid-template-columns: repeat(auto-fill, minmax(max(var(--_product-template-min-width), calc(100% / #{$i} - var(--_product-template-column-gap))), 1fr));
+	}
+}
 
-	&__responsive {
-		@for $i from 2 through 6 {
-			&.columns-#{$i} {
-				grid-template-columns: repeat(auto-fill, minmax(max(var(--_product-template-min-width), calc(100% / #{$i} - var(--_product-template-column-gap))), 1fr));
-			}
-		}
+:where(.wp-block-heading) + .wc-block-product-template {
+	margin-block-start: var(--wp--preset--spacing--4-xl);
+}
+
+// A card's image, with its add to cart button over the corner: shown while
+// the card is hovered or has focus, and always on touch screens.
+.product-card__media {
+	overflow: clip;
+	position: relative;
+}
+
+// Two classes: WooCommerce's `.wp-block-button.wc-block-components-product-button`
+// stacks the button and its "View cart" link.
+.product-card__media .wp-block-woocommerce-product-button {
+	align-items: center;
+	flex-direction: row;
+	gap: 0;
+	inset-block-end: var(--wp--preset--spacing--sm);
+	inset-inline-end: var(--wp--preset--spacing--sm);
+	opacity: 0;
+	position: absolute;
+	transition:
+		opacity var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1),
+		translate var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1);
+	translate: 0 100%;
+
+	@media (hover: none) {
+		opacity: 1;
+		translate: none;
 	}
 
-	.wp-block-heading + & {
-		margin-block-start: var(--wp--preset--spacing--4-xl);
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
 	}
+}
 
-	&__image-btn-wrapper {
-		overflow: clip;
-		position: relative;
+.wc-block-product:is(:hover, :focus-within) .wp-block-woocommerce-product-button {
+	opacity: 1;
+	translate: none;
+}
 
-		.wp-block-woocommerce-product-button {
-			align-items: center;
-			bottom: var(--wp--preset--spacing--sm);
-			display: flex;
-			flex-direction: row;
-			gap: 0;
-			opacity: 0;
-			position: absolute;
-			right: var(--wp--preset--spacing--sm);
-			transform: translateY(100%);
-			transition: transform var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1), opacity var(--wp--custom--transition--duration--normal) cubic-bezier(0.4, 0, 0.2, 1);
-
-			.added_to_cart,
-			.wp-block-button__link {
-				@include button(primary, small);
-				font-size: inherit;
-				line-height: inherit;
-				margin: 0;
-				text-decoration: none;
-			}
-		}
-	}
-
-	.wc-block-product:hover {
-		.wp-block-woocommerce-product-button {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+.product-card__media .wp-block-woocommerce-product-button :is(.added_to_cart, .wp-block-button__link) {
+	@include button(primary, small);
+	font-size: inherit;
+	line-height: inherit;
+	margin: 0;
+	text-decoration: none;
 }

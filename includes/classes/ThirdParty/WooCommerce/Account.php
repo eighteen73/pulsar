@@ -70,9 +70,9 @@ class Account implements Bootable {
 		if ( ! is_null( $wp_query ) && is_wc_endpoint_url() ) {
 			$endpoint = WC()->query->get_current_endpoint();
 			$title    = WC()->query->get_endpoint_title( $endpoint );
-			echo '<h2 class="woocommerce-MyAccount-content__title">' . esc_html( $title ) . '</h2>';
+			echo '<h2 class="my-account-title">' . esc_html( $title ) . '</h2>';
 		} else {
-			the_title( '<h2 class="woocommerce-MyAccount-content__title">', '</h2>' );
+			the_title( '<h2 class="my-account-title">', '</h2>' );
 		}
 	}
 }

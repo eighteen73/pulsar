@@ -26,8 +26,6 @@
 		{
 			"files": [
 				"src/css/blocks/woocommerce/*.scss",
-				"src/css/blocks/matter/gravity-form.scss",
-				"src/css/woocommerce-account.scss",
 				"src/css/tools/mixins/_woocommerce.scss"
 			],
 			"rules": {

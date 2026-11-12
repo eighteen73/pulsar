@@ -1,11 +1,20 @@
+/**
+ * My Account's layout (templates/page-my-account.html): the navigation beside
+ * the content from xl, the dashboard as a grid of links, and the logged-out
+ * login and register boxes. Forms, tables, orders and addresses are in
+ * woocommerce.scss, as they appear on other WooCommerce pages too.
+ */
+
+@use "settings";
 @use "tools" as *;
 
-// Account icons
+// Navigation icons, by endpoint (assets/svg/woocommerce/account/).
 $account-links: (
 	dashboard: woocommerce/account/dashboard,
 	orders: woocommerce/account/orders,
 	downloads: woocommerce/account/downloads,
 	edit-address: woocommerce/account/edit-address,
+	payment-methods: woocommerce/account/payment-methods,
 	edit-account: woocommerce/account/edit-account,
 	bookings: woocommerce/account/bookings,
 	members-area: woocommerce/account/members-area,
@@ -13,493 +22,281 @@ $account-links: (
 	customer-logout: woocommerce/account/customer-logout,
 );
 
-.woocommerce-account {
+// The page: a surface band, with the account inside.
+.woocommerce-account .site-main {
+	background-color: var(--scheme--background-surface);
+	padding-block: var(--wp--custom--spacing--section);
+}
 
-	// General styles
-	.site-main {
-		background-color: var(--scheme--background-surface);
-		padding-block: var(--wp--custom--spacing--section);
-
-		// On larger screens we hide the title, as its duplicated for styling purposes.
-		.wp-block-post-title {
-			@media (--xl) {
-				display: none;
-			}
-
-			+ .wp-block-heading {
-				display: none;
-
-				@media (--xl) {
-					display: block;
-				}
-			}
-		}
-
-		.woocommerce {
-			align-items: flex-start;
-			display: flex;
-			gap: var(--wp--preset--spacing--5-xl);
-			max-width: var(--wp--style--global--wide-size);
-
-			&::before,
-			&::after {
-				content: none;
-			}
-		}
-	}
-
-	.woocommerce-MyAccount-content__title {
+// The page's title ("My Account") shows from xl, beside the navigation; below
+// it, the endpoint's title shows instead (the post title, as the template's
+// heading is hidden).
+.woocommerce-account .site-main .wp-block-post-title {
+	@media (--xl) {
 		display: none;
-		margin-top: unset;
-
-		@media (--xl) {
-			display: block;
-			margin-bottom: var(--wp--style--block-gap);
-		}
 	}
+}
 
-	.entry-content {
-		margin-top: var(--wp--preset--spacing--4-xl);
+:where(.woocommerce-account .site-main) .wp-block-post-title + .wp-block-heading {
+	display: none;
+
+	@media (--xl) {
+		display: block;
 	}
+}
 
-	.woocommerce-MyAccount-back {
-		margin-bottom: var(--wp--preset--spacing--md);
+.my-account-title {
+	display: none;
+	margin-block: 0 var(--wp--style--block-gap);
 
-		.wp-block-button__link::before {
-			@include icon("icons/arrow-left", 12px);
-		}
-
-		@media (--xl) {
-			display: none;
-		}
+	@media (--xl) {
+		display: block;
 	}
+}
 
-	.woocommerce-MyAccount-content {
-		background-color: var(--scheme--background);
-		border-radius: var(--wp--preset--border-radius--md);
-		padding: var(--wp--preset--spacing--3-xl);
-		width: 100%;
+// "Back to my account", below xl (the navigation is the dashboard there).
+.wp-block-button.my-account-back {
+	margin-block-end: var(--wp--preset--spacing--md);
 
-		@media (--xl) {
-			flex: 1;
-		}
-	}
-
-	.woocommerce-MyAccount-navigation {
+	@media (--xl) {
 		display: none;
-		float: unset;
-		width: 100%;
-
-		@media (--xl) {
-			display: block;
-			width: 250px;
-		}
-
-		ul {
-			display: flex;
-			flex-direction: column;
-			gap: var(--wp--preset--spacing--lg);
-			margin: unset;
-		}
-
-		li {
-			padding: unset;
-
-			&.is-active a {
-				background-color: var(--scheme--background-surface);
-				color: var(--scheme--text-link);
-				text-decoration: none;
-			}
-
-			a {
-				align-items: center;
-				border-radius: var(--wp--preset--border-radius--sm);
-				color: var(--scheme--text);
-				display: flex;
-				font-size: var(--wp--preset--font-size--md);
-				font-weight: var(--wp--custom--typography--font-weight--label);
-				gap: var(--wp--preset--spacing--sm);
-				padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
-				text-decoration: none;
-				transition: all var(--wp--custom--transition--duration--normal) ease-out;
-
-				&:hover {
-					background-color: var(--scheme--background-surface);
-					text-decoration: none;
-				}
-
-				&:focus-visible {
-					@include focus-ring;
-					background-color: var(--scheme--background-surface);
-				}
-			}
-		}
-
-		.woocommerce-MyAccount-navigation-link {
-			@each $link, $icon in $account-links {
-				&--#{$link} a::before {
-					@include icon($icon, 20px);
-				}
-			}
-		}
 	}
+}
 
-	.woocommerce-form,
-	.woocommerce-address-fields__field-wrapper,
-	form {
-		display: grid;
-		gap: var(--wp--style--block-gap);
-		grid-template-columns: repeat(2, 1fr);
+.my-account-back .wp-block-button__link::before {
+	@include icon("icons/arrow-left", 12px);
+}
 
-		.clear {
-			display: none;
-		}
+// The wide width (over core's constrained layout for post content, 0,1,0).
+.woocommerce-account .site-main .woocommerce {
+	margin-block-start: var(--wp--preset--spacing--4-xl);
+	max-width: var(--wp--style--global--wide-size);
 
-		h2 {
-			grid-column: 1 / -1;
-		}
-
-		.woocommerce-address-fields {
-			grid-column: 1 / -1;
-		}
-
-		fieldset {
-			display: grid;
-			gap: var(--wp--style--block-gap);
-			grid-column: 1 / -1;
-			grid-template-columns: repeat(2, 1fr);
-			margin-top: calc(var(--wp--preset--spacing--4-xl) - var(--wp--style--block-gap));
-		}
-
-		legend {
-			@include legend;
-			margin-bottom: var(--wp--style--block-gap);
-		}
-
-		.form-row {
-			grid-column: 1 / -1;
-			margin: unset;
-			padding: unset;
-			width: 100%;
-
-			&-first {
-				grid-column: 1;
-			}
-
-			&-last {
-				grid-column: 2;
-			}
-
-			&::before,
-			&::after {
-				content: none;
-			}
-
-			input.input-text {
-				@include field-input;
-			}
-		}
-
-		> * {
-			margin-top: unset;
-		}
-
-		label {
-			@include label;
-		}
-
-		.wp-element-button {
-			margin-top: calc(var(--wp--preset--spacing--4-xl) - var(--wp--style--block-gap));
-		}
+	&::before,
+	&::after {
+		content: none;
 	}
+}
 
-	// Logged out styles
-	&:not(.logged-in) {
-		.woocommerce-MyAccount-back {
-			display: none;
-		}
+// Logged in: the navigation beside the content (from xl; below it, one or the
+// other shows).
+:where(.woocommerce-account.logged-in .site-main) .woocommerce {
+	align-items: flex-start;
+	display: flex;
+	gap: var(--wp--preset--spacing--5-xl);
+}
 
-		.woocommerce {
-			display: block;
+// Content: a card. (WooCommerce floats it: `.woocommerce-account
+// .woocommerce-MyAccount-content`, 0,2,0.)
+.woocommerce-account .woocommerce-MyAccount-content {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	float: none;
+	padding: var(--wp--preset--spacing--3-xl);
+	width: 100%;
 
-			// Registration on the account page is disabled.
-			&:not(:has(.u-columns)) {
-				background-color: var(--scheme--background);
-				border-radius: var(--wp--preset--border-radius--md);
-				float: unset;
-				padding: var(--wp--preset--spacing--3-xl);
-				width: 100%;
-			}
-		}
-
-		.login,
-		.register {
-			border: unset;
-			margin: unset;
-			padding: unset;
-		}
-
-		.u-columns {
-			display: flex;
-			flex-direction: column;
-			gap: var(--wp--preset--spacing--2-xl);
-			margin-top: unset;
-
-			@media (--lg) {
-				flex-direction: row;
-			}
-
-			&::before,
-			&::after {
-				content: none;
-			}
-		}
-
-		.col-1,
-		.col-2 {
-			background-color: var(--scheme--background);
-			border-radius: var(--wp--preset--border-radius--md);
-			float: unset;
-			padding: var(--wp--preset--spacing--3-xl);
-			width: 100%;
-
-			> :first-child {
-				margin-top: 0;
-			}
-
-			> :last-child {
-				margin-bottom: 0;
-			}
-
-			p {
-				color: var(--scheme--text-subtle);
-			}
-		}
-
-		.col-2 {
-			border-top: 1px solid var(--scheme--border);
-			padding-top: var(--wp--preset--spacing--2-xl);
-		}
-
-		.woocommerce-form-login__submit {
-			float: unset;
-			margin: unset;
-			margin-top: var(--wp--style--block-gap);
-			width: 100%;
-		}
-
-		.woocommerce-form-register__submit {
-			@include button(secondary);
-			width: 100%;
-		}
-
-		.woocommerce-form {
-			display: flex;
-			flex-direction: column;
-			gap: var(--wp--style--block-gap);
-			margin-top: var(--wp--preset--spacing--sm);
-
-			.form-row {
-				margin: unset;
-				padding: unset;
-
-				&::before,
-				&::after {
-					content: none;
-				}
-
-				.input-text {
-					@include field-input;
-				}
-
-				em {
-					color: var(--scheme--text-subtle);
-					font-size: var(--wp--preset--font-size--md);
-					font-style: normal;
-					margin-top: var(--wp--preset--spacing--sm);
-				}
-			}
-
-			> * {
-				margin-top: unset;
-			}
-
-			label {
-				@include label;
-			}
-
-			.woocommerce-form-login__rememberme {
-				margin-bottom: unset;
-			}
-
-			.woocommerce-form__label-for-checkbox {
-				align-items: center;
-				display: flex;
-				font-weight: var(--wp--custom--typography--font-weight--body);
-				gap: var(--wp--preset--spacing--sm);
-				margin-bottom: unset;
-			}
-
-			.lost_password {
-				margin: unset;
-			}
-
-			wc-order-attribution-inputs {
-				display: none;
-			}
-
-			.woocommerce-privacy-policy-text {
-				> :first-child {
-					margin-top: 0;
-				}
-
-				> :last-child {
-					margin-bottom: 0;
-				}
-			}
-		}
+	@media (--xl) {
+		flex: 1;
 	}
+}
 
-	// Dashboard styles
-	&.woocommerce-dashboard {
-		.woocommerce-MyAccount-back {
-			display: none;
-		}
+// Navigation: beside the content from xl; below it, the dashboard is the
+// navigation.
+.woocommerce-account .woocommerce-MyAccount-navigation {
+	display: none;
+	float: none;
+	width: 100%;
 
-		.woocommerce-MyAccount-content {
-			display: none;
-		}
-
-		.woocommerce-MyAccount-navigation {
-			display: block;
-			width: 100%;
-
-			ul {
-				display: grid;
-				gap: var(--wp--style--block-gap);
-				grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
-			}
-
-			// Dashboard link is hidden on the dashboard page.
-			.woocommerce-MyAccount-navigation-link--dashboard {
-				display: none;
-			}
-
-			li a {
-				background-color: var(--scheme--background);
-				border-radius: var(--wp--preset--border-radius--md);
-				flex-direction: column;
-				justify-content: center;
-				padding: var(--wp--preset--spacing--3-xl);
-
-				&:hover {
-					background-color: var(--scheme--background-surface);
-				}
-			}
-
-			.woocommerce-MyAccount-navigation-link--customer-logout a {
-				color: var(--wp--preset--color--status-error);
-
-				&:hover,
-				&:focus-visible {
-					background-color: var(--wp--preset--color--status-error-subtle);
-				}
-			}
-		}
+	@media (--xl) {
+		display: block;
+		flex: 0 0 250px;
 	}
+}
 
-	// Single order styles
-	.woocommerce-customer-details {
-		margin: var(--wp--preset--spacing--4-xl) 0 0;
+// (WooCommerce's block theme styles indent it: `.woocommerce-account
+// .woocommerce-MyAccount-navigation ul`, 0,2,1.)
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--sm);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
 
-		address {
-			border: unset;
-			margin-top: var(--wp--style--block-gap);
-			padding: 0;
-		}
+// (WooCommerce's block theme styles pad and underline them:
+// `.woocommerce-account .woocommerce-MyAccount-navigation li`, 0,2,1.)
+.woocommerce-account .woocommerce-MyAccount-navigation li {
+	padding: 0;
+}
 
-		.woocommerce-customer-details--email,
-		.woocommerce-customer-details--phone {
-			padding-left: unset;
+.woocommerce-account .woocommerce-MyAccount-navigation li a {
+	align-items: center;
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	display: flex;
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--sm);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+	text-decoration: none;
+	transition: background-color var(--wp--custom--transition--duration--normal) ease-out;
+}
 
-			&::before {
-				content: none;
-			}
-		}
+.woocommerce-MyAccount-navigation a:hover {
+	background-color: var(--scheme--background);
+}
 
-		h2 {
-			@include heading-base;
-			@include heading(h3);
-		}
+.woocommerce-MyAccount-navigation a:focus-visible {
+	@include focus-ring;
+}
+
+// stylelint-disable-next-line selector-max-specificity -- WooCommerce's block theme styles underline it at 0,3,2.
+.woocommerce-account .woocommerce-MyAccount-navigation li.is-active a {
+	background-color: var(--scheme--background);
+	color: var(--scheme--text-link);
+	text-decoration: none;
+}
+
+// Each endpoint's icon; others (an extension's) get none.
+@each $link, $icon in $account-links {
+	.woocommerce-MyAccount-navigation-link--#{$link} a::before {
+		@include icon($icon, 20px);
 	}
+}
 
-	.woocommerce-order-details {
-		margin: var(--wp--preset--spacing--4-xl) 0 0;
+// The dashboard: its links as cards, in place of the content. The content
+// (WooCommerce's greeting) is hidden unless it holds more than that, such as
+// a notice or an extension's dashboard.
+.woocommerce-dashboard .my-account-back {
+	display: none;
+}
 
-		.woocommerce-table--order-details {
-			margin-top: var(--wp--style--block-gap);
-		}
+:where(.woocommerce-dashboard) .woocommerce-MyAccount-content:where(:not(:has(> :not(p, .my-account-title, .woocommerce-notices-wrapper:empty)))) {
+	display: none;
+}
 
-		.woocommerce-order-details__title {
-			@include heading-base;
-			@include heading(h3);
-		}
+.woocommerce-dashboard .woocommerce-MyAccount-content > p {
+	display: none;
+}
+
+.woocommerce-dashboard .site-main .woocommerce {
+	flex-direction: column;
+}
+
+.woocommerce-dashboard .woocommerce-MyAccount-navigation {
+	display: block;
+	flex-basis: auto;
+}
+
+.woocommerce-dashboard // (WooCommerce's block theme styles indent it: `.woocommerce-account
+// .woocommerce-MyAccount-navigation ul`, 0,2,1.)
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+	display: grid;
+	gap: var(--wp--style--block-gap);
+	grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+}
+
+// The dashboard's own link isn't needed on it.
+.woocommerce-dashboard .woocommerce-MyAccount-navigation-link--dashboard {
+	display: none;
+}
+
+.woocommerce-dashboard .woocommerce-MyAccount-navigation li a {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	flex-direction: column;
+	justify-content: center;
+	padding: var(--wp--preset--spacing--3-xl);
+}
+
+.woocommerce-dashboard .woocommerce-MyAccount-navigation a:hover {
+	background-color: var(--scheme--background-surface);
+}
+
+.woocommerce-dashboard li.woocommerce-MyAccount-navigation-link--customer-logout a {
+	color: var(--wp--preset--color--status-error);
+}
+
+.woocommerce-dashboard .woocommerce-MyAccount-navigation-link--customer-logout a:is(:hover, :focus-visible) {
+	background-color: var(--wp--preset--color--status-error-subtle);
+}
+
+// Addresses: each one's title with its edit link below.
+.woocommerce-account .addresses .title {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--sm);
+	margin-block-end: var(--wp--preset--spacing--md);
+
+	&::before,
+	&::after {
+		content: none;
 	}
+}
 
-	// Downloads styles
+.woocommerce-account .addresses .title h2 {
+	@include heading-base;
+	@include heading(h3);
+	margin: 0;
+}
 
-	// Addresses styles
-	.addresses .title {
-		display: flex;
-		flex-direction: column;
-		gap: var(--wp--preset--spacing--sm);
+// stylelint-disable-next-line selector-max-specificity -- WooCommerce floats it at 0,4,0.
+.woocommerce-account .addresses .title .edit {
+	align-items: center;
+	display: inline-flex;
+	float: none;
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--sm);
 
-		&::before,
-		&::after {
-			content: none;
-		}
+}
 
-		h2 {
-			@include heading-base;
-			@include heading(h3);
-			margin: unset;
-		}
+.woocommerce-account .addresses .edit::before {
+	@include icon("woocommerce/account/edit-address", 12px);
+}
 
-		.edit {
-			align-items: center;
-			display: inline-flex;
-			font-size: var(--wp--preset--font-size--sm);
-			gap: var(--wp--preset--spacing--sm);
-			margin: unset;
+.woocommerce-account .woocommerce-Addresses {
+	margin-block-start: var(--wp--style--block-gap);
+}
 
-			&::before {
-				@include icon("woocommerce/account/edit-address", 12px);
-			}
-		}
+// Editing an address has the same body class as the addresses list, and its
+// own heading: the content title would repeat it.
+:where(.woocommerce-edit-address .woocommerce-MyAccount-content:has(.woocommerce-address-fields)) .my-account-title {
+	display: none;
+}
+
+// Logged out: login and register side by side from lg, each a card.
+.woocommerce-account:not(.logged-in) .my-account-back {
+	display: none;
+}
+
+// Registration switched off: the login form alone, in a card.
+:where(.woocommerce-account:not(.logged-in) .site-main) .woocommerce:where(:not(:has(.u-columns))) {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	padding: var(--wp--preset--spacing--3-xl);
+}
+
+.woocommerce-account .u-columns {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--2-xl);
+
+	@media (--lg) {
+		flex-direction: row;
 	}
+}
 
-	.woocommerce-Addresses {
-		margin-top: var(--wp--style--block-gap);
-	}
+:where(.woocommerce-account) .u-columns :is(.col-1, .col-2) {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	padding: var(--wp--preset--spacing--3-xl);
+}
 
-	.woocommerce-Address {
-		border: 1px solid var(--scheme--border);
-		border-radius: var(--wp--preset--border-radius--md);
-		padding: var(--wp--preset--spacing--2-xl);
-	}
+:where(.woocommerce-account .u-columns) :is(.col-1, .col-2) > :first-child {
+	margin-block-start: 0;
+}
 
-	address {
-		font-style: normal;
-		margin-top: var(--wp--style--block-gap);
-	}
-
-	// Edit address styles
-	&:where(.woocommerce-edit-address) {
-
-		// Long winded way of hiding the duplicate page title.
-		// Unfortunately the main addresses and edit address screens have the same body class.
-		.woocommerce-MyAccount-content:where(:has(.woocommerce-address-fields)) .woocommerce-MyAccount-content__title {
-			display: none;
-		}
-	}
+:where(.woocommerce-account .u-columns) :is(.col-1, .col-2) p:not(.form-row) {
+	color: var(--scheme--text-subtle);
 }

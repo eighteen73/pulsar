@@ -24,8 +24,9 @@ legend {
 	padding: 0;
 }
 
-// Fields, at element specificity (in :where()), so any class beats them.
-:where([type="text"], [type="email"], [type="url"], [type="password"], [type="number"], [type="date"], [type="datetime-local"], [type="month"], [type="search"], [type="tel"], [type="time"], [type="week"]) {
+// Fields, at element specificity (the type in :where()), so any class beats
+// them, and after the reset above.
+input:where([type="text"], [type="email"], [type="url"], [type="password"], [type="number"], [type="date"], [type="datetime-local"], [type="month"], [type="search"], [type="tel"], [type="time"], [type="week"]) {
 	@include field-input;
 }
 
@@ -41,27 +42,27 @@ select:where([multiple]) {
 	@include field-select(true);
 }
 
-:where([type="checkbox"]) {
+input:where([type="checkbox"]) {
 	@include field-checkbox;
 }
 
-:where([type="radio"]) {
+input:where([type="radio"]) {
 	@include field-radio;
 }
 
-:where([type="checkbox"], [type="radio"]) + label {
+input:where([type="checkbox"], [type="radio"]) + label {
 	font-weight: var(--wp--custom--typography--font-weight--body);
 }
 
-:where([type="file"]) {
+input:where([type="file"]) {
 	@include field-file;
 }
 
-:where([type="range"]) {
+input:where([type="range"]) {
 	@include field-range;
 }
 
-:where([type="submit"]) {
+:is(button, input):where([type="submit"]) {
 	@include button(primary);
 }
 

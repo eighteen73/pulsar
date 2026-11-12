@@ -1,394 +1,391 @@
 @use "tools" as *;
 
+// Gravity Forms forms rendered by `matter/gravity-form`, always with GF's
+// `gravity-theme` (basic.min.css and theme.min.css load before this file).
+// `:where(.wp-block-matter-gravity-form)` only scopes. GF scopes its own rules
+// to `.gform_wrapper.gravity-theme` (0,3,0 for a class, 0,3,1 for a field), so
+// a rule that overrides one starts with the same two classes and wins by
+// loading later. Where GF's rule is more specific than 0,3,1, the selector
+// matches it, with a comment naming the GF rule.
+
 .wp-block-matter-gravity-form {
 	--_form-gap: var(--wp--style--block-gap);
+}
 
-	.gform_wrapper,
-	.gform_wrapper.gravity-theme {
-		margin-top: 0;
+:where(.wp-block-matter-gravity-form) .gform_wrapper {
+	margin-top: 0;
+}
 
-		input[type="color"],
-		input[type="date"],
-		input[type="datetime-local"],
-		input[type="datetime"],
-		input[type="email"],
-		input[type="month"],
-		input[type="number"],
-		input[type="password"],
-		input[type="search"],
-		input[type="tel"],
-		input[type="text"],
-		input[type="time"],
-		input[type="url"],
-		input[type="week"] {
-			@include field-input;
-		}
+// Fields.
 
-		select:not([multiple]) {
-			@include field-select;
-		}
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="color"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="date"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="datetime-local"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="datetime"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="email"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="month"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="number"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="password"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="search"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="tel"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="text"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="time"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="url"],
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme input[type="week"] {
+	@include field-input;
+}
 
-		select[multiple] {
-			@include field-select(true);
-		}
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme select:not([multiple]) {
+	@include field-select;
+}
 
-		textarea {
-			@include field-textarea;
-		}
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme select[multiple] {
+	@include field-select(true);
+}
 
-		.gform_fields {
-			display: grid;
-			gap: var(--_form-gap);
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme textarea {
+	@include field-textarea;
+}
 
-			@media (--md) {
-				grid-template-columns: repeat(12, 1fr);
-			}
-		}
+// Field sizes. GF: `.gfield input.small` (0,4,1).
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container :is(input, select, textarea).small { // stylelint-disable-line selector-max-specificity -- matches GF's `.gfield input.small`
+	width: calc(25% - var(--_form-gap));
+}
 
-		.ginput_full:not(:last-of-type) {
-			margin-bottom: 0;
-		}
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container :is(input, select, textarea).medium { // stylelint-disable-line selector-max-specificity -- matches GF's `.gfield input.medium`
+	width: calc(50% - var(--_form-gap) / 2);
+}
 
-		.ginput_complex {
-			display: flex;
-			flex-wrap: wrap;
-			gap: var(--_form-gap);
+// Layout.
 
-			label {
-				@include label;
-				font-weight: var(--wp--custom--typography--font-weight--body);
-				padding-top: 0;
-			}
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gform_fields {
+	display: grid;
+	gap: var(--_form-gap);
 
-			> * {
-				flex: 1;
-				margin-bottom: 0;
-				padding: 0 !important; // stylelint-disable-line declaration-no-important
-			}
-
-			.ginput_full {
-				flex: 0 0 100%;
-			}
-
-			label + :is(input, select),
-			:is(input, select) + label {
-				margin-top: var(--wp--preset--spacing--sm);
-			}
-
-			.hour_minute_colon {
-				display: none;
-			}
-
-			.gfield_time_ampm {
-				margin-left: 0;
-			}
-
-			.ginput_address_city,
-			.ginput_address_country,
-			.ginput_address_state,
-			.ginput_address_zip {
-				flex: unset;
-				width: calc(50% - (var(--_form-gap) / 2));
-			}
-		}
-
-		.ginput_container_time {
-			max-width: 110px;
-			width: 100%;
-		}
-
-		.gfield_header_item + .gfield_header_item:not(.gfield_header_item--icons),
-		.gfield_list_group_item + .gfield_list_group_item {
-			margin-left: var(--_form-gap);
-		}
-
-		.gfield_header_item {
-			font-size: inherit;
-			padding-top: 0;
-		}
-
-		.gfield_list_group {
-			margin-bottom: var(--_form-gap);
-		}
-
-		.gfield_list_header {
-			margin-bottom: var(--wp--preset--spacing--sm);
-		}
-
-		.gf_clear_complex {
-			display: none;
-		}
-
-		.ginput_container_address {
-			margin-inline: 0;
-		}
-
-		.ginput_container {
-			.small {
-				width: calc(25% - var(--_form-gap));
-			}
-
-			.medium {
-				width: calc(50% - var(--_form-gap) / 2);
-			}
-
-			.large {
-				width: 100%;
-			}
-		}
-
-		.gfield_radio,
-		.gfield_checkbox {
-			display: grid;
-			gap: var(--wp--preset--spacing--sm);
-		}
-
-		.gform_required_legend {
-			display: none;
-		}
-
-		.gfield_required {
-			color: var(--wp--preset--color--status-error);
-			font-size: inherit;
-			font-style: inherit;
-			font-weight: inherit;
-			padding-inline-start: 0;
-		}
-
-		.gfield_label {
-			@include label;
-			padding-top: 0;
-
-			> .gfield_required {
-				margin-left: var(--wp--preset--spacing--xs);
-			}
-		}
-
-		.gfield_description {
-			font-size: inherit;
-			padding: 0;
-		}
-
-		.gform_drop_area {
-			background-color: transparent;
-			border-color: var(--scheme--border-strong);
-			border-radius: var(--wp--preset--border-radius--sm);
-			padding: var(--wp--preset--spacing--2-xl);
-
-			.button {
-				@include button(secondary);
-			}
-		}
-
-		.ginput_container_radio,
-		.ginput_container_checkbox,
-		.ginput_container_consent {
-			label {
-				display: inline-block;
-				font-size: inherit;
-				margin: 0;
-				vertical-align: middle;
-			}
-		}
-
-		.ginput_container_consent {
-			display: inline-grid;
-			gap: var(--wp--preset--spacing--sm);
-			grid-template-columns: minmax(16px, max-content) auto;
-		}
-
-		.ginput_container_date {
-			position: relative;
-
-			.ui-datepicker-trigger {
-				position: absolute;
-				right: var(--wp--preset--spacing--lg);
-			}
-		}
-
-		.gform_confirmation_message {
-			text-align: center;
-		}
-
-		.gform_button,
-		.gform-button {
-			@include button(primary);
-		}
-
-		.gform_validation_errors {
-			margin-bottom: var(--_form-gap);
-		}
-
-		.gform_footer {
-			margin-top: calc(var(--_form-gap) * 2);
-			padding: 0;
-
-			.gform-button {
-				margin-bottom: 0;
-			}
-		}
-
-		.gform_submission_error {
-			color: var(--wp--preset--color--status-error);
-			font-size: var(--wp--preset--font-size--md);
-			font-weight: var(--wp--custom--typography--font-weight--body);
-			margin-top: 0;
-			text-transform: none;
-
-			&:focus {
-				outline: 0;
-			}
-		}
-
-		.gfield_error {
-			input,
-			select,
-			textarea {
-				border-color: var(--wp--preset--color--status-error);
-			}
-		}
-
-		.validation_message {
-			color: var(--wp--preset--color--status-error);
-			margin-top: var(--wp--preset--spacing--sm);
-		}
-
-		.gform_heading {
-			margin-bottom: var(--_form-gap);
-		}
-
-		.gform_title {
-			margin-top: 0;
-		}
-
-		.gsection {
-			border-bottom: 1px solid var(--scheme--border);
-			padding: 0 0 var(--_form-gap) 0;
-		}
-
-		.gsection_description {
-			color: var(--scheme--text-subtle);
-			margin-bottom: 0;
-			margin-top: var(--wp--preset--spacing--sm);
-		}
-
-		.gform_hidden {
-			display: none;
-		}
-
-		.gfield_visibility_hidden {
-			left: -9999px;
-			position: absolute;
-			visibility: hidden;
-		}
-
-		.gform_validation_container {
-			display: none !important; // stylelint-disable-line declaration-no-important
-			left: -9999px;
-			position: absolute !important; // stylelint-disable-line declaration-no-important
-		}
+	@media (--md) {
+		grid-template-columns: repeat(12, 1fr);
 	}
 }
 
-.gravity-theme {
-	&.ui-datepicker {
-		--datepicker-border-color: var(--scheme--border-strong);
-		--datepicker-border-radius: var(--wp--preset--border-radius--sm);
-		--datepicker-cell-border-radius: var(--wp--preset--border-radius--xs);
-		--datepicker-cell-padding: 1px;
-		--datepicker-cell-size: 40px;
-		--datepicker-color: var(--scheme--text);
-		--datepicker-color-disabled: var(--wp--preset--color--neutral-400);
-		--datepicker-color-hover: var(--scheme--background-surface);
-		--datepicker-color-selected: var(--scheme--background-fill);
-		--datepicker-color-selected-text: var(--scheme--text-fill);
-		--datepicker-gap: var(--wp--preset--spacing--sm);
-		--datepicker-max-width: 300px;
-		--datepicker-padding: var(--wp--preset--spacing--lg);
-		--datepicker-shadow: var(--wp--preset--shadow--md);
-		--datepicker-transition-duration: var(--wp--custom--transition--duration--normal);
-		--datepicker-transition-timing: ease-out;
-
-		border: 1px solid var(--datepicker-border-color);
-		border-radius: var(--datepicker-border-radius);
-		box-shadow: var(--datepicker-shadow);
-		max-width: var(--datepicker-max-width);
-		padding: var(--datepicker-padding);
-
-		.ui-datepicker-header {
-			align-items: center;
-			gap: var(--datepicker-gap);
-			justify-content: space-between;
-
-			.ui-datepicker-prev,
-			.ui-datepicker-next {
-				position: static;
-				transform: none;
-				width: auto;
-			}
-
-			.ui-datepicker-next {
-				order: 3;
-			}
-
-			.ui-datepicker-title {
-				display: flex;
-				flex-grow: 1;
-				gap: var(--datepicker-gap);
-			}
-
-			select {
-				@include field-select;
-
-				color: var(--datepicker-color);
-				margin: 0 !important; // stylelint-disable-line declaration-no-important
-				padding-inline: var(--datepicker-padding);
-				text-align-last: left !important; // stylelint-disable-line declaration-no-important
-			}
-		}
-
-		.ui-datepicker-calendar {
-			color: var(--datepicker-color);
-
-			th span,
-			.ui-state-default {
-				block-size: 100%;
-				border: unset;
-				border-radius: var(--datepicker-cell-border-radius);
-				color: inherit;
-				inline-size: 100%;
-				transition:
-					color var(--datepicker-transition-duration) var(--datepicker-transition-timing),
-					background-color var(--datepicker-transition-duration) var(--datepicker-transition-timing);
-			}
-
-			th,
-			td {
-				block-size: var(--datepicker-cell-size);
-				padding: var(--datepicker-cell-padding);
-			}
-
-			td:not(.ui-state-disabled):not(.ui-datepicker-current-day) a:hover,
-			.ui-state-highlight {
-				background: var(--datepicker-color-hover);
-			}
-
-			td:not(.ui-state-disabled) a:focus-visible {
-				@include focus-ring;
-			}
-
-			.ui-datepicker-current-day .ui-state-default {
-				background: var(--datepicker-color-selected);
-				color: var(--datepicker-color-selected-text);
-			}
-
-			.ui-state-disabled .ui-state-default {
-				background: unset;
-				border: unset;
-				border-radius: unset;
-				box-shadow: unset;
-				color: var(--datepicker-color-disabled);
-			}
-		}
-	}
+:where(.wp-block-matter-gravity-form) .gform_heading {
+	margin-bottom: var(--_form-gap);
 }
+
+:where(.wp-block-matter-gravity-form) .gform_title {
+	margin-top: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_required_legend {
+	display: none;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gsection {
+	border-bottom: 1px solid var(--scheme--border);
+	padding: 0 0 var(--_form-gap) 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gsection_description {
+	color: var(--scheme--text-subtle);
+	margin-bottom: 0;
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+// Labels and descriptions.
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme :is(label, legend).gfield_label {
+	@include label;
+	padding-top: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_required {
+	color: var(--wp--preset--color--status-error);
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	padding-inline-start: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_required :is(.gfield_required_text, .gfield_required_custom) { // stylelint-disable-line selector-max-specificity -- matches GF's `.gfield_required .gfield_required_text` (italic, 400)
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+:where(.wp-block-matter-gravity-form) .gfield_label > .gfield_required {
+	margin-left: var(--wp--preset--spacing--xs);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_description {
+	font-size: inherit;
+	padding: 0;
+}
+
+// Complex fields (name, address, time).
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--_form-gap);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex > :is(span, div, fieldset) {
+	flex: 1;
+	margin-bottom: 0;
+	padding: 0 !important; // stylelint-disable-line declaration-no-important -- GF pads these at up to 0,7,2 (`.ginput_complex:not(.ginput_container_address) span:not([style*="display:none"]):not(.ginput_full) ~ span:not(.ginput_full)`)
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex .ginput_full { // stylelint-disable-line selector-max-specificity -- matches GF's `.ginput_full:not(:last-of-type)`
+	flex: 0 0 100%;
+	margin-bottom: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex label {
+	@include label;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	padding-top: 0;
+}
+
+// Sub-label above the input. `:is()` keeps GF's 0,3,1 (`input[type=text]` sets `margin-top: 0`).
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex :is(label + *) {
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+// Sub-label below the input.
+:where(.wp-block-matter-gravity-form) .ginput_complex :is(input, select) + label {
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+:where(.wp-block-matter-gravity-form) .gf_clear_complex {
+	display: none;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container_address {
+	margin-inline: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container_address > span {
+	flex: 0 1 auto;
+	width: calc(50% - var(--_form-gap) / 2);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container_time {
+	max-width: 110px;
+	width: 100%;
+}
+
+:where(.wp-block-matter-gravity-form) .hour_minute_colon {
+	display: none;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_time_ampm {
+	margin-left: 0;
+}
+
+// List field.
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_header_item {
+	font-size: inherit;
+	padding-top: 0;
+}
+
+/* stylelint-disable selector-max-specificity -- matches GF's own selectors for these (0,5,0 and 0,4,0) */
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_header_item + .gfield_header_item:not(.gfield_header_item--icons),
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_list_group_item + .gfield_list_group_item {
+	margin-left: var(--_form-gap);
+}
+/* stylelint-enable selector-max-specificity */
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_list_header {
+	margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_list_group {
+	margin-bottom: var(--_form-gap);
+}
+
+// Choices.
+
+:where(.wp-block-matter-gravity-form) :is(.gfield_radio, .gfield_checkbox) {
+	display: grid;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme :is(.ginput_container_radio, .ginput_container_checkbox, .ginput_container_consent) label {
+	display: inline-block;
+	font-size: inherit;
+	margin: 0;
+	vertical-align: middle;
+}
+
+:where(.wp-block-matter-gravity-form) .ginput_container_consent {
+	display: inline-grid;
+	gap: var(--wp--preset--spacing--sm);
+	grid-template-columns: minmax(16px, max-content) auto;
+}
+
+// Date.
+
+:where(.wp-block-matter-gravity-form) .ginput_container_date {
+	position: relative;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_container_date .datepicker_with_icon.large { // stylelint-disable-line selector-max-specificity -- matches GF's `.ginput_container_date .datepicker_with_icon.large`
+	width: 100%;
+}
+
+:where(.wp-block-matter-gravity-form) .ui-datepicker-trigger {
+	position: absolute;
+	right: var(--wp--preset--spacing--lg);
+}
+
+// File upload.
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gform_drop_area {
+	background-color: transparent;
+	border-color: var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--sm);
+	padding: var(--wp--preset--spacing--2-xl);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_drop_area .button {
+	@include button(secondary);
+}
+
+// Buttons.
+
+:where(.wp-block-matter-gravity-form) :is(.gform_button, .gform-button) {
+	@include button(primary);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gform_footer {
+	margin-top: calc(var(--_form-gap) * 2);
+	padding: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gform_footer button {
+	margin-bottom: 0;
+}
+
+// Validation.
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gform_validation_errors {
+	margin-bottom: var(--_form-gap);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme h2.gform_submission_error {
+	color: var(--wp--preset--color--status-error);
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	margin-top: 0;
+	text-transform: none;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_submission_error:focus {
+	outline: 0;
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_error :is(input, select, textarea) {
+	border-color: var(--wp--preset--color--status-error);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .gfield_error [aria-invalid="true"] { // stylelint-disable-line selector-max-specificity -- matches GF's `.gfield_error [aria-invalid=true]`
+	border-color: var(--wp--preset--color--status-error);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .validation_message {
+	color: var(--wp--preset--color--status-error);
+	margin-top: var(--wp--preset--spacing--sm);
+}
+
+:where(.wp-block-matter-gravity-form) .gform_confirmation_message {
+	text-align: center;
+}
+
+// Datepicker (appended to `body`, outside the block). GF's rules start
+// `.gravity-theme.ui-datepicker`.
+
+.gravity-theme.ui-datepicker {
+	border: 1px solid var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--sm);
+	box-shadow: var(--wp--preset--shadow--md);
+	max-width: 300px;
+	padding: var(--wp--preset--spacing--lg);
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-header {
+	align-items: center;
+	gap: var(--wp--preset--spacing--sm);
+	justify-content: space-between;
+}
+
+:where(.gravity-theme.ui-datepicker) .ui-datepicker-title {
+	display: flex;
+	flex-grow: 1;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+:where(.gravity-theme.ui-datepicker) .ui-datepicker-next {
+	order: 3;
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-header select {
+	@include field-select;
+	margin: 0;
+	padding-inline: var(--wp--preset--spacing--lg);
+	text-align-last: left;
+}
+
+:where(.gravity-theme.ui-datepicker) .ui-datepicker-calendar {
+	color: var(--scheme--text);
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-calendar :is(th, td) {
+	block-size: 40px;
+	padding: 1px;
+}
+
+:where(.gravity-theme.ui-datepicker) .ui-state-default:focus-visible {
+	@include focus-ring;
+}
+
+/* stylelint-disable selector-max-specificity -- GF's datepicker rules are 0,4,0 to 0,5,0: each selector here matches the GF rule it overrides */
+.gravity-theme.ui-datepicker .ui-datepicker-header :is(.ui-datepicker-prev, .ui-datepicker-next) {
+	position: static;
+	transform: none;
+	width: auto;
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-header select.ui-datepicker-month {
+	margin-right: 0;
+	text-align-last: left;
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-calendar th span,
+.gravity-theme.ui-datepicker .ui-datepicker-calendar .ui-state-default {
+	block-size: 100%;
+	border: unset;
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: inherit;
+	inline-size: 100%;
+	transition:
+		color var(--wp--custom--transition--duration--normal) ease-out,
+		background-color var(--wp--custom--transition--duration--normal) ease-out;
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-calendar .ui-state-default:hover,
+.gravity-theme.ui-datepicker .ui-datepicker-calendar .ui-state-highlight {
+	background: var(--scheme--background-surface);
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-calendar .ui-datepicker-current-day .ui-state-default {
+	background: var(--scheme--background-fill);
+	color: var(--scheme--text-fill);
+}
+
+.gravity-theme.ui-datepicker .ui-datepicker-calendar .ui-state-disabled .ui-state-default {
+	background: unset;
+	border: unset;
+	border-radius: unset;
+	box-shadow: unset;
+	color: var(--scheme--text-subtle);
+}
+/* stylelint-enable selector-max-specificity */

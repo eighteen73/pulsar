@@ -13,3 +13,9 @@ dl,
 dd {
 	margin-block-end: 0;
 }
+
+// Hidden means hidden, whatever display an element's styles give it (a field's
+// `display: block`, a theme's flex).
+[hidden]:not([hidden="until-found"]) {
+	display: none !important; // stylelint-disable-line declaration-no-important -- the `hidden` attribute must always hide.
+}

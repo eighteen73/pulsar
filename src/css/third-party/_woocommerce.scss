@@ -1,0 +1,114 @@
+@use "tools" as *;
+
+/// WooCommerce, wherever its markup appears (its own stylesheets load on every
+/// page).
+///
+/// WooCommerce's classic stylesheet reads these for its colours, form fields
+/// and select2 dropdowns (country and state): mapped to the scheme, they theme
+/// the classic templates (My Account, the customer payment page, classic cart
+/// and checkout, extensions' templates) without overriding its rules.
+body {
+	--wc-content-bg: var(--scheme--background);
+	--wc-destructive: var(--wp--preset--color--status-error);
+	--wc-form-border-color: var(--scheme--border-strong);
+	--wc-form-border-radius: var(--wp--preset--border-radius--sm);
+	--wc-form-border-width: 1px;
+	--wc-form-color-background: var(--scheme--background-surface);
+	--wc-form-color-text: var(--scheme--text);
+	--wc-green: var(--wp--preset--color--status-success);
+	--wc-highlight: var(--scheme--highlight);
+	--wc-highligh-text: var(--scheme--text-fill);
+	--wc-primary: var(--scheme--background-fill);
+	--wc-primary-text: var(--scheme--text-fill);
+	--wc-red: var(--wp--preset--color--status-error);
+	--wc-secondary: var(--scheme--background-surface);
+	--wc-secondary-text: var(--scheme--text);
+	--wc-subtext: var(--scheme--text-subtle);
+}
+
+// Select2 (country and state fields): sized like the theme's fields. One
+// element more than WooCommerce's rules.
+body .select2-container .select2-selection--single {
+	min-height: calc(2 * var(--wp--preset--spacing--md) + 1lh + 2px);
+}
+
+body .select2-container .select2-selection--single .select2-selection__rendered {
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--typography--line-height--normal);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--3-xl) var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+}
+
+body .select2-container .select2-selection--single .select2-selection__arrow {
+	inset-inline-end: var(--wp--preset--spacing--md);
+}
+
+/// Notices: the store's banners (WooCommerce prints classic notices as these
+/// too in a block theme), in the status colours. Light backgrounds in every
+/// scheme, so dark text. One element more than WooCommerce's rules.
+body .wc-block-components-notice-banner {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border: 1px solid var(--wp--preset--color--status-info);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--md);
+	gap: var(--wp--preset--spacing--md);
+	margin-block: var(--wp--preset--spacing--md);
+}
+
+body .wc-block-components-notice-banner > svg {
+	background-color: var(--wp--preset--color--status-info);
+}
+
+body .wc-block-components-notice-banner.is-success {
+	background-color: var(--wp--preset--color--status-success-subtle);
+	border-color: var(--wp--preset--color--status-success);
+}
+
+body .wc-block-components-notice-banner.is-success > svg {
+	background-color: var(--wp--preset--color--status-success);
+}
+
+body .wc-block-components-notice-banner.is-warning {
+	background-color: var(--wp--preset--color--status-warning-subtle);
+	border-color: var(--wp--preset--color--status-warning);
+}
+
+body .wc-block-components-notice-banner.is-warning > svg {
+	background-color: var(--wp--preset--color--status-warning);
+}
+
+body .wc-block-components-notice-banner.is-error {
+	background-color: var(--wp--preset--color--status-error-subtle);
+	border-color: var(--wp--preset--color--status-error);
+}
+
+body .wc-block-components-notice-banner.is-error > svg {
+	background-color: var(--wp--preset--color--status-error);
+}
+
+body .wc-block-components-notice-banner a:not(.wc-block-components-button) {
+	color: inherit;
+}
+
+// Classic notices (an extension printing its own, or WooCommerce's styles
+// switched off): the same.
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border: 1px solid var(--wp--preset--color--status-info);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--wp--preset--color--contrast);
+}
+
+body .woocommerce-message {
+	background-color: var(--wp--preset--color--status-success-subtle);
+	border-color: var(--wp--preset--color--status-success);
+}
+
+body .woocommerce-error {
+	background-color: var(--wp--preset--color--status-error-subtle);
+	border-color: var(--wp--preset--color--status-error);
+}
+
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error)::before {
+	color: inherit;
+}

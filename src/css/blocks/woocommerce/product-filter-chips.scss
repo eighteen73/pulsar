@@ -1,0 +1,30 @@
+@use "tools" as *;
+
+/// Chips: a variable product's options (WooCommerce shows each attribute's
+/// options as these, parts/variable-product-add-to-cart-with-options.html) and
+/// product filters. The selected chip's colours are WooCommerce's variables.
+.wc-block-product-filter-chips {
+	--wc-product-filter-chips-selected-background: var(--scheme--background-fill);
+	--wc-product-filter-chips-selected-border: var(--scheme--background-fill);
+	--wc-product-filter-chips-selected-text: var(--scheme--text-fill);
+}
+
+.wc-block-product-filter-chips__items {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wc-block-product-filter-chips__item {
+	border-color: var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--sm);
+	font-size: var(--wp--preset--font-size--md);
+	min-height: 44px;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--xl);
+
+	&:hover:not(:disabled, [aria-checked="true"]) {
+		background-color: var(--scheme--background-surface);
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}

@@ -237,4 +237,52 @@ test.describe('WooCommerce', () => {
 			page.locator('.wp-block-woocommerce-checkout')
 		).toBeVisible();
 	});
+
+	test("a link to #reviews opens the product's reviews", async ({ page }) => {
+		await page.goto('/product/test-bauble/#reviews');
+
+		await expect(
+			page.locator('.wp-block-matter-accordion-item').filter({
+				has: page.locator('#reviews'),
+			})
+		).toHaveClass(/\bis-open\b/);
+		await expect(
+			page.getByRole('button', { name: 'Submit' })
+		).toBeVisible();
+	});
+
+	test('the customer payment page shows the order and how to pay', async ({
+		page,
+		requestUtils,
+	}) => {
+		await requestUtils.rest({
+			path: '/wc/v3/payment_gateways/bacs',
+			method: 'PUT',
+			data: { enabled: true },
+		});
+
+		const [product] = await requestUtils.rest({
+			path: '/wc/v3/products',
+			params: { search: 'Test bauble' },
+		});
+		const order = await requestUtils.rest({
+			path: '/wc/v3/orders',
+			method: 'POST',
+			data: {
+				status: 'pending',
+				billing: { email: 'payer@example.com' },
+				line_items: [{ product_id: product.id, quantity: 1 }],
+			},
+		});
+
+		await page.goto(
+			`/checkout/order-pay/${order.id}/?pay_for_order=true&key=${order.order_key}`
+		);
+
+		await expect(page.locator('#payment')).toBeVisible();
+		await expect(
+			page.getByRole('button', { name: /pay for order/i })
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
 });

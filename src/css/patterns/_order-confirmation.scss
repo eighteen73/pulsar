@@ -1,0 +1,35 @@
+@use "../tools" as *;
+
+/// Order received (patterns/order-confirmation.php): WooCommerce's order
+/// confirmation blocks, a section's space from the status band and footer, in
+/// the theme's borders. WooCommerce spaces the parts (48px between them) and
+/// hides an empty address column.
+.order-confirmation {
+	padding-block: var(--wp--custom--spacing--section);
+}
+
+.order-confirmation .wc-block-order-confirmation-summary {
+	margin-block-start: 0;
+}
+
+// Tables and address boxes: two classes and elements, over WooCommerce's
+// (`.wc-block-order-confirmation-totals table td`, 0,1,2).
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) :is(table, th, td) {
+	border-color: var(--scheme--border);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) table {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-billing-address, .wc-block-order-confirmation-shipping-address) {
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+// Addresses: half the width each from md (a lone billing address too).
+.order-confirmation .wc-block-order-confirmation-address-wrapper > .wp-block-column {
+	@media (--md) {
+		flex: 0 1 calc(50% - var(--wp--preset--spacing--2-xl) / 2);
+	}
+}

@@ -1,0 +1,343 @@
+/**
+ * WooCommerce's classic markup: the forms, tables, order details, addresses
+ * and payment methods its PHP templates print. They appear on My Account, the
+ * customer payment page (order-pay), the classic cart and checkout, and in
+ * extensions' templates, so this loads on every WooCommerce page
+ * (Enqueue::woocommerce_styles), after WooCommerce's own stylesheet. Rules
+ * match WooCommerce's specificity where they override it (noted), and win by
+ * coming after it.
+ *
+ * Colours and form fields mostly follow from the `--wc-*` variables mapped to
+ * the scheme in third-party/_woocommerce.scss.
+ */
+
+@use "settings";
+@use "tools" as *;
+
+// Forms: a column of fields, two to a row where WooCommerce pairs them
+// (`.form-row-first`, `.form-row-last`), from md.
+.woocommerce :where(.woocommerce-address-fields__field-wrapper, .woocommerce-EditAccountForm, .woocommerce-ResetPassword, .woocommerce-form-login, .woocommerce-form-register, .woocommerce-form-coupon) {
+	display: grid;
+	gap: var(--wp--style--block-gap);
+
+	@media (--md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.woocommerce :where(.woocommerce-address-fields__field-wrapper, .woocommerce-EditAccountForm, .woocommerce-ResetPassword, .woocommerce-form-login, .woocommerce-form-register, .woocommerce-form-coupon) > * {
+	grid-column: 1 / -1;
+	margin: 0;
+}
+
+.woocommerce :where(.woocommerce-address-fields__field-wrapper, .woocommerce-EditAccountForm, .woocommerce-ResetPassword, .woocommerce-form-login, .woocommerce-form-register) > :where(.form-row-first) {
+	@media (--md) {
+		grid-column: 1;
+	}
+}
+
+.woocommerce :where(.woocommerce-address-fields__field-wrapper, .woocommerce-EditAccountForm, .woocommerce-ResetPassword, .woocommerce-form-login, .woocommerce-form-register) > :where(.form-row-last) {
+	@media (--md) {
+		grid-column: 2;
+	}
+}
+
+.woocommerce :where(.woocommerce-address-fields__field-wrapper, .woocommerce-EditAccountForm, .woocommerce-ResetPassword, .woocommerce-form-login, .woocommerce-form-register) :where(.clear) {
+	display: none;
+}
+
+// A row: label, field, help text. (WooCommerce's `.woocommerce form .form-row`,
+// 0,2,1.)
+.woocommerce form .form-row {
+	float: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
+.woocommerce form .form-row label {
+	@include label;
+	line-height: var(--wp--custom--typography--line-height--normal);
+}
+
+.woocommerce form .form-row .required {
+	color: var(--wp--preset--color--status-error);
+	text-decoration: none;
+}
+
+// Fields: the theme's. (WooCommerce's block theme styles shrink them:
+// `.woocommerce-page form .form-row input.input-text`, 0,3,2.)
+// stylelint-disable-next-line selector-max-specificity -- See above.
+.woocommerce form .form-row :is(input.input-text, textarea.input-text) {
+	@include field-input;
+}
+
+.woocommerce form .form-row select {
+	@include field-select;
+}
+
+// WooCommerce makes them inline (`.woocommerce form .form-row .input-checkbox`,
+// 0,3,1); the theme's draw their tick in a grid.
+.woocommerce form .form-row :is(.input-checkbox, .input-radio) {
+	display: inline-grid;
+	margin: 0;
+}
+
+.woocommerce form .form-row .woocommerce-form__label-for-checkbox {
+	align-items: center;
+	display: inline-flex;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	gap: var(--wp--preset--spacing--sm);
+}
+
+// Help text under a field (e.g. "This will be how your name is displayed").
+.woocommerce form .form-row em,
+.woocommerce form .form-row .description {
+	color: var(--scheme--text-subtle);
+	display: block;
+	font-size: var(--wp--preset--font-size--sm);
+	font-style: normal;
+	margin-block-start: var(--wp--preset--spacing--xs);
+}
+
+.woocommerce form .password-input {
+	display: block;
+	position: relative;
+}
+
+// Centred in the field (WooCommerce's transform moves it up by half).
+.woocommerce form .show-password-input {
+	inset-block: 50% auto;
+	inset-inline-end: var(--wp--preset--spacing--md);
+	margin: 0;
+	padding: 0;
+}
+
+.woocommerce-password-strength,
+.woocommerce-password-hint {
+	font-size: var(--wp--preset--font-size--sm);
+	margin-block-start: var(--wp--preset--spacing--xs);
+}
+
+// A form's heading (an address's, "Password change"): spaced from its fields.
+.woocommerce form > h2,
+.woocommerce form > h3 {
+	margin-block: 0 var(--wp--style--block-gap);
+}
+
+.woocommerce fieldset {
+	display: grid;
+	gap: var(--wp--style--block-gap);
+	margin-block-start: var(--wp--preset--spacing--2-xl);
+}
+
+.woocommerce legend {
+	@include legend;
+}
+
+// Login and register (logged out on My Account, and on the customer payment
+// page and classic checkout): WooCommerce's box goes; the page's layout frames
+// them. (WooCommerce's `.woocommerce form.login`, 0,2,1.)
+.woocommerce form.login,
+.woocommerce form.register,
+.woocommerce form.checkout_coupon {
+	border: 0;
+	border-radius: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.woocommerce .woocommerce-form-login__rememberme {
+	align-self: center;
+}
+
+.woocommerce .woocommerce-form-login__submit,
+.woocommerce .woocommerce-form-register__submit {
+	float: none;
+	margin: 0;
+	width: 100%;
+}
+
+.woocommerce .woocommerce-form-register__submit {
+	@include button-variant(secondary);
+}
+
+.woocommerce .lost_password {
+	margin: 0;
+}
+
+.woocommerce wc-order-attribution-inputs {
+	display: none;
+}
+
+// Tables: orders, order details, downloads, the customer payment page's
+// order. (WooCommerce's `.woocommerce table.shop_table td`, 0,2,2.)
+.woocommerce table.shop_table {
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	font-size: var(--wp--preset--font-size--md);
+	margin: 0;
+}
+
+.woocommerce table.shop_table :is(th, td) {
+	border-color: var(--scheme--border);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+	text-align: start;
+}
+
+.woocommerce table.shop_table th {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+// Actions in a table (View, Pay, Cancel; a download's file): small buttons in
+// a row. (WooCommerce stacks the orders table's:
+// `.woocommerce-account .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-actions a`,
+// 0,3,1.)
+.woocommerce :is(.woocommerce-orders-table__cell-order-actions, .download-file) {
+	white-space: nowrap;
+}
+
+.woocommerce-account .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-actions a,
+.woocommerce .download-file .button {
+	@include button-size(small);
+	display: inline-flex;
+	margin-block: var(--wp--preset--spacing--xs);
+	margin-inline-end: var(--wp--preset--spacing--xs);
+	width: auto;
+}
+
+.woocommerce .woocommerce-pagination {
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+	justify-content: space-between;
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+// Order and customer details (a viewed order, order received in classic
+// checkout).
+.woocommerce :is(.woocommerce-order-details, .woocommerce-customer-details, .woocommerce-order-downloads) {
+	margin-block: var(--wp--preset--spacing--3-xl) 0;
+}
+
+.woocommerce :is(.woocommerce-order-details__title, .woocommerce-column__title, .woocommerce-order-downloads__title, .woocommerce-customer-details h2) {
+	@include heading-base;
+	@include heading(h3);
+	margin-block-end: var(--wp--style--block-gap);
+}
+
+// Addresses. (WooCommerce's `.woocommerce .woocommerce-customer-details
+// address`, 0,2,1.)
+.woocommerce address {
+	font-style: normal;
+}
+
+.woocommerce .woocommerce-customer-details address,
+.woocommerce .woocommerce-Address {
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	padding: var(--wp--preset--spacing--lg);
+}
+
+.woocommerce .woocommerce-customer-details :is(.woocommerce-customer-details--email, .woocommerce-customer-details--phone) {
+	margin-block-start: var(--wp--preset--spacing--sm);
+	padding-inline-start: 0;
+
+	&::before {
+		content: none;
+	}
+}
+
+.woocommerce .col2-set {
+	display: grid;
+	gap: var(--wp--preset--spacing--xl);
+
+	@media (--md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
+// WooCommerce floats the columns (`.woocommerce .col2-set .col-1`, 0,3,0).
+.woocommerce .col2-set :is(.col-1, .col-2) {
+	float: none;
+	width: auto;
+}
+
+/* stylelint-disable selector-max-id, selector-max-specificity -- WooCommerce styles payment methods by ID (`.woocommerce-checkout #payment div.payment_box`, 1,2,1); these match it. */
+
+// Payment methods (the customer payment page, classic checkout, adding a
+// payment method): a box in the scheme's surface; each method's radio beside
+// its name, and its description below.
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment {
+	background: var(--scheme--background-surface);
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--md);
+	margin-block-start: var(--wp--preset--spacing--2-xl);
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment ul.payment_methods {
+	border-block-end: 1px solid var(--scheme--border);
+	display: grid;
+	gap: var(--wp--preset--spacing--md);
+	padding: var(--wp--preset--spacing--xl);
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment ul.payment_methods li {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--sm);
+	line-height: var(--wp--custom--typography--line-height--normal);
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment .payment_methods label {
+	display: inline;
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	margin: 0;
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment div.payment_box {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	flex-basis: 100%;
+	font-size: var(--wp--preset--font-size--md);
+	margin: var(--wp--preset--spacing--sm) 0 0;
+	padding: var(--wp--preset--spacing--lg);
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment div.payment_box::before {
+	border-block-end-color: var(--scheme--background);
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment div.payment_box p:last-child {
+	margin-block-end: 0;
+}
+
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment div.form-row {
+	display: grid;
+	gap: var(--wp--preset--spacing--lg);
+	padding: var(--wp--preset--spacing--xl);
+}
+
+.woocommerce #payment #place_order {
+	float: none;
+	justify-self: end;
+}
+
+/* stylelint-enable selector-max-id, selector-max-specificity */
+
+// The customer payment page (order-pay): the order, then how to pay, then the
+// page's foot.
+.woocommerce-order-pay .woocommerce {
+	padding-block-end: var(--wp--custom--spacing--section);
+}

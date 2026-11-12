@@ -33,6 +33,7 @@ const breakpointsImporter = {
 const entries = {
 	'css/app': ['./src/css/app.scss'],
 	'css/editor': ['./src/css/editor.scss'],
+	'css/woocommerce': ['./src/css/woocommerce.scss'],
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
 	'js/editor': ['./src/js/editor.js'],
 };

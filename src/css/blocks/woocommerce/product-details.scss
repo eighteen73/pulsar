@@ -1,55 +1,22 @@
 @use "tools" as *;
 
-.woocommerce .product .wp-block-woocommerce-product-details .wp-block-matter-tabs {
-	background-color: var(--scheme--background-surface);
-	padding-inline: var(--wp--custom--spacing--edge);
+/// A product's details (templates/single-product.html): description,
+/// additional information and reviews as an accordion at the wide width, the
+/// first open. A link to `#reviews` (the rating's "customer reviews") opens
+/// the reviews (Matter's deep links). The accordion's look is
+/// blocks/matter/accordion.scss.
+.wp-block-woocommerce-product-details .wp-block-matter-accordion {
+	@include container;
+}
 
-	@media (--lg) {
-		background-color: transparent;
-		margin-left: auto !important; // stylelint-disable-line declaration-no-important
-		margin-right: auto !important; // stylelint-disable-line declaration-no-important
-		max-width: var(--wp--style--global--wide-size);
-		padding-inline: unset;
-	}
+.wp-block-woocommerce-product-details .wp-block-matter-accordion-item:first-child {
+	border-block-start: 1px solid var(--scheme--border);
+}
 
-	.wp-block-matter-tabs__list {
-		border-bottom: 1px solid var(--scheme--border);
-		flex-direction: column;
-		gap: 0;
-		margin-block-end: 0;
-		padding-block: var(--wp--preset--spacing--2-xl);
+.wp-block-woocommerce-product-details .wp-block-matter-accordion-item__heading {
+	font-size: var(--wp--preset--font-size--xl);
+}
 
-		@media (--lg) {
-			border-bottom: none;
-			flex-direction: row;
-			padding-block: unset;
-		}
-	}
-
-	.wp-block-matter-tabs__tab {
-		border: none;
-		border-radius: var(--wp--preset--border-radius--sm);
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-		font-weight: var(--wp--custom--typography--font-weight--label);
-		padding-block: var(--wp--preset--spacing--lg);
-		padding-inline: var(--wp--preset--spacing--2-xl);
-
-		&:where([aria-selected="true"]) {
-			background-color: var(--scheme--background);
-
-			@media (--lg) {
-				background-color: var(--scheme--background-surface);
-			}
-		}
-	}
-
-	.wp-block-matter-tab {
-		background-color: var(--scheme--background-surface);
-		padding-block: var(--wp--preset--spacing--2-xl);
-
-		@media (--lg) {
-			padding-inline: var(--wp--preset--spacing--2-xl);
-		}
-	}
+.wp-block-woocommerce-product-details .wp-block-matter-accordion-item__content > :last-child {
+	padding-block-end: var(--wp--preset--spacing--2-xl);
 }
