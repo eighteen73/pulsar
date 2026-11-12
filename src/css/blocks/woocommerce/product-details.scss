@@ -1,22 +1,35 @@
 @use "tools" as *;
 
 /// A product's details (templates/single-product.html): description,
-/// additional information and reviews as an accordion at the wide width, the
+/// additional information and reviews, as an accordion below add to cart, the
 /// first open. A link to `#reviews` (the rating's "customer reviews") opens
-/// the reviews (Matter's deep links). The accordion's look is
-/// blocks/matter/accordion.scss.
+/// the reviews (Matter's deep links); empty items aren't shown. The
+/// accordion's look is blocks/matter/accordion.scss.
+// The column's width (two classes: core's constrained layout insets it).
 .wp-block-woocommerce-product-details .wp-block-matter-accordion {
-	@include container;
+	margin-inline: 0;
+	max-width: none;
+}
+
+.wp-block-woocommerce-product-details {
+	margin-block-start: var(--wp--preset--spacing--3-xl);
 }
 
 .wp-block-woocommerce-product-details .wp-block-matter-accordion-item:first-child {
 	border-block-start: 1px solid var(--scheme--border);
 }
 
-.wp-block-woocommerce-product-details .wp-block-matter-accordion-item__heading {
-	font-size: var(--wp--preset--font-size--xl);
+.wp-block-woocommerce-product-details .wp-block-matter-accordion-item__content > :last-child {
+	padding-block-end: var(--wp--preset--spacing--xl);
 }
 
-.wp-block-woocommerce-product-details .wp-block-matter-accordion-item__content > :last-child {
-	padding-block-end: var(--wp--preset--spacing--2-xl);
+// Additional information: the attributes table, in the theme's borders.
+.wp-block-woocommerce-product-specifications :is(table, th, td) {
+	border-color: var(--scheme--border);
+}
+
+.wp-block-woocommerce-product-specifications :is(th, td) {
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+	text-align: start;
+	vertical-align: top;
 }
