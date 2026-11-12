@@ -8,7 +8,6 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // eslint-disable-line -- part of @wordpress/scripts
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const { sync: glob } = require('fast-glob');
-const { basename } = require('path');
 const breakpoints = require('./config/breakpoints.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -42,39 +41,18 @@ const moduleEntries = {
 	'js/app': ['./src/js/app.js'],
 };
 /**
- * Converts a legacy path to the entry pair supported by webpack, e.g.:
- * `./entry-one.js` -> `[ 'entry-one', './entry-one.js] ]`
- * `entry-two.js` -> `[ 'entry-two', './entry-two.js' ]`
+ * The per-block stylesheets: `src/css/blocks/{namespace}/{block}.scss`, built
+ * to `css/blocks/{namespace}/{block}.css` and loaded with that block
+ * (Enqueue::block_styles()).
  *
- * @param {string} path The path provided.
- *
- * @return {string[]} The entry pair of its name and the file path.
- */
-const stylesheetPathToEntry = (path) => {
-	const entryName = basename(path, '.scss');
-
-	if (!path.startsWith('./')) {
-		path = './' + path;
-	}
-
-	return [entryName, path];
-};
-
-/**
- * Get all of the block specific stylesheets to use for entry points.
- *
- * @return {Object} An object of entry keys and values.
+ * @return {Object} Entry names and paths.
  */
 function getBlockStylesEntryPoints() {
-	const styles = glob('./src/css/blocks/*.scss');
-
 	return Object.fromEntries(
-		styles.map((fileArg) => {
-			const [entryName, path] = fileArg.includes('=')
-				? fileArg.split('=')
-				: stylesheetPathToEntry(fileArg);
-			return ['css/blocks/' + entryName, [path]];
-		})
+		glob('./src/css/blocks/*/*.scss').map((path) => [
+			path.replace(/^\.\/src\//, '').replace(/\.scss$/, ''),
+			[path],
+		])
 	);
 }
 

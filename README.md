@@ -47,7 +47,7 @@ They check that every section can be added in the editor, that pages pass axe (W
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards), passed to Matter, which enforces it in the post editor. Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
 | `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). |
-| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter-*.scss`. |
+| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter/`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
 | `includes/classes/Matter.php` | Feeds `config/` into Matter, and names the theme's namespace, `pulsar` (`matter_theme_namespace`): the prefix Matter looks for loop item patterns under (`pulsar/loop-item…`) and the icon collection's name. Keep it `pulsar` even if the theme's folder is renamed or a child theme is added; icon names and pattern slugs depend on it. |
@@ -56,7 +56,7 @@ They check that every section can be added in the editor, that pages pass axe (W
 | `assets/svg/woocommerce/account/` | My Account navigation icons. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
-| `src/css/blocks/{namespace}-{block}.scss` | Per-block styles, loaded only when the block is on the page (`core-*`, `matter-*`, `pulsar-*`, `woocommerce-*`). |
+| `src/css/blocks/{namespace}/{block}.scss` | Per-block styles, loaded only when the block is on the page: `core/`, `matter/`, `pulsar/`, `woocommerce/`, e.g. `matter/gallery.scss` for `matter/gallery`. A new file needs no registering; a block whose styles build on another's is listed in `Enqueue::STYLE_DEPENDENCIES` (the gallery's carousel layout loads `matter/carousel.scss`). |
 | `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `header` and `footer` (the parts in `header/` and `footer/` are their pieces), and checkout variants. |
 | `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"header"} /-->` for the header and footer. |
 | `patterns/loop-item-product.php`, `patterns/loop-item.php` | How each product, and each post or item of any other post type, shows in every loop and carousel, through Matter's `matter/loop-item` block. Add `patterns/loop-item-{post_type}.php` for a post type that needs its own. |
@@ -70,7 +70,7 @@ A section is a block with named content slots. Its layout lives in code, so chan
 
 1. Create `src/blocks/{name}/block.json` with `supports.matter.slots`. Copy an existing section.
 2. Optionally add `render.php` when the markup needs it, keeping the classes Matter uses in the editor (see the Matter README).
-3. Style it in `src/css/blocks/pulsar-{name}.scss`. Shared section rules are in `components/_sections.scss`.
+3. Style it in `src/css/blocks/pulsar/{name}.scss`. Shared section rules are in `components/_sections.scss`.
 4. Run `npm run build`. Sections appear in the inserter's **Sections** category.
 
 **Slots:**
@@ -198,7 +198,7 @@ Archives without their own content show a pattern, which is also where editors s
 - `archive-search.php`;
 - `archive-404.php`.
 
-Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across, Feature first) are in `config/matter.php` and styled in `src/css/blocks/matter-archive-loop.scss`.
+Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across, Feature first) are in `config/matter.php` and styled in `src/css/blocks/matter/archive-loop.scss`.
 
 ## Rendering blocks from PHP
 
@@ -211,4 +211,4 @@ This works for dynamic blocks only. It runs them through core's render pipeline,
 
 ## WooCommerce
 
-Shop, product, cart, checkout and account templates are block templates in `templates/`. Their styles are in `src/css/blocks/woocommerce-*.scss` and `src/css/woocommerce-account.scss`.
+Shop, product, cart, checkout and account templates are block templates in `templates/`. Their styles are in `src/css/blocks/woocommerce/` and `src/css/woocommerce-account.scss`.

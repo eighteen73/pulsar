@@ -1,0 +1,95 @@
+@use "tools" as *;
+
+// The carousel layout uses the carousel's markup and styles: this stylesheet
+// depends on blocks/matter/carousel (Enqueue::STYLE_DEPENDENCIES).
+
+/// Pulsar gallery. Editors choose the columns and aspect ratio (options in
+/// config/matter.php and theme.json's aspect ratio presets); the grid shows
+/// fewer columns where images would be narrower than --gallery-min-width.
+.wp-block-matter-gallery {
+	--gallery-gap: var(--wp--preset--spacing--md);
+	--gallery-min-width: 9rem;
+
+	.wp-block-image img {
+		display: block;
+	}
+}
+
+// Carousel layout: slides per view (the carousel's styles are included above).
+.wp-block-matter-gallery .wp-block-matter-carousel {
+	--carousel-gap: var(--gallery-gap);
+	--carousel-per-view: 2;
+
+	@media (--md) {
+		--carousel-per-view: 3;
+	}
+
+	@media (--lg) {
+		--carousel-per-view: 4;
+	}
+}
+
+// Thumbnails (reference variant): one image at a time, arrows and expand over
+// it, and a strip of thumbnails below.
+.wp-block-matter-gallery.is-style-thumbnails {
+	.wp-block-matter-carousel {
+		--carousel-per-view: 1;
+	}
+
+	.wp-block-matter-carousel__controls.is-stage {
+		align-items: center;
+	}
+
+	.wp-block-matter-carousel__expand {
+		inset-block-start: var(--wp--preset--spacing--md);
+		inset-inline-end: var(--wp--preset--spacing--md);
+		position: absolute;
+	}
+
+	.wp-block-matter-carousel__prev,
+	.wp-block-matter-carousel__next,
+	.wp-block-matter-carousel__expand {
+		border: 0;
+		box-shadow: var(--wp--preset--shadow--sm);
+	}
+
+	.wp-block-matter-carousel__controls.is-after {
+		background: var(--scheme--background-surface, rgb(0 0 0 / 5%));
+		margin: 0;
+		padding: var(--wp--preset--spacing--md);
+	}
+
+	// Four thumbnails across, six from `md`; more scroll.
+	.wp-block-matter-carousel__thumbnails {
+		--gallery-thumbnails-per-view: 4;
+		flex: 1;
+
+		@media (--md) {
+			--gallery-thumbnails-per-view: 6;
+		}
+	}
+
+	.wp-block-matter-carousel__thumbnail {
+		aspect-ratio: 4 / 3;
+		border-width: 2px;
+		height: auto;
+		opacity: 1;
+		width: calc((100% - (var(--gallery-thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--gallery-thumbnails-per-view));
+	}
+}
+
+.wp-block-matter-gallery__more {
+	@include button(secondary);
+
+	margin-block-start: var(--wp--preset--spacing--lg);
+}
+
+.wp-block-matter-gallery__open,
+.wp-block-matter-gallery__more,
+.wp-block-matter-carousel__prev,
+.wp-block-matter-carousel__next,
+.wp-block-matter-carousel__dot {
+	&:focus-visible {
+		@include focus-ring;
+	}
+}

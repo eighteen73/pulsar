@@ -1,7 +1,7 @@
 @use "../tools" as *;
 
 // Every button gets the base and the primary colours here; variants
-// (core/button block styles) only change the colours, in blocks/core-button.scss.
+// (core/button block styles) only change the colours, in blocks/core/button.scss.
 .wp-element-button,
 .wp-block-button__link {
 	@include button;

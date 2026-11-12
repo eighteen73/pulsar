@@ -1,0 +1,5 @@
+@use "tools" as *;
+
+.wp-block-pulsar-text__content {
+	max-width: var(--wp--style--global--content-size);
+}

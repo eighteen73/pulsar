@@ -1,0 +1,25 @@
+@use "tools" as *;
+
+/// Pulsar styling for Matter's accordion (Matter provides behaviour and
+/// functional layout only).
+.wp-block-matter-accordion-item {
+	border-block-end: 1px solid var(--scheme--border);
+}
+
+.wp-block-matter-accordion-item__heading {
+	font-size: var(--wp--preset--font-size--lg);
+}
+
+.wp-block-matter-accordion-item__toggle {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	padding-block: var(--wp--preset--spacing--lg);
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+// Padding on the last child (not the panel) so closed panels collapse fully.
+.wp-block-matter-accordion-item__content > :last-child {
+	padding-block-end: var(--wp--preset--spacing--lg);
+}
