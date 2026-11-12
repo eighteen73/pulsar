@@ -136,7 +136,9 @@
 	margin-block: 0 var(--wp--style--block-gap);
 }
 
-.woocommerce fieldset {
+// Account details' password change. (Only its: extensions' fieldsets, such as
+// All Products for Subscriptions' choice, are laid out by them.)
+.woocommerce-EditAccountForm fieldset {
 	display: grid;
 	gap: var(--wp--style--block-gap);
 	margin-block-start: var(--wp--preset--spacing--2-xl);
@@ -208,7 +210,14 @@
 	white-space: nowrap;
 }
 
+// Extensions' buttons (Memberships' actions, for one) don't have WooCommerce's
+// `wp-element-button` class, which gives WooCommerce's the theme's button.
+.woocommerce .button:not(.wp-element-button) {
+	@include button;
+}
+
 .woocommerce-account .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-actions a,
+.woocommerce td.order-actions .button,
 .woocommerce .download-file .button {
 	@include button-size(small);
 	display: inline-flex;

@@ -278,7 +278,7 @@ $order-statuses: (
 
 // An order's status: a dot in its colour, then its name (the dashboard's, and
 // the orders table's status cells, by the row's status).
-.order-status {
+.account-status {
 	align-items: center;
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--sm);
@@ -287,8 +287,8 @@ $order-statuses: (
 	white-space: nowrap;
 }
 
-.order-status::before,
-.woocommerce-orders-table__cell-order-status::before {
+.account-status::before,
+td.woocommerce-orders-table__cell-order-status::before {
 	background-color: var(--scheme--text-subtle);
 	border-radius: 50%;
 	content: "";
@@ -298,23 +298,45 @@ $order-statuses: (
 	width: 0.5rem;
 }
 
-.woocommerce-orders-table__cell-order-status::before {
+td.woocommerce-orders-table__cell-order-status::before {
 	margin-inline-end: var(--wp--preset--spacing--xs);
 	vertical-align: middle;
 }
 
 @each $status, $color in $order-statuses {
-	.order-status--#{$status}::before,
-	.woocommerce-orders-table__row--status-#{$status} .woocommerce-orders-table__cell-order-status::before {
+	.account-status--#{$status}::before,
+	.woocommerce-orders-table__row--status-#{$status} td.woocommerce-orders-table__cell-order-status::before {
 		background-color: var(--wp--preset--color--status-#{$color});
 	}
 }
 
-// Addresses: each one's title with its edit link below.
+// Addresses: cards like the dashboard's, each with its title and edit link in
+// a row. (WooCommerce floats the columns and the edit link:
+// `.woocommerce-account .addresses .title .edit`, 0,4,0.)
+.woocommerce-account .woocommerce-Addresses {
+	display: grid;
+	gap: var(--wp--preset--spacing--xl);
+	grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+	margin-block-start: var(--wp--preset--spacing--xl);
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
+.woocommerce-account .woocommerce-Addresses .woocommerce-Address {
+	border-radius: var(--wp--preset--border-radius--md);
+	float: none;
+	padding: var(--wp--preset--spacing--xl);
+	width: auto;
+}
+
 .woocommerce-account .addresses .title {
+	align-items: baseline;
 	display: flex;
-	flex-direction: column;
-	gap: var(--wp--preset--spacing--sm);
+	gap: var(--wp--preset--spacing--md);
+	justify-content: space-between;
 	margin-block-end: var(--wp--preset--spacing--md);
 
 	&::before,
@@ -324,8 +346,7 @@ $order-statuses: (
 }
 
 .woocommerce-account .addresses .title h2 {
-	@include heading-base;
-	@include heading(h4);
+	font-size: var(--wp--preset--font-size--lg);
 	margin: 0;
 }
 
@@ -333,6 +354,22 @@ $order-statuses: (
 .woocommerce-account .addresses .title .edit {
 	float: none;
 	font-size: var(--wp--preset--font-size--sm);
+	white-space: nowrap;
+}
+
+// Headings in a section (an order's details, a subscription's totals, an
+// extension's lists): one size, spaced from what's above. (As specific as
+// woocommerce.scss's order and customer details titles, 0,2,1, which it
+// follows.)
+.woocommerce-account .woocommerce-MyAccount-content :is(h2, h3):where(:not(.my-account-title, .account-overview__title)) {
+	@include heading-base;
+	@include heading(h4);
+	margin-block: var(--wp--preset--spacing--2-xl) var(--wp--preset--spacing--md);
+}
+
+// Lesser actions (cancelling a subscription or a booking): outline buttons.
+.woocommerce-MyAccount-content :is(.button.cancel, .button.view) {
+	@include button-variant(secondary);
 }
 
 // Logged out: login and register side by side from lg, each a card (or the
@@ -342,7 +379,7 @@ $order-statuses: (
 }
 
 :where(.woocommerce-account:not(.logged-in) .my-account) .woocommerce:where(:not(:has(.u-columns))),
-:where(.woocommerce-account) .u-columns :is(.col-1, .col-2) {
+:where(.woocommerce-account:not(.logged-in)) .u-columns :is(.col-1, .col-2) {
 	background-color: var(--scheme--background);
 	border-radius: var(--wp--preset--border-radius--md);
 	padding: var(--wp--preset--spacing--xl);
@@ -352,7 +389,7 @@ $order-statuses: (
 	}
 }
 
-.woocommerce-account .u-columns {
+.woocommerce-account:not(.logged-in) .u-columns {
 	display: flex;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--2-xl);
@@ -368,4 +405,30 @@ $order-statuses: (
 
 :where(.woocommerce-account .u-columns) :is(.col-1, .col-2) p:not(.form-row) {
 	color: var(--scheme--text-subtle);
+}
+
+// Bookings: its list repeats the section's title after the search (and a
+// notice), and its statuses are labels; shown like the orders' (a dot, then
+// the name).
+.woocommerce-bookings-search ~ h2 {
+	display: none;
+}
+
+.woocommerce-MyAccount-content .wc-bookings-status-label {
+	align-items: center;
+	background: none;
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--xs);
+	padding: 0;
+
+	&::before {
+		background-color: var(--scheme--text-subtle);
+		border-radius: 50%;
+		content: "";
+		forced-color-adjust: none;
+		height: 0.5rem;
+		width: 0.5rem;
+	}
 }

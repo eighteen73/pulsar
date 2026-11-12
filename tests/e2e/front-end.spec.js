@@ -349,7 +349,7 @@ test.describe('My Account', () => {
 		await logInAsCustomer(page, requestUtils);
 
 		await expect(
-			page.locator('.account-orders__item .order-status--processing')
+			page.locator('.account-orders__item .account-status--processing')
 		).toBeVisible();
 		await expect(
 			page.locator('.account-overview address').first()

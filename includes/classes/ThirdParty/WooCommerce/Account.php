@@ -64,16 +64,28 @@ class Account implements Bootable {
 
 	/**
 	 * The current section's title, at the top of the account content: the
-	 * endpoint's title, or the navigation's name for the dashboard.
+	 * endpoint's title (e.g. "Subscription #123"), else its name in the
+	 * navigation (extensions' sections, such as Memberships', and the
+	 * dashboard).
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function content_title(): void {
 		$endpoint = WC()->query->get_current_endpoint();
-		$title    = $endpoint
-			? WC()->query->get_endpoint_title( $endpoint )
-			: ( wc_get_account_menu_items()['dashboard'] ?? __( 'Dashboard', 'pulsar' ) );
+		$title    = $endpoint ? WC()->query->get_endpoint_title( $endpoint ) : '';
+
+		// The navigation is keyed by the endpoint, or by its slug (Memberships'
+		// `members_area` is `members-area` there).
+		if ( '' === $title ) {
+			$items = wc_get_account_menu_items();
+			$slug  = WC()->query->get_query_vars()[ $endpoint ] ?? '';
+			$title = $items[ $endpoint ?: 'dashboard' ] ?? $items[ $slug ] ?? '';
+		}
+
+		if ( '' === $title ) {
+			return;
+		}
 
 		echo '<h2 class="my-account-title">' . esc_html( $title ) . '</h2>';
 	}

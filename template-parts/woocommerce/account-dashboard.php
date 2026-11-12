@@ -61,7 +61,7 @@ $pulsar_user = wp_get_current_user();
 							</span>
 						</div>
 
-						<span class="order-status order-status--<?php echo esc_attr( $pulsar_status ); ?>"><?php echo esc_html( wc_get_order_status_name( $pulsar_status ) ); ?></span>
+						<span class="account-status account-status--<?php echo esc_attr( $pulsar_status ); ?>"><?php echo esc_html( wc_get_order_status_name( $pulsar_status ) ); ?></span>
 
 						<div class="account-orders__actions">
 							<?php foreach ( wc_get_account_orders_actions( $pulsar_order ) as $pulsar_key => $pulsar_action ) : ?>
