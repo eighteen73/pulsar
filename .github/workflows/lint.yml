@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
     inputs:
       matter_ref:
-        description: 'Matter branch to test against (release is the built 1.x release; another branch is built here)'
-        default: release
+        description: 'Matter branch to test against (release is the built release; any other branch is built here). Empty: next for Pulsar next, else release.'
+        default: ''
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,29 +20,31 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: eighteen73/github-actions/.github/actions/lint@main
 
   browser-tests:
-    name: Browser tests (wp-env, Matter ${{ inputs.matter_ref || 'release' }})
+    name: Browser tests (wp-env)
     runs-on: ubuntu-latest
     env:
-      MATTER_REF: ${{ inputs.matter_ref || 'release' }}
+      # Pulsar's next (pushes and pull requests to it) is developed against
+      # Matter's next; everything else is tested against Matter's release.
+      MATTER_REF: ${{ inputs.matter_ref || ((github.ref_name == 'next' || github.base_ref == 'next') && 'next') || 'release' }}
     steps:
       - name: Checkout Pulsar
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Matter is a must-use plugin; the release branch is built (build/ and
       # vendor/ included).
-      - name: Checkout Matter
-        uses: actions/checkout@v4
+      - name: Checkout Matter (${{ env.MATTER_REF }})
+        uses: actions/checkout@v7
         with:
           repository: eighteen73/matter
           ref: ${{ env.MATTER_REF }}
           path: .matter
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: '.nvmrc'
           cache: npm
@@ -80,14 +82,14 @@ jobs:
         run: npm run env:start
 
       - name: Install Playwright's Chromium
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps --only-shell chromium
 
       - name: Run browser tests
         run: npm run test:e2e
 
       - name: Keep browser test artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: browser-test-artifacts
           path: artifacts/
