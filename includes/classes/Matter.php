@@ -29,6 +29,7 @@ class Matter implements Bootable {
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
 		add_filter( 'matter_allowed_blocks', [ $this, 'allowed_blocks' ] );
+		add_filter( 'matter_theme_namespace', fn() => 'pulsar' );
 		add_filter( 'matter_theme_icons', [ $this, 'icons' ] );
 		add_filter( 'matter_icon_collections', fn() => [ 'pulsar' ] );
 		add_filter( 'matter_carousel_slides', [ $this, 'carousel_slides' ] );
@@ -100,21 +101,17 @@ class Matter implements Bootable {
 	}
 
 	/**
-	 * The theme's icons (`assets/svg/icons/`) are the `pulsar` icon
-	 * collection. Named here rather than after the theme's folder, because
-	 * icon names (`pulsar/arrow-right`) are saved in content.
+	 * The theme's icons (`assets/svg/icons/`): the `pulsar` icon collection,
+	 * from the theme's namespace (`matter_theme_namespace`, above), which
+	 * also prefixes its loop item patterns. Named rather than taken from
+	 * the theme's folder, because icon names (`pulsar/arrow-right`) and
+	 * pattern slugs are saved in content and looked up by Matter.
 	 *
 	 * @param array $icons Matter's defaults.
 	 * @return array
 	 */
 	public function icons( array $icons ): array {
-		return array_merge(
-			$icons,
-			[
-				'collection' => 'pulsar',
-				'label'      => __( 'Theme icons', 'pulsar' ),
-			]
-		);
+		return array_merge( $icons, [ 'label' => __( 'Theme icons', 'pulsar' ) ] );
 	}
 
 	/**
