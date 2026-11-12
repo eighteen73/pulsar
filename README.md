@@ -15,7 +15,7 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 - [PHP](https://www.php.net/) 8.3+
 - [Node.js](https://nodejs.org/) 20+
 - [Matter](https://github.com/eighteen73/matter) 1.0+, for sections, schemes, menus, panels and site settings. It's a must-use plugin installed by Composer (`eighteen73/matter`), so it's always active and the theme uses it without checking. An admin notice warns if Composer has installed an older version or none.
-- [Orbit](https://github.com/eighteen73/orbit), recommended. It disables the Site Editor and ignores database template overrides outside development.
+- [Orbit](https://github.com/eighteen73/orbit), recommended. Outside local and development environments it removes the Site Editor, blocks REST writes to templates, template parts and global styles, and ignores any saved in the database, so the theme's files are always what shows. **Without Orbit**, editors with `edit_theme_options` can open the Site Editor and change templates, the header and footer template blocks, and global styles, and those database copies then override the theme's files.
 
 ## Development
 
@@ -38,6 +38,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter-*.scss`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
+| `includes/classes/Matter.php` | Feeds `config/` into Matter, and names the theme's namespace, `pulsar` (`matter_theme_namespace`): the prefix Matter looks for loop item patterns under (`pulsar/loop-item…`) and the icon collection's name. Keep it `pulsar` even if the theme's folder is renamed or a child theme is added; icon names and pattern slugs depend on it. |
 | `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
 | `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). |
 | `assets/svg/woocommerce/account/` | My Account navigation icons. |
@@ -178,7 +179,7 @@ Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
 
 ## Archives, search and 404
 
-`index.html` (blog, categories, tags, authors, dates), `archive-product.html`, `taxonomy-product_cat.html`, `search.html` and `404.html` each have fixed parts plus Matter's `matter/archive-content` around the list. The fixed parts are breadcrumbs, notices, subcategories and the search form, and they're hidden when empty. Editors add content above and below the list in Appearance › Archive content (see Matter's README).
+`index.html` (blog, categories, tags, authors, dates), `archive-product.html`, `taxonomy-product_cat.html`, `search.html` and `404.html` each have fixed parts plus Matter's `matter/archive-content` around the list. The fixed parts are breadcrumbs, notices, subcategories and the search form, and they're hidden when empty. Editors add content above and below the list in Appearance › Archives (see Matter's README).
 
 Archives without their own content show a pattern, which is also where editors start when they customise one:
 - `patterns/archive.php`: the archive's title and description, then the list;
