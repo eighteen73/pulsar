@@ -13,9 +13,11 @@
 	margin-block-end: -1px;
 	padding-block: var(--wp--preset--spacing--md);
 
+	// The border marks the selected tab, not Matter's default underline.
 	&[aria-selected="true"] {
 		border-block-end-color: var(--scheme--text-link);
 		color: var(--scheme--text-link);
+		text-decoration: none;
 	}
 
 	&:focus-visible {
