@@ -1,5 +1,16 @@
 @use "../tools" as *;
 
+// WooCommerce hides the closed drawer only with opacity (and moves it off
+// screen), so its close button and links could still be tabbed to while it's
+// aria-hidden. Hide it properly once it has slid out (WooCommerce's 300ms,
+// the same as the normal duration token).
+.wc-block-components-drawer__screen-overlay--is-hidden {
+	transition:
+		opacity var(--wp--custom--transition--duration--normal),
+		visibility 0ms var(--wp--custom--transition--duration--normal);
+	visibility: hidden;
+}
+
 .wc-block-mini-cart__quantity-badge {
 	@include wc-cart-icon;
 }

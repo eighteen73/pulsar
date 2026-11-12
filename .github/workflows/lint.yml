@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and test
 
 on:
   push:
@@ -6,6 +6,15 @@ on:
       - main
       - next
   pull_request:
+  workflow_dispatch:
+    inputs:
+      matter_ref:
+        description: 'Matter branch to test against (release is the built 1.x release; another branch is built here)'
+        default: release
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
@@ -13,3 +22,73 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: eighteen73/github-actions/.github/actions/lint@main
+
+  browser-tests:
+    name: Browser tests (wp-env, Matter ${{ inputs.matter_ref || 'release' }})
+    runs-on: ubuntu-latest
+    env:
+      MATTER_REF: ${{ inputs.matter_ref || 'release' }}
+    steps:
+      - name: Checkout Pulsar
+        uses: actions/checkout@v4
+
+      # Matter is a must-use plugin; the release branch is built (build/ and
+      # vendor/ included).
+      - name: Checkout Matter
+        uses: actions/checkout@v4
+        with:
+          repository: eighteen73/matter
+          ref: ${{ env.MATTER_REF }}
+          path: .matter
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Set up PHP
+        if: env.MATTER_REF != 'release'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+
+      # Any other branch isn't built: build it (npm ci installs Composer's
+      # dependencies too).
+      - name: Build Matter
+        if: env.MATTER_REF != 'release'
+        working-directory: .matter
+        run: npm ci && npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Locally, .wp-env.json maps Matter from the Nebula project around the
+      # theme; here it's the checkout above.
+      - name: Use the Matter checkout
+        run: |
+          cat > .wp-env.override.json <<'JSON'
+          {
+            "mappings": {
+              "wp-content/mu-plugins/matter": "./.matter"
+            }
+          }
+          JSON
+
+      - name: Start wp-env
+        run: npm run env:start
+
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: npm run test:e2e
+
+      - name: Keep browser test artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-test-artifacts
+          path: artifacts/
+          retention-days: 7

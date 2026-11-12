@@ -20,17 +20,24 @@
 		"packages-update": "wp-scripts packages-update",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
-		"create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar"
+		"create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"test:e2e": "wp-scripts test-playwright"
 	},
 	"engines": {
 		"node": ">=26.0.0",
 		"npm": ">=11.0.0"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.14.0",
 		"@babel/runtime": "^8.0.0",
 		"@eighteen73/browserslist-config-wordpress": "^1.0.1",
 		"@eighteen73/eslint-config-wordpress": "^2.0.0",
 		"@eighteen73/stylelint-config-wordpress": "^2.0.0",
+		"@playwright/test": "^1.65.0",
+		"@wordpress/e2e-test-utils-playwright": "^1.54.0",
+		"@wordpress/env": "^12.1.0",
 		"@wordpress/icons": "^15.5.0",
 		"@wordpress/prettier-config": "^4.54.0",
 		"@wordpress/scripts": "^34.2.0",

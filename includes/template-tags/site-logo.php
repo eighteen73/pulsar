@@ -29,7 +29,10 @@ function get_site_logo( array $args = [] ): string {
 		$args,
 		[
 			'logo'        => $args['logo'] ?? 'brand/logo',
-			'tag'         => is_front_page() ? 'h1' : 'div',
+			// Not a heading: every template has its own h1 (the hero, the
+			// page's title, an archive's title), so the front page would
+			// have two. Pass 'tag' to change it.
+			'tag'         => 'div',
 			'class'       => $args['class'] ?? 'site-header__logo',
 			'link_class'  => $args['link_class'] ?? 'site-header__logo-link',
 			'image_class' => $args['image_class'] ?? 'site-header__logo-image',

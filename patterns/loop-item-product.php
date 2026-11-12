@@ -27,7 +27,7 @@
 	<!-- wp:group {"className":"","style":{"spacing":{"blockGap":"var:preset|spacing|sm"}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group">
 
-		<!-- wp:post-title {"className":"","fontSize":"lg","__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->
+		<!-- wp:post-title {"isLink":true,"className":"","fontSize":"lg","__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->
 
 		<!-- wp:woocommerce/product-price {"isDescendentOfQueryLoop":true,"className":"","fontSize":"lg"} /-->
 

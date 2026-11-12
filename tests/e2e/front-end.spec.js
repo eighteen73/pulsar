@@ -1,0 +1,240 @@
+/**
+ * Front end, as a visitor: sections in every scheme, the header and footer,
+ * archives and WooCommerce. Content comes from content.js.
+ */
+const { test, expect } = require('@wordpress/e2e-test-utils-playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
+const { SCHEMES, SETTINGS, PAGE_PREFIX } = require('./content');
+
+const DESKTOP = { width: 1280, height: 900 };
+const MOBILE = { width: 390, height: 800 };
+const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
+
+// As a visitor, failing on any uncaught script error.
+test.use({ storageState: { cookies: [], origins: [] }, viewport: DESKTOP });
+
+const scriptErrors = new WeakMap();
+
+test.beforeEach(({ page }) => {
+	scriptErrors.set(page, []);
+	page.on('pageerror', (error) => scriptErrors.get(page).push(error.message));
+});
+
+test.afterEach(({ page }) => {
+	expect(scriptErrors.get(page), 'uncaught script errors').toEqual([]);
+});
+
+const violations = async (page) =>
+	(
+		await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze()
+	).violations.map(
+		({ id, nodes }) =>
+			`${id}: ${nodes.map((node) => node.target).join(' | ')}`
+	);
+
+test.describe('sections', () => {
+	for (const scheme of SCHEMES) {
+		test(`every section in the ${scheme} scheme passes axe`, async ({
+			page,
+		}) => {
+			const response = await page.goto(
+				`/${PAGE_PREFIX}sections-${scheme}/`
+			);
+
+			expect(response.status()).toBe(200);
+			await expect(
+				page.getByRole('heading', {
+					level: 1,
+					name: `Sections in the ${scheme} scheme`,
+				})
+			).toBeVisible();
+			await expect(
+				page.locator(`.wp-block-pulsar-hero.has-scheme-${scheme}`)
+			).toBeVisible();
+			expect(await violations(page)).toEqual([]);
+		});
+	}
+
+	test('a linked card links from its heading', async ({ page }) => {
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		await expect(
+			page.getByRole('link', { name: 'Card 1' })
+		).toHaveAttribute('href', '/');
+	});
+});
+
+test.describe('header and footer', () => {
+	test('desktop: the menu opens a submenu, and the call to action shows', async ({
+		page,
+	}) => {
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const header = page.locator('.site-header');
+		const services = header
+			.locator('.matter-menu__item.has-submenu')
+			.first();
+
+		await services.hover();
+		await expect(services).toHaveClass(/\bis-open\b/);
+		await expect(
+			services.getByRole('link', { name: 'Design' })
+		).toBeVisible();
+
+		await expect(
+			header.getByRole('link', { name: SETTINGS.header.cta_label })
+		).toHaveAttribute('href', SETTINGS.header.cta_url);
+	});
+
+	test('mobile: the menu panel opens, traps focus and closes on Escape', async ({
+		page,
+	}) => {
+		await page.setViewportSize(MOBILE);
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const toggle = page.locator('[aria-controls="site-navigation"]');
+		const panel = page.locator('#site-navigation');
+
+		await toggle.click();
+		await expect(panel).toHaveClass(/\bis-open\b/);
+		await expect(
+			panel.getByRole('button', { name: /Services/ })
+		).toBeVisible();
+		await expect
+			.poll(() =>
+				panel.evaluate((element) =>
+					element.contains(element.ownerDocument.activeElement)
+				)
+			)
+			.toBe(true);
+
+		await page.keyboard.press('Escape');
+		await expect(panel).not.toHaveClass(/\bis-open\b/);
+		await expect(toggle).toBeFocused();
+	});
+
+	test('the footer shows contact details, menus and the copyright', async ({
+		page,
+	}) => {
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const footer = page.locator('.site-footer');
+
+		await expect(
+			footer.getByRole('link', { name: SETTINGS.contact.phone })
+		).toHaveAttribute('href', 'tel:01134960000');
+		await expect(
+			footer.getByRole('link', { name: 'Privacy policy' })
+		).toBeVisible();
+		await expect(
+			footer.getByRole('link', { name: 'Careers' })
+		).toBeVisible();
+		await expect(footer.locator('.site-footer__copyright')).toContainText(
+			String(new Date().getFullYear())
+		);
+	});
+});
+
+test.describe('archives, search and 404', () => {
+	test('the blog lists posts under its title', async ({ page }) => {
+		await page.goto('/');
+
+		await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+		await expect(
+			page.getByRole('link', { name: 'News story 1' })
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('a category shows its name and its posts', async ({ page }) => {
+		await page.goto('/category/news/');
+
+		await expect(
+			page.getByRole('heading', { level: 1, name: 'News' })
+		).toBeVisible();
+		await expect(
+			page.getByRole('link', { name: 'News story 2' })
+		).toBeVisible();
+	});
+
+	test('search shows its results', async ({ page }) => {
+		await page.goto('/?s=story');
+
+		await expect(page.getByRole('heading', { level: 1 })).toContainText(
+			'story'
+		);
+		await expect(
+			page.getByRole('link', { name: 'News story 3' })
+		).toBeVisible();
+	});
+
+	test('a missing page is a 404 with its content', async ({ page }) => {
+		const response = await page.goto('/this-page-does-not-exist/');
+
+		expect(response.status()).toBe(404);
+		await expect(
+			page.getByRole('heading', { level: 1, name: 'Page not found' })
+		).toBeVisible();
+	});
+});
+
+test.describe('WooCommerce', () => {
+	test('the shop lists products with their loop item', async ({ page }) => {
+		await page.goto('/shop/');
+
+		await expect(
+			page.getByRole('link', { name: 'Test bauble' }).first()
+		).toBeVisible();
+		await expect(
+			page.locator('.wp-block-matter-loop-item').first()
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('a product category lists its products', async ({ page }) => {
+		await page.goto('/product-category/christmas/');
+
+		await expect(
+			page.getByRole('heading', { level: 1, name: 'Christmas' })
+		).toBeVisible();
+		await expect(
+			page.getByRole('link', { name: 'Test wreath' }).first()
+		).toBeVisible();
+	});
+
+	test("the mini-cart opens, and can't be tabbed into while closed", async ({
+		page,
+	}) => {
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const drawer = page.locator('.wc-block-mini-cart__drawer');
+		const close = drawer.locator('.wc-block-components-drawer__close');
+
+		await expect(close).toBeHidden();
+		await page.locator('.wc-block-mini-cart__button').click();
+		await expect(close).toBeVisible();
+		await close.click();
+		await expect(close).toBeHidden();
+	});
+
+	test('a product can be added to the basket, and the basket and checkout load', async ({
+		page,
+	}) => {
+		await page.goto('/product/test-bauble/');
+		await expect(
+			page.getByRole('heading', { level: 1, name: 'Test bauble' })
+		).toBeVisible();
+		await page
+			.getByRole('button', { name: /add to (basket|cart)/i })
+			.first()
+			.click();
+
+		await page.goto('/cart/');
+		await expect(page.getByText('Test bauble').first()).toBeVisible();
+
+		await page.goto('/checkout/');
+		await expect(
+			page.locator('.wp-block-woocommerce-checkout')
+		).toBeVisible();
+	});
+});

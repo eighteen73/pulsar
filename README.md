@@ -28,6 +28,18 @@ npm run lint:css && npm run lint:js && npm run lint:php
 
 `theme.json` is generated from `config/theme-json/*.json`. Edit the parts, not `theme.json`.
 
+### Browser tests
+
+Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker, ports 8890/8891): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). Before the tests run, `tests/e2e/content.js` creates their content: a page of every section in each colour scheme, menus, Appearance › Options values, posts and products.
+
+```bash
+npm run env:start                  # start wp-env
+npx playwright install chromium    # once
+npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
+```
+
+They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, and that the header, footer, menus, archives, search, 404 and shop work. **In a project,** add its sections to `content.js` and `editor.spec.js` as they're built, so a change to a section or a scheme is checked like the starter's. CI runs them against Matter's `release` branch (`.github/workflows/lint.yml`; run it by hand to test another Matter branch).
+
 ## Where things live
 
 | Path | What |

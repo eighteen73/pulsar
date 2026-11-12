@@ -3,3 +3,8 @@
 /vendor
 npm-debug.log
 yarn-error.log
+
+# Browser tests
+artifacts/
+.wp-env.override.json
+.matter/
