@@ -1,1 +1,1 @@
-.wp-block-list *+*{margin-top:var(--wp--preset--spacing--xs)}
+.wp-block-list :where(*+*){margin-top:var(--wp--preset--spacing--xs)}

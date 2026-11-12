@@ -1,27 +1,25 @@
 @use "tools" as *;
 
-.wp-block-pulsar-media-text {
-	&__inner {
-		align-items: center;
-		display: grid;
-		gap: var(--wp--custom--spacing--gutter);
+.wp-block-pulsar-media-text__inner {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--custom--spacing--gutter);
 
-		@media (--md) {
-			grid-template-columns: 1fr 1fr;
-		}
+	@media (--md) {
+		grid-template-columns: 1fr 1fr;
 	}
+}
 
-	&__media img {
-		aspect-ratio: 1;
-		height: auto;
-		object-fit: cover;
-		width: 100%;
-	}
+.wp-block-pulsar-media-text__media img {
+	aspect-ratio: 1;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
 
-	// Variant: image after the text from md up.
-	&.is-style-media-end &__media {
-		@media (--md) {
-			order: 1;
-		}
+// Variant: the image after the text, from md up.
+.wp-block-pulsar-media-text.is-style-media-end .wp-block-pulsar-media-text__media {
+	@media (--md) {
+		order: 1;
 	}
 }

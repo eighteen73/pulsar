@@ -1,25 +1,23 @@
 @use "tools" as *;
 
-.wp-block-pulsar-hero {
-	&__inner {
-		align-items: center;
-		display: grid;
-		gap: var(--wp--custom--spacing--gutter);
+.wp-block-pulsar-hero__inner {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--custom--spacing--gutter);
 
-		@media (--md) {
-			grid-template-columns: 1fr 1fr;
-		}
+	@media (--md) {
+		grid-template-columns: 1fr 1fr;
 	}
+}
 
-	&__content {
-		max-width: var(--wp--style--global--content-size);
-	}
+.wp-block-pulsar-hero__content {
+	max-width: var(--wp--style--global--content-size);
+}
 
-	&__media img {
-		aspect-ratio: 4 / 3;
-		border-radius: var(--wp--preset--border-radius--lg);
-		height: auto;
-		object-fit: cover;
-		width: 100%;
-	}
+.wp-block-pulsar-hero__media img {
+	aspect-ratio: 4 / 3;
+	border-radius: var(--wp--preset--border-radius--lg);
+	height: auto;
+	object-fit: cover;
+	width: 100%;
 }

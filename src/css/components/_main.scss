@@ -4,12 +4,15 @@
 	margin-block-start: 0;
 }
 
+// The main content fills the page's height (the footer sits at the foot); on
+// cart, checkout and account pages it's inside WooCommerce's page wrapper.
 .site-main,
-.woocommerce {
+:where(.wp-site-blocks) > .woocommerce {
 	flex: 1 0 auto;
 	margin: 0;
+}
 
-	> .wp-block-group + .wp-block-group {
-		margin-block-start: var(--wp--custom--spacing--section);
-	}
+// Bands in templates (groups) are a section's space apart.
+.site-main > .wp-block-group + .wp-block-group {
+	margin-block-start: var(--wp--custom--spacing--section);
 }

@@ -5,42 +5,43 @@
 	border: 1px solid var(--scheme--border);
 	border-radius: var(--wp--preset--border-radius--md);
 	overflow: hidden;
+}
 
-	&__inner {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
+.wp-block-pulsar-card__inner {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.wp-block-pulsar-card__media img {
+	aspect-ratio: 3 / 2;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+.wp-block-pulsar-card__content {
+	flex: 1;
+	padding: var(--wp--preset--spacing--xl);
+}
+
+// Linked as a whole (Matter's link support): the heading is the link, and
+// keeps its look (over the theme's link styles).
+.wp-block-pulsar-card.has-link {
+	transition: border-color var(--wp--custom--transition--duration--quick);
+
+	&:hover {
+		border-color: var(--scheme--border-strong);
 	}
+}
 
-	&__media img {
-		aspect-ratio: 3 / 2;
-		display: block;
-		height: auto;
-		object-fit: cover;
-		width: 100%;
-	}
+.wp-block-pulsar-card .matter-link {
+	color: inherit;
+	text-decoration: none;
+}
 
-	&__content {
-		flex: 1;
-		padding: var(--wp--preset--spacing--xl);
-	}
-
-	// Linked as a whole (Matter's link support): the heading is the link.
-	&.has-link {
-		transition: border-color var(--wp--custom--transition--duration--quick);
-
-		&:hover {
-			border-color: var(--scheme--border-strong);
-		}
-
-		// The heading keeps its look (over the theme's link styles).
-		.matter-link {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		&:hover .matter-link {
-			text-decoration: underline;
-		}
-	}
+// Only linked cards have one.
+.wp-block-pulsar-card:hover .matter-link {
+	text-decoration: underline;
 }

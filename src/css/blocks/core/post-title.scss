@@ -1,7 +1,5 @@
 @use "tools" as *;
 
-.wp-block-post-title {
-	a {
-		text-decoration: none;
-	}
+.wp-block-post-title a {
+	text-decoration: none;
 }

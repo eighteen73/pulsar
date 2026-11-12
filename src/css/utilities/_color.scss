@@ -2,8 +2,8 @@
 /// Developer-only utility for templates; clients don't pick colours.
 .has-text-subtle {
 	color: var(--scheme--text-subtle);
+}
 
-	a {
-		color: inherit;
-	}
+.has-text-subtle a {
+	color: inherit;
 }

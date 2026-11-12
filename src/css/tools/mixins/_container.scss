@@ -1,14 +1,8 @@
-/// This recreates what WordPress adds to blocks
-/// when a block is layout constrained.
-/// This recreates the `has-global-padding` and `is-layout-constrained`
-/// classes and should be applied to the parent element.
+/// The site's wide container: content at the wide width, with the root
+/// padding either side (as a constrained, padded block). For the header,
+/// footer and other wrappers outside post content.
 @mixin container() {
-	padding-left: var(--wp--style--root--padding-left);
-	padding-right: var(--wp--style--root--padding-right);
-
-	> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-		margin-left: auto;
-		margin-right: auto;
-		max-width: var(--wp--style--global--wide-size);
-	}
+	margin-inline: auto;
+	max-width: calc(var(--wp--style--global--wide-size) + var(--wp--style--root--padding-left) + var(--wp--style--root--padding-right));
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
 }

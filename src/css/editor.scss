@@ -57,16 +57,15 @@
 
 /// Third Party Styles.
 ///
-/// Styles specifically for 3rd parties like Gravity Forms.
-/// Note: If styling is for a 3rd party block, it should have a block specific file instead.
+/// Styles for 3rd parties that aren't blocks (a block's styles go in its own
+/// file in blocks/).
 
 @use "third-party";
 
 /// Utilities.
 ///
-/// Utilities are helper classes and overrides.  This gets loaded last.
-/// If necessary, this is the only place where `!important` rules should
-/// go, but only if necessary.
+/// Utilities are helper classes for templates. This gets loaded last. See the
+/// README's CSS conventions for when `!important` is acceptable.
 
 @use "utilities";
 

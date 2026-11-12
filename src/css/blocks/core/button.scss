@@ -1,56 +1,56 @@
 @use "tools" as *;
 
+/// Buttons. Core's button stylesheet is off (config/disabled-block-styles.php);
+/// the link has the button base (elements/_button.scss) and these set widths,
+/// variants and icons.
 .wp-block-button {
 	--_button-width-gap: var(--wp--preset--spacing--md);
-
-	&:where(.has-custom-width) {
-		max-width: none;
-
-		.wp-block-button__link {
-			width: 100%;
-		}
-	}
-
-	&:where(.wp-block-button__width-25) {
-		width: calc(25% - (var(--_button-width-gap) * 0.75));
-	}
-
-	&:where(.wp-block-button__width-50) {
-		width: calc(50% - (var(--_button-width-gap) * 0.5));
-	}
-
-	&:where(.wp-block-button__width-75) {
-		width: calc(75% - (var(--_button-width-gap) * 0.25));
-
-	}
-
-	&:where(.wp-block-button__width-100) {
-		flex-basis: 100%;
-		width: 100%;
-	}
-
-	:where(.is-vertical) > & {
-		--_button-width-gap: 0;
-	}
-
-	// The link already has the button base (elements/_button.scss).
-	&.is-style-secondary .wp-block-button__link {
-		@include button-variant(secondary);
-	}
-
-	&.is-style-link .wp-block-button__link {
-		@include button-variant(link);
-	}
 }
 
-// Button icons (Matter button icon extension).
+:where(.is-vertical) > .wp-block-button {
+	--_button-width-gap: 0;
+}
 
+.wp-block-button:where(.has-custom-width) {
+	max-width: none;
+}
+
+.wp-block-button:where(.has-custom-width) .wp-block-button__link {
+	width: 100%;
+}
+
+.wp-block-button:where(.wp-block-button__width-25) {
+	width: calc(25% - (var(--_button-width-gap) * 0.75));
+}
+
+.wp-block-button:where(.wp-block-button__width-50) {
+	width: calc(50% - (var(--_button-width-gap) * 0.5));
+}
+
+.wp-block-button:where(.wp-block-button__width-75) {
+	width: calc(75% - (var(--_button-width-gap) * 0.25));
+}
+
+.wp-block-button:where(.wp-block-button__width-100) {
+	flex-basis: 100%;
+	width: 100%;
+}
+
+.wp-block-button.is-style-secondary .wp-block-button__link {
+	@include button-variant(secondary);
+}
+
+.wp-block-button.is-style-link .wp-block-button__link {
+	@include button-variant(link);
+}
+
+// Button icons (Matter's button icon extension).
 .wp-block-button__icon {
 	display: inline-flex;
+}
 
-	svg {
-		fill: currentcolor;
-		height: 1em;
-		width: 1em;
-	}
+.wp-block-button__icon svg {
+	fill: currentcolor;
+	height: 1em;
+	width: 1em;
 }

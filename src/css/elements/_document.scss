@@ -2,8 +2,9 @@
 @use "settings" as *;
 
 html {
-	scroll-behavior: smooth;
-	scroll-snap-type: x mandatory;
+	@media (prefers-reduced-motion: no-preference) {
+		scroll-behavior: smooth;
+	}
 }
 
 body {

@@ -1,24 +1,22 @@
 @use "tools" as *;
 
-.wp-block-pulsar-cards {
-	&__inner {
-		display: flex;
-		flex-direction: column;
-		gap: var(--wp--preset--spacing--4-xl);
-	}
+.wp-block-pulsar-cards__inner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--4-xl);
+}
 
-	&__intro {
-		max-width: var(--wp--style--global--content-size);
-	}
+.wp-block-pulsar-cards__intro {
+	max-width: var(--wp--style--global--content-size);
+}
 
-	// The items slot is the grid; its children are pulsar/card sections.
-	&__items.wp-block-matter-slot {
-		display: grid;
-		gap: var(--wp--custom--spacing--gutter);
-		grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+// The items slot is the grid; its children are pulsar/card sections.
+.wp-block-pulsar-cards__items.wp-block-matter-slot {
+	display: grid;
+	gap: var(--wp--custom--spacing--gutter);
+	grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+}
 
-		> * + * {
-			margin-block-start: 0;
-		}
-	}
+.wp-block-pulsar-cards__items.wp-block-matter-slot > * + * {
+	margin-block-start: 0;
 }

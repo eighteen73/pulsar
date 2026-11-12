@@ -24,18 +24,8 @@ legend {
 	padding: 0;
 }
 
-[type="text"],
-[type="email"],
-[type="url"],
-[type="password"],
-[type="number"],
-[type="date"],
-[type="datetime-local"],
-[type="month"],
-[type="search"],
-[type="tel"],
-[type="time"],
-[type="week"] {
+// Fields, at element specificity (in :where()), so any class beats them.
+:where([type="text"], [type="email"], [type="url"], [type="password"], [type="number"], [type="date"], [type="datetime-local"], [type="month"], [type="search"], [type="tel"], [type="time"], [type="week"]) {
 	@include field-input;
 }
 
@@ -43,33 +33,35 @@ textarea {
 	@include field-textarea;
 }
 
-select {
-	&:where(:not([multiple])) {
-		@include field-select(false);
-	}
-
-	&:where([multiple]) {
-		@include field-select(true);
-	}
+select:where(:not([multiple])) {
+	@include field-select(false);
 }
 
-[type="checkbox"] {
+select:where([multiple]) {
+	@include field-select(true);
+}
+
+:where([type="checkbox"]) {
 	@include field-checkbox;
 }
 
-[type="radio"] {
+:where([type="radio"]) {
 	@include field-radio;
 }
 
-[type="file"] {
+:where([type="checkbox"], [type="radio"]) + label {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+:where([type="file"]) {
 	@include field-file;
 }
 
-[type="range"] {
+:where([type="range"]) {
 	@include field-range;
 }
 
-[type="submit"] {
+:where([type="submit"]) {
 	@include button(primary);
 }
 

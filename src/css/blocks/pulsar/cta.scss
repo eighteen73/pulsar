@@ -4,8 +4,8 @@
 	margin-inline: auto;
 	max-width: var(--wp--style--global--content-size);
 	text-align: center;
+}
 
-	.wp-block-buttons {
-		justify-content: center;
-	}
+.wp-block-pulsar-cta__content .wp-block-buttons {
+	justify-content: center;
 }

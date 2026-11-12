@@ -118,7 +118,9 @@
 			text-decoration: underline;
 		}
 
-		@include focus-block;
+		&:focus-visible {
+			@include focus-block;
+		}
 	} @else {
 		@error "Unknown button variant: #{$variant}";
 	}

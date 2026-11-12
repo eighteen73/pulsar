@@ -55,7 +55,7 @@ They check that every section can be added in the editor, that pages pass axe (W
 | `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). |
 | `assets/svg/woocommerce/account/` | My Account navigation icons. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
-| `src/css/` | ITCSS: settings → tools → generic → elements → components → utilities. |
+| `src/css/` | ITCSS: settings → tools → generic → elements → components → patterns (a pattern's own styles) → third-party (non-block plugins) → utilities. `app.scss` is the front end; `editor.scss` the same for the editor. |
 | `src/css/blocks/{namespace}/{block}.scss` | Per-block styles, loaded only when the block is on the page: `core/`, `matter/`, `pulsar/`, `woocommerce/`, e.g. `matter/gallery.scss` for `matter/gallery`. A new file needs no registering; a block whose styles build on another's is listed in `Enqueue::STYLE_DEPENDENCIES` (the gallery's carousel layout loads `matter/carousel.scss`). |
 | `template-parts/` | PHP parts, rendered in templates by Matter's `matter/template-part` block (files with a `Title:` header are offered in its settings): `header` and `footer` (the parts in `header/` and `footer/` are their pieces), and checkout variants. |
 | `templates/` | Block templates. They use `<!-- wp:matter/template-part {"slug":"header"} /-->` for the header and footer. |
@@ -147,22 +147,32 @@ Name the Figma variables the same way (`brand-primary`, `background-fill`, `spac
 
 ## CSS conventions
 
-The aim is no `!important`.
+The aim is no `!important`, and styles that are easy to find. Stylelint enforces the rules marked ✓.
+
+**Selectors**
+- ✓ Every class is written out in full: no `&__` or `&-` concatenation, so searching for a class finds its styles.
+- ✓ Nesting only for the same element: `&:hover`, `&::before`, `&[aria-selected="true"]`, `&.is-open`, and at-rules (`@media`, `@include`). Anything else is its own rule with its full selector.
+- Mixins output declarations; the caller writes the selector (`.thing:focus-visible { @include focus-ring; }`).
 
 **Specificity**
-- One BEM class per selector. Nest only for a part, modifier or state (`&__title`, `&.is-style-feature`, `&.is-open`).
-- Element styles (`h2`, `a`, `button`) stay at element specificity, or inside `:where()`, so any class beats them.
-- Matter's skin is wrapped in `:where()`, so a single class here always overrides it.
-- `!important` only to beat someone else's `!important` or inline style (WordPress's constrained layout, WooCommerce, Gravity Forms), or to guarantee accessibility (focus ring, visually hidden). Always with a `stylelint-disable-line` comment saying why.
+- One class per selector where possible; context that's only there to scope goes in `:where()` (`:where(.site-header__navigation) .matter-menu__link`).
+- ✓ At most 0,3,1, and no IDs. (WooCommerce and Gravity Forms files are exempt until they're rewritten.)
+- Element styles (`h2`, `a`, form fields) stay at element specificity, or inside `:where()`, so any class beats them.
+- `!important` only to beat someone else's `!important` or inline style (WordPress's constrained layout, WooCommerce, Gravity Forms), or to guarantee accessibility (focus ring). Always with a `stylelint-disable-line` comment saying why.
+
+**Matter's blocks**
+- Matter ships a minimal default skin in `:where()`, so any class here overrides it. Pulsar styles every Matter block it uses in full (`blocks/matter/`, `components/_menu.scss`, the panel in `components/_header.scss`), icons included (`assets/svg/ui/`), so a Matter update doesn't change how the site looks.
+- Where Pulsar's design differs from the skin, undo the skin's part explicitly (e.g. the selected tab sets `text-decoration: none` over Matter's underline).
+- Matter shows and hides parts per mode (a menu's toggle text, submenus and their headers, the panel toggle): don't set `display` on these.
+- Matter's per-mode classes exist only inside Matter's media queries, so mode-specific styles use the same breakpoint as the PHP that sets it (`collapse_below: 'lg'` in `template-parts/header.php` → `@media (--lg-down)`; `dropdownBelow` in `config/matter.php` → `@media (--md-down)`).
 
 **Class names**
 - `.wp-block-{namespace}-{block}` and `__{element}` for its parts.
 - `.is-style-{variant}` for variants, `.has-{option}` for options, `.is-{state}` for states, `.has-scheme-{slug}` for schemes.
 
 **CSS variables**
-- Use the tokens above: `--scheme--{role}` for colour, presets and roles for everything else. No hex values in component CSS.
-- A component's own variables are `--{component}-{setting}`, and only for settings or values JavaScript sets. Matter's block settings (`--gallery-gap`, `--menu-duration`…) can be set on `:root` or on the block's class; see Matter's README.
-- Private helpers a component computes for itself are `--_{component}-{name}`.
+- Use the tokens above: `--scheme--{role}` for colour, presets and roles for everything else. No hex values in component CSS. Icons and form controls are drawn in the scheme's colours (masks, gradients), never fixed-colour SVGs.
+- A component's own variables are `--{component}-{setting}`, and only for settings or values JavaScript sets. Matter's block settings (`--carousel-per-view`, `--gallery-gap`…) can be set on `:root` or on the block's class; see Matter's README. Don't invent variables in Matter's names (`--carousel-*`, `--gallery-*`…): Pulsar's private ones are `--_{component}-{name}`.
 - A value used once is written as a property, not a variable.
 
 **Buttons**

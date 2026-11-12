@@ -3,27 +3,18 @@
 /// Sections: developer-built layout blocks (Matter section framework).
 /// Full-width sections (`"align": "full"`) are bands painted by their colour
 /// scheme, with content held to the wide width. Nested sections (e.g. cards)
-/// aren't bands. Section-specific layout lives in blocks/pulsar-*.scss.
-.is-section.alignfull {
-	padding-block: var(--wp--custom--spacing--section);
-	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
-
-	> * {
-		margin-inline: auto;
-		max-width: var(--wp--style--global--wide-size);
-	}
-}
-
+/// aren't bands. Section-specific layout lives in blocks/pulsar/.
 // An archive's list (Matter archive content) is a band like a section,
 // between the sections editors add above and below it.
+.is-section.alignfull,
 .wp-block-matter-archive-loop {
 	padding-block: var(--wp--custom--spacing--section);
 	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
 
-	> * {
-		margin-inline: auto;
-		max-width: var(--wp--style--global--wide-size);
-	}
+:where(.is-section.alignfull, .wp-block-matter-archive-loop) > * {
+	margin-inline: auto;
+	max-width: var(--wp--style--global--wide-size);
 }
 
 $section-parents: ".wp-block-post-content, .wp-block-matter-archive-content";
@@ -40,12 +31,10 @@ $bands: ".is-section, .wp-block-matter-archive-loop";
 }
 
 // Content flow inside slots.
-.wp-block-matter-slot {
-	> * {
-		margin-block: 0;
-	}
+.wp-block-matter-slot > * {
+	margin-block: 0;
+}
 
-	> * + * {
-		margin-block-start: var(--wp--style--block-gap);
-	}
+.wp-block-matter-slot > * + * {
+	margin-block-start: var(--wp--style--block-gap);
 }

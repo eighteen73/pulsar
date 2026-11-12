@@ -1,59 +1,24 @@
 @use "tools" as *;
 
-.wp-block-term-template {
-	.wp-block-term {
-		position: relative;
-	}
+/// Terms in a Terms Query (the shop's subcategories, "Shop by category").
+/// Each term is a link to it: its name's link is stretched over the term.
+.wp-block-term {
+	position: relative;
+}
 
-	.wp-block-term-name {
-		a {
-			color: inherit;
-		}
+.wp-block-term-name a {
+	color: inherit;
+}
 
-		a::before {
-			background-color: var(--scheme--background-fill);
-			content: "";
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-			z-index: 2;
-		}
-	}
+.wp-block-term-name a::before {
+	content: "";
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+}
 
-	.shop-by-category-buttons {
-		align-items: flex-start;
-		background: linear-gradient(180deg, rgb(from var(--wp--preset--color--neutral-900) r g b / 0) 40%, rgb(from var(--wp--preset--color--neutral-900) r g b / 0.78) 100%);
-		bottom: 0;
-		color: var(--wp--preset--color--base); // Over a darkened image, so always light whatever the scheme.
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		justify-content: flex-end;
-		left: 0;
-		padding: var(--wp--preset--spacing--2-xl);
-		position: absolute;
-		width: 100%;
-
-		a {
-			color: inherit;
-		}
-
-		.wp-block-term-name {
-			color: inherit;
-		}
-
-		.wp-block-term-name a {
-			text-decoration: none;
-		}
-	}
-
-	.wp-block-image {
-		img {
-			border-radius: var(--wp--preset--border-radius--sm);
-			height: 100%;
-			width: 100%;
-		}
-	}
+.wp-block-term .wp-block-image img {
+	border-radius: var(--wp--preset--border-radius--sm);
+	height: 100%;
+	width: 100%;
 }

@@ -1,3 +1,43 @@
 {
-	"extends": "@eighteen73/stylelint-config-wordpress"
+	"extends": "@eighteen73/stylelint-config-wordpress",
+	"rules": {
+		"scss/at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": [ "starting-style", "custom-media" ]
+			}
+		],
+		"scss/selector-no-union-class-name": true,
+		"selector-nested-pattern": [
+			"^&(:|::|\\[|\\.)",
+			{ "splitList": true }
+		],
+		"max-nesting-depth": [
+			1,
+			{
+				"ignoreAtRules": [ "media", "supports", "starting-style", "container", "include" ]
+			}
+		],
+		"selector-max-compound-selectors": 4,
+		"selector-max-specificity": "0,3,1",
+		"selector-max-id": 0
+	},
+	"overrides": [
+		{
+			"files": [
+				"src/css/blocks/woocommerce/*.scss",
+				"src/css/blocks/matter/gravity-form.scss",
+				"src/css/woocommerce-account.scss",
+				"src/css/tools/mixins/_woocommerce.scss"
+			],
+			"rules": {
+				"scss/selector-no-union-class-name": null,
+				"selector-nested-pattern": null,
+				"max-nesting-depth": null,
+				"selector-max-compound-selectors": null,
+				"selector-max-specificity": null,
+				"selector-max-id": null
+			}
+		}
+	]
 }

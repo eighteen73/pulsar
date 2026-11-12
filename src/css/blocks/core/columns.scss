@@ -1,84 +1,54 @@
 @use "tools" as *;
 
+/// Columns. Core's columns stylesheet is off (config/disabled-block-styles.php);
+/// these replace it. Columns stack until a breakpoint, set by
+/// `.is-stacked-on-{sm|md|lg|xl}` (sm without one), then sit in a row.
 .wp-block-columns {
-	// Trump cores `.is-layout-flex` selector as it doesn't apply to columns.
-	&:not([class^="are-vertically-aligned"]) {
-		align-items: initial;
-	}
+	flex-direction: column;
+}
 
-	// Columns should always be rows unless set to stack.
-	&:where(:not([class^="is-stacked-on"])) {
-		flex-direction: column;
-	}
+// Stretched unless a vertical alignment is chosen (core's `.is-layout-flex`
+// centres).
+.wp-block-columns:not([class*="are-vertically-aligned-"]) {
+	align-items: initial;
+}
 
-	// All Columns Alignment
-	&.are-vertically-aligned-top {
-		align-items: flex-start;
-	}
+.wp-block-columns.are-vertically-aligned-top {
+	align-items: flex-start;
+}
 
-	&.are-vertically-aligned-center {
-		align-items: center;
-	}
+.wp-block-columns.are-vertically-aligned-center {
+	align-items: center;
+}
 
-	&.are-vertically-aligned-bottom {
-		align-items: flex-end;
-	}
+.wp-block-columns.are-vertically-aligned-bottom {
+	align-items: flex-end;
+}
 
-	&:where(.is-reversed-when-stacked) {
-		flex-direction: column-reverse;
+// In a row from the breakpoint; two columns are spaced by the gutter rather
+// than the block gap (two classes, over core's per-block gap).
+.wp-block-columns:where(.is-stacked-on-sm, :not([class*="is-stacked-on-"])) {
+	@media (--sm) {
+		flex-direction: row;
 	}
+}
 
-	/// The fallback stacking class.
-	&:where(.is-stacked-on-sm),
-	&:where(:not([class*="is-stacked-on"])) {
-		@media (--sm) {
+.wp-block-columns.is-layout-flex:where(.is-stacked-on-sm, :not([class*="is-stacked-on-"])):where(:has(> :nth-child(2):last-child)) {
+	@media (--sm) {
+		gap: var(--wp--custom--spacing--gutter);
+	}
+}
+
+@each $breakpoint in md, lg, xl {
+	.wp-block-columns:where(.is-stacked-on-#{$breakpoint}) {
+		@media (--#{$breakpoint}) {
 			flex-direction: row;
 		}
-
-		// Two columns use the gutter rather than the block gap.
-		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
-			@media (--sm) {
-				gap: var(--wp--custom--spacing--gutter);
-			}
-		}
 	}
 
-	&:where(.is-stacked-on-md) {
-		@media (--md) {
-			flex-direction: row;
-		}
-
-		// Two columns use the gutter rather than the block gap.
-		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
-			@media (--md) {
-				gap: var(--wp--custom--spacing--gutter);
-			}
-		}
-	}
-
-	&:where(.is-stacked-on-lg) {
-		@media (--lg) {
-			flex-direction: row;
-		}
-
-		// Two columns use the gutter rather than the block gap.
-		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
-			@media (--lg) {
-				gap: var(--wp--custom--spacing--gutter);
-			}
-		}
-	}
-
-	&:where(.is-stacked-on-xl) {
-		@media (--xl) {
-			flex-direction: row;
-		}
-
-		// Two columns use the gutter rather than the block gap.
-		&.is-layout-flex:where(:has(> :nth-child(2):last-child)) {
-			@media (--xl) {
-				gap: var(--wp--custom--spacing--gutter);
-			}
+	.wp-block-columns.is-layout-flex:where(.is-stacked-on-#{$breakpoint}):where(:has(> :nth-child(2):last-child)) {
+		@media (--#{$breakpoint}) {
+			gap: var(--wp--custom--spacing--gutter);
 		}
 	}
 }
