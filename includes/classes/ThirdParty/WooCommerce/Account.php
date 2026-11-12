@@ -27,6 +27,9 @@ class Account implements Bootable {
 		add_action( 'woocommerce_register_form_start', [ $this, 'register_intro_text' ] );
 
 		add_action( 'woocommerce_account_content', [ $this, 'content_title' ], PHP_INT_MIN );
+
+		// The dashboard: an overview, before extensions' dashboard content.
+		add_action( 'woocommerce_account_dashboard', [ $this, 'dashboard' ], 5 );
 	}
 
 	/**
@@ -60,19 +63,28 @@ class Account implements Bootable {
 	}
 
 	/**
-	 * Adds a title to the account content.
+	 * The current section's title, at the top of the account content: the
+	 * endpoint's title, or the navigation's name for the dashboard.
 	 *
 	 * @access public
 	 * @return void
 	 */
 	public function content_title(): void {
-		global $wp_query;
-		if ( ! is_null( $wp_query ) && is_wc_endpoint_url() ) {
-			$endpoint = WC()->query->get_current_endpoint();
-			$title    = WC()->query->get_endpoint_title( $endpoint );
-			echo '<h2 class="my-account-title">' . esc_html( $title ) . '</h2>';
-		} else {
-			the_title( '<h2 class="my-account-title">', '</h2>' );
-		}
+		$endpoint = WC()->query->get_current_endpoint();
+		$title    = $endpoint
+			? WC()->query->get_endpoint_title( $endpoint )
+			: ( wc_get_account_menu_items()['dashboard'] ?? __( 'Dashboard', 'pulsar' ) );
+
+		echo '<h2 class="my-account-title">' . esc_html( $title ) . '</h2>';
+	}
+
+	/**
+	 * The dashboard's overview (template-parts/woocommerce/account-dashboard.php).
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function dashboard(): void {
+		get_template_part( 'template-parts/woocommerce/account-dashboard' );
 	}
 }

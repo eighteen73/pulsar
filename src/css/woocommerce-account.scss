@@ -1,14 +1,18 @@
 /**
- * My Account's layout (templates/page-my-account.html): the navigation beside
- * the content from xl, the dashboard as a grid of links, and the logged-out
- * login and register boxes. Forms, tables, orders and addresses are in
- * woocommerce.scss, as they appear on other WooCommerce pages too.
+ * My Account (templates/page-my-account.html): one layout on every page. The
+ * header (who's signed in), then the navigation and the current section: the
+ * navigation is a sidebar from lg, and a strip of tabs that scrolls sideways
+ * below it. The dashboard is an overview
+ * (template-parts/woocommerce/account-dashboard.php). Forms, tables, orders
+ * and addresses are in woocommerce.scss, as they appear on other WooCommerce
+ * pages too.
  */
 
 @use "settings";
 @use "tools" as *;
 
-// Navigation icons, by endpoint (assets/svg/woocommerce/account/).
+// Navigation icons, by endpoint (assets/svg/woocommerce/account/); other
+// endpoints (an extension's) have none.
 $account-links: (
 	dashboard: woocommerce/account/dashboard,
 	orders: woocommerce/account/orders,
@@ -22,55 +26,50 @@ $account-links: (
 	customer-logout: woocommerce/account/customer-logout,
 );
 
-// The page: a surface band, with the account inside.
-.woocommerce-account .site-main {
+// Order statuses, by the status colour they're shown in.
+$order-statuses: (
+	completed: success,
+	processing: info,
+	on-hold: warning,
+	pending: warning,
+	cancelled: error,
+	failed: error,
+	refunded: error,
+);
+
+// The page: a band in the scheme's surface, the account at the wide width.
+.my-account {
 	background-color: var(--scheme--background-surface);
 	padding-block: var(--wp--custom--spacing--section);
 }
 
-// The page's title ("My Account") shows from xl, beside the navigation; below
-// it, the endpoint's title shows instead (the post title, as the template's
-// heading is hidden).
-.woocommerce-account .site-main .wp-block-post-title {
-	@media (--xl) {
-		display: none;
+.my-account-header {
+	margin-block-end: var(--wp--preset--spacing--2-xl);
+}
+
+.my-account-header__title {
+	margin: 0;
+}
+
+.my-account-header__user {
+	color: var(--scheme--text-subtle);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+	margin-block: var(--wp--preset--spacing--sm) 0;
+}
+
+// The navigation beside the section from lg; above it below lg.
+.my-account .woocommerce {
+	display: grid;
+	gap: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--3-xl);
+	// No wider than the page: the navigation's strip scrolls inside it.
+	grid-template-columns: minmax(0, 1fr);
+
+	@media (--lg) {
+		align-items: start;
+		grid-template-columns: 15rem minmax(0, 1fr);
 	}
-}
-
-:where(.woocommerce-account .site-main) .wp-block-post-title + .wp-block-heading {
-	display: none;
-
-	@media (--xl) {
-		display: block;
-	}
-}
-
-.my-account-title {
-	display: none;
-	margin-block: 0 var(--wp--style--block-gap);
-
-	@media (--xl) {
-		display: block;
-	}
-}
-
-// "Back to my account", below xl (the navigation is the dashboard there).
-.wp-block-button.my-account-back {
-	margin-block-end: var(--wp--preset--spacing--md);
-
-	@media (--xl) {
-		display: none;
-	}
-}
-
-.my-account-back .wp-block-button__link::before {
-	@include icon("icons/arrow-left", 12px);
-}
-
-// The wide width (over core's constrained layout for post content, 0,1,0).
-.woocommerce-account .site-main .woocommerce {
-	margin-block-start: var(--wp--preset--spacing--4-xl);
-	max-width: var(--wp--style--global--wide-size);
 
 	&::before,
 	&::after {
@@ -78,56 +77,43 @@ $account-links: (
 	}
 }
 
-// Logged in: the navigation beside the content (from xl; below it, one or the
-// other shows).
-:where(.woocommerce-account.logged-in .site-main) .woocommerce {
-	align-items: flex-start;
-	display: flex;
-	gap: var(--wp--preset--spacing--5-xl);
+// The wide width (WooCommerce's block theme styles cap it at 1000px:
+// `.woocommerce-account main .woocommerce`, 0,2,1).
+.woocommerce-account .my-account .woocommerce {
+	max-width: none;
 }
 
-// Content: a card. (WooCommerce floats it: `.woocommerce-account
-// .woocommerce-MyAccount-content`, 0,2,0.)
+// (WooCommerce floats them: `.woocommerce-account
+// .woocommerce-MyAccount-navigation`, 0,2,0.)
+.woocommerce-account .woocommerce-MyAccount-navigation,
 .woocommerce-account .woocommerce-MyAccount-content {
-	background-color: var(--scheme--background);
-	border-radius: var(--wp--preset--border-radius--md);
 	float: none;
-	padding: var(--wp--preset--spacing--3-xl);
-	width: 100%;
-
-	@media (--xl) {
-		flex: 1;
-	}
+	width: auto;
 }
 
-// Navigation: beside the content from xl; below it, the dashboard is the
-// navigation.
-.woocommerce-account .woocommerce-MyAccount-navigation {
-	display: none;
-	float: none;
-	width: 100%;
-
-	@media (--xl) {
-		display: block;
-		flex: 0 0 250px;
-	}
-}
-
-// (WooCommerce's block theme styles indent it: `.woocommerce-account
-// .woocommerce-MyAccount-navigation ul`, 0,2,1.)
-.woocommerce-account .woocommerce-MyAccount-navigation ul {
-	display: flex;
-	flex-direction: column;
-	gap: var(--wp--preset--spacing--sm);
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
+// Navigation: tabs that scroll sideways below lg; a list from lg.
 // (WooCommerce's block theme styles pad and underline them:
 // `.woocommerce-account .woocommerce-MyAccount-navigation li`, 0,2,1.)
-.woocommerce-account .woocommerce-MyAccount-navigation li {
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+	display: flex;
+	gap: var(--wp--preset--spacing--xs);
+	list-style: none;
+	margin: 0;
+	overflow-x: auto;
 	padding: 0;
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+
+	@media (--lg) {
+		flex-direction: column;
+		overflow: visible;
+	}
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation li {
+	flex: none;
+	padding: 0;
+	scroll-snap-align: start;
 }
 
 .woocommerce-account .woocommerce-MyAccount-navigation li a {
@@ -135,12 +121,15 @@ $account-links: (
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: var(--scheme--text);
 	display: flex;
-	font-size: var(--wp--preset--font-size--md);
 	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
-	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--xl);
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
 	text-decoration: none;
-	transition: background-color var(--wp--custom--transition--duration--normal) ease-out;
+	white-space: nowrap;
+
+	@media (--lg) {
+		padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+	}
 }
 
 .woocommerce-MyAccount-navigation a:hover {
@@ -158,68 +147,167 @@ $account-links: (
 	text-decoration: none;
 }
 
-// Each endpoint's icon; others (an extension's) get none.
 @each $link, $icon in $account-links {
 	.woocommerce-MyAccount-navigation-link--#{$link} a::before {
 		@include icon($icon, 20px);
 	}
 }
 
-// The dashboard: its links as cards, in place of the content. The content
-// (WooCommerce's greeting) is hidden unless it holds more than that, such as
-// a notice or an extension's dashboard.
-.woocommerce-dashboard .my-account-back {
+// The current section: a card.
+.woocommerce-account .woocommerce-MyAccount-content {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	padding: var(--wp--preset--spacing--xl);
+
+	@media (--md) {
+		padding: var(--wp--preset--spacing--3-xl);
+	}
+}
+
+.my-account-title {
+	@include heading-base;
+	@include heading(h3);
+	margin-block: 0 var(--wp--preset--spacing--xl);
+}
+
+// Editing an address: the form's own heading names it.
+:where(.woocommerce-MyAccount-content:has(.woocommerce-address-fields)) .my-account-title {
 	display: none;
 }
 
-:where(.woocommerce-dashboard) .woocommerce-MyAccount-content:where(:not(:has(> :not(p, .my-account-title, .woocommerce-notices-wrapper:empty)))) {
-	display: none;
-}
-
+// The dashboard: the overview replaces WooCommerce's greeting (the header
+// says who's signed in) and its sentence of links (the navigation).
 .woocommerce-dashboard .woocommerce-MyAccount-content > p {
 	display: none;
 }
 
-.woocommerce-dashboard .site-main .woocommerce {
-	flex-direction: column;
-}
-
-.woocommerce-dashboard .woocommerce-MyAccount-navigation {
-	display: block;
-	flex-basis: auto;
-}
-
-.woocommerce-dashboard // (WooCommerce's block theme styles indent it: `.woocommerce-account
-// .woocommerce-MyAccount-navigation ul`, 0,2,1.)
-.woocommerce-account .woocommerce-MyAccount-navigation ul {
+.account-overview {
 	display: grid;
-	gap: var(--wp--style--block-gap);
-	grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+	gap: var(--wp--preset--spacing--xl);
+	grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
 }
 
-// The dashboard's own link isn't needed on it.
-.woocommerce-dashboard .woocommerce-MyAccount-navigation-link--dashboard {
-	display: none;
-}
-
-.woocommerce-dashboard .woocommerce-MyAccount-navigation li a {
-	background-color: var(--scheme--background);
+.account-overview__panel {
+	border: 1px solid var(--scheme--border);
 	border-radius: var(--wp--preset--border-radius--md);
-	flex-direction: column;
-	justify-content: center;
-	padding: var(--wp--preset--spacing--3-xl);
+	padding: var(--wp--preset--spacing--xl);
 }
 
-.woocommerce-dashboard .woocommerce-MyAccount-navigation a:hover {
-	background-color: var(--scheme--background-surface);
+.account-overview__panel--orders {
+	grid-column: 1 / -1;
 }
 
-.woocommerce-dashboard li.woocommerce-MyAccount-navigation-link--customer-logout a {
-	color: var(--wp--preset--color--status-error);
+.account-overview__panel :is(address, p) {
+	font-style: normal;
+	margin: 0;
 }
 
-.woocommerce-dashboard .woocommerce-MyAccount-navigation-link--customer-logout a:is(:hover, :focus-visible) {
-	background-color: var(--wp--preset--color--status-error-subtle);
+.account-overview__header {
+	align-items: baseline;
+	display: flex;
+	gap: var(--wp--preset--spacing--md);
+	justify-content: space-between;
+	margin-block-end: var(--wp--preset--spacing--md);
+}
+
+.account-overview__title {
+	font-size: var(--wp--preset--font-size--lg);
+	margin: 0;
+}
+
+.account-overview__more {
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.account-overview__empty {
+	color: var(--scheme--text-subtle);
+}
+
+.account-overview__empty + .wp-element-button {
+	margin-block-start: var(--wp--preset--spacing--md);
+}
+
+// Recent orders: number, date and total; status; what can be done.
+.account-orders {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.account-orders__item {
+	align-items: center;
+	border-block-start: 1px solid var(--scheme--border);
+	display: grid;
+	gap: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--lg);
+	grid-template-columns: minmax(0, 1fr) auto;
+	padding-block: var(--wp--preset--spacing--md);
+
+	@media (--md) {
+		grid-template-columns: minmax(0, 1fr) auto auto;
+	}
+}
+
+.account-orders__number {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+.account-orders__meta {
+	color: var(--scheme--text-subtle);
+	display: block;
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.account-orders__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs);
+	grid-column: 1 / -1;
+
+	@media (--md) {
+		grid-column: auto;
+	}
+}
+
+.account-orders__action {
+	@include button-size(small);
+}
+
+.account-orders__action--view {
+	@include button-variant(secondary);
+}
+
+// An order's status: a dot in its colour, then its name (the dashboard's, and
+// the orders table's status cells, by the row's status).
+.order-status {
+	align-items: center;
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--xs);
+	white-space: nowrap;
+}
+
+.order-status::before,
+.woocommerce-orders-table__cell-order-status::before {
+	background-color: var(--scheme--text-subtle);
+	border-radius: 50%;
+	content: "";
+	display: inline-block;
+	forced-color-adjust: none;
+	height: 0.5rem;
+	width: 0.5rem;
+}
+
+.woocommerce-orders-table__cell-order-status::before {
+	margin-inline-end: var(--wp--preset--spacing--xs);
+	vertical-align: middle;
+}
+
+@each $status, $color in $order-statuses {
+	.order-status--#{$status}::before,
+	.woocommerce-orders-table__row--status-#{$status} .woocommerce-orders-table__cell-order-status::before {
+		background-color: var(--wp--preset--color--status-#{$color});
+	}
 }
 
 // Addresses: each one's title with its edit link below.
@@ -237,44 +325,31 @@ $account-links: (
 
 .woocommerce-account .addresses .title h2 {
 	@include heading-base;
-	@include heading(h3);
+	@include heading(h4);
 	margin: 0;
 }
 
 // stylelint-disable-next-line selector-max-specificity -- WooCommerce floats it at 0,4,0.
 .woocommerce-account .addresses .title .edit {
-	align-items: center;
-	display: inline-flex;
 	float: none;
 	font-size: var(--wp--preset--font-size--sm);
-	gap: var(--wp--preset--spacing--sm);
-
 }
 
-.woocommerce-account .addresses .edit::before {
-	@include icon("woocommerce/account/edit-address", 12px);
+// Logged out: login and register side by side from lg, each a card (or the
+// login form alone, when registering here is switched off).
+:where(.woocommerce-account:not(.logged-in)) .my-account .woocommerce {
+	display: block;
 }
 
-.woocommerce-account .woocommerce-Addresses {
-	margin-block-start: var(--wp--style--block-gap);
-}
-
-// Editing an address has the same body class as the addresses list, and its
-// own heading: the content title would repeat it.
-:where(.woocommerce-edit-address .woocommerce-MyAccount-content:has(.woocommerce-address-fields)) .my-account-title {
-	display: none;
-}
-
-// Logged out: login and register side by side from lg, each a card.
-.woocommerce-account:not(.logged-in) .my-account-back {
-	display: none;
-}
-
-// Registration switched off: the login form alone, in a card.
-:where(.woocommerce-account:not(.logged-in) .site-main) .woocommerce:where(:not(:has(.u-columns))) {
+:where(.woocommerce-account:not(.logged-in) .my-account) .woocommerce:where(:not(:has(.u-columns))),
+:where(.woocommerce-account) .u-columns :is(.col-1, .col-2) {
 	background-color: var(--scheme--background);
 	border-radius: var(--wp--preset--border-radius--md);
-	padding: var(--wp--preset--spacing--3-xl);
+	padding: var(--wp--preset--spacing--xl);
+
+	@media (--md) {
+		padding: var(--wp--preset--spacing--3-xl);
+	}
 }
 
 .woocommerce-account .u-columns {
@@ -285,12 +360,6 @@ $account-links: (
 	@media (--lg) {
 		flex-direction: row;
 	}
-}
-
-:where(.woocommerce-account) .u-columns :is(.col-1, .col-2) {
-	background-color: var(--scheme--background);
-	border-radius: var(--wp--preset--border-radius--md);
-	padding: var(--wp--preset--spacing--3-xl);
 }
 
 :where(.woocommerce-account .u-columns) :is(.col-1, .col-2) > :first-child {

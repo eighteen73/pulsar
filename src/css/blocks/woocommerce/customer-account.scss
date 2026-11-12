@@ -1,0 +1,22 @@
+@use "tools" as *;
+
+/// The header's account link (template-parts/header.php): an icon beside the
+/// basket's, the same size and colour.
+.wp-block-woocommerce-customer-account a {
+	align-items: center;
+	color: inherit;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0;
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+.wp-block-woocommerce-customer-account svg {
+	height: 24px;
+	width: 24px;
+}

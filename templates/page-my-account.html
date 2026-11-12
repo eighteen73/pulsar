@@ -1,23 +1,15 @@
 <!-- wp:matter/template-part {"slug":"header"} /-->
 
-<!-- wp:group {"tagName":"main","className":"site-main","layout":{"type":"default"}} -->
-<main class="wp-block-group site-main"><!-- wp:group {"className":"","layout":{"type":"constrained"}} -->
-<div class="wp-block-group"><!-- wp:group {"align":"wide","className":"","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide"><!-- wp:buttons {"className":""} -->
-<div class="wp-block-buttons"><!-- wp:button {"className":"my-account-back is-style-link"} -->
-<div class="wp-block-button my-account-back is-style-link"><a class="wp-block-button__link wp-element-button" href="/my-account/">Back to my account</a></div>
-<!-- /wp:button --></div>
-<!-- /wp:buttons -->
+<!-- wp:group {"tagName":"main","className":"site-main my-account","layout":{"type":"constrained"}} -->
+<main class="wp-block-group site-main my-account">
+	<!-- wp:group {"align":"wide","className":"","layout":{"type":"default"}} -->
+	<div class="wp-block-group alignwide">
+		<!-- wp:matter/template-part {"slug":"woocommerce/account-header"} /-->
 
-<!-- wp:post-title {"level":1,"className":""} /-->
-
-<!-- wp:heading {"level":1,"className":""} -->
-<h1 class="wp-block-heading">My Account</h1>
-<!-- /wp:heading --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group -->
-
-<!-- wp:post-content {"className":"","layout":{"type":"constrained"}} /--></main>
+		<!-- wp:post-content {"className":"","layout":{"type":"default"}} /-->
+	</div>
+	<!-- /wp:group -->
+</main>
 <!-- /wp:group -->
 
 <!-- wp:matter/template-part {"slug":"footer"} /-->

@@ -51,6 +51,14 @@ use function Eighteen73\Matter\panel_toggle;
 		<div class="site-header__actions">
 			<?php
 			if ( class_exists( 'WooCommerce' ) ) {
+				// My account (or log in), then the basket.
+				Pulsar\the_block(
+					'woocommerce/customer-account',
+					[
+						'displayStyle' => 'icon_only',
+						'iconStyle'    => 'line',
+					]
+				);
 				Pulsar\the_block( 'woocommerce/mini-cart' );
 			}
 

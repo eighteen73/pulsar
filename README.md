@@ -223,7 +223,8 @@ This works for dynamic blocks only. It runs them through core's render pipeline,
 
 Shop, product, cart, checkout, order received and account templates are block templates in `templates/`.
 
-- **Product pages:** the details (description, additional information, reviews) are an accordion; the rating's "customer reviews" link (`#reviews`) opens the reviews. A variable product's options are chips (`parts/variable-product-add-to-cart-with-options.html`).
+- **Product pages:** the gallery stays in view beside the summary; the details (description, additional information, reviews) are an accordion below add to cart, and the rating's "customer reviews" link (`#reviews`) opens the reviews. Related products are a Matter carousel. A variable product's options are chips (`parts/variable-product-add-to-cart-with-options.html`).
+- **My Account** has one layout on every page: a header with who's signed in (`template-parts/woocommerce/account-header.php`), and the navigation beside the current section from `lg` (a strip of tabs that scrolls sideways below it). The dashboard is an overview of recent orders, addresses and details (`template-parts/woocommerce/account-dashboard.php`, on WooCommerce's `woocommerce_account_dashboard` hook, so extensions' dashboard content follows it). WooCommerce's own account templates aren't overridden. The header has an account link beside the basket.
 - **Order received** is built from WooCommerce's order confirmation blocks (`patterns/order-confirmation.php`).
 - **Blocks** are styled per block in `src/css/blocks/woocommerce/`.
 - **WooCommerce's classic markup** (My Account's forms, orders, addresses; the customer payment page that payment links open; the classic cart and checkout; extensions' templates) is styled in `src/css/woocommerce.scss`, loaded on every WooCommerce page after WooCommerce's own stylesheet; My Account's layout and navigation in `src/css/woocommerce-account.scss`.

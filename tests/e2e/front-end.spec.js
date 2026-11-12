@@ -286,3 +286,98 @@ test.describe('WooCommerce', () => {
 		expect(await violations(page)).toEqual([]);
 	});
 });
+
+test.describe('My Account', () => {
+	/**
+	 * A customer with an address and a processing order, logged in.
+	 *
+	 * @param {Object} page         Page.
+	 * @param {Object} requestUtils WordPress request utils.
+	 */
+	const logInAsCustomer = async (page, requestUtils) => {
+		const username = `customer${Date.now()}`;
+		const email = `${username}@example.com`;
+		const password = 'Customer-password-1';
+		const customer = await requestUtils.rest({
+			path: '/wc/v3/customers',
+			method: 'POST',
+			data: {
+				email,
+				username,
+				password,
+				first_name: 'Test',
+				last_name: 'Customer',
+				billing: {
+					first_name: 'Test',
+					last_name: 'Customer',
+					address_1: '1 Test Street',
+					city: 'Leeds',
+					postcode: 'LS1 1AA',
+					country: 'GB',
+					email,
+				},
+			},
+		});
+		const [product] = await requestUtils.rest({
+			path: '/wc/v3/products',
+			params: { search: 'Test bauble' },
+		});
+
+		await requestUtils.rest({
+			path: '/wc/v3/orders',
+			method: 'POST',
+			data: {
+				customer_id: customer.id,
+				status: 'processing',
+				line_items: [{ product_id: product.id, quantity: 1 }],
+			},
+		});
+
+		await page.goto('/my-account/');
+		await page.locator('#username').fill(username);
+		await page.locator('#password').fill(password);
+		await page.getByRole('button', { name: /log in/i }).click();
+		await expect(page.locator('.my-account-header__user')).toContainText(
+			username
+		);
+	};
+
+	test('the dashboard is an overview, and every section passes axe', async ({
+		page,
+		requestUtils,
+	}) => {
+		await logInAsCustomer(page, requestUtils);
+
+		await expect(
+			page.locator('.account-orders__item .order-status--processing')
+		).toBeVisible();
+		await expect(
+			page.locator('.account-overview address').first()
+		).toContainText('1 Test Street');
+		expect(await violations(page)).toEqual([]);
+
+		for (const section of ['orders', 'edit-address', 'edit-account']) {
+			await page.goto(`/my-account/${section}/`);
+			await expect(page.locator('.my-account-title')).toBeVisible();
+			expect(await violations(page), section).toEqual([]);
+		}
+	});
+
+	test('on a phone, the navigation scrolls within the page', async ({
+		page,
+		requestUtils,
+	}) => {
+		await page.setViewportSize(MOBILE);
+		await logInAsCustomer(page, requestUtils);
+		await page.goto('/my-account/edit-account/');
+
+		expect(
+			await page.evaluate(
+				() => document.documentElement.scrollWidth <= window.innerWidth
+			)
+		).toBe(true);
+		await expect(
+			page.locator('.woocommerce-MyAccount-navigation .is-active')
+		).toBeInViewport();
+	});
+});
