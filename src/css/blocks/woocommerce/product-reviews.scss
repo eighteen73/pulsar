@@ -16,8 +16,10 @@
 	padding-block-end: var(--wp--preset--spacing--xl);
 }
 
-// WooCommerce centres the stars (auto margins).
+// WooCommerce centres the stars (auto margins). In the link colour, as the
+// product's rating and the rating filter's are.
 .wp-block-woocommerce-product-review-rating .wc-block-product-review-rating__stars {
+	color: var(--scheme--text-link);
 	margin-inline: 0;
 }
 

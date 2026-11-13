@@ -71,7 +71,29 @@
 	margin-block-start: var(--wp--preset--spacing--sm);
 }
 
-// Rating's stars, in the link colour as a product's rating is.
+// Rating: five stars cropped to the rating, in the link colour as a product's
+// rating is. WooCommerce crops them with an inline width, a percentage of the
+// text beside the checkbox: that's made five stars wide, so 80% is four
+// stars (the count runs on past it).
+.wc-block-product-filter-checkbox-list__text-wrapper:has(> .wc-block-product-filter-checkbox-list__stars) {
+	--_star-size: 1.25em;
+	display: flex;
+	gap: var(--wp--preset--spacing--xs);
+	width: calc(5 * var(--_star-size));
+}
+
 .wc-block-product-filter-checkbox-list__stars {
 	color: var(--scheme--text-link);
+	flex-shrink: 0;
+	height: var(--_star-size);
+}
+
+.wc-block-product-filter-checkbox-list__stars svg.wc-block-product-filter-checkbox-list__stars-svg {
+	height: var(--_star-size);
+	max-width: none;
+	width: auto;
+}
+
+.wc-block-product-filter-checkbox-list__stars + .wc-block-product-filter-checkbox-list__count {
+	flex-shrink: 0;
 }
