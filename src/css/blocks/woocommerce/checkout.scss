@@ -443,10 +443,12 @@
 	margin-top: var(--wp--preset--spacing--md);
 }
 
-// The chosen option. (As specific as a card's `:hover`, 0,3,0, which it follows.)
+// The chosen option. (As specific as a card's `:hover`, 0,3,0, which it
+// follows; WooCommerce rounds it less, 4px, so the radius is restated.)
 .wp-block-woocommerce-checkout .wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
 .wp-block-woocommerce-checkout .wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
 	@include option-card-checked;
+	border-radius: var(--wp--preset--border-radius--md);
 }
 
 .wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control__option::after,
