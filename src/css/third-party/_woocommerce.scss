@@ -30,6 +30,7 @@ body {
 // theme styles (Product Bundles', Bookings') size their titles and labels with
 // them, and without them their sizes are inherited.
 :root {
+	--wp--preset--font-size--x-small: var(--wp--preset--font-size--xs);
 	--wp--preset--font-size--small: var(--wp--preset--font-size--sm);
 	--wp--preset--font-size--medium: var(--wp--preset--font-size--md);
 	--wp--preset--font-size--large: var(--wp--preset--font-size--lg);

@@ -1,4 +1,5 @@
 @use "tools" as *;
+@use "third-party/woocommerce-subscriptions-totals";
 
 /// The cart (templates/page-cart.html): the items, then the totals beside them
 /// from lg. This loads after WooCommerce's cart.css, so matching a rule's
