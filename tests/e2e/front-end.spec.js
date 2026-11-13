@@ -4,7 +4,7 @@
  */
 const { test, expect } = require('@wordpress/e2e-test-utils-playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
-const { SCHEMES, SETTINGS, PAGE_PREFIX } = require('./content');
+const { SCHEMES, SETTINGS, PAGE_PREFIX, COUPON } = require('./content');
 
 const DESKTOP = { width: 1280, height: 900 };
 const MOBILE = { width: 390, height: 800 };
@@ -24,9 +24,12 @@ test.afterEach(({ page }) => {
 	expect(scriptErrors.get(page), 'uncaught script errors').toEqual([]);
 });
 
-const violations = async (page) =>
+const violations = async (page, disableRules = []) =>
 	(
-		await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze()
+		await new AxeBuilder({ page })
+			.withTags(AXE_TAGS)
+			.disableRules(disableRules)
+			.analyze()
 	).violations.map(
 		({ id, nodes }) =>
 			`${id}: ${nodes.map((node) => node.target).join(' | ')}`
@@ -228,6 +231,9 @@ test.describe('WooCommerce', () => {
 			.getByRole('button', { name: /add to (basket|cart)/i })
 			.first()
 			.click();
+		await expect(page.locator('.wc-block-mini-cart__badge')).toHaveText(
+			/[1-9]/
+		);
 
 		await page.goto('/cart/');
 		await expect(page.getByText('Test bauble').first()).toBeVisible();
@@ -282,6 +288,176 @@ test.describe('WooCommerce', () => {
 		await expect(page.locator('#payment')).toBeVisible();
 		await expect(
 			page.getByRole('button', { name: /pay for order/i })
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
+});
+
+test.describe('WooCommerce: stock, filters, basket and checkout', () => {
+	/**
+	 * Add a product to the basket from its page, waiting for the mini cart to
+	 * count it.
+	 *
+	 * @param {Object} page Page.
+	 * @param {string} slug The product's slug.
+	 */
+	const addToBasket = async (page, slug) => {
+		await page.goto(`/product/${slug}/`);
+		await page
+			.locator('.wc-block-add-to-cart-with-options')
+			.getByRole('button', { name: /add to (basket|cart)/i })
+			.click();
+		await expect(page.locator('.wc-block-mini-cart__badge')).toHaveText(
+			/[1-9]/
+		);
+	};
+
+	test("a product shows its stock, and out of stock it can't be bought", async ({
+		page,
+	}) => {
+		for (const [slug, stock] of [
+			['test-back-order', /back-?order/i],
+			['test-few-left', '3 in stock'],
+			['test-out-of-stock', 'Out of stock'],
+		]) {
+			await page.goto(`/product/${slug}/`);
+			await expect(
+				page.locator('.wc-block-components-product-stock-indicator')
+			).toContainText(stock);
+		}
+
+		// (Related products below can still be added.)
+		await expect(
+			page
+				.locator('.wc-block-add-to-cart-with-options')
+				.getByRole('button', { name: /add to (basket|cart)/i })
+		).toHaveCount(0);
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('a product with reviews shows its rating and reviews, and passes axe', async ({
+		page,
+	}) => {
+		await page.goto('/product/test-bauble/#reviews');
+
+		await expect(
+			page.locator('.wp-block-woocommerce-product-review-rating').first()
+		).toBeVisible();
+		await expect(page.getByText('Lovely and sparkly.')).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('the product filters narrow the products, and pass axe', async ({
+		page,
+	}) => {
+		await page.goto(`/${PAGE_PREFIX}filters/`);
+
+		await expect(
+			page.getByRole('link', { name: 'Test few left' }).first()
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+
+		await page
+			.locator('.wp-block-woocommerce-product-filter-taxonomy')
+			.getByRole('checkbox', { name: 'Christmas' })
+			.check();
+
+		await expect(page).toHaveURL(/categories=christmas/);
+		await expect(
+			page.locator('.wc-block-product-filter-removable-chips__item')
+		).toContainText('Christmas');
+		await expect(
+			page.getByRole('link', { name: 'Test bauble' }).first()
+		).toBeVisible();
+		await expect(
+			page.getByRole('link', { name: 'Test few left' })
+		).toHaveCount(0);
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('on a phone, the filters open in an overlay that closes again', async ({
+		page,
+	}) => {
+		await page.setViewportSize(MOBILE);
+		await page.goto(`/${PAGE_PREFIX}filters/`);
+
+		const filters = page.locator('.wc-block-product-filters');
+
+		await page.getByRole('button', { name: 'Filter products' }).click();
+		await expect(filters).toHaveClass(/\bis-overlay-opened\b/);
+		expect(await violations(page)).toEqual([]);
+
+		await filters
+			.locator('.wc-block-product-filters__close-overlay')
+			.click();
+		await expect(filters).not.toHaveClass(/\bis-overlay-opened\b/);
+	});
+
+	test('an empty basket passes axe', async ({ page }) => {
+		await page.goto('/cart/');
+
+		await expect(
+			page.locator('.wp-block-woocommerce-empty-cart-block')
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('a coupon applies as a chip, a wrong code shows an error, and the basket passes axe', async ({
+		page,
+	}) => {
+		await addToBasket(page, 'test-bauble');
+		await page.goto('/cart/');
+
+		const coupons = page.locator('.wc-block-components-totals-coupon');
+
+		await page.getByRole('button', { name: /add coupons?/i }).click();
+		await coupons.getByRole('textbox').fill('not-a-coupon');
+		await coupons.getByRole('button', { name: /apply/i }).click();
+		await expect(
+			coupons.locator('.wc-block-components-validation-error')
+		).toBeVisible();
+
+		await coupons.getByRole('textbox').fill(COUPON);
+		await coupons.getByRole('button', { name: /apply/i }).click();
+		await expect(page.locator('.wc-block-components-chip')).toContainText(
+			COUPON
+		);
+		expect(await violations(page)).toEqual([]);
+	});
+
+	test('checkout shows each missing field, and an order by bank transfer is received', async ({
+		page,
+	}) => {
+		await addToBasket(page, 'test-gift-card');
+		await page.goto('/checkout/');
+
+		const placeOrder = page.getByRole('button', { name: /place order/i });
+
+		await placeOrder.click();
+		await expect(
+			page.locator('.wc-block-components-text-input.has-error').first()
+		).toBeVisible();
+		// WooCommerce's fields point aria-errormessage at a message whose
+		// wrapper (not the message itself) is role="alert". It is announced,
+		// but axe wants the live region on the referenced element, and reports
+		// it as aria-valid-attr-value.
+		expect(await violations(page, ['aria-valid-attr-value'])).toEqual([]);
+
+		for (const [label, value] of [
+			['Email address', 'buyer@example.com'],
+			['First name', 'Test'],
+			['Last name', 'Buyer'],
+			['Address', '2 Order Lane'],
+			['City', 'Leeds'],
+			['Postcode', 'LS1 2AB'],
+		]) {
+			await page.getByLabel(label, { exact: true }).fill(value);
+		}
+
+		await placeOrder.click();
+		await expect(page).toHaveURL(/order-received/);
+		await expect(
+			page.getByRole('heading', { level: 1, name: /order received/i })
 		).toBeVisible();
 		expect(await violations(page)).toEqual([]);
 	});

@@ -1,0 +1,9 @@
+{
+	"plugins": [
+		"https://downloads.wordpress.org/plugin/woocommerce.11.3.0.zip",
+		"../../plugins/woocommerce-subscriptions",
+		"../../plugins/woocommerce-product-bundles",
+		"../../plugins/woocommerce-bookings",
+		"../../plugins/woocommerce-memberships"
+	]
+}

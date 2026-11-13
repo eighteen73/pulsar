@@ -38,7 +38,17 @@ npx playwright install chromium    # once
 npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
 ```
 
-They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, and that the header, footer, menus, archives, search, 404 and shop work. **In a project,** add its sections to `content.js` and `editor.spec.js` as they're built, so a change to a section or a scheme is checked like the starter's. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
+They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, and that the header, footer, menus, archives, search, 404 and shop work. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account.
+
+**WooCommerce's paid extensions** (Subscriptions, with All Products for Subscriptions; Product Bundles; Bookings; Memberships) have their own tests, `tests/e2e/extensions.spec.js`. They need the plugins, so they run locally and skip in CI. With the extensions in the project's `web/app/plugins`:
+
+```bash
+cp tests/wp-env/extensions.override.example.json .wp-env.override.json   # git-ignored
+npm run env:start
+npm run test:e2e   # seeds a customer, products, a subscription, booking and membership (tests/wp-env/seed-extensions.php)
+```
+
+Delete `.wp-env.override.json` and start again to go back to WooCommerce alone. (Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.) **In a project,** add its sections to `content.js` and `editor.spec.js` as they're built, so a change to a section or a scheme is checked like the starter's. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
 
 ## Where things live
 

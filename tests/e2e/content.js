@@ -133,15 +133,34 @@ async function clean(requestUtils) {
 	await requestUtils.deleteAllPosts();
 	await requestUtils.deleteAllMenus?.();
 
+	// (Except the extension tests' products, which their orders, subscription
+	// and booking keep: tests/wp-env/seed-extensions.php.)
 	const products = await requestUtils.rest({
 		path: '/wc/v3/products',
 		params: { per_page: 100 },
 	});
 
 	await Promise.all(
-		products.map(({ id }) =>
+		products
+			.filter(({ slug }) => !slug.startsWith('pulsar-ext-'))
+			.map(({ id }) =>
+				requestUtils.rest({
+					path: `/wc/v3/products/${id}`,
+					method: 'DELETE',
+					params: { force: true },
+				})
+			)
+	);
+
+	const coupons = await requestUtils.rest({
+		path: '/wc/v3/coupons',
+		params: { per_page: 100 },
+	});
+
+	await Promise.all(
+		coupons.map(({ id }) =>
 			requestUtils.rest({
-				path: `/wc/v3/products/${id}`,
+				path: `/wc/v3/coupons/${id}`,
 				method: 'DELETE',
 				params: { force: true },
 			})
@@ -230,6 +249,39 @@ async function createMenus(requestUtils) {
 	]);
 }
 
+/** The coupon the basket test applies. */
+const COUPON = 'pulsar10';
+
+/**
+ * Products with their filters beside them: WooCommerce's product filters
+ * (active filters, price, rating, category, availability) inside a Product
+ * Collection, whose query they filter.
+ *
+ * @return {string} Block markup.
+ */
+const filtersPage = () => {
+	const filter = (block, title, inner, attributes = {}) =>
+		`<!-- wp:woocommerce/${block} ${JSON.stringify(attributes)} --><div class="wp-block-woocommerce-${block}">${heading(3, title)}${inner}</div><!-- /wp:woocommerce/${block} -->`;
+	const checkboxes =
+		'<!-- wp:woocommerce/product-filter-checkbox-list --><div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div><!-- /wp:woocommerce/product-filter-checkbox-list -->';
+	const query = {
+		perPage: 9,
+		pages: 0,
+		offset: 0,
+		postType: 'product',
+		order: 'asc',
+		orderBy: 'title',
+		inherit: false,
+		filterable: true,
+		isProductCollectionBlock: true,
+		woocommerceStockStatus: ['instock', 'outofstock', 'onbackorder'],
+	};
+
+	return `<!-- wp:woocommerce/product-collection {"queryId":9,"query":${JSON.stringify(query)},"tagName":"div","displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"queryContextIncludes":["collection"]} -->
+<div class="wp-block-woocommerce-product-collection"><!-- wp:columns --><div class="wp-block-columns"><!-- wp:column {"width":"30%"} --><div class="wp-block-column" style="flex-basis:30%"><!-- wp:woocommerce/product-filters --><div class="wp-block-woocommerce-product-filters wc-block-product-filters">${heading(2, 'Filters')}<!-- wp:woocommerce/product-filter-active --><div class="wp-block-woocommerce-product-filter-active"><!-- wp:woocommerce/product-filter-removable-chips --><div class="wp-block-woocommerce-product-filter-removable-chips wc-block-product-filter-removable-chips"></div><!-- /wp:woocommerce/product-filter-removable-chips --></div><!-- /wp:woocommerce/product-filter-active -->${filter('product-filter-price', 'Price', '<!-- wp:woocommerce/product-filter-price-slider {"showInputFields":true} --><div class="wp-block-woocommerce-product-filter-price-slider wc-block-product-filter-price-slider"></div><!-- /wp:woocommerce/product-filter-price-slider -->')}${filter('product-filter-rating', 'Rating', checkboxes)}${filter('product-filter-taxonomy', 'Category', checkboxes, { showCounts: true })}${filter('product-filter-status', 'Availability', checkboxes)}</div><!-- /wp:woocommerce/product-filters --></div><!-- /wp:column --><!-- wp:column {"width":"70%"} --><div class="wp-block-column" style="flex-basis:70%"><!-- wp:woocommerce/product-template --><!-- wp:matter/loop-item /--><!-- /wp:woocommerce/product-template --></div><!-- /wp:column --></div><!-- /wp:columns --></div>
+<!-- /wp:woocommerce/product-collection -->`;
+};
+
 /**
  * Create everything the tests use.
  *
@@ -281,6 +333,81 @@ async function createContent(requestUtils) {
 		});
 	}
 
+	// A product in each stock state, and a virtual one (checkout without
+	// shipping).
+	const states = await term(
+		requestUtils,
+		'/wc/v3/products/categories',
+		'States'
+	);
+
+	for (const product of [
+		{ name: 'Test out of stock', stock_status: 'outofstock' },
+		{
+			name: 'Test back-order',
+			manage_stock: true,
+			stock_quantity: 0,
+			backorders: 'notify',
+		},
+		{ name: 'Test few left', manage_stock: true, stock_quantity: 3 },
+		{ name: 'Test gift card', virtual: true },
+	]) {
+		await requestUtils.rest({
+			path: '/wc/v3/products',
+			method: 'POST',
+			data: {
+				regular_price: '9.00',
+				status: 'publish',
+				categories: [{ id: states }],
+				...product,
+			},
+		});
+	}
+
+	// A review, so there are ratings.
+	const [bauble] = await requestUtils.rest({
+		path: '/wc/v3/products',
+		params: { search: 'Test bauble' },
+	});
+
+	await requestUtils.rest({
+		path: '/wc/v3/products/reviews',
+		method: 'POST',
+		data: {
+			product_id: bauble.id,
+			review: 'Lovely and sparkly.',
+			reviewer: 'Test reviewer',
+			reviewer_email: 'reviewer@example.com',
+			rating: 4,
+			status: 'approved',
+		},
+	});
+
+	await requestUtils.rest({
+		path: '/wc/v3/coupons',
+		method: 'POST',
+		data: { code: COUPON, discount_type: 'percent', amount: '10' },
+	});
+
+	// Orders can be placed (by bank transfer), from the UK (no state field).
+	await requestUtils.rest({
+		path: '/wc/v3/payment_gateways/bacs',
+		method: 'PUT',
+		data: { enabled: true },
+	});
+	await requestUtils.rest({
+		path: '/wc/v3/settings/general/woocommerce_default_country',
+		method: 'PUT',
+		data: { value: 'GB' },
+	});
+
+	await requestUtils.createPage({
+		title: 'Filters',
+		slug: `${PAGE_PREFIX}filters`,
+		status: 'publish',
+		content: filtersPage(),
+	});
+
 	await createMenus(requestUtils);
 
 	await requestUtils.rest({
@@ -290,4 +417,4 @@ async function createContent(requestUtils) {
 	});
 }
 
-module.exports = { createContent, SCHEMES, SETTINGS, PAGE_PREFIX };
+module.exports = { createContent, SCHEMES, SETTINGS, PAGE_PREFIX, COUPON };

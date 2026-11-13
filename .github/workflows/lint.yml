@@ -24,6 +24,9 @@ jobs:
       - uses: eighteen73/github-actions/.github/actions/lint@main
         with:
           node-version-file: .nvmrc
+      # The committed build: no stylesheet may start with a byte order mark.
+      - name: Check the built stylesheets
+        run: node tests/lint-build.js
 
   browser-tests:
     name: Browser tests (wp-env)
