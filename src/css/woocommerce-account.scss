@@ -451,6 +451,11 @@ td.woocommerce-orders-table__cell-order-status::after {
 	color: var(--scheme--text-subtle);
 }
 
+// Memberships with none: its sentence as the other sections' empty notices.
+.woocommerce-account-my-memberships > p:only-child {
+	@include wc-notice;
+}
+
 // Bookings: its list repeats the section's title after the search (and a
 // notice), and its statuses are labels; shown like the orders' (a dot, then
 // the name).
