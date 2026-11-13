@@ -20,6 +20,11 @@
 	&[aria-disabled="true"]::before {
 		opacity: 0.3;
 	}
+
+	// Right to left, previous is on the right: the carets point the other way.
+	&:dir(rtl)::before {
+		scale: -1 1;
+	}
 }
 
 .wc-block-next-previous-buttons .wc-block-next-previous-buttons__button svg {

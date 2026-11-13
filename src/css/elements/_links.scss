@@ -8,3 +8,10 @@
 		@include focus-block;
 	}
 }
+
+// Phone numbers read left to right in a right-to-left page too (its digit
+// groups would otherwise be reordered: "0113 496 0000" as "0000 496 0113").
+:where(a[href^="tel:"]) {
+	direction: ltr;
+	unicode-bidi: isolate;
+}

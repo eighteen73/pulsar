@@ -68,6 +68,7 @@ class Enqueue implements Bootable {
 			Asset::attribute( 'app', 'css', 'version' ),
 			'screen, print',
 		);
+		wp_style_add_data( 'pulsar-app-styles', 'rtl', 'replace' );
 	}
 
 	/**
@@ -114,6 +115,7 @@ class Enqueue implements Bootable {
 			Asset::attribute( 'woocommerce', 'css', 'version' ),
 			'screen, print',
 		);
+		wp_style_add_data( 'pulsar-woocommerce-styles', 'rtl', 'replace' );
 
 		if ( \is_account_page() ) {
 			wp_enqueue_style(
@@ -123,6 +125,7 @@ class Enqueue implements Bootable {
 				Asset::attribute( 'woocommerce-account', 'css', 'version' ),
 				'screen, print',
 			);
+			wp_style_add_data( 'pulsar-woocommerce-account-styles', 'rtl', 'replace' );
 		}
 
 		// Bookings' form, after Bookings' own styles (which it loads on every
@@ -135,6 +138,7 @@ class Enqueue implements Bootable {
 				Asset::attribute( 'woocommerce-bookings', 'css', 'version' ),
 				'screen, print',
 			);
+			wp_style_add_data( 'pulsar-woocommerce-bookings-styles', 'rtl', 'replace' );
 		}
 	}
 
