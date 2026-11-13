@@ -439,11 +439,15 @@ td.woocommerce-orders-table__cell-order-status::after {
 	}
 }
 
-:where(.woocommerce-account .u-columns) :is(.col-1, .col-2) > :first-child {
+// Each card's heading at its top: a column's first child, or the login form
+// alone's, after the (empty) notices.
+:where(.woocommerce-account .u-columns) :is(.col-1, .col-2) > :first-child,
+:where(.woocommerce-account:not(.logged-in) .my-account) .woocommerce > .woocommerce-notices-wrapper:empty + * {
 	margin-block-start: 0;
 }
 
-:where(.woocommerce-account .u-columns) :is(.col-1, .col-2) p:not(.form-row) {
+// The intro under each heading, and the lost password link.
+:where(.woocommerce-account:not(.logged-in) .my-account) .woocommerce p:not(.form-row) {
 	color: var(--scheme--text-subtle);
 }
 

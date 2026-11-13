@@ -24,10 +24,15 @@
 	display: none;
 }
 
+// Once its script loads, WooCommerce colours the badge inline (the block's
+// product count colour, or else the button's text and background colours
+// swapped), so the scheme's colours flashed to those. Kept with `!important`.
 .wc-block-mini-cart__badge {
 	aspect-ratio: 1 / 1;
-	background-color: var(--scheme--background-fill);
-	color: var(--scheme--text-fill);
+	/* stylelint-disable declaration-no-important -- WooCommerce's inline style, set by its script. */
+	background-color: var(--scheme--background-fill) !important;
+	color: var(--scheme--text-fill) !important;
+	/* stylelint-enable declaration-no-important */
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	height: 24px;

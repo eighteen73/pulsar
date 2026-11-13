@@ -160,8 +160,16 @@
 	padding: 0;
 }
 
-.woocommerce .woocommerce-form-login__rememberme {
-	align-self: center;
+// "Remember me" and the button share a row: spaced as the form's rows are.
+.woocommerce .form-row:has(> .woocommerce-form-login__rememberme) {
+	display: grid;
+	gap: var(--wp--style--block-gap);
+}
+
+// (Not a field's label: `.woocommerce form .form-row label`, 0,2,1, above.)
+.woocommerce form .form-row .woocommerce-form-login__rememberme {
+	justify-self: start;
+	margin: 0;
 }
 
 .woocommerce .woocommerce-form-login__submit,
