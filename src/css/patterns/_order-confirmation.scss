@@ -4,11 +4,36 @@
 /// confirmation blocks, a section's space from the status band and footer, in
 /// the theme's borders. WooCommerce spaces the parts (48px between them) and
 /// hides an empty address column.
+// (The space after the status band is the page's between groups:
+// `.site-main > .wp-block-group + .wp-block-group`.)
 .order-confirmation {
-	padding-block: var(--wp--custom--spacing--section);
+	padding-block-end: var(--wp--custom--spacing--section);
 }
 
 .order-confirmation .wc-block-order-confirmation-summary {
+	margin-block-start: 0;
+}
+
+// The status band: the title as the cart's and checkout's are (2-xl), the
+// thanks under it.
+.wc-block-order-confirmation-status h1 {
+	@include heading-base;
+	font-size: var(--wp--preset--font-size--2-xl);
+	margin: 0;
+}
+
+.wc-block-order-confirmation-status p {
+	font-size: var(--wp--preset--font-size--lg);
+	margin-block: var(--wp--preset--spacing--xs) 0;
+}
+
+// Each part's heading, spaced the same from what it heads (WooCommerce spaces
+// the tables, 24px, but not the addresses).
+.order-confirmation .wp-block-heading {
+	margin-block: 0 var(--wp--preset--spacing--lg);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) {
 	margin-block-start: 0;
 }
 

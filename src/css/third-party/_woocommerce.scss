@@ -37,6 +37,19 @@ body {
 	--wp--preset--font-size--x-large: var(--wp--preset--font-size--xl);
 }
 
+// Fields with an error (the checkout's, the coupon's): the label, the message
+// and an invalid checkbox's text in the error colour, not WooCommerce's red.
+// One element more than WooCommerce's, up to 0,3,1.
+/* stylelint-disable selector-max-specificity -- WooCommerce's label, `.wc-block-components-form .wc-block-components-text-input.has-error label`, 0,3,1. */
+body .wc-block-components-validation-error,
+body .wc-block-components-form .wc-block-components-text-input.has-error label,
+body .wc-block-components-text-input.has-error label,
+body .wc-block-components-checkbox.has-error,
+body .wc-block-components-checkbox.has-error a {
+	color: var(--wp--preset--color--status-error);
+}
+/* stylelint-enable selector-max-specificity */
+
 // Select2 (country and state fields): sized like the theme's fields. One
 // element more than WooCommerce's rules.
 body .select2-container .select2-selection--single {

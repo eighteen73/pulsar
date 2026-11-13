@@ -290,6 +290,16 @@
 	}
 }
 
+// With an error, the border (focused too) in the error colour.
+.wc-block-components-form .wc-block-components-text-input.has-error input:is([type="email"], [type="number"], [type="password"], [type="tel"], [type="text"], [type="url"]) {
+	border-color: var(--wp--preset--color--status-error);
+
+	&:focus {
+		border-color: var(--wp--preset--color--status-error);
+		box-shadow: var(--wp--preset--color--status-error) 0 0 0 1px;
+	}
+}
+
 /* stylelint-enable selector-max-specificity */
 
 .wp-block-woocommerce-checkout .wc-block-components-text-input label {
@@ -398,6 +408,11 @@
 
 .wc-block-components-checkbox .wc-block-components-checkbox__mark {
 	display: none;
+}
+
+// stylelint-disable-next-line selector-max-specificity -- The checkbox above, 0,3,0, with an error (a required checkbox, e.g. the terms).
+.wc-block-components-checkbox.has-error .wc-block-components-checkbox__input[type="checkbox"] {
+	border-color: var(--wp--preset--color--status-error);
 }
 
 .wp-block-woocommerce-checkout .wc-block-components-checkbox label {
