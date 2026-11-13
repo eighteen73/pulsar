@@ -60,3 +60,10 @@
 	max-width: 6rem;
 	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
 }
+
+// Inline (the fields either side of the range): narrower, so the range has
+// room in a sidebar.
+.wc-block-product-filter-price-slider__content--inline .text input:is(.min, .max) {
+	max-width: 4.5rem;
+	padding-inline: var(--wp--preset--spacing--sm);
+}

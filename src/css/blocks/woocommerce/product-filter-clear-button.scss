@@ -2,7 +2,7 @@
 
 /// "Clear filters": a small secondary button (WooCommerce's is an outline
 /// button, a style the theme doesn't have; its inline padding and border
-/// are removed, ThirdParty\WooCommerce\Setup::filter_clear_button()).
+/// are removed, ThirdParty\WooCommerce\Setup::product_filters_default_styles()).
 .wp-block-woocommerce-product-filter-clear-button :where(.wp-block-buttons) {
 	margin-block-start: var(--wp--preset--spacing--md);
 }

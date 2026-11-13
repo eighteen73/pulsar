@@ -12,15 +12,18 @@
 }
 
 // The title ("Filters") and each filter's heading: smaller than the page's
-// headings. (Their margins are WooCommerce's, inline.)
+// headings, and spaced from what they head (WooCommerce's inline margins are
+// removed, Setup::product_filters_default_styles()).
 .wc-block-product-filters :is(.wc-block-product-filters__content, .wc-block-product-filters__overlay-content) > .wp-block-heading {
 	@include heading-base;
 	@include heading(h4);
+	margin-block: 0;
 }
 
 .wc-block-product-filters [class*="wp-block-woocommerce-product-filter-"] > .wp-block-heading {
 	@include heading-base;
 	@include heading(h6);
+	margin-block: 0 var(--wp--preset--spacing--md);
 }
 
 // "Filter products" (below the breakpoint): a secondary button. As specific as
