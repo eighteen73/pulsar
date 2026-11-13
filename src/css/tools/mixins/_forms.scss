@@ -219,6 +219,35 @@
 	}
 }
 
+/// A choice as a card (a radio's label: the checkout's shipping and payment
+/// methods, All Products for Subscriptions' options): ringed in the border
+/// colour, more strongly on hover. Rings are inset shadows, so the chosen card
+/// (`option-card-checked`) doesn't move.
+@mixin option-card() {
+	background-color: var(--scheme--background);
+	border-radius: var(--wp--preset--border-radius--md);
+	box-shadow: inset 0 0 0 1px var(--scheme--border);
+	cursor: pointer;
+	transition:
+		background-color var(--wp--custom--transition--duration--quick),
+		box-shadow var(--wp--custom--transition--duration--quick);
+
+	&:hover {
+		box-shadow: inset 0 0 0 1px var(--scheme--border-strong);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+/// The chosen option card: on the surface, ringed (2px) in the fill colour.
+/// After `option-card`, at least as specific as its `:hover`.
+@mixin option-card-checked() {
+	background-color: var(--scheme--background-surface);
+	box-shadow: inset 0 0 0 2px var(--scheme--background-fill);
+}
+
 /// Range styles.
 @mixin field-range() {
 	accent-color: var(--scheme--background-fill);
