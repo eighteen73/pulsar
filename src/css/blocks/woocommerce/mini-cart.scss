@@ -100,12 +100,11 @@
 	padding: var(--wp--preset--spacing--xl);
 }
 
+// A thumbnail, the product (its name has the room), then the total, as narrow
+// as it can be: WooCommerce places the total in a column of its own, sized by
+// its content, so a long savings badge squeezed the name.
 .wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row {
-	grid-template-columns: 44px 1fr 1fr;
-
-	@media (--xs) {
-		grid-template-columns: 144px 1fr;
-	}
+	grid-template-columns: calc(64px + var(--wp--preset--spacing--lg)) minmax(0, 1fr) auto;
 }
 
 .wc-block-mini-cart__items tr.wc-block-cart-items__row:first-child {
@@ -124,10 +123,43 @@
 	border-radius: var(--wp--preset--border-radius--sm);
 }
 
-/* stylelint-disable selector-max-specificity -- WooCommerce lays the items out with `table.wc-block-cart-items .wc-block-cart-items__row …` and `.is-mobile table.wc-block-cart-items .wc-block-cart-items__row …`, up to 0,4,1, which load after this: these are its selectors in the drawer. */
+/* stylelint-disable selector-max-specificity, selector-max-compound-selectors -- WooCommerce lays the items out with `table.wc-block-cart-items .wc-block-cart-items__row …` and `.is-mobile table.wc-block-cart-items .wc-block-cart-items__row …`, up to 0,4,1, which load after this (and Product Bundles its items, up to 0,5,2): these are its selectors in the drawer. */
 .wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__image,
 .wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__product {
 	padding-right: var(--wp--preset--spacing--lg);
+}
+
+// WooCommerce spans the product across the total's column.
+.wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__product {
+	grid-column: 2;
+}
+
+.wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__total {
+	grid-column: 3;
+	text-align: end;
+}
+
+// Product Bundles' items: Bundles moves their image into the product's column
+// and indents their content past it (`.is-mobile table.wc-block-cart-items
+// .wc-block-cart-items__row.is-bundled__indented …`, up to 0,5,2), which
+// pushes the quantity out of the drawer. Here the image stays in its column,
+// smaller and to the right, beside the bundle's, and the content lines up
+// with the bundle's.
+.wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__image a {
+	height: auto;
+	width: auto;
+}
+
+.wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__image img {
+	display: block;
+	margin: 0;
+	margin-inline-start: auto;
+	position: static;
+	width: 40px;
+}
+
+.wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__product .wc-block-cart-item__wrap {
+	padding-left: 0;
 }
 
 .wc-block-mini-cart__drawer table.wc-block-cart-items .wc-block-cart-items__row .wc-block-components-product-name {
@@ -149,7 +181,7 @@
 		margin-right: var(--wp--preset--spacing--xs);
 	}
 }
-/* stylelint-enable selector-max-specificity */
+/* stylelint-enable selector-max-specificity, selector-max-compound-selectors */
 
 .wc-block-mini-cart__items .wc-block-cart-item__product .wc-block-components-product-price {
 	font-size: var(--wp--preset--font-size--sm);
@@ -203,13 +235,17 @@
 	line-height: var(--wp--custom--typography--line-height--tight);
 }
 
-// The item's savings ("Save $10"), from xs.
+// The item's savings ("Save $10"), from xs: small, so a subscription's
+// ("Save £45.00 / month") doesn't squeeze the name.
 .wc-block-mini-cart__items .wc-block-cart-item__total .wc-block-components-sale-badge {
 	display: none;
 
 	@media (--xs) {
 		@include wc-savings-badge;
+		font-size: var(--wp--preset--font-size--xs);
 		margin-top: var(--wp--preset--spacing--sm);
+		padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+		white-space: nowrap;
 
 		&:where(:not([hidden])) {
 			display: inline-block;
