@@ -1,0 +1,33 @@
+@use "tools" as *;
+
+/// A product's stock ("3 in stock", "Out of stock", "Available on back-order"):
+/// a dot in its status's colour, then the text, as an order's status is
+/// (woocommerce-account.scss's `.account-status`).
+.wc-block-components-product-stock-indicator {
+	--_stock-colour: var(--wp--preset--color--status-success);
+	align-items: center;
+	color: var(--scheme--text);
+	display: flex;
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--xs);
+
+	&::before {
+		background-color: var(--_stock-colour);
+		border-radius: 50%;
+		content: "";
+		flex-shrink: 0;
+		forced-color-adjust: none;
+		height: 0.5rem;
+		width: 0.5rem;
+	}
+}
+
+.wc-block-components-product-stock-indicator--low-stock,
+.wc-block-components-product-stock-indicator--available-on-backorder {
+	--_stock-colour: var(--wp--preset--color--status-warning);
+}
+
+.wc-block-components-product-stock-indicator--out-of-stock {
+	--_stock-colour: var(--wp--preset--color--status-error);
+}

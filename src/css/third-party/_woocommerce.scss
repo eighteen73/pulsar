@@ -48,7 +48,68 @@ body .wc-block-components-checkbox.has-error,
 body .wc-block-components-checkbox.has-error a {
 	color: var(--wp--preset--color--status-error);
 }
+
+// The coupon field with an error (the theme's coupon field, cart.scss and
+// checkout.scss: `… .wc-block-components-totals-coupon__input input[type="text"]`, 0,3,1).
+body .wc-block-components-totals-coupon .wc-block-components-text-input.has-error input[type="text"] {
+	border-color: var(--wp--preset--color--status-error);
+}
 /* stylelint-enable selector-max-specificity */
+
+// A message over two lines, spaced as text is (WooCommerce's line height is
+// 1), its icon by the first line.
+body .wc-block-components-validation-error > p {
+	align-items: flex-start;
+	line-height: var(--wp--custom--typography--line-height--normal);
+}
+
+body .wc-block-components-validation-error svg {
+	flex-shrink: 0;
+	margin: 0;
+}
+
+// Chips (applied coupons, in the cart's and checkout's totals): as the product
+// filters' active filters are (blocks/woocommerce/product-filter-removable-chips.scss),
+// the theme's icon removing them. The class twice: WooCommerce's sizes
+// (`.wc-block-components-chip.wc-block-components-chip--radius-large`) are 0,2,0.
+body .wc-block-components-chip.wc-block-components-chip {
+	background-color: var(--scheme--background-surface);
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--xs);
+	margin: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm) 0;
+	padding: 0 0 0 var(--wp--preset--spacing--md);
+}
+
+body .wc-block-components-chip .wc-block-components-chip__text {
+	font-size: inherit;
+	padding: 0;
+}
+
+// (WooCommerce's, hovered or focused, `.wc-block-components-chip__remove:hover`, 0,2,0.)
+body .wc-block-components-chip .wc-block-components-chip__remove {
+	align-items: center;
+	background: none;
+	border-radius: var(--wp--preset--border-radius--sm);
+	display: flex;
+	height: 32px;
+	justify-content: center;
+	width: 32px;
+
+	&::before {
+		@include icon("ui/x");
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+body .wc-block-components-chip .wc-block-components-chip__remove svg {
+	display: none;
+}
 
 // Select2 (country and state fields): sized like the theme's fields. One
 // element more than WooCommerce's rules.
