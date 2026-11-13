@@ -370,3 +370,16 @@
 .woocommerce-order-pay .woocommerce {
 	padding-block-end: var(--wp--custom--spacing--section);
 }
+
+// Product Bundles' items (a bundle's product form): each item's name one size
+// in every layout (Bundles sizes the tabular layout's with core's large preset:
+// `.woocommerce div.product form.cart .bundled_product_summary .bundled_product_title`,
+// 0,5,2), and its image rounded as product images are.
+// stylelint-disable-next-line selector-max-specificity, selector-max-compound-selectors -- Bundles' rule, above.
+.woocommerce div.product form.cart .bundled_product_summary h4.bundled_product_title {
+	font-size: var(--wp--preset--font-size--md);
+}
+
+.woocommerce .bundled_product_images img {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
