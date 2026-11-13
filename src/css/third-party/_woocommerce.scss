@@ -26,6 +26,29 @@ body {
 	--wc-subtext: var(--scheme--text-subtle);
 }
 
+// The block cart's and checkout's lines (WooCommerce's separator colour, 20%
+// of the text's): the scheme's border, from the scheme they're in.
+:where(.wp-block-woocommerce-cart, .wp-block-woocommerce-checkout) {
+	--wc-separator-color: var(--scheme--border);
+}
+
+// Express payment buttons (Stripe's Google Pay, Apple Pay, Link…): rounded as
+// the theme's buttons (Stripe's own radius is set to match, js/stripe.js),
+// and focused in the theme's highlight rather than WooCommerce's blue.
+// (WooCommerce's `.wc-block-components-express-payment
+// .wc-block-components-express-payment__event-buttons > div`, 0,2,1.)
+body .wc-block-components-express-payment .wc-block-components-express-payment__event-buttons > :is(div, li) {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+// (WooCommerce's `… > div:focus-within::after` and
+// `… > div.wc-block-components-express-payment__event-button--focused::after`,
+// up to 0,4,2.)
+// stylelint-disable-next-line selector-max-specificity -- See above.
+body .wc-block-components-express-payment .wc-block-components-express-payment__event-buttons > :is(div, li):is(:focus-within, .wc-block-components-express-payment__event-button--focused)::after {
+	border-color: var(--scheme--highlight);
+}
+
 // Core's default font sizes, which theme.json turns off: extensions' block
 // theme styles (Product Bundles', Bookings') size their titles and labels with
 // them, and without them their sizes are inherited.

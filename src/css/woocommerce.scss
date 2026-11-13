@@ -366,8 +366,9 @@
 /* stylelint-enable selector-max-id, selector-max-specificity */
 
 // The customer payment page (order-pay): the order, then how to pay, then the
-// page's foot.
-.woocommerce-order-pay .woocommerce {
+// page's foot. (The page's content: the store notices above it are
+// `.woocommerce` too.)
+.woocommerce-order-pay .wp-block-post-content > .woocommerce {
 	padding-block-end: var(--wp--custom--spacing--section);
 }
 

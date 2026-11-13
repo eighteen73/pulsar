@@ -37,6 +37,7 @@ const entries = {
 	'css/woocommerce-account': ['./src/css/woocommerce-account.scss'],
 	'css/woocommerce-bookings': ['./src/css/woocommerce-bookings.scss'],
 	'js/editor': ['./src/js/editor.js'],
+	'js/stripe': ['./src/js/stripe.js'],
 };
 
 const moduleEntries = {
