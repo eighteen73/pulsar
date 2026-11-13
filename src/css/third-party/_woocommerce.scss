@@ -33,8 +33,9 @@ body {
 }
 
 // Express payment buttons (Stripe's Google Pay, Apple Pay, Link…): rounded as
-// the theme's buttons (Stripe's own radius is set to match, js/stripe.js),
-// and focused in the theme's highlight rather than WooCommerce's blue.
+// the theme's buttons (the wrapper clips the button, in the payment plugin's
+// own iframe, to its corners), and focused in the theme's highlight rather
+// than WooCommerce's blue.
 // (WooCommerce's `.wc-block-components-express-payment
 // .wc-block-components-express-payment__event-buttons > div`, 0,2,1.)
 body .wc-block-components-express-payment .wc-block-components-express-payment__event-buttons > :is(div, li) {

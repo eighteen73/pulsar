@@ -352,6 +352,19 @@
 	margin-block-end: 0;
 }
 
+// Stripe's payment form (in its own iframe, styled by Stripe): spaced from
+// its test mode instructions above, and from the option to use it for every
+// subscription below.
+#payment .payment_box * + .wc-upe-form {
+	margin-block-start: var(--wp--preset--spacing--md);
+}
+
+// (WooCommerce's `#add_payment_method #payment div.payment_box .form-row`,
+// 2,2,1.)
+:is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment .wc-upe-form ~ p.form-row {
+	margin-block-start: var(--wp--preset--spacing--md);
+}
+
 :is(.woocommerce-checkout, .woocommerce-cart, #add_payment_method) #payment div.form-row {
 	display: grid;
 	gap: var(--wp--preset--spacing--lg);

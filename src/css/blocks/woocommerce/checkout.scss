@@ -509,6 +509,18 @@
 	padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
 }
 
+// Stripe's payment form, in its own iframe (styled by Stripe, so it won't
+// quite match): its edges in line with the option's text (its iframe keeps
+// 4px around the form for focus rings), and spaced from Stripe's test mode
+// instructions above it.
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-content .wcstripe-payment-element {
+	margin-inline: -4px;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-content * + .wcstripe-payment-element {
+	margin-block-start: var(--wp--preset--spacing--md);
+}
+
 // Terms, then Place order (full width) above Return to cart.
 .wp-block-woocommerce-checkout .wc-block-checkout__terms {
 	margin-bottom: var(--wp--preset--spacing--3-xl);

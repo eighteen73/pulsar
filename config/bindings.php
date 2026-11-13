@@ -18,5 +18,4 @@ return [
 	Pulsar\ThirdParty\WooCommerce\Setup::class,
 	Pulsar\ThirdParty\WooCommerce\Account::class,
 	Pulsar\ThirdParty\WooCommerce\SingleProduct::class,
-	Pulsar\ThirdParty\WooCommerce\Stripe::class,
 ];
