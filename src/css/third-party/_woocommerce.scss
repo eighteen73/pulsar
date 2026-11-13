@@ -69,6 +69,16 @@ body .wc-block-components-notice-banner > svg {
 	background-color: var(--wp--preset--color--status-info);
 }
 
+// WooCommerce colours info too (`.wc-block-components-notice-banner.is-info`, 0,2,0).
+body .wc-block-components-notice-banner.is-info {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border-color: var(--wp--preset--color--status-info);
+}
+
+body .wc-block-components-notice-banner.is-info > svg {
+	background-color: var(--wp--preset--color--status-info);
+}
+
 body .wc-block-components-notice-banner.is-success {
 	background-color: var(--wp--preset--color--status-success-subtle);
 	border-color: var(--wp--preset--color--status-success);
@@ -100,18 +110,47 @@ body .wc-block-components-notice-banner a:not(.wc-block-components-button) {
 	color: inherit;
 }
 
-// Classic notices (an extension printing its own, or WooCommerce's styles
-// switched off): the same.
+// Classic notices (extensions print their own: Subscriptions', Bookings'):
+// drawn as the banners are. WooCommerce's layout stays (padding for the icon,
+// the action floated), as their text and links are inline. The banner's icons,
+// in white on the status colour.
+$notice-icon-info: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 3.2c-4.8 0-8.8 3.9-8.8 8.8 0 4.8 3.9 8.8 8.8 8.8 4.8 0 8.8-3.9 8.8-8.8 0-4.8-4-8.8-8.8-8.8zm0 16c-4 0-7.2-3.3-7.2-7.2C4.8 8 8 4.8 12 4.8s7.2 3.3 7.2 7.2c0 4-3.2 7.2-7.2 7.2zM11 17h2v-6h-2v6zm0-8h2V7h-2v2z'/></svg>";
+$notice-icon-success: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z'/></svg>";
+
+// The banner's padding (WooCommerce's, 16px) and line height.
 body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
 	background-color: var(--wp--preset--color--status-info-subtle);
 	border: 1px solid var(--wp--preset--color--status-info);
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--typography--line-height--normal);
+	margin: var(--wp--preset--spacing--md) 0;
+	padding: 16px;
+	padding-inline-start: calc(16px + 24px + var(--wp--preset--spacing--md));
 }
 
-body .woocommerce-message {
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error)::before {
+	background: var(--wp--preset--color--status-info) url($notice-icon-info) center / 20px no-repeat;
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 24px;
+	inset-block-start: 16px;
+	inset-inline-start: 16px;
+	position: absolute;
+	width: 24px;
+}
+
+// Subscriptions' info notice also has `woocommerce-message`.
+body .woocommerce-message:not(.woocommerce-info) {
 	background-color: var(--wp--preset--color--status-success-subtle);
 	border-color: var(--wp--preset--color--status-success);
+}
+
+body .woocommerce-message:not(.woocommerce-info)::before {
+	background-color: var(--wp--preset--color--status-success);
+	background-image: url($notice-icon-success);
 }
 
 body .woocommerce-error {
@@ -119,6 +158,37 @@ body .woocommerce-error {
 	border-color: var(--wp--preset--color--status-error);
 }
 
-body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error)::before {
-	color: inherit;
+body .woocommerce-error::before {
+	background-color: var(--wp--preset--color--status-error);
+	transform: rotate(180deg);
 }
+
+// A notice's action (Browse products, Confirm email address): a link at the
+// end, in the notice's colour (WooCommerce's banner greys it, too faintly).
+// stylelint-disable selector-max-specificity, declaration-no-important -- WooCommerce's banner link (`.wc-block-components-notice-banner > .wc-block-components-notice-banner__content .wc-forward`, 0,3,0) sets these `!important`, and classic WooCommerce's `.woocommerce a.button:hover`, 0,3,1, colours it.
+body .wc-block-components-notice-banner > .wc-block-components-notice-banner__content .button,
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error) :is(a, button).button {
+	appearance: none;
+	background: none !important;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	color: inherit !important;
+	display: inline;
+	float: inline-end;
+	font-size: inherit;
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	line-height: inherit;
+	margin: 0;
+	margin-inline-start: var(--wp--preset--spacing--lg);
+	min-height: 0;
+	opacity: 1;
+	padding: 0 !important;
+	text-decoration-line: underline;
+	text-underline-position: under;
+
+	&:is(:hover, :focus-visible) {
+		text-decoration-line: none;
+	}
+}
+// stylelint-enable selector-max-specificity, declaration-no-important

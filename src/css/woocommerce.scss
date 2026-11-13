@@ -212,7 +212,8 @@
 
 // Extensions' buttons (Memberships' actions, for one) don't have WooCommerce's
 // `wp-element-button` class, which gives WooCommerce's the theme's button.
-.woocommerce .button:not(.wp-element-button) {
+// A notice's is a link (third-party/_woocommerce.scss).
+.woocommerce .button:not(.wp-element-button):not(:where(:is(.wc-block-components-notice-banner, .woocommerce-info, .woocommerce-message, .woocommerce-error) *)) {
 	@include button;
 }
 

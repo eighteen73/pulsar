@@ -164,13 +164,14 @@ $order-statuses: (
 	}
 }
 
-.my-account-title {
+// Editing an address: the form's own heading names it, so it's the title.
+.my-account-title,
+:where(.woocommerce-MyAccount-content) h2:has(+ .woocommerce-address-fields) {
 	@include heading-base;
 	@include heading(h3);
 	margin-block: 0 var(--wp--preset--spacing--xl);
 }
 
-// Editing an address: the form's own heading names it.
 :where(.woocommerce-MyAccount-content:has(.woocommerce-address-fields)) .my-account-title {
 	display: none;
 }
@@ -287,8 +288,12 @@ $order-statuses: (
 	white-space: nowrap;
 }
 
+// Below md, WooCommerce stacks the tables, each cell labelled by its
+// `::before` (Setup::smallscreen_breakpoint() matches its breakpoint to md):
+// the dot is the `::after` there, ordered between the label and the name.
 .account-status::before,
-td.woocommerce-orders-table__cell-order-status::before {
+td.woocommerce-orders-table__cell-order-status::before,
+td.woocommerce-orders-table__cell-order-status::after {
 	background-color: var(--scheme--text-subtle);
 	border-radius: 50%;
 	content: "";
@@ -303,9 +308,44 @@ td.woocommerce-orders-table__cell-order-status::before {
 	vertical-align: middle;
 }
 
+td.woocommerce-orders-table__cell-order-status::after {
+	display: none;
+}
+
+@media (--md-down) {
+	// stylelint-disable selector-max-specificity, selector-max-compound-selectors -- WooCommerce's stacked cell and its label: `.woocommerce table.shop_table_responsive tr td(::before)`, 0,2,3.
+	.woocommerce table.shop_table_responsive tr td.woocommerce-orders-table__cell-order-status {
+		align-items: center;
+		display: flex;
+		gap: var(--wp--preset--spacing--xs);
+
+		&::before {
+			background: none;
+			border-radius: 0;
+			height: auto;
+			margin-inline-end: auto;
+			order: -2;
+			width: auto;
+		}
+
+		&::after {
+			display: inline-block;
+			order: -1;
+		}
+	}
+	// stylelint-enable selector-max-specificity, selector-max-compound-selectors
+
+	// WooCommerce hides the order number (the row's `th`) when stacked.
+	.woocommerce-account table.shop_table_responsive tbody th {
+		display: block;
+		text-align: start;
+	}
+}
+
 @each $status, $color in $order-statuses {
 	.account-status--#{$status}::before,
-	.woocommerce-orders-table__row--status-#{$status} td.woocommerce-orders-table__cell-order-status::before {
+	.woocommerce-orders-table__row--status-#{$status} td.woocommerce-orders-table__cell-order-status::before,
+	.woocommerce-orders-table__row--status-#{$status} td.woocommerce-orders-table__cell-order-status::after {
 		background-color: var(--wp--preset--color--status-#{$color});
 	}
 }
@@ -361,7 +401,7 @@ td.woocommerce-orders-table__cell-order-status::before {
 // extension's lists): one size, spaced from what's above. (As specific as
 // woocommerce.scss's order and customer details titles, 0,2,1, which it
 // follows.)
-.woocommerce-account .woocommerce-MyAccount-content :is(h2, h3):where(:not(.my-account-title, .account-overview__title)) {
+.woocommerce-account .woocommerce-MyAccount-content :is(h2, h3):where(:not(.my-account-title, .account-overview__title, :has(+ .woocommerce-address-fields))) {
 	@include heading-base;
 	@include heading(h4);
 	margin-block: var(--wp--preset--spacing--2-xl) var(--wp--preset--spacing--md);
@@ -412,6 +452,12 @@ td.woocommerce-orders-table__cell-order-status::before {
 // the name).
 .woocommerce-bookings-search ~ h2 {
 	display: none;
+}
+
+// Spaced from the notice when there are none (the lists' headings have their
+// own margin).
+.woocommerce-bookings-search {
+	margin-block-end: var(--wp--preset--spacing--xl);
 }
 
 .woocommerce-MyAccount-content .wc-bookings-status-label {

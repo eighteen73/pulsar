@@ -25,6 +25,7 @@ class Setup implements Bootable {
 	public function boot(): void {
 		add_action( 'pre_get_posts', [ $this, 'products_per_page' ] );
 		add_filter( 'woocommerce_get_price_html', [ $this, 'from_variation_price' ], 10, 2 );
+		add_filter( 'woocommerce_style_smallscreen_breakpoint', [ $this, 'smallscreen_breakpoint' ] );
 	}
 
 	/**
@@ -52,6 +53,20 @@ class Setup implements Bootable {
 		if ( is_post_type_archive( 'product' ) ) {
 			$query->set( 'posts_per_page', 24 );
 		}
+	}
+
+	/**
+	 * WooCommerce's small screen styles (its stacked tables) up to the theme's
+	 * `md` breakpoint, where the theme's `--md-down` queries end, rather than
+	 * at 768px inclusive.
+	 *
+	 * @param string $breakpoint WooCommerce's breakpoint (a max-width).
+	 * @return string
+	 */
+	public function smallscreen_breakpoint( string $breakpoint ): string {
+		$breakpoints = wp_json_file_decode( get_theme_file_path( 'config/breakpoints.json' ), [ 'associative' => true ] );
+
+		return isset( $breakpoints['md'] ) ? ( (int) $breakpoints['md'] - 1 ) . 'px' : $breakpoint;
 	}
 
 	/**
