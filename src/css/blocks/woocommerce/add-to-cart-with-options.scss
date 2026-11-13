@@ -39,14 +39,130 @@
 	@include wc-quantity-selector-button;
 }
 
-// All Products for Subscriptions' choice (one time, or subscribe): a list of
-// radios, without a list's indent. (Its `ul.wcsatt-options-prompt-radios`,
-// 0,1,1, keeps the padding.)
+// All Products for Subscriptions' choice (one time, or subscribe): each option
+// a card, the chosen one in the fill colour. (Its `ul.wcsatt-options-prompt-radios`,
+// 0,1,1, keeps the list's padding.)
 .wc-block-add-to-cart-with-options ul.wcsatt-options-prompt-radios {
 	display: grid;
-	gap: var(--wp--preset--spacing--xs);
+	gap: var(--wp--preset--spacing--sm);
 	list-style: none;
 	padding: 0;
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-product-prompt {
+	margin-block-end: var(--wp--preset--spacing--lg);
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-label {
+	align-items: center;
+	background-color: var(--scheme--background);
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--md);
+	cursor: pointer;
+	display: flex;
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	gap: var(--wp--preset--spacing--sm);
+	padding: var(--wp--preset--spacing--lg);
+	transition:
+		background-color var(--wp--custom--transition--duration--quick),
+		border-color var(--wp--custom--transition--duration--quick),
+		box-shadow var(--wp--custom--transition--duration--quick);
+
+	&:hover {
+		border-color: var(--scheme--border-strong);
+	}
+
+	// The chosen option: a 2px border (1px and an inset ring, so it doesn't
+	// move) in the fill colour.
+	&:has(> input:checked) {
+		background-color: var(--scheme--background-surface);
+		border-color: var(--scheme--background-fill);
+		box-shadow: inset 0 0 0 1px var(--scheme--background-fill);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+	}
+}
+
+// The option's text; a price in it ("Subscribe for £42.50 / month", one plan)
+// at the card's end.
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-action {
+	align-items: baseline;
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--xs);
+	padding: 0;
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-action > .price {
+	margin-inline-start: auto;
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-action del {
+	color: var(--scheme--text-subtle);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-action ins {
+	text-decoration: none;
+}
+
+// The discount ("Subscribe to save 15%"): the savings badge.
+.wc-block-add-to-cart-with-options .wcsatt-options-prompt-action .wcsatt-sub-discount {
+	@include wc-savings-badge;
+	align-self: center;
+	border-radius: var(--wp--preset--border-radius--xs);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	margin: 0;
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+}
+
+// The plans (shown once subscribing, when there's more than one): the
+// theme's label and select.
+.wc-block-add-to-cart-with-options .wcsatt-options-product-dropdown-label {
+	@include label;
+}
+
+.wc-block-add-to-cart-with-options .wcsatt-options-product-dropdown {
+	margin: 0;
+}
+
+// Subscribing (the last option) with plans to choose from: the plans hang
+// from its card, as part of it. Otherwise (another order, or one plan) they
+// stay below.
+// (The condition in `:where()`: these follow, and match, the rules above.)
+$subscribing-with-plans: ".wcsatt-options-wrapper:has(.wcsatt-options-prompt-radio:last-child .wcsatt-options-prompt-label-subscription > input:checked):has(.wcsatt-options-product-dropdown option + option)";
+
+.wc-block-add-to-cart-with-options :where(#{$subscribing-with-plans}) .wcsatt-options-product-prompt {
+	margin-block-end: 0;
+}
+
+// Open at the bottom: its ring on the top and sides only. (As specific as the
+// chosen card's, which it follows.)
+.wc-block-add-to-cart-with-options :where(#{$subscribing-with-plans} .wcsatt-options-prompt-radio:last-child) .wcsatt-options-prompt-label:has(> input:checked) {
+	border-block-end-width: 0;
+	border-end-end-radius: 0;
+	border-end-start-radius: 0;
+	box-shadow:
+		inset 1px 0 0 var(--scheme--background-fill),
+		inset -1px 0 0 var(--scheme--background-fill),
+		inset 0 1px 0 var(--scheme--background-fill);
+}
+
+.wc-block-add-to-cart-with-options :where(#{$subscribing-with-plans}) .wcsatt-options-product-wrapper {
+	background-color: var(--scheme--background-surface);
+	border: 2px solid var(--scheme--background-fill);
+	border-block-start: 0;
+	border-end-end-radius: var(--wp--preset--border-radius--md);
+	border-end-start-radius: var(--wp--preset--border-radius--md);
+	// Overlapping the card by a pixel: where they meet on a half pixel, the
+	// edges blend with the page as a faint line.
+	margin-block: -1px var(--wp--preset--spacing--lg);
+	padding: 1px var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg);
+	position: relative;
 }
 
 // The classic form's quantity and button (a subscription's, a bundle's, a
