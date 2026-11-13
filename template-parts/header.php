@@ -59,7 +59,9 @@ use function Eighteen73\Matter\panel_toggle;
 						'iconStyle'    => 'line',
 					]
 				);
-				Pulsar\the_block( 'woocommerce/mini-cart' );
+				// Not on the cart and checkout pages (WooCommerce's default
+				// hides it there, keeping its space).
+				Pulsar\the_block( 'woocommerce/mini-cart', [ 'cartAndCheckoutRenderStyle' => 'removed' ] );
 			}
 
 			panel_toggle(

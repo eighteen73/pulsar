@@ -37,6 +37,15 @@
 	gap: var(--wp--preset--spacing--xs);
 }
 
+/// A compact stepper (the cart's, the mini cart's): its field and square
+/// buttons a size (`$size`), the field `$input-width` wide. Set on the
+/// stepper; the field and button mixins read it (a product's stepper, without
+/// it, is as tall as its add to cart button).
+@mixin wc-quantity-selector-compact($size: 32px, $input-width: 48px) {
+	--_quantity-selector-size: #{$size};
+	--_quantity-selector-input-width: #{$input-width};
+}
+
 /// A quantity stepper's field (`.wc-block-components-quantity-selector__input`,
 /// a classic form's `.qty`).
 @mixin wc-quantity-selector-input() {
@@ -45,22 +54,52 @@
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: var(--wp--preset--border-radius--xs);
 	font-size: var(--wp--preset--font-size--sm);
+	height: var(--_quantity-selector-size, auto);
 	max-width: unset;
 	padding: unset;
-	width: 70px;
+	width: var(--_quantity-selector-input-width, 70px);
 
 	&:focus {
 		box-shadow: none;
 	}
 }
 
+/// A quantity that can't be changed (a bundled item's, fixed by its bundle:
+/// the field read-only, without buttons): "× 1", as text. This on the stepper
+/// (`:has(> input[readonly])`), the next on its field.
+@mixin wc-quantity-selector-readonly() {
+	align-items: baseline;
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	min-width: 0;
+	width: auto;
+
+	&::before {
+		content: "×";
+	}
+}
+
+@mixin wc-quantity-selector-readonly-input() {
+	background: none;
+	border: 0;
+	color: inherit;
+	height: auto;
+	min-height: 0;
+	padding: 0;
+	pointer-events: none;
+	text-align: start;
+	width: 4ch;
+}
+
 /// A quantity stepper's minus and plus buttons
-/// (`.wc-block-components-quantity-selector__button`).
+/// (`.wc-block-components-quantity-selector__button`): square in a compact
+/// stepper.
 @mixin wc-quantity-selector-button() {
 	border: 0;
 	border-radius: var(--wp--preset--border-radius--xs);
 	font-size: var(--wp--preset--font-size--sm);
-	width: 42px;
+	min-width: 0;
+	width: var(--_quantity-selector-size, 42px);
 
 	&:where(:not(:disabled)):hover {
 		background-color: var(--scheme--background-surface);

@@ -51,6 +51,7 @@
 }
 
 .wc-block-cart table.wc-block-cart-items .wc-block-cart-items__row {
+	grid-template-columns: 64px 132px;
 	padding-block: var(--wp--preset--spacing--2-xl);
 
 	@media (--lg) {
@@ -109,6 +110,14 @@
 	border-radius: var(--wp--preset--border-radius--xs);
 }
 
+// The item's image: 64px, as in the mini cart and the checkout's summary
+// (WooCommerce's fills its column, which the table widens; and its column is
+// 60px or 80px when the items stack).
+// stylelint-disable-next-line selector-max-specificity, selector-max-compound-selectors -- WooCommerce's `table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__image img`, 0,3,2.
+.wc-block-cart table.wc-block-cart-items .wc-block-cart-items__row .wc-block-cart-item__image img {
+	width: 64px;
+}
+
 .wc-block-cart table.wc-block-cart-items .wc-block-cart-item__prices {
 	font-size: var(--wp--preset--font-size--sm);
 	margin-bottom: var(--wp--preset--spacing--sm);
@@ -130,10 +139,12 @@
 	margin-top: var(--wp--preset--spacing--lg);
 }
 
-// The quantity stepper. (WooCommerce's `.wc-block-components-quantity-selector
-// input.wc-block-components-quantity-selector__input`, 0,2,1.)
+// The quantity stepper: compact, its buttons square. (WooCommerce's
+// `.wc-block-components-quantity-selector input.wc-block-components-quantity-selector__input`,
+// 0,2,1.)
 .wc-block-cart .wc-block-components-quantity-selector {
 	@include wc-quantity-selector;
+	@include wc-quantity-selector-compact;
 }
 
 .wc-block-components-quantity-selector input.wc-block-components-quantity-selector__input {
@@ -142,6 +153,59 @@
 
 .wc-block-components-quantity-selector .wc-block-components-quantity-selector__button {
 	@include wc-quantity-selector-button;
+}
+
+// A quantity that can't be changed (a bundled item's): "× 1".
+.wc-block-cart .wc-block-components-quantity-selector:has(> input[readonly]) {
+	@include wc-quantity-selector-readonly;
+}
+
+.wc-block-components-quantity-selector input.wc-block-components-quantity-selector__input[readonly] {
+	@include wc-quantity-selector-readonly-input;
+}
+
+// Product Bundles' items: Bundles moves their image into the product's column
+// and indents their content past it (`.is-large table.wc-block-cart-items
+// .wc-block-cart-items__row.is-bundled__indented …`, up to 0,5,2). Here, as in
+// the mini cart, the image stays in its column, smaller and to the right,
+// under the bundle's; the content lines up with the bundle's, closer to it.
+/* stylelint-disable selector-max-specificity, selector-max-compound-selectors -- Product Bundles' selectors, above. */
+.wc-block-cart table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__image a {
+	height: auto;
+	width: auto;
+}
+
+.wc-block-cart table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__image img {
+	display: block;
+	margin: 0;
+	margin-inline-start: auto;
+	position: static;
+	width: 40px;
+}
+
+.wc-block-cart table.wc-block-cart-items .wc-block-cart-items__row.is-bundled__indented td.wc-block-cart-item__product .wc-block-cart-item__wrap {
+	padding-left: 0;
+}
+/* stylelint-enable selector-max-specificity, selector-max-compound-selectors */
+
+// The bundle and its items, closer together: the bundle's cells without
+// their bottom padding, its items' with only a little at the top.
+.wc-block-cart .wc-block-cart-items__row.is-bundle > td {
+	padding-block-end: 0;
+}
+
+.wc-block-cart .wc-block-cart-items__row.is-bundled > td {
+	padding-block: var(--wp--preset--spacing--lg) 0;
+}
+
+.wc-block-cart .wc-block-cart-items__row.is-bundled__last > td {
+	padding-block-end: var(--wp--preset--spacing--2-xl);
+}
+
+// (WooCommerce's quantity margin above is 0,3,1.)
+// stylelint-disable-next-line selector-max-specificity -- As above, for a bundled item.
+.wc-block-cart table.wc-block-cart-items .is-bundled .wc-block-cart-item__quantity {
+	margin-top: var(--wp--preset--spacing--xs);
 }
 
 // The item's savings ("Save $10").

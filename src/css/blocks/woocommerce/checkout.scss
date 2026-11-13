@@ -133,9 +133,12 @@
 	border-top: 1px solid var(--scheme--border);
 }
 
+// The item's image: the mini cart's size, and not shrinking (a long name, or
+// a bundle's contents, squeezed it).
 .wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__image {
+	flex-shrink: 0;
 	padding-bottom: unset;
-	width: 75px;
+	width: 64px;
 }
 
 .wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__image img {
