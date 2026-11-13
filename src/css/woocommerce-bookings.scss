@@ -12,17 +12,50 @@
 @use "tools" as *;
 
 // The form: no box (Bookings' `.wc-bookings-booking-form`, 0,1,0), its fields
-// a column.
+// a column (two, for person types: below).
 .wc-bookings-booking-form {
 	border: 0;
 	display: grid;
 	gap: var(--wp--style--block-gap);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	margin: 0 0 var(--wp--style--block-gap);
 	padding: 0;
 }
 
 .wc-bookings-booking-form .form-field {
 	margin: 0;
+}
+
+// Two to a row: a booking's person types (Adults, Children); everything else
+// a whole row (the form's two columns, above).
+.wc-bookings-booking-form > * {
+	grid-column: 1 / -1;
+}
+
+.wc-bookings-booking-form > .form-field[class*="wc_bookings_field_persons_"] {
+	grid-column: auto;
+}
+
+// A duration the customer chooses: its unit ("Day(s)") beside the field.
+.wc-bookings-booking-form .wc_bookings_field_duration {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wc-bookings-booking-form .wc_bookings_field_duration label {
+	flex-basis: 100%;
+}
+
+// Number fields (duration, persons): one width, enough for a few digits.
+.wc-bookings-booking-form .form-field input[type="number"] {
+	width: 6rem;
+}
+
+// "Book now": the whole row, as a product's add to cart button is.
+.wc-block-add-to-cart-with-options form.cart .wc-bookings-booking-form-button {
+	width: 100%;
 }
 
 .wc-bookings-booking-form .form-field label {

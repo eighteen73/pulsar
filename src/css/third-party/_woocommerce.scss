@@ -111,6 +111,21 @@ body .wc-block-components-chip .wc-block-components-chip__remove svg {
 	display: none;
 }
 
+// A cart item's details (a variation's attributes; a booking's date, people
+// and room) in the cart, mini cart and checkout: a line each, its name
+// subtle, without WooCommerce's " / " between them.
+body .wc-block-components-product-details > span {
+	display: block;
+}
+
+body .wc-block-components-product-details > span > [aria-hidden="true"] {
+	display: none;
+}
+
+body .wc-block-components-product-details .wc-block-components-product-details__name {
+	color: var(--scheme--text-subtle);
+}
+
 // Select2 (country and state fields): sized like the theme's fields. One
 // element more than WooCommerce's rules.
 body .select2-container .select2-selection--single {
