@@ -1,3 +1,4 @@
+@use "sass:string";
 @use "utility" as *;
 @use "forms" as *;
 
@@ -74,8 +75,11 @@
 	min-width: 0;
 	width: auto;
 
+	// The "×" escaped, as ASCII: a character outside it makes Sass start the
+	// compressed stylesheet with a byte order mark, which breaks the first
+	// rule when WordPress inlines the stylesheet.
 	&::before {
-		content: "×";
+		content: string.unquote('"\\00d7"');
 	}
 }
 
