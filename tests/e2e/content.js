@@ -3,8 +3,9 @@
  * they run (global-setup.js). Only the tests' own content is replaced, so
  * WooCommerce's shop, cart and checkout pages stay.
  *
- * Adapt it per project: add the project's sections to SECTIONS, its menus
- * and its settings.
+ * Adapt it per project (see the README's "Browser tests"): its sections in
+ * sectionsPage() (and editor.spec.js's SECTIONS), its schemes in SCHEMES,
+ * its menus and its settings in SETTINGS.
  */
 
 /** The colour schemes in config/theme-json/settings.custom.json. */
