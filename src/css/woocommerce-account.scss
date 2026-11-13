@@ -451,6 +451,13 @@ td.woocommerce-orders-table__cell-order-status::after {
 	color: var(--scheme--text-subtle);
 }
 
+// A subscription's actions (Cancel, Renew now, Change payment): spaced as
+// buttons in a row are.
+.woocommerce-account .subscription_details .button {
+	margin-block: var(--wp--preset--spacing--xs);
+	margin-inline-end: var(--wp--preset--spacing--sm);
+}
+
 // Memberships with none: its sentence as the other sections' empty notices.
 .woocommerce-account-my-memberships > p:only-child {
 	@include wc-notice;

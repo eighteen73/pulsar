@@ -35,6 +35,11 @@
 	margin-block: 0 var(--wp--preset--spacing--xl);
 }
 
+// The form's rating, the stars in the link colour as every other rating is.
+.wp-block-woocommerce-product-review-form .stars button {
+	color: var(--scheme--text-link);
+}
+
 // "Add a review" (a span).
 .wp-block-woocommerce-product-review-form .comment-reply-title {
 	@include heading-base;
