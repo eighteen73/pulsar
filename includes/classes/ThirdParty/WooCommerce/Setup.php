@@ -26,6 +26,52 @@ class Setup implements Bootable {
 		add_action( 'pre_get_posts', [ $this, 'products_per_page' ] );
 		add_filter( 'woocommerce_get_price_html', [ $this, 'from_variation_price' ], 10, 2 );
 		add_filter( 'woocommerce_style_smallscreen_breakpoint', [ $this, 'smallscreen_breakpoint' ] );
+		add_filter( 'render_block_core/button', [ $this, 'filter_clear_button' ], 10, 2 );
+	}
+
+	/**
+	 * The style WooCommerce gives the product filters' "Clear filters" button
+	 * when it's inserted (a small outline button).
+	 */
+	private const CLEAR_BUTTON_DEFAULT_STYLE = [
+		'border'     => [ 'width' => '1px' ],
+		'typography' => [ 'textDecoration' => 'none' ],
+		'outline'    => 'none',
+		'fontSize'   => 'medium',
+		'spacing'    => [
+			'padding' => [
+				'left'   => '8px',
+				'right'  => '8px',
+				'top'    => '5px',
+				'bottom' => '5px',
+			],
+		],
+	];
+
+	/**
+	 * The product filters' "Clear filters" button is the theme's (its
+	 * stylesheet, blocks/woocommerce/product-filter-clear-button.scss), so
+	 * WooCommerce's inline padding and border go. Only while they're still
+	 * WooCommerce's: a style set in the editor stays.
+	 *
+	 * @param string $content The button's HTML.
+	 * @param array  $block   The parsed block.
+	 * @return string
+	 */
+	public function filter_clear_button( string $content, array $block ): string {
+		$classes = explode( ' ', $block['attrs']['className'] ?? '' );
+
+		if ( ! in_array( 'wc-block-product-filter-clear-button', $classes, true ) || ( $block['attrs']['style'] ?? [] ) != self::CLEAR_BUTTON_DEFAULT_STYLE ) { // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual -- The same keys and values, in any order.
+			return $content;
+		}
+
+		$processor = new \WP_HTML_Tag_Processor( $content );
+
+		if ( $processor->next_tag( [ 'class_name' => 'wp-block-button__link' ] ) ) {
+			$processor->remove_attribute( 'style' );
+		}
+
+		return $processor->get_updated_html();
 	}
 
 	/**

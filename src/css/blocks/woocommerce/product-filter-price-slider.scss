@@ -1,0 +1,62 @@
+@use "tools" as *;
+
+/// The price filter: a range in the scheme's fill colour, its handles the
+/// theme's, and the minimum and maximum as the theme's fields. The colours are
+/// WooCommerce's variables, but not a handle's hover and focus (#1e1e1e).
+.wc-block-product-filter-price-slider {
+	--wc-product-filter-price-slider: var(--scheme--background-fill);
+	--wc-product-filter-price-slider-handle: var(--scheme--background);
+	--wc-product-filter-price-slider-handle-border: var(--scheme--background-fill);
+}
+
+.wc-block-product-filter-price-slider__content {
+	column-gap: var(--wp--preset--spacing--md);
+}
+
+.wc-block-product-filter-price-slider__range {
+	margin-block: var(--wp--preset--spacing--lg);
+}
+
+/* stylelint-disable selector-max-specificity -- WooCommerce's handles, after which this loads: `.wc-block-product-filter-price-slider__range input[type=range]::-webkit-slider-thumb`, 0,2,2, with `:hover` or `:focus` 0,3,2. */
+.wc-block-product-filter-price-slider__range input[type="range"] {
+	&::-webkit-slider-thumb {
+		height: 16px;
+		margin-top: -7px;
+		width: 16px;
+	}
+
+	&::-moz-range-thumb {
+		height: 16px;
+		width: 16px;
+	}
+
+	&::-webkit-slider-thumb:hover,
+	&:focus::-webkit-slider-thumb {
+		background: var(--scheme--background-fill);
+		border-color: var(--scheme--background-fill);
+	}
+
+	&::-moz-range-thumb:hover,
+	&:focus::-moz-range-thumb {
+		background: var(--scheme--background-fill);
+		border-color: var(--scheme--background-fill);
+	}
+
+	&:focus-visible::-webkit-slider-thumb {
+		box-shadow: var(--scheme--background) 0 0 0 2px, var(--scheme--highlight) 0 0 0 4px;
+	}
+
+	&:focus-visible::-moz-range-thumb {
+		box-shadow: var(--scheme--background) 0 0 0 2px, var(--scheme--highlight) 0 0 0 4px;
+	}
+}
+/* stylelint-enable selector-max-specificity */
+
+// The minimum and maximum. (WooCommerce's `.wc-block-product-filter-price-slider .text input[type=text]`, 0,3,1.)
+.wc-block-product-filter-price-slider .text input.min,
+.wc-block-product-filter-price-slider .text input.max {
+	@include field-input;
+	font-size: var(--wp--preset--font-size--sm);
+	max-width: 6rem;
+	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+}

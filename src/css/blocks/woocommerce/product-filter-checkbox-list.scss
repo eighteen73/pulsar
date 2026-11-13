@@ -1,0 +1,77 @@
+@use "tools" as *;
+
+/// A filter's options as checkboxes (attributes, categories, status, rating):
+/// the theme's checkbox, with WooCommerce's tick (an SVG after the input) in
+/// the scheme's fill colours. Its colours are WooCommerce's variables.
+.wc-block-product-filter-checkbox-list {
+	--wc-product-filter-checkbox-list-option-element: var(--scheme--background-surface);
+	--wc-product-filter-checkbox-list-option-element-border: var(--scheme--border-strong);
+	--wc-product-filter-checkbox-list-option-element-selected: var(--scheme--text-fill);
+}
+
+.wc-block-product-filter-checkbox-list__items {
+	display: grid;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+// Flex, so the (inline-flex) label isn't in a line box: a checked box moved
+// its baseline, and the item grew.
+.wc-block-product-filter-checkbox-list__item {
+	display: flex;
+}
+
+.wc-block-product-filter-checkbox-list__label {
+	color: var(--scheme--text);
+	cursor: pointer;
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wc-block-product-filter-checkbox-list__text-wrapper {
+	font-size: inherit;
+}
+
+.wc-block-product-filter-checkbox-list__count {
+	color: var(--scheme--text-subtle);
+}
+
+// WooCommerce's grey square behind the input.
+.wc-block-product-filter-checkbox-list__input-wrapper::before {
+	content: none;
+}
+
+// The box: the theme's size, radius and colours. (WooCommerce's
+// `input[type=checkbox].wc-block-product-filter-checkbox-list__input`, 0,2,1.)
+.wc-block-product-filter-checkbox-list__input-wrapper input.wc-block-product-filter-checkbox-list__input {
+	border-radius: var(--wp--preset--border-radius--xs);
+	height: 24px;
+	width: 24px;
+
+	&:checked {
+		background-color: var(--scheme--background-fill);
+		border-color: var(--scheme--background-fill);
+	}
+
+	&:focus-visible {
+		box-shadow: var(--scheme--background) 0 0 0 1px, var(--scheme--highlight) 0 0 0 3px;
+		outline: 2px solid transparent;
+	}
+}
+
+.wc-block-product-filter-checkbox-list__input-wrapper svg.wc-block-product-filter-checkbox-list__mark {
+	height: 24px;
+	padding: 6px;
+	width: 24px;
+}
+
+.wc-block-product-filter-checkbox-list__show-more-button {
+	color: var(--scheme--text-link);
+	font-size: var(--wp--preset--font-size--sm);
+	margin-block-start: var(--wp--preset--spacing--sm);
+}
+
+// Rating's stars, in the link colour as a product's rating is.
+.wc-block-product-filter-checkbox-list__stars {
+	color: var(--scheme--text-link);
+}

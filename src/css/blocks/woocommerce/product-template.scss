@@ -56,9 +56,10 @@
 	translate: none;
 }
 
+// A small button, its text smaller still over the image.
 .product-card__media .wp-block-woocommerce-product-button :is(.added_to_cart, .wp-block-button__link) {
 	@include button(primary, small);
-	font-size: inherit;
+	--_button-font-size: var(--wp--preset--font-size--xs);
 	line-height: inherit;
 	margin: 0;
 	text-decoration: none;

@@ -19,7 +19,7 @@
 			<!-- wp:woocommerce/product-sale-badge {"align":"right","className":""} /-->
 		<!-- /wp:woocommerce/product-image -->
 
-		<!-- wp:woocommerce/product-button {"isDescendentOfQueryLoop":true,"className":"is-style-fill","fontSize":"xs"} /-->
+		<!-- wp:woocommerce/product-button {"isDescendentOfQueryLoop":true,"className":""} /-->
 
 	</div>
 	<!-- /wp:group -->

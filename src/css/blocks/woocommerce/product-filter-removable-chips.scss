@@ -1,0 +1,37 @@
+@use "tools" as *;
+
+/// The active filters, each a chip with a remove button.
+.wc-block-product-filter-removable-chips__items {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+// WooCommerce's `.wc-block-product-filter-removable-chips__items .wc-block-product-filter-removable-chips__item`, 0,2,0.
+.wc-block-product-filter-removable-chips .wc-block-product-filter-removable-chips__items .wc-block-product-filter-removable-chips__item {
+	background-color: var(--scheme--background-surface);
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--xs);
+	padding-block: 0;
+	padding-inline: var(--wp--preset--spacing--md) 0;
+}
+
+// The remove button: the theme's icon, its target the chip's height. (WooCommerce's, 0,3,0.)
+.wc-block-product-filter-removable-chips__item .wc-block-product-filter-removable-chips__remove.wc-block-product-filter-removable-chips__remove {
+	height: 36px;
+	justify-content: center;
+	width: 36px;
+
+	&::before {
+		@include icon("ui/x");
+	}
+}
+
+.wc-block-product-filter-removable-chips__remove:focus-visible {
+	@include focus-ring;
+}
+
+.wc-block-product-filter-removable-chips__remove svg {
+	display: none;
+}

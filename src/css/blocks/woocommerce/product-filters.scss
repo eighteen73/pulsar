@@ -1,0 +1,84 @@
+@use "tools" as *;
+
+/// Product filters: the container of the filter blocks (price, attributes,
+/// categories, status, rating, the active filters). In the page from
+/// WooCommerce's breakpoint (782px), below it in an overlay opened by a
+/// "Filter products" button. WooCommerce's rules are mostly `:where()`, and
+/// its colours variables.
+.wc-block-product-filters {
+	--wc-product-filter-block-spacing: var(--wp--preset--spacing--2-xl);
+	--wc-product-filters-overlay-background-color: var(--scheme--background);
+	--wc-product-filters-overlay-text-color: var(--scheme--text);
+}
+
+// The title ("Filters") and each filter's heading: smaller than the page's
+// headings. (Their margins are WooCommerce's, inline.)
+.wc-block-product-filters :is(.wc-block-product-filters__content, .wc-block-product-filters__overlay-content) > .wp-block-heading {
+	@include heading-base;
+	@include heading(h4);
+}
+
+.wc-block-product-filters [class*="wp-block-woocommerce-product-filter-"] > .wp-block-heading {
+	@include heading-base;
+	@include heading(h6);
+}
+
+// "Filter products" (below the breakpoint): a secondary button. As specific as
+// WooCommerce's base rule, 0,1,0, so its hiding above the breakpoint
+// (`:where(.wc-block-product-filters).is-mobile-overlay …`, 0,2,0) still wins.
+:where(.wc-block-product-filters) .wc-block-product-filters__open-overlay {
+	@include button(secondary, small);
+	gap: var(--wp--preset--spacing--xs);
+}
+
+.wc-block-product-filters .wc-block-product-filters__open-overlay span {
+	padding: 0;
+}
+
+// The overlay: a drawer like the theme's (Matter's drawer, the mini cart).
+// WooCommerce pads it with core's spacing presets, which the theme doesn't
+// have.
+.wc-block-product-filters.is-overlay-opened .wc-block-product-filters__overlay {
+	background-color: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.6);
+}
+
+.wc-block-product-filters .wc-block-product-filters__overlay-header {
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--md) 0;
+}
+
+// (The content is the overlay's in the page too: padded only when open.)
+.wc-block-product-filters.is-overlay-opened .wc-block-product-filters__overlay-content {
+	overflow-y: auto;
+	padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
+}
+
+.wc-block-product-filters .wc-block-product-filters__overlay-footer {
+	border-block-start: 1px solid var(--scheme--border);
+	box-shadow: none;
+	padding: var(--wp--preset--spacing--xl);
+}
+
+// The close button: the theme's icon in a 44px target.
+.wc-block-product-filters .wc-block-product-filters__close-overlay {
+	height: 44px;
+	justify-content: center;
+	width: 44px;
+
+	&::before {
+		@include icon("ui/x");
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+.wc-block-product-filters .wc-block-product-filters__close-overlay svg {
+	display: none;
+}
+
+// Inside the overlay, WooCommerce spaces a group's children with 20px margins
+// (`:where(.wc-block-product-filters).is-overlay-opened … .wp-block-group > div`, 0,3,1).
+.is-overlay-opened .wc-block-product-filters__overlay-content .wp-block-group > div {
+	margin: 0;
+}

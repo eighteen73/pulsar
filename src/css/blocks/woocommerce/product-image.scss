@@ -8,6 +8,12 @@
 	@include focus-ring;
 }
 
+// Blocks over the image (the sale badge block in a product card): inset as
+// the card's add to cart button is, rather than WooCommerce's 4px.
+.wp-block-woocommerce-product-image .wc-block-components-product-image__inner-container {
+	padding: var(--wp--preset--spacing--sm);
+}
+
 // The sale badge over a product's image (when the image block shows it).
 .wp-block-woocommerce-product-image .wc-block-components-product-sale-badge {
 	@include wc-product-sale-badge;
