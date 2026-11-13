@@ -49,8 +49,10 @@
 	padding: 0;
 }
 
+// Spaced from the quantity and button below, more than the form's block gap
+// (xl, which this margin collapses with).
 .wc-block-add-to-cart-with-options .wcsatt-options-product-prompt {
-	margin-block-end: var(--wp--preset--spacing--lg);
+	margin-block-end: var(--wp--preset--spacing--2-xl);
 }
 
 .wc-block-add-to-cart-with-options .wcsatt-options-prompt-label {
@@ -109,10 +111,10 @@
 	text-decoration: none;
 }
 
-// The discount ("Subscribe to save 15%"): the savings badge.
+// The discount ("Subscribe to save 15%"): the savings badge, its figure on
+// the text's baseline.
 .wc-block-add-to-cart-with-options .wcsatt-options-prompt-action .wcsatt-sub-discount {
 	@include wc-savings-badge;
-	align-self: center;
 	border-radius: var(--wp--preset--border-radius--xs);
 	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--label);
@@ -160,7 +162,7 @@ $subscribing-with-plans: ".wcsatt-options-wrapper:has(.wcsatt-options-prompt-rad
 	border-end-start-radius: var(--wp--preset--border-radius--md);
 	// Overlapping the card by a pixel: where they meet on a half pixel, the
 	// edges blend with the page as a faint line.
-	margin-block: -1px var(--wp--preset--spacing--lg);
+	margin-block: -1px var(--wp--preset--spacing--2-xl);
 	padding: 1px var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg);
 	position: relative;
 }
