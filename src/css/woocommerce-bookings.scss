@@ -170,6 +170,14 @@
 	color: var(--scheme--text-subtle);
 }
 
+// Days that can't be chosen stay readable (Bookings fades them to 0.6, below
+// contrast): bookable days already stand out by their tint and weight.
+// (Bookings' `.wc-bookings-date-picker .ui-datepicker .ui-state-disabled`,
+// 0,3,0.)
+.wc-bookings-date-picker .ui-datepicker td.ui-state-disabled {
+	opacity: 1;
+}
+
 // Days that can be booked: a tint, then the theme's fill on hover and once
 // chosen. (Bookings' `.wc-bookings-date-picker .ui-datepicker td.bookable a`,
 // 0,3,2, and `td.ui-datepicker-current-day a`, 0,3,2, both `!important`.)
@@ -214,6 +222,12 @@
 .wc-bookings-booking-form .block-picker li {
 	float: none;
 	min-width: 0;
+}
+
+// Before a day is chosen, the list holds a message ("Choose a date above…")
+// rather than times: it spans the row.
+.wc-bookings-booking-form .block-picker li:only-child:not(:has(a)) {
+	grid-column: 1 / -1;
 }
 
 // (Bookings' `.wc-bookings-booking-form .block-picker li:nth-child(odd) a`,

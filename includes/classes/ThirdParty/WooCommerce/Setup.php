@@ -27,6 +27,26 @@ class Setup implements Bootable {
 		add_filter( 'woocommerce_get_price_html', [ $this, 'from_variation_price' ], 10, 2 );
 		add_filter( 'woocommerce_style_smallscreen_breakpoint', [ $this, 'smallscreen_breakpoint' ] );
 		add_filter( 'render_block_woocommerce/product-filters', [ $this, 'product_filters_default_styles' ] );
+		add_filter( 'render_block_woocommerce/product-filter-checkbox-list', [ $this, 'rating_stars_role' ] );
+	}
+
+	/**
+	 * The rating filter's stars are labelled ("Rated 4 out of 5") on a span
+	 * with no role, where the label is ignored (and is an axe failure). As an
+	 * image it is read, and names the checkbox. Every rating, including the
+	 * template WooCommerce clones in the browser.
+	 *
+	 * @param string $content The checkbox list's HTML.
+	 * @return string
+	 */
+	public function rating_stars_role( string $content ): string {
+		$processor = new \WP_HTML_Tag_Processor( $content );
+
+		while ( $processor->next_tag( [ 'class_name' => 'wc-block-product-filter-checkbox-list__stars' ] ) ) {
+			$processor->set_attribute( 'role', 'img' );
+		}
+
+		return $processor->get_updated_html();
 	}
 
 	/**
