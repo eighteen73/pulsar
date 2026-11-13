@@ -59,7 +59,7 @@
 }
 
 .wc-bookings-booking-form .form-field label {
-	@include label;
+	@include form-label;
 }
 
 .wc-bookings-date-picker-timezone-block {
@@ -233,12 +233,13 @@
 // (Bookings' `.wc-bookings-booking-form .block-picker li:nth-child(odd) a`,
 // 0,3,2, and its `a.selected`, 0,3,2, `!important`.)
 .wc-bookings-booking-form .block-picker li:nth-child(n) a {
+	@include label-text;
+
 	background: var(--scheme--background);
 	border: 1px solid var(--scheme--border-strong);
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: var(--scheme--text);
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--font-weight--label);
 	height: auto !important;
 	padding: var(--wp--preset--spacing--sm);
 	transition:

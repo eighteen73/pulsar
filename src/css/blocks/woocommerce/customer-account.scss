@@ -2,7 +2,7 @@
 
 /// The header's account link (template-parts/header.php): an icon beside the
 /// basket's, the same size and colour.
-.wp-block-woocommerce-customer-account a {
+.wc-block-customer-account__link {
 	align-items: center;
 	color: inherit;
 	display: inline-flex;

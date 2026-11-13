@@ -19,7 +19,10 @@
 				"typography": {
 					"lineHeight": "",
 					"fontSize": "",
-					"fontFamily": ""
+					"fontFamily": "",
+					"fontWeight": "",
+					"letterSpacing": "",
+					"textTransform": ""
 				}
 			}
 		},

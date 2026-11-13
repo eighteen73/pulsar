@@ -1,5 +1,6 @@
 @use "../../settings" as *;
 @use "utility" as *;
+@use "typography" as *;
 
 /// Buttons.
 ///
@@ -43,6 +44,8 @@
 	--_button-padding-inline: var(--wp--preset--spacing--lg);
 	--_button-font-size: var(--wp--preset--font-size--md);
 
+	@include label-text;
+
 	align-items: center;
 	background-color: var(--_button-background);
 	border: var(--_button-border-width) solid var(--_button-border);
@@ -51,9 +54,7 @@
 	color: var(--_button-text);
 	cursor: pointer;
 	display: inline-flex;
-	font-family: inherit;
 	font-size: var(--_button-font-size);
-	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
 	justify-content: center;
 	line-height: var(--wp--custom--typography--line-height--tight);

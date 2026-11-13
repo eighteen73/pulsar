@@ -29,7 +29,7 @@
 				{
 					"name": "full",
 					"slug": "full",
-					"size": "calc(9999px * var(--wp--custom--roundness))"
+					"size": "9999px"
 				}
 			],
 			"style": false,

@@ -93,7 +93,7 @@
 // Labels and descriptions.
 
 :where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme :is(label, legend).gfield_label {
-	@include label;
+	@include form-label;
 	padding-top: 0;
 }
 
@@ -139,7 +139,7 @@
 }
 
 :where(.wp-block-matter-gravity-form) .gform_wrapper.gravity-theme .ginput_complex label {
-	@include label;
+	@include form-label;
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	padding-top: 0;
 }

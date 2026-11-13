@@ -1,0 +1,40 @@
+/// The roles every scheme sets (config/theme-json/settings.custom.json).
+$scheme-roles: (
+	background,
+	background-surface,
+	background-fill,
+	text,
+	text-subtle,
+	text-heading,
+	text-link,
+	text-fill,
+	border,
+	border-strong,
+	highlight
+);
+
+/// A colour scheme, where a `has-scheme-{slug}` class can't give it: a
+/// wrapper whose scheme changes with the screen width. It sets the
+/// `--scheme--{role}` variables from WordPress's `--wp--custom--scheme--{slug}--{role}`,
+/// as Matter's `.has-scheme-{slug}` does (both are in Matter's theme contract),
+/// and paints the background and text, as `.has-scheme` does. Content inside
+/// adapts as it does to a class.
+///
+/// @param {string} $slug - A scheme in settings.custom.json.
+///
+/// @example scss - Olive on phones, cream from lg
+///   .site-header__bar {
+///     @include scheme(accent);
+///
+///     @media (--lg) {
+///       @include scheme(subtle);
+///     }
+///   }
+@mixin scheme($slug) {
+	@each $role in $scheme-roles {
+		--scheme--#{$role}: var(--wp--custom--scheme--#{$slug}--#{$role});
+	}
+
+	background-color: var(--scheme--background);
+	color: var(--scheme--text);
+}

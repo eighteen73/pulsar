@@ -61,7 +61,7 @@
 }
 
 .woocommerce form .form-row label {
-	@include label;
+	@include form-label;
 	line-height: var(--wp--custom--typography--line-height--normal);
 }
 

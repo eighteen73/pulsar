@@ -30,11 +30,19 @@ $bands: ".is-section, .wp-block-matter-archive-loop";
 	padding-block-start: 0;
 }
 
-// Content flow inside slots.
+// Content flow inside slots: the block gap between blocks, or a section's own
+// gap, set as `--slot-gap` on its slot's class (e.g. Cards' items, 0). Each
+// slot starts from the block gap, so a section's gap stops at the slots
+// nested in it. Set the variable rather than a margin: a section's own
+// `> * + *` rule would tie with this one.
+:where(.wp-block-matter-slot) {
+	--slot-gap: var(--wp--style--block-gap);
+}
+
 .wp-block-matter-slot > * {
 	margin-block: 0;
 }
 
 .wp-block-matter-slot > * + * {
-	margin-block-start: var(--wp--style--block-gap);
+	margin-block-start: var(--slot-gap);
 }

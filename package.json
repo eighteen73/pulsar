@@ -4,6 +4,7 @@
 	"scripts": {
 		"start": "wp-scripts start --webpack-copy-php --experimental-modules --blocks-manifest",
 		"start:hot": "wp-scripts start --hot --webpack-copy-php --experimental-modules --blocks-manifest",
+		"prebuild": "node -e \"require('fs').rmSync('build', { recursive: true, force: true })\"",
 		"build": "wp-scripts build --webpack-copy-php --experimental-modules --blocks-manifest",
 		"watch": "npm run start",
 		"production": "npm run build",

@@ -139,7 +139,7 @@
 /// The coupon form's label (`.wc-block-components-totals-coupon__input label`),
 /// over the field like the checkout's.
 @mixin wc-coupon-label() {
-	@include label;
+	@include form-label;
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	left: var(--wp--preset--spacing--lg);
 }

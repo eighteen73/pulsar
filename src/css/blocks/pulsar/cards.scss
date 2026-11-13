@@ -11,12 +11,10 @@
 }
 
 // The items slot is the grid; its children are pulsar/card sections.
-.wp-block-pulsar-cards__items.wp-block-matter-slot {
+.wp-block-pulsar-cards__items {
+	--slot-gap: 0;
+
 	display: grid;
 	gap: var(--wp--custom--spacing--gutter);
 	grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
-}
-
-.wp-block-pulsar-cards__items.wp-block-matter-slot > * + * {
-	margin-block-start: 0;
 }

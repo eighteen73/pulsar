@@ -64,6 +64,15 @@
 				"section": "clamp(64px, 54.8571px + 2.8571vw, 96px)"
 			},
 			"typography": {
+				"fontFamily": {
+					"label": "var(--wp--preset--font-family--primary)"
+				},
+				"letterSpacing": {
+					"label": "normal"
+				},
+				"textTransform": {
+					"label": "none"
+				},
 				"fontWeight": {
 					"body": 400,
 					"heading": 700,

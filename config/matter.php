@@ -3,16 +3,17 @@
  * Matter block variants.
  *
  * Variants are shown to editors as block styles. Their options set behaviour;
- * their look (slide widths, sizes…) is styled in src/css/blocks/matter-*.scss
+ * their look (slide widths, sizes…) is styled in src/css/blocks/matter/*.scss
  * via `.is-style-{slug}`. Each block's `default` variant inherits Matter's
- * defaults; others inherit `default`.
+ * defaults; others inherit `default`, so an option set on `default` applies to
+ * every variant: put a crop, autoplay or loop on the variant that wants it.
  *
  * Carousel options: loop (bool), align (start|center|end), slidesToScroll
  * (int|'auto'), autoplay (seconds per slide, 0 = off), autoScroll (continuous
  * speed, 0 = off), controls (groups of parts by position: before, stage —
  * over the slides — and after; parts: prev, next, dots, progress, timer,
  * counter, play, thumbnails, expand), thumbnailSize. Place and style the
- * parts in src/css/blocks/matter-carousel.scss.
+ * parts in src/css/blocks/matter/carousel.scss.
  * Carousels of only images also take aspectRatio: the default crop, a slug
  * from theme.json's aspect ratio presets or 'auto' (editors can change it).
  * Gallery options: imageSize (a registered image size), columns (the column
@@ -25,26 +26,29 @@
  * tabs set to "Show as a dropdown on smaller screens".
  * Archive list (the posts or products in archive content): no options; each
  * variant is a layout for the template's list, styled in
- * src/css/blocks/matter-archive-loop.scss.
+ * src/css/blocks/matter/archive-loop.scss.
  *
  * @package Pulsar
  */
 
 return [
 	'matter/carousel' => [
+		// Images keep their own shape unless an editor, or a variant, crops them.
 		'default' => [
 			'label'       => __( 'Single', 'pulsar' ),
-			'aspectRatio' => '16-9',
+			'aspectRatio' => 'auto',
 		],
 		'cards'   => [
 			'label'          => __( 'Cards', 'pulsar' ),
 			'slidesToScroll' => 'auto',
 		],
+		// One shape, so the height doesn't jump as slides change.
 		'slides'  => [
-			'label'    => __( 'Slideshow', 'pulsar' ),
-			'loop'     => true,
-			'autoplay' => 6,
-			'controls' => [ 'before' => [ 'dots' ] ],
+			'label'       => __( 'Slideshow', 'pulsar' ),
+			'loop'        => true,
+			'autoplay'    => 6,
+			'aspectRatio' => '16-9',
+			'controls'    => [ 'before' => [ 'dots' ] ],
 		],
 	],
 	'matter/archive-loop' => [

@@ -16,8 +16,9 @@
 }
 
 .wp-block-query-pagination .page-numbers {
+	@include label-text;
+
 	color: var(--scheme--text-subtle);
-	font-weight: var(--wp--custom--typography--font-weight--label);
 	line-height: var(--wp--custom--typography--line-height--none);
 	min-width: 34px;
 	padding: var(--wp--preset--spacing--sm);

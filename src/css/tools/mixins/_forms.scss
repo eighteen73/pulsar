@@ -1,8 +1,8 @@
 @use "../../settings" as *;
 @use "utility" as *;
 
-/// Label styles.
-@mixin label() {
+/// A form label. (Label text for controls is `label-text`.)
+@mixin form-label() {
 	color: var(--scheme--text);
 	display: block;
 	font-size: var(--wp--preset--font-size--md);

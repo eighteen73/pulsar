@@ -45,7 +45,8 @@
 }
 
 .term-card__cta {
-	font-weight: var(--wp--custom--typography--font-weight--label);
+	@include label-text;
+
 	margin: 0;
 }
 

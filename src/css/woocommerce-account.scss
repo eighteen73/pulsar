@@ -117,11 +117,12 @@ $order-statuses: (
 }
 
 .woocommerce-account .woocommerce-MyAccount-navigation li a {
+	@include label-text;
+
 	align-items: center;
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: var(--scheme--text);
 	display: flex;
-	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
 	padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
 	text-decoration: none;

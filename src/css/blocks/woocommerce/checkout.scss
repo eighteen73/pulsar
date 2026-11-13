@@ -303,7 +303,7 @@
 /* stylelint-enable selector-max-specificity */
 
 .wp-block-woocommerce-checkout .wc-block-components-text-input label {
-	@include label;
+	@include form-label;
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	left: var(--wp--preset--spacing--lg);
 }
@@ -351,7 +351,7 @@
 }
 
 .wc-blocks-components-select .wc-blocks-components-select__label {
-	@include label;
+	@include form-label;
 	font-weight: var(--wp--custom--typography--font-weight--body);
 	left: var(--wp--preset--spacing--lg);
 	margin: unset;

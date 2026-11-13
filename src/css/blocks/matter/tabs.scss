@@ -11,6 +11,8 @@
 }
 
 .wp-block-matter-tabs__tab {
+	@include label-text;
+
 	align-items: center;
 	appearance: none;
 	background: none;
@@ -19,9 +21,10 @@
 	color: inherit;
 	cursor: pointer;
 	display: inline-flex;
-	font: inherit;
-	font-weight: var(--wp--custom--typography--font-weight--label);
+	font-size: inherit;
+	font-style: inherit;
 	gap: var(--wp--preset--spacing--sm);
+	line-height: inherit;
 	margin-block-end: -1px;
 	padding: var(--wp--preset--spacing--md) 0;
 	text-align: start;
@@ -77,6 +80,8 @@
 // Dropdown on smaller screens (below md: `dropdownBelow` in config/matter.php):
 // a button showing the current tab opens the tab list as a menu.
 .wp-block-matter-tabs__toggle {
+	@include label-text;
+
 	align-items: center;
 	appearance: none;
 	background: none;
@@ -84,9 +89,10 @@
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: inherit;
 	cursor: pointer;
-	font: inherit;
-	font-weight: var(--wp--custom--typography--font-weight--label);
+	font-size: inherit;
+	font-style: inherit;
 	gap: var(--wp--preset--spacing--sm);
+	line-height: inherit;
 	padding: var(--wp--preset--spacing--md);
 	text-align: start;
 	width: 100%;

@@ -9,7 +9,7 @@
 /// `lg` and a dropdown from `lg`, so its type-specific look uses those
 /// breakpoints. The footer menus are single-level lists.
 .matter-menu {
-	font-weight: var(--wp--custom--typography--font-weight--label);
+	@include label-text;
 }
 
 .matter-menu__link {

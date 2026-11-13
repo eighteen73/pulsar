@@ -60,3 +60,21 @@
 	outline: none !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
 	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
 }
+
+/// Hidden on the site but shown in the editor, for a slot (or any part a
+/// client fills) hidden at some screen widths. Breakpoints in the editor
+/// follow the canvas, which is often narrower than the screen it stands for,
+/// so a slot hidden by width would vanish there and couldn't be filled. Use
+/// it inside the media query.
+///
+/// @example scss - The hero's start image only from lg
+///   .wp-block-pulsar-hero__media-start {
+///     @media (--lg-down) {
+///       @include hidden-on-site;
+///     }
+///   }
+@mixin hidden-on-site {
+	:where(body:not(.editor-styles-wrapper)) & {
+		display: none;
+	}
+}

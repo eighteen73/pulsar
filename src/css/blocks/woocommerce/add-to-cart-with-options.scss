@@ -57,12 +57,15 @@
 
 // Option cards, as the checkout's shipping and payment methods are.
 .wc-block-add-to-cart-with-options .wcsatt-options-prompt-label {
-	@include option-card;
 	align-items: center;
 	display: flex;
 	font-weight: var(--wp--custom--typography--font-weight--label);
 	gap: var(--wp--preset--spacing--sm);
 	padding: var(--wp--preset--spacing--lg);
+
+	// After the declarations: the mixin ends in nested rules (:hover, a media
+	// query), and declarations after nested rules are deprecated in Sass.
+	@include option-card;
 
 	&:has(> input:checked) {
 		@include option-card-checked;
@@ -107,7 +110,7 @@
 // The plans (shown once subscribing, when there's more than one): the
 // theme's label and select.
 .wc-block-add-to-cart-with-options .wcsatt-options-product-dropdown-label {
-	@include label;
+	@include form-label;
 }
 
 .wc-block-add-to-cart-with-options .wcsatt-options-product-dropdown {

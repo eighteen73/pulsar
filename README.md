@@ -22,11 +22,13 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 ```bash
 npm install
 npm run start   # watch
-npm run build   # production build (commit build/ and theme.json)
+npm run build   # production build, emptying build/ first (commit build/ and theme.json)
 npm run lint:css && npm run lint:js && npm run lint:php
 ```
 
 `theme.json` is generated from `config/theme-json/*.json`. Edit the parts, not `theme.json`.
+
+**In a Nebula project** the theme is an npm workspace of the project: run `npm install` at the project root, not in the theme (the theme's lock file isn't used there). Build and lint from the theme folder, or with `-w pulsar` from the root. A project's pre-commit hooks should run the theme's own linters from the theme folder (`npm run lint:css` and the rest): its stylelint config is an ES module that an older root stylelint can't load, and its PHPCS ruleset differs from the project's.
 
 ### Browser tests
 
@@ -38,7 +40,9 @@ npx playwright install chromium    # once
 npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
 ```
 
-They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, and that the header, footer, menus, archives, search, 404 and shop work. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account.
+They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, that every scheme's colour pairs meet AA contrast (`contrast.spec.js`), and that the header, footer, menus, archives, search, 404 and shop work.
+
+**Ports.** Every project copied from Pulsar uses 8890/8891. To run two at once, give one others in `.wp-env.override.json` (git-ignored), e.g. `{ "port": 8892, "testsPort": 8893 }`: its tests use the override's `testsPort`. Before anything runs, the set-up checks that the site is this project's own wp-env tests site and stops if it isn't, so the tests (which replace their content) never run against another project's. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account.
 
 **WooCommerce's paid extensions** (Subscriptions, with All Products for Subscriptions; Product Bundles; Bookings; Memberships) have their own tests, `tests/e2e/extensions.spec.js`. They need the plugins, so they run locally and skip in CI. With the extensions in the project's `web/app/plugins`:
 
@@ -48,7 +52,10 @@ npm run env:start
 npm run test:e2e   # seeds a customer, products, a subscription, booking and membership (tests/wp-env/seed-extensions.php)
 ```
 
-Delete `.wp-env.override.json` and start again to go back to WooCommerce alone. (Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.) **In a project,** add its sections to `content.js` and `editor.spec.js` as they're built, so a change to a section or a scheme is checked like the starter's. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
+Delete `.wp-env.override.json` and start again to go back to WooCommerce alone. (Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.) **In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
+- sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
+- schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
+- Appearance › Options, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test). CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
 
 ## Where things live
 
@@ -83,10 +90,18 @@ A section is a block with named content slots. Its layout lives in code, so chan
 3. Style it in `src/css/blocks/pulsar/{name}.scss`. Shared section rules are in `components/_sections.scss`.
 4. Run `npm run build`. Sections appear in the inserter's **Sections** category.
 
+**To remove one,** delete its `src/blocks/{name}` folder and its stylesheet, and build: the build empties `build/` first, so it's no longer registered. Take it out of the tests too (see Browser tests).
+
 **Slots:**
 - `allowedBlocks` limits what editors can add.
 - `templateLock: "contentOnly"` fixes the blocks and lets editors change only their content.
 - Slots are matched by name, so they can be added, reordered or removed in any position. To rename one, list its old name (`"previously": [ "media" ]`) so existing content follows it. See Matter's README.
+
+**Spacing:**
+- A full-width section is a band: its spacing is padding (`--wp--custom--spacing--section`, above and below), so its scheme's background covers it. Two bands in a row without a scheme read as one, so the second loses its top padding (`components/_sections.scss`). That relies on the first keeping its bottom padding: a section that runs to its edges (an edge-to-edge hero) should still keep the section spacing below it, or the next section will touch it.
+- Blocks in a slot are spaced by the block gap. For a different gap in one slot, set `--slot-gap` on the slot's class (`.wp-block-pulsar-cards__items { --slot-gap: 0; }`). Don't write a `> * + *` margin rule: it ties with the shared one, which loads later and wins. Each slot starts from the block gap, so the setting doesn't reach slots nested inside.
+
+**Slots hidden at some widths:** in the editor, breakpoints follow the canvas, which is often narrower than the screen it stands for (the sidebars take the rest), so a slot hidden below `lg` can vanish there and can't be filled. Hide it with `@include hidden-on-site;` inside the media query: hidden on the site, always shown in the editor.
 
 ## Colour schemes and tokens
 
@@ -104,7 +119,7 @@ Tokens come in two layers, and components only ever use the second:
 
 ### Schemes
 
-`custom.scheme` defines `default`, `subtle`, `brand` and `contrast`. Every scheme sets all 11 roles, each pointing at the palette:
+`custom.scheme` defines `default`, `subtle`, `brand` and `contrast`. The slugs and the number of schemes are the project's to choose (add an `accent`, rename `contrast`); Matter uses whatever is there, `default` on `:root`. The starter names `subtle` in `parts/breadcrumbs.html`, `templates/page-cart.html`, `templates/page-checkout.html` and `patterns/order-confirmation.php`, and the tests list the schemes in `tests/e2e/content.js`, so update those with a rename. Every scheme sets all 11 roles, each pointing at the palette:
 
 | Role | For |
 | --- | --- |
@@ -122,6 +137,28 @@ Tokens come in two layers, and components only ever use the second:
 
 Matter writes the `default` scheme onto `:root` as `--scheme--{role}` and swaps in another on `.has-scheme-{slug}`, so nested content adapts. Component CSS uses `var(--scheme--text-link)` and the like with no fallback: a missing role should look wrong in review. Read the palette directly only for one-off marks, such as text over a darkened image. In templates, put `has-scheme has-scheme-{slug}` on a wrapper, never palette colour classes; `.has-text-subtle` sets subtle text. Client-facing scheme names come from the `matter_scheme_labels` filter.
 
+**A scheme that changes with the screen width** (a header bar that's one scheme on phones and another from `lg`) can't be a class. Use the `scheme()` mixin inside media queries; it sets the roles from WordPress's variables for that scheme, as `.has-scheme-{slug}` does:
+
+```scss
+.site-header__bar {
+	@include scheme(accent);
+
+	@media (--lg) {
+		@include scheme(subtle);
+	}
+}
+```
+
+**Contrast.** Each scheme's roles must pass WCAG AA in these pairs, which `tests/e2e/contrast.spec.js` checks for every scheme in `theme.json`:
+
+| Foreground | On | Ratio |
+| --- | --- | --- |
+| `text`, `text-subtle`, `text-heading`, `text-link` | `background` and `background-surface` | 4.5:1 |
+| `text-fill` | `background-fill` | 4.5:1 |
+| `border-strong`, `highlight` | `background` and `background-surface` | 3:1 |
+
+Links on a tinted background are the usual failure, which is why `subtle` uses `accent-primary-strong` for `text-link` and `highlight`: keep that reason when swapping colours, and check the surface as well as the background (cards and panels sit on `background-surface`).
+
 ### Spacing, type and the rest
 
 | Variable | Values |
@@ -132,9 +169,10 @@ Matter writes the `default` scheme onto `:root` as `--scheme--{role}` and swaps 
 | `--wp--custom--spacing--section` | Padding above and below a section, 64→96 |
 | `--wp--style--block-gap` | Space between blocks in a flow (`xl`), WordPress's own variable |
 | `--wp--preset--font-size--{slug}` | `xs` 12, `sm` 14, `md` 16 (body), `lg` 19→20, `xl` 23→25, `2-xl` 28→31, `3-xl` 33→39, `4-xl` 40→49, `5-xl` 48→61 |
-| `--wp--custom--typography--font-weight--{body,heading,label}` | 400, 700, and `label` (buttons, form labels, menus, tabs, prices) follows `heading` unless set |
+| `--wp--custom--typography--font-weight--{body,heading,label}` | 400, 700, and `label` (buttons, form labels, menus, tabs, prices) follows `heading` unless set. If headings aren't bold, set `label` (usually 700), or every label goes to the heading's weight |
+| `--wp--custom--typography--{font-family,letter-spacing,text-transform}--label` | The body font, `normal`, `none`: label text for controls (buttons, menus, tabs, pagination, account navigation) through the `label-text` mixin. Set them for labels in their own font, capitals or tracking. Prices, totals and form labels use only the label weight |
 | `--wp--custom--typography--line-height--{none,tight,normal}` | 1, 1.1, 1.5 |
-| `--wp--preset--border-radius--{xs,sm,md,lg,full}` | 4, 8, 10→16, 16→24, pill; each multiplied by `--wp--custom--roundness` (0 square, 1 default, 1.5 rounder) |
+| `--wp--preset--border-radius--{xs,sm,md,lg,full}` | 4, 8, 10→16, 16→24, pill; `xs` to `lg` are multiplied by `--wp--custom--roundness` (0 square, 1 default, 1.5 rounder). `full` is always a pill or circle (round controls such as carousel arrows stay round on a square site); use `lg` for anything that should square up with the rest |
 | `--wp--preset--shadow--{xs,sm,md,lg}` | Tinted from `neutral-900` |
 | `--wp--custom--transition--duration--{quick,normal}` | 150ms, 300ms |
 | `--wp--style--global--content-size` / `--wide-size` | 768px / 1440px |
@@ -150,7 +188,7 @@ The editor's colour, spacing, layout, border and typography controls are switche
 Ask the designer for:
 - one hex per colour, ranked by use: `brand-primary` at minimum, plus `base` and `contrast`. A paler or deeper version of a colour is its `-subtle` or `-strong`; only give a hex if the default mix isn't right. Greys always go in `neutral-*`.
 - the schemes the site needs (usually two to four), each as the 11 roles above, picked from the palette.
-- fonts and weights for body, headings and labels; body size if not 16px.
+- fonts and weights for body, headings and labels (and whether labels are in capitals or tracked); body size if not 16px.
 - roundness (square, default or rounder) and whether section spacing differs from 64→96.
 
 Name the Figma variables the same way (`brand-primary`, `background-fill`, `spacing/xl`) so a design maps straight onto theme.json.
@@ -162,7 +200,8 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 **Selectors**
 - ✓ Every class is written out in full: no `&__` or `&-` concatenation, so searching for a class finds its styles.
 - ✓ Nesting only for the same element: `&:hover`, `&::before`, `&[aria-selected="true"]`, `&.is-open`, and at-rules (`@media`, `@include`). Anything else is its own rule with its full selector.
-- Mixins output declarations; the caller writes the selector (`.thing:focus-visible { @include focus-ring; }`).
+- Mixins output declarations; the caller writes the selector (`.thing:focus-visible { @include focus-ring; }`). The exception is `hidden-on-site`, which wraps the caller's selector to leave the editor out.
+- Labels: `label-text` is label text on controls (buttons, menus, tabs); `form-label` is a form field's label.
 
 **Specificity**
 - One class per selector where possible; context that's only there to scope goes in `:where()` (`:where(.site-header__navigation) .matter-menu__link`).
@@ -188,7 +227,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 **Buttons**
 - Every button is the base plus a variant (`primary`, `secondary`, `link`) and optionally a size (`small`). The base draws the border on every variant and allows for it in the padding, so all buttons are the same height.
 - `@include button(secondary, small)` makes something a button. Anything that's already one (`.wp-element-button`, `.wp-block-button__link`) only needs `@include button-variant(secondary)` or `button-size(small)`, which set colours or spacing through private `--_button-*` variables.
-- Hovers mix the fill towards the section's background, so they work in every scheme.
+- Hovers mix the fill towards the section's background, so they work in every scheme. That's the starter's default, not a rule: follow the design's hover, as long as it works in every scheme.
 
 ## Header, footer and menus
 
@@ -206,6 +245,8 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - the credit.
 
 Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
+
+**Footer menu headings** aren't in the starter. If a design heads each footer menu ("Help", "About"), use the menu's name, `wp_get_nav_menu_name( $location )`, so a client renames a heading by renaming the menu in Appearance › Menus. Give `menu()` the same `label`, so the navigation is announced by the heading's name.
 
 **Megamenus** aren't styled in the starter. Matter supports them (a menu item's "Display submenu as a megamenu"); see Matter's README for setting one up, with an example panel and CSS.
 
