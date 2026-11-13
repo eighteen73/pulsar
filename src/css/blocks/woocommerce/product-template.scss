@@ -27,11 +27,11 @@
 }
 
 // Two classes: WooCommerce's `.wp-block-button.wc-block-components-product-button`
-// stacks the button and its "View cart" link.
+// stacks the button and its "View cart" link (once added): side by side here.
 .product-card__media .wp-block-woocommerce-product-button {
 	align-items: center;
 	flex-direction: row;
-	gap: 0;
+	gap: var(--wp--preset--spacing--sm);
 	inset-block-end: var(--wp--preset--spacing--sm);
 	inset-inline-end: var(--wp--preset--spacing--sm);
 	opacity: 0;
