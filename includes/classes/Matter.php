@@ -66,6 +66,8 @@ class Matter implements Bootable {
 	 * What a new carousel can hold, with the variant (config/matter.php) it
 	 * starts as. Matter offers images, posts and products; cards are added.
 	 * A slide type's block needs `matter/carousel` in its block.json `parent`.
+	 * A type for one section's carousel only lists the section in `within`
+	 * (e.g. `'within' => [ 'pulsar/hero' ]`), so other carousels don't offer it.
 	 *
 	 * @return array
 	 */
