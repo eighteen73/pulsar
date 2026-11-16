@@ -58,6 +58,28 @@ test.describe('sections', () => {
 		});
 	}
 
+	test("a section's own padding, at one class, beats the shared band padding", async ({
+		page,
+	}) => {
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const hero = page.locator('.wp-block-pulsar-hero').first();
+
+		await expect(hero).not.toHaveCSS('padding-top', '3px');
+
+		// As a block stylesheet: one class, loaded before the theme's.
+		await page.evaluate(() => {
+			const style = document.createElement('style');
+
+			style.textContent =
+				'.wp-block-pulsar-hero { padding-block: 3px; }';
+			document.head.prepend(style);
+		});
+
+		await expect(hero).toHaveCSS('padding-top', '3px');
+		await expect(hero).toHaveCSS('padding-bottom', '3px');
+	});
+
 	test('a linked card links from its heading', async ({ page }) => {
 		await page.goto(`/${PAGE_PREFIX}sections-default/`);
 

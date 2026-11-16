@@ -75,7 +75,7 @@ Delete `.wp-env.tests.override.json` and start the test site again to go back to
 | `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). It's read after `init`, so a `select`'s `options` can come from a function, e.g. a taxonomy's terms. |
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter/`. |
 | `config/theme-json/` | Design tokens and editor settings. |
-| `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
+| `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. Draw them single-colour, as filled `path` or `polygon` elements only: WordPress's icon registry keeps only those (and `fill`, `fill-rule`, `d`, `transform`), and drops strokes, circles, groups and `fill="none"` without a warning, so an outline icon comes out blank. Draw a ring as two arcs with `fill-rule="evenodd"`. |
 | `includes/classes/Matter.php` | Feeds `config/` into Matter, and names the theme's namespace, `pulsar` (`matter_theme_namespace`): the prefix Matter looks for loop item patterns under (`pulsar/loop-item…`) and the icon collection's name. Keep it `pulsar` even if the theme's folder is renamed or a child theme is added; icon names and pattern slugs depend on it. |
 | `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
 | `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). `Pulsar\site_logo()` shows `brand/logo` in the header and footer. For a logo that's only a PNG (or JPEG, WebP, AVIF), put it in `assets/img/brand/` and pass its path with the extension, `site_logo( [ 'logo' => 'img/brand/logo.png' ] )` (in `template-parts/header/logo.php` and `footer/logo.php`): it's output as an `<img>` with its size, and a `logo@2x.png` beside it is used on high-density screens. An SVG is better where there is one: it's sharp at any size and can take the scheme's colour. |
@@ -96,11 +96,12 @@ A section is a block with named content slots. Its layout lives in code, so chan
 **To add one:**
 
 1. Create `src/blocks/{name}/block.json` with `supports.matter.slots`. Copy an existing section.
-2. Optionally add `render.php` when the markup needs it, keeping the classes Matter uses in the editor (see the Matter README).
-3. Style it in `src/css/blocks/pulsar/{name}.scss`. Shared section rules are in `components/_sections.scss`.
-4. Run `npm run build`. Sections appear in the inserter's **Sections** category.
+2. Declare its variants as block styles, `styles` in `block.json` (see `media-text`): the default first, with `isDefault`, then one entry per variant. Each is styled as `.is-style-{name}`; the default has `is-style-default` too (Matter adds it on the site and in the editor), so its own styles don't need to exclude the others.
+3. Optionally add `render.php` when the markup needs it, keeping the classes Matter uses in the editor (see the Matter README).
+4. Style it in `src/css/blocks/pulsar/{name}.scss`. Shared section rules are in `components/_sections.scss`.
+5. Run `npm run build`. Sections appear in the inserter's **Sections** category.
 
-**Variants, not options.** A client chooses a section's scheme and one variant, nothing else, so each layout is its own variant, mirror images included ("Image last"). When a section's variants pass five or six, or split into families that share little CSS, make it two sections.
+**Variants, not options.** A client chooses a section's scheme and one variant, nothing else, so each layout is its own variant, mirror images included ("Image last"). When a section's variants pass five or six, or split into families that share little CSS, make it two sections. A variant changes CSS only: every variant has the same slots, templates and locks, so a layout that needs different slots (two images where the others have one) is a separate section. Keep variant labels to about twelve characters ("Over image", "Faded"): the Styles panel shows them as two buttons a row and cuts longer ones off.
 
 **To remove one,** delete its `src/blocks/{name}` folder and its stylesheet, and build: the build empties `build/` first, so it's no longer registered. Take it out of the tests too (see Browser tests).
 
@@ -113,6 +114,7 @@ A section is a block with named content slots. Its layout lives in code, so chan
 **Spacing:**
 - A full-width section is a band: its spacing is padding (`--wp--custom--spacing--section`, above and below), so its scheme's background covers it. Two bands in a row without a scheme read as one, so the second loses its top padding (`components/_sections.scss`). That relies on the first keeping its bottom padding: a section that runs to its edges (an edge-to-edge hero) should still keep the section spacing below it, or the next section will touch it.
 - A page whose last section (or template band) has a scheme meets the footer, with no gap between them; other pages keep the flow gap above the footer (`components/_main.scss`).
+- The shared padding is at zero specificity, so a section or variant sets its own with one class (`.wp-block-pulsar-cta { padding-block: … }`). Margins are different: the "sections touch" rule has to beat WordPress's layout margins, so a section that changes its own margin (pulling itself up into the band above) needs `.is-section` in its selector as well (`.wp-block-pulsar-{name}.is-style-{variant}.is-section`).
 - Blocks in a slot are spaced by the block gap. For a different gap in one slot, set `--slot-gap` on the slot's class (`.wp-block-pulsar-cards__items { --slot-gap: 0; }`). Don't write a `> * + *` margin rule: it ties with the shared one, which loads later and wins. Each slot starts from the block gap, so the setting doesn't reach slots nested inside.
 
 **Slots hidden at some widths:** in the editor, breakpoints follow the canvas, which is often narrower than the screen it stands for (the sidebars take the rest), so a slot hidden below `lg` can vanish there and can't be filled. Hide it with `@include hidden-on-site;` inside the media query: hidden on the site, always shown in the editor.
@@ -216,6 +218,8 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 **Selectors**
 - ✓ Every class is written out in full: no `&__` or `&-` concatenation, so searching for a class finds its styles.
 - ✓ Nesting only for the same element: `&:hover`, `&::before`, `&[aria-selected="true"]`, `&.is-open`, and at-rules (`@media`, `@include`). Anything else is its own rule with its full selector.
+- ✓ Properties in alphabetical order. So set longhands rather than a shorthand plus an override: the override would sort before the shorthand, which then resets it (write the four `border-*-radius` corners, not `border-radius: 0` and one corner).
+- ✓ ASCII only. Sass writes a non-ASCII character as it is and then starts the file with a byte order mark; WordPress inlines small block stylesheets, so the mark joins the first selector, which never matches. Escape characters (`content: "\201C"` or `open-quote`). `npm run lint:build` checks the built files; stylelint doesn't.
 - Mixins output declarations; the caller writes the selector (`.thing:focus-visible { @include focus-ring; }`). The exception is `hidden-on-site`, which wraps the caller's selector to leave the editor out.
 - Labels: `label-text` is label text on controls (buttons, the header's menu, tabs); `form-label` is a form field's label.
 
@@ -224,7 +228,10 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - ✓ At most 0,3,1, and no IDs. (WooCommerce and Gravity Forms files are exempt until they're rewritten.)
 - Element styles (`h2`, `a`, form fields) stay at element specificity, or inside `:where()`, so any class beats them.
 - A section's base rules for what's inside its slots put the context in `:where()`: `.wp-block-pulsar-card :where(.wp-block-pulsar-card__media) img` (0,1,1). A variant then overrides it with one class more, `.wp-block-pulsar-card.is-style-icon :where(.wp-block-pulsar-card__media) img` (0,2,1), and stays under the limit.
+- Rules that pick a slot's contents by position (`figure + figure`, `:nth-child(even)`) soon pass the limit or the four-selector one. Put the position in `:where()` on every rule in the family, not only the long ones (`:where(.wp-block-pulsar-media-text__media figure + figure) + figure`): wrapping only some leaves them weaker than the rules they should override, which looks right in the source and wrong in the browser.
 - `!important` only to beat someone else's `!important` or inline style (WordPress's constrained layout, WooCommerce, Gravity Forms), or to guarantee accessibility (focus ring). Always with a `stylelint-disable-line` comment saying why.
+
+**In the editor.** Sections share their markup and CSS with the editor, but the editor adds its own styles to it (Matter's README, "In the editor"). In short: decorate a section's or card's `::before`, or an inner element, not its own `::after`, which the editor uses for block outlines; place things against the section from the slot, not a block inside it; and keep a slot that sits behind the content reachable (`.is-empty`, `pointer-events`).
 
 **Matter's blocks**
 - Matter ships a minimal default skin in `:where()`, so any class here overrides it. Pulsar styles every Matter block it uses in full (`blocks/matter/`, `components/_menu.scss`, the panel in `components/_header.scss`), icons included (`assets/svg/ui/`), so a Matter update doesn't change how the site looks.

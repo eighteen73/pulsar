@@ -6,8 +6,9 @@
 /// aren't bands. Section-specific layout lives in blocks/pulsar/.
 // An archive's list (Matter archive content) is a band like a section,
 // between the sections editors add above and below it.
-.is-section.alignfull,
-.wp-block-matter-archive-loop {
+// Zero specificity, so a section's or variant's own padding (one class, in its
+// block stylesheet, which loads earlier) wins.
+:where(.is-section.alignfull, .wp-block-matter-archive-loop) {
 	padding-block: var(--wp--custom--spacing--section);
 	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
 }
@@ -21,12 +22,16 @@ $section-parents: ".wp-block-post-content, .wp-block-matter-archive-content";
 $bands: ".is-section, .wp-block-matter-archive-loop";
 
 // Stacked sections touch; each provides its own vertical padding.
+// Two classes, to beat core's flow layout margins (`:root :where(...) > *`), so
+// a section that changes its own margin (pulling itself into the band above,
+// say) needs `.is-section` in its selector too.
 :where(#{$section-parents}) > :is(#{$bands}) + :is(#{$bands}) {
 	margin-block-start: 0;
 }
 
 // Two adjacent bands in the same scheme read as one band, so collapse the gap.
-:where(#{$section-parents}) > :is(#{$bands}):not(.has-scheme) + :is(#{$bands}):not(.has-scheme) {
+// Zero specificity, like the padding it overrides.
+:where(:where(#{$section-parents}) > :is(#{$bands}):not(.has-scheme) + :is(#{$bands}):not(.has-scheme)) {
 	padding-block-start: 0;
 }
 
