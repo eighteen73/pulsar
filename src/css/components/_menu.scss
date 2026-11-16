@@ -8,7 +8,9 @@
 /// The header's primary menu (template-parts/header.php) is a drill-down below
 /// `lg` and a dropdown from `lg`, so its type-specific look uses those
 /// breakpoints. The footer menus are single-level lists.
-.matter-menu {
+// The header's menu is navigation chrome, in label text. Footer and legal
+// menus are lists of links, in body text.
+.site-header__navigation .matter-menu {
 	@include label-text;
 }
 

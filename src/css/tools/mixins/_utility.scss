@@ -61,6 +61,25 @@
 	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
 }
 
+/// Hidden visually, but still read by screen readers: for a label that only
+/// shows at some widths, so an icon-only control keeps its name. (`display:
+/// none` would remove the name too.)
+///
+/// @example scss - Text beside an icon from lg
+///   .cart-link__text {
+///     @media (--lg-down) {
+///       @include visually-hidden;
+///     }
+///   }
+@mixin visually-hidden {
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
 /// Hidden on the site but shown in the editor, for a slot (or any part a
 /// client fills) hidden at some screen widths. Breakpoints in the editor
 /// follow the canvas, which is often narrower than the screen it stands for,

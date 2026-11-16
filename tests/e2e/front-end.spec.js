@@ -168,6 +168,27 @@ test.describe('header and footer', () => {
 			String(new Date().getFullYear())
 		);
 	});
+
+	test('the footer meets a page that ends in a coloured band, and keeps its gap otherwise', async ({
+		page,
+	}) => {
+		const gap = async () =>
+			page.evaluate(() => {
+				const footer = document.querySelector('.site-footer');
+				const main = document.querySelector('.site-main');
+
+				return Math.round(
+					footer.getBoundingClientRect().top -
+						main.getBoundingClientRect().bottom
+				);
+			});
+
+		await page.goto(`/${PAGE_PREFIX}sections-subtle/`);
+		expect(await gap()).toBe(0);
+
+		await page.goto('/product/test-bauble/');
+		expect(await gap()).toBeGreaterThan(0);
+	});
 });
 
 test.describe('archives, search and 404', () => {
@@ -278,6 +299,9 @@ test.describe('WooCommerce', () => {
 
 	test("a link to #reviews opens the product's reviews", async ({ page }) => {
 		await page.goto('/product/test-bauble/#reviews');
+
+		// WooCommerce's reviews title is the target; nothing else has the ID.
+		await expect(page.locator('[id="reviews"]')).toHaveCount(1);
 
 		await expect(
 			page.locator('.wp-block-matter-accordion-item').filter({
@@ -423,6 +447,36 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 			.locator('.wc-block-product-filters__close-overlay')
 			.click();
 		await expect(filters).not.toHaveClass(/\bis-overlay-opened\b/);
+	});
+
+	test('on a phone, a product, the basket and checkout pass axe, with nothing between the bands', async ({
+		page,
+	}) => {
+		await page.setViewportSize(MOBILE);
+		await addToBasket(page, 'test-bauble');
+		await page.reload();
+		// The notices group is hidden while it's empty (not just empty: it
+		// would still add a band's space).
+		await expect(
+			page.locator('.site-main > .wp-block-group', {
+				has: page.locator('> .wp-block-woocommerce-store-notices'),
+			})
+		).toHaveCSS('display', 'none');
+		// With the product in the basket, WooCommerce's button reads "1 in
+		// cart" but keeps the aria-label "Add to cart: …" (WooCommerce's).
+		expect(await violations(page, ['label-content-name-mismatch'])).toEqual(
+			[]
+		);
+
+		await page.goto('/cart/');
+		await expect(page.getByText('Test bauble').first()).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+
+		await page.goto('/checkout/');
+		await expect(
+			page.getByRole('link', { name: /return to (basket|cart)/i })
+		).toBeVisible();
+		expect(await violations(page)).toEqual([]);
 	});
 
 	test('an empty basket passes axe', async ({ page }) => {

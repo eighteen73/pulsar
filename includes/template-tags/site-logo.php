@@ -22,7 +22,7 @@ function site_logo( array $args = [] ): void {
  *
  * The logo is either an SVG in assets/svg, named without its extension
  * (`brand/logo`, the default), which is inlined so it can use `currentColor`,
- * or an image file in assets/ with its extension (`images/brand/logo.png`; PNG,
+ * or an image file in assets/ with its extension (`img/brand/logo.png`; PNG,
  * JPEG, WebP, AVIF or GIF), output as an `<img>` with its size, and a
  * `logo@2x.png` beside it as its high-density source.
  *

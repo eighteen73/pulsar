@@ -13,11 +13,13 @@
 	display: none;
 }
 
+// The text shows from lg. Below it it's only visually hidden, so the icon-only
+// link keeps its name for screen readers (WooCommerce adds no aria-label).
 // WooCommerce's `.wc-block-cart-link .wc-block-cart-link__text`, 0,2,0.
 .wc-block-cart-link .wc-block-cart-link__text {
-	display: none;
+	display: block;
 
-	@media (--lg) {
-		display: block;
+	@media (--lg-down) {
+		@include visually-hidden;
 	}
 }

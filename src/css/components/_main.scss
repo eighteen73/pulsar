@@ -16,3 +16,20 @@
 .site-main > .wp-block-group + .wp-block-group {
 	margin-block-start: var(--wp--custom--spacing--section);
 }
+
+// A template's notices group (e.g. single-product.html's) is hidden while it
+// has nothing to show, so it doesn't add a band's space, or a strip between
+// two coloured bands. Only a group holding nothing but the notices (a
+// template's `main` can hold them among its content). WooCommerce fills the
+// block as people shop, and the group shows then.
+.wp-block-group:where(:has(> .wp-block-woocommerce-store-notices:only-child):not(:has(.wp-block-woocommerce-store-notices > :not(.woocommerce-notices-wrapper), .woocommerce-notices-wrapper > *))) {
+	display: none;
+}
+
+// A page that ends in a coloured band (a section or template band with a
+// scheme) meets the footer, rather than leaving a strip of the page's
+// background over the template's flow gap. Others keep the gap. (0,2,0 over
+// core's flow gaps.)
+:root :where(.site-main:has(> .has-scheme:last-child, > .wp-block-post-content:last-child > .has-scheme:last-child)) ~ .site-footer {
+	margin-block-start: 0;
+}
