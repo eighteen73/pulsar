@@ -63,21 +63,32 @@ test.describe('sections', () => {
 	}) => {
 		await page.goto(`/${PAGE_PREFIX}sections-default/`);
 
-		const hero = page.locator('.wp-block-pulsar-hero').first();
-
-		await expect(hero).not.toHaveCSS('padding-top', '3px');
-
-		// As a block stylesheet: one class, loaded before the theme's.
+		// A band of the test's own, with no section's class, so a project's
+		// section styles don't take part. The rule is as a block stylesheet's:
+		// one class, loaded before the theme's.
 		await page.evaluate(() => {
 			const style = document.createElement('style');
+			const band = document.createElement('section');
 
-			style.textContent =
-				'.wp-block-pulsar-hero { padding-block: 3px; }';
+			style.textContent = '.is-padding-test { padding-block: 3px; }';
 			document.head.prepend(style);
+			band.className = 'is-section alignfull is-padding-band';
+			document.querySelector('.wp-block-post-content').append(band);
 		});
 
-		await expect(hero).toHaveCSS('padding-top', '3px');
-		await expect(hero).toHaveCSS('padding-bottom', '3px');
+		const band = page.locator('.is-padding-band');
+
+		// The shared padding applies (the bottom: the top may collapse
+		// against the band above).
+		await expect(band).not.toHaveCSS('padding-bottom', '0px');
+		await expect(band).not.toHaveCSS('padding-bottom', '3px');
+
+		await band.evaluate((element) =>
+			element.classList.add('is-padding-test')
+		);
+
+		await expect(band).toHaveCSS('padding-top', '3px');
+		await expect(band).toHaveCSS('padding-bottom', '3px');
 	});
 
 	test('a linked card links from its heading', async ({ page }) => {
