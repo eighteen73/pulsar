@@ -7,7 +7,7 @@
  * the products' slugs start with pulsar-ext- so content.js leaves them be.
  *
  * Run by tests/e2e/global-setup.js:
- * wp-env run tests-cli wp eval-file wp-content/themes/pulsar/tests/wp-env/seed-extensions.php
+ * wp-env --config=.wp-env.tests.json run cli wp eval-file wp-content/themes/pulsar/tests/wp-env/seed-extensions.php
  *
  * @package Pulsar
  */

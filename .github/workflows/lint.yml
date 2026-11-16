@@ -71,11 +71,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Locally, .wp-env.json maps Matter from the Nebula project around the
-      # theme; here it's the checkout above.
+      # Locally, .wp-env.tests.json maps Matter from the Nebula project around
+      # the theme; here it's the checkout above.
       - name: Use the Matter checkout
         run: |
-          cat > .wp-env.override.json <<'JSON'
+          cat > .wp-env.tests.override.json <<'JSON'
           {
             "mappings": {
               "wp-content/mu-plugins/matter": "./.matter"
@@ -83,8 +83,8 @@ jobs:
           }
           JSON
 
-      - name: Start wp-env
-        run: npm run env:start
+      - name: Start wp-env's test site
+        run: npm run env:start:tests
 
       - name: Install Playwright's Chromium
         run: npx playwright install --with-deps --only-shell chromium

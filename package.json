@@ -24,7 +24,8 @@
 		"check-licenses": "wp-scripts check-licenses",
 		"create:block": "npx @wordpress/create-block@latest --template @eighteen73/create-block-template --no-plugin --namespace pulsar",
 		"env:start": "wp-env start",
-		"env:stop": "wp-env stop",
+		"env:start:tests": "wp-env --config=.wp-env.tests.json start",
+		"env:stop": "wp-env stop && wp-env --config=.wp-env.tests.json stop",
 		"test:e2e": "wp-scripts test-playwright"
 	},
 	"engines": {

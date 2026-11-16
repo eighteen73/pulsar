@@ -24,10 +24,13 @@ function checkSite(baseURL) {
 	let home;
 
 	try {
-		home = execSync('npx wp-env run tests-cli wp option get home', {
-			encoding: 'utf8',
-			stdio: ['ignore', 'pipe', 'ignore'],
-		})
+		home = execSync(
+			'npx wp-env --config=.wp-env.tests.json run cli wp option get home',
+			{
+				encoding: 'utf8',
+				stdio: ['ignore', 'pipe', 'ignore'],
+			}
+		)
 			.split('\n')
 			.find((line) => line.startsWith('http'));
 	} catch {
@@ -36,13 +39,13 @@ function checkSite(baseURL) {
 
 	if (!home) {
 		throw new Error(
-			`This project's wp-env isn't running (npm run env:start). Not testing ${baseURL}, which may be another project's site.`
+			`This project's wp-env test site isn't running (npm run env:start:tests). Not testing ${baseURL}, which may be another project's site.`
 		);
 	}
 
 	if (new URL(home).origin !== new URL(baseURL).origin) {
 		throw new Error(
-			`The tests would run against ${baseURL}, but this project's tests site is ${home}. Set its ports in .wp-env.override.json (see the README), or WP_BASE_URL=${home}.`
+			`The tests would run against ${baseURL}, but this project's tests site is ${home}. Set its port in .wp-env.tests.override.json (see the README), or WP_BASE_URL=${home}.`
 		);
 	}
 }
@@ -65,7 +68,7 @@ module.exports = async (config) => {
 
 	if ((await activeExtensions(requestUtils)).length) {
 		execSync(
-			'npx wp-env run tests-cli wp eval-file wp-content/themes/pulsar/tests/wp-env/seed-extensions.php',
+			'npx wp-env --config=.wp-env.tests.json run cli wp eval-file wp-content/themes/pulsar/tests/wp-env/seed-extensions.php',
 			{ stdio: 'inherit' }
 		);
 	}

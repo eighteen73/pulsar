@@ -15,6 +15,13 @@
       "align": "full",
       "slots": {
         "content": {
+          "alignments": [
+            "left",
+            "center",
+            "right",
+            "wide",
+            "full"
+          ],
           "allowedBlocks": [
             "core/heading",
             "core/paragraph",

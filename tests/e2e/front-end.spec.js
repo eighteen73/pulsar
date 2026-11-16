@@ -67,6 +67,38 @@ test.describe('sections', () => {
 	});
 });
 
+test.describe('Text section alignments', () => {
+	test('wide blocks take the wide width, and full ones the whole band', async ({
+		page,
+	}) => {
+		await page.setViewportSize({ width: 1700, height: 900 });
+		await page.goto(`/${PAGE_PREFIX}sections-default/`);
+
+		const widths = await page.evaluate(() => {
+			const content = document.querySelector(
+				'.is-aligned-test .wp-block-pulsar-text__content'
+			);
+			const box = (element) => element.getBoundingClientRect();
+
+			return {
+				viewport: document.documentElement.clientWidth,
+				overflow:
+					document.documentElement.scrollWidth -
+					document.documentElement.clientWidth,
+				paragraph: box(content.querySelector(':scope > p')).width,
+				wide: box(content.querySelector(':scope > .alignwide')).width,
+				full: box(content.querySelector(':scope > .alignfull')),
+			};
+		});
+
+		expect(widths.paragraph).toBe(768);
+		expect(widths.wide).toBe(1440);
+		expect(widths.full.left).toBeLessThanOrEqual(0);
+		expect(widths.full.right).toBeGreaterThanOrEqual(widths.viewport);
+		expect(widths.overflow).toBe(0);
+	});
+});
+
 test.describe('header and footer', () => {
 	test('desktop: the menu opens a submenu, and the call to action shows', async ({
 		page,

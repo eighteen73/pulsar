@@ -353,6 +353,13 @@ return array(
 				'align' => 'full',
 				'slots' => array(
 					'content' => array(
+						'alignments' => array(
+							'left',
+							'center',
+							'right',
+							'wide',
+							'full'
+						),
 						'allowedBlocks' => array(
 							'core/heading',
 							'core/paragraph',

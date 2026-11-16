@@ -1,25 +1,26 @@
 /**
- * Browser tests (npm run test:e2e), against wp-env's tests site, with Pulsar
- * active and Matter as a must-use plugin (see .wp-env.json). wp-scripts'
- * config logs in as admin.
+ * Browser tests (npm run test:e2e), against wp-env's test site
+ * (.wp-env.tests.json), with Pulsar active and Matter as a must-use plugin.
+ * wp-scripts' config logs in as admin.
  *
- * Ports 8890/8891, so this can run alongside Matter's own wp-env. Every
- * project copied from Pulsar has the same ports: to run two at once, give one
- * others in `.wp-env.override.json` ("port", "testsPort"), which the tests
- * then use. global-setup.js stops the run if the site isn't this project's.
+ * Ports 8890 (development) and 8891 (tests), so this can run alongside
+ * Matter's own wp-env. Every project copied from Pulsar has the same ports: to
+ * run two at once, give one others in `.wp-env.override.json` and
+ * `.wp-env.tests.override.json` ("port"), which the tests then use.
+ * global-setup.js stops the run if the site isn't this project's.
  */
 const fs = require('fs');
 const path = require('path');
 
 /**
- * The tests site's port: the override's, else .wp-env.json's.
+ * The test site's port: its override's, else .wp-env.tests.json's.
  *
  * @return {number} Port.
  */
 function testsPort() {
-	for (const file of ['.wp-env.override.json', '.wp-env.json']) {
+	for (const file of ['.wp-env.tests.override.json', '.wp-env.tests.json']) {
 		try {
-			const { testsPort: port } = JSON.parse(
+			const { port } = JSON.parse(
 				fs.readFileSync(path.join(__dirname, file), 'utf8')
 			);
 
@@ -49,7 +50,7 @@ module.exports = defineConfig({
 	},
 	webServer: {
 		...base.webServer,
-		command: 'npm run env:start',
+		command: 'npm run env:start:tests',
 		port: Number(new URL(process.env.WP_BASE_URL).port || 80),
 	},
 });

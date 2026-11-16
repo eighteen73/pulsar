@@ -32,30 +32,34 @@ npm run lint:css && npm run lint:js && npm run lint:php
 
 ### Browser tests
 
-Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker, ports 8890/8891): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). Before the tests run, `tests/e2e/content.js` creates their content: a page of every section in each colour scheme, menus, Appearance › Options values, posts and products.
+Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). There are two sites, each with its own containers and database: a development site to look around (`.wp-env.json`, http://localhost:8890) and the test site (`.wp-env.tests.json`, http://localhost:8891). Keep the two configs alike apart from their ports. Before the tests run, `tests/e2e/content.js` creates their content on the test site: a page of every section in each colour scheme, menus, Appearance › Options values, posts and products.
 
 ```bash
-npm run env:start                  # start wp-env
+npm run env:start                  # the development site
+npm run env:start:tests            # the test site (the tests start it if it isn't running)
+npm run env:stop                   # both
 npx playwright install chromium    # once
 npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
 ```
 
-They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, that every scheme's colour pairs meet AA contrast (`contrast.spec.js`), and that the header, footer, menus, archives, search, 404 and shop work.
+They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, that every scheme's colour pairs meet AA contrast (`contrast.spec.js`), and that the header, footer, menus, archives, search, 404 and shop work. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
 
-**Ports.** Every project copied from Pulsar uses 8890/8891. To run two at once, give one others in `.wp-env.override.json` (git-ignored), e.g. `{ "port": 8892, "testsPort": 8893 }`: its tests use the override's `testsPort`. Before anything runs, the set-up checks that the site is this project's own wp-env tests site and stops if it isn't, so the tests (which replace their content) never run against another project's. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account.
+**Ports.** Every project copied from Pulsar uses 8890 and 8891. To run two at once, give one other ports in its git-ignored overrides, `.wp-env.override.json` (`{ "port": 8892 }`) and `.wp-env.tests.override.json` (`{ "port": 8893 }`); its tests use the test override's port. Before anything runs, the set-up checks that the site is this project's own test site and stops if it isn't, so the tests (which replace their content) never run against another project's.
 
 **WooCommerce's paid extensions** (Subscriptions, with All Products for Subscriptions; Product Bundles; Bookings; Memberships) have their own tests, `tests/e2e/extensions.spec.js`. They need the plugins, so they run locally and skip in CI. With the extensions in the project's `web/app/plugins`:
 
 ```bash
-cp tests/wp-env/extensions.override.example.json .wp-env.override.json   # git-ignored
-npm run env:start
+cp tests/wp-env/extensions.override.example.json .wp-env.tests.override.json   # git-ignored
+npm run env:start:tests
 npm run test:e2e   # seeds a customer, products, a subscription, booking and membership (tests/wp-env/seed-extensions.php)
 ```
 
-Delete `.wp-env.override.json` and start again to go back to WooCommerce alone. (Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.) **In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
+Delete `.wp-env.tests.override.json` and start the test site again to go back to WooCommerce alone (add a `port` to the copy if the project needs one). Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.
+
+**In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
 - sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
 - schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
-- Appearance › Options, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test). CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
+- Appearance › Options, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
 
 ## Where things live
 
@@ -69,7 +73,7 @@ Delete `.wp-env.override.json` and start again to go back to WooCommerce alone. 
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. |
 | `includes/classes/Matter.php` | Feeds `config/` into Matter, and names the theme's namespace, `pulsar` (`matter_theme_namespace`): the prefix Matter looks for loop item patterns under (`pulsar/loop-item…`) and the icon collection's name. Keep it `pulsar` even if the theme's folder is renamed or a child theme is added; icon names and pattern slugs depend on it. |
 | `assets/svg/ui/` | Interface icons used by CSS (`@include icon("ui/x")`) and PHP. Not shown to editors. |
-| `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). |
+| `assets/svg/brand/` | The site logo and the eighteen73 credit (`Pulsar\display_svg( 'brand/logo' )`). `Pulsar\site_logo()` shows `brand/logo` in the header and footer. For a logo that's only a PNG (or JPEG, WebP, AVIF), put it in `assets/images/brand/` and pass its path with the extension, `site_logo( [ 'logo' => 'images/brand/logo.png' ] )` (in `template-parts/header/logo.php` and `footer/logo.php`): it's output as an `<img>` with its size, and a `logo@2x.png` beside it is used on high-density screens. An SVG is better where there is one: it's sharp at any size and can take the scheme's colour. |
 | `assets/svg/woocommerce/account/` | My Account navigation icons. |
 | `src/blocks/` | Sections (`text`, `hero`, `media-text`, `cards` + `card`, `cta`). |
 | `src/css/` | ITCSS: settings → tools → generic → elements → components → patterns (a pattern's own styles) → third-party (non-block plugins) → utilities. `app.scss` is the front end; `editor.scss` the same for the editor. |
@@ -96,6 +100,7 @@ A section is a block with named content slots. Its layout lives in code, so chan
 - `allowedBlocks` limits what editors can add.
 - `templateLock: "contentOnly"` fixes the blocks and lets editors change only their content.
 - Slots are matched by name, so they can be added, reordered or removed in any position. To rename one, list its old name (`"previously": [ "media" ]`) so existing content follows it. See Matter's README.
+- `alignments` lists the alignments the slot's blocks offer. Text's content slot offers wide and full: a carousel, gallery, image, video or embed aligned wide takes the section's wide width, and one aligned full the whole band, edge to edge (`blocks/pulsar/text.scss`). Copy those rules for another section whose slot allows them.
 
 **Spacing:**
 - A full-width section is a band: its spacing is padding (`--wp--custom--spacing--section`, above and below), so its scheme's background covers it. Two bands in a row without a scheme read as one, so the second loses its top padding (`components/_sections.scss`). That relies on the first keeping its bottom padding: a section that runs to its edges (an edge-to-edge hero) should still keep the section spacing below it, or the next section will touch it.

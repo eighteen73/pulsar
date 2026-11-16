@@ -1,5 +1,26 @@
 @use "tools" as *;
 
-.wp-block-pulsar-text__content {
+// The content is held to the content width, at the start of the section. A
+// block aligned wide (a carousel, gallery, image, video or embed) takes the
+// section's wide width, and one aligned full the whole band, edge to edge:
+// the slot offers both ("alignments" in block.json).
+.wp-block-pulsar-text {
+	// A full-width block is as wide as the viewport, scrollbar included.
+	overflow-x: clip;
+}
+
+.wp-block-pulsar-text__content > * {
 	max-width: var(--wp--style--global--content-size);
+}
+
+.wp-block-pulsar-text__content > .alignwide {
+	max-width: none;
+}
+
+// The slot spans the section's inner width, which is centred, so this centres
+// the block on the viewport.
+.wp-block-pulsar-text__content > .alignfull {
+	margin-inline: calc(50% - 50vw);
+	max-width: none;
+	width: 100vw;
 }

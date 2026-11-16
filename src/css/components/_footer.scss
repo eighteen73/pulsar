@@ -36,7 +36,10 @@
 	display: inline-block;
 }
 
+// An inline SVG or an <img> (Pulsar\get_site_logo()).
 .site-footer__logo-image {
+	display: block;
+	height: auto;
 	width: 100%;
 }
 

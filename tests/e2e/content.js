@@ -68,6 +68,17 @@ const sectionsPage = (scheme) => {
 				heading(2, 'Text') + paragraph('A paragraph of body text.')
 			)
 		),
+		// Blocks aligned wide and full in a Text section.
+		section(
+			'text',
+			{ ...attrs, className: 'is-aligned-test' },
+			slot(
+				'content',
+				paragraph('Beside wider blocks.') +
+					`<!-- wp:matter/carousel {"align":"wide","label":"Wide carousel"} -->${[1, 2, 3].map((n) => image(`Wide slide ${n}`)).join('')}<!-- /wp:matter/carousel -->` +
+					`<!-- wp:image {"align":"full"} --><figure class="wp-block-image alignfull"><img src="${IMAGE}" alt="Full-width image"/></figure><!-- /wp:image -->`
+			)
+		),
 		section(
 			'media-text',
 			attrs,
