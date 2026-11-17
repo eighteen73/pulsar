@@ -29,7 +29,7 @@ use function Eighteen73\Matter\panel_toggle;
 			function () {
 				menu(
 					[
-						'location' => 'primary',
+						'location' => 'main',
 						'type'     => [
 							'drill-down',
 							'lg' => 'dropdown',

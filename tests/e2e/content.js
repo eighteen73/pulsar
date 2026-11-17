@@ -240,7 +240,7 @@ async function createMenus(requestUtils) {
 		}
 	};
 
-	await menu('Primary', 'primary', [
+	await menu('Main', 'main', [
 		{
 			title: 'Services',
 			url: '/services/',

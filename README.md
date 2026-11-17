@@ -258,7 +258,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 
 `template-parts/header.php` contains:
 - the logo;
-- the primary menu in a Matter panel: a drill-down drawer below `lg`, an inline dropdown from `lg`;
+- the main menu in a Matter panel: a drill-down drawer below `lg`, an inline dropdown from `lg`;
 - the header call to action;
 - the mini-cart.
 
@@ -269,7 +269,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - the copyright (`{year}` and `{site}` placeholders);
 - the credit.
 
-Menu locations: `primary`, `footer-1`, `footer-2` and `legal`.
+Menu locations: `main`, `footer-1`, `footer-2` and `legal`.
 
 **Footer menu headings** aren't in the starter. If a design heads each footer menu ("Help", "About"), use the menu's name, `wp_get_nav_menu_name( $location )`, so a client renames a heading by renaming the menu in Appearance › Menus. Give `menu()` the same `label`, so the navigation is announced by the heading's name.
 
