@@ -29,7 +29,7 @@
               {}
             ]
           ],
-          "templateLock": "contentOnly"
+          "templateLock": "all"
         },
         "content": {
           "allowedBlocks": [

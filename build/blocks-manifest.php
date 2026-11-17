@@ -34,7 +34,7 @@ return array(
 								)
 							)
 						),
-						'templateLock' => 'contentOnly'
+						'templateLock' => 'all'
 					),
 					'content' => array(
 						'allowedBlocks' => array(
@@ -254,7 +254,7 @@ return array(
 								)
 							)
 						),
-						'templateLock' => 'contentOnly'
+						'templateLock' => 'all'
 					)
 				)
 			)
