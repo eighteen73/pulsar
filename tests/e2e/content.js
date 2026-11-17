@@ -108,7 +108,7 @@ const sectionsPage = (scheme) => {
 	].join('\n');
 };
 
-/** Site settings (Appearance › Options), as config/settings.php declares. */
+/** Site settings (Appearance › Site details), as config/settings.php declares. */
 const SETTINGS = {
 	contact: {
 		phone: '0113 496 0000',

@@ -6,7 +6,7 @@ Pulsar 6 is built around one idea: **clients edit content; developers own layout
 
 - **Clients** build pages from **sections** (Hero, Text, Media and text, Cards, Call to action…) and fill them with core content blocks: headings, paragraphs, lists, buttons, images and video.
 - **Clients choose** a colour scheme and a variant, never colours, spacing or widths.
-- **Header and footer** are PHP, so they stay in version control. Clients edit menus (Appearance › Menus) and site-wide content (Appearance › Options).
+- **Header and footer** are PHP, so they stay in version control. Clients edit menus (Appearance › Menus) and site-wide content (Appearance › Site details).
 - **The Site Editor** is only available on local/development environments (via Orbit).
 
 ## Requirements
@@ -34,7 +34,7 @@ npm run lint:css && npm run lint:js && npm run lint:php
 
 ### Browser tests
 
-Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). There are two sites, each with its own containers and database: a development site to look around (`.wp-env.json`, http://localhost:8890) and the test site (`.wp-env.tests.json`, http://localhost:8891). Keep the two configs alike apart from their ports. Before the tests run, `tests/e2e/content.js` creates their content on the test site: a page of every section in each colour scheme, menus, Appearance › Options values, posts and products.
+Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). There are two sites, each with its own containers and database: a development site to look around (`.wp-env.json`, http://localhost:8890) and the test site (`.wp-env.tests.json`, http://localhost:8891). Keep the two configs alike apart from their ports. Before the tests run, `tests/e2e/content.js` creates their content on the test site: a page of every section in each colour scheme, menus, Appearance › Site details values, posts and products.
 
 ```bash
 npm run env:start                  # the development site
@@ -61,7 +61,7 @@ Delete `.wp-env.tests.override.json` and start the test site again to go back to
 **In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
 - sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
 - schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
-- Appearance › Options, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
+- Appearance › Site details, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
 - the project's own post types and taxonomies (e.g. from a must-use plugin): the test site maps only the theme and Matter, so map the plugin in `.wp-env.tests.override.json` (`mappings`) and the dev config's override, or the tests can't see them.
 
 **Updating Matter** in a project that uses a clone or copy of it: update the folder in place (`git pull`, or `rsync --delete`). Deleting and copying it again leaves the running wp-env pointing at the deleted folder, and the sites fail until `npm run env:stop` and start.
@@ -72,7 +72,7 @@ Delete `.wp-env.tests.override.json` and start the test site again to go back to
 | --- | --- |
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards), passed to Matter, which enforces it in the post editor. Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
-| `config/settings.php` | Appearance › Options fields (contact, social, header call to action, footer). It's read after `init`, so a `select`'s `options` can come from a function, e.g. a taxonomy's terms. |
+| `config/settings.php` | Appearance › Site details fields (contact, social, header call to action, footer). It's read after `init`, so a `select`'s `options` can come from a function, e.g. a taxonomy's terms. |
 | `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter/`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. Draw them single-colour, as filled `path` or `polygon` elements only: WordPress's icon registry keeps only those (and `fill`, `fill-rule`, `d`, `transform`), and drops strokes, circles, groups and `fill="none"` without a warning, so an outline icon comes out blank. Draw a ring as two arcs with `fill-rule="evenodd"`. |
@@ -264,7 +264,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 
 `footer.php` contains:
 - the logo;
-- contact details and social links (from Appearance › Options);
+- contact details and social links (from Appearance › Site details);
 - the footer and legal menus;
 - the copyright (`{year}` and `{site}` placeholders);
 - the credit.
