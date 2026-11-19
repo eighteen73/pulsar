@@ -86,3 +86,75 @@
 	color: var(--scheme--highlight);
 	font-size: 1.125rem;
 }
+
+// Collapsible: a row per filter, its name and a caret before it (pointing
+// down when open) that opens and closes its options, rows divided by a line.
+.wp-block-matter-filter__group {
+	border-block-end: 1px solid var(--scheme--border);
+	padding-block: var(--wp--preset--spacing--md);
+}
+
+.wp-block-matter-filter__summary {
+	@include heading-base;
+	@include heading(h6);
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--xs);
+	list-style: none;
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&::before {
+		@include icon("ui/caret-down", 0.875em);
+		rotate: -90deg;
+	}
+
+	&:dir(rtl)::before {
+		rotate: 90deg;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		&::before {
+			transition: rotate var(--wp--custom--transition--duration--normal);
+		}
+	}
+}
+
+.wp-block-matter-filter__group[open] > .wp-block-matter-filter__summary {
+	margin-block-end: var(--wp--preset--spacing--md);
+
+	&::before {
+		rotate: 0deg;
+	}
+}
+
+.wp-block-matter-filter__summary:focus-visible {
+	@include focus-ring;
+}
+
+.wp-block-matter-filter__chosen {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+// Opening and closing slide, where the browser can (::details-content).
+.wp-block-matter-filter__group::details-content {
+	contain: layout;
+	interpolate-size: allow-keywords;
+	overflow: clip;
+}
+
+.wp-block-matter-filter__group:not([open])::details-content {
+	block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.wp-block-matter-filter__group::details-content {
+		transition: block-size, content-visibility, display;
+		transition-behavior: allow-discrete;
+		transition-duration: var(--wp--custom--transition--duration--normal);
+		transition-timing-function: ease-in-out;
+	}
+}
