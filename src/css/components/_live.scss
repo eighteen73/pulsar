@@ -1,0 +1,31 @@
+@use "../tools" as *;
+
+/// Matter's live blocks waiting for the shopper's own (a price filled in the
+/// browser, `.matter-live[aria-busy]`): a price-sized bar with a gentle
+/// shimmer, so a card looks loading rather than broken. Still for reduced
+/// motion. The sale badge's placeholder, over the image, stays invisible.
+.matter-live.is-woocommerce-product-price[aria-busy] {
+	animation: live-shimmer 1400ms ease-in-out infinite;
+	background:
+		linear-gradient(90deg, transparent, color-mix(in srgb, var(--scheme--background) 60%, transparent), transparent) no-repeat,
+		color-mix(in srgb, var(--scheme--text) 10%, transparent);
+	background-size: 50% 100%, auto;
+	block-size: 1lh;
+	border-radius: 2px;
+	inline-size: 5em;
+	max-inline-size: 100%;
+
+	@media (prefers-reduced-motion: reduce) {
+		animation: none;
+	}
+}
+
+@keyframes live-shimmer {
+	from {
+		background-position: -100% 0, 0 0;
+	}
+
+	to {
+		background-position: 200% 0, 0 0;
+	}
+}
