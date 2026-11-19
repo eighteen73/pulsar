@@ -449,7 +449,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 
 		await page.getByRole('checkbox', { name: /^Christmas/ }).check();
 
-		await expect(page).toHaveURL(/categories=christmas/);
+		await expect(page).toHaveURL(/filter_category=christmas/);
 		await expect(
 			page.getByRole('button', { name: 'Remove Christmas' })
 		).toBeVisible();
@@ -469,7 +469,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 	test('the shop filters its products, a price range included', async ({
 		page,
 	}) => {
-		await page.goto('/shop/?min_price=20');
+		await page.goto('/shop/?filter_price_min=20');
 
 		await expect(
 			page.getByRole('link', { name: 'Test wreath' }).first()
@@ -482,7 +482,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 		).toBeVisible();
 
 		await page.getByRole('button', { name: 'Clear all' }).first().click();
-		await expect(page).not.toHaveURL(/min_price/);
+		await expect(page).not.toHaveURL(/filter_price_min/);
 		await expect(
 			page.getByRole('link', { name: 'Test bauble' }).first()
 		).toBeVisible();
