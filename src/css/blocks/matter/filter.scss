@@ -158,3 +158,31 @@
 		transition-timing-function: ease-in-out;
 	}
 }
+
+// The price slider: the track in the border colour, the span between the
+// thumbs and the thumbs in the highlight colour.
+.wp-block-matter-filter__slider {
+	--matter-slider-track: var(--scheme--border);
+	--matter-slider-fill: var(--scheme--highlight);
+	color: var(--scheme--highlight);
+}
+
+.wp-block-matter-filter__thumb::-webkit-slider-thumb {
+	block-size: 1.25rem;
+	box-shadow: 0 0 0 2px var(--scheme--background);
+	inline-size: 1.25rem;
+}
+
+.wp-block-matter-filter__thumb::-moz-range-thumb {
+	block-size: 1.25rem;
+	box-shadow: 0 0 0 2px var(--scheme--background);
+	inline-size: 1.25rem;
+}
+
+.wp-block-matter-filter__thumb:focus-visible {
+	@include focus-ring;
+}
+
+.wp-block-matter-filter__span {
+	@include label-text;
+}
