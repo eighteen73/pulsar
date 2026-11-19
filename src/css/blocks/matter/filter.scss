@@ -73,3 +73,16 @@
 .wp-block-matter-filter__bound input {
 	@include field-input;
 }
+
+// Swatches: a circle of the colour (or image) beside each option.
+.wp-block-matter-filter__swatch {
+	block-size: 1.5rem;
+	border-color: var(--scheme--border);
+	inline-size: 1.5rem;
+}
+
+// Stars: the rating in the highlight colour, then "& up".
+.wp-block-matter-filter__stars {
+	color: var(--scheme--highlight);
+	font-size: 1.125rem;
+}
