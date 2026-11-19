@@ -69,8 +69,16 @@ return [
 	],
 	'matter/filters'  => [
 		'default' => [
+			'label'         => __( 'Sidebar', 'pulsar' ),
 			'collapseBelow' => 'lg',
 			'position'      => 'start',
+		],
+		// A row of buttons above the results, each opening its filter.
+		'bar'     => [
+			'label'         => __( 'Bar', 'pulsar' ),
+			'collapseBelow' => 'lg',
+			'position'      => 'start',
+			'layout'        => 'bar',
 		],
 	],
 	'matter/tabs'     => [

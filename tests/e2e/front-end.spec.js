@@ -235,6 +235,32 @@ test.describe('archives, search and 404', () => {
 		expect(await violations(page)).toEqual([]);
 	});
 
+	test('the blog filters from a bar of dropdowns that stay open while choosing', async ({
+		page,
+	}) => {
+		await page.goto('/');
+
+		const trigger = page
+			.locator('.wp-block-matter-filter__trigger')
+			.filter({ hasText: 'Category' });
+		const dropdown = page.locator('.wp-block-matter-filter__popover', {
+			has: page.getByRole('checkbox', { name: /^News/ }),
+		});
+
+		await expect(dropdown).toBeHidden();
+		await trigger.click();
+		await expect(dropdown).toBeVisible();
+		expect(await violations(page)).toEqual([]);
+
+		await dropdown.getByRole('checkbox', { name: /^News/ }).check();
+		await expect(page).toHaveURL(/filter_category=news/);
+		await expect(dropdown).toBeVisible();
+		await expect(trigger).toContainText('1');
+
+		await page.keyboard.press('Escape');
+		await expect(dropdown).toBeHidden();
+	});
+
 	test('a category shows its name and its posts', async ({ page }) => {
 		await page.goto('/category/news/');
 

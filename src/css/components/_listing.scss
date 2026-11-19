@@ -14,6 +14,13 @@
 	}
 }
 
+// Filters as a bar (the filters' Bar variant): above the results, not beside.
+.site-listing.is-bar {
+	@media (--lg) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
 // The groups' flow layout spaces each child after the first; in the grid the
 // gap does.
 .site-listing > *,

@@ -186,3 +186,34 @@
 .wp-block-matter-filter__span {
 	@include label-text;
 }
+
+// In a bar of filters: a pill per filter, its caret pointing down, opening
+// its options in a card below it.
+.wp-block-matter-filter__trigger {
+	@include label-text;
+	border-color: var(--scheme--border-strong);
+	border-radius: 999px;
+	gap: var(--wp--preset--spacing--xs);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+
+	&::after {
+		@include icon("ui/caret-down", 0.75em);
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+.wp-block-matter-filter__trigger:has(+ :popover-open) {
+	background: var(--scheme--background-fill);
+	border-color: var(--scheme--background-fill);
+	color: var(--scheme--text-fill);
+}
+
+.wp-block-matter-filter__popover:popover-open {
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--custom--radius--md, 0.5rem);
+	box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
+	padding: var(--wp--preset--spacing--md);
+}
