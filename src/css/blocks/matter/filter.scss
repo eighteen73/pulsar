@@ -87,8 +87,8 @@
 	font-size: 1.125rem;
 }
 
-// Collapsible: a row per filter, its name and a caret before it (pointing
-// down when open) that opens and closes its options, rows divided by a line.
+// Collapsible: a row per filter, its name and, at the far end, a caret that
+// turns up while open; rows divided by a line.
 .wp-block-matter-filter__group {
 	border-block-end: 1px solid var(--scheme--border);
 	padding-block: var(--wp--preset--spacing--md);
@@ -106,28 +106,26 @@
 		display: none;
 	}
 
-	&::before {
+	&::after {
 		@include icon("ui/caret-down", 0.875em);
-		rotate: -90deg;
-	}
-
-	&:dir(rtl)::before {
-		rotate: 90deg;
+		margin-inline-start: auto;
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		&::before {
+		&::after {
 			transition: rotate var(--wp--custom--transition--duration--normal);
 		}
 	}
 }
 
-.wp-block-matter-filter__group[open] > .wp-block-matter-filter__summary {
-	margin-block-end: var(--wp--preset--spacing--md);
+.wp-block-matter-filter__group[open] > .wp-block-matter-filter__summary::after {
+	rotate: 180deg;
+}
 
-	&::before {
-		rotate: 0deg;
-	}
+// The space between the name and the options is inside what slides, so it
+// opens and closes with them rather than jumping at either end.
+.wp-block-matter-filter__group > :not(summary) {
+	margin-block-start: var(--wp--preset--spacing--md);
 }
 
 .wp-block-matter-filter__summary:focus-visible {
@@ -139,7 +137,8 @@
 	font-size: var(--wp--preset--font-size--sm);
 }
 
-// Opening and closing slide, where the browser can (::details-content).
+// Opening and closing slide, where the browser can (::details-content). Its
+// layout containment keeps the options' top margin inside it.
 .wp-block-matter-filter__group::details-content {
 	contain: layout;
 	interpolate-size: allow-keywords;

@@ -6,7 +6,14 @@
 /// breakpoint is the `matter/filters` variant's `collapseBelow`
 /// (config/matter.php).
 .wp-block-matter-filters__form {
-	gap: var(--wp--preset--spacing--2-xl);
+	--filters-gap: var(--wp--preset--spacing--2-xl);
+	gap: var(--filters-gap);
+}
+
+// Collapsible filters one after another are rows that space and divide
+// themselves (filter.scss): no gap between them.
+:where(.wp-block-matter-filter:has(> .wp-block-matter-filter__group)) + .wp-block-matter-filter:has(> .wp-block-matter-filter__group) {
+	margin-block-start: calc(-1 * var(--filters-gap));
 }
 
 .wp-block-matter-filters__panel .matter-panel__content {
