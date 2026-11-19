@@ -436,7 +436,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 		expect(await violations(page)).toEqual([]);
 	});
 
-	test('the product filters narrow the products, and pass axe', async ({
+	test('the product filters narrow the products without a page load, and pass axe', async ({
 		page,
 	}) => {
 		await page.goto(`/${PAGE_PREFIX}filters/`);
@@ -445,41 +445,70 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 			page.getByRole('link', { name: 'Test few left' }).first()
 		).toBeVisible();
 		expect(await violations(page)).toEqual([]);
+		await page.evaluate(() => (window.loadedOnce = true));
 
-		await page
-			.locator('.wp-block-woocommerce-product-filter-taxonomy')
-			.getByRole('checkbox', { name: 'Christmas' })
-			.check();
+		await page.getByRole('checkbox', { name: /^Christmas/ }).check();
 
 		await expect(page).toHaveURL(/categories=christmas/);
 		await expect(
-			page.locator('.wc-block-product-filter-removable-chips__item')
-		).toContainText('Christmas');
+			page.getByRole('button', { name: 'Remove Christmas' })
+		).toBeVisible();
 		await expect(
 			page.getByRole('link', { name: 'Test bauble' }).first()
 		).toBeVisible();
 		await expect(
 			page.getByRole('link', { name: 'Test few left' })
 		).toHaveCount(0);
+		await expect(page.locator('.wp-block-matter-results-count')).toHaveText(
+			'2 results'
+		);
+		expect(await page.evaluate(() => window.loadedOnce)).toBe(true);
 		expect(await violations(page)).toEqual([]);
 	});
 
-	test('on a phone, the filters open in an overlay that closes again', async ({
+	test('the shop filters its products, a price range included', async ({
+		page,
+	}) => {
+		await page.goto('/shop/?min_price=20');
+
+		await expect(
+			page.getByRole('link', { name: 'Test wreath' }).first()
+		).toBeVisible();
+		await expect(
+			page.getByRole('link', { name: 'Test bauble' })
+		).toHaveCount(0);
+		await expect(
+			page.getByRole('button', { name: /^Remove From/ })
+		).toBeVisible();
+
+		await page.getByRole('button', { name: 'Clear all' }).first().click();
+		await expect(page).not.toHaveURL(/min_price/);
+		await expect(
+			page.getByRole('link', { name: 'Test bauble' }).first()
+		).toBeVisible();
+	});
+
+	test('on a phone, the filters open in a drawer that "Show results" closes', async ({
 		page,
 	}) => {
 		await page.setViewportSize(MOBILE);
 		await page.goto(`/${PAGE_PREFIX}filters/`);
 
-		const filters = page.locator('.wc-block-product-filters');
+		const toggle = page.getByRole('button', { name: /^Filters/ });
+		const drawer = page.getByRole('dialog', { name: 'Filters' });
 
-		await page.getByRole('button', { name: 'Filter products' }).click();
-		await expect(filters).toHaveClass(/\bis-overlay-opened\b/);
+		await toggle.click();
+		await expect(drawer).toBeVisible();
 		expect(await violations(page)).toEqual([]);
 
-		await filters
-			.locator('.wc-block-product-filters__close-overlay')
-			.click();
-		await expect(filters).not.toHaveClass(/\bis-overlay-opened\b/);
+		await drawer.getByRole('checkbox', { name: /^Christmas/ }).check();
+		await expect(
+			drawer.getByRole('button', { name: 'Show 2 results' })
+		).toBeVisible();
+
+		await drawer.getByRole('button', { name: 'Show 2 results' }).click();
+		await expect(drawer).toBeHidden();
+		await expect(toggle).toContainText('1');
 	});
 
 	test('on a phone, a product, the basket and checkout pass axe, with nothing between the bands', async ({

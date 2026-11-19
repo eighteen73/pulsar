@@ -24,6 +24,11 @@
  * Tabs options: dropdownBelow (a breakpoint from breakpoints.json, or false
  * to switch `.wp-block-matter-tabs.has-dropdown` in your own CSS) — used by
  * tabs set to "Show as a dropdown on smaller screens".
+ * Filters options: collapseBelow (a breakpoint from breakpoints.json below
+ * which the filters are a drawer opened by the Filters button; '' for always
+ * a drawer, false for never), position (the drawer's edge: start or end).
+ * The listing's layout is components/_listing.scss, whose sidebar starts at
+ * the same breakpoint.
  * Archive list (the posts or products in archive content): no options; each
  * variant is a layout for the template's list, styled in
  * src/css/blocks/matter/archive-loop.scss.
@@ -60,6 +65,12 @@ return [
 		],
 		'feature' => [
 			'label' => __( 'Feature first', 'pulsar' ),
+		],
+	],
+	'matter/filters'  => [
+		'default' => [
+			'collapseBelow' => 'lg',
+			'position'      => 'start',
 		],
 	],
 	'matter/tabs'     => [

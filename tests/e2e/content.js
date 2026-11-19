@@ -265,17 +265,13 @@ async function createMenus(requestUtils) {
 const COUPON = 'pulsar10';
 
 /**
- * Products with their filters beside them: WooCommerce's product filters
- * (active filters, price, rating, category, availability) inside a Product
- * Collection, whose query they filter.
+ * Products with their filters beside them: Matter's filters (category, price,
+ * availability, rating) inside a Product Collection, laid out as the shop
+ * template is (components/_listing.scss).
  *
  * @return {string} Block markup.
  */
 const filtersPage = () => {
-	const filter = (block, title, inner, attributes = {}) =>
-		`<!-- wp:woocommerce/${block} ${JSON.stringify(attributes)} --><div class="wp-block-woocommerce-${block}">${heading(3, title)}${inner}</div><!-- /wp:woocommerce/${block} -->`;
-	const checkboxes =
-		'<!-- wp:woocommerce/product-filter-checkbox-list --><div class="wp-block-woocommerce-product-filter-checkbox-list wc-block-product-filter-checkbox-list"></div><!-- /wp:woocommerce/product-filter-checkbox-list -->';
 	const query = {
 		perPage: 9,
 		pages: 0,
@@ -284,13 +280,28 @@ const filtersPage = () => {
 		order: 'asc',
 		orderBy: 'title',
 		inherit: false,
-		filterable: true,
 		isProductCollectionBlock: true,
 		woocommerceStockStatus: ['instock', 'outofstock', 'onbackorder'],
 	};
+	const group = (className, inner) =>
+		`<!-- wp:group {"className":"${className}","layout":{"type":"default"}} --><div class="wp-block-group ${className}">${inner}</div><!-- /wp:group -->`;
+	const filters = [
+		'{"source":"taxonomy:product_cat"}',
+		'{"source":"price","display":"range"}',
+		'{"source":"stock"}',
+		'{"source":"rating"}',
+	]
+		.map((attributes) => `<!-- wp:matter/filter ${attributes} /-->`)
+		.join('');
 
 	return `<!-- wp:woocommerce/product-collection {"queryId":9,"query":${JSON.stringify(query)},"tagName":"div","displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"queryContextIncludes":["collection"]} -->
-<div class="wp-block-woocommerce-product-collection"><!-- wp:columns --><div class="wp-block-columns"><!-- wp:column {"width":"30%"} --><div class="wp-block-column" style="flex-basis:30%"><!-- wp:woocommerce/product-filters --><div class="wp-block-woocommerce-product-filters wc-block-product-filters">${heading(2, 'Filters')}<!-- wp:woocommerce/product-filter-active --><div class="wp-block-woocommerce-product-filter-active"><!-- wp:woocommerce/product-filter-removable-chips --><div class="wp-block-woocommerce-product-filter-removable-chips wc-block-product-filter-removable-chips"></div><!-- /wp:woocommerce/product-filter-removable-chips --></div><!-- /wp:woocommerce/product-filter-active -->${filter('product-filter-price', 'Price', '<!-- wp:woocommerce/product-filter-price-slider {"showInputFields":true} --><div class="wp-block-woocommerce-product-filter-price-slider wc-block-product-filter-price-slider"></div><!-- /wp:woocommerce/product-filter-price-slider -->')}${filter('product-filter-rating', 'Rating', checkboxes)}${filter('product-filter-taxonomy', 'Category', checkboxes, { showCounts: true })}${filter('product-filter-status', 'Availability', checkboxes)}</div><!-- /wp:woocommerce/product-filters --></div><!-- /wp:column --><!-- wp:column {"width":"70%"} --><div class="wp-block-column" style="flex-basis:70%"><!-- wp:woocommerce/product-template --><!-- wp:matter/loop-item /--><!-- /wp:woocommerce/product-template --></div><!-- /wp:column --></div><!-- /wp:columns --></div>
+<div class="wp-block-woocommerce-product-collection">${group(
+		'site-listing',
+		`<!-- wp:matter/filters -->${filters}<!-- /wp:matter/filters -->${group(
+			'site-listing__results',
+			`${group('site-listing__bar', '<!-- wp:matter/filters-toggle /--><!-- wp:matter/results-count /-->')}<!-- wp:matter/active-filters /--><!-- wp:woocommerce/product-template --><!-- wp:matter/loop-item /--><!-- /wp:woocommerce/product-template -->`
+		)}`
+	)}</div>
 <!-- /wp:woocommerce/product-collection -->`;
 };
 

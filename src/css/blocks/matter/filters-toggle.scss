@@ -1,0 +1,11 @@
+@use "tools" as *;
+
+/// The Filters button (below `lg`): a secondary button, with the number of
+/// filters applied.
+.wp-block-matter-filters-toggle__button {
+	@include button(secondary, small);
+}
+
+.wp-block-matter-filters-toggle__count {
+	font-variant-numeric: tabular-nums;
+}

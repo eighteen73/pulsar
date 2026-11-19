@@ -1,0 +1,75 @@
+@use "tools" as *;
+
+/// One of Matter's filters: its options (checkboxes and radios use the theme's
+/// form controls), chips, a dropdown or a price range.
+.wp-block-matter-filter__label {
+	@include heading-base;
+	@include heading(h6);
+	margin-block: 0 var(--wp--preset--spacing--md);
+}
+
+.wp-block-matter-filter__options {
+	gap: var(--wp--preset--spacing--xs);
+}
+
+// A label with its control: the theme's labels are blocks, so laid out here.
+.wp-block-matter-filter__choice {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+	margin: 0;
+}
+
+.wp-block-matter-filter__choice input {
+	margin: 0;
+}
+
+// The count, after the name, quieter.
+.wp-block-matter-filter__count {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.wp-block-matter-filter__more {
+	@include button(link, small);
+	margin-block-start: var(--wp--preset--spacing--sm);
+}
+
+// Chips: a pill per option, filled when chosen.
+.is-display-chips .wp-block-matter-filter__choice {
+	border-color: var(--scheme--border-strong);
+	font-size: var(--wp--preset--font-size--sm);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+}
+
+.is-display-chips .wp-block-matter-filter__choice:has(input:checked) {
+	background: var(--scheme--background-fill);
+	border-color: var(--scheme--background-fill);
+	color: var(--scheme--text-fill);
+}
+
+:where(.is-display-chips) .wp-block-matter-filter__choice:has(input:checked) .wp-block-matter-filter__count {
+	color: inherit;
+}
+
+.is-display-chips .wp-block-matter-filter__choice:has(input:focus-visible) {
+	@include focus-ring;
+}
+
+// A dropdown and a price range: the theme's fields.
+.wp-block-matter-filter__field select {
+	@include field-select;
+}
+
+.wp-block-matter-filter__field .wp-block-matter-filter__label {
+	@include form-label;
+}
+
+.wp-block-matter-filter__bound label {
+	@include label-text;
+	margin-block-end: var(--wp--preset--spacing--xs);
+}
+
+.wp-block-matter-filter__bound input {
+	@include field-input;
+}

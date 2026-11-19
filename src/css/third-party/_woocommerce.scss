@@ -92,9 +92,9 @@ body .wc-block-components-validation-error svg {
 	margin: 0;
 }
 
-// Chips (applied coupons, in the cart's and checkout's totals): as the product
-// filters' active filters are (blocks/woocommerce/product-filter-removable-chips.scss),
-// the theme's icon removing them. The class twice: WooCommerce's sizes
+// Chips (applied coupons, in the cart's and checkout's totals): as the active
+// filters' are (blocks/matter/active-filters.scss), the theme's icon removing
+// them. The class twice: WooCommerce's sizes
 // (`.wc-block-components-chip.wc-block-components-chip--radius-large`) are 0,2,0.
 body .wc-block-components-chip.wc-block-components-chip {
 	background-color: var(--scheme--background-surface);

@@ -1,0 +1,8 @@
+@use "tools" as *;
+
+/// "Showing 1–12 of 48 results": quiet, beside the Filters button.
+.wp-block-matter-results-count {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	margin: 0;
+}
