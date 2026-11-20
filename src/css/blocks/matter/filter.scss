@@ -100,7 +100,7 @@
 	display: flex;
 	gap: var(--wp--preset--spacing--xs);
 	list-style: none;
-	padding-block: var(--wp--preset--spacing--md);
+	padding-block: var(--wp--preset--spacing--lg);
 
 	&::-webkit-details-marker {
 		display: none;
@@ -136,7 +136,7 @@
 }
 
 .wp-block-matter-filter__group-content > :last-child {
-	padding-block-end: var(--wp--preset--spacing--md);
+	padding-block-end: var(--wp--preset--spacing--lg);
 }
 
 // The price slider: the track in the border colour, the span between the
