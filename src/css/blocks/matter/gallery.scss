@@ -95,6 +95,16 @@
 	color: var(--wp--preset--color--base);
 }
 
+// Forced colours: the system colours, opaque. The translucent background above
+// outranks Matter's forced-colours rule (in `:where()`), and would let the page
+// show through.
+@media (forced-colors: active) {
+	.wp-block-matter-gallery__lightbox {
+		background: canvas;
+		color: canvastext;
+	}
+}
+
 .wp-block-matter-gallery__figure {
 	gap: var(--wp--preset--spacing--sm);
 	padding: var(--wp--preset--spacing--4-xl) var(--wp--preset--spacing--md) 0;
