@@ -91,7 +91,6 @@
 // turns up while open; rows divided by a line.
 .wp-block-matter-filter__group {
 	border-block-end: 1px solid var(--scheme--border);
-	padding-block: var(--wp--preset--spacing--md);
 }
 
 .wp-block-matter-filter__summary {
@@ -101,6 +100,7 @@
 	display: flex;
 	gap: var(--wp--preset--spacing--xs);
 	list-style: none;
+	padding-block: var(--wp--preset--spacing--md);
 
 	&::-webkit-details-marker {
 		display: none;
@@ -122,40 +122,21 @@
 	rotate: 180deg;
 }
 
-// The space between the name and the options is inside what slides, so it
-// opens and closes with them rather than jumping at either end.
-.wp-block-matter-filter__group > :not(summary) {
-	margin-block-start: var(--wp--preset--spacing--md);
+// Matter slides the options (as an accordion item's panel). Their space
+// below is padding inside what slides, as in the accordion, so a closed
+// filter collapses fully; around them, room for the options' focus rings,
+// which the slide would clip.
+.wp-block-matter-filter__group-content {
+	margin-inline: -0.25rem;
+	padding-inline: 0.25rem;
 }
 
-.wp-block-matter-filter__summary:focus-visible {
-	@include focus-ring;
+.wp-block-matter-filter__group-content > :first-child {
+	padding-block-start: 0.25rem;
 }
 
-.wp-block-matter-filter__chosen {
-	color: var(--scheme--text-subtle);
-	font-size: var(--wp--preset--font-size--sm);
-}
-
-// Opening and closing slide, where the browser can (::details-content). Its
-// layout containment keeps the options' top margin inside it.
-.wp-block-matter-filter__group::details-content {
-	contain: layout;
-	interpolate-size: allow-keywords;
-	overflow: clip;
-}
-
-.wp-block-matter-filter__group:not([open])::details-content {
-	block-size: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.wp-block-matter-filter__group::details-content {
-		transition: block-size, content-visibility, display;
-		transition-behavior: allow-discrete;
-		transition-duration: var(--wp--custom--transition--duration--normal);
-		transition-timing-function: ease-in-out;
-	}
+.wp-block-matter-filter__group-content > :last-child {
+	padding-block-end: var(--wp--preset--spacing--md);
 }
 
 // The price slider: the track in the border colour, the span between the
