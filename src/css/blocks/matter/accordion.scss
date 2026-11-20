@@ -31,6 +31,15 @@
 	}
 }
 
+// Without JavaScript the answers show and the headings do nothing: no caret.
+.wp-block-matter-accordion:not(#{$matter-enhanced}) .wp-block-matter-accordion-item__toggle {
+	cursor: default;
+
+	&::after {
+		display: none;
+	}
+}
+
 // A caret that turns over while the item is open.
 .wp-block-matter-accordion-item__toggle::after {
 	@include icon("ui/caret-down", 1rem);

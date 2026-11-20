@@ -40,6 +40,14 @@
 	}
 }
 
+// Without JavaScript every panel shows under its name (Matter hides it once
+// its script starts).
+.wp-block-matter-tab__label {
+	@include label-text;
+
+	margin-block-end: var(--wp--preset--spacing--sm);
+}
+
 .wp-block-matter-tabs__icon {
 	display: flex;
 	flex: none;
