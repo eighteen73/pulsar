@@ -9,8 +9,11 @@
 /// either not yet `matter-late`, or that type's script has run on the page.
 /// Keep it the same as Matter's `enhanced()` (src/styles/_enhanced.scss): this is
 /// a copy, as the theme's build can't count on Matter's source being there to
-/// `@use`. Matter's Jest test (src/styles/test/enhanced-gate.js) and its
-/// CHANGELOG line "The enhanced gate" flag a change to it.
+/// `@use`. Matter's Jest test (src/styles/test/enhanced-gate.js) flags a change
+/// on Matter's side only: it fails until Matter's CHANGELOG line "The enhanced
+/// gate" is updated. When that line changes, update this copy and GATE in
+/// tests/lint-gate.js (`npm run lint:gate`, part of `npm run lint`), which fails
+/// when this copy no longer matches that constant.
 ///
 /// @param {String} $type Matter's block type.
 /// @return {String} A selector.
