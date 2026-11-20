@@ -29,8 +29,8 @@ class Matter implements Bootable {
 		add_filter( 'matter_breakpoints', [ $this, 'breakpoints' ] );
 		add_filter( 'matter_variants', [ $this, 'variants' ] );
 		add_filter( 'matter_allowed_blocks', [ $this, 'allowed_blocks' ] );
-		add_filter( 'matter_theme_namespace', fn() => 'pulsar' );
-		add_filter( 'matter_theme_icons', [ $this, 'icons' ] );
+		add_filter( 'matter_theme_namespaces', fn() => 'pulsar' );
+		add_filter( 'matter_icon_theme_collection', [ $this, 'icons' ] );
 		add_filter( 'matter_icon_collections', fn() => [ 'pulsar' ] );
 		add_filter( 'matter_carousel_slides', [ $this, 'carousel_slides' ] );
 		add_filter( 'matter_archive_default_content', [ $this, 'archive_default_content' ], 10, 2 );
@@ -104,7 +104,7 @@ class Matter implements Bootable {
 
 	/**
 	 * The theme's icons (`assets/svg/icons/`): the `pulsar` icon collection,
-	 * from the theme's namespace (`matter_theme_namespace`, above), which
+	 * from the theme's namespace (`matter_theme_namespaces`, above), which
 	 * also prefixes its loop item patterns. Named rather than taken from
 	 * the theme's folder, because icon names (`pulsar/arrow-right`) and
 	 * pattern slugs are saved in content and looked up by Matter.
