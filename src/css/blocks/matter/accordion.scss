@@ -32,7 +32,7 @@
 }
 
 // Without JavaScript the answers show and the headings do nothing: no caret.
-.wp-block-matter-accordion:not(#{$matter-enhanced}) .wp-block-matter-accordion-item__toggle {
+.wp-block-matter-accordion-item:not(#{matter-enhanced(accordion)}) > .wp-block-matter-accordion-item__heading .wp-block-matter-accordion-item__toggle {
 	cursor: default;
 
 	&::after {

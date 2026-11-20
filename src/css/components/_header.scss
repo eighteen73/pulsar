@@ -21,7 +21,7 @@
 	// Without JavaScript (or when the panel's script fails) the navigation is
 	// not a drawer: it's a row of its own under the logo and actions.
 	@media (--lg-down) {
-		&:has(> .site-header__navigation:not(#{$matter-enhanced})) {
+		&:has(> .site-header__navigation:not(#{matter-enhanced(panel)})) {
 			flex-wrap: wrap;
 		}
 	}
@@ -57,7 +57,7 @@
 	}
 }
 
-.site-header__navigation:not(#{$matter-enhanced}) {
+.site-header__navigation:not(#{matter-enhanced(panel)}) {
 	@media (--lg-down) {
 		flex: 1 1 100%;
 		order: 1;
@@ -81,7 +81,7 @@
 }
 
 // The drawer (not the plain list a visitor without JavaScript gets).
-.site-header__navigation#{$matter-enhanced} .matter-panel__content {
+.site-header__navigation#{matter-enhanced(panel)} .matter-panel__content {
 	@media (--lg-down) {
 		background: var(--scheme--background);
 		box-shadow: var(--wp--preset--shadow--lg);

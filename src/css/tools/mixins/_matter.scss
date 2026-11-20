@@ -1,6 +1,16 @@
 /// Matter's gate for what its scripts do (Matter README, "Without JavaScript"):
-/// a block that is running, or is about to be. Add it after a selector for the
-/// block's marked element, `.site-header__navigation#{$matter-enhanced}`, to
-/// style only the off-canvas panel, and the closed panels, not the plain
-/// content a visitor without JavaScript (or whose script failed) gets.
-$matter-enhanced: ":is(.is-enhanced, html.matter-js:not(.matter-late) *)";
+/// a block that is running, or is about to be, and the block editor, which
+/// shows the enhanced look without running the scripts. `matter-enhanced(type)`
+/// goes after a selector for the block's marked element,
+/// `.site-header__navigation#{matter-enhanced(panel)}`, to style only the
+/// off-canvas panel, and the closed panels, not the plain content a visitor
+/// without JavaScript (or whose script failed) gets. The type is the block's
+/// script (`accordion`, `tabs`, `menu`, `panel`, `overlay`): `matter-js` and
+/// either not yet `matter-late`, or that type's script has run on the page.
+/// Keep it the same as Matter's `enhanced()` (src/styles/_enhanced.scss).
+///
+/// @param {String} $type Matter's block type.
+/// @return {String} A selector.
+@function matter-enhanced($type) {
+	@return ":is(.is-enhanced, html.matter-js:is(:not(.matter-late), .matter-ready-#{$type}) *, .editor-styles-wrapper *)";
+}
