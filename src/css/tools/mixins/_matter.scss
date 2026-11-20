@@ -7,7 +7,10 @@
 /// without JavaScript (or whose script failed) gets. The type is the block's
 /// script (`accordion`, `tabs`, `menu`, `panel`, `overlay`): `matter-js` and
 /// either not yet `matter-late`, or that type's script has run on the page.
-/// Keep it the same as Matter's `enhanced()` (src/styles/_enhanced.scss).
+/// Keep it the same as Matter's `enhanced()` (src/styles/_enhanced.scss): this is
+/// a copy, as the theme's build can't count on Matter's source being there to
+/// `@use`. Matter's Jest test (src/styles/test/enhanced-gate.js) and its
+/// CHANGELOG line "The enhanced gate" flag a change to it.
 ///
 /// @param {String} $type Matter's block type.
 /// @return {String} A selector.
