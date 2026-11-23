@@ -52,18 +52,15 @@ class GravityForms implements Bootable {
 	 */
 	public function input_to_button( $button, $form ): string {
 		$fragment = \WP_HTML_Processor::create_fragment( $button );
+		$fragment->next_token();
 
-		if ( ! $fragment || ! $fragment->next_tag() || 'INPUT' !== $fragment->get_tag() ) {
-			return $button;
-		}
-
-		$attributes      = [ 'id', 'type', 'class', 'onclick' ];
+		$attributes      = array( 'id', 'type', 'class', 'onclick' );
 		$data_attributes = $fragment->get_attribute_names_with_prefix( 'data-' );
 		if ( ! empty( $data_attributes ) ) {
 			$attributes = array_merge( $attributes, $data_attributes );
 		}
 
-		$new_attributes = [];
+		$new_attributes = array();
 		foreach ( $attributes as $attribute ) {
 			$value = $fragment->get_attribute( $attribute );
 			if ( ! empty( $value ) ) {

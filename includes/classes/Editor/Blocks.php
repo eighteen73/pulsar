@@ -22,9 +22,6 @@ class Blocks implements Bootable {
 	 */
 	public function boot(): void {
 
-		// Load individual block CSS files on demand.
-		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
-
 		// Register custom blocks.
 		add_action( 'init', [ $this, 'register_custom_blocks' ] );
 	}

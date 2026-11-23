@@ -59,6 +59,7 @@ npm run test:e2e   # seeds a customer, products, a subscription, booking and mem
 Delete `.wp-env.tests.override.json` and start the test site again to go back to WooCommerce alone (add a `port` to the copy if the project needs one). Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.
 
 **In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
+
 - sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
 - schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
 - Appearance › Site details, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
@@ -106,12 +107,14 @@ A section is a block with named content slots. Its layout lives in code, so chan
 **To remove one,** delete its `src/blocks/{name}` folder and its stylesheet, and build: the build empties `build/` first, so it's no longer registered. Take it out of the tests too (see Browser tests).
 
 **Slots:**
+
 - `allowedBlocks` limits what editors can add.
 - `templateLock: "all"` fixes the blocks (the hero's and card's single image) while leaving their settings, such as the focal point, in reach. Don't use `"contentOnly"`: it hides those settings behind "Edit pattern" (see Matter's README).
 - Slots are matched by name, so they can be added, reordered or removed in any position. To rename one, list its old name (`"previously": [ "media" ]`) so existing content follows it. See Matter's README.
 - `alignments` lists the alignments the slot's blocks offer. Text's content slot offers wide and full: a carousel, gallery, image, video or embed aligned wide takes the section's wide width, and one aligned full the whole band, edge to edge (`blocks/pulsar/text.scss`). Copy those rules for another section whose slot allows them.
 
 **Spacing:**
+
 - A full-width section is a band: its spacing is padding (`--wp--custom--spacing--section`, above and below), so its scheme's background covers it. Two bands in a row without a scheme read as one, so the second loses its top padding (`components/_sections.scss`). That relies on the first keeping its bottom padding: a section that runs to its edges (an edge-to-edge hero) should still keep the section spacing below it, or the next section will touch it.
 - A page whose last section (or template band) has a scheme meets the footer, with no gap between them; other pages keep the flow gap above the footer (`components/_main.scss`).
 - The shared padding is at zero specificity, so a section or variant sets its own with one class (`.wp-block-pulsar-cta { padding-block: … }`). Margins are different: the "sections touch" rule has to beat WordPress's layout margins, so a section that changes its own margin (pulling itself up into the band above) needs `.is-section` in its selector as well (`.wp-block-pulsar-{name}.is-style-{variant}.is-section`).
@@ -122,12 +125,14 @@ A section is a block with named content slots. Its layout lives in code, so chan
 ## Colour schemes and tokens
 
 Tokens come in two layers, and components only ever use the second:
+
 - **Presets** are the raw scales: every colour, spacing step, font size, radius and shadow. They live in `config/theme-json/settings.*.json`.
 - **Roles** say what a value is for: scheme colours, spacing roles, font weights. They live in `config/theme-json/settings.custom.json` and point at presets.
 
 ### Palette
 
 `settings.color.json` holds every colour the site has, named by rank, not by lightness:
+
 - `brand-primary`, then `-secondary`/`-tertiary` if the brand has them; `accent-primary`, `accent-secondary`… for supporting colours.
 - `-subtle` (paler) and `-strong` (deeper) versions of each, written as `color-mix(in oklch, var(--wp--preset--color--brand-primary) 12%, white)` and `… 70%, black)`. Swap in a hex when the design specifies one. Mix towards white and black, not `base` and `contrast`: a tinted `contrast` shifts the hue.
 - `neutral-50` to `neutral-950`, `base` (page background) and `contrast` (text).
@@ -204,6 +209,7 @@ The editor's colour, spacing, layout, border and typography controls are switche
 ### Designer handover
 
 Ask the designer for:
+
 - one hex per colour, ranked by use: `brand-primary` at minimum, plus `base` and `contrast`. A paler or deeper version of a colour is its `-subtle` or `-strong`; only give a hex if the default mix isn't right. Greys always go in `neutral-*`.
 - the schemes the site needs (usually two to four), each as the 11 roles above, picked from the palette.
 - fonts and weights for body, headings and labels (and whether labels are in capitals or tracked); body size if not 16px.
@@ -216,6 +222,7 @@ Name the Figma variables the same way (`brand-primary`, `background-fill`, `spac
 The aim is no `!important`, and styles that are easy to find. Stylelint enforces the rules marked ✓.
 
 **Selectors**
+
 - ✓ Every class is written out in full: no `&__` or `&-` concatenation, so searching for a class finds its styles.
 - ✓ Nesting only for the same element: `&:hover`, `&::before`, `&[aria-selected="true"]`, `&.is-open`, and at-rules (`@media`, `@include`). Anything else is its own rule with its full selector.
 - ✓ Properties in alphabetical order. So set longhands rather than a shorthand plus an override: the override would sort before the shorthand, which then resets it (write the four `border-*-radius` corners, not `border-radius: 0` and one corner).
@@ -224,6 +231,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - Labels: `label-text` is label text on controls (buttons, the header's menu, tabs); `form-label` is a form field's label.
 
 **Specificity**
+
 - One class per selector where possible; context that's only there to scope goes in `:where()` (`:where(.site-header__navigation) .matter-menu__link`).
 - ✓ At most 0,3,1, and no IDs. (WooCommerce and Gravity Forms files are exempt until they're rewritten.)
 - Element styles (`h2`, `a`, form fields) stay at element specificity, or inside `:where()`, so any class beats them.
@@ -234,6 +242,7 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 **In the editor.** Sections share their markup and CSS with the editor, but the editor adds its own styles to it (Matter's README, "In the editor"). In short: decorate a section's or card's `::before`, or an inner element, not its own `::after`, which the editor uses for block outlines; place things against the section from the slot, not a block inside it; and keep a slot that sits behind the content reachable (`.is-empty`, `pointer-events`).
 
 **Matter's blocks**
+
 - Matter ships a minimal default skin in `:where()`, so any class here overrides it. Pulsar styles every Matter block it uses in full (`blocks/matter/`, `components/_menu.scss`, the panel in `components/_header.scss`), icons included (`assets/svg/ui/`), so a Matter update doesn't change how the site looks.
 - Where Pulsar's design differs from the skin, undo the skin's part explicitly (e.g. the selected tab sets `text-decoration: none` over Matter's underline).
 - Matter shows and hides parts per mode (a menu's toggle text, submenus and their headers, the panel toggle): don't set `display` on these.
@@ -241,15 +250,18 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - Matter's per-mode classes exist only inside Matter's media queries, so mode-specific styles use the same breakpoint as the PHP that sets it (`collapse_below: 'lg'` in `template-parts/header.php` → `@media (--lg-down)`; `dropdownBelow` in `config/matter.php` → `@media (--md-down)`).
 
 **Class names**
+
 - `.wp-block-{namespace}-{block}` and `__{element}` for its parts.
 - `.is-style-{variant}` for variants, `.has-{option}` for options, `.is-{state}` for states, `.has-scheme-{slug}` for schemes.
 
 **CSS variables**
+
 - Use the tokens above: `--scheme--{role}` for colour, presets and roles for everything else. No hex values in component CSS. Icons and form controls are drawn in the scheme's colours (masks, gradients), never fixed-colour SVGs.
 - A component's own variables are `--{component}-{setting}`, and only for settings or values JavaScript sets. Matter's block settings (`--carousel-per-view`, `--gallery-gap`…) can be set on `:root` or on the block's class; see Matter's README. Don't invent variables in Matter's names (`--carousel-*`, `--gallery-*`…): Pulsar's private ones are `--_{component}-{name}`.
 - A value used once is written as a property, not a variable.
 
 **Buttons**
+
 - Every button is the base plus a variant (`primary`, `secondary`, `link`) and optionally a size (`small`). The base draws the border on every variant and allows for it in the padding, so all buttons are the same height.
 - `@include button(secondary, small)` makes something a button. Anything that's already one (`.wp-element-button`, `.wp-block-button__link`) only needs `@include button-variant(secondary)` or `button-size(small)`, which set colours or spacing through private `--_button-*` variables.
 - Icons before a button's label are `::before`, and decoration after it `::after`. Some things that are buttons already use a pseudo-element: the cart link draws its bag with `::after` (`wc-cart-icon`), and WooCommerce's icon-only buttons (the mini-cart drawer's close) have the button classes. If every button gains decoration, leave those out.
@@ -258,12 +270,14 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 ## Header, footer and menus
 
 `template-parts/header.php` contains:
+
 - the logo;
 - the main menu in a Matter panel: a drill-down drawer below `lg`, an inline dropdown from `lg`;
 - the header call to action;
 - the mini-cart.
 
 `footer.php` contains:
+
 - the logo;
 - contact details and social links (from Appearance › Site details);
 - the footer and legal menus;
@@ -287,13 +301,14 @@ Menu locations: `main`, `footer-1`, `footer-2` and `legal`.
 **Products per page** on the shop and category pages are WooCommerce's (columns × rows, 4 × 4 by default; the `loop_shop_per_page` filter): the template's Product Collection takes the main query, so its own `perPage` is ignored. How many go across is the list's variant (`config/matter.php`).
 
 Archives without their own content show a pattern, which is also where editors start when they customise one:
+
 - `patterns/archive.php`: the archive's title and description, then the list;
 - `archive-search.php`;
 - `archive-404.php`.
 
 Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across, Feature first) are in `config/matter.php` and styled in `src/css/blocks/matter/archive-loop.scss`.
 
-**Don't add `front-page.html`** for a small difference on the home page (hiding the breadcrumbs, say). WordPress uses it for the front page whether that's a page or the latest posts, so it takes over a blog front page too. Use a rule under `.home` instead.
+**Don't add** `front-page.html` for a small difference on the home page (hiding the breadcrumbs, say). WordPress uses it for the front page whether that's a page or the latest posts, so it takes over a blog front page too. Use a rule under `.home` instead.
 
 ## Rendering blocks from PHP
 
@@ -313,5 +328,5 @@ Shop, product, cart, checkout, order received and account templates are block te
 - **Order received** is built from WooCommerce's order confirmation blocks (`patterns/order-confirmation.php`).
 - **Blocks** are styled per block in `src/css/blocks/woocommerce/`.
 - **WooCommerce's classic markup** (My Account's forms, orders, addresses; the customer payment page that payment links open; the classic cart and checkout; extensions' templates) is styled in `src/css/woocommerce.scss`, loaded on every WooCommerce page after WooCommerce's own stylesheet; My Account's layout and navigation in `src/css/woocommerce-account.scss`.
-- **Everywhere:** WooCommerce's colour and form variables (`--wc-*`) are mapped to the scheme, and notices use the status colours (`src/css/third-party/_woocommerce.scss`), so WooCommerce's own styles and extensions follow the theme.
+- **Everywhere:** WooCommerce's colour and form variables (`--wc-`*) are mapped to the scheme, and notices use the status colours (`src/css/third-party/_woocommerce.scss`), so WooCommerce's own styles and extensions follow the theme.
 - WooCommerce's stylesheets stay on: Pulsar overrides them, matching their specificity where it has to (each case is commented).

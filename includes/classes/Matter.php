@@ -37,6 +37,15 @@ class Matter implements Bootable {
 	}
 
 	/**
+	 * Determines if the class can be booted.
+	 *
+	 * @return bool
+	 */
+	public function can_boot(): bool {
+		return true;
+	}
+
+	/**
 	 * Archives without their own content show (and editors customising one
 	 * start from) a pattern: patterns/archive-404.php, archive-search.php,
 	 * or archive.php for the rest. Add e.g. `pulsar/archive-product` to give
@@ -81,15 +90,6 @@ class Matter implements Bootable {
 			'core/query'                     => [ 'variant' => 'cards' ],
 			'woocommerce/product-collection' => [ 'variant' => 'cards' ],
 		];
-	}
-
-	/**
-	 * Determines if the class can be booted.
-	 *
-	 * @return bool
-	 */
-	public function can_boot(): bool {
-		return true;
 	}
 
 	/**

@@ -51,7 +51,7 @@ class Setup implements Bootable {
 		}
 
 		if ( is_post_type_archive( 'product' ) ) {
-			$query->set( 'posts_per_page', 24 );
+			$query->set( 'posts_per_page', 48 );
 		}
 	}
 
