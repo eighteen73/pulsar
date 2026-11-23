@@ -8,6 +8,7 @@
 const { test, expect } = require('@wordpress/e2e-test-utils-playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const { activeExtensions } = require('./extensions');
+const { basketSaved } = require('./basket');
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 const CUSTOMER = { username: 'pulsarext', password: 'Pulsar-ext-1' };
@@ -78,6 +79,7 @@ const addToBasket = async (page) => {
 	await expect(page.locator('.wc-block-mini-cart__badge')).toHaveText(
 		/[1-9]/
 	);
+	await basketSaved(page);
 };
 
 test.describe('Subscriptions', () => {

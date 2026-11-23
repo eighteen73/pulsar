@@ -5,6 +5,7 @@
 const { test, expect } = require('@wordpress/e2e-test-utils-playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const { SCHEMES, SETTINGS, PAGE_PREFIX, COUPON } = require('./content');
+const { BASKET_TIMEOUT, basketSaved } = require('./basket');
 
 const DESKTOP = { width: 1280, height: 900 };
 const MOBILE = { width: 390, height: 800 };
@@ -346,14 +347,17 @@ test.describe('WooCommerce', () => {
 		await expect(page.locator('.wc-block-mini-cart__badge')).toHaveText(
 			/[1-9]/
 		);
+		await basketSaved(page);
 
 		await page.goto('/cart/');
-		await expect(page.getByText('Test bauble').first()).toBeVisible();
+		await expect(page.getByText('Test bauble').first()).toBeVisible({
+			timeout: BASKET_TIMEOUT,
+		});
 
 		await page.goto('/checkout/');
 		await expect(
 			page.locator('.wp-block-woocommerce-checkout')
-		).toBeVisible();
+		).toBeVisible({ timeout: BASKET_TIMEOUT });
 	});
 
 	test("a link to #reviews opens the product's reviews", async ({ page }) => {
@@ -425,6 +429,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 		await expect(page.locator('.wc-block-mini-cart__badge')).toHaveText(
 			/[1-9]/
 		);
+		await basketSaved(page);
 	};
 
 	test("a product shows its stock, and out of stock it can't be bought", async ({
@@ -557,13 +562,15 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 		);
 
 		await page.goto('/cart/');
-		await expect(page.getByText('Test bauble').first()).toBeVisible();
+		await expect(page.getByText('Test bauble').first()).toBeVisible({
+			timeout: BASKET_TIMEOUT,
+		});
 		expect(await violations(page)).toEqual([]);
 
 		await page.goto('/checkout/');
 		await expect(
 			page.getByRole('link', { name: /return to (basket|cart)/i })
-		).toBeVisible();
+		).toBeVisible({ timeout: BASKET_TIMEOUT });
 		expect(await violations(page)).toEqual([]);
 	});
 
@@ -581,6 +588,9 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 	}) => {
 		await addToBasket(page, 'test-bauble');
 		await page.goto('/cart/');
+		await expect(page.getByText('Test bauble').first()).toBeVisible({
+			timeout: BASKET_TIMEOUT,
+		});
 
 		const coupons = page.locator('.wc-block-components-totals-coupon');
 
@@ -607,6 +617,7 @@ test.describe('WooCommerce: stock, filters, basket and checkout', () => {
 
 		const placeOrder = page.getByRole('button', { name: /place order/i });
 
+		await expect(placeOrder).toBeVisible({ timeout: BASKET_TIMEOUT });
 		await placeOrder.click();
 		await expect(
 			page.locator('.wc-block-components-text-input.has-error').first()
