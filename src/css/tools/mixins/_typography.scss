@@ -8,15 +8,15 @@
 }
 
 /// Label text: the controls people read as labels (buttons, menus, tabs,
-/// pagination, account navigation). Its family, weight, case and letter
-/// spacing are roles in settings.custom.json (`typography.*.label`). Bold text
-/// that isn't a control (prices, totals, product names) uses only the label
-/// weight.
+/// pagination, account navigation). Set the font, case and letter spacing
+/// here for labels in their own font, capitals or tracking. The weight is a
+/// role in settings.custom.json (`typography.fontWeight.label`) because bold
+/// text that isn't a control (prices, totals, product names) uses it too.
 @mixin label-text {
-	font-family: var(--wp--custom--typography--font-family--label);
+	font-family: var(--wp--preset--font-family--primary);
 	font-weight: var(--wp--custom--typography--font-weight--label);
-	letter-spacing: var(--wp--custom--typography--letter-spacing--label);
-	text-transform: var(--wp--custom--typography--text-transform--label);
+	letter-spacing: normal;
+	text-transform: none;
 }
 
 @mixin heading($size) {

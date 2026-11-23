@@ -193,12 +193,13 @@ Links on a tinted background are the usual failure, which is why `subtle` uses `
 | `--wp--style--block-gap` | Space between blocks in a flow (`xl`), WordPress's own variable |
 | `--wp--preset--font-size--{slug}` | `xs` 12, `sm` 14, `md` 16 (body), `lg` 19→20, `xl` 23→25, `2-xl` 28→31, `3-xl` 33→39, `4-xl` 40→49, `5-xl` 48→61 |
 | `--wp--custom--typography--font-weight--{body,heading,label}` | 400, 700, and `label` (buttons, form labels, menus, tabs, prices) follows `heading` unless set. If headings aren't bold, set `label` (usually 700), or every label goes to the heading's weight |
-| `--wp--custom--typography--{font-family,letter-spacing,text-transform}--label` | The body font, `normal`, `none`: label text for controls (buttons, the header's menu, tabs, pagination, account navigation) through the `label-text` mixin; footer menus are body text. Set them for labels in their own font, capitals or tracking. Prices, totals and form labels use only the label weight |
 | `--wp--custom--typography--line-height--{none,tight,normal}` | 1, 1.1, 1.5 |
 | `--wp--preset--border-radius--{xs,sm,md,lg,full}` | 4, 8, 10→16, 16→24, pill; `xs` to `lg` are multiplied by `--wp--custom--roundness` (0 square, 1 default, 1.5 rounder). `full` is always a pill or circle (round controls such as carousel arrows stay round on a square site); use `lg` for anything that should square up with the rest |
 | `--wp--preset--shadow--{xs,sm,md,lg}` | Tinted from `neutral-900` |
 | `--wp--custom--transition--duration--{quick,normal}` | 150ms, 300ms |
 | `--wp--style--global--content-size` / `--wide-size` | 768px / 1440px |
+
+Label text for controls (buttons, the header's menu, tabs, pagination, account navigation) comes from the `label-text` mixin in `src/css/tools/mixins/_typography.scss`: the body font, the label weight, no capitals, no tracking. Change the font, case or letter spacing there for labels in their own font, capitals or tracking. Footer menus are body text, and prices, totals and form labels use only the label weight.
 
 Headings map to sizes in `src/css/tools/mixins/_typography.scss`: `h1` `4-xl`, `h2` `3-xl`, `h3` `2-xl`, `h4` `xl`, `h5` `lg`, `h6` `md`. `5-xl` is free for display headings.
 
