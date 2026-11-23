@@ -61,7 +61,7 @@
 				{
 					"name": "Secondary",
 					"slug": "secondary",
-					"fontFamily": "var(--wp--preset--font-family--primary)"
+					"fontFamily": "var:preset|font-family|primary"
 				}
 			],
 			"fontSizes": [

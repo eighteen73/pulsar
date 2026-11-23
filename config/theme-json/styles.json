@@ -29,8 +29,8 @@
 		"spacing": {
 			"blockGap": "var:preset|spacing|xl",
 			"padding": {
-				"left": "var(--wp--custom--spacing--edge)",
-				"right": "var(--wp--custom--spacing--edge)"
+				"left": "var:custom|spacing|edge",
+				"right": "var:custom|spacing|edge"
 			}
 		}
 	}

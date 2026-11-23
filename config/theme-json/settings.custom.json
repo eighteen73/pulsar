@@ -67,7 +67,7 @@
 				"fontWeight": {
 					"body": 400,
 					"heading": 700,
-					"label": "var(--wp--custom--typography--font-weight--heading)"
+					"label": "var:custom|typography|font-weight|heading"
 				},
 				"lineHeight": {
 					"none": "1",
