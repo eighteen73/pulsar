@@ -41,7 +41,7 @@ const sectionsPage = (scheme) => {
 	const card = (n) =>
 		section(
 			'card',
-			{ ...attrs, link: { url: '/' } },
+			{ ...attrs, matterLink: { url: '/' } },
 			slot('media', image(`Card ${n} image`)) +
 				slot(
 					'content',
