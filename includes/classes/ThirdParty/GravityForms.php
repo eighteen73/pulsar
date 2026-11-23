@@ -42,6 +42,8 @@ class GravityForms implements Bootable {
 	/**
 	 * Filters the next, previous and submit buttons.
 	 * Replaces the form's <input> buttons with <button> while maintaining attributes from original <input>.
+	 * Buttons that are already <button>s (Gravity Forms 3's, whose label is
+	 * their content, not a `value`) are left as they are.
 	 *
 	 * @param string $button Contains the <input> tag to be filtered.
 	 * @param array  $form    Contains all the properties of the current form.

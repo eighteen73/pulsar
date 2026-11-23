@@ -1,0 +1,55 @@
+@use "tools" as *;
+
+/// A product's gallery: the large image, thumbnails, and the dialog that opens
+/// it full screen.
+
+// Two classes: WooCommerce sets the gap with the block's class.
+.wp-block-woocommerce-product-gallery.wp-block-woocommerce-product-gallery {
+	gap: var(--wp--preset--spacing--md);
+}
+
+// The large image's inner blocks (the sale badge, previous and next).
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-large-image__inner-blocks {
+	height: calc(100% - calc(var(--wp--preset--spacing--lg) * 2));
+	left: var(--wp--preset--spacing--lg);
+	top: var(--wp--preset--spacing--lg);
+	width: calc(100% - calc(var(--wp--preset--spacing--lg) * 2));
+}
+
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-large-image__wrapper {
+	border-radius: var(--wp--preset--border-radius--md);
+	overflow: clip;
+}
+
+// Thumbnails, without a scrollbar.
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-thumbnails__scrollable {
+	gap: var(--wp--preset--spacing--md);
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-thumbnails__thumbnail img {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+// The dialog.
+.wp-block-woocommerce-product-gallery :where(.wc-block-product-gallery-dialog) {
+	background-color: var(--scheme--background);
+	border: none;
+}
+
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-dialog__content img {
+	border-radius: var(--wp--preset--border-radius--md);
+}
+
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-dialog__close-button::before {
+	@include icon("ui/x", 32px, var(--scheme--text));
+}
+
+.wp-block-woocommerce-product-gallery .wc-block-product-gallery-dialog__close-button svg {
+	display: none;
+}

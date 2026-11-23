@@ -1,0 +1,272 @@
+@use "tools" as *;
+
+/// WooCommerce, wherever its markup appears (its own stylesheets load on every
+/// page).
+///
+/// WooCommerce's classic stylesheet reads these for its colours, form fields
+/// and select2 dropdowns (country and state): mapped to the scheme, they theme
+/// the classic templates (My Account, the customer payment page, classic cart
+/// and checkout, extensions' templates) without overriding its rules.
+body {
+	--wc-content-bg: var(--scheme--background);
+	--wc-destructive: var(--wp--preset--color--status-error);
+	--wc-form-border-color: var(--scheme--border-strong);
+	--wc-form-border-radius: var(--wp--preset--border-radius--sm);
+	--wc-form-border-width: 1px;
+	--wc-form-color-background: var(--scheme--background-surface);
+	--wc-form-color-text: var(--scheme--text);
+	--wc-green: var(--wp--preset--color--status-success);
+	--wc-highlight: var(--scheme--highlight);
+	--wc-highligh-text: var(--scheme--text-fill);
+	--wc-primary: var(--scheme--background-fill);
+	--wc-primary-text: var(--scheme--text-fill);
+	--wc-red: var(--wp--preset--color--status-error);
+	--wc-secondary: var(--scheme--background-surface);
+	--wc-secondary-text: var(--scheme--text);
+	--wc-subtext: var(--scheme--text-subtle);
+}
+
+// The block cart's and checkout's lines (WooCommerce's separator colour, 20%
+// of the text's): the scheme's border, from the scheme they're in.
+:where(.wp-block-woocommerce-cart, .wp-block-woocommerce-checkout) {
+	--wc-separator-color: var(--scheme--border);
+}
+
+// Express payment buttons (Stripe's Google Pay, Apple Pay, Link…): rounded as
+// the theme's buttons (the wrapper clips the button, in the payment plugin's
+// own iframe, to its corners), and focused in the theme's highlight rather
+// than WooCommerce's blue.
+// (WooCommerce's `.wc-block-components-express-payment
+// .wc-block-components-express-payment__event-buttons > div`, 0,2,1.)
+body .wc-block-components-express-payment .wc-block-components-express-payment__event-buttons > :is(div, li) {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+// (WooCommerce's `… > div:focus-within::after` and
+// `… > div.wc-block-components-express-payment__event-button--focused::after`,
+// up to 0,4,2.)
+// stylelint-disable-next-line selector-max-specificity -- See above.
+body .wc-block-components-express-payment .wc-block-components-express-payment__event-buttons > :is(div, li):is(:focus-within, .wc-block-components-express-payment__event-button--focused)::after {
+	border-color: var(--scheme--highlight);
+}
+
+// Core's default font sizes, which theme.json turns off: extensions' block
+// theme styles (Product Bundles', Bookings') size their titles and labels with
+// them, and without them their sizes are inherited.
+:root {
+	--wp--preset--font-size--x-small: var(--wp--preset--font-size--xs);
+	--wp--preset--font-size--small: var(--wp--preset--font-size--sm);
+	--wp--preset--font-size--medium: var(--wp--preset--font-size--md);
+	--wp--preset--font-size--large: var(--wp--preset--font-size--lg);
+	--wp--preset--font-size--x-large: var(--wp--preset--font-size--xl);
+}
+
+// Fields with an error (the checkout's, the coupon's): the label, the message
+// and an invalid checkbox's text in the error colour, not WooCommerce's red.
+// One element more than WooCommerce's, up to 0,3,1.
+/* stylelint-disable selector-max-specificity -- WooCommerce's label, `.wc-block-components-form .wc-block-components-text-input.has-error label`, 0,3,1. */
+body .wc-block-components-validation-error,
+body .wc-block-components-form .wc-block-components-text-input.has-error label,
+body .wc-block-components-text-input.has-error label,
+body .wc-block-components-checkbox.has-error,
+body .wc-block-components-checkbox.has-error a {
+	color: var(--wp--preset--color--status-error);
+}
+
+// The coupon field with an error (the theme's coupon field, cart.scss and
+// checkout.scss: `… .wc-block-components-totals-coupon__input input[type="text"]`, 0,3,1).
+body .wc-block-components-totals-coupon .wc-block-components-text-input.has-error input[type="text"] {
+	border-color: var(--wp--preset--color--status-error);
+}
+/* stylelint-enable selector-max-specificity */
+
+// A message over two lines, spaced as text is (WooCommerce's line height is
+// 1), its icon by the first line.
+body .wc-block-components-validation-error > p {
+	align-items: flex-start;
+	line-height: var(--wp--custom--typography--line-height--normal);
+}
+
+body .wc-block-components-validation-error svg {
+	flex-shrink: 0;
+	margin: 0;
+}
+
+// Chips (applied coupons, in the cart's and checkout's totals): as the active
+// filters' are (blocks/matter/active-filters.scss), the theme's icon removing
+// them. The class twice: WooCommerce's sizes
+// (`.wc-block-components-chip.wc-block-components-chip--radius-large`) are 0,2,0.
+body .wc-block-components-chip.wc-block-components-chip {
+	background-color: var(--scheme--background-surface);
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--xs);
+	margin: 0 var(--wp--preset--spacing--sm) var(--wp--preset--spacing--sm) 0;
+	padding: 0 0 0 var(--wp--preset--spacing--md);
+}
+
+body .wc-block-components-chip .wc-block-components-chip__text {
+	font-size: inherit;
+	padding: 0;
+}
+
+// (WooCommerce's, hovered or focused, `.wc-block-components-chip__remove:hover`, 0,2,0.)
+body .wc-block-components-chip .wc-block-components-chip__remove {
+	align-items: center;
+	background: none;
+	border-radius: var(--wp--preset--border-radius--sm);
+	display: flex;
+	height: 32px;
+	justify-content: center;
+	width: 32px;
+
+	&::before {
+		@include icon("ui/x");
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+body .wc-block-components-chip .wc-block-components-chip__remove svg {
+	display: none;
+}
+
+// A cart item's details (a variation's attributes; a booking's date, people
+// and room) in the cart, mini cart and checkout: a line each, its name
+// subtle, without WooCommerce's " / " between them.
+body .wc-block-components-product-details > span {
+	display: block;
+}
+
+body .wc-block-components-product-details > span > [aria-hidden="true"] {
+	display: none;
+}
+
+body .wc-block-components-product-details .wc-block-components-product-details__name {
+	color: var(--scheme--text-subtle);
+}
+
+// Select2 (country and state fields): sized like the theme's fields. One
+// element more than WooCommerce's rules.
+body .select2-container .select2-selection--single {
+	min-height: calc(2 * var(--wp--preset--spacing--md) + 1lh + 2px);
+}
+
+body .select2-container .select2-selection--single .select2-selection__rendered {
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--typography--line-height--normal);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--3-xl) var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+}
+
+body .select2-container .select2-selection--single .select2-selection__arrow {
+	inset-inline-end: var(--wp--preset--spacing--md);
+}
+
+/// Notices: the store's banners (WooCommerce prints classic notices as these
+/// too in a block theme), in the status colours. Light backgrounds in every
+/// scheme, so dark text. One element more than WooCommerce's rules.
+body .wc-block-components-notice-banner {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border: 1px solid var(--wp--preset--color--status-info);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--md);
+	gap: var(--wp--preset--spacing--md);
+	margin-block: var(--wp--preset--spacing--md);
+}
+
+body .wc-block-components-notice-banner > svg {
+	background-color: var(--wp--preset--color--status-info);
+}
+
+// WooCommerce colours info too (`.wc-block-components-notice-banner.is-info`, 0,2,0).
+body .wc-block-components-notice-banner.is-info {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border-color: var(--wp--preset--color--status-info);
+}
+
+body .wc-block-components-notice-banner.is-info > svg {
+	background-color: var(--wp--preset--color--status-info);
+}
+
+body .wc-block-components-notice-banner.is-success {
+	background-color: var(--wp--preset--color--status-success-subtle);
+	border-color: var(--wp--preset--color--status-success);
+}
+
+body .wc-block-components-notice-banner.is-success > svg {
+	background-color: var(--wp--preset--color--status-success);
+}
+
+body .wc-block-components-notice-banner.is-warning {
+	background-color: var(--wp--preset--color--status-warning-subtle);
+	border-color: var(--wp--preset--color--status-warning);
+}
+
+body .wc-block-components-notice-banner.is-warning > svg {
+	background-color: var(--wp--preset--color--status-warning);
+}
+
+body .wc-block-components-notice-banner.is-error {
+	background-color: var(--wp--preset--color--status-error-subtle);
+	border-color: var(--wp--preset--color--status-error);
+}
+
+body .wc-block-components-notice-banner.is-error > svg {
+	background-color: var(--wp--preset--color--status-error);
+}
+
+body .wc-block-components-notice-banner a:not(.wc-block-components-button) {
+	color: inherit;
+}
+
+// Classic notices (extensions print their own: Subscriptions', Bookings'):
+// drawn as the banners are (tools/mixins/_woocommerce.scss, `wc-notice`).
+// WooCommerce's layout stays (padding for the icon, the action floated), as
+// their text and links are inline.
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error) {
+	@include wc-notice;
+}
+
+// Subscriptions' info notice also has `woocommerce-message`.
+body .woocommerce-message:not(.woocommerce-info) {
+	@include wc-notice-status(success);
+}
+
+body .woocommerce-error {
+	@include wc-notice-status(error);
+}
+
+// A notice's action (Browse products, Confirm email address): a link at the
+// end, in the notice's colour (WooCommerce's banner greys it, too faintly).
+// stylelint-disable selector-max-specificity, declaration-no-important -- WooCommerce's banner link (`.wc-block-components-notice-banner > .wc-block-components-notice-banner__content .wc-forward`, 0,3,0) sets these `!important`, and classic WooCommerce's `.woocommerce a.button:hover`, 0,3,1, colours it.
+body .wc-block-components-notice-banner > .wc-block-components-notice-banner__content .button,
+body :is(.woocommerce-info, .woocommerce-message, .woocommerce-error) :is(a, button).button {
+	appearance: none;
+	background: none !important;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	color: inherit !important;
+	display: inline;
+	float: inline-end;
+	font-size: inherit;
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	line-height: inherit;
+	margin: 0;
+	margin-inline-start: var(--wp--preset--spacing--lg);
+	min-height: 0;
+	opacity: 1;
+	padding: 0 !important;
+	text-decoration-line: underline;
+	text-underline-position: under;
+
+	&:is(:hover, :focus-visible) {
+		text-decoration-line: none;
+	}
+}
+// stylelint-enable selector-max-specificity, declaration-no-important

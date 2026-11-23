@@ -1,0 +1,14 @@
+@use "tools" as *;
+
+/// Archive bands that are hidden when empty.
+
+/// Breadcrumbs (parts/breadcrumbs.html): a band that's hidden when there's no
+/// trail, e.g. while Yoast's breadcrumbs are switched off.
+.site-breadcrumbs:not(:has(.alignwide > *)) {
+	display: none;
+}
+
+/// A category's subcategories (taxonomy-product_cat.html): hidden without any.
+.site-subcategories:not(:has(.wp-block-term-template > *)) {
+	display: none;
+}

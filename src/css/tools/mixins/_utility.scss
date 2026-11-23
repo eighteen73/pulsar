@@ -1,73 +1,24 @@
 @use "../../settings" as *;
 
-/// Add styles for dark mode.
-/// Can target both prefers-color-scheme, and
-/// via a data attribute on the body.
-@mixin dark-mode() {
-	@media (prefers-color-scheme: dark) {
-		@content;
-	}
-
-	[data-mode="dark"] & {
-		@content;
-	}
-}
-
-/// Makes an element visually hidden, but still accessible to keyboards and assistive devices.
-/// @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
-/// @link http://hugogiraudel.com/2016/10/13/css-hide-and-seek/
+/// An icon: an SVG from assets/svg as a mask, painted in a colour (the text
+/// colour by default). Typically on a pseudo-element.
 ///
-/// @param {Boolean} $enforce - Use `!important` on applied properties
+/// @param {string} $icon - The icon's path in assets/svg, without `.svg`, e.g. `ui/x`.
+/// @param {string} $size - Width and height (default: 16px).
+/// @param {string} $color - The colour (default: currentcolor).
 ///
-@mixin hide-visually($enforce: false) {
-	$important: if(sass($enforce): "!important");
-
-	border: 0 #{$important};
-	clip: rect(1px, 1px, 1px, 1px) #{$important};
-	clip-path: inset(50%) #{$important};
-	height: 1px #{$important};
-	overflow: hidden #{$important};
-	padding: 0 #{$important};
-	white-space: nowrap #{$important};
-	width: 1px #{$important};
-	word-wrap: normal #{$important};
-	z-index: 100000; // Above WP toolbar
-}
-
-/// This reverses `hide-visually()`.
-///
-/// @param {Boolean} $enforce - Use `!important` on applied properties.
-///
-@mixin show-visually($enforce: false) {
-	$important: if(sass($enforce): "!important");
-
-	clip: auto #{$important};
-	clip-path: none #{$important};
-	height: auto #{$important};
-	overflow: visible #{$important};
-	text-decoration: none;
-	white-space: normal #{$important};
-	width: auto #{$important};
-	z-index: 0;
-}
-
-///
-/// @mixin icon
-/// @description A mixin for creating icons using a mask. Typically used with pseudo-elements.
-///
-/// @param {string} $icon - The name of the icon. The icon should be in the SVG format in the assets/svg directory.
-/// @param {string} $size - The size of the pseudo-element (default: 16px).
-/// @param {string} $color - The color of the pseudo-element (default: currentcolor).
-///
-/// @example Usage:
+/// @example
 ///   .my-element::after {
-///     @include pseudo-icon('icon', 24px, var(--wp--custom--color--text--primary));
+///     @include icon("ui/caret-down", 16px);
 ///   }
-///
 @mixin icon($icon, $size: 16px, $color: currentcolor) {
 	background-color: $color;
 	content: "";
 	display: inline-block;
+	flex: none;
+	// In forced colours (high contrast) backgrounds are replaced, which would
+	// hide the icon; it keeps the text colour, which is the forced one.
+	forced-color-adjust: none;
 	height: $size;
 	mask-position: center;
 	mask-repeat: no-repeat;
@@ -79,27 +30,70 @@
 	}
 }
 
+/// Another icon, on an element already using `icon()`.
+///
+/// @param {string} $icon - The icon's path in assets/svg, without `.svg`.
+@mixin icon-image($icon) {
+	mask-image: url("/assets/svg/#{$icon}.svg");
+}
+
 /// Set the focus ring style.
 /// @param {Color} $color - The color of the focus ring.
 ///
-@mixin focus-ring($color: var(--wp--custom--color--focus)) {
+@mixin focus-ring($color: var(--wp--preset--color--focus)) {
 	outline: 2px solid $color !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 	outline-offset: 2px !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus ring is visible
 }
 
-/// Set the focus block style.
+/// Set the focus block style (declarations only: use it in a `:focus-visible`
+/// rule).
 /// @param {Color} $surface - The color of the focus block surface.
 /// @param {Color} $text - The color of the focus block text.
 ///
 @mixin focus-block(
-	$surface: var(--wp--custom--color--focus),
-	$text: var(--wp--custom--color--focus-accent)
+	$surface: var(--wp--preset--color--focus),
+	$text: var(--wp--preset--color--contrast)
 ) {
-	&:focus-visible {
-		background-color: $surface !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		color: $text !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		outline: none !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
-		transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	background-color: $surface !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	color: $text !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	outline: none !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+	transition: unset !important; // stylelint-disable-line declaration-no-important -- make sure the focus block is visible
+}
+
+/// Hidden visually, but still read by screen readers: for a label that only
+/// shows at some widths, so an icon-only control keeps its name. (`display:
+/// none` would remove the name too.)
+///
+/// @example scss - Text beside an icon from lg
+///   .cart-link__text {
+///     @media (--lg-down) {
+///       @include visually-hidden;
+///     }
+///   }
+@mixin visually-hidden {
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/// Hidden on the site but shown in the editor, for a slot (or any part a
+/// client fills) hidden at some screen widths. Breakpoints in the editor
+/// follow the canvas, which is often narrower than the screen it stands for,
+/// so a slot hidden by width would vanish there and couldn't be filled. Use
+/// it inside the media query.
+///
+/// @example scss - The hero's start image only from lg
+///   .wp-block-pulsar-hero__media-start {
+///     @media (--lg-down) {
+///       @include hidden-on-site;
+///     }
+///   }
+@mixin hidden-on-site {
+	:where(body:not(.editor-styles-wrapper)) & {
+		display: none;
 	}
 }

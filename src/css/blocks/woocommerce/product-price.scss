@@ -1,0 +1,15 @@
+@use "tools" as *;
+
+.wp-block-woocommerce-product-price {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+
+	&[data-is-descendent-of-single-product-template="true"] {
+		font-weight: var(--wp--custom--typography--font-weight--label);
+	}
+}
+
+// All Products for Subscriptions' offer after the price ("— or subscribe to
+// save up to 10%"): one size. (It leaves the discount outside its `<small>`.)
+.wp-block-woocommerce-product-price :is(.wcsatt-sub-options, .wcsatt-sub-discount) {
+	font-size: var(--wp--preset--font-size--md);
+}

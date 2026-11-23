@@ -9,13 +9,11 @@
 
 return [
 	Pulsar\Setup::class,
+	Pulsar\Requirements::class,
 	Pulsar\Enqueue::class,
 	Pulsar\Editor\Blocks::class,
 	Pulsar\Editor\Bindings::class,
-	Pulsar\Editor\Icons::class,
-	Pulsar\Editor\Patterns::class,
-	Pulsar\Editor\TemplateParts::class,
-	Pulsar\ThirdParty\BlockVisibility::class,
+	Pulsar\Matter::class,
 	Pulsar\ThirdParty\GravityForms::class,
 	Pulsar\ThirdParty\WooCommerce\Setup::class,
 	Pulsar\ThirdParty\WooCommerce\Account::class,

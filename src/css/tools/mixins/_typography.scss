@@ -1,11 +1,22 @@
 @use "../../settings" as *;
 
 @mixin heading-base {
-	color: var(--wp--preset--color--contrast);
-	font-family: var(--wp--preset--font-family--primary);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
-	letter-spacing: var(--wp--custom--typography--letter-spacing--normal);
+	color: var(--scheme--text-heading);
+	font-family: var(--wp--preset--font-family--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--heading);
 	text-wrap: balance;
+}
+
+/// Label text: the controls people read as labels (buttons, menus, tabs,
+/// pagination, account navigation). Set the font, case and letter spacing
+/// here for labels in their own font, capitals or tracking. The weight is a
+/// role in settings.custom.json (`typography.fontWeight.label`) because bold
+/// text that isn't a control (prices, totals, product names) uses it too.
+@mixin label-text {
+	font-family: var(--wp--preset--font-family--primary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	letter-spacing: normal;
+	text-transform: none;
 }
 
 @mixin heading($size) {

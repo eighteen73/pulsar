@@ -1,0 +1,83 @@
+@use "tools" as *;
+
+/// Matter's filters: a sidebar from `lg` (the listing's first column, see
+/// components/_listing.scss), below it a drawer from the inline start, like
+/// the navigation's, opened by the Filters button (filters-toggle.scss). The
+/// breakpoint is the `matter/filters` variant's `collapseBelow`
+/// (config/matter.php).
+.wp-block-matter-filters__form {
+	--filters-gap: var(--wp--preset--spacing--2-xl);
+	gap: var(--filters-gap);
+}
+
+// Collapsible filters one after another are rows that space and divide
+// themselves (filter.scss): no gap between them.
+:where(.wp-block-matter-filter:has(> .wp-block-matter-filter__group)) + .wp-block-matter-filter:has(> .wp-block-matter-filter__group) {
+	margin-block-start: calc(-1 * var(--filters-gap));
+}
+
+// The drawer (not the inline form a visitor without JavaScript gets).
+.wp-block-matter-filters__panel#{matter-enhanced(panel)} .matter-panel__content {
+	@media (--lg-down) {
+		background: var(--scheme--background);
+		box-shadow: var(--wp--preset--shadow--lg);
+		color: var(--scheme--text);
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+		padding: var(--wp--preset--spacing--4-xl) var(--wp--preset--spacing--xl) 0;
+		width: min(100vw, 26rem);
+	}
+}
+
+.wp-block-matter-filters__panel .matter-panel__backdrop {
+	@media (--lg-down) {
+		background: rgb(from var(--wp--preset--color--neutral-900) r g b / 0.5);
+	}
+}
+
+.wp-block-matter-filters__panel .matter-panel__close {
+	align-items: center;
+	color: inherit;
+	inset-block-start: var(--wp--preset--spacing--sm);
+	inset-inline-end: var(--wp--preset--spacing--sm);
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+	position: absolute;
+
+	&::before {
+		@include icon("ui/x", 24px);
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+// The drawer's foot: Clear all and "Show N results", kept in view as the
+// filters scroll.
+.wp-block-matter-filters__footer {
+	background: var(--scheme--background);
+	border-block-start: 1px solid var(--scheme--border);
+	gap: var(--wp--preset--spacing--md);
+	inset-block-end: 0;
+	margin-block-start: auto;
+	padding-block: var(--wp--preset--spacing--lg);
+	position: sticky;
+}
+
+.wp-block-matter-filters__show {
+	@include button(primary);
+	flex: 1 1 auto;
+}
+
+.wp-block-matter-filters__clear {
+	@include button(secondary);
+}
+
+// Without JavaScript: the form's own submit.
+.wp-block-matter-filters__apply {
+	@include button(primary, small);
+	justify-self: start;
+}

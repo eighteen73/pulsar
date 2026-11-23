@@ -1,0 +1,60 @@
+@use "../tools" as *;
+
+/// Order received (patterns/order-confirmation.php): WooCommerce's order
+/// confirmation blocks, a section's space from the status band and footer, in
+/// the theme's borders. WooCommerce spaces the parts (48px between them) and
+/// hides an empty address column.
+// (The space after the status band is the page's between groups:
+// `.site-main > .wp-block-group + .wp-block-group`.)
+.order-confirmation {
+	padding-block-end: var(--wp--custom--spacing--section);
+}
+
+.order-confirmation .wc-block-order-confirmation-summary {
+	margin-block-start: 0;
+}
+
+// The status band: the title as the cart's and checkout's are (2-xl), the
+// thanks under it.
+.wc-block-order-confirmation-status h1 {
+	@include heading-base;
+	font-size: var(--wp--preset--font-size--2-xl);
+	margin: 0;
+}
+
+.wc-block-order-confirmation-status p {
+	font-size: var(--wp--preset--font-size--lg);
+	margin-block: var(--wp--preset--spacing--xs) 0;
+}
+
+// Each part's heading, spaced the same from what it heads (WooCommerce spaces
+// the tables, 24px, but not the addresses).
+.order-confirmation .wp-block-heading {
+	margin-block: 0 var(--wp--preset--spacing--lg);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) {
+	margin-block-start: 0;
+}
+
+// Tables and address boxes: two classes and elements, over WooCommerce's
+// (`.wc-block-order-confirmation-totals table td`, 0,1,2).
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) :is(table, th, td) {
+	border-color: var(--scheme--border);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-totals, .wc-block-order-confirmation-downloads) table {
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+.order-confirmation :is(.wc-block-order-confirmation-billing-address, .wc-block-order-confirmation-shipping-address) {
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--sm);
+}
+
+// Addresses: half the width each from md (a lone billing address too).
+.order-confirmation .wc-block-order-confirmation-address-wrapper > .wp-block-column {
+	@media (--md) {
+		flex: 0 1 calc(50% - var(--wp--preset--spacing--2-xl) / 2);
+	}
+}

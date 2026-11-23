@@ -1,0 +1,199 @@
+@use "tools" as *;
+
+/// One of Matter's filters: its options (checkboxes and radios use the theme's
+/// form controls), chips, a dropdown or a price range.
+.wp-block-matter-filter__label {
+	@include heading-base;
+	@include heading(h6);
+	margin-block: 0 var(--wp--preset--spacing--md);
+}
+
+.wp-block-matter-filter__options {
+	gap: var(--wp--preset--spacing--xs);
+}
+
+// A label with its control: the theme's labels are blocks, so laid out here.
+.wp-block-matter-filter__choice {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+	margin: 0;
+}
+
+.wp-block-matter-filter__choice input {
+	margin: 0;
+}
+
+// The count, after the name, quieter.
+.wp-block-matter-filter__count {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.wp-block-matter-filter__more {
+	@include button(link, small);
+	margin-block-start: var(--wp--preset--spacing--sm);
+}
+
+// Chips: a pill per option, filled when chosen.
+.is-display-chips .wp-block-matter-filter__choice {
+	border-color: var(--scheme--border-strong);
+	font-size: var(--wp--preset--font-size--sm);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+}
+
+.is-display-chips .wp-block-matter-filter__choice:has(input:checked) {
+	background: var(--scheme--background-fill);
+	border-color: var(--scheme--background-fill);
+	color: var(--scheme--text-fill);
+}
+
+:where(.is-display-chips) .wp-block-matter-filter__choice:has(input:checked) .wp-block-matter-filter__count {
+	color: inherit;
+}
+
+.is-display-chips .wp-block-matter-filter__choice:has(input:focus-visible) {
+	@include focus-ring;
+}
+
+// A dropdown and a price range: the theme's fields.
+.wp-block-matter-filter__field select {
+	@include field-select;
+}
+
+.wp-block-matter-filter__field .wp-block-matter-filter__label {
+	@include form-label;
+}
+
+.wp-block-matter-filter__bound label {
+	@include label-text;
+	margin-block-end: var(--wp--preset--spacing--xs);
+}
+
+.wp-block-matter-filter__bound input {
+	@include field-input;
+}
+
+// Swatches: a circle of the colour (or image) beside each option.
+.wp-block-matter-filter__swatch {
+	block-size: 1.5rem;
+	border-color: var(--scheme--border);
+	inline-size: 1.5rem;
+}
+
+// Stars: the rating in the highlight colour, then "& up".
+.wp-block-matter-filter__stars {
+	color: var(--scheme--highlight);
+	font-size: var(--wp--preset--font-size--lg);
+}
+
+// Collapsible: a row per filter, its name and, at the far end, a caret that
+// turns up while open; rows divided by a line.
+.wp-block-matter-filter__group {
+	border-block-end: 1px solid var(--scheme--border);
+}
+
+.wp-block-matter-filter__summary {
+	@include heading-base;
+	@include heading(h6);
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--xs);
+	list-style: none;
+	padding-block: var(--wp--preset--spacing--lg);
+
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&::after {
+		@include icon("ui/caret-down", 0.875em);
+		margin-inline-start: auto;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		&::after {
+			transition: rotate var(--wp--custom--transition--duration--normal);
+		}
+	}
+}
+
+.wp-block-matter-filter__group[open] > .wp-block-matter-filter__summary::after {
+	rotate: 180deg;
+}
+
+// Matter slides the options (as an accordion item's panel). Their space
+// below is padding inside what slides, as in the accordion, so a closed
+// filter collapses fully; around them, room for the options' focus rings,
+// which the slide would clip.
+.wp-block-matter-filter__group-content {
+	margin-inline: -0.25rem;
+	padding-inline: 0.25rem;
+}
+
+.wp-block-matter-filter__group-content > :first-child {
+	padding-block-start: 0.25rem;
+}
+
+.wp-block-matter-filter__group-content > :last-child {
+	padding-block-end: var(--wp--preset--spacing--lg);
+}
+
+// The price slider: the track in the border colour, the span between the
+// thumbs and the thumbs in the highlight colour.
+.wp-block-matter-filter__slider {
+	--matter-slider-track: var(--scheme--border);
+	--matter-slider-fill: var(--scheme--highlight);
+	color: var(--scheme--highlight);
+}
+
+.wp-block-matter-filter__thumb::-webkit-slider-thumb {
+	block-size: 1.25rem;
+	box-shadow: 0 0 0 2px var(--scheme--background);
+	inline-size: 1.25rem;
+}
+
+.wp-block-matter-filter__thumb::-moz-range-thumb {
+	block-size: 1.25rem;
+	box-shadow: 0 0 0 2px var(--scheme--background);
+	inline-size: 1.25rem;
+}
+
+.wp-block-matter-filter__thumb:focus-visible {
+	@include focus-ring;
+}
+
+.wp-block-matter-filter__span {
+	@include label-text;
+}
+
+// In a bar of filters: a pill per filter, its caret pointing down, opening
+// its options in a card below it.
+.wp-block-matter-filter__trigger {
+	@include label-text;
+	border-color: var(--scheme--border-strong);
+	border-radius: 999px;
+	gap: var(--wp--preset--spacing--xs);
+	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+
+	&::after {
+		@include icon("ui/caret-down", 0.75em);
+	}
+
+	&:focus-visible {
+		@include focus-ring;
+	}
+}
+
+.wp-block-matter-filter__trigger:has(+ :popover-open) {
+	background: var(--scheme--background-fill);
+	border-color: var(--scheme--background-fill);
+	color: var(--scheme--text-fill);
+}
+
+.wp-block-matter-filter__popover:popover-open {
+	border-color: var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--md, 0.5rem);
+	box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
+	padding: var(--wp--preset--spacing--md);
+}

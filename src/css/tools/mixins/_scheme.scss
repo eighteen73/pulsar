@@ -1,0 +1,47 @@
+/// The roles every scheme sets (config/theme-json/settings.custom.json).
+$scheme-roles: (
+	background,
+	background-surface,
+	background-fill,
+	text,
+	text-subtle,
+	text-heading,
+	text-link,
+	text-fill,
+	border,
+	border-strong,
+	highlight
+);
+
+/// A colour scheme, where a `has-scheme-{slug}` class can't give it: a
+/// wrapper whose scheme changes with the screen width. It sets the
+/// `--scheme--{role}` variables from WordPress's `--wp--custom--scheme--{slug}--{role}`,
+/// as Matter's `.has-scheme-{slug}` does (both are in Matter's theme contract),
+/// and paints the background and text, as `.has-scheme` does. Content inside
+/// adapts as it does to a class.
+///
+/// With `$paint: false` it sets only the variables, for a band that paints its
+/// own background (e.g. a gradient that fills part of it with the scheme's
+/// colour) or takes a scheme's colours for its content only.
+///
+/// @param {string} $slug - A scheme in settings.custom.json.
+/// @param {boolean} $paint - Paint the background and text (default: true).
+///
+/// @example scss - Olive on phones, cream from lg
+///   .site-header__bar {
+///     @include scheme(accent);
+///
+///     @media (--lg) {
+///       @include scheme(subtle);
+///     }
+///   }
+@mixin scheme($slug, $paint: true) {
+	@each $role in $scheme-roles {
+		--scheme--#{$role}: var(--wp--custom--scheme--#{$slug}--#{$role});
+	}
+
+	@if $paint {
+		background-color: var(--scheme--background);
+		color: var(--scheme--text);
+	}
+}

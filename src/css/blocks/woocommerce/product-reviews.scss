@@ -1,0 +1,69 @@
+@use "tools" as *;
+
+/// Product reviews (templates/single-product.html, in the Reviews tab: the
+/// rating's "customer reviews" link opens it): each review's rating, author
+/// and date, and its text, then the form.
+.wp-block-woocommerce-product-review-template {
+	display: grid;
+	gap: var(--wp--preset--spacing--xl);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wp-block-woocommerce-product-review-template > li {
+	border-block-end: 1px solid var(--scheme--border);
+	padding-block-end: var(--wp--preset--spacing--xl);
+}
+
+// WooCommerce centres the stars (auto margins). In the link colour, as the
+// product's rating and the rating filter's are.
+.wp-block-woocommerce-product-review-rating .wc-block-product-review-rating__stars {
+	color: var(--scheme--text-link);
+	margin-inline: 0;
+}
+
+.product-reviews__meta {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	gap: var(--wp--preset--spacing--sm);
+	margin-block: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+}
+
+.wp-block-woocommerce-product-reviews-title {
+	font-size: var(--wp--preset--font-size--lg);
+	margin-block: 0 var(--wp--preset--spacing--xl);
+}
+
+// The form's rating, the stars in the link colour as every other rating is.
+.wp-block-woocommerce-product-review-form .stars button {
+	color: var(--scheme--text-link);
+}
+
+// "Add a review" (a span).
+.wp-block-woocommerce-product-review-form .comment-reply-title {
+	@include heading-base;
+	@include heading(h4);
+	display: block;
+	margin-block: var(--wp--preset--spacing--3-xl) var(--wp--preset--spacing--sm);
+}
+
+.wp-block-woocommerce-product-review-form .comment-form > p {
+	margin-block: 0 var(--wp--style--block-gap);
+}
+
+// "Save my name, email…": the checkbox beside its label.
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent label {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	margin: 0;
+}
+
+.wp-block-woocommerce-product-review-form .comment-form-cookies-consent input {
+	margin: 0;
+}

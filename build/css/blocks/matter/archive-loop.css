@@ -1,0 +1,1 @@
+@media(min-width: 1024px){.wp-block-matter-archive-loop.is-style-four :is(.wp-block-post-template.is-layout-grid,.wc-block-product-template){grid-template-columns:repeat(4, minmax(0, 1fr))}}

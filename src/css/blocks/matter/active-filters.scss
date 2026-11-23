@@ -1,0 +1,21 @@
+@use "tools" as *;
+
+/// Matter's active filters: a chip per filter applied, with the theme's cross
+/// removing it (as applied coupons' chips, third-party/_woocommerce.scss), and
+/// Clear all as a link.
+.wp-block-matter-active-filters {
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-matter-active-filters__chip {
+	@include button(secondary, small);
+	gap: var(--wp--preset--spacing--xs);
+
+	&::after {
+		@include icon("ui/x", 16px);
+	}
+}
+
+.wp-block-matter-active-filters__clear {
+	@include button(link, small);
+}

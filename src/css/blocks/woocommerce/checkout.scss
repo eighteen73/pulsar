@@ -1,0 +1,542 @@
+@use "tools" as *;
+@use "third-party/woocommerce-subscriptions-totals";
+
+/// The checkout (templates/page-checkout.html): the steps, then the order
+/// summary beside them from lg. This loads after WooCommerce's checkout.css
+/// and packages-style.css, so matching a rule's specificity is enough to
+/// override it.
+
+// The page's title and content. (Page-level: the checkout template's, here
+// because this only loads with the checkout. Two classes: the global styles'
+// `:root :where(.is-layout-constrained) > *` sets the margin.)
+:where(.woocommerce-checkout) .site-main .wp-block-post-title {
+	margin-top: unset;
+	max-width: var(--wp--style--global--wide-size);
+}
+
+:where(.woocommerce-checkout) .site-main .entry-content {
+	margin-top: var(--wp--preset--spacing--4-xl);
+}
+
+.wp-block-woocommerce-checkout {
+	padding: unset;
+}
+
+// The layout: a column, the summary beside the steps from lg.
+.wp-block-woocommerce-checkout .wc-block-components-sidebar-layout {
+	gap: var(--wp--preset--spacing--3-xl);
+	margin: unset;
+
+	@media (--lg) {
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+}
+
+.wp-block-woocommerce-checkout .wc-block-checkout__main {
+	width: 100%;
+
+	@media (--lg) {
+		border-right: 1px solid var(--scheme--border);
+		padding-right: var(--wp--preset--spacing--3-xl);
+		width: 65%;
+	}
+}
+
+.wp-block-woocommerce-checkout .wc-block-checkout__sidebar {
+	margin: unset;
+	padding-left: unset;
+	width: 100%;
+
+	@media (--lg) {
+		width: 35%;
+	}
+}
+
+// WooCommerce pads the sidebar's totals, coupon and panels (a schedule's
+// details): `.wc-block-components-sidebar .slot-wrapper .wc-block-components-panel`, 0,3,0.
+.wp-block-woocommerce-checkout .wc-block-checkout__sidebar :is(.wc-block-components-totals-coupon, .wc-block-components-totals-item, .wc-block-components-panel) {
+	padding-inline: unset;
+}
+
+// Totals: a line between each.
+.wp-block-woocommerce-checkout .wc-block-components-totals-wrapper {
+	border-top: 1px solid var(--scheme--border);
+	padding-block: var(--wp--preset--spacing--xl);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-wrapper:empty,
+.wc-block-components-totals-wrapper:has(> :only-child:empty) {
+	border: unset;
+	padding: unset;
+}
+
+// The totals' wrappers draw the lines, so the group doesn't (it doubled the
+// line under the coupon form).
+.wp-block-woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-totals-block {
+	border-top: 0;
+	padding-bottom: unset;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-item__label {
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-item__value {
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-item__value :is(strong, .wc-block-components-formatted-money-amount) {
+	font-weight: inherit;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-footer-item :is(.wc-block-components-totals-item__label, .wc-block-components-totals-item__value) {
+	font-size: var(--wp--preset--font-size--xl);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+// The order summary.
+.wp-block-woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-block {
+	border: unset;
+	font-size: var(--wp--preset--font-size--md);
+	padding: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .checkout-order-summary-block-fill {
+	border: unset;
+	border-radius: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-checkout-order-summary__title {
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-checkout-order-summary__title .wc-block-components-checkout-order-summary__title-text {
+	@include heading-base;
+	@include heading(h4);
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary {
+	padding: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item {
+	font-size: var(--wp--preset--font-size--md);
+	padding-block: var(--wp--preset--spacing--lg);
+
+	&:last-child {
+		padding-bottom: unset;
+	}
+}
+
+.wc-block-components-order-summary-item + .wc-block-components-order-summary-item {
+	border-top: 1px solid var(--scheme--border);
+}
+
+// The item's image: the mini cart's size, and not shrinking (a long name, or
+// a bundle's contents, squeezed it).
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__image {
+	flex-shrink: 0;
+	padding-bottom: unset;
+	width: 64px;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__image img {
+	border-radius: var(--wp--preset--border-radius--xs);
+	max-width: 100%;
+	width: 100%;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__description {
+	padding: 0 var(--wp--preset--spacing--sm) 0 var(--wp--preset--spacing--xl);
+}
+
+// The item's quantity, a badge on its image.
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__quantity {
+	align-items: center;
+	aspect-ratio: 1;
+	background-color: var(--scheme--background-fill);
+	border-radius: 50%;
+	color: var(--scheme--text-fill);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	height: 24px;
+	width: 24px;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-name {
+	color: var(--scheme--text);
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	margin: unset;
+	text-decoration: none;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-price {
+	margin-top: var(--wp--preset--spacing--xs);
+	padding-top: unset;
+}
+
+// The regular price (struck through) from xs.
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-price .wc-block-components-product-price__regular {
+	display: none;
+
+	@media (--xs) {
+		display: inline;
+		font-size: var(--wp--preset--font-size--xs);
+		margin-right: var(--wp--preset--spacing--xs);
+	}
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-price .wc-block-formatted-money-amount {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__total-price {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+	line-height: var(--wp--custom--typography--line-height--tight);
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item__total-price .wc-block-formatted-money-amount {
+	font-weight: inherit;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-price__value {
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block :is(.wc-block-components-product-metadata__description, .wc-block-components-sale-badge) {
+	display: none;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-order-summary-item .wc-block-components-product-metadata {
+	font-size: var(--wp--preset--font-size--sm);
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-details {
+	font-size: var(--wp--preset--font-size--md);
+	margin-top: var(--wp--preset--spacing--md);
+}
+
+.wp-block-woocommerce-checkout-order-summary-block .wc-block-components-product-details__name {
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+// Steps.
+.wp-block-woocommerce-checkout .wc-block-components-checkout-step {
+	margin-bottom: var(--wp--preset--spacing--3-xl);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-checkout-step__heading-container {
+	margin-bottom: var(--wp--preset--spacing--xl);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-title {
+	@include heading-base;
+	@include heading(h3);
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-checkout-step__description {
+	color: var(--scheme--text-subtle);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-address-card {
+	border: 1px solid var(--scheme--border);
+	border-radius: var(--wp--preset--border-radius--md);
+	font-size: inherit;
+	padding: var(--wp--preset--spacing--xl);
+}
+
+.wc-block-components-address-card .wc-block-components-address-card__address-section:first-child {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+// Text fields: the theme's, with WooCommerce's floating label.
+.wp-block-woocommerce-checkout .wc-block-components-text-input {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--sm);
+	margin-top: var(--wp--style--block-gap);
+}
+
+/* stylelint-disable selector-max-specificity -- WooCommerce's text fields: `.wc-block-components-form .wc-block-components-text-input input[type="text"]` (0,3,1), focused (0,4,1), and with a value (`.is-active`, 0,4,1, and 0,5,1 focused). These match it. */
+
+.wc-block-components-form .wc-block-components-text-input input:is([type="email"], [type="number"], [type="password"], [type="tel"], [type="text"], [type="url"]) {
+	@include field-input;
+	height: 60px;
+
+	// WooCommerce's focus has its own background, text colour and a 1.5px
+	// border.
+	&:focus {
+		background-color: var(--scheme--background-surface);
+		border-width: 1px;
+		color: var(--scheme--text);
+	}
+}
+
+// With a value, or autofilled, the text sits under the label.
+.wc-block-components-form .wc-block-components-text-input.is-active input:is([type="email"], [type="number"], [type="password"], [type="tel"], [type="text"], [type="url"]),
+.wc-block-components-form .wc-block-components-text-input input:-webkit-autofill {
+	padding: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--md);
+
+	&:focus {
+		padding-left: var(--wp--preset--spacing--lg);
+		padding-top: var(--wp--preset--spacing--xl);
+	}
+}
+
+// With an error, the border (focused too) in the error colour.
+.wc-block-components-form .wc-block-components-text-input.has-error input:is([type="email"], [type="number"], [type="password"], [type="tel"], [type="text"], [type="url"]) {
+	border-color: var(--wp--preset--color--status-error);
+
+	&:focus {
+		border-color: var(--wp--preset--color--status-error);
+		box-shadow: var(--wp--preset--color--status-error) 0 0 0 1px;
+	}
+}
+
+/* stylelint-enable selector-max-specificity */
+
+.wp-block-woocommerce-checkout .wc-block-components-text-input label {
+	@include form-label;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	left: var(--wp--preset--spacing--lg);
+}
+
+// Empty, the label sits in the middle of the field.
+.wc-block-components-text-input:not(.is-active) label {
+	top: 50%;
+}
+
+// A required field's asterisk.
+.wc-block-components-text-input [required] + label {
+	overflow: visible;
+}
+
+.wc-block-components-text-input [required] + label::after {
+	color: var(--wp--preset--color--status-error);
+	content: "*";
+	font-size: var(--wp--preset--font-size--sm);
+	left: 100%;
+	margin-left: var(--wp--preset--spacing--xs);
+	position: absolute;
+	top: 0;
+}
+
+// Selects (country, state): like the text fields, the label over the value.
+// (WooCommerce's `.wc-blocks-components-select .wc-blocks-components-select__select`,
+// 0,2,0, and focused, 0,3,0.)
+.wc-blocks-components-select .wc-blocks-components-select__container {
+	background-color: unset;
+	border-radius: unset;
+	height: unset;
+}
+
+.wc-blocks-components-select .wc-blocks-components-select__select {
+	@include field-select;
+	height: 60px;
+	padding-top: var(--wp--preset--spacing--xl);
+
+	&:focus {
+		border-width: 1px;
+		padding-bottom: var(--wp--preset--spacing--md);
+		padding-left: var(--wp--preset--spacing--lg);
+		padding-top: var(--wp--preset--spacing--xl);
+	}
+}
+
+.wc-blocks-components-select .wc-blocks-components-select__label {
+	@include form-label;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	left: var(--wp--preset--spacing--lg);
+	margin: unset;
+	transform: scale(0.82);
+	transform-origin: top left;
+}
+
+.wc-blocks-components-select .wc-blocks-components-select__expand {
+	display: none;
+}
+
+// The coupon form: the field and its button joined. (After the text fields,
+// which it overrides.)
+.wp-block-woocommerce-checkout .wc-block-components-totals-coupon__form {
+	gap: 0;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-coupon__form .wc-block-components-totals-coupon__input {
+	margin: unset;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-coupon__input label {
+	@include wc-coupon-label;
+}
+
+// The order summary at the top on small screens is inside the form, so this
+// matches WooCommerce's (and the text fields' above) with a value: 0,4,1, and
+// 0,5,1 focused.
+// stylelint-disable-next-line selector-max-specificity -- See above.
+.wc-block-components-totals-coupon .wc-block-components-text-input.wc-block-components-totals-coupon__input input[type="text"] {
+	@include wc-coupon-input;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-totals-coupon__button {
+	@include wc-coupon-button;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-textarea {
+	@include field-textarea;
+	margin-top: var(--wp--style--block-gap);
+}
+
+// Checkboxes: the theme's, which draws its own tick (WooCommerce's is an SVG,
+// `.wc-block-components-checkbox__mark`). (WooCommerce's
+// `.wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"]`,
+// 0,3,0.)
+.wc-block-components-checkbox .wc-block-components-checkbox__input[type="checkbox"] {
+	@include field-checkbox;
+
+	&::after {
+		content: none;
+	}
+}
+
+.wc-block-components-checkbox .wc-block-components-checkbox__mark {
+	display: none;
+}
+
+// stylelint-disable-next-line selector-max-specificity -- The checkbox above, 0,3,0, with an error (a required checkbox, e.g. the terms).
+.wc-block-components-checkbox.has-error .wc-block-components-checkbox__input[type="checkbox"] {
+	border-color: var(--wp--preset--color--status-error);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-checkbox label {
+	display: flex;
+	gap: var(--wp--preset--spacing--sm);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-checkbox__label {
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+// Radios: the theme's. (WooCommerce's `.wc-block-components-radio-control
+// .wc-block-components-radio-control__input`, 0,2,0; it draws the checked dot
+// itself, `…:checked:before`, 0,3,1, so that's matched to draw the theme's.)
+.wc-block-components-radio-control .wc-block-components-radio-control__input {
+	@include field-radio;
+
+	&:checked::before {
+		background-color: var(--scheme--text-fill);
+		height: 8px;
+		position: static;
+		transform: none;
+		width: 8px;
+	}
+}
+
+.wc-block-components-radio-control::after {
+	content: none;
+}
+
+// Options (shipping, payment): option cards, as All Products for
+// Subscriptions' are on a product. A payment method is the whole option (its
+// label, and its description once chosen), so its label isn't a card itself.
+.wp-block-woocommerce-checkout :is(.wc-block-components-radio-control__option, .wc-block-components-radio-control-accordion-option) {
+	@include option-card;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-option .wc-block-components-radio-control__option {
+	background: none;
+	box-shadow: none;
+}
+
+.wc-block-components-radio-control__option + .wc-block-components-radio-control__option,
+.wc-block-components-radio-control-accordion-option + .wc-block-components-radio-control-accordion-option {
+	margin-top: var(--wp--preset--spacing--md);
+}
+
+// The chosen option. (As specific as a card's `:hover`, 0,3,0, which it
+// follows; WooCommerce rounds it less, 4px, so the radius is restated.)
+.wp-block-woocommerce-checkout .wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+.wp-block-woocommerce-checkout .wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+	@include option-card-checked;
+	border-radius: var(--wp--preset--border-radius--md);
+}
+
+.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control__option::after,
+.wc-block-components-radio-control--highlight-checked div.wc-block-components-radio-control-accordion-option::after {
+	content: none;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-radio-control__option-checked {
+	box-shadow: unset;
+}
+
+.wc-block-checkout__shipping-option .wc-block-components-radio-control__option {
+	padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--4-xl);
+}
+
+.wc-block-checkout__payment-method .wc-block-components-radio-control__option {
+	padding: var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--lg) var(--wp--preset--spacing--4-xl);
+}
+
+.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__input {
+	left: var(--wp--preset--spacing--lg);
+}
+
+.wc-block-checkout__payment-method .wc-block-components-radio-control__option .wc-block-components-radio-control__input {
+	left: var(--wp--preset--spacing--xl);
+}
+
+.wp-block-woocommerce-checkout :is(.wc-block-components-radio-control__description, .wc-block-components-radio-control__label, .wc-block-components-radio-control__secondary-description, .wc-block-components-radio-control__secondary-label) {
+	font-size: var(--wp--preset--font-size--md);
+}
+
+.wc-block-components-shipping-rates-control__package .wc-block-components-radio-control__label {
+	font-size: var(--wp--preset--font-size--md);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-content {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--md);
+	padding: 0 var(--wp--preset--spacing--xl) var(--wp--preset--spacing--xl);
+}
+
+// Stripe's payment form, in its own iframe (styled by Stripe, so it won't
+// quite match): its edges in line with the option's text (its iframe keeps
+// 4px around the form for focus rings), and spaced from Stripe's test mode
+// instructions above it.
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-content .wcstripe-payment-element {
+	margin-inline: -4px;
+}
+
+.wp-block-woocommerce-checkout .wc-block-components-radio-control-accordion-content * + .wcstripe-payment-element {
+	margin-block-start: var(--wp--preset--spacing--md);
+}
+
+// Terms, then Place order (full width) above Return to cart.
+.wp-block-woocommerce-checkout .wc-block-checkout__terms {
+	margin-bottom: var(--wp--preset--spacing--3-xl);
+}
+
+.wp-block-woocommerce-checkout .wc-block-checkout__terms--with-separator {
+	border-top: 1px solid var(--scheme--border);
+	padding-top: var(--wp--preset--spacing--3-xl);
+}
+
+.wp-block-woocommerce-checkout-actions-block .wc-block-checkout__actions_row {
+	flex-direction: column-reverse;
+	gap: var(--wp--preset--spacing--md);
+}
+
+.wp-block-woocommerce-checkout-actions-block .wc-block-components-checkout-place-order-button {
+	@include button(primary);
+	width: 100%;
+}

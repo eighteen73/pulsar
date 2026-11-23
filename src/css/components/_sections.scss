@@ -1,0 +1,53 @@
+@use "tools" as *;
+
+/// Sections: developer-built layout blocks (Matter section framework).
+/// Full-width sections (`"align": "full"`) are bands painted by their colour
+/// scheme, with content held to the wide width. Nested sections (e.g. cards)
+/// aren't bands. Section-specific layout lives in blocks/pulsar/.
+// An archive's list (Matter archive content) is a band like a section,
+// between the sections editors add above and below it.
+// Zero specificity, so a section's or variant's own padding (one class, in its
+// block stylesheet, which loads earlier) wins.
+:where(.is-section.alignfull, .wp-block-matter-archive-loop) {
+	padding-block: var(--wp--custom--spacing--section);
+	padding-inline: var(--wp--style--root--padding-left) var(--wp--style--root--padding-right);
+}
+
+:where(.is-section.alignfull, .wp-block-matter-archive-loop) > * {
+	margin-inline: auto;
+	max-width: var(--wp--style--global--wide-size);
+}
+
+$section-parents: ".wp-block-post-content, .wp-block-matter-archive-content";
+$bands: ".is-section, .wp-block-matter-archive-loop";
+
+// Stacked sections touch; each provides its own vertical padding.
+// Two classes, to beat core's flow layout margins (`:root :where(...) > *`), so
+// a section that changes its own margin (pulling itself into the band above,
+// say) needs `.is-section` in its selector too.
+:where(#{$section-parents}) > :is(#{$bands}) + :is(#{$bands}) {
+	margin-block-start: 0;
+}
+
+// Two adjacent bands in the same scheme read as one band, so collapse the gap.
+// Zero specificity, like the padding it overrides.
+:where(:where(#{$section-parents}) > :is(#{$bands}):not(.has-scheme) + :is(#{$bands}):not(.has-scheme)) {
+	padding-block-start: 0;
+}
+
+// Content flow inside slots: the block gap between blocks, or a section's own
+// gap, set as `--slot-gap` on its slot's class (e.g. Cards' items, 0). Each
+// slot starts from the block gap, so a section's gap stops at the slots
+// nested in it. Set the variable rather than a margin: a section's own
+// `> * + *` rule would tie with this one.
+:where(.wp-block-matter-slot) {
+	--slot-gap: var(--wp--style--block-gap);
+}
+
+.wp-block-matter-slot > * {
+	margin-block: 0;
+}
+
+.wp-block-matter-slot > * + * {
+	margin-block-start: var(--slot-gap);
+}

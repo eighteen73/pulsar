@@ -37,6 +37,7 @@ p {
 	text-wrap: pretty;
 }
 
+// Heavier than the text around it, whatever weight that is.
 strong {
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: bolder;
 }

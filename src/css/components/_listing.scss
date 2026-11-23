@@ -1,0 +1,43 @@
+@use "../tools" as *;
+
+/// A filterable listing (templates/archive-product.html, index.html…): the
+/// filters as a sidebar beside the results from `lg`, where Matter's filters
+/// are inline; below it one column, the filters a drawer opened from the bar
+/// above the results (the Filters button and the results count).
+.site-listing {
+	display: grid;
+	gap: var(--wp--preset--spacing--2-xl) var(--wp--preset--spacing--4-xl);
+
+	@media (--lg) {
+		align-items: start;
+		grid-template-columns: minmax(224px, 288px) minmax(0, 1fr);
+	}
+}
+
+// Filters as a bar (the filters' Bar variant): above the results, not beside.
+.site-listing.is-bar {
+	@media (--lg) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+// The groups' flow layout spaces each child after the first; in the grid the
+// gap does.
+.site-listing > *,
+.site-listing__results > * {
+	margin-block: 0;
+}
+
+.site-listing__results {
+	display: grid;
+	gap: var(--wp--preset--spacing--xl);
+	min-width: 0;
+}
+
+.site-listing__bar {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--md);
+	justify-content: space-between;
+}

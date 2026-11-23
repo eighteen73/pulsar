@@ -1,0 +1,25 @@
+@use "tools" as *;
+
+.wp-block-pulsar-media-text__inner {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--custom--spacing--gutter);
+
+	@media (--md) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.wp-block-pulsar-media-text__media img {
+	aspect-ratio: var(--wp--preset--aspect-ratio--square);
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+// Variant: the image after the text, from md up.
+.wp-block-pulsar-media-text.is-style-media-end .wp-block-pulsar-media-text__media {
+	@media (--md) {
+		order: 1;
+	}
+}

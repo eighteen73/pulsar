@@ -4,16 +4,51 @@
 	"settings": {
 		"blocks": {
 			"core/button": {
-				"settings": {
-					"color": {
-						"background": false,
-						"text": false
-					}
+				"typography": {
+					"fontSizes": []
+				},
+				"shadow": {
+					"presets": []
 				}
 			},
-			"core/column": {
-				"spacing": {
-					"units": ["%", "px", "vw"]
+			"core/buttons": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/heading": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/image": {
+				"shadow": {
+					"presets": []
+				}
+			},
+			"core/list": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/list-item": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/paragraph": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/quote": {
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/table": {
+				"typography": {
+					"fontSizes": []
 				}
 			}
 		}

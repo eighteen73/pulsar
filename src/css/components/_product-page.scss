@@ -1,0 +1,18 @@
+@use "tools" as *;
+
+/// The single product page (templates/single-product.html): from md, where the
+/// columns sit side by side, the gallery stays in view while the summary and
+/// its details (an accordion, which can be long) scroll beside it.
+.product-media {
+	@media (--md) {
+		inset-block-start: var(--wp--preset--spacing--xl);
+		position: sticky;
+	}
+}
+
+// Related products and "Shop by category": carousels of cards (Matter's
+// carousel, "cards" style; a grid when they all fit), under their headings.
+.product-related .wp-block-heading,
+.product-categories .wp-block-heading {
+	margin-block-end: var(--wp--preset--spacing--2-xl);
+}

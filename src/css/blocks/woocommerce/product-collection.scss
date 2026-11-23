@@ -1,0 +1,20 @@
+@use "tools" as *;
+
+/// Product collections (related products, the shop's carousels).
+.wp-block-woocommerce-product-collection h2.wp-block-heading {
+	@include heading("h2");
+}
+
+.wp-block-woocommerce-product-collection .is-product-collection-layout-carousel {
+	padding: 0;
+}
+
+// Four across in a carousel from lg.
+.is-product-collection-layout-carousel .wc-block-product {
+	@media (--lg) {
+		flex-basis: 25%;
+		flex-grow: 0;
+		flex-shrink: 1;
+		min-width: unset;
+	}
+}

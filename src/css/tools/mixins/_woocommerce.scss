@@ -1,115 +1,229 @@
+@use "sass:map";
+@use "sass:string";
 @use "utility" as *;
 @use "forms" as *;
 
+/// A product's sale badge: the scheme's fill, with its text colour (a pair
+/// with guaranteed contrast).
 @mixin wc-product-sale-badge() {
-	background-color: var(--wp--preset--color--accent-secondary);
+	background-color: var(--scheme--background-fill);
 	border: unset;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--preset--color--base);
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: var(--scheme--text-fill);
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--xs);
-	font-weight: var(--wp--custom--typography--font-weight--secondary);
+	font-weight: var(--wp--custom--typography--font-weight--label);
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
 }
 
-@mixin wc-sale-badge() {
-	background-color: var(--wp--custom--color--primitive--success--100);
+/// A cart item's savings ("Save £10"), in the success colours.
+@mixin wc-savings-badge() {
+	background-color: var(--wp--preset--color--status-success-subtle);
 	border: none;
-	border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-	color: var(--wp--custom--color--primitive--success--900);
+	border-radius: var(--wp--preset--border-radius--xs);
+	color: var(--wp--preset--color--status-success);
 	font-size: var(--wp--preset--font-size--sm);
-	font-weight: var(--wp--custom--typography--font-weight--primary);
+	font-weight: var(--wp--custom--typography--font-weight--body);
 	line-height: var(--wp--custom--typography--line-height--none);
 	padding: var(--wp--preset--spacing--sm);
 	text-transform: uppercase;
 }
 
+/// A quantity stepper (`.wc-block-components-quantity-selector`, or a classic
+/// form's `.quantity`): the field between its buttons, without WooCommerce's
+/// box around them.
 @mixin wc-quantity-selector() {
 	border: unset;
 	border-radius: unset;
 	gap: var(--wp--preset--spacing--xs);
+}
 
-	.qty,
-	.wc-block-components-quantity-selector__input {
-		@include field-input;
-		-webkit-appearance: textfield;
-		border: 1px solid var(--wp--custom--color--border-input);
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-		font-size: var(--wp--preset--font-size--sm);
-		max-width: unset;
-		padding: unset;
-		width: 70px;
+/// A compact stepper (the cart's, the mini cart's): its field and square
+/// buttons a size (`$size`), the field `$input-width` wide. Set on the
+/// stepper; the field and button mixins read it (a product's stepper, without
+/// it, is as tall as its add to cart button).
+@mixin wc-quantity-selector-compact($size: 32px, $input-width: 48px) {
+	--_quantity-selector-size: #{$size};
+	--_quantity-selector-input-width: #{$input-width};
+}
 
-		&:focus {
-			box-shadow: none;
-		}
-	}
+/// A quantity stepper's field (`.wc-block-components-quantity-selector__input`,
+/// a classic form's `.qty`).
+@mixin wc-quantity-selector-input() {
+	@include field-input;
+	-webkit-appearance: textfield;
+	border: 1px solid var(--scheme--border-strong);
+	border-radius: var(--wp--preset--border-radius--xs);
+	font-size: var(--wp--preset--font-size--sm);
+	height: var(--_quantity-selector-size, auto);
+	max-width: unset;
+	padding: unset;
+	width: var(--_quantity-selector-input-width, 70px);
 
-	.wc-block-components-quantity-selector__button {
-		border: 0;
-		border-radius: calc(var(--wp--custom--global--is-rounded) * var(--wp--preset--border-radius--xs));
-		font-size: var(--wp--preset--font-size--sm);
-		width: 42px;
-
-		&:where(:not(:disabled)):hover {
-			background-color: var(--wp--preset--color--tint-primary);
-		}
-
-		&:focus {
-			box-shadow: none;
-		}
-
-		&:focus-visible {
-			@include focus-block;
-		}
+	&:focus {
+		box-shadow: none;
 	}
 }
 
+/// A quantity that can't be changed (a bundled item's, fixed by its bundle:
+/// the field read-only, without buttons): "× 1", as text. This on the stepper
+/// (`:has(> input[readonly])`), the next on its field.
+@mixin wc-quantity-selector-readonly() {
+	align-items: baseline;
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	min-width: 0;
+	width: auto;
+
+	// The "×" escaped, as ASCII: a character outside it makes Sass start the
+	// compressed stylesheet with a byte order mark, which breaks the first
+	// rule when WordPress inlines the stylesheet.
+	&::before {
+		content: string.unquote('"\\00d7"');
+	}
+}
+
+@mixin wc-quantity-selector-readonly-input() {
+	background: none;
+	border: 0;
+	color: inherit;
+	height: auto;
+	min-height: 0;
+	padding: 0;
+	pointer-events: none;
+	text-align: start;
+	width: 4ch;
+}
+
+/// A quantity stepper's minus and plus buttons
+/// (`.wc-block-components-quantity-selector__button`): square in a compact
+/// stepper.
+@mixin wc-quantity-selector-button() {
+	border: 0;
+	border-radius: var(--wp--preset--border-radius--xs);
+	font-size: var(--wp--preset--font-size--sm);
+	min-width: 0;
+	width: var(--_quantity-selector-size, 42px);
+
+	&:where(:not(:disabled)):hover {
+		background-color: var(--scheme--background-surface);
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+
+	&:focus-visible {
+		@include focus-block;
+	}
+}
+
+/// A cart item's remove link: the trash icon, in the error colour, after it.
+/// The caller hides WooCommerce's own icon (`.wc-block-cart-item__remove-link svg`).
 @mixin wc-trash-icon() {
 	&::after {
-		@include icon("icons/trash", 24px);
-		color: var(--wp--custom--color--error);
-	}
-
-	svg {
-		display: none;
+		@include icon("ui/trash", 24px);
+		color: var(--wp--preset--color--status-error);
 	}
 }
 
+/// The cart icon, after the element. The caller hides WooCommerce's own icon
+/// (its `svg`).
 @mixin wc-cart-icon() {
 	&::after {
 		@include icon("icons/cart", 24px);
 	}
+}
 
-	svg {
-		display: none;
+/// The coupon form's label (`.wc-block-components-totals-coupon__input label`),
+/// over the field like the checkout's.
+@mixin wc-coupon-label() {
+	@include form-label;
+	font-weight: var(--wp--custom--typography--font-weight--body);
+	left: var(--wp--preset--spacing--lg);
+}
+
+/// The coupon form's field (`.wc-block-components-totals-coupon__input input`),
+/// joined to the button on its right.
+@mixin wc-coupon-input() {
+	@include field-input;
+	border-bottom-right-radius: unset;
+	border-top-right-radius: unset;
+	height: 60px;
+
+	// WooCommerce moves the text under its label when focused.
+	&:focus {
+		padding-block: var(--wp--preset--spacing--md);
+		padding-inline: var(--wp--preset--spacing--lg);
 	}
 }
 
-@mixin wc-coupon-form() {
-	gap: 0;
+/// The coupon form's button (`.wc-block-components-totals-coupon__button`),
+/// joined to the field on its left.
+@mixin wc-coupon-button() {
+	border-bottom-left-radius: unset;
+	border-top-left-radius: unset;
+	text-transform: uppercase;
+}
 
-	.wc-block-components-totals-coupon__input {
-		margin: unset;
+$_wc-notice-icons: (
+	info: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 3.2c-4.8 0-8.8 3.9-8.8 8.8 0 4.8 3.9 8.8 8.8 8.8 4.8 0 8.8-3.9 8.8-8.8 0-4.8-4-8.8-8.8-8.8zm0 16c-4 0-7.2-3.3-7.2-7.2C4.8 8 8 4.8 12 4.8s7.2 3.3 7.2 7.2c0 4-3.2 7.2-7.2 7.2zM11 17h2v-6h-2v6zm0-8h2V7h-2v2z'/></svg>",
+	success: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z'/></svg>",
+);
 
-		label {
-			@include label;
-			font-weight: var(--wp--custom--typography--font-weight--primary);
-			left: var(--wp--preset--spacing--lg);
+/// A notice, drawn as WooCommerce's banners are (third-party/_woocommerce.scss):
+/// the status's subtle colour, bordered in it, with the banner's icon (white
+/// on the status colour) before the text. Block layout, so inline text and
+/// links flow; the icon sits in the padding.
+/// @param {String} $status - info, success or error.
+@mixin wc-notice($status: info) {
+	background-color: var(--wp--preset--color--status-info-subtle);
+	border: 1px solid var(--wp--preset--color--status-info);
+	border-radius: var(--wp--preset--border-radius--sm);
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--md);
+	line-height: var(--wp--custom--typography--line-height--normal);
+	margin: var(--wp--preset--spacing--md) 0;
+	padding: 16px;
+	padding-inline-start: calc(16px + 24px + var(--wp--preset--spacing--md));
+	position: relative;
+
+	$icon: map.get($_wc-notice-icons, info);
+
+	&::before {
+		background: var(--wp--preset--color--status-info) url($icon) center / 20px no-repeat;
+		border-radius: 50%;
+		content: "";
+		display: block;
+		height: 24px;
+		inset-block-start: 16px;
+		inset-inline-start: 16px;
+		position: absolute;
+		width: 24px;
+	}
+
+	@if $status != info {
+		@include wc-notice-status($status);
+	}
+}
+
+/// A notice's status other than info (after `wc-notice`): its colours, and
+/// its icon (success's tick; error's the info icon turned over, as the
+/// banner's).
+/// @param {String} $status - success or error.
+@mixin wc-notice-status($status) {
+	background-color: var(--wp--preset--color--status-#{$status}-subtle);
+	border-color: var(--wp--preset--color--status-#{$status});
+
+	&::before {
+		background-color: var(--wp--preset--color--status-#{$status});
+
+		@if $status == success {
+			$icon: map.get($_wc-notice-icons, success);
+			background-image: url($icon);
+		} @else if $status == error {
+			transform: rotate(180deg);
 		}
-	}
-
-	#wc-block-components-totals-coupon__input-coupon {
-		@include field-input;
-		border-bottom-right-radius: unset;
-		border-top-right-radius: unset;
-		height: 60px;
-	}
-
-	.wc-block-components-totals-coupon__button {
-		border-bottom-left-radius: unset;
-		border-top-left-radius: unset;
-		text-transform: uppercase;
 	}
 }

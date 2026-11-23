@@ -1,0 +1,88 @@
+@use "tools" as *;
+
+/// WooCommerce Subscriptions' recurring totals, in the cart's and the
+/// checkout's totals (blocks/woocommerce/cart.scss and checkout.scss use this):
+/// a block per schedule (its total, when it starts, and "Details"), opening to
+/// its subtotal, shipping and total in a box.
+///
+/// Subscriptions pads each schedule and draws faint lines around it
+/// (`.wcs-recurring-totals-panel`, `::after`), and indents the details in the
+/// checkout (`.wc-block-components-main .wcs-recurring-totals-panel__details`,
+/// 0,2,0). The cart's and checkout's own rules for totals (0,2,0) follow this
+/// in their stylesheets, so these are a little more specific.
+
+// The schedules' row of the totals, padded as the checkout pads each (the
+// cart's is WooCommerce's slot, unpadded).
+.wc-block-components-totals-wrapper:has(.wcs-recurring-totals-panel) {
+	padding-block: var(--wp--preset--spacing--xl);
+}
+
+// Each schedule, a line between them.
+.wc-block-components-totals-wrapper .wcs-recurring-totals-panel {
+	padding: 0;
+}
+
+.wc-block-components-totals-wrapper .wcs-recurring-totals-panel::after {
+	content: none;
+}
+
+.wc-block-components-totals-wrapper .wcs-recurring-totals-panel + .wcs-recurring-totals-panel {
+	border-block-start: 1px solid var(--scheme--border);
+	margin-block-start: var(--wp--preset--spacing--xl);
+	padding-block-start: var(--wp--preset--spacing--xl);
+}
+
+// Its total, then when it starts.
+.wcs-recurring-totals-panel .wcs-recurring-totals-panel__title span.wc-block-components-totals-item__label {
+	font-weight: var(--wp--custom--typography--font-weight--label);
+}
+
+.wcs-recurring-totals-panel .wcs-recurring-totals-panel__title .wc-block-components-totals-item__description {
+	color: var(--scheme--text-subtle);
+	font-size: var(--wp--preset--font-size--sm);
+	font-weight: var(--wp--custom--typography--font-weight--body);
+}
+
+// "Details": small, under it, not indented.
+.wcs-recurring-totals-panel div.wcs-recurring-totals-panel__details {
+	margin-block-start: var(--wp--preset--spacing--sm);
+	padding: 0;
+}
+
+.wcs-recurring-totals-panel .wcs-recurring-totals-panel__details .wc-block-components-panel__button {
+	color: var(--scheme--text-subtle);
+	margin: 0;
+	padding-block: 0;
+}
+
+// Opened: the schedule's subtotal, shipping and total in a box, the total
+// under a line.
+.wcs-recurring-totals-panel .wcs-recurring-totals-panel__details .wc-block-components-panel__content {
+	background-color: var(--scheme--background-surface);
+	border-radius: var(--wp--preset--border-radius--sm);
+	margin-block-start: var(--wp--preset--spacing--sm);
+	padding: var(--wp--preset--spacing--md) var(--wp--preset--spacing--lg);
+}
+
+.wcs-recurring-totals-panel .wc-block-components-panel__content .wc-block-components-totals-wrapper {
+	border: 0;
+	padding-block: var(--wp--preset--spacing--xs);
+}
+
+.wcs-recurring-totals-panel :where(.wc-block-components-panel__content) .wc-block-components-totals-wrapper:empty {
+	display: none;
+}
+
+.wcs-recurring-totals-panel :where(.wc-block-components-panel__content) .wc-block-components-totals-wrapper:has(.wcs-recurring-totals-panel__details-total) {
+	border-block-start: 1px solid var(--scheme--border);
+	margin-block-start: var(--wp--preset--spacing--xs);
+	padding-block-start: var(--wp--preset--spacing--sm);
+}
+
+.wcs-recurring-totals-panel .wc-block-components-panel__content :is(.wc-block-components-totals-item__label, .wc-block-components-totals-item__value, .wc-block-components-totals-item__description) {
+	font-size: var(--wp--preset--font-size--sm);
+}
+
+.wcs-recurring-totals-panel .wc-block-components-panel__content .wc-block-components-totals-item__description {
+	color: var(--scheme--text-subtle);
+}

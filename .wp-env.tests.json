@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"core": "WordPress/WordPress#7.1",
+	"phpVersion": "8.3",
+	"port": 8891,
+	"testsEnvironment": false,
+	"plugins": [
+		"https://downloads.wordpress.org/plugin/woocommerce.11.3.0.zip"
+	],
+	"themes": [
+		"."
+	],
+	"mappings": {
+		"wp-content/mu-plugins/matter": "../../mu-plugins/matter",
+		"wp-content/mu-plugins/matter-loader.php": "./tests/wp-env/matter-loader.php"
+	},
+	"lifecycleScripts": {
+		"afterStart": "wp-env --config=.wp-env.tests.json run cli wp theme activate pulsar && wp-env --config=.wp-env.tests.json run cli wp rewrite structure /%postname%/ && wp-env --config=.wp-env.tests.json run cli wp option update woocommerce_coming_soon no"
+	},
+	"config": {
+		"WP_DEVELOPMENT_MODE": "theme",
+		"WP_DEBUG": false,
+		"SCRIPT_DEBUG": false
+	}
+}
