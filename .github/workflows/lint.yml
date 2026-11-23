@@ -16,8 +16,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# A pull request from this repository's next branch skips its jobs: the push to
+# next has already run them on the same commit. A skipped required check counts
+# as passed.
 jobs:
   lint:
+    if: github.event_name != 'pull_request' || github.head_ref != 'next' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -30,6 +34,7 @@ jobs:
 
   browser-tests:
     name: Browser tests (wp-env)
+    if: github.event_name != 'pull_request' || github.head_ref != 'next' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     env:
       # Pulsar's next (pushes and pull requests to it) is developed against
