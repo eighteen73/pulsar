@@ -84,7 +84,7 @@
 // Stars: the rating in the highlight colour, then "& up".
 .wp-block-matter-filter__stars {
 	color: var(--scheme--highlight);
-	font-size: 1.125rem;
+	font-size: var(--wp--preset--font-size--lg);
 }
 
 // Collapsible: a row per filter, its name and, at the far end, a caret that
@@ -193,7 +193,7 @@
 
 .wp-block-matter-filter__popover:popover-open {
 	border-color: var(--scheme--border);
-	border-radius: var(--wp--custom--radius--md, 0.5rem);
+	border-radius: var(--wp--preset--border-radius--md, 0.5rem);
 	box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 12%);
 	padding: var(--wp--preset--spacing--md);
 }
