@@ -63,9 +63,6 @@ return [
 		'four'    => [
 			'label' => __( 'Four across', 'pulsar' ),
 		],
-		'feature' => [
-			'label' => __( 'Feature first', 'pulsar' ),
-		],
 	],
 	'matter/filters'  => [
 		'default' => [

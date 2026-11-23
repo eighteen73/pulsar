@@ -9,18 +9,3 @@ $items: ".wp-block-post-template.is-layout-grid, .wc-block-product-template";
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 }
-
-// The first item spans two columns and two rows.
-.wp-block-matter-archive-loop.is-style-feature :is(#{$items}) {
-	@media (--md) {
-		grid-auto-flow: dense;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-}
-
-.wp-block-matter-archive-loop.is-style-feature :is(#{$items}) > :first-child {
-	@media (--md) {
-		grid-column: span 2;
-		grid-row: span 2;
-	}
-}

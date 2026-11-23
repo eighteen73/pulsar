@@ -74,7 +74,7 @@ Delete `.wp-env.tests.override.json` and start the test site again to go back to
 | `config/allowed-blocks.php` | Blocks offered to editors (`namespace/*` wildcards), passed to Matter, which enforces it in the post editor. Templates may use any block. |
 | `config/breakpoints.json` | The only breakpoint source: compiled into SCSS (`@use "pulsar:breakpoints"`) and passed to Matter. |
 | `config/settings.php` | Appearance › Site details fields (contact, social, header call to action, footer). It's read after `init`, so a `select`'s `options` can come from a function, e.g. a taxonomy's terms. |
-| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across / Feature first). The comments list every option. Styled in `src/css/blocks/matter/`. |
+| `config/matter.php` | Matter variants: behaviour and controls layout (e.g. carousel Single / Cards / Slideshow; gallery Thumbnails; archive list Four across). The comments list every option. Styled in `src/css/blocks/matter/`. |
 | `config/theme-json/` | Design tokens and editor settings. |
 | `assets/svg/icons/` | The button icons editors can pick from (Matter registers them as the `pulsar` icon collection). Add an icon here only if clients should see it. Draw them single-colour, as filled `path` or `polygon` elements only: WordPress's icon registry keeps only those (and `fill`, `fill-rule`, `d`, `transform`), and drops strokes, circles, groups and `fill="none"` without a warning, so an outline icon comes out blank. Draw a ring as two arcs with `fill-rule="evenodd"`. |
 | `includes/classes/Matter.php` | Feeds `config/` into Matter, and names the theme's namespace, `pulsar` (`matter_theme_namespaces`): the prefix Matter looks for loop item patterns under (`pulsar/loop-item…`) and the icon collection's name. Keep it `pulsar` even if the theme's folder is renamed or a child theme is added; icon names and pattern slugs depend on it. |
@@ -307,7 +307,7 @@ Archives without their own content show a pattern, which is also where editors s
 - `archive-search.php`;
 - `archive-404.php`.
 
-Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across, Feature first) are in `config/matter.php` and styled in `src/css/blocks/matter/archive-loop.scss`.
+Add `pulsar/archive-{post type}` (e.g. `archive-product.php`) to give a post type its own default. The list's variants (Three across, Four across) are in `config/matter.php` and styled in `src/css/blocks/matter/archive-loop.scss`.
 
 **Don't add** `front-page.html` for a small difference on the home page (hiding the breadcrumbs, say). WordPress uses it for the front page whether that's a page or the latest posts, so it takes over a blog front page too. Use a rule under `.home` instead.
 
