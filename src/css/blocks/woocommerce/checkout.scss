@@ -161,7 +161,7 @@
 	background-color: var(--scheme--background-fill);
 	border-radius: 50%;
 	color: var(--scheme--text-fill);
-	font-size: 60%;
+	font-size: var(--wp--preset--font-size--xs);
 	font-weight: var(--wp--custom--typography--font-weight--label);
 	height: 24px;
 	width: 24px;
@@ -186,7 +186,7 @@
 
 	@media (--xs) {
 		display: inline;
-		font-size: 70%;
+		font-size: var(--wp--preset--font-size--xs);
 		margin-right: var(--wp--preset--spacing--xs);
 	}
 }
