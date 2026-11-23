@@ -5,7 +5,7 @@
 /// over a gradient at the foot. The name's link covers the card
 /// (blocks/core/term-template.scss).
 .term-card {
-	aspect-ratio: 1;
+	aspect-ratio: var(--wp--preset--aspect-ratio--square);
 	background-color: var(--scheme--background-fill);
 	border-radius: var(--wp--preset--border-radius--md);
 	overflow: hidden;

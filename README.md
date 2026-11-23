@@ -196,6 +196,7 @@ Links on a tinted background are the usual failure, which is why `subtle` uses `
 | `--wp--custom--typography--line-height--{none,tight,normal}` | 1, 1.1, 1.5 |
 | `--wp--preset--border-radius--{xs,sm,md,lg,full}` | 4, 8, 10→16, 16→24, pill; `xs` to `lg` are multiplied by `--wp--custom--roundness` (0 square, 1 default, 1.5 rounder). `full` is always a pill or circle (round controls such as carousel arrows stay round on a square site); use `lg` for anything that should square up with the rest |
 | `--wp--preset--shadow--{xs,sm,md,lg}` | Tinted from `neutral-900` |
+| `--wp--preset--aspect-ratio--{square,4-3,3-2,16-9,3-4}` | The image shapes editors choose from (galleries, image carousels) and the ones the theme's media use (hero 4:3, card 3:2, media and text square). Use these for image shapes, so a project changes them in one place. Shapes that are geometry, such as a round badge, stay `aspect-ratio: 1` |
 | `--wp--custom--transition--duration--{quick,normal}` | 150ms, 300ms |
 | `--wp--style--global--content-size` / `--wide-size` | 768px / 1440px |
 

@@ -11,7 +11,7 @@
 }
 
 .wp-block-pulsar-media-text__media img {
-	aspect-ratio: 1;
+	aspect-ratio: var(--wp--preset--aspect-ratio--square);
 	height: auto;
 	object-fit: cover;
 	width: 100%;

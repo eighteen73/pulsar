@@ -205,7 +205,7 @@
 }
 
 .wp-block-matter-gallery.is-style-thumbnails .wp-block-matter-carousel__thumbnail {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: var(--wp--preset--aspect-ratio--4-3);
 	height: auto;
 	width: calc((100% - (var(--_gallery-thumbnails-per-view) - 1) * var(--wp--preset--spacing--sm)) / var(--_gallery-thumbnails-per-view));
 }

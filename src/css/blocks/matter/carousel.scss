@@ -24,7 +24,7 @@
 // Images within slides, e.g. cards. Carousels of only images, and galleries,
 // use the aspect ratio chosen in the editor.
 :where(.wp-block-matter-carousel:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items)) .wp-block-matter-carousel__track img {
-	aspect-ratio: 16 / 9;
+	aspect-ratio: var(--wp--preset--aspect-ratio--16-9);
 	display: block;
 	height: auto;
 	object-fit: cover;
@@ -32,7 +32,7 @@
 }
 
 :where(.wp-block-matter-carousel.is-style-cards:not(.has-image-aspect-ratio, .wp-block-matter-gallery__items)) .wp-block-matter-carousel__track img {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: var(--wp--preset--aspect-ratio--4-3);
 }
 
 // Controls: groups before, over (the stage) and after the slides.
