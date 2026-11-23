@@ -204,7 +204,7 @@ Label text for controls (buttons, the header's menu, tabs, pagination, account n
 
 Headings map to sizes in `src/css/tools/mixins/_typography.scss`: `h1` `4-xl`, `h2` `3-xl`, `h3` `2-xl`, `h4` `xl`, `h5` `lg`, `h6` `md`. `5-xl` is free for display headings.
 
-The fluid sizes come from [Utopia](https://utopia.fyi) with 320px and 1440px as the screen range: type at 16px body, ratio 1.2 → 1.25; spacing as one-up pairs (each step from the one below to its own size). Regenerate there rather than hand-writing a `clamp()`. Font sizes are `{min, max}` pairs in `settings.typography.json`, which WordPress turns into `clamp()`s using `settings.typography.fluid`; spacing sizes and roles are written as Utopia's `clamp()`s. If a font needs larger body text, change `md` to 16→18 and regenerate the steps above it.
+The fluid sizes come from [Utopia](https://utopia.fyi) with 320px and 1440px as the screen range: type at 16px body, ratio 1.2 → 1.25; spacing as one-up pairs (each step from the one below to its own size). Regenerate there rather than hand-writing a `clamp()`. Font sizes are `{min, max}` pairs in `settings.typography.json`, which WordPress turns into `clamp()`s using `settings.typography.fluid`; spacing sizes and roles are written as Utopia's `clamp()`s. `xs` to `md` are fixed sizes (`"fluid": false`). If a font needs larger body text, give `md` a `{min, max}` pair of 16→18 and regenerate the steps above it.
 
 The editor's colour, spacing, layout, border and typography controls are switched off in `theme.json`. Presets still generate their variables.
 

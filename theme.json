@@ -568,10 +568,7 @@
 					"name": "MD",
 					"slug": "md",
 					"size": "16px",
-					"fluid": {
-						"min": "16px",
-						"max": "16px"
-					}
+					"fluid": false
 				},
 				{
 					"name": "LG",
