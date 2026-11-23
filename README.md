@@ -32,41 +32,6 @@ npm run lint:css && npm run lint:js && npm run lint:php
 
 **Taking starter changes into a project.** A project's theme is a copy, but it can take later starter fixes as a git merge, so the project's own changes stay. When the theme is first copied, commit the untouched starter on its own branch (e.g. `pulsar-upstream`). To update, check that branch out, replace the theme folder with the new starter, commit, and merge the branch into the project's. Git combines the two sides and leaves only real clashes to resolve. Don't merge `build/` or `theme.json`: take either side, then build. Restart wp-env afterwards (`npm run env:stop`, then start): checking out the other branch replaces files it mounts one by one (`tests/wp-env/matter-loader.php`), and the sites fail with a critical error until it's restarted. Some starter tests check the starter's own design (the footer's gap, for one); where the project's design differs, change the test to match it.
 
-### Browser tests
-
-Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). There are two sites, each with its own containers and database: a development site to look around (`.wp-env.json`, http://localhost:8890) and the test site (`.wp-env.tests.json`, http://localhost:8891). Keep the two configs alike apart from their ports. Before the tests run, `tests/e2e/content.js` creates their content on the test site: a page of every section in each colour scheme, menus, Appearance › Site details values, posts and products.
-
-```bash
-npm run env:start                  # the development site
-npm run env:start:tests            # the test site (the tests start it if it isn't running)
-npm run env:stop                   # both
-npx playwright install chromium    # once
-npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
-```
-
-They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, that every scheme's colour pairs meet AA contrast (`contrast.spec.js`), and that the header, footer, menus, archives, search, 404 and shop work. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
-
-**Ports.** Every project copied from Pulsar uses 8890 and 8891. To run two at once, give one other ports in its git-ignored overrides, `.wp-env.override.json` (`{ "port": 8892 }`) and `.wp-env.tests.override.json` (`{ "port": 8893 }`); its tests use the test override's port. Before anything runs, the set-up checks that the site is this project's own test site and stops if it isn't, so the tests (which replace their content) never run against another project's.
-
-**WooCommerce's paid extensions** (Subscriptions, with All Products for Subscriptions; Product Bundles; Bookings; Memberships) have their own tests, `tests/e2e/extensions.spec.js`. They need the plugins, so they run locally and skip in CI. With the extensions in the project's `web/app/plugins`:
-
-```bash
-cp tests/wp-env/extensions.override.example.json .wp-env.tests.override.json   # git-ignored
-npm run env:start:tests
-npm run test:e2e   # seeds a customer, products, a subscription, booking and membership (tests/wp-env/seed-extensions.php)
-```
-
-Delete `.wp-env.tests.override.json` and start the test site again to go back to WooCommerce alone (add a `port` to the copy if the project needs one). Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.
-
-**In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
-
-- sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
-- schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
-- Appearance › Site details, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
-- the project's own post types and taxonomies (e.g. from a must-use plugin): the test site maps only the theme and Matter, so map the plugin in `.wp-env.tests.override.json` (`mappings`) and the dev config's override, or the tests can't see them.
-
-**Updating Matter** in a project that uses a clone or copy of it: update the folder in place (`git pull`, or `rsync --delete`). Deleting and copying it again leaves the running wp-env pointing at the deleted folder, and the sites fail until `npm run env:stop` and start.
-
 ## Where things live
 
 | Path | What |
@@ -337,3 +302,38 @@ Shop, product, cart, checkout, order received and account templates are block te
 - **WooCommerce's classic markup** (My Account's forms, orders, addresses; the customer payment page that payment links open; the classic cart and checkout; extensions' templates) is styled in `src/css/woocommerce.scss`, loaded on every WooCommerce page after WooCommerce's own stylesheet; My Account's layout and navigation in `src/css/woocommerce-account.scss`.
 - **Everywhere:** WooCommerce's colour and form variables (`--wc-`*) are mapped to the scheme, and notices use the status colours (`src/css/third-party/_woocommerce.scss`), so WooCommerce's own styles and extensions follow the theme.
 - WooCommerce's stylesheets stay on: Pulsar overrides them, matching their specificity where it has to (each case is commented).
+
+## Browser tests
+
+Playwright and axe tests (`tests/e2e`) run against [wp-env](https://www.npmjs.com/package/@wordpress/env) (Docker): WordPress, WooCommerce, this theme, and Matter from the project around it (`../../mu-plugins/matter`). There are two sites, each with its own containers and database: a development site to look around (`.wp-env.json`, http://localhost:8890) and the test site (`.wp-env.tests.json`, http://localhost:8891). Keep the two configs alike apart from their ports. Before the tests run, `tests/e2e/content.js` creates their content on the test site: a page of every section in each colour scheme, menus, Appearance › Site details values, posts and products.
+
+```bash
+npm run env:start                  # the development site
+npm run env:start:tests            # the test site (the tests start it if it isn't running)
+npm run env:stop                   # both
+npx playwright install chromium    # once
+npm run test:e2e                   # editor, sections in each scheme (axe), header, footer, archives, WooCommerce
+```
+
+They check that every section can be added in the editor, that pages pass axe (WCAG 2.2 AA) in every scheme, that every scheme's colour pairs meet AA contrast (`contrast.spec.js`), and that the header, footer, menus, archives, search, 404 and shop work. WooCommerce is covered from product filters, stock and reviews through the basket, coupons and checkout errors to an order received, and My Account. CI runs them against Matter's `release` branch, or Matter's `next` for Pulsar's `next` (`.github/workflows/lint.yml`; run it by hand to choose another Matter branch).
+
+**Ports.** Every project copied from Pulsar uses 8890 and 8891. To run two at once, give one other ports in its git-ignored overrides, `.wp-env.override.json` (`{ "port": 8892 }`) and `.wp-env.tests.override.json` (`{ "port": 8893 }`); its tests use the test override's port. Before anything runs, the set-up checks that the site is this project's own test site and stops if it isn't, so the tests (which replace their content) never run against another project's.
+
+**WooCommerce's paid extensions** (Subscriptions, with All Products for Subscriptions; Product Bundles; Bookings; Memberships) have their own tests, `tests/e2e/extensions.spec.js`. They need the plugins, so they run locally and skip in CI. With the extensions in the project's `web/app/plugins`:
+
+```bash
+cp tests/wp-env/extensions.override.example.json .wp-env.tests.override.json   # git-ignored
+npm run env:start:tests
+npm run test:e2e   # seeds a customer, products, a subscription, booking and membership (tests/wp-env/seed-extensions.php)
+```
+
+Delete `.wp-env.tests.override.json` and start the test site again to go back to WooCommerce alone (add a `port` to the copy if the project needs one). Subscriptions includes All Products for Subscriptions; the standalone plugin isn't mapped, as its first activation from WP-CLI fails alongside it.
+
+**In a project,** adapt the tests as the theme changes, so a change to a section or a scheme is checked like the starter's:
+
+- sections: add them to `sectionsPage()` in `content.js` (the page of every section, made in each scheme) and to `SECTIONS` in `editor.spec.js`; remove the starter's that the project deletes;
+- schemes: `SCHEMES` in `content.js` (`contrast.spec.js` reads them from `theme.json` itself);
+- Appearance › Site details, menus and the header and footer: `SETTINGS` and the menus in `content.js`, and the header and footer tests in `front-end.spec.js` (e.g. removing the header call to action means removing its test).
+- the project's own post types and taxonomies (e.g. from a must-use plugin): the test site maps only the theme and Matter, so map the plugin in `.wp-env.tests.override.json` (`mappings`) and the dev config's override, or the tests can't see them.
+
+**Updating Matter** in a project that uses a clone or copy of it: update the folder in place (`git pull`, or `rsync --delete`). Deleting and copying it again leaves the running wp-env pointing at the deleted folder, and the sites fail until `npm run env:stop` and start.
