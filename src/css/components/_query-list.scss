@@ -1,0 +1,14 @@
+@use "../tools" as *;
+
+/// Images in a list of posts, products or terms (Matter's `matter-query-list`,
+/// on every loop template's list). Filtering and client-side navigation render
+/// the list again with new image elements, so each waits for its image, even
+/// from the cache. While it waits, the image is a tile in the scheme's surface
+/// colour rather than a hole, and the alt text Firefox draws in it is hidden.
+/// Screen readers still read the alt text, and the item's title sits with it
+/// for anyone who sees an image that failed. An image with transparent parts
+/// shows the tile through them.
+:where(.matter-query-list) img {
+	background-color: var(--scheme--background-surface);
+	color: transparent;
+}
