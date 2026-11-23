@@ -8,10 +8,10 @@
 	border-radius: var(--wp--preset--border-radius--md);
 	box-shadow: var(--wp--preset--shadow--lg);
 	color: var(--scheme--text);
-	max-height: calc(100dvh - 2rem);
-	max-width: calc(100vw - 2rem);
+	max-height: calc(100dvh - 32px);
+	max-width: calc(100vw - 32px);
 	padding: 0;
-	width: 40rem;
+	width: 640px;
 }
 
 .wp-block-matter-modal::backdrop {

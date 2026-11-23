@@ -232,6 +232,11 @@ The aim is no `!important`, and styles that are easy to find. Stylelint enforces
 - Mixins output declarations; the caller writes the selector (`.thing:focus-visible { @include focus-ring; }`). The exception is `hidden-on-site`, which wraps the caller's selector to leave the editor out.
 - Labels: `label-text` is label text on controls (buttons, the header's menu, tabs); `form-label` is a form field's label.
 
+**Values**
+
+- Sizes are in `px`, like the presets they sit beside. Use `em` only for what should follow its own text: an icon beside a label (`@include icon("ui/caret-down", 0.75em)`), letter spacing.
+- Spacing, font sizes, radii, shadows and image shapes come from the presets (`--wp--preset--*`) or roles (`--wp--custom--*`). Write a raw value only for something that isn't on a scale, such as a control's 44px target or a dot's size, and name it in a local variable (`--_carousel-dot-size`) when it is used more than once.
+
 **Specificity**
 
 - One class per selector where possible; context that's only there to scope goes in `:where()` (`:where(.site-header__navigation) .matter-menu__link`).

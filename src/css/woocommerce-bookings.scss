@@ -50,7 +50,7 @@
 
 // Number fields (duration, persons): one width, enough for a few digits.
 .wc-bookings-booking-form .form-field input[type="number"] {
-	width: 6rem;
+	width: 96px;
 }
 
 // "Book now": the whole row, as a product's add to cart button is.
@@ -215,7 +215,7 @@
 .wc-bookings-booking-form .block-picker {
 	display: grid;
 	gap: var(--wp--preset--spacing--xs);
-	grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
 	min-height: 0;
 }
 

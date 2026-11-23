@@ -9,7 +9,7 @@
 /// (Enqueue::STYLE_DEPENDENCIES).
 .wp-block-matter-gallery {
 	--gallery-gap: var(--wp--preset--spacing--md);
-	--gallery-min-width: 9rem;
+	--gallery-min-width: 144px;
 }
 
 .wp-block-matter-gallery .wp-block-image img {
@@ -63,13 +63,13 @@
 	color: var(--wp--preset--color--base);
 	cursor: pointer;
 	display: inline-flex;
-	height: 2.75rem;
+	height: 44px;
 	inset-block-end: var(--wp--preset--spacing--sm);
 	inset-inline-start: var(--wp--preset--spacing--sm);
 	justify-content: center;
 	padding: 0;
 	position: absolute;
-	width: 2.75rem;
+	width: 44px;
 	z-index: 3;
 }
 
@@ -82,7 +82,7 @@
 	border-radius: var(--wp--preset--border-radius--sm);
 	color: var(--wp--preset--color--base);
 	font-size: var(--wp--preset--font-size--sm);
-	inset-block-end: calc(2.75rem + var(--wp--preset--spacing--md));
+	inset-block-end: calc(44px + var(--wp--preset--spacing--md));
 	inset-inline-start: var(--wp--preset--spacing--sm);
 	max-width: calc(100% - 2 * var(--wp--preset--spacing--sm));
 	padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
@@ -134,10 +134,10 @@
 	color: inherit;
 	cursor: pointer;
 	display: inline-flex;
-	height: 3rem;
+	height: 48px;
 	justify-content: center;
 	padding: 0;
-	width: 3rem;
+	width: 48px;
 }
 
 .wp-block-matter-gallery__close {

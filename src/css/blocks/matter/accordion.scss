@@ -42,7 +42,7 @@
 
 // A caret that turns over while the item is open.
 .wp-block-matter-accordion-item__toggle::after {
-	@include icon("ui/caret-down", 1rem);
+	@include icon("ui/caret-down", 16px);
 	transition: rotate var(--wp--custom--transition--duration--normal);
 
 	@media (prefers-reduced-motion: reduce) {

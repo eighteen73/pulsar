@@ -9,7 +9,7 @@
 ///
 /// @example
 ///   .my-element::after {
-///     @include icon("ui/caret-down", 1rem);
+///     @include icon("ui/caret-down", 16px);
 ///   }
 @mixin icon($icon, $size: 16px, $color: currentcolor) {
 	background-color: $color;

@@ -77,7 +77,7 @@
 .site-footer__menus {
 	display: grid;
 	gap: var(--wp--preset--spacing--xl);
-	grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(192px, 1fr));
 }
 
 .site-footer__legal {

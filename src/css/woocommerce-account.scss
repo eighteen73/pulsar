@@ -68,7 +68,7 @@ $order-statuses: (
 
 	@media (--lg) {
 		align-items: start;
-		grid-template-columns: 15rem minmax(0, 1fr);
+		grid-template-columns: 240px minmax(0, 1fr);
 	}
 
 	&::before,
@@ -186,7 +186,7 @@ $order-statuses: (
 .account-overview {
 	display: grid;
 	gap: var(--wp--preset--spacing--xl);
-	grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(256px, 100%), 1fr));
 }
 
 .account-overview__panel {
@@ -300,8 +300,8 @@ td.woocommerce-orders-table__cell-order-status::after {
 	content: "";
 	display: inline-block;
 	forced-color-adjust: none;
-	height: 0.5rem;
-	width: 0.5rem;
+	height: 8px;
+	width: 8px;
 }
 
 td.woocommerce-orders-table__cell-order-status::before {
@@ -357,7 +357,7 @@ td.woocommerce-orders-table__cell-order-status::after {
 .woocommerce-account .woocommerce-Addresses {
 	display: grid;
 	gap: var(--wp--preset--spacing--xl);
-	grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(256px, 100%), 1fr));
 	margin-block-start: var(--wp--preset--spacing--xl);
 
 	&::before,
@@ -491,7 +491,7 @@ td.woocommerce-orders-table__cell-order-status::after {
 		border-radius: 50%;
 		content: "";
 		forced-color-adjust: none;
-		height: 0.5rem;
-		width: 0.5rem;
+		height: 8px;
+		width: 8px;
 	}
 }

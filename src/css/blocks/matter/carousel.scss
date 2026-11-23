@@ -6,7 +6,8 @@
 /// depend on Matter's default skin. The variant (block style) sets slides per
 /// view and where the controls sit.
 .wp-block-matter-carousel {
-	--_carousel-button-size: 2.75rem;
+	--_carousel-button-size: 44px;
+	--_carousel-dot-size: 10px;
 	--carousel-gap: var(--wp--preset--spacing--xl);
 	--carousel-per-view: 1;
 }
@@ -101,7 +102,7 @@
 .wp-block-matter-carousel__dots {
 	display: flex;
 	flex-wrap: wrap;
-	gap: calc(24px - 0.625rem);
+	gap: calc(24px - var(--_carousel-dot-size));
 }
 
 .wp-block-matter-carousel__dot {
@@ -111,10 +112,10 @@
 	border-radius: var(--wp--preset--border-radius--full);
 	cursor: pointer;
 	forced-color-adjust: none;
-	height: 0.625rem;
+	height: var(--_carousel-dot-size);
 	opacity: 0.3;
 	padding: 0;
-	width: 0.625rem;
+	width: var(--_carousel-dot-size);
 
 	&[aria-current] {
 		opacity: 1;
@@ -150,9 +151,9 @@
 	border: 2px solid transparent;
 	cursor: pointer;
 	flex: none;
-	height: 4rem;
+	height: 64px;
 	padding: 0;
-	width: 6rem;
+	width: 96px;
 
 	&[aria-current] {
 		border-color: var(--scheme--text-link);

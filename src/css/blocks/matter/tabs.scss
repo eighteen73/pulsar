@@ -62,7 +62,7 @@
 // Vertical: the list beside the panels, the border on its inline end.
 .wp-block-matter-tabs.is-vertical {
 	column-gap: var(--wp--preset--spacing--2-xl);
-	grid-template-columns: minmax(8rem, max-content) minmax(0, 1fr);
+	grid-template-columns: minmax(128px, max-content) minmax(0, 1fr);
 }
 
 :where(.wp-block-matter-tabs.is-vertical, .wp-block-matter-tabs.is-vertical > .wp-block-matter-tabs__nav) > .wp-block-matter-tabs__list {
@@ -111,7 +111,7 @@
 }
 
 .wp-block-matter-tabs__toggle::after {
-	@include icon("ui/caret-down", 1rem);
+	@include icon("ui/caret-down", 16px);
 	margin-inline-start: auto;
 }
 
